@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+
+<html lang="ro"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Confirmă Deblocarea</title>
+<!-- Google Fonts: Inter -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-error": "#ffffff",
+                    "tertiary-fixed": "#d1e4ff",
+                    "primary-container": "#4caf50",
+                    "on-tertiary-fixed": "#001d36",
+                    "inverse-on-surface": "#f2f0f0",
+                    "error-container": "#ffdad6",
+                    "on-error-container": "#93000a",
+                    "tertiary-fixed-dim": "#9ecaff",
+                    "surface-tint": "#006e1c",
+                    "surface-container-highest": "#e3e2e2",
+                    "outline": "#6f7a6b",
+                    "error": "#ba1a1a",
+                    "on-surface-variant": "#3f4a3c",
+                    "on-background": "#1b1c1c",
+                    "on-secondary-container": "#653900",
+                    "on-primary": "#ffffff",
+                    "primary-fixed": "#94f990",
+                    "primary-fixed-dim": "#78dc77",
+                    "on-tertiary-fixed-variant": "#00497d",
+                    "surface-container-low": "#f5f3f3",
+                    "surface-container": "#efeded",
+                    "tertiary-container": "#33a0fe",
+                    "tertiary": "#0061a4",
+                    "surface-container-high": "#e9e8e7",
+                    "inverse-primary": "#78dc77",
+                    "surface-bright": "#fbf9f9",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary-fixed-variant": "#693c00",
+                    "on-primary-fixed-variant": "#005313",
+                    "background": "#fbf9f9",
+                    "on-primary-container": "#003c0b",
+                    "on-secondary": "#ffffff",
+                    "secondary": "#8b5000",
+                    "on-surface": "#1b1c1c",
+                    "secondary-fixed-dim": "#ffb870",
+                    "surface-dim": "#dbdad9",
+                    "surface": "#fbf9f9",
+                    "secondary-container": "#ff9800",
+                    "on-tertiary-container": "#00355d",
+                    "secondary-fixed": "#ffdcbe",
+                    "on-secondary-fixed": "#2c1600",
+                    "primary": "#006e1c",
+                    "surface-variant": "#e3e2e2",
+                    "on-primary-fixed": "#002204",
+                    "on-tertiary": "#ffffff",
+                    "outline-variant": "#becab9",
+                    "inverse-surface": "#303031"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "lg": "40px",
+                    "sm": "12px",
+                    "base": "8px",
+                    "gutter": "16px",
+                    "xs": "4px",
+                    "md": "24px",
+                    "xl": "64px",
+                    "margin-mobile": "16px",
+                    "margin-desktop": "48px"
+            },
+            "fontFamily": {
+                    "headline-xl": ["Inter", "sans-serif"],
+                    "headline-md": ["Inter", "sans-serif"],
+                    "label-sm": ["Inter", "sans-serif"],
+                    "label-md": ["Inter", "sans-serif"],
+                    "body-lg": ["Inter", "sans-serif"],
+                    "headline-lg-mobile": ["Inter", "sans-serif"],
+                    "headline-lg": ["Inter", "sans-serif"],
+                    "body-md": ["Inter", "sans-serif"]
+            },
+            "fontSize": {
+                    "headline-xl": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        /* Ambient shadow utility for cards */
+        .ambient-shadow {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+        }
+    </style>
+</head>
+<body class="bg-surface-container-low min-h-screen flex flex-col items-center justify-center p-gutter md:p-margin-desktop antialiased text-on-surface">
+<!-- Transactional Screen - Navigation Suppressed -->
+<div class="w-full max-w-md flex flex-col items-center gap-md">
+<!-- Brand Logo -->
+<div class="mb-md">
+<img alt="Vitality Logo" class="h-16 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBofypYwfvL_BgqA_y9wQ91xbgs_7ZSZVViKIrTAbpkFsiLCpkMpliHaBAbg_WkqY1OKmLqhI9fxr3S82aqFiUIo_xmrXUKgg7VteHdBU1r42HtuGTbYJNWrAgE5osc0d3bYIPwRzIGX4rqrR-7plpU7Q4yFMAx7HsDTfBskX9uO5kPYrRvk0mrDLiaw1vTw6MgN6gBx-IuKMOQxXsdCLFZhVQbBMfuJlkP0Ori1Pf7Ifqrcf4BSvzlAfhpk3p7bQv_ZeAyQnZViRWm"/>
+</div>
+<!-- Confirmation Card -->
+<main class="w-full bg-surface-container-lowest rounded-xl ambient-shadow p-lg flex flex-col items-center text-center border border-surface-variant relative overflow-hidden">
+<!-- Subtle background accent -->
+<div class="absolute top-0 left-0 w-full h-2 bg-primary"></div>
+<!-- Icon Header -->
+<div class="w-20 h-20 rounded-full bg-primary-fixed flex items-center justify-center mb-md shadow-sm">
+<span class="material-symbols-outlined text-on-primary-fixed" style="font-size: 36px; font-variation-settings: 'FILL' 1;">
+                    lock_open
+                </span>
+</div>
+<!-- Text Content -->
+<h1 class="font-headline-lg-mobile md:font-headline-lg text-on-surface mb-sm">
+                Confirmă Deblocarea
+            </h1>
+<p class="font-body-md text-on-surface-variant mb-lg max-w-[280px]">
+                Ești pe cale să folosești 500 de puncte pentru a debloca un cupon de 10% reducere.
+            </p>
+<!-- Reward Summary Card -->
+<div class="w-full bg-surface-container rounded-lg p-md mb-lg border border-outline-variant flex items-center gap-sm text-left">
+<div class="w-12 h-12 rounded-full bg-surface-container-highest flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">
+                        restaurant
+                    </span>
+</div>
+<div class="flex-1">
+<h3 class="font-label-md text-on-surface">10% reducere la următorul chef personal</h3>
+<div class="flex items-center gap-xs mt-1">
+<span class="material-symbols-outlined text-secondary text-[16px]" style="font-variation-settings: 'FILL' 1;">stars</span>
+<span class="font-label-sm text-secondary font-bold">500 Puncte</span>
+</div>
+</div>
+</div>
+<!-- Actions -->
+<div class="w-full flex flex-col gap-sm">
+<button class="w-full h-12 bg-primary text-on-primary font-label-md rounded-full hover:bg-surface-tint transition-colors active:scale-[0.98] flex items-center justify-center shadow-sm">
+                    Confirmă și Deblochează
+                </button>
+<button class="w-full h-12 bg-transparent text-primary font-label-md rounded-full border border-primary hover:bg-surface-variant transition-colors active:scale-[0.98] flex items-center justify-center">
+                    Anulează
+                </button>
+</div>
+</main>
+</div>
+</body></html>
