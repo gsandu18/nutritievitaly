@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Vitality Professional - Resource Library</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed-dim": "#ffb870",
+                        "inverse-on-surface": "#f2f0f0",
+                        "on-surface": "#1b1c1c",
+                        "secondary-fixed": "#ffdcbe",
+                        "secondary": "#8b5000",
+                        "surface-container-high": "#e9e8e7",
+                        "on-secondary-fixed": "#2c1600",
+                        "on-primary": "#ffffff",
+                        "surface-container-highest": "#e3e2e2",
+                        "inverse-primary": "#78dc77",
+                        "on-error": "#ffffff",
+                        "tertiary-fixed-dim": "#9ecaff",
+                        "tertiary-container": "#33a0fe",
+                        "on-secondary-fixed-variant": "#693c00",
+                        "on-secondary": "#ffffff",
+                        "surface-container-low": "#f5f3f3",
+                        "outline-variant": "#becab9",
+                        "on-background": "#1b1c1c",
+                        "error-container": "#ffdad6",
+                        "on-primary-fixed-variant": "#005313",
+                        "error": "#ba1a1a",
+                        "on-tertiary-fixed-variant": "#00497d",
+                        "on-tertiary": "#ffffff",
+                        "on-tertiary-fixed": "#001d36",
+                        "inverse-surface": "#303031",
+                        "surface-dim": "#dbdad9",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-container": "#00355d",
+                        "on-surface-variant": "#3f4a3c",
+                        "primary-fixed": "#94f990",
+                        "outline": "#6f7a6b",
+                        "surface-variant": "#e3e2e2",
+                        "primary-container": "#4caf50",
+                        "background": "#fbf9f9",
+                        "tertiary-fixed": "#d1e4ff",
+                        "surface": "#fbf9f9",
+                        "primary": "#006e1c",
+                        "surface-bright": "#fbf9f9",
+                        "tertiary": "#0061a4",
+                        "surface-container": "#efeded",
+                        "secondary-container": "#ff9800",
+                        "surface-tint": "#006e1c",
+                        "on-primary-fixed": "#002204",
+                        "on-primary-container": "#003c0b",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-fixed-dim": "#78dc77",
+                        "on-secondary-container": "#653900"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "sm": "12px",
+                        "base": "8px",
+                        "xs": "4px",
+                        "xl": "64px",
+                        "gutter": "16px",
+                        "md": "24px",
+                        "margin-mobile": "16px",
+                        "margin-desktop": "48px",
+                        "lg": "40px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-xl": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "label-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-xl": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen font-body-md text-body-md antialiased pt-16 pb-24">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 w-full z-50 bg-surface dark:bg-on-surface border-b border-outline-variant dark:border-outline shadow-sm">
+<div class="flex items-center justify-between px-margin-mobile md:px-margin-desktop h-16 w-full">
+<div class="flex items-center gap-sm">
+<div class="w-10 h-10 rounded-full bg-surface-container overflow-hidden border border-surface-variant flex items-center justify-center">
+<img alt="Nutritionist Profile Picture" class="w-full h-full object-cover" data-alt="A professional headshot of a female nutritionist in a modern, brightly lit clinical office setting. She is wearing a neat white coat over a light green blouse, smiling warmly at the camera. The background is slightly blurred, showing a clean white wall and a hint of a vibrant green plant. The lighting is soft and even, creating an approachable and trustworthy atmosphere consistent with a health professional app." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzb-QOefNSjsKWhy5buheWpBuVxVzNTdV5noD3CkCooNki-F_-OkuidRfB3XSyJPaK7pwnB1DmRo11NDqtQ2Ga-iGWfLjLx1kXfGR1cZHK5g5oCVDaOJgTgUdbnqY3pJ-LPC4GxeQpKhoVRv3Hzay3ljzqxSxVJZ0ERkjypXJHO8wsk9K4hzFCkMuscMTHZzztvGduypENE-LTQ4r9djzj0tGAql60PbOujvqFP3y132TLhdJU3wiVUExgGZGoGoU4snY7R6GpyNiL"/>
+</div>
+<h1 class="font-headline-md text-headline-md-mobile font-bold text-primary dark:text-primary-fixed-dim">Vitality Professional</h1>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container-low transition-colors active:scale-95 transition-transform text-primary dark:text-primary-fixed-dim">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="max-w-[1280px] mx-auto px-margin-mobile md:px-margin-desktop mt-md flex flex-col gap-xl">
+<!-- Header & Search -->
+<section class="flex flex-col gap-md">
+<div>
+<h2 class="font-headline-xl text-headline-xl text-on-surface mb-xs">Resource Library</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Access educational materials for your clients.</p>
+</div>
+<div class="relative w-full md:w-2/3 lg:w-1/2">
+<div class="absolute inset-y-0 left-0 pl-sm flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-outline">search</span>
+</div>
+<input class="w-full bg-surface-container-low text-on-surface placeholder-outline font-body-md text-body-md rounded-xl pl-12 pr-sm py-sm border-0 focus:ring-2 focus:ring-primary focus:bg-surface transition-all shadow-sm" placeholder="Search articles, recipes, videos..." type="text"/>
+</div>
+</section>
+<!-- Categories Bento Grid -->
+<section class="flex flex-col gap-sm">
+<h3 class="font-headline-md text-headline-md text-on-surface">Categories</h3>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-sm md:gap-gutter">
+<!-- Category Card 1 -->
+<a class="bg-surface rounded-xl p-md shadow-[0_4px_20px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)] border border-[#E0E0E0] flex flex-col items-start gap-sm transition-all group" href="#">
+<div class="w-12 h-12 rounded-full bg-primary-container/20 flex items-center justify-center group-hover:bg-primary-container/30 transition-colors">
+<span class="material-symbols-outlined text-primary text-[28px]" style="font-variation-settings: 'FILL' 1;">restaurant</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface group-hover:text-primary transition-colors">Nutrition Basics</span>
+</a>
+<!-- Category Card 2 -->
+<a class="bg-surface rounded-xl p-md shadow-[0_4px_20px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)] border border-[#E0E0E0] flex flex-col items-start gap-sm transition-all group" href="#">
+<div class="w-12 h-12 rounded-full bg-tertiary-container/20 flex items-center justify-center group-hover:bg-tertiary-container/30 transition-colors">
+<span class="material-symbols-outlined text-tertiary text-[28px]" style="font-variation-settings: 'FILL' 1;">menu_book</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface group-hover:text-tertiary transition-colors">Healthy Recipes</span>
+</a>
+<!-- Category Card 3 -->
+<a class="bg-surface rounded-xl p-md shadow-[0_4px_20px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)] border border-[#E0E0E0] flex flex-col items-start gap-sm transition-all group" href="#">
+<div class="w-12 h-12 rounded-full bg-secondary-container/20 flex items-center justify-center group-hover:bg-secondary-container/30 transition-colors">
+<span class="material-symbols-outlined text-secondary text-[28px]" style="font-variation-settings: 'FILL' 1;">fitness_center</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface group-hover:text-secondary transition-colors">Exercise Tips</span>
+</a>
+<!-- Category Card 4 -->
+<a class="bg-surface rounded-xl p-md shadow-[0_4px_20px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)] border border-[#E0E0E0] flex flex-col items-start gap-sm transition-all group" href="#">
+<div class="w-12 h-12 rounded-full bg-primary-fixed-dim/20 flex items-center justify-center group-hover:bg-primary-fixed-dim/30 transition-colors">
+<span class="material-symbols-outlined text-on-primary-fixed-variant text-[28px]" style="font-variation-settings: 'FILL' 1;">self_improvement</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface group-hover:text-on-primary-fixed-variant transition-colors">Mindful Eating</span>
+</a>
+</div>
+</section>
+<!-- Latest Resources -->
+<section class="flex flex-col gap-md">
+<div class="flex items-center justify-between">
+<h3 class="font-headline-md text-headline-md text-on-surface">Latest Resources</h3>
+<a class="font-label-md text-label-md text-primary hover:underline" href="#">View All</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-md">
+<!-- Article Card 1 -->
+<div class="bg-surface rounded-xl overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.04)] border border-[#E0E0E0] hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)] transition-all flex flex-col cursor-pointer group">
+<div class="h-48 w-full relative overflow-hidden bg-surface-container">
+<img alt="Glass of water" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A pristine, condensation-covered glass of ice water sitting on a light oak wooden table. Bright, natural morning sunlight streams in from a nearby window, casting a soft, refreshing glow and crisp shadows. Next to the glass is a sprig of fresh green mint and a slice of bright yellow lemon, evoking a sense of health, vitality, and clean living typical of a premium wellness brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBf-bEHQTxMeS1xElAdfutrXf106l1bnsi6r-cPBUMQkryj8I5lwZ7oBL82VeVmMnKoLUuIjK6VV4pupBUnPpqLZtfE7JfZ1V72TfZXtdnmM_Kog4N6cdST5w0hSyEOABaMw6IqDk9Z6zrUMbmZkEW0Mjh7QCiHqlq6AjsOPJTJshLvbu7QrrmxBbHUa9xtP6qwHZH7Y-9pGNOXDkw5Q0y9tuEJdybIj3DusWc0cSAkDASes77TENOS6L7UmNkhe_V67tHL2QrjRCR8"/>
+<div class="absolute top-sm left-sm bg-surface/90 backdrop-blur-sm px-2 py-1 rounded-md font-label-sm text-label-sm text-on-surface flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]">article</span> Article
+                        </div>
+</div>
+<div class="p-md flex flex-col flex-1">
+<span class="font-label-sm text-label-sm text-primary mb-xs">Nutrition Basics</span>
+<h4 class="font-headline-md text-headline-md-mobile text-on-surface mb-sm line-clamp-2 group-hover:text-primary transition-colors">The Importance of Hydration for Optimal Health</h4>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2 mt-auto">Discover how maintaining proper hydration levels affects energy, metabolism, and overall cellular function.</p>
+</div>
+</div>
+<!-- Video Card 2 -->
+<div class="bg-surface rounded-xl overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.04)] border border-[#E0E0E0] hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)] transition-all flex flex-col cursor-pointer group">
+<div class="h-48 w-full relative overflow-hidden bg-surface-container flex items-center justify-center">
+<img alt="Healthy breakfast bowl" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A beautifully arranged smoothie bowl in a modern ceramic dish, placed on a pristine white marble countertop. The bowl is filled with vibrant magenta acai, perfectly topped with symmetrical rows of fresh blueberries, sliced bananas, chia seeds, and toasted coconut flakes. A sleek silver spoon rests neatly beside it. The bright, high-key lighting creates a fresh, appetizing, and highly professional aesthetic suitable for a nutritionist's guide." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBeFb_gC3dCq3UN4_2Nj-hg8ZpCH-1bnK5y1ocU976EqeZZrq9IOba1aGXuAUPlkVTiXVe8tyouNPNkgolhk3lk8oJqVRHgdzvqbLuy94rNjkcChpJSB73A_P4ArbMmpiwMY92jwUz4Ln4EAXM8YpEtH1Ra0z1MZw_IFGrKz12etJgui6fJcB-K8CX0Rd2TYb9bFOJ4jB5kRCegJrPuiyCS0KpOIT4pcBHGobNStJocHUAY91bi1_lld1MfzWLwR7dZbCV9qCNqLgG7"/>
+<div class="absolute inset-0 bg-on-surface/20 flex items-center justify-center">
+<div class="w-12 h-12 bg-surface/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-md">
+<span class="material-symbols-outlined text-primary text-[28px]" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</div>
+</div>
+<div class="absolute top-sm left-sm bg-surface/90 backdrop-blur-sm px-2 py-1 rounded-md font-label-sm text-label-sm text-on-surface flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]">play_circle</span> Video
+                        </div>
+</div>
+<div class="p-md flex flex-col flex-1">
+<span class="font-label-sm text-label-sm text-tertiary mb-xs">Healthy Recipes</span>
+<h4 class="font-headline-md text-headline-md-mobile text-on-surface mb-sm line-clamp-2 group-hover:text-tertiary transition-colors">Quick &amp; Nutrient-Dense Breakfast Ideas</h4>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2 mt-auto">Start the day right with these 5-minute breakfast recipes packed with complex carbohydrates and high-quality protein.</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 rounded-t-xl shadow-[0_-4px_20px_rgba(0,0,0,0.04)] bg-surface dark:bg-inverse-surface">
+<div class="flex justify-around items-center w-full h-20 pb-safe px-sm">
+<!-- Active Tab: Home (Assuming Resource Library is accessed from Home dashboard) -->
+<button class="flex flex-col items-center justify-center bg-secondary-container dark:bg-secondary text-on-secondary-container dark:text-on-secondary rounded-2xl px-5 py-1 active:scale-90 transition-transform duration-200">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-label-md text-label-md mt-1">Home</span>
+</button>
+<!-- Inactive Tab: Clients -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant px-5 py-1 hover:bg-surface-container-high dark:hover:bg-surface-variant transition-all active:scale-90 duration-200 rounded-xl">
+<span class="material-symbols-outlined">group</span>
+<span class="font-label-md text-label-md mt-1">Clients</span>
+</button>
+<!-- Inactive Tab: Plans -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant px-5 py-1 hover:bg-surface-container-high dark:hover:bg-surface-variant transition-all active:scale-90 duration-200 rounded-xl">
+<span class="material-symbols-outlined">description</span>
+<span class="font-label-md text-label-md mt-1">Plans</span>
+</button>
+<!-- Inactive Tab: Chat -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant px-5 py-1 hover:bg-surface-container-high dark:hover:bg-surface-variant transition-all active:scale-90 duration-200 rounded-xl">
+<span class="material-symbols-outlined">chat</span>
+<span class="font-label-md text-label-md mt-1">Chat</span>
+</button>
+</div>
+</nav>
+</body></html>
