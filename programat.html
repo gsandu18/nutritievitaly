@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+
+<html lang="ro"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Consultații Programate - Vitality Professional</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-bright": "#fbf9f9",
+                        "inverse-on-surface": "#f2f0f0",
+                        "on-primary-fixed": "#002204",
+                        "surface-dim": "#dbdad9",
+                        "on-secondary-container": "#653900",
+                        "surface-container": "#efeded",
+                        "on-secondary": "#ffffff",
+                        "primary-container": "#4caf50",
+                        "tertiary-container": "#33a0fe",
+                        "tertiary": "#0061a4",
+                        "surface-variant": "#e3e2e2",
+                        "secondary-fixed": "#ffdcbe",
+                        "primary-fixed": "#94f990",
+                        "on-surface-variant": "#3f4a3c",
+                        "on-primary-container": "#003c0b",
+                        "error-container": "#ffdad6",
+                        "on-secondary-fixed-variant": "#693c00",
+                        "on-error": "#ffffff",
+                        "secondary-fixed-dim": "#ffb870",
+                        "tertiary-fixed": "#d1e4ff",
+                        "outline": "#6f7a6b",
+                        "on-tertiary-container": "#00355d",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-fixed-dim": "#78dc77",
+                        "tertiary-fixed-dim": "#9ecaff",
+                        "surface-container-high": "#e9e8e7",
+                        "secondary": "#8b5000",
+                        "background": "#fbf9f9",
+                        "inverse-surface": "#303031",
+                        "on-primary-fixed-variant": "#005313",
+                        "inverse-primary": "#78dc77",
+                        "on-primary": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "primary": "#006e1c",
+                        "outline-variant": "#becab9",
+                        "on-secondary-fixed": "#2c1600",
+                        "surface-tint": "#006e1c",
+                        "surface-container-low": "#f5f3f3",
+                        "on-background": "#1b1c1c",
+                        "surface-container-highest": "#e3e2e2",
+                        "on-tertiary-fixed": "#001d36",
+                        "surface": "#fbf9f9",
+                        "secondary-container": "#ff9800",
+                        "on-tertiary-fixed-variant": "#00497d",
+                        "on-error-container": "#93000a",
+                        "error": "#ba1a1a",
+                        "on-surface": "#1b1c1c"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xl": "64px",
+                        "md": "24px",
+                        "lg": "40px",
+                        "sm": "12px",
+                        "margin-desktop": "48px",
+                        "margin-mobile": "16px",
+                        "gutter": "16px",
+                        "xs": "4px",
+                        "base": "8px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "headline-xl": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+                        "headline-xl": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen flex flex-col md:flex-row">
+<!-- NavigationDrawer (Web) -->
+<aside class="hidden md:flex flex-col h-screen w-80 fixed left-0 top-0 bg-surface-container-low shadow-md py-md gap-base z-40">
+<div class="px-margin-desktop mb-lg flex items-center gap-4">
+<img alt="Nutritionist profile photo" class="w-12 h-12 rounded-full object-cover" data-alt="Professional headshot of a smiling female nutritionist in a modern, well-lit clinic setting. She wears a white coat over a soft blue shirt. The background is slightly blurred, emphasizing a clean, clinical yet approachable atmosphere. Lighting is bright, natural, and inviting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCsBvnXIrxBT8E2dMy8PgOp-0Nvu0q6PjWMOBCOF9FOTc2MHLCP4YpEPY70FUXA-uh38AVfMRe8J5NCISMFTFDum9-lTMR1rqKFS_OYQe94kWjFO01E6YWCb8af_tj9-pHSAnve_WEQQF7uI6Y_VIzoOFU3RcC_PofWJC8qYmybCUGzJGlAtGKKdAX2dUnfn_qutItZR3J91Wv4kKPP3HQjYsMICf9gIvHLf5oYCjkNfmiR5cw3ySr5JcYB8sVFnSHRsr76Ri99pLXD"/>
+<div>
+<h2 class="font-headline-md text-headline-md text-primary">Dr. Sarah Miller</h2>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Registered Dietitian</p>
+</div>
+</div>
+<nav class="flex flex-col gap-2">
+<a class="flex items-center gap-4 text-on-surface-variant hover:bg-surface-variant transition-all rounded-xl px-4 py-3 mx-2 cursor-pointer active:opacity-80" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-4 text-on-surface-variant hover:bg-surface-variant transition-all rounded-xl px-4 py-3 mx-2 cursor-pointer active:opacity-80" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="font-label-md text-label-md">Clients</span>
+</a>
+<a class="flex items-center gap-4 bg-primary-container text-on-primary-container rounded-xl px-4 py-3 mx-2 cursor-pointer active:opacity-80" href="#">
+<span class="material-symbols-outlined" data-icon="calendar_month" style="font-variation-settings: 'FILL' 1;">calendar_month</span>
+<span class="font-label-md text-label-md">Schedule</span>
+</a>
+<a class="flex items-center gap-4 text-on-surface-variant hover:bg-surface-variant transition-all rounded-xl px-4 py-3 mx-2 cursor-pointer active:opacity-80" href="#">
+<span class="material-symbols-outlined" data-icon="restaurant_menu">restaurant_menu</span>
+<span class="font-label-md text-label-md">Meal Plans</span>
+</a>
+<a class="flex items-center gap-4 text-on-surface-variant hover:bg-surface-variant transition-all rounded-xl px-4 py-3 mx-2 cursor-pointer active:opacity-80" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</a>
+</nav>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 md:ml-80 flex flex-col min-h-screen pb-24 md:pb-0">
+<!-- TopAppBar (Mobile/Web) -->
+<header class="w-full top-0 sticky bg-surface-bright border-b border-outline-variant shadow-sm z-30">
+<div class="flex items-center justify-between px-margin-mobile md:px-margin-desktop py-4 w-full max-w-7xl mx-auto">
+<div class="flex items-center gap-4">
+<img alt="Professional headshot of the nutritionist" class="w-10 h-10 rounded-full object-cover md:hidden" data-alt="Professional headshot of a smiling female nutritionist in a modern clinic. Close up face shot. Bright lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCH6pv_G5CILILrWOgtLAVLuJmaE0b6bxmwbTWk3mafZv-syQTfVojIDozM6kTvmj-s1RcQJcc_N4PRPM5Nk2EEzojjE0h9zeujJ169uiHB_Y9yOnCFFRYHWvDDKHMoqkXlYRqoS6P6V8n9WRSXiaifE13nTp6V4LHotOyTgqd2zh2sQ6ypt2LQJKCOfgxiwZU5wjnQqYSDoCoT9d2Yk2UhUz_huy1ecVoMe0yvCuV5Vfc72snbvk9oz4lvQCYT6fVXETse3RsVDkPc"/>
+<h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg font-bold text-primary">Vitality Professional</h1>
+</div>
+<button class="text-on-surface-variant hover:bg-surface-container transition-colors p-2 rounded-full active:scale-95 transition-transform">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+</div>
+</header>
+<!-- Canvas -->
+<div class="px-margin-mobile md:px-margin-desktop py-md md:py-lg max-w-7xl mx-auto w-full flex-1 flex flex-col gap-md md:gap-lg">
+<div class="flex flex-col gap-2">
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface">Consultații Programate</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Gestionează întâlnirile tale cu clienții.</p>
+</div>
+<!-- Calendar Section -->
+<section class="bg-surface-container-lowest rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.04)] border border-outline-variant/30 p-md md:p-lg">
+<div class="flex justify-between items-center mb-md">
+<h3 class="font-headline-md text-headline-md text-on-surface">Octombrie 2023</h3>
+<div class="flex gap-2">
+<button class="p-2 border border-outline-variant rounded-lg hover:bg-surface-container text-on-surface-variant"><span class="material-symbols-outlined">chevron_left</span></button>
+<button class="p-2 border border-outline-variant rounded-lg hover:bg-surface-container text-on-surface-variant"><span class="material-symbols-outlined">chevron_right</span></button>
+</div>
+</div>
+<!-- Week View Simplified -->
+<div class="grid grid-cols-7 gap-xs md:gap-sm text-center">
+<div class="flex flex-col gap-1 items-center pb-2">
+<span class="font-label-sm text-label-sm text-on-surface-variant">L</span>
+<div class="w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center font-body-md text-body-md text-on-surface hover:bg-surface-container cursor-pointer">16</div>
+</div>
+<div class="flex flex-col gap-1 items-center pb-2">
+<span class="font-label-sm text-label-sm text-on-surface-variant">M</span>
+<div class="w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center font-body-md text-body-md text-on-surface hover:bg-surface-container cursor-pointer">17</div>
+</div>
+<div class="flex flex-col gap-1 items-center pb-2 border-b-2 border-primary">
+<span class="font-label-sm text-label-sm text-primary font-bold">M</span>
+<div class="w-8 h-8 md:w-10 md:h-10 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-body-md text-body-md cursor-pointer shadow-sm">18</div>
+</div>
+<div class="flex flex-col gap-1 items-center pb-2">
+<span class="font-label-sm text-label-sm text-on-surface-variant">J</span>
+<div class="w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center font-body-md text-body-md text-on-surface hover:bg-surface-container cursor-pointer">19</div>
+</div>
+<div class="flex flex-col gap-1 items-center pb-2">
+<span class="font-label-sm text-label-sm text-on-surface-variant">V</span>
+<div class="w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center font-body-md text-body-md text-on-surface hover:bg-surface-container cursor-pointer">20</div>
+</div>
+<div class="flex flex-col gap-1 items-center pb-2">
+<span class="font-label-sm text-label-sm text-on-surface-variant">S</span>
+<div class="w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center font-body-md text-body-md text-on-surface-variant hover:bg-surface-container cursor-pointer">21</div>
+</div>
+<div class="flex flex-col gap-1 items-center pb-2">
+<span class="font-label-sm text-label-sm text-on-surface-variant">D</span>
+<div class="w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center font-body-md text-body-md text-on-surface-variant hover:bg-surface-container cursor-pointer">22</div>
+</div>
+</div>
+</section>
+<!-- Appointments List -->
+<section class="flex flex-col gap-md">
+<h3 class="font-headline-md text-headline-md text-on-surface">Programări - 18 Octombrie</h3>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-md">
+<!-- Appointment Card 1 -->
+<div class="bg-surface-container-lowest rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.04)] border border-outline-variant/30 p-md flex flex-col gap-sm hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)] transition-shadow">
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-sm">
+<div class="w-12 h-12 rounded-full bg-secondary-container/20 flex items-center justify-center text-on-secondary-container font-headline-md">EP</div>
+<div>
+<h4 class="font-label-md text-label-md text-on-surface">Elena Popescu</h4>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Initial Assessment</p>
+</div>
+</div>
+<span class="px-2 py-1 bg-tertiary-container/20 text-on-tertiary-container rounded-full font-label-sm text-label-sm">Video</span>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant mt-2">
+<span class="material-symbols-outlined text-sm">schedule</span>
+<span class="font-body-md text-body-md">10:00 AM - 10:45 AM</span>
+</div>
+<div class="flex gap-sm mt-xs">
+<button class="flex-1 bg-primary text-on-primary py-2 rounded-lg font-label-md text-label-md hover:bg-primary/90 transition-colors flex items-center justify-center gap-2 h-12">
+<span class="material-symbols-outlined">videocam</span>
+                                Join Meeting
+                            </button>
+<button class="flex-1 border border-primary text-primary py-2 rounded-lg font-label-md text-label-md hover:bg-primary/5 transition-colors h-12">
+                                View Details
+                            </button>
+</div>
+</div>
+<!-- Appointment Card 2 -->
+<div class="bg-surface-container-lowest rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.04)] border border-outline-variant/30 p-md flex flex-col gap-sm hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)] transition-shadow">
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-sm">
+<div class="w-12 h-12 rounded-full bg-primary-container/20 flex items-center justify-center text-on-primary-container font-headline-md">MI</div>
+<div>
+<h4 class="font-label-md text-label-md text-on-surface">Mihai Ionescu</h4>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Follow-up</p>
+</div>
+</div>
+<span class="px-2 py-1 bg-surface-variant text-on-surface-variant rounded-full font-label-sm text-label-sm">In-person</span>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant mt-2">
+<span class="material-symbols-outlined text-sm">schedule</span>
+<span class="font-body-md text-body-md">11:30 AM - 12:00 PM</span>
+</div>
+<div class="flex gap-sm mt-xs">
+<button class="flex-1 border border-primary text-primary py-2 rounded-lg font-label-md text-label-md hover:bg-primary/5 transition-colors h-12">
+                                View Details
+                            </button>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- BottomNavBar (Mobile) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center px-4 py-3 pb-safe bg-surface-container shadow-[0_-4px_20px_rgba(0,0,0,0.04)] rounded-t-xl z-50">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant/50 active:scale-90 transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label-sm text-label-sm">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant/50 active:scale-90 transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="person_search">person_search</span>
+<span class="font-label-sm text-label-sm">Clients</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-5 py-1 active:scale-90 transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="event_available" style="font-variation-settings: 'FILL' 1;">event_available</span>
+<span class="font-label-sm text-label-sm">Schedules</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant/50 active:scale-90 transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="set_meal">set_meal</span>
+<span class="font-label-sm text-label-sm">Meals</span>
+</a>
+</nav>
+</body></html>
