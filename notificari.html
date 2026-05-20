@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Vitality Professional - Notifications</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container": "#efeded",
+                        "on-tertiary-fixed-variant": "#00497d",
+                        "error-container": "#ffdad6",
+                        "tertiary": "#0061a4",
+                        "on-primary-container": "#003c0b",
+                        "tertiary-fixed": "#d1e4ff",
+                        "surface-container-low": "#f5f3f3",
+                        "surface-container-highest": "#e3e2e2",
+                        "secondary": "#8b5000",
+                        "surface-dim": "#dbdad9",
+                        "on-error-container": "#93000a",
+                        "primary-fixed": "#94f990",
+                        "secondary-fixed": "#ffdcbe",
+                        "on-surface-variant": "#3f4a3c",
+                        "on-secondary-fixed-variant": "#693c00",
+                        "on-primary-fixed": "#002204",
+                        "surface-tint": "#006e1c",
+                        "surface-container-lowest": "#ffffff",
+                        "outline": "#6f7a6b",
+                        "on-secondary-container": "#653900",
+                        "surface-container-high": "#e9e8e7",
+                        "tertiary-container": "#33a0fe",
+                        "on-background": "#1b1c1c",
+                        "surface": "#fbf9f9",
+                        "on-secondary": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "primary-fixed-dim": "#78dc77",
+                        "on-surface": "#1b1c1c",
+                        "on-primary-fixed-variant": "#005313",
+                        "tertiary-fixed-dim": "#9ecaff",
+                        "inverse-primary": "#78dc77",
+                        "on-secondary-fixed": "#2c1600",
+                        "inverse-on-surface": "#f2f0f0",
+                        "secondary-fixed-dim": "#ffb870",
+                        "primary": "#006e1c",
+                        "surface-bright": "#fbf9f9",
+                        "background": "#fbf9f9",
+                        "surface-variant": "#e3e2e2",
+                        "on-tertiary-fixed": "#001d36",
+                        "error": "#ba1a1a",
+                        "on-tertiary": "#ffffff",
+                        "secondary-container": "#ff9800",
+                        "on-tertiary-container": "#00355d",
+                        "primary-container": "#4caf50",
+                        "outline-variant": "#becab9",
+                        "inverse-surface": "#303031"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "lg": "40px",
+                        "xl": "64px",
+                        "xs": "4px",
+                        "md": "24px",
+                        "base": "8px",
+                        "margin-mobile": "16px",
+                        "gutter": "16px",
+                        "sm": "12px",
+                        "margin-desktop": "48px"
+                    },
+                    "fontFamily": {
+                        "headline-xl": ["Inter"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "headline-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-xl": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen font-body-md antialiased selection:bg-primary-container selection:text-on-primary-container">
+<div class="flex flex-col md:flex-row min-h-screen">
+<!-- Navigation Drawer (Desktop) -->
+<nav class="hidden md:flex flex-col fixed left-0 top-0 h-full z-40 w-72 rounded-r-xl bg-surface-container-low border-r border-outline-variant shadow-md">
+<div class="p-lg flex flex-col gap-sm">
+<div class="w-16 h-16 rounded-full overflow-hidden border border-outline-variant">
+<img alt="Dr. Vitality" class="w-full h-full object-cover" data-alt="A professional headshot of a modern nutritionist, smiling warmly in a bright, clean, clinical yet inviting office environment. The lighting is high-key and soft, illuminating the subject's face against a blurred background of fresh green plants and white shelves. The color palette emphasizes crisp whites, vitality green accents, and natural skin tones, projecting reliability and professional care." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBkkWSgsgdB4Kbkv3WR_jayxO41HhUCXRPHch1CnxerBQxdiN_ZAcHIjDkDV-v_KVamb_U_I2wjQo1TGdKVu33hAM1UiEg7cp9AlTXiTptVXwxQE2qp1Zt7tO6KCyNasvvf7L-V6q-Unn5D0QchIxTB5MMn2moclQ-1_6U4OSixHEibp9E5y8Izz28hTB_e1k8Zzu3F-UE72NLAw03HlmWcW6mx4EXrpt7XpyiJjeWELNHcZUZNLjCGzImCLpp1gzHYAWwtBJ7g1pH6"/>
+</div>
+<div>
+<h2 class="text-headline-md font-headline-md text-primary">Dr. Vitality</h2>
+<p class="text-label-md font-label-md text-on-surface-variant">Nutrition Specialist</p>
+<p class="text-label-sm font-label-sm text-outline mt-1">Professional Portal</p>
+</div>
+</div>
+<div class="flex flex-col gap-2 px-2 mt-md">
+<a class="flex items-center gap-md px-4 py-3 text-on-surface-variant hover:bg-surface-variant rounded-full mx-2 transition-all duration-200 ease-in-out group" href="#">
+<span class="material-symbols-outlined text-outline group-hover:text-on-surface-variant transition-colors" data-icon="grid_view">grid_view</span>
+<span class="text-label-md font-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-md px-4 py-3 text-on-surface-variant hover:bg-surface-variant rounded-full mx-2 transition-all duration-200 ease-in-out group" href="#">
+<span class="material-symbols-outlined text-outline group-hover:text-on-surface-variant transition-colors" data-icon="group">group</span>
+<span class="text-label-md font-label-md">Clients</span>
+</a>
+<a class="flex items-center gap-md px-4 py-3 text-on-surface-variant hover:bg-surface-variant rounded-full mx-2 transition-all duration-200 ease-in-out group" href="#">
+<span class="material-symbols-outlined text-outline group-hover:text-on-surface-variant transition-colors" data-icon="calendar_today">calendar_today</span>
+<span class="text-label-md font-label-md">Consultations</span>
+</a>
+<a class="flex items-center gap-md px-4 py-3 text-on-surface-variant hover:bg-surface-variant rounded-full mx-2 transition-all duration-200 ease-in-out group" href="#">
+<span class="material-symbols-outlined text-outline group-hover:text-on-surface-variant transition-colors" data-icon="payments">payments</span>
+<span class="text-label-md font-label-md">Revenue</span>
+</a>
+<a class="flex items-center gap-md px-4 py-3 text-on-surface-variant hover:bg-surface-variant rounded-full mx-2 transition-all duration-200 ease-in-out group" href="#">
+<span class="material-symbols-outlined text-outline group-hover:text-on-surface-variant transition-colors" data-icon="description">description</span>
+<span class="text-label-md font-label-md">Documents</span>
+</a>
+<a class="flex items-center gap-md px-4 py-3 text-on-surface-variant hover:bg-surface-variant rounded-full mx-2 transition-all duration-200 ease-in-out group" href="#">
+<span class="material-symbols-outlined text-outline group-hover:text-on-surface-variant transition-colors" data-icon="settings">settings</span>
+<span class="text-label-md font-label-md">Settings</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col min-w-0 md:ml-72 pb-24 md:pb-0">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center px-margin-mobile md:px-margin-desktop h-16 w-full z-50 bg-surface border-b border-outline-variant shadow-sm sticky top-0">
+<div class="flex items-center gap-sm">
+<div class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant md:hidden">
+<img alt="Nutritionist Portrait" class="w-full h-full object-cover" data-alt="A professional headshot of a modern nutritionist, smiling warmly in a bright, clean, clinical yet inviting office environment. The lighting is high-key and soft, illuminating the subject's face against a blurred background of fresh green plants and white shelves. The color palette emphasizes crisp whites, vitality green accents, and natural skin tones, projecting reliability and professional care." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0foMeLNKT0bvAIt2wpI8NcXeyYsyXZmDR7DixXnT5DlOzWaHE5X_WC329vWahVthtZAdsla4zehsBeHqC6eIUJeNlXYU5rfFV6V7E3_xVkdt09c-VxjFbUscfrctUeBSgi-AC_X9F-R6oliWSZIyEL32zsEXhAD9B1PyZUReSDy25ytuuxKOIOua6kSUtU2ph4eEw9Ro2bTBxLdXSmYhIYVGWnZKC9_ocRf4iB3xk_Zm7ovtzIWbotKONviEvR3G6tESQUb5LPTMQ"/>
+</div>
+<h1 class="text-headline-lg-mobile font-headline-lg-mobile md:text-headline-lg md:font-headline-lg font-bold text-primary tracking-tight">Vitality Professional</h1>
+</div>
+<div class="flex items-center gap-4">
+<button aria-label="Notifications" class="w-10 h-10 flex items-center justify-center rounded-full bg-primary-container text-on-primary-container hover:bg-surface-container transition-colors active:opacity-80 active:scale-95 shadow-sm relative group">
+<span class="material-symbols-outlined fill text-primary" data-icon="notifications">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full ring-2 ring-surface"></span>
+</button>
+</div>
+</header>
+<!-- Notifications Canvas -->
+<div class="flex-1 overflow-y-auto px-margin-mobile md:px-margin-desktop py-lg">
+<div class="max-w-4xl mx-auto w-full">
+<!-- Header & Actions -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between mb-lg gap-4">
+<div>
+<h2 class="text-headline-md font-headline-md text-on-surface">Notifications &amp; Alerts</h2>
+<p class="text-body-md font-body-md text-on-surface-variant mt-1">Stay updated with your daily professional tasks.</p>
+</div>
+<button class="flex items-center justify-center gap-2 h-12 px-6 rounded-lg border border-outline-variant text-primary font-label-md text-label-md hover:bg-surface-container transition-colors shadow-[0_4px_20px_0_rgba(0,0,0,0.04)] bg-surface">
+<span class="material-symbols-outlined" data-icon="done_all">done_all</span>
+                            Mark all as read
+                        </button>
+</div>
+<!-- Notifications List -->
+<div class="flex flex-col gap-md">
+<!-- Item: Upcoming Consultation (Unread) -->
+<div class="group relative flex flex-col sm:flex-row gap-md p-md bg-surface border border-outline-variant rounded-xl shadow-[0_4px_20px_0_rgba(0,0,0,0.04)] hover:shadow-[0_8px_24px_0_rgba(0,0,0,0.08)] transition-all cursor-pointer before:absolute before:left-0 before:top-4 before:bottom-4 before:w-1 before:bg-primary before:rounded-r-full overflow-hidden">
+<div class="flex-shrink-0 flex items-center justify-center w-14 h-14 rounded-full bg-primary-container text-on-primary-container ml-2 sm:ml-0">
+<span class="material-symbols-outlined text-2xl" data-icon="event">event</span>
+</div>
+<div class="flex-1 flex flex-col justify-center ml-2 sm:ml-0">
+<div class="flex justify-between items-start gap-4">
+<span class="text-label-sm font-label-sm text-primary uppercase tracking-wider mb-1 block">Upcoming Consultation</span>
+<span class="text-label-sm font-label-sm text-on-surface-variant whitespace-nowrap">10m ago</span>
+</div>
+<h3 class="text-body-lg font-body-lg font-medium text-on-surface mb-1">Session with Sarah Jenkins</h3>
+<p class="text-body-md font-body-md text-on-surface-variant line-clamp-2">Sarah has completed her weekly food log. Review her macronutrient distribution before the video call.</p>
+</div>
+</div>
+<!-- Item: New Client (Read) -->
+<div class="group relative flex flex-col sm:flex-row gap-md p-md bg-surface border border-outline-variant rounded-xl shadow-[0_4px_20px_0_rgba(0,0,0,0.04)] hover:shadow-[0_8px_24px_0_rgba(0,0,0,0.08)] transition-all cursor-pointer opacity-80 hover:opacity-100">
+<div class="flex-shrink-0 flex items-center justify-center w-14 h-14 rounded-full bg-surface-container-high text-on-surface-variant">
+<span class="material-symbols-outlined text-2xl" data-icon="person_add">person_add</span>
+</div>
+<div class="flex-1 flex flex-col justify-center">
+<div class="flex justify-between items-start gap-4">
+<span class="text-label-sm font-label-sm text-secondary uppercase tracking-wider mb-1 block">New Client</span>
+<span class="text-label-sm font-label-sm text-on-surface-variant whitespace-nowrap">2h ago</span>
+</div>
+<h3 class="text-body-lg font-body-lg font-medium text-on-surface mb-1">Marcus Thorne joined your roster</h3>
+<p class="text-body-md font-body-md text-on-surface-variant line-clamp-2">Marcus has completed the onboarding questionnaire. His primary goal is endurance athlete optimization.</p>
+</div>
+</div>
+<!-- Item: System Update (Unread) -->
+<div class="group relative flex flex-col sm:flex-row gap-md p-md bg-surface border border-outline-variant rounded-xl shadow-[0_4px_20px_0_rgba(0,0,0,0.04)] hover:shadow-[0_8px_24px_0_rgba(0,0,0,0.08)] transition-all cursor-pointer before:absolute before:left-0 before:top-4 before:bottom-4 before:w-1 before:bg-primary before:rounded-r-full overflow-hidden">
+<div class="flex-shrink-0 flex items-center justify-center w-14 h-14 rounded-full bg-tertiary-container text-on-tertiary-container ml-2 sm:ml-0">
+<span class="material-symbols-outlined text-2xl" data-icon="system_update">system_update</span>
+</div>
+<div class="flex-1 flex flex-col justify-center ml-2 sm:ml-0">
+<div class="flex justify-between items-start gap-4">
+<span class="text-label-sm font-label-sm text-tertiary uppercase tracking-wider mb-1 block">System Update</span>
+<span class="text-label-sm font-label-sm text-on-surface-variant whitespace-nowrap">Yesterday</span>
+</div>
+<h3 class="text-body-lg font-body-lg font-medium text-on-surface mb-1">New Macro Tracking Features</h3>
+<p class="text-body-md font-body-md text-on-surface-variant line-clamp-2">We've added advanced micronutrient tracking capabilities. You can now set specific targets for sodium and potassium.</p>
+</div>
+</div>
+<!-- Item: Report Ready (Read) -->
+<div class="group relative flex flex-col sm:flex-row gap-md p-md bg-surface border border-outline-variant rounded-xl shadow-[0_4px_20px_0_rgba(0,0,0,0.04)] hover:shadow-[0_8px_24px_0_rgba(0,0,0,0.08)] transition-all cursor-pointer opacity-80 hover:opacity-100">
+<div class="flex-shrink-0 flex items-center justify-center w-14 h-14 rounded-full bg-surface-container-high text-on-surface-variant">
+<span class="material-symbols-outlined text-2xl" data-icon="description">description</span>
+</div>
+<div class="flex-1 flex flex-col justify-center">
+<div class="flex justify-between items-start gap-4">
+<span class="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider mb-1 block">Report Ready</span>
+<span class="text-label-sm font-label-sm text-on-surface-variant whitespace-nowrap">May 12</span>
+</div>
+<h3 class="text-body-lg font-body-lg font-medium text-on-surface mb-1">Monthly Client Progress Digest</h3>
+<p class="text-body-md font-body-md text-on-surface-variant line-clamp-2">Your automated monthly progress report for all active clients has been generated and is ready for review.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation Bar (Mobile) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-2 bg-surface shadow-[0_-4px_20px_0_rgba(0,0,0,0.04)] rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high active:scale-90 transition-transform duration-150 p-2 rounded-lg" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="home">home</span>
+<span class="text-label-sm font-label-sm">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high active:scale-90 transition-transform duration-150 p-2 rounded-lg" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="group">group</span>
+<span class="text-label-sm font-label-sm">Clients</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high active:scale-90 transition-transform duration-150 p-2 rounded-lg" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="event_note">event_note</span>
+<span class="text-label-sm font-label-sm">Calendar</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high active:scale-90 transition-transform duration-150 p-2 rounded-lg" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="account_balance_wallet">account_balance_wallet</span>
+<span class="text-label-sm font-label-sm">Billing</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high active:scale-90 transition-transform duration-150 p-2 rounded-lg" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="more_horiz">more_horiz</span>
+<span class="text-label-sm font-label-sm">More</span>
+</a>
+</nav>
+</div>
+</body></html>
