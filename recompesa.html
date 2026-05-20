@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+
+<html class="light" lang="ro"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Recompensă Deblocată - Vitality</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed-dim": "#78dc77",
+                        "primary-container": "#4caf50",
+                        "secondary-fixed-dim": "#ffb870",
+                        "on-secondary-fixed-variant": "#693c00",
+                        "surface-container-high": "#e9e8e7",
+                        "surface-container": "#efeded",
+                        "surface-bright": "#fbf9f9",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-fixed": "#d1e4ff",
+                        "on-primary-fixed": "#002204",
+                        "surface-tint": "#006e1c",
+                        "secondary": "#8b5000",
+                        "error-container": "#ffdad6",
+                        "surface": "#fbf9f9",
+                        "primary": "#006e1c",
+                        "surface-container-highest": "#e3e2e2",
+                        "surface-dim": "#dbdad9",
+                        "on-error-container": "#93000a",
+                        "inverse-primary": "#78dc77",
+                        "on-tertiary-container": "#00355d",
+                        "primary-fixed": "#94f990",
+                        "on-surface-variant": "#3f4a3c",
+                        "tertiary-fixed-dim": "#9ecaff",
+                        "on-primary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-container": "#ff9800",
+                        "on-tertiary-fixed-variant": "#00497d",
+                        "inverse-on-surface": "#f2f0f0",
+                        "surface-variant": "#e3e2e2",
+                        "outline-variant": "#becab9",
+                        "on-primary-fixed-variant": "#005313",
+                        "tertiary-container": "#33a0fe",
+                        "on-error": "#ffffff",
+                        "secondary-fixed": "#ffdcbe",
+                        "on-secondary": "#ffffff",
+                        "background": "#fbf9f9",
+                        "on-background": "#1b1c1c",
+                        "inverse-surface": "#303031",
+                        "surface-container-low": "#f5f3f3",
+                        "on-primary-container": "#003c0b",
+                        "on-secondary-fixed": "#2c1600",
+                        "on-tertiary-fixed": "#001d36",
+                        "on-secondary-container": "#653900",
+                        "outline": "#6f7a6b",
+                        "error": "#ba1a1a",
+                        "tertiary": "#0061a4",
+                        "on-surface": "#1b1c1c"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "md": "24px",
+                        "xl": "64px",
+                        "sm": "12px",
+                        "xs": "4px",
+                        "margin-mobile": "16px",
+                        "lg": "40px",
+                        "margin-desktop": "48px",
+                        "gutter": "16px",
+                        "base": "8px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Inter"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-xl": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "headline-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-xl": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .icon-fill {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface antialiased min-h-screen flex flex-col items-center justify-center p-margin-mobile md:p-margin-desktop">
+<main class="w-full max-w-md bg-surface-container-lowest rounded-xl shadow-[0_4px_20px_0_rgba(0,0,0,0.04)] p-lg flex flex-col items-center text-center border border-surface-variant relative overflow-hidden">
+<!-- Background Decoration -->
+<div class="absolute top-[-50px] left-[-50px] w-[200px] h-[200px] bg-primary-fixed rounded-full opacity-20 blur-3xl pointer-events-none"></div>
+<div class="absolute bottom-[-50px] right-[-50px] w-[150px] h-[150px] bg-secondary-fixed rounded-full opacity-20 blur-3xl pointer-events-none"></div>
+<!-- Logo -->
+<div class="mb-md z-10">
+<img alt="Vitality Logo" class="h-12 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDAWXlCKcSlq9GcoawLBuwJNWk9kJSA1QJ7UUztqB-rIDIkQEQY0FngVrVQxVIwIpXHt_TdXgUdFW4IIgnJoFuoK4jFL89ZY7lNPwAIxSutE5R234EG4nbl3O_0wWQC0dzFciJcZ4m5m0dwIYb3NuG65DLpjta9ceqgx-pR_nJoAv5GAEBSHDYn8SWOKcz4_-Ur94fZfBilo3dF8NflEdyHKG-LYAY2qSl3vFt0-maosNcyPBFuXN0nX1rpWD243U6i1wyIogtpyTIo"/>
+</div>
+<!-- Success Icon -->
+<div class="mb-sm relative z-10">
+<div class="w-20 h-20 bg-primary-container rounded-full flex items-center justify-center shadow-lg transform hover:scale-105 transition-transform duration-300">
+<span class="material-symbols-outlined icon-fill text-on-primary-container text-[48px]">verified</span>
+</div>
+</div>
+<!-- Typography -->
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-primary mb-xs z-10">
+            Felicitări! Recompensă Deblocată
+        </h1>
+<p class="font-body-md text-body-md text-on-surface-variant mb-md z-10">
+            Ai deblocat cu succes cuponul de 10% reducere pentru următorul chef personal.
+        </p>
+<!-- Coupon Card -->
+<div class="w-full bg-primary-container/10 border-2 border-dashed border-primary/30 rounded-xl p-6 mb-md flex items-center justify-between z-10 relative group transition-all duration-300">
+<div class="absolute left-0 top-1/2 -translate-y-1/2 w-1.5 h-1/2 bg-primary/40 rounded-r-full"></div>
+<div class="flex flex-col items-start">
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest mb-1 opacity-80">Cod Reducere</p>
+<p class="text-[24px] leading-8 font-mono text-on-surface font-bold tracking-[0.2em] select-all" id="couponCode">VITALITY10</p>
+</div>
+<button aria-label="Copy code" class="w-12 h-12 rounded-full bg-surface-container-lowest border border-outline-variant/30 shadow-sm hover:shadow-md hover:bg-primary-container/20 flex items-center justify-center text-primary transition-all duration-200 active:scale-90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2" onclick="copyToClipboard()">
+<span class="material-symbols-outlined text-[24px]" id="copyIcon">content_copy</span>
+</button>
+</div><p class="font-label-sm text-label-sm text-on-surface-variant text-center -mt-2 mb-md z-10 opacity-70">Valabil până la: 31 Decembrie 2023</p>
+<!-- Points Summary -->
+<div class="w-full flex items-center justify-center gap-xs z-10">
+<span class="material-symbols-outlined text-secondary text-[20px]">stars</span>
+<p class="font-label-md text-label-md text-on-surface-variant">
+<span class="font-bold text-on-surface">750 pct</span> rămase
+            </p>
+</div><div class="w-full mb-md px-sm z-10">
+<p class="font-label-sm text-label-sm text-on-surface-variant text-center">
+<span class="font-bold text-primary">Cum funcționează?</span><br/>
+Aplică codul de reducere în pagina de checkout atunci când rezervi următorul tău chef personal.
+</p>
+</div>
+<!-- Actions -->
+<div class="w-full flex flex-col gap-sm z-10">
+<button class="w-full min-h-[48px] bg-primary hover:bg-surface-tint text-on-primary rounded-full font-label-md text-label-md flex items-center justify-center shadow-md active:scale-[0.98] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
+                Mergi la Rezervări
+            </button>
+<button class="w-full min-h-[48px] bg-transparent border border-primary text-primary hover:bg-primary-fixed-dim hover:text-on-primary-fixed rounded-full font-label-md text-label-md flex items-center justify-center active:scale-[0.98] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
+                Înapoi la Recompense
+            </button>
+</div>
+</main>
+<script>
+        function copyToClipboard() {
+            const code = document.getElementById('couponCode').innerText;
+            navigator.clipboard.writeText(code).then(() => {
+                const icon = document.getElementById('copyIcon');
+                icon.innerText = 'check';
+                icon.classList.add('text-primary');
+                
+                // Add a little pop effect
+                icon.parentElement.classList.add('scale-110');
+                
+                setTimeout(() => {
+                    icon.innerText = 'content_copy';
+                    icon.parentElement.classList.remove('scale-110');
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+            });
+        }
+    </script>
+</body></html>
