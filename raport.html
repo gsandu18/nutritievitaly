@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+
+<html lang="ro"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Raport Progres Lunar - Vitality Professional</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "tertiary-container": "#33a0fe",
+                      "primary-container": "#4caf50",
+                      "outline-variant": "#becab9",
+                      "outline": "#6f7a6b",
+                      "on-secondary-fixed-variant": "#693c00",
+                      "secondary-fixed-dim": "#ffb870",
+                      "on-background": "#1b1c1c",
+                      "error-container": "#ffdad6",
+                      "surface-dim": "#dbdad9",
+                      "inverse-primary": "#78dc77",
+                      "surface-container-highest": "#e3e2e2",
+                      "on-error-container": "#93000a",
+                      "tertiary-fixed": "#d1e4ff",
+                      "on-tertiary-fixed-variant": "#00497d",
+                      "secondary": "#8b5000",
+                      "tertiary-fixed-dim": "#9ecaff",
+                      "secondary-fixed": "#ffdcbe",
+                      "secondary-container": "#ff9800",
+                      "on-primary-fixed": "#002204",
+                      "on-surface": "#1b1c1c",
+                      "primary-fixed": "#94f990",
+                      "on-primary-container": "#003c0b",
+                      "on-primary-fixed-variant": "#005313",
+                      "error": "#ba1a1a",
+                      "on-primary": "#ffffff",
+                      "tertiary": "#0061a4",
+                      "inverse-surface": "#303031",
+                      "surface-container": "#efeded",
+                      "on-tertiary-container": "#00355d",
+                      "on-secondary-container": "#653900",
+                      "primary-fixed-dim": "#78dc77",
+                      "surface-container-low": "#f5f3f3",
+                      "surface-tint": "#006e1c",
+                      "on-tertiary": "#ffffff",
+                      "on-secondary": "#ffffff",
+                      "surface-container-lowest": "#ffffff",
+                      "surface-variant": "#e3e2e2",
+                      "surface-container-high": "#e9e8e7",
+                      "on-secondary-fixed": "#2c1600",
+                      "on-error": "#ffffff",
+                      "on-surface-variant": "#3f4a3c",
+                      "primary": "#006e1c",
+                      "inverse-on-surface": "#f2f0f0",
+                      "on-tertiary-fixed": "#001d36",
+                      "surface-bright": "#fbf9f9",
+                      "surface": "#fbf9f9",
+                      "background": "#fbf9f9"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "xl": "64px",
+                      "xs": "4px",
+                      "gutter": "16px",
+                      "lg": "40px",
+                      "base": "8px",
+                      "margin-mobile": "16px",
+                      "md": "24px",
+                      "sm": "12px",
+                      "margin-desktop": "48px"
+              },
+              "fontFamily": {
+                      "headline-lg": ["Inter"],
+                      "headline-md": ["Inter"],
+                      "label-md": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "label-sm": ["Inter"],
+                      "headline-xl": ["Inter"],
+                      "headline-lg-mobile": ["Inter"],
+                      "body-md": ["Inter"]
+              },
+              "fontSize": {
+                      "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                      "headline-xl": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "headline-lg-mobile": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .icon-fill {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .card-shadow {
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.04);
+        }
+        .card-hover-shadow:hover {
+            box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.08);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface font-body-md text-on-surface flex h-screen overflow-hidden">
+<!-- Navigation Drawer (SideNav) -->
+<aside class="hidden md:flex flex-col h-full w-80 fixed left-0 top-0 bg-surface-container-low shadow-md p-gutter gap-base z-20">
+<!-- Profile Header -->
+<div class="flex items-center gap-sm mb-md px-base">
+<img alt="Nutritionist profile" class="w-12 h-12 rounded-full object-cover" data-alt="Professional headshot portrait of a confident female nutritionist wearing a clean white clinical blouse against a bright, modern office background. Soft, flattering lighting highlighting her face. High-quality corporate aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDemjeUBlXHxIdZl-n4jP1AW-dK1JafL4lDy7umj7Cnkx3yKWNqguH4gpBeyqqpJXVLaNf35L9lfcCL80Wr_15EugPL2nD-ujG-tWPFYWQNPiBRYMrFIxFQWVMq8nIJqjgmbT07jTuYUCd4wI8ouIxsQNL-NbuwLxT_tAWJGztBXy1PCiFjd7YSuw_gqY-zzoP4zONMzeT10KyCYTFF0fMtdREhfV902t6eDrw6Yh-Sz4EUtkSHidH6d1MhIM1Wn_nZpLIBFuTsfdPY"/>
+<div>
+<h2 class="font-label-md text-label-md text-on-surface font-bold">Dr. Sarah Miller</h2>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Senior Nutritionist</p>
+<div class="flex items-center gap-xs mt-xs">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Active Status</span>
+</div>
+</div>
+</div>
+<nav class="flex-1 space-y-2">
+<!-- Inactive -->
+<a class="flex items-center gap-sm px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<!-- Inactive -->
+<a class="flex items-center gap-sm px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-label-md text-label-md">Clients</span>
+</a>
+<!-- Inactive -->
+<a class="flex items-center gap-sm px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">event_note</span>
+<span class="font-label-md text-label-md">Consultations</span>
+</a>
+<!-- Active State -->
+<a class="flex items-center gap-sm px-md py-sm bg-primary-container text-on-primary-container rounded-lg font-bold transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined icon-fill">analytics</span>
+<span class="font-label-md text-label-md">Reports</span>
+</a>
+<!-- Inactive -->
+<a class="flex items-center gap-sm px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">library_books</span>
+<span class="font-label-md text-label-md">Resources</span>
+</a>
+</nav>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col md:ml-80 h-full overflow-y-auto bg-background">
+<!-- TopAppBar -->
+<header class="w-full sticky top-0 bg-surface shadow-sm border-b border-outline-variant z-10">
+<div class="flex items-center justify-between px-margin-desktop py-4 max-w-7xl mx-auto">
+<div class="flex items-center gap-sm">
+<h1 class="font-headline-md text-headline-md text-primary font-bold">Nutrition Pro Portal</h1>
+</div>
+<div class="flex items-center gap-sm">
+<button class="p-sm rounded-full text-on-surface-variant hover:bg-surface-container-high transition-colors cursor-pointer active:opacity-80">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<img alt="Professional headshot of nutritionist" class="w-10 h-10 rounded-full object-cover border border-outline-variant hidden md:block" data-alt="Professional headshot portrait of a confident female nutritionist wearing a clean white clinical blouse against a bright, modern office background. Soft, flattering lighting highlighting her face. High-quality corporate aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBQSuWaIYVXkWMweWHja2THNqtO0vmWab8-LKDNOlkD0JOePToac2cn0B-jvwgd6jlytHle6fryWnposWNsrJ2BXHYFH8504GDLlY_9XvBuefTrs0A6YUNnPsjWsTWF_PFfkPQKleMRE75lGpHSHXCH6dx8-e7uE2QrLptZnKVDjETZuDdctVhciBK_8rVw8iKBa5gex2UqUpP3pVVM9nMA2MCfR3U_FSY0bm4Ln9A_rKIkVooub_UCtC5Xe06JUepMZWc0ZFYRMPhz"/>
+</div>
+</div>
+</header>
+<!-- Page Canvas -->
+<div class="p-margin-desktop max-w-7xl mx-auto w-full flex-1 pb-xl">
+<!-- Context Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-md mb-lg">
+<div>
+<div class="flex items-center gap-sm mb-xs">
+<span class="font-label-md text-label-md text-primary uppercase tracking-wider">Raport Lunar</span>
+<span class="text-outline-variant">•</span>
+<span class="font-label-md text-label-md text-on-surface-variant">Septembrie 2023</span>
+</div>
+<h2 class="font-headline-xl text-headline-xl text-on-background mb-xs">Alexandru Popescu</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Sinteza performanței și aderenței la planul nutrițional.</p>
+</div>
+<div class="flex gap-sm">
+<button class="h-12 px-md flex items-center justify-center gap-xs rounded-lg border border-primary text-primary font-label-md text-label-md hover:bg-primary/5 transition-colors">
+<span class="material-symbols-outlined text-[20px]">download</span>
+                        Descarcă PDF
+                    </button>
+<button class="h-12 px-md flex items-center justify-center gap-xs rounded-lg bg-primary text-on-primary font-label-md text-label-md hover:opacity-90 transition-opacity shadow-sm">
+<span class="material-symbols-outlined text-[20px]">send</span>
+                        Trimite Clientului
+                    </button>
+</div>
+</div>
+<!-- Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-md">
+<!-- Adherence Score (Bento Box 1) -->
+<div class="md:col-span-4 bg-surface-container-lowest rounded-xl p-lg card-shadow border border-outline-variant/30 flex flex-col justify-between card-hover-shadow transition-shadow">
+<div class="flex justify-between items-start mb-md">
+<h3 class="font-headline-md text-headline-md text-on-surface">Sumar Performanță</h3>
+<span class="material-symbols-outlined text-primary-container">stars</span>
+</div>
+<div class="flex flex-col items-center justify-center flex-1 py-sm">
+<!-- Simulated Progress Ring -->
+<div class="relative w-40 h-40 rounded-full flex items-center justify-center" style="background: conic-gradient(#4caf50 92%, #efeded 0);">
+<div class="absolute inset-2 bg-surface-container-lowest rounded-full flex flex-col items-center justify-center">
+<span class="font-headline-xl text-headline-xl text-on-background">92%</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Scor General</span>
+</div>
+</div>
+</div>
+<p class="font-body-md text-body-md text-center text-on-surface-variant mt-md">
+                        Aderență excelentă în această lună. Continuă tot așa!
+                    </p>
+</div>
+<!-- Weight Evolution (Bento Box 2) -->
+<div class="md:col-span-8 bg-surface-container-lowest rounded-xl p-lg card-shadow border border-outline-variant/30 flex flex-col card-hover-shadow transition-shadow">
+<div class="flex justify-between items-center mb-lg">
+<h3 class="font-headline-md text-headline-md text-on-surface">Evoluție Greutate</h3>
+<div class="flex items-center gap-sm">
+<div class="bg-surface-container px-sm py-xs rounded-lg flex items-center gap-xs">
+<span class="w-3 h-3 rounded-full bg-primary-container"></span>
+<span class="font-label-sm text-label-sm text-on-surface">Țintă</span>
+</div>
+</div>
+</div>
+<!-- Chart Placeholder -->
+<div class="flex-1 w-full min-h-[200px] rounded-lg bg-surface-container-low border border-dashed border-outline relative flex items-center justify-center overflow-hidden">
+<!-- Abstract representation of a chart -->
+<div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(#6f7a6b 1px, transparent 1px); background-size: 20px 20px;"></div>
+<svg class="w-full h-full absolute inset-0 text-primary-container/30 px-md py-sm preserve-3d" preserveaspectratio="none" viewbox="0 0 100 40">
+<path d="M0 35 Q 20 20, 40 25 T 80 15 T 100 5 L 100 40 L 0 40 Z" fill="currentColor"></path>
+<path d="M0 35 Q 20 20, 40 25 T 80 15 T 100 5" fill="none" stroke="#006e1c" stroke-width="2"></path>
+</svg>
+<span class="font-label-md text-label-md text-on-surface-variant relative z-10 bg-surface-container-lowest px-sm py-xs rounded shadow-sm border border-outline-variant">Zonă Grafic</span>
+</div>
+<div class="grid grid-cols-3 gap-md mt-lg pt-md border-t border-surface-variant">
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant">1 Septembrie</p>
+<p class="font-headline-md text-headline-md text-on-surface">82.5 kg</p>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant">30 Septembrie</p>
+<p class="font-headline-md text-headline-md text-on-surface">80.1 kg</p>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Diferență</p>
+<p class="font-headline-md text-headline-md text-primary flex items-center">
+<span class="material-symbols-outlined text-[20px] mr-xs">arrow_downward</span>
+                                -2.4 kg
+                            </p>
+</div>
+</div>
+</div>
+<!-- Nutrient Adherence (Bento Box 3) -->
+<div class="md:col-span-6 bg-surface-container-lowest rounded-xl p-lg card-shadow border border-outline-variant/30 card-hover-shadow transition-shadow">
+<div class="flex items-center justify-between mb-lg">
+<h3 class="font-headline-md text-headline-md text-on-surface">Aderență Nutrienți</h3>
+<span class="material-symbols-outlined text-outline">restaurant_menu</span>
+</div>
+<div class="space-y-md">
+<!-- Protein -->
+<div>
+<div class="flex justify-between items-end mb-xs">
+<span class="font-label-md text-label-md text-on-surface">Proteine</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">145g / 150g (96%)</span>
+</div>
+<div class="h-3 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary" style="width: 96%;"></div>
+</div>
+</div>
+<!-- Carbs -->
+<div>
+<div class="flex justify-between items-end mb-xs">
+<span class="font-label-md text-label-md text-on-surface">Carbohidrați</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">190g / 200g (95%)</span>
+</div>
+<div class="h-3 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-secondary-container" style="width: 95%;"></div>
+</div>
+</div>
+<!-- Fats -->
+<div>
+<div class="flex justify-between items-end mb-xs">
+<span class="font-label-md text-label-md text-on-surface">Grăsimi</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">65g / 60g (108%)</span>
+</div>
+<div class="h-3 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-error" style="width: 100%;"></div>
+</div>
+<p class="font-label-sm text-label-sm text-error mt-xs">Ușoară depășire a țintei de grăsimi.</p>
+</div>
+</div>
+</div>
+<!-- Goals Tracker (Bento Box 4) -->
+<div class="md:col-span-6 bg-surface-container-lowest rounded-xl p-lg card-shadow border border-outline-variant/30 card-hover-shadow transition-shadow">
+<div class="flex items-center justify-between mb-lg">
+<h3 class="font-headline-md text-headline-md text-on-surface">Obiective Lunare</h3>
+<span class="material-symbols-outlined text-outline">track_changes</span>
+</div>
+<ul class="space-y-sm">
+<!-- Goal 1 -->
+<li class="flex items-center justify-between p-sm rounded-lg bg-surface-container-low border border-surface-variant">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary-container">water_drop</span>
+<span class="font-body-md text-body-md text-on-surface">Consum apă (3L/zi)</span>
+</div>
+<span class="px-sm py-xs rounded bg-primary-container/20 text-on-primary-container font-label-sm text-label-sm flex items-center gap-xs">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+                                Atins
+                            </span>
+</li>
+<!-- Goal 2 -->
+<li class="flex items-center justify-between p-sm rounded-lg bg-surface-container-low border border-surface-variant">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-on-surface-variant">monitor_weight</span>
+<span class="font-body-md text-body-md text-on-surface">Scădere în greutate (-2kg)</span>
+</div>
+<span class="px-sm py-xs rounded bg-primary-container/20 text-on-primary-container font-label-sm text-label-sm flex items-center gap-xs">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+                                Depășit
+                            </span>
+</li>
+<!-- Goal 3 -->
+<li class="flex items-center justify-between p-sm rounded-lg bg-surface-container-low border border-surface-variant">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-secondary-container">fitness_center</span>
+<span class="font-body-md text-body-md text-on-surface">Antrenamente (3/săpt)</span>
+</div>
+<span class="px-sm py-xs rounded bg-secondary-container/20 text-on-secondary-container font-label-sm text-label-sm flex items-center gap-xs">
+<span class="material-symbols-outlined text-[14px]">sync</span>
+                                În curs
+                            </span>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</main>
+</body></html>
