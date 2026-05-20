@@ -191,4 +191,26 @@
 </div>
 </div>
 </div>
+        
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyDmKC06ObRWWvod2TYJUvEM-ULKrztw7Ts",
+  authDomain: "app-vitality.firebaseapp.com",
+  projectId: "app-vitality",
+  storageBucket: "app-vitality.firebasestorage.app",
+  messagingSenderId: "360982822240",
+  appId: "1:360982822240:web:a650b9289aabd9de80f205",
+  measurementId: "G-T8D7CTP5ZK"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
 </body></html>
