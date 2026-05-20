@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+
+<html lang="ro"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Setări Notificări - Vitality</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-container-low": "#f5f3f3",
+                      "outline": "#6f7a6b",
+                      "on-primary-fixed-variant": "#005313",
+                      "tertiary-fixed": "#d1e4ff",
+                      "primary": "#006e1c",
+                      "tertiary": "#0061a4",
+                      "on-tertiary-fixed": "#001d36",
+                      "on-secondary-fixed-variant": "#693c00",
+                      "surface-container-highest": "#e3e2e2",
+                      "secondary-fixed-dim": "#ffb870",
+                      "on-tertiary-fixed-variant": "#00497d",
+                      "inverse-surface": "#303031",
+                      "outline-variant": "#becab9",
+                      "on-error-container": "#93000a",
+                      "on-surface-variant": "#3f4a3c",
+                      "error": "#ba1a1a",
+                      "surface": "#fbf9f9",
+                      "on-primary-container": "#003c0b",
+                      "inverse-primary": "#78dc77",
+                      "on-surface": "#1b1c1c",
+                      "surface-tint": "#006e1c",
+                      "on-secondary-fixed": "#2c1600",
+                      "secondary": "#8b5000",
+                      "surface-dim": "#dbdad9",
+                      "surface-variant": "#e3e2e2",
+                      "primary-container": "#4caf50",
+                      "on-tertiary": "#ffffff",
+                      "on-error": "#ffffff",
+                      "secondary-fixed": "#ffdcbe",
+                      "primary-fixed": "#94f990",
+                      "surface-bright": "#fbf9f9",
+                      "on-secondary": "#ffffff",
+                      "background": "#fbf9f9",
+                      "surface-container-high": "#e9e8e7",
+                      "on-tertiary-container": "#00355d",
+                      "surface-container-lowest": "#ffffff",
+                      "on-primary-fixed": "#002204",
+                      "primary-fixed-dim": "#78dc77",
+                      "secondary-container": "#ff9800",
+                      "on-background": "#1b1c1c",
+                      "on-secondary-container": "#653900",
+                      "surface-container": "#efeded",
+                      "on-primary": "#ffffff",
+                      "error-container": "#ffdad6",
+                      "tertiary-fixed-dim": "#9ecaff",
+                      "tertiary-container": "#33a0fe",
+                      "inverse-on-surface": "#f2f0f0"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "margin-mobile": "16px",
+                      "md": "24px",
+                      "lg": "40px",
+                      "gutter": "16px",
+                      "base": "8px",
+                      "xl": "64px",
+                      "sm": "12px",
+                      "xs": "4px",
+                      "margin-desktop": "48px"
+              },
+              "fontFamily": {
+                      "label-sm": ["Inter"],
+                      "headline-lg": ["Inter"],
+                      "headline-md": ["Inter"],
+                      "body-md": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "label-md": ["Inter"],
+                      "headline-lg-mobile": ["Inter"],
+                      "headline-xl": ["Inter"]
+              },
+              "fontSize": {
+                      "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                      "headline-lg-mobile": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                      "headline-xl": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        body {
+            background-color: theme('colors.background');
+            color: theme('colors.on-background');
+        }
+        /* Hide scrollbar for clean UI */
+        ::-webkit-scrollbar {
+            display: none;
+        }
+        
+        /* Custom Toggle Switch Styles */
+        .toggle-checkbox:checked {
+            right: 0;
+            border-color: theme('colors.primary');
+        }
+        .toggle-checkbox:checked + .toggle-label {
+            background-color: theme('colors.primary');
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="antialiased min-h-screen pb-24">
+<!-- TopAppBar -->
+<header class="bg-surface shadow-sm docked full-width top-0 fixed left-0 w-full z-50 flex justify-between items-center px-margin-mobile h-16">
+<div class="flex items-center gap-4">
+<button class="text-primary hover:bg-surface-variant active:scale-95 duration-150 ease-in-out p-2 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">arrow_back</span>
+</button>
+<h1 class="font-headline-md text-headline-md text-primary font-bold">Setări Notificări</h1>
+</div>
+<div class="w-10"></div> <!-- Spacer to center title visually against back button -->
+</header>
+<!-- Main Content Canvas -->
+<main class="pt-24 px-margin-mobile md:px-margin-desktop max-w-3xl mx-auto space-y-md">
+<div class="space-y-2">
+<p class="font-body-md text-body-md text-on-surface-variant">Gestionează cum și când vrei să fii notificat despre rezervările tale de Chef personal și actualizările platformei Vitality.</p>
+</div>
+<!-- Section: Booking Reminders -->
+<section class="bg-surface-container-lowest rounded-xl shadow-[0_4px_20px_0_rgba(0,0,0,0.04)] border border-surface-variant overflow-hidden">
+<div class="p-4 border-b border-surface-variant bg-surface-bright">
+<h2 class="font-headline-md text-[20px] font-semibold text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">event</span>
+                    Rezervări Chef
+                </h2>
+<p class="font-body-md text-sm text-on-surface-variant mt-1">Notificări pentru a te asigura că ești pregătit pentru experiența culinară.</p>
+</div>
+<div class="divide-y divide-surface-variant">
+<!-- Toggle Item 1 -->
+<div class="p-4 flex items-center justify-between hover:bg-surface-container-low transition-colors">
+<div>
+<h3 class="font-body-lg text-body-lg font-medium text-on-surface">Reminder 24h înainte</h3>
+<p class="font-body-md text-sm text-on-surface-variant">Primește o notificare cu o zi înainte de rezervare.</p>
+</div>
+<div class="relative inline-block w-12 mr-2 align-middle select-none transition duration-200 ease-in">
+<input checked="" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer z-10 transition-transform duration-200 ease-in-out translate-x-6 border-primary" id="toggle-24h" name="toggle" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-6 rounded-full bg-primary cursor-pointer transition-colors duration-200 ease-in-out" for="toggle-24h"></label>
+</div>
+</div>
+<!-- Toggle Item 2 -->
+<div class="p-4 flex items-center justify-between hover:bg-surface-container-low transition-colors">
+<div>
+<h3 class="font-body-lg text-body-lg font-medium text-on-surface">Reminder 1h înainte</h3>
+<p class="font-body-md text-sm text-on-surface-variant">Ultimul reminder înainte de sosirea Chef-ului.</p>
+</div>
+<div class="relative inline-block w-12 mr-2 align-middle select-none transition duration-200 ease-in">
+<input checked="" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer z-10 transition-transform duration-200 ease-in-out translate-x-6 border-primary" id="toggle-1h" name="toggle" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-6 rounded-full bg-primary cursor-pointer transition-colors duration-200 ease-in-out" for="toggle-1h"></label>
+</div>
+</div>
+<!-- Toggle Item 3 -->
+<div class="p-4 flex items-center justify-between hover:bg-surface-container-low transition-colors">
+<div>
+<h3 class="font-body-lg text-body-lg font-medium text-on-surface">Modificări rezervare</h3>
+<p class="font-body-md text-sm text-on-surface-variant">Alerte dacă apar schimbări în meniu sau program.</p>
+</div>
+<div class="relative inline-block w-12 mr-2 align-middle select-none transition duration-200 ease-in">
+<input checked="" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer z-10 transition-transform duration-200 ease-in-out translate-x-6 border-primary" id="toggle-changes" name="toggle" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-6 rounded-full bg-primary cursor-pointer transition-colors duration-200 ease-in-out" for="toggle-changes"></label>
+</div>
+</div>
+</div>
+</section>
+<!-- Section: General Notifications -->
+<section class="bg-surface-container-lowest rounded-xl shadow-[0_4px_20px_0_rgba(0,0,0,0.04)] border border-surface-variant overflow-hidden">
+<div class="p-4 border-b border-surface-variant bg-surface-bright">
+<h2 class="font-headline-md text-[20px] font-semibold text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">campaign</span>
+                    Comunicare Generală
+                </h2>
+</div>
+<div class="divide-y divide-surface-variant">
+<!-- Toggle Item 4 -->
+<div class="p-4 flex items-center justify-between hover:bg-surface-container-low transition-colors">
+<div>
+<h3 class="font-body-lg text-body-lg font-medium text-on-surface">Noutăți și Recomandări</h3>
+<p class="font-body-md text-sm text-on-surface-variant">Sfaturi de nutriție și meniuri noi recomandate.</p>
+</div>
+<div class="relative inline-block w-12 mr-2 align-middle select-none transition duration-200 ease-in">
+<input class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer z-10 transition-transform duration-200 ease-in-out border-surface-variant" id="toggle-news" name="toggle" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-6 rounded-full bg-surface-variant cursor-pointer transition-colors duration-200 ease-in-out" for="toggle-news"></label>
+</div>
+</div>
+<!-- Toggle Item 5 -->
+<div class="p-4 flex items-center justify-between hover:bg-surface-container-low transition-colors">
+<div>
+<h3 class="font-body-lg text-body-lg font-medium text-on-surface">Oferte Marketing</h3>
+<p class="font-body-md text-sm text-on-surface-variant">Promoții speciale pentru rezervări viitoare.</p>
+</div>
+<div class="relative inline-block w-12 mr-2 align-middle select-none transition duration-200 ease-in">
+<input class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer z-10 transition-transform duration-200 ease-in-out border-surface-variant" id="toggle-marketing" name="toggle" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-6 rounded-full bg-surface-variant cursor-pointer transition-colors duration-200 ease-in-out" for="toggle-marketing"></label>
+</div>
+</div>
+</div>
+</section>
+<div class="pt-sm flex justify-center">
+<p class="font-label-sm text-label-sm text-on-surface-variant text-center max-w-md">Modificările sunt salvate automat. Setările de sistem pentru notificări push pot suprascrie aceste preferințe.</p>
+</div>
+</main>
+<!-- Suppressed Bottom Navigation: Not rendering BottomNavBar because this is a Settings/Transactional sub-page, prioritizing the main canvas canvas as per instructions -->
+</body></html>
