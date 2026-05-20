@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Modify Nutrition Plan - Elena Popescu</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-background": "#1b1c1c",
+                        "tertiary-fixed": "#d1e4ff",
+                        "tertiary": "#0061a4",
+                        "primary-fixed-dim": "#78dc77",
+                        "on-primary-fixed-variant": "#005313",
+                        "primary-fixed": "#94f990",
+                        "error": "#ba1a1a",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "secondary": "#8b5000",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed-dim": "#9ecaff",
+                        "tertiary-container": "#33a0fe",
+                        "secondary-fixed": "#ffdcbe",
+                        "on-secondary-fixed": "#2c1600",
+                        "inverse-primary": "#78dc77",
+                        "on-tertiary-container": "#00355d",
+                        "primary-container": "#4caf50",
+                        "surface-bright": "#fbf9f9",
+                        "primary": "#006e1c",
+                        "surface-container": "#efeded",
+                        "outline-variant": "#becab9",
+                        "on-primary-container": "#003c0b",
+                        "surface-tint": "#006e1c",
+                        "surface-container-high": "#e9e8e7",
+                        "surface-container-highest": "#e3e2e2",
+                        "on-secondary-container": "#653900",
+                        "on-primary": "#ffffff",
+                        "on-surface": "#1b1c1c",
+                        "on-error-container": "#93000a",
+                        "surface-dim": "#dbdad9",
+                        "inverse-on-surface": "#f2f0f0",
+                        "on-tertiary-fixed-variant": "#00497d",
+                        "on-surface-variant": "#3f4a3c",
+                        "on-secondary-fixed-variant": "#693c00",
+                        "on-secondary": "#ffffff",
+                        "surface-variant": "#e3e2e2",
+                        "surface-container-low": "#f5f3f3",
+                        "background": "#fbf9f9",
+                        "surface": "#fbf9f9",
+                        "on-tertiary-fixed": "#001d36",
+                        "secondary-fixed-dim": "#ffb870",
+                        "inverse-surface": "#303031",
+                        "secondary-container": "#ff9800",
+                        "on-primary-fixed": "#002204",
+                        "outline": "#6f7a6b"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "md": "24px",
+                        "margin-desktop": "48px",
+                        "gutter": "16px",
+                        "xs": "4px",
+                        "sm": "12px",
+                        "base": "8px",
+                        "margin-mobile": "16px",
+                        "xl": "64px",
+                        "lg": "40px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-xl": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-xl": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background antialiased min-h-screen pb-xl">
+<!-- TopAppBar -->
+<header class="bg-surface shadow-[0px_4px_20px_0px_rgba(0,0,0,0.04)] docked full-width top-0 z-50 sticky">
+<div class="flex items-center justify-between px-margin-mobile md:px-margin-desktop h-16 w-full max-w-[1280px] mx-auto">
+<div class="flex items-center gap-sm">
+<img alt="Vitality Logo" class="h-8 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-7HF0M_m4Akb6C-WejO0xymimoyh4djVOMR1nC_FX9_cOOrWkTRdfPC8BkiYpYKUjxvQFrWZTAD6y4IzbA68VQx5n-CLAmQ1pb1JzLLljo14yJ_Hu7dwqhwCQ2uUcEjj4-Va08iGnG8zzmbRCMCsSOV051DIIOWHEziY9sGofbHOT-dyd60tRamiLa1EzgZuBQeDQALIQrIYYYhP92AkkOccHkTHgFXpl0UvK_dunHZeAokyg5DKp7VlHE3XAFHh_jsywe2oi7Clv"/>
+<span class="font-headline-md text-headline-md font-bold text-primary hidden md:block">Vitality Professional</span>
+</div>
+<!-- Desktop Nav -->
+<nav class="hidden md:flex items-center gap-md">
+<a class="text-on-surface-variant hover:bg-surface-container-low px-4 py-2 rounded-lg transition-colors font-label-md text-label-md" href="#">Clients</a>
+<a class="text-primary font-bold hover:bg-surface-container-low px-4 py-2 rounded-lg transition-colors font-label-md text-label-md relative after:content-[''] after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:w-1/2 after:h-0.5 after:bg-primary after:rounded-t-full" href="#">Plans</a>
+<a class="text-on-surface-variant hover:bg-surface-container-low px-4 py-2 rounded-lg transition-colors font-label-md text-label-md" href="#">Sessions</a>
+</nav>
+<div class="flex items-center gap-sm">
+<button class="w-10 h-10 rounded-full overflow-hidden hover:bg-surface-container-low active:scale-95 transition-transform duration-200 focus:outline-none focus:ring-2 focus:ring-primary">
+<img alt="Nutritionist Avatar" class="w-full h-full object-cover" data-alt="A professional headshot of a nutritionist in a clinical yet approachable setting. The lighting is bright and clean, typical of a modern healthcare facility. They wear a subtle white coat over a light blue shirt. The mood is confident and caring." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCg3U-A2lCYREY8JsnCZ1RRWSzzIKPNMdLCvZ29pv_0A_vchBp3t174hqVLQ-hYnHv_gug5rKw1lxm8RibtDkiJkgLwj0_N76YBvFAa3JOQqTFqRpY2kYj4047B0caC8f3t8uxlIQmD1W3ZrXJiWOKA8EEOH9PmxK8XtHJRAVDuX-5EBhZlUGuoly-qw9DR1HQcscYWuTXjsXgH8-WhYCGERPj7e-7VIcQpTLlESOhY_Os_kt5FgCx2sEUfhEN0a2gPcpMunlzuCQAM"/>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="max-w-[1280px] mx-auto px-margin-mobile md:px-margin-desktop py-md md:py-lg grid grid-cols-1 lg:grid-cols-12 gap-md items-start">
+<!-- Header Section -->
+<div class="col-span-1 lg:col-span-12 flex flex-col md:flex-row justify-between items-start md:items-center gap-md mb-sm">
+<div>
+<a class="inline-flex items-center text-on-surface-variant hover:text-primary transition-colors font-label-sm text-label-sm mb-xs" href="#">
+<span class="material-symbols-outlined text-[16px] mr-1">arrow_back</span>
+                    Back to Client Profile
+                </a>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-on-background">Modify Nutrition Plan</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-xs">Editing active plan for <span class="font-bold text-on-background">Elena Popescu</span> (28 yrs, Weight Loss)</p>
+</div>
+<div class="flex gap-sm w-full md:w-auto">
+<button class="flex-1 md:flex-none px-6 py-3 border border-primary text-primary rounded-lg font-label-md text-label-md hover:bg-primary-container hover:text-on-primary-container transition-colors focus:ring-2 focus:ring-primary focus:outline-none">
+                    Discard
+                </button>
+<button class="flex-1 md:flex-none px-6 py-3 bg-primary text-on-primary rounded-lg font-label-md text-label-md shadow-[0px_4px_20px_0px_rgba(0,0,0,0.04)] hover:shadow-[0px_4px_20px_0px_rgba(0,0,0,0.08)] hover:bg-surface-tint active:scale-95 transition-all focus:ring-2 focus:ring-primary focus:outline-none">
+                    Save Changes
+                </button>
+</div>
+</div>
+<!-- Left Column: Macros & Goals -->
+<div class="col-span-1 lg:col-span-4 flex flex-col gap-md">
+<!-- Summary Card -->
+<section class="bg-surface-container-lowest rounded-xl p-lg shadow-[0px_4px_20px_0px_rgba(0,0,0,0.04)] border border-outline-variant">
+<h2 class="font-headline-md text-headline-md mb-md text-on-background">Plan Summary</h2>
+<div class="space-y-sm">
+<div class="flex justify-between items-center py-2 border-b border-surface-container">
+<span class="font-body-md text-body-md text-on-surface-variant">Daily Caloric Target</span>
+<div class="flex items-center gap-2">
+<span class="text-outline line-through text-sm">2100</span>
+<span class="font-label-md text-label-md text-primary">1850 kcal</span>
+</div>
+</div>
+<div class="flex justify-between items-center py-2 border-b border-surface-container">
+<span class="font-body-md text-body-md text-on-surface-variant">Protein</span>
+<div class="flex items-center gap-2">
+<span class="text-outline line-through text-sm">110g</span>
+<span class="font-label-md text-label-md text-tertiary">140g</span>
+</div>
+</div>
+<div class="flex justify-between items-center py-2 border-b border-surface-container">
+<span class="font-body-md text-body-md text-on-surface-variant">Carbs</span>
+<div class="flex items-center gap-2">
+<span class="text-outline line-through text-sm">220g</span>
+<span class="font-label-md text-label-md text-secondary">160g</span>
+</div>
+</div>
+<div class="flex justify-between items-center py-2">
+<span class="font-body-md text-body-md text-on-surface-variant">Fats</span>
+<div class="flex items-center gap-2">
+<span class="text-outline line-through text-sm">75g</span>
+<span class="font-label-md text-label-md text-error">65g</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Adjustments Card -->
+<section class="bg-surface-container-lowest rounded-xl p-lg shadow-[0px_4px_20px_0px_rgba(0,0,0,0.04)] border border-outline-variant">
+<h2 class="font-headline-md text-headline-md mb-md text-on-background">Adjust Targets</h2>
+<!-- Calorie Slider -->
+<div class="mb-md">
+<label class="flex justify-between font-label-md text-label-md text-on-background mb-xs">
+<span>Daily Calories</span>
+<span class="text-primary" id="calValue">1850 kcal</span>
+</label>
+<input class="w-full h-2 bg-surface-container rounded-lg appearance-none cursor-pointer accent-primary" max="3000" min="1200" oninput="document.getElementById('calValue').innerText = this.value + ' kcal'" step="50" type="range" value="1850"/>
+</div>
+<!-- Macro Inputs -->
+<div class="grid grid-cols-3 gap-sm">
+<div>
+<label class="block font-label-sm text-label-sm text-on-surface-variant mb-1">Protein (g)</label>
+<input class="w-full bg-surface-container-low border border-outline-variant rounded-lg px-3 py-2 text-center font-body-md focus:bg-surface-container-lowest focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors" type="number" value="140"/>
+<div class="mt-1 h-1 w-full bg-tertiary-fixed rounded-full overflow-hidden">
+<div class="h-full bg-tertiary w-[30%]"></div>
+</div>
+</div>
+<div>
+<label class="block font-label-sm text-label-sm text-on-surface-variant mb-1">Carbs (g)</label>
+<input class="w-full bg-surface-container-low border border-outline-variant rounded-lg px-3 py-2 text-center font-body-md focus:bg-surface-container-lowest focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors" type="number" value="160"/>
+<div class="mt-1 h-1 w-full bg-secondary-fixed rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-[45%]"></div>
+</div>
+</div>
+<div>
+<label class="block font-label-sm text-label-sm text-on-surface-variant mb-1">Fats (g)</label>
+<input class="w-full bg-surface-container-low border border-outline-variant rounded-lg px-3 py-2 text-center font-body-md focus:bg-surface-container-lowest focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors" type="number" value="65"/>
+<div class="mt-1 h-1 w-full bg-error-container rounded-full overflow-hidden">
+<div class="h-full bg-error w-[25%]"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Chef Notes -->
+<section class="bg-surface-container-lowest rounded-xl p-lg shadow-[0px_4px_20px_0px_rgba(0,0,0,0.04)] border border-outline-variant">
+<div class="flex items-center gap-2 mb-sm">
+<span class="material-symbols-outlined text-primary">restaurant_menu</span>
+<h2 class="font-headline-md text-headline-md text-on-background">Notes for Chef</h2>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-sm text-sm">Instructions for the personal chef (Bucătarul Personal).</p>
+<textarea class="w-full bg-surface-container-low border border-outline-variant rounded-lg p-3 font-body-md text-on-background focus:bg-surface-container-lowest focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors resize-none placeholder-outline" placeholder="E.g., Client prefers low sodium. Substitute dairy with oat milk where possible..." rows="4">Elena requested more fish dishes this week. Please ensure salmon is wild-caught. Minimal added salt.</textarea>
+</section>
+</div>
+<!-- Right Column: Meal Schedule (Bento Layout) -->
+<div class="col-span-1 lg:col-span-8">
+<div class="bg-surface-container-lowest rounded-xl p-lg shadow-[0px_4px_20px_0px_rgba(0,0,0,0.04)] border border-outline-variant min-h-full">
+<div class="flex justify-between items-center mb-md">
+<h2 class="font-headline-md text-headline-md text-on-background">Daily Meal Schedule</h2>
+<button class="text-primary flex items-center gap-1 hover:bg-primary-container px-3 py-1.5 rounded-lg transition-colors font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                        Add Meal
+                    </button>
+</div>
+<div class="grid grid-cols-1 gap-md">
+<!-- Meal Item: Breakfast -->
+<div class="border border-outline-variant rounded-xl p-sm md:p-md bg-surface-bright hover:shadow-[0px_4px_20px_0px_rgba(0,0,0,0.04)] transition-shadow group relative overflow-hidden">
+<div class="absolute top-0 left-0 w-1 h-full bg-tertiary"></div>
+<div class="flex flex-col md:flex-row justify-between items-start gap-4">
+<div class="flex-1">
+<div class="flex items-center gap-2 mb-2">
+<h3 class="font-label-md text-label-md text-on-background text-lg">Breakfast</h3>
+<span class="bg-surface-container px-2 py-0.5 rounded text-xs text-on-surface-variant">08:00 AM</span>
+</div>
+<input class="w-full bg-transparent border-b border-transparent focus:border-primary focus:outline-none font-body-md text-on-background pb-1 hover:border-outline-variant transition-colors" type="text" value="Oatmeal with Berries &amp; Protein Powder"/>
+<p class="text-sm text-on-surface-variant mt-2 font-label-sm">Substitutes: Greek Yogurt</p>
+</div>
+<div class="flex gap-2 w-full md:w-auto">
+<div class="bg-tertiary-fixed text-on-tertiary-fixed-variant px-3 py-1 rounded-full text-xs font-semibold flex flex-col items-center flex-1 md:flex-none">
+<span>P</span><span>25g</span>
+</div>
+<div class="bg-secondary-fixed text-on-secondary-fixed-variant px-3 py-1 rounded-full text-xs font-semibold flex flex-col items-center flex-1 md:flex-none">
+<span>C</span><span>45g</span>
+</div>
+<div class="bg-error-container text-on-error-container px-3 py-1 rounded-full text-xs font-semibold flex flex-col items-center flex-1 md:flex-none">
+<span>F</span><span>8g</span>
+</div>
+<div class="bg-surface-container text-on-surface px-3 py-1 rounded-lg text-xs font-bold flex flex-col items-center justify-center flex-1 md:flex-none ml-2">
+<span>350</span><span>kcal</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Meal Item: Lunch -->
+<div class="border border-outline-variant rounded-xl p-sm md:p-md bg-surface-bright hover:shadow-[0px_4px_20px_0px_rgba(0,0,0,0.04)] transition-shadow group relative overflow-hidden">
+<div class="absolute top-0 left-0 w-1 h-full bg-primary"></div>
+<div class="flex flex-col md:flex-row justify-between items-start gap-4">
+<div class="flex-1">
+<div class="flex items-center gap-2 mb-2">
+<h3 class="font-label-md text-label-md text-on-background text-lg">Lunch</h3>
+<span class="bg-surface-container px-2 py-0.5 rounded text-xs text-on-surface-variant">01:00 PM</span>
+</div>
+<input class="w-full bg-transparent border-b border-transparent focus:border-primary focus:outline-none font-body-md text-on-background pb-1 hover:border-outline-variant transition-colors" type="text" value="Grilled Lemon Herb Salmon with Quinoa &amp; Asparagus"/>
+<p class="text-sm text-on-surface-variant mt-2 font-label-sm">Substitutes: Chicken Breast</p>
+</div>
+<div class="flex gap-2 w-full md:w-auto">
+<div class="bg-tertiary-fixed text-on-tertiary-fixed-variant px-3 py-1 rounded-full text-xs font-semibold flex flex-col items-center flex-1 md:flex-none">
+<span>P</span><span>40g</span>
+</div>
+<div class="bg-secondary-fixed text-on-secondary-fixed-variant px-3 py-1 rounded-full text-xs font-semibold flex flex-col items-center flex-1 md:flex-none">
+<span>C</span><span>50g</span>
+</div>
+<div class="bg-error-container text-on-error-container px-3 py-1 rounded-full text-xs font-semibold flex flex-col items-center flex-1 md:flex-none">
+<span>F</span><span>22g</span>
+</div>
+<div class="bg-surface-container text-on-surface px-3 py-1 rounded-lg text-xs font-bold flex flex-col items-center justify-center flex-1 md:flex-none ml-2">
+<span>550</span><span>kcal</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Meal Item: Snack -->
+<div class="border border-outline-variant rounded-xl p-sm md:p-md bg-surface-bright hover:shadow-[0px_4px_20px_0px_rgba(0,0,0,0.04)] transition-shadow group relative overflow-hidden">
+<div class="absolute top-0 left-0 w-1 h-full bg-secondary-container"></div>
+<div class="flex flex-col md:flex-row justify-between items-start gap-4">
+<div class="flex-1">
+<div class="flex items-center gap-2 mb-2">
+<h3 class="font-label-md text-label-md text-on-background text-lg">Snack</h3>
+<span class="bg-surface-container px-2 py-0.5 rounded text-xs text-on-surface-variant">04:00 PM</span>
+</div>
+<input class="w-full bg-transparent border-b border-transparent focus:border-primary focus:outline-none font-body-md text-on-background pb-1 hover:border-outline-variant transition-colors" type="text" value="Apple Slices with Almond Butter"/>
+<p class="text-sm text-on-surface-variant mt-2 font-label-sm">Substitutes: Mixed Nuts</p>
+</div>
+<div class="flex gap-2 w-full md:w-auto">
+<div class="bg-tertiary-fixed text-on-tertiary-fixed-variant px-3 py-1 rounded-full text-xs font-semibold flex flex-col items-center flex-1 md:flex-none">
+<span>P</span><span>5g</span>
+</div>
+<div class="bg-secondary-fixed text-on-secondary-fixed-variant px-3 py-1 rounded-full text-xs font-semibold flex flex-col items-center flex-1 md:flex-none">
+<span>C</span><span>25g</span>
+</div>
+<div class="bg-error-container text-on-error-container px-3 py-1 rounded-full text-xs font-semibold flex flex-col items-center flex-1 md:flex-none">
+<span>F</span><span>15g</span>
+</div>
+<div class="bg-surface-container text-on-surface px-3 py-1 rounded-lg text-xs font-bold flex flex-col items-center justify-center flex-1 md:flex-none ml-2">
+<span>250</span><span>kcal</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile) -->
+<nav class="md:hidden bg-surface border-t border-outline-variant shadow-[0px_-4px_20px_0px_rgba(0,0,0,0.04)] docked full-width bottom-0 rounded-t-xl fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-3 pb-safe">
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-container-high transition-all" href="#">
+<span class="material-symbols-outlined mb-1">group</span>
+<span class="font-label-sm text-label-sm">Clients</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-5 py-1 active:scale-90 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined mb-1">restaurant_menu</span>
+<span class="font-label-sm text-label-sm">Plans</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-container-high transition-all" href="#">
+<span class="material-symbols-outlined mb-1">event</span>
+<span class="font-label-sm text-label-sm">Sessions</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-container-high transition-all" href="#">
+<span class="material-symbols-outlined mb-1">account_circle</span>
+<span class="font-label-sm text-label-sm">Profile</span>
+</a>
+</nav>
+</body></html>
