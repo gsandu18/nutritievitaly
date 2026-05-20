@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+
+<html lang="ro"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Card Adăugat cu Succes!</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-dim": "#dbdad9",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-container": "#00355d",
+                        "on-surface-variant": "#3f4a3c",
+                        "primary-fixed": "#94f990",
+                        "outline": "#6f7a6b",
+                        "surface-variant": "#e3e2e2",
+                        "on-tertiary-fixed-variant": "#00497d",
+                        "on-tertiary": "#ffffff",
+                        "on-tertiary-fixed": "#001d36",
+                        "inverse-surface": "#303031",
+                        "surface-bright": "#fbf9f9",
+                        "tertiary": "#0061a4",
+                        "surface-container": "#efeded",
+                        "secondary-container": "#ff9800",
+                        "surface-tint": "#006e1c",
+                        "on-primary-fixed": "#002204",
+                        "on-primary-container": "#003c0b",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-fixed-dim": "#78dc77",
+                        "on-secondary-container": "#653900",
+                        "primary-container": "#4caf50",
+                        "background": "#fbf9f9",
+                        "tertiary-fixed": "#d1e4ff",
+                        "surface": "#fbf9f9",
+                        "primary": "#006e1c",
+                        "secondary-fixed": "#ffdcbe",
+                        "secondary": "#8b5000",
+                        "surface-container-high": "#e9e8e7",
+                        "on-secondary-fixed": "#2c1600",
+                        "on-primary": "#ffffff",
+                        "surface-container-highest": "#e3e2e2",
+                        "inverse-primary": "#78dc77",
+                        "secondary-fixed-dim": "#ffb870",
+                        "inverse-on-surface": "#f2f0f0",
+                        "on-surface": "#1b1c1c",
+                        "surface-container-low": "#f5f3f3",
+                        "outline-variant": "#becab9",
+                        "on-background": "#1b1c1c",
+                        "error-container": "#ffdad6",
+                        "on-primary-fixed-variant": "#005313",
+                        "error": "#ba1a1a",
+                        "on-error": "#ffffff",
+                        "tertiary-fixed-dim": "#9ecaff",
+                        "tertiary-container": "#33a0fe",
+                        "on-secondary-fixed-variant": "#693c00",
+                        "on-secondary": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-desktop": "48px",
+                        "lg": "40px",
+                        "margin-mobile": "16px",
+                        "md": "24px",
+                        "gutter": "16px",
+                        "xs": "4px",
+                        "xl": "64px",
+                        "sm": "12px",
+                        "base": "8px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-xl": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-xl": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface min-h-screen flex flex-col font-body-md">
+<!-- Top Navigation (Suppressed per rules for transactional/success screen, but keeping a minimal back/close if needed, or fully suppressing. Rules say: "Automatic Suppression: You MUST exclude the navigation shell if the page intent is: Linear/Transactional: Login, Sign-up, Onboarding, Checkout, or 'Success/Confirmation' splash screens." - Suppressing both Top and Bottom Nav) -->
+<!-- Main Content Canvas -->
+<main class="flex-grow flex items-center justify-center px-margin-mobile md:px-margin-desktop py-xl">
+<div class="max-w-md w-full flex flex-col items-center text-center space-y-lg bg-surface-container-lowest p-lg rounded-xl shadow-[0_4px_20px_0_rgba(0,0,0,0.04)] border border-outline-variant/30">
+<!-- Success Icon -->
+<div class="w-32 h-32 bg-primary-container/20 rounded-full flex items-center justify-center mb-md">
+<span class="material-symbols-outlined text-[64px] text-primary" style="font-variation-settings: 'FILL' 1;">
+                    check_circle
+                </span>
+</div>
+<!-- Typography -->
+<div class="space-y-sm">
+<!-- Using mobile headline for consistency on small screens, desktop scales up if needed based on classes, but using base here for generic -->
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-on-surface">
+                    Card Adăugat cu Succes!
+                </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-sm mx-auto">
+                    Cardul tău a fost salvat și este gata pentru a fi utilizat la viitoarele rezervări.
+                </p>
+</div>
+<!-- Actions -->
+<div class="w-full flex flex-col space-y-md pt-md">
+<button class="w-full h-12 bg-primary text-on-primary font-label-md text-label-md rounded-full flex items-center justify-center shadow-sm hover:shadow-md transition-shadow active:scale-95 duration-150">
+                    Înapoi la Plăți
+                </button>
+<button class="w-full h-12 bg-transparent border border-primary text-primary font-label-md text-label-md rounded-full flex items-center justify-center hover:bg-primary-container/10 transition-colors active:scale-95 duration-150">
+                    Finalizează
+                </button>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation Bar - SUPPRESSED -->
+<!-- Rule: "Automatic Suppression: You MUST exclude the navigation shell if the page intent is: Linear/Transactional... or 'Success/Confirmation' splash screens." -->
+</body></html>
