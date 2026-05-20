@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+
+<html lang="ro"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Vitality - Istoric Tranzacții</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-container": "#00355d",
+                        "secondary": "#8b5000",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "surface": "#fbf9f9",
+                        "secondary-fixed": "#ffdcbe",
+                        "surface-variant": "#e3e2e2",
+                        "surface-container-highest": "#e3e2e2",
+                        "secondary-container": "#ff9800",
+                        "outline": "#6f7a6b",
+                        "surface-container": "#efeded",
+                        "on-secondary-container": "#653900",
+                        "surface-dim": "#dbdad9",
+                        "primary-fixed-dim": "#78dc77",
+                        "on-primary-fixed": "#002204",
+                        "on-surface-variant": "#3f4a3c",
+                        "on-secondary-fixed-variant": "#693c00",
+                        "inverse-surface": "#303031",
+                        "primary": "#006e1c",
+                        "inverse-on-surface": "#f2f0f0",
+                        "tertiary": "#0061a4",
+                        "primary-fixed": "#94f990",
+                        "primary-container": "#4caf50",
+                        "on-secondary-fixed": "#2c1600",
+                        "surface-container-high": "#e9e8e7",
+                        "on-tertiary-fixed": "#001d36",
+                        "tertiary-fixed-dim": "#9ecaff",
+                        "background": "#fbf9f9",
+                        "inverse-primary": "#78dc77",
+                        "on-error": "#ffffff",
+                        "surface-tint": "#006e1c",
+                        "error-container": "#ffdad6",
+                        "on-primary": "#ffffff",
+                        "on-background": "#1b1c1c",
+                        "on-surface": "#1b1c1c",
+                        "error": "#ba1a1a",
+                        "outline-variant": "#becab9",
+                        "tertiary-container": "#33a0fe",
+                        "on-primary-fixed-variant": "#005313",
+                        "on-primary-container": "#003c0b",
+                        "on-error-container": "#93000a",
+                        "tertiary-fixed": "#d1e4ff",
+                        "surface-bright": "#fbf9f9",
+                        "secondary-fixed-dim": "#ffb870",
+                        "surface-container-low": "#f5f3f3",
+                        "on-tertiary-fixed-variant": "#00497d"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "16px",
+                        "sm": "12px",
+                        "xl": "64px",
+                        "lg": "40px",
+                        "xs": "4px",
+                        "base": "8px",
+                        "margin-desktop": "48px",
+                        "margin-mobile": "16px",
+                        "md": "24px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "headline-xl": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+                        "headline-xl": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background min-h-screen font-sans pb-24 md:pb-0 md:pl-80">
+<!-- Mobile TopAppBar (from JSON) -->
+<header class="md:hidden fixed top-0 w-full z-50 bg-surface dark:bg-surface-dim shadow-[0_4px_20px_0_rgba(0,0,0,0.04)] flex items-center justify-between px-margin-mobile h-16">
+<div class="flex items-center gap-2">
+<img alt="User Profile Avatar" class="w-8 h-8 rounded-full object-cover border border-outline-variant" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCukz26W-5sxrZVIgNWtD5D139a0U-dNE8qEHHUmyZyLG9RvEYlnhHmxDUDcv23UOU9kUtgLrYvw4279DvkNXI6pOFcUFItns64Ti8G0K5ZLjZOtFb1GGiKQTmcuMGy6Wyx3rRAfMx7GANFwKpe_sFw29aje46mbq8o1XJxhCpyJ1RheZ-5HV6NXDsf6TYcLyMa5j5AdYVwLVkR1zb3Ka4L34WrDfxbCUMzuFji0yOep2AC9CsfQ5dpD6UKpiJ47K-9m7eaLhvjhwLH"/>
+<span class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim">Vitality</span>
+</div>
+<button class="text-on-surface-variant dark:text-outline-variant hover:bg-surface-container dark:hover:bg-surface-container-highest transition-colors active:scale-95 duration-200 p-2 rounded-full">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+</header>
+<!-- Desktop SideNav (NavigationDrawer from JSON) -->
+<aside class="hidden md:flex flex-col h-full py-lg w-80 rounded-r-xl bg-surface-container-low dark:bg-surface-container-lowest shadow-xl fixed top-0 left-0 z-50">
+<div class="px-lg pb-md flex items-center gap-sm">
+<img alt="Chef Professional Profile" class="w-12 h-12 rounded-full object-cover border-2 border-primary" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBlZ3Hq04GucOJbkweOZA2UR98DftXG93qY4q-O6KRjVes3rVCfcpUGx1iWCNOiITX0PBL47fYL4PfkH_MlDH9B8PVRG9leM59rZkk-mZE4c_PGC0r3S3sXlWRlPUmKqud6akWKEl5iMYzVBHz6ZPBX94in7HAzRxnMXim1bD2NN4g4SsU6g2BwOBM72IuUWjPzdh-AY-jVJcR84-LNyGaRw05NKg_0rWd85osgzzEACclkslXMefm9XQPTlRqtuPnNtFrPhnMnvOyR"/>
+<div>
+<h2 class="font-headline-md text-headline-md font-bold text-primary">Vitality Pro</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Chef Alex Reed</p>
+<span class="font-label-sm text-label-sm text-secondary bg-secondary-container bg-opacity-20 px-2 py-0.5 rounded-full mt-1 inline-block">Premium Account</span>
+</div>
+</div>
+<nav class="flex flex-col gap-2 flex-grow px-2">
+<a class="flex items-center gap-3 px-4 py-3 font-body-md text-body-md text-on-surface-variant dark:text-outline-variant mx-2 hover:bg-surface-variant dark:hover:bg-on-surface-variant transition-all rounded-full active:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 font-body-md text-body-md text-on-surface-variant dark:text-outline-variant mx-2 hover:bg-surface-variant dark:hover:bg-on-surface-variant transition-all rounded-full active:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span>Client Management</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 font-body-md text-body-md text-on-surface-variant dark:text-outline-variant mx-2 hover:bg-surface-variant dark:hover:bg-on-surface-variant transition-all rounded-full active:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span>Reports</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 font-body-md text-body-md text-on-surface-variant dark:text-outline-variant mx-2 hover:bg-surface-variant dark:hover:bg-on-surface-variant transition-all rounded-full active:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="receipt_long">receipt_long</span>
+<span>Billing</span>
+</a>
+<!-- Active State on Desktop representing Settings/Profile equivalent -->
+<a class="flex items-center gap-3 px-4 py-3 font-body-md text-body-md bg-secondary-container text-on-secondary-container dark:bg-secondary-fixed-dim dark:text-on-secondary-fixed rounded-full mx-2 hover:bg-surface-variant dark:hover:bg-on-surface-variant transition-all active:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span>Settings</span>
+</a>
+</nav>
+</aside>
+<!-- Main Content -->
+<main class="pt-20 px-margin-mobile md:px-margin-desktop md:pt-margin-desktop max-w-5xl mx-auto">
+<header class="mb-md md:mb-lg flex items-center gap-sm">
+<button class="md:hidden text-on-surface-variant p-2 -ml-2 rounded-full hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary">Istoric Tranzacții</h1>
+</header>
+<!-- Filters (Optional but good UX) -->
+<div class="flex gap-sm mb-md overflow-x-auto pb-2 scrollbar-hide"><button class="bg-primary text-on-primary font-label-md text-label-md px-4 py-2 rounded-full whitespace-nowrap shadow-sm">Toate</button><button class="bg-surface-container-high text-on-surface font-label-md text-label-md px-4 py-2 rounded-full whitespace-nowrap hover:bg-surface-variant transition-colors border border-outline-variant border-opacity-50">Servicii</button><button class="bg-surface-container-high text-on-surface font-label-md text-label-md px-4 py-2 rounded-full whitespace-nowrap hover:bg-surface-variant transition-colors border border-outline-variant border-opacity-50">Produse</button><button class="bg-surface-container-high text-on-surface font-label-md text-label-md px-4 py-2 rounded-full whitespace-nowrap hover:bg-surface-variant transition-colors border border-outline-variant border-opacity-50">Anulări</button><button class="bg-surface-container-high text-on-surface font-label-md text-label-md px-4 py-2 rounded-full whitespace-nowrap hover:bg-surface-variant transition-colors border border-outline-variant border-opacity-50 flex items-center gap-2"><span class="material-symbols-outlined text-[20px]">calendar_today</span><span>Dată</span></button></div>
+<!-- Transactions List -->
+<div class="flex flex-col gap-sm">
+<!-- Transaction Item 1 -->
+<div class="bg-surface-container-lowest rounded-xl p-4 md:p-6 shadow-[0_4px_20px_0_rgba(0,0,0,0.04)] border border-outline-variant border-opacity-20 hover:shadow-[0_4px_20px_0_rgba(0,0,0,0.08)] transition-shadow duration-300 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+<div class="flex items-start gap-4">
+<div class="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined">restaurant</span>
+</div>
+<div>
+<h3 class="font-headline-md text-base md:text-lg text-on-surface mb-1">Rezervare Chef Alexandru Popescu</h3>
+<p class="font-body-md text-sm text-on-surface-variant mb-2">14 Octombrie 2023</p>
+<span class="inline-flex items-center gap-1 font-label-sm text-xs bg-primary-container bg-opacity-20 text-primary px-2 py-1 rounded-full">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+                            Finalizată
+                        </span>
+</div>
+</div>
+<div class="flex md:flex-col items-center md:items-end justify-between w-full md:w-auto gap-4 md:gap-2 border-t md:border-t-0 border-outline-variant border-opacity-20 pt-4 md:pt-0">
+<span class="font-headline-md text-lg text-on-surface">250 RON</span>
+<button class="font-label-md text-sm text-tertiary flex items-center gap-1 hover:text-tertiary-container transition-colors">
+<span class="material-symbols-outlined text-[18px]">receipt</span>
+                        Vezi Factură
+                    </button>
+</div>
+</div>
+<!-- Transaction Item 2 -->
+<div class="bg-surface-container-lowest rounded-xl p-4 md:p-6 shadow-[0_4px_20px_0_rgba(0,0,0,0.04)] border border-outline-variant border-opacity-20 hover:shadow-[0_4px_20px_0_rgba(0,0,0,0.08)] transition-shadow duration-300 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+<div class="flex items-start gap-4">
+<div class="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined">description</span>
+</div>
+<div>
+<h3 class="font-headline-md text-base md:text-lg text-on-surface mb-1">Plan Nutriție Premium (Abonament Luni)</h3>
+<p class="font-body-md text-sm text-on-surface-variant mb-2">01 Octombrie 2023</p>
+<span class="inline-flex items-center gap-1 font-label-sm text-xs bg-primary-container bg-opacity-20 text-primary px-2 py-1 rounded-full">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+                            Finalizată
+                        </span>
+</div>
+</div>
+<div class="flex md:flex-col items-center md:items-end justify-between w-full md:w-auto gap-4 md:gap-2 border-t md:border-t-0 border-outline-variant border-opacity-20 pt-4 md:pt-0">
+<span class="font-headline-md text-lg text-on-surface">150 RON</span>
+<button class="font-label-md text-sm text-tertiary flex items-center gap-1 hover:text-tertiary-container transition-colors">
+<span class="material-symbols-outlined text-[18px]">receipt</span>
+                        Vezi Factură
+                    </button>
+</div>
+</div>
+<!-- Transaction Item 3 (Pending/Processing) -->
+<div class="bg-surface-container-lowest rounded-xl p-4 md:p-6 shadow-[0_4px_20px_0_rgba(0,0,0,0.04)] border border-outline-variant border-opacity-20 hover:shadow-[0_4px_20px_0_rgba(0,0,0,0.08)] transition-shadow duration-300 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+<div class="flex items-start gap-4">
+<div class="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center text-secondary shrink-0">
+<span class="material-symbols-outlined">local_mall</span>
+</div>
+<div>
+<h3 class="font-headline-md text-base md:text-lg text-on-surface mb-1">Comandă Echipament Sportiv</h3>
+<p class="font-body-md text-sm text-on-surface-variant mb-2">28 Septembrie 2023</p>
+<span class="inline-flex items-center gap-1 font-label-sm text-xs bg-secondary-container bg-opacity-20 text-on-secondary-container px-2 py-1 rounded-full">
+<span class="material-symbols-outlined text-[14px]">pending</span>
+                            În procesare
+                        </span>
+</div>
+</div>
+<div class="flex md:flex-col items-center md:items-end justify-between w-full md:w-auto gap-4 md:gap-2 border-t md:border-t-0 border-outline-variant border-opacity-20 pt-4 md:pt-0">
+<span class="font-headline-md text-lg text-on-surface">420 RON</span>
+<button class="font-label-md text-sm text-outline flex items-center gap-1 hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-[18px]">receipt</span>
+                        Detalii
+                    </button>
+</div>
+</div>
+</div>
+</main>
+<!-- Mobile BottomNavBar (from JSON) -->
+<nav class="md:hidden fixed bottom-0 w-full z-50 bg-surface dark:bg-surface-dim shadow-[0_-4px_20px_0_rgba(0,0,0,0.04)] flex justify-around items-center h-20 px-2 pb-safe">
+<button class="flex flex-col items-center justify-center gap-1 text-on-surface-variant dark:text-outline-variant hover:bg-surface-container-low dark:hover:bg-surface-container-highest active:scale-90 transition-transform duration-150 p-2 rounded-xl">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label-sm text-label-sm">Home</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-1 text-on-surface-variant dark:text-outline-variant hover:bg-surface-container-low dark:hover:bg-surface-container-highest active:scale-90 transition-transform duration-150 p-2 rounded-xl">
+<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
+<span class="font-label-sm text-label-sm">Diary</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-1 text-on-surface-variant dark:text-outline-variant hover:bg-surface-container-low dark:hover:bg-surface-container-highest active:scale-90 transition-transform duration-150 p-2 rounded-xl">
+<span class="material-symbols-outlined" data-icon="assignment">assignment</span>
+<span class="font-label-sm text-label-sm">Plans</span>
+</button>
+<!-- Active Nav Item -->
+<button class="flex flex-col items-center justify-center gap-1 bg-primary-container dark:bg-on-primary-container text-on-primary-container dark:text-primary-fixed rounded-xl px-4 py-1 hover:bg-surface-container-low dark:hover:bg-surface-container-highest active:scale-90 transition-transform duration-150">
+<span class="material-symbols-outlined" data-icon="person" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-label-sm text-label-sm">Profile</span>
+</button>
+</nav>
+</body></html>
