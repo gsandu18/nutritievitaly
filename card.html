@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Add Payment Method</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-surface-variant": "#3f4a3c",
+                      "tertiary-fixed": "#d1e4ff",
+                      "on-secondary-fixed-variant": "#693c00",
+                      "on-tertiary-fixed-variant": "#00497d",
+                      "on-tertiary-fixed": "#001d36",
+                      "on-tertiary": "#ffffff",
+                      "surface-container-low": "#f5f3f3",
+                      "secondary-fixed-dim": "#ffb870",
+                      "on-surface": "#1b1c1c",
+                      "on-error-container": "#93000a",
+                      "secondary": "#8b5000",
+                      "inverse-surface": "#303031",
+                      "inverse-primary": "#78dc77",
+                      "on-tertiary-container": "#00355d",
+                      "surface-container-high": "#e9e8e7",
+                      "secondary-container": "#ff9800",
+                      "error": "#ba1a1a",
+                      "surface-dim": "#dbdad9",
+                      "on-error": "#ffffff",
+                      "primary-container": "#4caf50",
+                      "surface-container": "#efeded",
+                      "tertiary": "#0061a4",
+                      "on-primary-fixed-variant": "#005313",
+                      "on-secondary": "#ffffff",
+                      "tertiary-fixed-dim": "#9ecaff",
+                      "inverse-on-surface": "#f2f0f0",
+                      "error-container": "#ffdad6",
+                      "outline": "#6f7a6b",
+                      "on-secondary-fixed": "#2c1600",
+                      "on-primary": "#ffffff",
+                      "surface-tint": "#006e1c",
+                      "outline-variant": "#becab9",
+                      "on-primary-container": "#003c0b",
+                      "surface-variant": "#e3e2e2",
+                      "background": "#fbf9f9",
+                      "on-primary-fixed": "#002204",
+                      "surface-bright": "#fbf9f9",
+                      "on-secondary-container": "#653900",
+                      "on-background": "#1b1c1c",
+                      "primary-fixed": "#94f990",
+                      "primary-fixed-dim": "#78dc77",
+                      "surface-container-highest": "#e3e2e2",
+                      "tertiary-container": "#33a0fe",
+                      "surface": "#fbf9f9",
+                      "secondary-fixed": "#ffdcbe",
+                      "primary": "#006e1c",
+                      "surface-container-lowest": "#ffffff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "margin-mobile": "16px",
+                      "gutter": "16px",
+                      "base": "8px",
+                      "sm": "12px",
+                      "margin-desktop": "48px",
+                      "md": "24px",
+                      "xs": "4px",
+                      "xl": "64px",
+                      "lg": "40px"
+              },
+              "fontFamily": {
+                      "label-md": [
+                              "Inter"
+                      ],
+                      "headline-xl": [
+                              "Inter"
+                      ],
+                      "body-lg": [
+                              "Inter"
+                      ],
+                      "label-sm": [
+                              "Inter"
+                      ],
+                      "headline-md": [
+                              "Inter"
+                      ],
+                      "body-md": [
+                              "Inter"
+                      ],
+                      "headline-lg-mobile": [
+                              "Inter"
+                      ],
+                      "headline-lg": [
+                              "Inter"
+                      ]
+              },
+              "fontSize": {
+                      "label-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-xl": [
+                              "40px",
+                              {
+                                      "lineHeight": "48px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "28px",
+                              {
+                                      "lineHeight": "36px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col pt-16 pb-20">
+<!-- TopAppBar -->
+<header class="bg-surface text-primary font-headline-md-mobile md:text-headline-md border-b border-outline-variant shadow-sm flex items-center justify-between px-margin-mobile h-16 w-full z-50 fixed top-0">
+<button class="hover:bg-surface-container-high transition-colors active:scale-95 transition-transform p-2 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant">arrow_back</span>
+</button>
+<h1 class="font-headline-md text-primary font-bold">Add Payment Method</h1>
+<button class="hover:bg-surface-container-high transition-colors active:scale-95 transition-transform p-2 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant">lock</span>
+</button>
+</header>
+<!-- Main Content -->
+<main class="flex-grow w-full max-w-3xl mx-auto px-margin-mobile md:px-margin-desktop py-md">
+<!-- Card Placeholder -->
+<div class="bg-surface-container-highest rounded-xl p-6 shadow-sm mb-lg relative overflow-hidden aspect-[1.58/1]">
+<div class="absolute inset-0 opacity-10 bg-gradient-to-br from-primary to-transparent"></div>
+<div class="relative z-10 flex flex-col h-full justify-between">
+<div class="flex justify-between items-start">
+<div class="w-12 h-8 bg-surface-dim rounded opacity-50"></div>
+<span class="material-symbols-outlined text-on-surface-variant" style="font-variation-settings: 'FILL' 1;">contactless</span>
+</div>
+<div>
+<div class="font-headline-md font-body-md text-on-surface-variant tracking-widest mb-xs opacity-70">
+                        •••• •••• •••• ••••
+                    </div>
+<div class="flex justify-between items-end">
+<div class="font-label-md text-on-surface-variant opacity-70">CARDHOLDER NAME</div>
+<div class="font-label-md text-on-surface-variant opacity-70">MM/YY</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Form -->
+<form class="space-y-sm">
+<!-- Card Number -->
+<div>
+<label class="block font-label-md text-on-surface mb-xs" for="cardNumber">Card Number</label>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-outline">credit_card</span>
+</div>
+<input class="block w-full pl-10 pr-3 py-3 bg-surface-container-low border border-transparent focus:bg-surface focus:border-primary focus:ring-1 focus:ring-primary rounded-lg font-body-md text-on-surface placeholder:text-outline transition-colors" id="cardNumber" name="cardNumber" placeholder="0000 0000 0000 0000" required="" type="text"/>
+</div>
+</div>
+<!-- Cardholder Name -->
+<div>
+<label class="block font-label-md text-on-surface mb-xs" for="cardName">Cardholder Name</label>
+<input class="block w-full px-3 py-3 bg-surface-container-low border border-transparent focus:bg-surface focus:border-primary focus:ring-1 focus:ring-primary rounded-lg font-body-md text-on-surface placeholder:text-outline transition-colors" id="cardName" name="cardName" placeholder="Name on card" required="" type="text"/>
+</div>
+<!-- Expiry & CVV -->
+<div class="grid grid-cols-2 gap-gutter">
+<div>
+<label class="block font-label-md text-on-surface mb-xs" for="expiryDate">Expiry Date</label>
+<input class="block w-full px-3 py-3 bg-surface-container-low border border-transparent focus:bg-surface focus:border-primary focus:ring-1 focus:ring-primary rounded-lg font-body-md text-on-surface placeholder:text-outline transition-colors" id="expiryDate" name="expiryDate" placeholder="MM/YY" required="" type="text"/>
+</div>
+<div>
+<label class="flex items-center font-label-md text-on-surface mb-xs" for="cvv">
+                        CVV
+                        <span class="material-symbols-outlined text-outline ml-1 text-[16px] cursor-help">help</span>
+</label>
+<input class="block w-full px-3 py-3 bg-surface-container-low border border-transparent focus:bg-surface focus:border-primary focus:ring-1 focus:ring-primary rounded-lg font-body-md text-on-surface placeholder:text-outline transition-colors" id="cvv" name="cvv" placeholder="123" required="" type="text"/>
+</div>
+</div>
+<!-- Default Checkbox -->
+<div class="flex items-center mt-md">
+<input class="h-5 w-5 rounded border-outline-variant text-primary focus:ring-primary bg-surface-container-low cursor-pointer" id="defaultPayment" name="defaultPayment" type="checkbox"/>
+<label class="ml-3 font-body-md text-on-surface cursor-pointer" for="defaultPayment">
+                    Set as default payment method
+                </label>
+</div>
+<!-- Save Button -->
+<div class="pt-lg">
+<button class="w-full bg-primary-container text-on-primary-container font-label-md py-4 rounded-full shadow-sm hover:shadow-md active:scale-[0.98] transition-all flex justify-center items-center h-12" type="submit">
+                    Save Card
+                </button>
+</div>
+</form>
+</main>
+<!-- BottomNavBar (Hidden on desktop, shown on mobile) -->
+<nav class="md:hidden bg-surface font-label-md text-label-md shadow-[0_-4px_20px_0_rgba(0,0,0,0.04)] fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-2 py-3 rounded-t-xl">
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all active:scale-90 duration-200">
+<span class="material-symbols-outlined mb-1">home</span>
+<span>Home</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all active:scale-90 duration-200">
+<span class="material-symbols-outlined mb-1">description</span>
+<span>Diary</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all active:scale-90 duration-200">
+<span class="material-symbols-outlined mb-1">restaurant_menu</span>
+<span>Plans</span>
+</button>
+<!-- Active Profile Tab -->
+<button class="flex flex-col items-center justify-center text-primary bg-primary-container/20 rounded-xl px-4 py-1 hover:text-primary transition-all active:scale-90 duration-200">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">person</span>
+<span>Profile</span>
+</button>
+</nav>
+</body></html>
