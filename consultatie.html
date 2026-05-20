@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+
+<html lang="ro"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Vitality Professional - Consultații</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "tertiary-fixed-dim": "#9ecaff",
+                      "on-secondary": "#ffffff",
+                      "on-primary-container": "#003c0b",
+                      "on-primary-fixed-variant": "#005313",
+                      "surface-tint": "#006e1c",
+                      "primary": "#006e1c",
+                      "on-primary-fixed": "#002204",
+                      "on-tertiary-fixed-variant": "#00497d",
+                      "surface-container-high": "#e9e8e7",
+                      "secondary-container": "#ff9800",
+                      "on-tertiary-fixed": "#001d36",
+                      "on-primary": "#ffffff",
+                      "on-error": "#ffffff",
+                      "on-surface-variant": "#3f4a3c",
+                      "primary-fixed": "#94f990",
+                      "surface-dim": "#dbdad9",
+                      "inverse-primary": "#78dc77",
+                      "background": "#fbf9f9",
+                      "surface-container": "#efeded",
+                      "on-surface": "#1b1c1c",
+                      "secondary-fixed-dim": "#ffb870",
+                      "on-secondary-fixed": "#2c1600",
+                      "surface": "#fbf9f9",
+                      "primary-fixed-dim": "#78dc77",
+                      "on-background": "#1b1c1c",
+                      "error-container": "#ffdad6",
+                      "inverse-on-surface": "#f2f0f0",
+                      "surface-bright": "#fbf9f9",
+                      "on-secondary-fixed-variant": "#693c00",
+                      "tertiary": "#0061a4",
+                      "on-secondary-container": "#653900",
+                      "on-tertiary-container": "#00355d",
+                      "surface-container-low": "#f5f3f3",
+                      "outline": "#6f7a6b",
+                      "on-tertiary": "#ffffff",
+                      "outline-variant": "#becab9",
+                      "tertiary-fixed": "#d1e4ff",
+                      "surface-variant": "#e3e2e2",
+                      "surface-container-lowest": "#ffffff",
+                      "error": "#ba1a1a",
+                      "surface-container-highest": "#e3e2e2",
+                      "secondary": "#8b5000",
+                      "on-error-container": "#93000a",
+                      "tertiary-container": "#33a0fe",
+                      "secondary-fixed": "#ffdcbe",
+                      "primary-container": "#4caf50",
+                      "inverse-surface": "#303031"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "md": "24px",
+                      "margin-mobile": "16px",
+                      "gutter": "16px",
+                      "xs": "4px",
+                      "base": "8px",
+                      "sm": "12px",
+                      "margin-desktop": "48px",
+                      "lg": "40px",
+                      "xl": "64px"
+              },
+              "fontFamily": {
+                      "body-md": [
+                              "Inter"
+                      ],
+                      "body-lg": [
+                              "Inter"
+                      ],
+                      "headline-lg-mobile": [
+                              "Inter"
+                      ],
+                      "label-sm": [
+                              "Inter"
+                      ],
+                      "headline-md": [
+                              "Inter"
+                      ],
+                      "headline-lg": [
+                              "Inter"
+                      ],
+                      "label-md": [
+                              "Inter"
+                      ],
+                      "headline-xl": [
+                              "Inter"
+                      ]
+              },
+              "fontSize": {
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "28px",
+                              {
+                                      "lineHeight": "36px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "label-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "label-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-xl": [
+                              "40px",
+                              {
+                                      "lineHeight": "48px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+<style>
+        body { background-color: #fbf9f9; } /* bg-background */
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-background font-body-md text-body-md flex min-h-screen">
+<!-- Navigation Drawer (Desktop) -->
+<aside class="hidden md:flex flex-col fixed left-0 top-0 bottom-0 z-40 py-lg w-80 rounded-r-xl border-r border-outline-variant bg-surface-container-lowest shadow-sm">
+<div class="px-md mb-lg">
+<div class="flex items-center gap-sm">
+<div class="w-12 h-12 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container font-headline-md">
+                    SM
+                </div>
+<div>
+<h2 class="font-label-md text-label-md text-primary">Dr. Sarah Miller</h2>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm">Lead Nutritionist</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 flex flex-col gap-xs">
+<a class="flex items-center gap-base text-on-surface-variant hover:text-on-surface px-md py-sm mx-sm hover:bg-surface-container-high transition-colors rounded-full font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+                Dashboard
+            </a>
+<a class="flex items-center gap-base text-on-surface-variant hover:text-on-surface px-md py-sm mx-sm hover:bg-surface-container-high transition-colors rounded-full font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">group</span>
+                Clients
+            </a>
+<a class="flex items-center gap-base text-on-surface-variant hover:text-on-surface px-md py-sm mx-sm hover:bg-surface-container-high transition-colors rounded-full font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">restaurant_menu</span>
+                Meal Plans
+            </a>
+<!-- Active State -->
+<a class="flex items-center gap-base bg-primary-container text-on-primary-container rounded-full px-md py-sm mx-sm transition-transform translate-x-1 font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">event</span>
+                Consultations
+            </a>
+</nav>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 md:ml-80 flex flex-col min-h-screen">
+<!-- TopAppBar -->
+<header class="sticky top-0 w-full z-50 flex justify-between items-center px-margin-mobile md:px-margin-desktop h-20 max-w-[1280px] mx-auto bg-surface shadow-[0_4px_20px_0_rgba(0,0,0,0.04)]">
+<div class="flex items-center gap-sm">
+<div class="w-10 h-10 rounded-full bg-tertiary-container flex items-center justify-center text-on-tertiary-container font-headline-md md:hidden">
+                    SM
+                </div>
+<h1 class="text-headline-md font-headline-md text-primary hidden md:block">Vitality Professional</h1>
+</div>
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</header>
+<!-- Content Canvas -->
+<div class="flex-1 p-margin-mobile md:p-margin-desktop pb-32 md:pb-lg max-w-[1280px] mx-auto w-full">
+<div class="mb-lg">
+<h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface">Consultații &amp; Sarcini</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-xs">Gestionează-ți programul și prioritățile de azi.</p>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-md md:gap-lg">
+<!-- Left Column (Calendar & Tasks) -->
+<div class="lg:col-span-8 flex flex-col gap-md md:gap-lg">
+<!-- Section 1: Calendar View (Weekly) -->
+<section class="bg-surface-container-lowest rounded-xl shadow-[0_4px_20px_0_rgba(0,0,0,0.04)] border border-surface-variant p-md md:p-lg">
+<div class="flex justify-between items-center mb-md">
+<h2 class="font-headline-md text-headline-md text-on-surface">Calendar Săptămânal</h2>
+<button class="text-primary font-label-md text-label-md flex items-center gap-xs hover:bg-surface-container-low px-3 py-1 rounded-full transition-colors">
+<span class="material-symbols-outlined">calendar_month</span>
+                                Vizualizare Lună
+                            </button>
+</div>
+<div class="grid grid-cols-7 gap-xs text-center">
+<!-- Day Labels -->
+<div class="font-label-sm text-label-sm text-on-surface-variant pb-xs">LUN</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant pb-xs">MAR</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant pb-xs">MIE</div>
+<div class="font-label-sm text-label-sm text-primary font-bold pb-xs">JOI</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant pb-xs">VIN</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant pb-xs">SÂM</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant pb-xs">DUM</div>
+<!-- Dates -->
+<div class="flex flex-col items-center gap-1 p-2 rounded-lg hover:bg-surface-container-low cursor-pointer transition-colors">
+<span class="font-body-md text-body-md text-on-surface">12</span>
+</div>
+<div class="flex flex-col items-center gap-1 p-2 rounded-lg hover:bg-surface-container-low cursor-pointer transition-colors relative">
+<span class="font-body-md text-body-md text-on-surface">13</span>
+<div class="w-1.5 h-1.5 rounded-full bg-primary absolute bottom-1"></div>
+</div>
+<div class="flex flex-col items-center gap-1 p-2 rounded-lg hover:bg-surface-container-low cursor-pointer transition-colors relative">
+<span class="font-body-md text-body-md text-on-surface">14</span>
+<div class="w-1.5 h-1.5 rounded-full bg-secondary-container absolute bottom-1"></div>
+</div>
+<!-- Active Day -->
+<div class="flex flex-col items-center gap-1 p-2 rounded-lg bg-primary text-on-primary shadow-sm cursor-pointer relative">
+<span class="font-body-md text-body-md font-bold">15</span>
+<div class="w-1.5 h-1.5 rounded-full bg-on-primary absolute bottom-1"></div>
+</div>
+<div class="flex flex-col items-center gap-1 p-2 rounded-lg hover:bg-surface-container-low cursor-pointer transition-colors relative">
+<span class="font-body-md text-body-md text-on-surface">16</span>
+<div class="w-1.5 h-1.5 rounded-full bg-primary absolute bottom-1"></div>
+</div>
+<div class="flex flex-col items-center gap-1 p-2 rounded-lg hover:bg-surface-container-low cursor-pointer transition-colors">
+<span class="font-body-md text-body-md text-on-surface-variant opacity-50">17</span>
+</div>
+<div class="flex flex-col items-center gap-1 p-2 rounded-lg hover:bg-surface-container-low cursor-pointer transition-colors">
+<span class="font-body-md text-body-md text-on-surface-variant opacity-50">18</span>
+</div>
+</div>
+</section>
+<!-- Section 3 & 4: Quick Filters & Task List -->
+<section class="bg-surface-container-lowest rounded-xl shadow-[0_4px_20px_0_rgba(0,0,0,0.04)] border border-surface-variant p-md md:p-lg flex-1">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between mb-md gap-sm">
+<h2 class="font-headline-md text-headline-md text-on-surface">Sarcini</h2>
+<!-- Quick Filters -->
+<div class="flex gap-2 overflow-x-auto pb-2 sm:pb-0 hide-scrollbar">
+<button class="whitespace-nowrap px-4 py-1.5 rounded-full bg-error-container text-on-error-container font-label-sm text-label-sm hover:opacity-90 transition-opacity">
+                                    Urgent
+                                </button>
+<button class="whitespace-nowrap px-4 py-1.5 rounded-full bg-primary text-on-primary font-label-sm text-label-sm shadow-sm">
+                                    Azi
+                                </button>
+<button class="whitespace-nowrap px-4 py-1.5 rounded-full bg-surface-container text-on-surface-variant border border-outline-variant font-label-sm text-label-sm hover:bg-surface-container-high transition-colors">
+                                    Săptămâna aceasta
+                                </button>
+</div>
+</div>
+<!-- Task Items -->
+<div class="flex flex-col gap-sm">
+<!-- Task 1 -->
+<label class="flex items-start gap-sm p-sm rounded-lg hover:bg-surface-container-low transition-colors cursor-pointer group">
+<div class="relative flex items-center justify-center mt-1">
+<input class="w-5 h-5 border-2 border-outline rounded text-primary focus:ring-primary focus:ring-offset-0 bg-transparent transition-all" type="checkbox"/>
+</div>
+<div class="flex-1">
+<p class="font-body-md text-body-md text-on-surface group-hover:text-primary transition-colors">Revizuiește jurnalul alimentar al Mariei</p>
+<p class="font-label-sm text-label-sm text-error mt-0.5">Scadență: Azi, 14:00</p>
+</div>
+</label>
+<!-- Task 2 -->
+<label class="flex items-start gap-sm p-sm rounded-lg hover:bg-surface-container-low transition-colors cursor-pointer group">
+<div class="relative flex items-center justify-center mt-1">
+<input class="w-5 h-5 border-2 border-outline rounded text-primary focus:ring-primary focus:ring-offset-0 bg-transparent transition-all" type="checkbox"/>
+</div>
+<div class="flex-1">
+<p class="font-body-md text-body-md text-on-surface group-hover:text-primary transition-colors">Actualizează planul lui Popa</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-0.5">Scadență: Azi, 16:30</p>
+</div>
+</label>
+<!-- Task 3 -->
+<label class="flex items-start gap-sm p-sm rounded-lg hover:bg-surface-container-low transition-colors cursor-pointer group">
+<div class="relative flex items-center justify-center mt-1">
+<input class="w-5 h-5 border-2 border-outline rounded text-primary focus:ring-primary focus:ring-offset-0 bg-transparent transition-all" type="checkbox"/>
+</div>
+<div class="flex-1">
+<p class="font-body-md text-body-md text-on-surface group-hover:text-primary transition-colors">Verifică analiticele</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-0.5">General • Săptămânal</p>
+</div>
+</label>
+<button class="mt-sm flex items-center justify-center gap-xs w-full py-3 rounded-lg border border-dashed border-outline-variant text-on-surface-variant hover:bg-surface-container-low hover:text-primary transition-colors font-label-md text-label-md">
+<span class="material-symbols-outlined">add</span>
+                                Adaugă o sarcină nouă
+                            </button>
+</div>
+</section><section class="bg-surface-container-lowest rounded-xl shadow-[0_4px_20px_0_rgba(0,0,0,0.04)] border border-surface-variant p-md md:p-lg flex flex-col gap-md">
+<div class="flex justify-between items-center">
+<h2 class="font-headline-md text-headline-md text-on-surface">Rapoarte Lunare</h2>
+</div>
+<div class="flex flex-col sm:flex-row items-center justify-between p-sm rounded-lg border border-surface-variant bg-surface-container-low gap-sm">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary">description</span>
+<div>
+<p class="font-label-md text-label-md text-on-surface">Raport Septembrie 2023</p>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm">92% Aderență medie</p>
+</div>
+</div>
+<button class="flex items-center gap-xs px-4 py-2 bg-primary text-on-primary rounded-full font-label-md text-label-md hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined text-[20px]">add</span>
+            Generează Raport Nou
+        </button>
+</div>
+</section>
+</div>
+<!-- Right Column (Upcoming Appointments) -->
+<div class="lg:col-span-4 flex flex-col">
+<section class="bg-surface-container-lowest rounded-xl shadow-[0_4px_20px_0_rgba(0,0,0,0.04)] border border-surface-variant p-md md:p-lg h-full">
+<div class="flex items-center justify-between mb-md">
+<h2 class="font-headline-md text-headline-md text-on-surface">Programări viitoare</h2>
+<span class="bg-primary-container text-on-primary-container font-label-sm text-label-sm px-2 py-0.5 rounded-full">Azi</span>
+</div>
+<div class="flex flex-col gap-sm">
+<!-- Appointment 1 -->
+<div class="p-sm rounded-xl border border-surface-variant bg-surface hover:shadow-sm transition-shadow">
+<div class="flex items-center gap-sm mb-xs">
+<div class="w-2 h-2 rounded-full bg-primary"></div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">10:00 - 11:00</span>
+</div>
+<div class="flex items-center justify-between">
+<div>
+<h3 class="font-label-md text-label-md text-on-surface">Maria Ionescu</h3>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm">Consultație Inițială</p>
+</div>
+<button class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-primary hover:bg-primary-container transition-colors">
+<span class="material-symbols-outlined text-[20px]">videocam</span>
+</button>
+</div>
+</div>
+<!-- Appointment 2 -->
+<div class="p-sm rounded-xl border border-surface-variant bg-surface hover:shadow-sm transition-shadow">
+<div class="flex items-center gap-sm mb-xs">
+<div class="w-2 h-2 rounded-full bg-secondary-container"></div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">13:30 - 14:00</span>
+</div>
+<div class="flex items-center justify-between">
+<div>
+<h3 class="font-label-md text-label-md text-on-surface">Andrei Popa</h3>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm">Follow-up Plan</p>
+</div>
+<button class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-primary hover:bg-primary-container transition-colors">
+<span class="material-symbols-outlined text-[20px]">chat</span>
+</button>
+</div>
+</div>
+<!-- Divider for tomorrow -->
+<div class="flex items-center gap-sm mt-sm mb-xs">
+<div class="h-px bg-outline-variant flex-1"></div>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Mâine</span>
+<div class="h-px bg-outline-variant flex-1"></div>
+</div>
+<!-- Appointment 3 -->
+<div class="p-sm rounded-xl border border-surface-variant bg-surface hover:shadow-sm transition-shadow opacity-80">
+<div class="flex items-center gap-sm mb-xs">
+<div class="w-2 h-2 rounded-full bg-outline"></div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">09:00 - 09:45</span>
+</div>
+<div class="flex items-center justify-between">
+<div>
+<h3 class="font-label-md text-label-md text-on-surface">Elena Vasile</h3>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm">Ajustare Macro</p>
+</div>
+<button class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-primary hover:bg-primary-container transition-colors" title="Notează">
+<span class="material-symbols-outlined text-[20px]">edit_note</span>
+</button></div>
+</div>
+</div>
+</section>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-margin-mobile py-base bg-surface shadow-[0_-4px_20px_0_rgba(0,0,0,0.04)] rounded-t-xl md:hidden">
+<!-- Assuming Dashboard/Home is the active mobile view for this tasks screen -->
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-2xl px-4 py-1 scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-label-sm text-label-sm-mobile mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-on-surface transition-colors px-4 py-1" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-sm text-label-sm-mobile mt-1">Clients</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-on-surface transition-colors px-4 py-1" href="#">
+<span class="material-symbols-outlined">assignment</span>
+<span class="font-label-sm text-label-sm-mobile mt-1">Plans</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-on-surface transition-colors px-4 py-1" href="#">
+<span class="material-symbols-outlined">chat</span>
+<span class="font-label-sm text-label-sm-mobile mt-1">Chat</span>
+</a>
+</nav>
+<style>
+        /* Utility to hide scrollbar for horizontal scrolling filters */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</body></html>
