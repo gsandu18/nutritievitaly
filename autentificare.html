@@ -151,21 +151,14 @@
                     </p>
 </div>
 <!-- Form -->
-<form class="flex flex-col gap-md">
+<form id="login-form" ...>
 <!-- Email Field -->
 <div class="flex flex-col gap-xs">
 <label class="font-label-md text-label-md text-on-surface" for="email">Adresă de email</label>
-<input class="h-12 px-4 rounded-lg bg-surface-container text-on-surface border-transparent focus:bg-surface-container-lowest focus:border-primary focus:ring-1 focus:ring-primary transition-colors font-body-md" id="email" placeholder="nume@exemplu.ro" required="" type="email"/>
-</div>
-<!-- Password Field -->
-<div class="flex flex-col gap-xs">
-<div class="flex justify-between items-center">
-<label class="font-label-md text-label-md text-on-surface" for="password">Parolă</label>
-<a class="font-label-sm text-label-sm text-primary hover:text-primary-fixed-dim transition-colors" href="#">
-                                Am uitat parola
+<input id="email" type="email" class="..." />
                             </a>
 </div>
-<input class="h-12 px-4 rounded-lg bg-surface-container text-on-surface border-transparent focus:bg-surface-container-lowest focus:border-primary focus:ring-1 focus:ring-primary transition-colors font-body-md" id="password" placeholder="••••••••" required="" type="password"/>
+<input id="password" type="password" class="h-12 px-4 rounded-lg..." />
 </div>
 <!-- Submit Button -->
 <button class="mt-sm h-12 w-full flex items-center justify-center gap-xs bg-primary text-on-primary font-label-md text-label-md rounded-lg hover:bg-surface-tint transition-all shadow-[0_2px_8px_0_rgba(0,0,0,0.04)] hover:shadow-[0_4px_12px_0_rgba(0,0,0,0.08)] active:scale-[0.98]" type="button">
