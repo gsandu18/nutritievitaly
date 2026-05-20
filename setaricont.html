@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+
+<html lang="ro"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Setări Cont - Vitality</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed-dim": "#78dc77",
+                        "primary-container": "#4caf50",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-fixed": "#d1e4ff",
+                        "surface-bright": "#fbf9f9",
+                        "surface-container-high": "#e9e8e7",
+                        "surface-container": "#efeded",
+                        "secondary-fixed-dim": "#ffb870",
+                        "on-secondary-fixed-variant": "#693c00",
+                        "surface-container-highest": "#e3e2e2",
+                        "primary": "#006e1c",
+                        "secondary": "#8b5000",
+                        "error-container": "#ffdad6",
+                        "surface": "#fbf9f9",
+                        "on-primary-fixed": "#002204",
+                        "surface-tint": "#006e1c",
+                        "primary-fixed": "#94f990",
+                        "on-surface-variant": "#3f4a3c",
+                        "tertiary-fixed-dim": "#9ecaff",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-container": "#00355d",
+                        "inverse-primary": "#78dc77",
+                        "surface-dim": "#dbdad9",
+                        "on-error-container": "#93000a",
+                        "secondary-fixed": "#ffdcbe",
+                        "on-secondary": "#ffffff",
+                        "tertiary-container": "#33a0fe",
+                        "on-error": "#ffffff",
+                        "on-tertiary-fixed-variant": "#00497d",
+                        "inverse-on-surface": "#f2f0f0",
+                        "surface-variant": "#e3e2e2",
+                        "outline-variant": "#becab9",
+                        "on-primary-fixed-variant": "#005313",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-container": "#ff9800",
+                        "inverse-surface": "#303031",
+                        "on-background": "#1b1c1c",
+                        "background": "#fbf9f9",
+                        "on-tertiary-fixed": "#001d36",
+                        "on-secondary-container": "#653900",
+                        "on-secondary-fixed": "#2c1600",
+                        "surface-container-low": "#f5f3f3",
+                        "on-primary-container": "#003c0b",
+                        "tertiary": "#0061a4",
+                        "on-surface": "#1b1c1c",
+                        "outline": "#6f7a6b",
+                        "error": "#ba1a1a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base": "8px",
+                        "margin-desktop": "48px",
+                        "gutter": "16px",
+                        "sm": "12px",
+                        "xs": "4px",
+                        "margin-mobile": "16px",
+                        "lg": "40px",
+                        "md": "24px",
+                        "xl": "64px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["Inter"],
+                        "headline-xl": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "label-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-xl": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "500" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface antialiased min-h-screen pb-24 md:pb-0">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-mobile h-16 bg-surface shadow-sm dark:shadow-none transition-colors">
+<div class="flex items-center gap-sm">
+<div class="w-10 h-10 rounded-full overflow-hidden bg-surface-container-high border border-outline-variant">
+<img alt="Profile" class="w-full h-full object-cover" data-alt="A professional headshot of a smiling woman with dark hair, lit by soft natural light against a neutral grey background. The image is crisp, modern, and conveys a sense of approachable health and vitality." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBcRK65rh_b9YIoIScFOUVOLymtAZ1Ynd-4aYCrPqLheecs-248TUjHSnpLbcAFUqkuCCbl2KOf-hz2kNrCiUUXKHnVKm3EV6hnIT3YIBiGI6G6jWeaKupYvhJBW0WIkl0RT2bksb279Ackqq5RzrCnASuBqBKo__X3xf3NRm6nCvUwbqQz45ig1Rf4M0OnIDUWTmOvEECmao3FYrSrquxX8M646jDMXzI-RJWG_TU7x_R2WvXbsvFKM8TxbLwj8Nx5Kbo69-aX3VtY"/>
+</div>
+<span class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim">Vitality</span>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-full text-primary dark:text-primary-fixed-dim hover:bg-surface-variant dark:hover:bg-surface-container-highest transition-colors active:scale-95 duration-150 ease-in-out">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</header>
+<!-- Desktop Sidebar Navigation (Hidden on Mobile) -->
+<aside class="hidden md:flex flex-col w-64 fixed left-0 top-16 bottom-0 bg-surface-container-low border-r border-outline-variant/20 p-md z-40">
+<nav class="flex-1 space-y-sm">
+<a class="flex items-center gap-sm px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-variant transition-all group" href="#">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-sm px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-variant transition-all group" href="#">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">description</span>
+<span class="font-label-md text-label-md">Jurnal</span>
+</a>
+<a class="flex items-center gap-sm px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-variant transition-all group" href="#">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">restaurant_menu</span>
+<span class="font-label-md text-label-md">Plan</span>
+</a>
+<a class="flex items-center gap-sm px-4 py-3 rounded-lg bg-primary-container text-on-primary-container font-medium shadow-sm transition-all" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-label-md text-label-md">Profil</span>
+</a>
+</nav>
+</aside>
+<!-- Main Content -->
+<main class="pt-24 px-margin-mobile md:pl-[calc(256px+24px)] md:pr-margin-desktop max-w-7xl mx-auto space-y-md">
+<header class="flex flex-col gap-xs mb-lg">
+<h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface">Setări Cont</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Gestionează preferințele și securitatea contului tău Vitality.</p>
+</header>
+<!-- Bento Grid Layout for Settings -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-md">
+<!-- Primary Settings Column -->
+<div class="lg:col-span-8 space-y-md">
+<!-- Personal Information Card -->
+<section class="bg-surface-container-lowest rounded-xl p-md shadow-[0_4px_20px_0_rgba(0,0,0,0.04)] border border-[#E0E0E0] hover:shadow-[0_8px_24px_0_rgba(0,0,0,0.08)] transition-shadow">
+<div class="flex items-center gap-sm mb-md pb-sm border-b border-surface-variant">
+<div class="w-10 h-10 rounded-full bg-primary-container/20 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">person</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface">Informații Personale</h2>
+</div>
+<div class="space-y-md">
+<a class="flex items-center justify-between p-sm hover:bg-surface-container-low rounded-lg transition-colors group" href="#">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface">Nume complet</span>
+<span class="font-body-md text-body-md text-on-surface-variant">Elena Popescu</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">chevron_right</span>
+</a>
+<a class="flex items-center justify-between p-sm hover:bg-surface-container-low rounded-lg transition-colors group" href="#">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface">Adresă de email</span>
+<span class="font-body-md text-body-md text-on-surface-variant">elena.popescu@example.com</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">chevron_right</span>
+</a>
+<a class="flex items-center justify-between p-sm hover:bg-surface-container-low rounded-lg transition-colors group" href="#">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface">Număr de telefon</span>
+<span class="font-body-md text-body-md text-on-surface-variant">+40 712 345 678</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">chevron_right</span>
+</a>
+</div>
+</section>
+<!-- Security & Privacy Card -->
+<section class="bg-surface-container-lowest rounded-xl p-md shadow-[0_4px_20px_0_rgba(0,0,0,0.04)] border border-[#E0E0E0] hover:shadow-[0_8px_24px_0_rgba(0,0,0,0.08)] transition-shadow">
+<div class="flex items-center gap-sm mb-md pb-sm border-b border-surface-variant">
+<div class="w-10 h-10 rounded-full bg-primary-container/20 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">lock</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface">Securitate și Confidențialitate</h2>
+</div>
+<div class="space-y-md">
+<a class="flex items-center justify-between p-sm hover:bg-surface-container-low rounded-lg transition-colors group" href="#">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary">key</span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface">Schimbă parola</span>
+<span class="font-body-md text-body-md text-on-surface-variant text-sm">Actualizat acum 3 luni</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">chevron_right</span>
+</a>
+<div class="flex items-center justify-between p-sm rounded-lg hover:bg-surface-container-low transition-colors">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-on-surface-variant">fingerprint</span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface">Autentificare biometrică</span>
+<span class="font-body-md text-body-md text-on-surface-variant text-sm">Folosește FaceID/TouchID</span>
+</div>
+</div>
+<!-- Toggle Switch UI -->
+<button class="w-12 h-6 rounded-full bg-primary-container flex items-center px-1 transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
+<div class="w-4 h-4 rounded-full bg-on-primary transform translate-x-6 transition-transform shadow-sm"></div>
+</button>
+</div>
+</div>
+</section>
+</div>
+<!-- Secondary Settings Column -->
+<div class="lg:col-span-4 space-y-md">
+<!-- App Preferences Card -->
+<section class="bg-surface-container-lowest rounded-xl p-md shadow-[0_4px_20px_0_rgba(0,0,0,0.04)] border border-[#E0E0E0] hover:shadow-[0_8px_24px_0_rgba(0,0,0,0.08)] transition-shadow">
+<div class="flex items-center gap-sm mb-md pb-sm border-b border-surface-variant">
+<div class="w-10 h-10 rounded-full bg-primary-container/20 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">settings</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface">Preferințe</h2>
+</div>
+<div class="space-y-md">
+<div class="flex items-center justify-between p-sm rounded-lg hover:bg-surface-container-low transition-colors group">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary">language</span>
+<span class="font-label-md text-label-md text-on-surface">Limbă</span>
+</div>
+<div class="flex items-center gap-xs">
+<span class="font-body-md text-body-md text-on-surface-variant">Română</span>
+<span class="material-symbols-outlined text-on-surface-variant text-sm">expand_more</span>
+</div>
+</div>
+<div class="flex items-center justify-between p-sm rounded-lg hover:bg-surface-container-low transition-colors group">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary">notifications_active</span>
+<span class="font-label-md text-label-md text-on-surface">Notificări Push</span>
+</div>
+<button class="w-12 h-6 rounded-full bg-primary-container flex items-center px-1 transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
+<div class="w-4 h-4 rounded-full bg-on-primary transform translate-x-6 transition-transform shadow-sm"></div>
+</button>
+</div>
+<div class="flex items-center justify-between p-sm rounded-lg hover:bg-surface-container-low transition-colors group">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary">dark_mode</span>
+<span class="font-label-md text-label-md text-on-surface">Mod Întunecat</span>
+</div>
+<button class="w-12 h-6 rounded-full bg-surface-variant border border-outline-variant flex items-center px-1 transition-colors focus:outline-none">
+<div class="w-4 h-4 rounded-full bg-on-surface-variant transform translate-x-0 transition-transform shadow-sm"></div>
+</button>
+</div>
+</div>
+</section>
+<!-- Support Card -->
+<section class="bg-surface-container-lowest rounded-xl p-md shadow-[0_4px_20px_0_rgba(0,0,0,0.04)] border border-[#E0E0E0] hover:shadow-[0_8px_24px_0_rgba(0,0,0,0.08)] transition-shadow">
+<div class="space-y-sm">
+<a class="flex items-center gap-sm p-sm hover:bg-surface-container-low rounded-lg transition-colors text-on-surface group" href="#">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary">help</span>
+<span class="font-label-md text-label-md">Centru de Suport</span>
+</a>
+<a class="flex items-center gap-sm p-sm hover:bg-surface-container-low rounded-lg transition-colors text-on-surface group" href="#">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary">description</span>
+<span class="font-label-md text-label-md">Termeni și Condiții</span>
+</a>
+</div>
+</section>
+<!-- Logout Button -->
+<button class="w-full flex items-center justify-center gap-sm p-md rounded-xl border border-error text-error hover:bg-error-container hover:text-on-error-container transition-colors font-label-md text-label-md h-12 focus:outline-none focus:ring-2 focus:ring-error focus:ring-offset-2">
+<span class="material-symbols-outlined">logout</span>
+                    Deconectare
+                </button>
+</div>
+</div>
+<!-- Bottom spacing for mobile nav -->
+<div class="h-8 md:hidden"></div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-2 bg-surface shadow-[0_-4px_20px_0_rgba(0,0,0,0.04)] rounded-t-xl border-t border-surface-variant">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant transition-all active:scale-90 duration-200 w-16 h-14 rounded-lg" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-sm text-label-sm mt-1">Dashboard</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant transition-all active:scale-90 duration-200 w-16 h-14 rounded-lg" href="#">
+<span class="material-symbols-outlined">description</span>
+<span class="font-label-sm text-label-sm mt-1">Jurnal</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant transition-all active:scale-90 duration-200 w-16 h-14 rounded-lg" href="#">
+<span class="material-symbols-outlined">restaurant_menu</span>
+<span class="font-label-sm text-label-sm mt-1">Plan</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 active:scale-90 duration-200 h-14" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-label-sm text-label-sm mt-1 font-semibold">Profil</span>
+</a>
+</nav>
+</body></html>
