@@ -111,7 +111,7 @@
       min-height: max(884px, 100dvh);
     }
   </style>
-  </head>
+</head>
 <body class="bg-background text-on-background min-h-screen flex flex-col md:flex-row">
 <!-- NavigationDrawer (Web) -->
 <aside class="hidden md:flex flex-col h-screen w-80 fixed left-0 top-0 bg-surface-container-low shadow-md py-md gap-base z-40">
@@ -151,12 +151,18 @@
 <header class="w-full top-0 sticky bg-surface-bright border-b border-outline-variant shadow-sm z-30">
 <div class="flex items-center justify-between px-margin-mobile md:px-margin-desktop py-4 w-full max-w-7xl mx-auto">
 <div class="flex items-center gap-4">
-<img alt="Professional headshot of the nutritionist" class="w-10 h-10 rounded-full object-cover md:hidden" data-alt="Professional headshot of a smiling female nutritionist in a modern clinic. Close up face shot. Bright lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCH6pv_G5CILILrWOgtLAVLuJmaE0b6bxmwbTWk3mafZv-syQTfVojIDozM6kTvmj-s1RcQJcc_N4PRPM5Nk2EEzojjE0h9zeujJ169uiHB_Y9yOnCFFRYHWvDDKHMoqkXlYRqoS6P6V8n9WRSXiaifE13nTp6V4LHotOyTgqd2zh2sQ6ypt2LQJKCOfgxiwZU5wjnQqYSDoCoT9d2Yk2UhUz_huy1ecVoMe0yvCuV5Vfc72snbvk9oz4lvQCYT6fVXETse3RsVDkPc"/>
-<h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg font-bold text-primary">Vitality Professional</h1>
+<img alt="Vitality Professional Logo" class="h-10 md:h-12 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAGBnhZmpvZvwdWcdXeiD5X0G__iQfNJOOsOckf3pq-3loQRKu-j-3XZXF4NWjIDQvDpN-P-xau1OZxkDZBCkAnt4CuvGY0GYXocxhe63Sd6tn_yA498VzbeoDLbGklU9AAoUSYCwIOWMOF6igGPX7wMas7gVFsu8AmD8wNKdMzd3xArdVLhQGMuCKFCd0CYcmrC9iGjL1OjDcOH1-hQpqqnvpyNRGREcDyRwHgj769oFo2eC8PC0pnpqjA-N_1qnemDFJgHHxOuv_y"/>
+<div class="flex flex-col">
+<h1 class="font-headline-md text-headline-md font-bold text-primary leading-tight">Vitality</h1>
+<p class="font-label-sm text-label-sm font-semibold text-on-surface-variant tracking-wider uppercase">Professional</p>
 </div>
+</div>
+<div class="flex items-center gap-4">
 <button class="text-on-surface-variant hover:bg-surface-container transition-colors p-2 rounded-full active:scale-95 transition-transform">
-<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="material-symbols-outlined">notifications</span>
 </button>
+<img alt="Nutritionist profile photo" class="w-10 h-10 rounded-full object-cover md:hidden border border-outline-variant" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCH6pv_G5CILILrWOgtLAVLuJmaE0b6bxmwbTWk3mafZv-syQTfVojIDozM6kTvmj-s1RcQJcc_N4PRPM5Nk2EEzojjE0h9zeujJ169uiHB_Y9yOnCFFRYHWvDDKHMoqkXlYRqoS6P6V8n9WRSXiaifE13nTp6V4LHotOyTgqd2zh2sQ6ypt2LQJKCOfgxiwZU5wjnQqYSDoCoT9d2Yk2UhUz_huy1ecVoMe0yvCuV5Vfc72snbvk9oz4lvQCYT6fVXETse3RsVDkPc"/>
+</div>
 </div>
 </header>
 <!-- Canvas -->
@@ -234,7 +240,9 @@
 <button class="flex-1 border border-primary text-primary py-2 rounded-lg font-label-md text-label-md hover:bg-primary/5 transition-colors h-12">
                                 View Details
                             </button>
-</div>
+<button class="flex-1 border border-error text-error py-2 rounded-lg font-label-md text-label-md hover:bg-error/5 transition-colors h-12 truncate px-2">
+                                Anulează Consultația
+                            </button></div>
 </div>
 <!-- Appointment Card 2 -->
 <div class="bg-surface-container-lowest rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.04)] border border-outline-variant/30 p-md flex flex-col gap-sm hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)] transition-shadow">
@@ -252,7 +260,9 @@
 <span class="material-symbols-outlined text-sm">schedule</span>
 <span class="font-body-md text-body-md">11:30 AM - 12:00 PM</span>
 </div>
-<div class="flex gap-sm mt-xs">
+<div class="flex gap-sm mt-xs"><button class="flex-1 border border-error text-error py-2 rounded-lg font-label-md text-label-md hover:bg-error/5 transition-colors h-12 truncate px-2">
+                                Anulează Consultația
+                            </button>
 <button class="flex-1 border border-primary text-primary py-2 rounded-lg font-label-md text-label-md hover:bg-primary/5 transition-colors h-12">
                                 View Details
                             </button>
