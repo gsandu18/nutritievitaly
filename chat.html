@@ -1,0 +1,238 @@
+<!DOCTYPE html><html lang="ro"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Mesaje Bucătar</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-tint": "#006e1c",
+                        "surface-container-high": "#e9e8e7",
+                        "on-secondary-container": "#653900",
+                        "secondary-fixed": "#ffdcbe",
+                        "on-error": "#ffffff",
+                        "background": "#fbf9f9",
+                        "surface-container-highest": "#e3e2e2",
+                        "outline": "#6f7a6b",
+                        "error-container": "#ffdad6",
+                        "secondary-fixed-dim": "#ffb870",
+                        "on-surface-variant": "#3f4a3c",
+                        "inverse-on-surface": "#f2f0f0",
+                        "secondary-container": "#ff9800",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed-variant": "#005313",
+                        "on-primary-container": "#003c0b",
+                        "tertiary-fixed-dim": "#9ecaff",
+                        "tertiary-container": "#33a0fe",
+                        "surface-dim": "#dbdad9",
+                        "on-tertiary-container": "#00355d",
+                        "surface-container": "#efeded",
+                        "primary-fixed-dim": "#78dc77",
+                        "primary-fixed": "#94f990",
+                        "primary-container": "#4caf50",
+                        "tertiary-fixed": "#d1e4ff",
+                        "error": "#ba1a1a",
+                        "surface": "#fbf9f9",
+                        "on-surface": "#1b1c1c",
+                        "surface-variant": "#e3e2e2",
+                        "on-primary-fixed": "#002204",
+                        "inverse-primary": "#78dc77",
+                        "outline-variant": "#becab9",
+                        "on-background": "#1b1c1c",
+                        "surface-container-low": "#f5f3f3",
+                        "primary": "#006e1c",
+                        "surface-bright": "#fbf9f9",
+                        "inverse-surface": "#303031",
+                        "on-secondary-fixed-variant": "#693c00",
+                        "on-secondary-fixed": "#2c1600",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-fixed": "#001d36",
+                        "tertiary": "#0061a4",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "secondary": "#8b5000",
+                        "on-tertiary-fixed-variant": "#00497d",
+                        "on-error-container": "#93000a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "md": "24px",
+                        "lg": "40px",
+                        "base": "8px",
+                        "xs": "4px",
+                        "margin-mobile": "16px",
+                        "gutter": "16px",
+                        "xl": "64px",
+                        "margin-desktop": "48px",
+                        "sm": "12px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-xl": ["Inter"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "headline-lg-mobile": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-xl": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background h-screen flex overflow-hidden flex-col md:flex-row">
+<!-- Desktop Sidebar Navigation (Hidden on Mobile) -->
+<nav class="hidden md:flex flex-col h-full w-xl fixed left-0 top-0 bg-surface-container-low border-r border-outline-variant py-lg px-sm gap-base z-20">
+<div class="mb-lg px-sm">
+<div class="font-headline-md text-headline-md text-primary">Vitality</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant mt-1">Professional</div>
+</div>
+<div class="flex flex-col gap-2 flex-grow">
+<a class="flex items-center gap-sm px-sm py-xs text-on-surface-variant hover:text-primary hover:bg-surface-container-high transition-all rounded-full group cursor-pointer active:scale-[0.98] transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-sm px-sm py-xs text-on-surface-variant hover:text-primary hover:bg-surface-container-high transition-all rounded-full group cursor-pointer active:scale-[0.98] transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-label-md text-label-md">Clients</span>
+</a>
+<a class="flex items-center gap-sm px-sm py-xs text-on-surface-variant hover:text-primary hover:bg-surface-container-high transition-all rounded-full group cursor-pointer active:scale-[0.98] transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">calendar_today</span>
+<span class="font-label-md text-label-md">Schedule</span>
+</a>
+<a class="flex items-center gap-sm px-sm py-xs text-on-surface-variant hover:text-primary hover:bg-surface-container-high transition-all rounded-full group cursor-pointer active:scale-[0.98] transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">restaurant</span>
+<span class="font-label-md text-label-md">Meal Planner</span>
+</a>
+<a class="flex items-center gap-sm px-sm py-xs bg-secondary-container text-on-secondary-container rounded-full font-bold cursor-pointer active:scale-[0.98] transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">chat</span>
+<span class="font-label-md text-label-md">Messages</span>
+</a>
+</div>
+<div class="mt-auto border-t border-outline-variant pt-md px-sm">
+<div class="flex items-center gap-sm">
+<img alt="Nutritionist Portrait" class="w-10 h-10 rounded-full object-cover" data-alt="A professional headshot of a female nutritionist in her 30s. She is smiling warmly at the camera, wearing a crisp white blouse with a subtle green lanyard. The background is a bright, modern clinical office setting with natural light and a blurred green plant. High-key lighting emphasizing a healthy, fresh aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDUvPlQzrQoF497JK_YMXwYjLcdthuJK-txBssdLo-R1CpgxHFZkH6_YASshNtNvkVf3ueBws_zXDzvCky1aGteY3Uxg1f9ZtywV5Mfr5TPDstJ8aEGdDFfxuwPiZI4uzi9i128L_YUw3wqcZ-am74ErxJs2gZRFrx7VlVa4fNo2RaQ5ojJFJLEfU-YX2J-wa20EcgbKSIQufumSzx8VDMibGBn__4IMX1MsCw0N-LuCi5iYf_YcOfjjAUbLjHUkYV3UiAROI1TtFzi">
+<div>
+<p class="font-label-md text-label-md text-on-surface">Dr. Sarah Miller</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Active Status</p>
+</div>
+</div>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-1 flex flex-col h-full md:ml-xl bg-surface">
+<!-- Top App Bar / Header -->
+<header class="bg-surface shadow-sm z-10 sticky top-0 flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-base border-b border-surface-variant">
+<div class="flex items-center gap-md">
+<button class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer active:scale-95 transition-transform">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="font-headline-md text-headline-md text-on-surface">Mesaje Bucătar</h1>
+</div>
+<div class="flex items-center gap-sm cursor-pointer hover:bg-surface-container-low transition-colors rounded-lg p-xs">
+<div class="text-right hidden sm:block">
+<p class="font-label-md text-label-md text-on-surface">Alexandru Popescu</p>
+<p class="font-label-sm text-label-sm text-primary">Personal Chef</p>
+</div>
+<img alt="Alexandru Popescu Profile" class="w-10 h-10 rounded-full object-cover border border-outline-variant" data-alt="A close-up profile picture of a male professional chef. He has a neat beard and is wearing a crisp white chef's coat. The background is a clean, modern kitchen environment with stainless steel elements subtly out of focus. The lighting is bright and professional, conveying expertise and cleanliness." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDEPHmp8D6-tuu2GVojkwgWPnxP5q8KHai1mbUwrWt5FalQ6phrnHMXoBHcim9nTTY7BtvK6tdKwMepNtXWc_ecpTA4OwnsXLKZ9D-fr7jL3Xlw1guNBvs_Xw-cXsZeRzAPR9SGgVHa4mrdz2mQHrS8fnRfgTInI0S_8deydFiMIoZiyO7LhPldL6gk1izonLXFIqeoko8Cpr5cIxTkBRi7WqzCt37OKEWDcD_gXLdMdozf3FKfo45oYCK8h-CwD9PkqYXEA8wgqELA">
+</div>
+</header>
+<!-- Chat Area -->
+<div class="flex-1 overflow-y-auto p-margin-mobile md:p-margin-desktop flex flex-col gap-md bg-surface-bright">
+<!-- Date Divider -->
+<div class="flex justify-center my-2">
+<span class="bg-surface-container text-on-surface-variant font-label-sm text-label-sm px-3 py-1 rounded-full">Today</span>
+</div>
+<!-- Message Bubble (Right - Nutritionist) -->
+<div class="flex justify-end">
+<div class="bg-primary-container text-on-primary-container max-w-[85%] md:max-w-[70%] p-sm rounded-2xl rounded-tr-sm shadow-[0_2px_10px_0_rgba(0,0,0,0.02)]">
+<p class="font-body-md text-body-md">Bună Alexandru, am trimis planul pentru Elena Popescu. Te rog să eviți lactatele, are o intoleranță nouă.</p>
+<div class="flex justify-end mt-1">
+<span class="font-label-sm text-[10px] text-on-primary-container opacity-70">10:42 AM</span>
+</div>
+</div>
+</div>
+<!-- Message Bubble (Left - Chef) -->
+<div class="flex justify-start">
+<div class="flex items-end gap-2 max-w-[85%] md:max-w-[70%]">
+<img alt="Chef Avatar" class="w-8 h-8 rounded-full object-cover hidden sm:block mb-1 border border-outline-variant" data-alt="A small circular avatar image of a male professional chef wearing a white chef's coat, set against a blurred kitchen background. Bright, clinical lighting suitable for a modern healthcare application." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCGwY2gVDFfY4f_IKx-LNL_3UeohvHD1XNYW3lBZAYick2mw4zpDSUo9hlvrHpDg8EFonro0LUi4gWAagd6e3_oLtaMh_pqUnh6uh_EZvt5dpMKLJQ-ucFr4GX43p4j05otTMMu59BZXRq2bEHKoKEc40SRqsa15owUeVMEku0rxUuUaFLIJcfNHS2SgbLKcF0HSlSkOAf-xcUhQ3Yox7al31J4MRh_LY-mHUMxDdwbuwxQVswzFFAwmQ8TgDj6syYZkmXYG9J6KGFb">
+<div class="bg-surface-container text-on-surface p-sm rounded-2xl rounded-tl-sm shadow-[0_2px_10px_0_rgba(0,0,0,0.02)]">
+<p class="font-body-md text-body-md">Am primit, mulțumesc. Voi înlocui smântâna cu lapte de cocos în rețeta de pui curry. E ok?</p>
+<div class="flex justify-start mt-1">
+<span class="font-label-sm text-[10px] text-on-surface-variant">10:45 AM</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Message Bubble (Right - Nutritionist) -->
+<div class="flex justify-end">
+<div class="bg-primary-container text-on-primary-container max-w-[85%] md:max-w-[70%] p-sm rounded-2xl rounded-tr-sm shadow-[0_2px_10px_0_rgba(0,0,0,0.02)]">
+<p class="font-body-md text-body-md">Perfect, sună bine. De asemenea, preferă porții mai mici pentru cină.</p>
+<div class="flex justify-end mt-1">
+<span class="font-label-sm text-[10px] text-on-primary-container opacity-70">10:48 AM</span>
+</div>
+</div>
+</div>
+<div class="flex justify-end">
+<div class="bg-primary-container text-on-primary-container max-w-[85%] md:max-w-[70%] p-sm rounded-2xl rounded-tr-sm shadow-[0_2px_10px_0_rgba(0,0,0,0.02)]">
+<div class="flex items-center gap-sm bg-white/10 p-3 rounded-xl border border-white/20">
+<span class="material-symbols-outlined text-[32px]">picture_as_pdf</span>
+<div class="flex-1 overflow-hidden">
+<p class="font-label-md text-label-md truncate">Plan_Nutritional_Elena_Popescu.pdf</p>
+<p class="font-label-sm text-[10px] opacity-70">1.2 MB • PDF</p>
+</div>
+<button class="p-2 hover:bg-white/20 rounded-full transition-colors">
+<span class="material-symbols-outlined">download</span>
+</button>
+</div>
+<div class="flex justify-end mt-1">
+<span class="font-label-sm text-[10px] text-on-primary-container opacity-70">10:50 AM</span>
+<span class="material-symbols-outlined text-[12px] text-on-primary-container opacity-70 ml-1" style="font-variation-settings: &quot;FILL&quot; 1;">done_all</span></div>
+</div>
+</div></div>
+<!-- Input Area Footer -->
+<footer class="bg-surface border-t border-surface-variant p-margin-mobile md:p-sm shrink-0">
+<div class="max-w-4xl mx-auto w-full flex items-center gap-sm bg-surface-container-lowest rounded-full border border-outline-variant px-sm py-xs focus-within:border-primary focus-within:shadow-[0_0_0_1px_rgba(0,110,28,1)] transition-all">
+<button class="text-on-surface-variant hover:text-primary transition-colors p-2 rounded-full cursor-pointer flex-shrink-0"><span class="material-symbols-outlined">attach_file</span></button>
+<input class="flex-1 bg-transparent border-none focus:ring-0 font-body-md text-body-md text-on-surface placeholder-on-surface-variant p-2 h-12 w-full outline-none" placeholder="Scrie un mesaj..." type="text">
+<button class="bg-primary text-on-primary hover:bg-surface-tint transition-colors p-2 rounded-full cursor-pointer flex-shrink-0 flex items-center justify-center w-10 h-10 shadow-sm active:scale-95">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">send</span>
+</button>
+</div>
+</footer>
+</main>
+
+
+
+
+</body></html>
