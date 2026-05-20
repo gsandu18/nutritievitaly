@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+
+<html lang="ro"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Plată Confirmată - Vitality</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "inverse-primary": "#78dc77",
+                        "surface-bright": "#fbf9f9",
+                        "on-error-container": "#93000a",
+                        "on-secondary-fixed": "#2c1600",
+                        "surface-tint": "#006e1c",
+                        "on-secondary-fixed-variant": "#693c00",
+                        "on-primary": "#ffffff",
+                        "inverse-on-surface": "#f2f0f0",
+                        "on-surface-variant": "#3f4a3c",
+                        "surface-container-highest": "#e3e2e2",
+                        "on-tertiary-fixed-variant": "#00497d",
+                        "surface-container": "#efeded",
+                        "on-background": "#1b1c1c",
+                        "error": "#ba1a1a",
+                        "inverse-surface": "#303031",
+                        "on-error": "#ffffff",
+                        "on-tertiary-container": "#00355d",
+                        "outline": "#6f7a6b",
+                        "surface-container-high": "#e9e8e7",
+                        "primary-fixed": "#94f990",
+                        "primary": "#006e1c",
+                        "tertiary-fixed-dim": "#9ecaff",
+                        "surface-variant": "#e3e2e2",
+                        "secondary": "#8b5000",
+                        "tertiary": "#0061a4",
+                        "on-primary-fixed": "#002204",
+                        "on-secondary": "#ffffff",
+                        "background": "#fbf9f9",
+                        "surface-dim": "#dbdad9",
+                        "surface-container-low": "#f5f3f3",
+                        "surface": "#fbf9f9",
+                        "secondary-fixed-dim": "#ffb870",
+                        "on-tertiary-fixed": "#001d36",
+                        "tertiary-fixed": "#d1e4ff",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-container": "#33a0fe",
+                        "primary-container": "#4caf50",
+                        "on-primary-fixed-variant": "#005313",
+                        "primary-fixed-dim": "#78dc77",
+                        "on-surface": "#1b1c1c",
+                        "secondary-fixed": "#ffdcbe",
+                        "outline-variant": "#becab9",
+                        "secondary-container": "#ff9800",
+                        "on-primary-container": "#003c0b",
+                        "on-secondary-container": "#653900"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "16px",
+                        "xs": "4px",
+                        "xl": "64px",
+                        "sm": "12px",
+                        "margin-desktop": "48px",
+                        "md": "24px",
+                        "base": "8px",
+                        "margin-mobile": "16px",
+                        "lg": "40px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Inter", "sans-serif"],
+                        "label-md": ["Inter", "sans-serif"],
+                        "headline-lg-mobile": ["Inter", "sans-serif"],
+                        "headline-lg": ["Inter", "sans-serif"],
+                        "body-md": ["Inter", "sans-serif"],
+                        "headline-md": ["Inter", "sans-serif"],
+                        "headline-xl": ["Inter", "sans-serif"],
+                        "body-lg": ["Inter", "sans-serif"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-xl": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface min-h-screen flex items-center justify-center p-margin-mobile md:p-margin-desktop antialiased">
+<!-- Transactional screens suppress global navigation -->
+<main class="w-full max-w-md">
+<!-- Success Card Container -->
+<div class="bg-surface-container-lowest rounded-xl shadow-[0_4px_20px_0_rgba(0,0,0,0.04)] border border-outline-variant p-md md:p-lg flex flex-col items-center">
+<!-- Success Icon -->
+<div class="w-xl h-xl rounded-full bg-primary-container text-on-primary-container flex items-center justify-center mb-md">
+<span class="material-symbols-outlined text-[40px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<!-- Header Texts -->
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-on-surface text-center mb-xs">
+                Plată Confirmată!
+            </h1>
+<p class="font-body-md text-body-md text-on-surface-variant text-center mb-lg">
+                Rezervarea ta a fost înregistrată cu succes.
+            </p>
+<!-- Booking Summary Bento/List -->
+<div class="w-full bg-surface border border-outline-variant rounded-lg p-sm md:p-md flex flex-col gap-sm mb-lg">
+<div class="flex justify-between items-center py-xs border-b border-surface-variant">
+<span class="font-body-md text-body-md text-on-surface-variant">Serviciu</span>
+<span class="font-label-md text-label-md text-on-surface text-right">Chef Personal Vitality</span>
+</div>
+<div class="flex justify-between items-center py-xs border-b border-surface-variant">
+<span class="font-body-md text-body-md text-on-surface-variant">Data</span>
+<span class="font-label-md text-label-md text-on-surface text-right">Joi, 12 Octombrie</span>
+</div>
+<div class="flex justify-between items-center py-xs border-b border-surface-variant">
+<span class="font-body-md text-body-md text-on-surface-variant">Ora</span>
+<span class="font-label-md text-label-md text-on-surface text-right">13:00</span>
+</div>
+<div class="flex justify-between items-center py-xs border-b border-surface-variant mt-xs">
+<span class="font-body-md text-body-md text-on-surface-variant">Metodă de plată</span>
+<div class="flex items-center gap-xs text-on-surface">
+<span class="material-symbols-outlined text-[18px]">credit_card</span>
+<span class="font-label-md text-label-md">Card **** 1234</span>
+</div>
+</div>
+<div class="flex justify-between items-center py-xs border-b border-surface-variant">
+<span class="font-body-md text-body-md text-on-surface-variant">ID Tranzacție</span>
+<span class="font-label-md text-label-md text-on-surface text-right">#VIT-98234-AX</span>
+</div>
+<!-- Total Row -->
+<div class="flex justify-between items-center pt-sm mt-xs">
+<span class="font-headline-md text-headline-md text-on-surface">Total</span>
+<span class="font-headline-md text-headline-md text-primary">250 RON</span>
+</div>
+</div>
+<!-- Actions -->
+<button class="w-full h-12 mb-sm flex items-center justify-center gap-xs bg-surface border border-outline text-on-surface-variant hover:bg-surface-variant font-label-md text-label-md rounded-lg transition-colors">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+    Vizualizează Factura
+</button><button class="w-full h-12 mb-sm flex items-center justify-center gap-xs bg-surface border border-outline text-on-surface-variant hover:bg-surface-variant font-label-md text-label-md rounded-lg transition-colors"><span class="material-symbols-outlined text-[20px]">download</span>
+    Descarcă PDF</button><button class="w-full h-12 mb-sm flex items-center justify-center gap-xs bg-surface border border-outline text-on-surface-variant hover:bg-surface-variant font-label-md text-label-md rounded-lg transition-colors">
+<span class="material-symbols-outlined text-[20px]">mail</span>
+    Trimite Factura pe Email
+</button><button class="w-full h-12 mb-sm flex items-center justify-center gap-xs bg-surface border border-outline text-on-surface-variant hover:bg-surface-variant font-label-md text-label-md rounded-lg transition-colors">
+<span class="material-symbols-outlined text-[20px]">print</span>
+    Printează Factura
+</button><div class="w-full flex flex-col gap-sm">
+<button class="w-full h-12 bg-primary hover:bg-surface-tint text-on-primary font-label-md text-label-md rounded-lg transition-colors flex items-center justify-center">
+                    Vezi Rezervările Mele
+                </button>
+<button class="w-full h-12 bg-transparent border border-primary text-primary hover:bg-surface-container-low font-label-md text-label-md rounded-lg transition-colors flex items-center justify-center">
+                    Înapoi la Dashboard
+                </button>
+</div>
+</div>
+</main>
+</body></html>
