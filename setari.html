@@ -3,9 +3,11 @@
 <html lang="ro"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Setări Notificări - Vitality</title>
+<title>Confirmare și Plată - Vitality</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
@@ -14,53 +16,53 @@
           theme: {
             extend: {
               "colors": {
-                      "surface-container-low": "#f5f3f3",
-                      "outline": "#6f7a6b",
-                      "on-primary-fixed-variant": "#005313",
-                      "tertiary-fixed": "#d1e4ff",
-                      "primary": "#006e1c",
-                      "tertiary": "#0061a4",
-                      "on-tertiary-fixed": "#001d36",
-                      "on-secondary-fixed-variant": "#693c00",
-                      "surface-container-highest": "#e3e2e2",
-                      "secondary-fixed-dim": "#ffb870",
-                      "on-tertiary-fixed-variant": "#00497d",
-                      "inverse-surface": "#303031",
-                      "outline-variant": "#becab9",
-                      "on-error-container": "#93000a",
-                      "on-surface-variant": "#3f4a3c",
-                      "error": "#ba1a1a",
-                      "surface": "#fbf9f9",
-                      "on-primary-container": "#003c0b",
-                      "inverse-primary": "#78dc77",
-                      "on-surface": "#1b1c1c",
-                      "surface-tint": "#006e1c",
+                      "on-background": "#1b1c1c",
+                      "inverse-on-surface": "#f2f0f0",
+                      "surface-container-high": "#e9e8e7",
                       "on-secondary-fixed": "#2c1600",
-                      "secondary": "#8b5000",
-                      "surface-dim": "#dbdad9",
+                      "inverse-surface": "#303031",
+                      "primary": "#006e1c",
+                      "on-secondary-container": "#653900",
+                      "tertiary-fixed": "#d1e4ff",
+                      "on-error-container": "#93000a",
+                      "primary-fixed": "#94f990",
                       "surface-variant": "#e3e2e2",
-                      "primary-container": "#4caf50",
+                      "on-primary-fixed": "#002204",
+                      "surface-container": "#efeded",
+                      "secondary-fixed-dim": "#ffb870",
+                      "outline-variant": "#becab9",
+                      "inverse-primary": "#78dc77",
+                      "on-tertiary-fixed-variant": "#00497d",
+                      "surface-bright": "#fbf9f9",
+                      "surface": "#fbf9f9",
+                      "on-secondary": "#ffffff",
                       "on-tertiary": "#ffffff",
+                      "on-surface-variant": "#3f4a3c",
+                      "tertiary-container": "#33a0fe",
+                      "surface-container-highest": "#e3e2e2",
+                      "on-primary-fixed-variant": "#005313",
+                      "on-secondary-fixed-variant": "#693c00",
+                      "on-primary": "#ffffff",
+                      "surface-dim": "#dbdad9",
+                      "error": "#ba1a1a",
+                      "surface-container-lowest": "#ffffff",
+                      "on-primary-container": "#003c0b",
+                      "background": "#fbf9f9",
+                      "outline": "#6f7a6b",
+                      "error-container": "#ffdad6",
+                      "surface-container-low": "#f5f3f3",
+                      "tertiary-fixed-dim": "#9ecaff",
+                      "primary-container": "#4caf50",
+                      "on-surface": "#1b1c1c",
+                      "on-tertiary-fixed": "#001d36",
+                      "on-tertiary-container": "#00355d",
+                      "tertiary": "#0061a4",
+                      "surface-tint": "#006e1c",
+                      "secondary-container": "#ff9800",
+                      "primary-fixed-dim": "#78dc77",
                       "on-error": "#ffffff",
                       "secondary-fixed": "#ffdcbe",
-                      "primary-fixed": "#94f990",
-                      "surface-bright": "#fbf9f9",
-                      "on-secondary": "#ffffff",
-                      "background": "#fbf9f9",
-                      "surface-container-high": "#e9e8e7",
-                      "on-tertiary-container": "#00355d",
-                      "surface-container-lowest": "#ffffff",
-                      "on-primary-fixed": "#002204",
-                      "primary-fixed-dim": "#78dc77",
-                      "secondary-container": "#ff9800",
-                      "on-background": "#1b1c1c",
-                      "on-secondary-container": "#653900",
-                      "surface-container": "#efeded",
-                      "on-primary": "#ffffff",
-                      "error-container": "#ffdad6",
-                      "tertiary-fixed-dim": "#9ecaff",
-                      "tertiary-container": "#33a0fe",
-                      "inverse-on-surface": "#f2f0f0"
+                      "secondary": "#8b5000"
               },
               "borderRadius": {
                       "DEFAULT": "0.25rem",
@@ -69,162 +71,224 @@
                       "full": "9999px"
               },
               "spacing": {
-                      "margin-mobile": "16px",
                       "md": "24px",
+                      "margin-desktop": "48px",
+                      "xs": "4px",
+                      "margin-mobile": "16px",
                       "lg": "40px",
                       "gutter": "16px",
-                      "base": "8px",
                       "xl": "64px",
-                      "sm": "12px",
-                      "xs": "4px",
-                      "margin-desktop": "48px"
+                      "base": "8px",
+                      "sm": "12px"
               },
               "fontFamily": {
-                      "label-sm": ["Inter"],
-                      "headline-lg": ["Inter"],
-                      "headline-md": ["Inter"],
-                      "body-md": ["Inter"],
-                      "body-lg": ["Inter"],
-                      "label-md": ["Inter"],
-                      "headline-lg-mobile": ["Inter"],
-                      "headline-xl": ["Inter"]
+                      "label-md": [
+                              "Inter"
+                      ],
+                      "headline-xl": [
+                              "Inter"
+                      ],
+                      "headline-lg": [
+                              "Inter"
+                      ],
+                      "body-lg": [
+                              "Inter"
+                      ],
+                      "headline-md": [
+                              "Inter"
+                      ],
+                      "body-md": [
+                              "Inter"
+                      ],
+                      "label-sm": [
+                              "Inter"
+                      ],
+                      "headline-lg-mobile": [
+                              "Inter"
+                      ]
               },
               "fontSize": {
-                      "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
-                      "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
-                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
-                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
-                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
-                      "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
-                      "headline-lg-mobile": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
-                      "headline-xl": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+                      "label-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-xl": [
+                              "40px",
+                              {
+                                      "lineHeight": "48px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "28px",
+                              {
+                                      "lineHeight": "36px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "700"
+                              }
+                      ]
               }
-            }
-          }
+      },
+          },
         }
-    </script>
+      </script>
 <style>
-        body {
-            background-color: theme('colors.background');
-            color: theme('colors.on-background');
+        /* Custom styles for radio buttons and subtle animations */
+        input[type="radio"]:checked {
+            background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3ccircle cx='8' cy='8' r='3'/%3e%3c/svg%3e");
         }
-        /* Hide scrollbar for clean UI */
-        ::-webkit-scrollbar {
-            display: none;
-        }
-        
-        /* Custom Toggle Switch Styles */
-        .toggle-checkbox:checked {
-            right: 0;
-            border-color: theme('colors.primary');
-        }
-        .toggle-checkbox:checked + .toggle-label {
-            background-color: theme('colors.primary');
-        }
-    </style>
+      </style>
 <style>
     body {
       min-height: max(884px, 100dvh);
     }
   </style>
   </head>
-<body class="antialiased min-h-screen pb-24">
-<!-- TopAppBar -->
-<header class="bg-surface shadow-sm docked full-width top-0 fixed left-0 w-full z-50 flex justify-between items-center px-margin-mobile h-16">
-<div class="flex items-center gap-4">
-<button class="text-primary hover:bg-surface-variant active:scale-95 duration-150 ease-in-out p-2 rounded-full flex items-center justify-center">
-<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">arrow_back</span>
+<body class="bg-background text-on-background min-h-screen flex flex-col items-center">
+<div class="w-full max-w-md mx-auto relative flex flex-col h-full min-h-screen pb-24">
+<!-- Header -->
+<header class="flex justify-between items-center w-full px-margin-mobile py-base bg-surface border-b border-outline-variant/30 sticky top-0 z-10 shadow-sm">
+<button class="text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 p-2 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
 </button>
-<h1 class="font-headline-md text-headline-md text-primary font-bold">Setări Notificări</h1>
-</div>
-<div class="w-10"></div> <!-- Spacer to center title visually against back button -->
+<h1 class="font-headline-md text-headline-md text-primary font-bold">Confirmare și Plată</h1>
+<div class="w-10"></div> <!-- Spacer for centering -->
 </header>
-<!-- Main Content Canvas -->
-<main class="pt-24 px-margin-mobile md:px-margin-desktop max-w-3xl mx-auto space-y-md">
-<div class="space-y-2">
-<p class="font-body-md text-body-md text-on-surface-variant">Gestionează cum și când vrei să fii notificat despre rezervările tale de Chef personal și actualizările platformei Vitality.</p>
+<main class="flex-1 px-margin-mobile py-md flex flex-col gap-md">
+<!-- Booking Summary Card -->
+<section class="bg-surface-container-lowest rounded-xl p-md shadow-[0_4px_20px_0_rgba(0,0,0,0.04)] border border-outline-variant/30">
+<h2 class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider mb-sm">Sumar Rezervare</h2>
+<div class="flex items-start gap-sm mb-sm">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-surface-container-high flex-shrink-0">
+<img alt="Dr. Sarah Miller" class="w-full h-full object-cover" data-alt="A professional headshot of a female nutritionist with blonde hair wearing a white coat, smiling warmly. The background is a modern, softly lit clinical office with a hint of greenery. The image has a clean, high-key lighting style suited for a modern health app." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBMaQWOydbCbUKbR1GdcOfADaYziw8xlvbCxf1BPmaStsgfAHOIECkX3woIswglYx4Q4EdBPI904lOWWdxfLfN7Z3bdkAKxFr3JvxTJwraycVKpq6wI-h5l6HJmEaQ0AFI-XaiU74nkMO-fnE-w5YBpMOy3gDRqyisMEjHz4oCzsm55DfEiUvShoowC0-3r4aSICTL7was6m4k-JZnCmsr9Zapgry8xMfsIT8Te_ZTnik_kGZoGJAG_Okb28DeE46_8uPxlQqP4GLb6"/>
 </div>
-<!-- Section: Booking Reminders -->
-<section class="bg-surface-container-lowest rounded-xl shadow-[0_4px_20px_0_rgba(0,0,0,0.04)] border border-surface-variant overflow-hidden">
-<div class="p-4 border-b border-surface-variant bg-surface-bright">
-<h2 class="font-headline-md text-[20px] font-semibold text-on-surface flex items-center gap-2">
-<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">event</span>
-                    Rezervări Chef
-                </h2>
-<p class="font-body-md text-sm text-on-surface-variant mt-1">Notificări pentru a te asigura că ești pregătit pentru experiența culinară.</p>
-</div>
-<div class="divide-y divide-surface-variant">
-<!-- Toggle Item 1 -->
-<div class="p-4 flex items-center justify-between hover:bg-surface-container-low transition-colors">
 <div>
-<h3 class="font-body-lg text-body-lg font-medium text-on-surface">Reminder 24h înainte</h3>
-<p class="font-body-md text-sm text-on-surface-variant">Primește o notificare cu o zi înainte de rezervare.</p>
-</div>
-<div class="relative inline-block w-12 mr-2 align-middle select-none transition duration-200 ease-in">
-<input checked="" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer z-10 transition-transform duration-200 ease-in-out translate-x-6 border-primary" id="toggle-24h" name="toggle" type="checkbox"/>
-<label class="toggle-label block overflow-hidden h-6 rounded-full bg-primary cursor-pointer transition-colors duration-200 ease-in-out" for="toggle-24h"></label>
+<h3 class="font-headline-md text-[18px] leading-snug font-semibold text-on-surface">Consultație Inițială</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Dr. Sarah Miller</p>
 </div>
 </div>
-<!-- Toggle Item 2 -->
-<div class="p-4 flex items-center justify-between hover:bg-surface-container-low transition-colors">
+<div class="grid grid-cols-2 gap-sm bg-surface-container-low p-sm rounded-lg mt-base">
 <div>
-<h3 class="font-body-lg text-body-lg font-medium text-on-surface">Reminder 1h înainte</h3>
-<p class="font-body-md text-sm text-on-surface-variant">Ultimul reminder înainte de sosirea Chef-ului.</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Data &amp; Ora</p>
+<p class="font-body-md text-body-md font-medium text-on-surface">Oct 12, 14:30</p>
 </div>
-<div class="relative inline-block w-12 mr-2 align-middle select-none transition duration-200 ease-in">
-<input checked="" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer z-10 transition-transform duration-200 ease-in-out translate-x-6 border-primary" id="toggle-1h" name="toggle" type="checkbox"/>
-<label class="toggle-label block overflow-hidden h-6 rounded-full bg-primary cursor-pointer transition-colors duration-200 ease-in-out" for="toggle-1h"></label>
-</div>
-</div>
-<!-- Toggle Item 3 -->
-<div class="p-4 flex items-center justify-between hover:bg-surface-container-low transition-colors">
 <div>
-<h3 class="font-body-lg text-body-lg font-medium text-on-surface">Modificări rezervare</h3>
-<p class="font-body-md text-sm text-on-surface-variant">Alerte dacă apar schimbări în meniu sau program.</p>
-</div>
-<div class="relative inline-block w-12 mr-2 align-middle select-none transition duration-200 ease-in">
-<input checked="" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer z-10 transition-transform duration-200 ease-in-out translate-x-6 border-primary" id="toggle-changes" name="toggle" type="checkbox"/>
-<label class="toggle-label block overflow-hidden h-6 rounded-full bg-primary cursor-pointer transition-colors duration-200 ease-in-out" for="toggle-changes"></label>
-</div>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Preț</p>
+<p class="font-body-md text-body-md font-medium text-on-surface">$85.00</p>
 </div>
 </div>
 </section>
-<!-- Section: General Notifications -->
-<section class="bg-surface-container-lowest rounded-xl shadow-[0_4px_20px_0_rgba(0,0,0,0.04)] border border-surface-variant overflow-hidden">
-<div class="p-4 border-b border-surface-variant bg-surface-bright">
-<h2 class="font-headline-md text-[20px] font-semibold text-on-surface flex items-center gap-2">
-<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">campaign</span>
-                    Comunicare Generală
-                </h2>
-</div>
-<div class="divide-y divide-surface-variant">
-<!-- Toggle Item 4 -->
-<div class="p-4 flex items-center justify-between hover:bg-surface-container-low transition-colors">
+<!-- Payment Methods -->
+<section>
+<h2 class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider mb-sm pl-2">Metodă de plată</h2>
+<div class="flex flex-col gap-base">
+<!-- Saved Card -->
+<label class="flex items-center justify-between bg-surface-container-lowest p-sm rounded-xl border border-primary bg-primary/5 cursor-pointer shadow-sm transition-all hover:shadow-md">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary" data-icon="credit_card">credit_card</span>
 <div>
-<h3 class="font-body-lg text-body-lg font-medium text-on-surface">Noutăți și Recomandări</h3>
-<p class="font-body-md text-sm text-on-surface-variant">Sfaturi de nutriție și meniuri noi recomandate.</p>
-</div>
-<div class="relative inline-block w-12 mr-2 align-middle select-none transition duration-200 ease-in">
-<input class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer z-10 transition-transform duration-200 ease-in-out border-surface-variant" id="toggle-news" name="toggle" type="checkbox"/>
-<label class="toggle-label block overflow-hidden h-6 rounded-full bg-surface-variant cursor-pointer transition-colors duration-200 ease-in-out" for="toggle-news"></label>
+<p class="font-body-md text-body-md font-medium text-on-surface">Visa terminat în 4242</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Expiră 12/25</p>
 </div>
 </div>
-<!-- Toggle Item 5 -->
-<div class="p-4 flex items-center justify-between hover:bg-surface-container-low transition-colors">
-<div>
-<h3 class="font-body-lg text-body-lg font-medium text-on-surface">Oferte Marketing</h3>
-<p class="font-body-md text-sm text-on-surface-variant">Promoții speciale pentru rezervări viitoare.</p>
+<input checked="" class="w-5 h-5 text-primary bg-surface-container-lowest border-outline-variant focus:ring-primary focus:ring-2 rounded-full cursor-pointer" name="payment_method" type="radio"/>
+</label>
+<!-- Add New Card -->
+<label class="flex items-center justify-between bg-surface-container-lowest p-sm rounded-xl border border-outline-variant/30 cursor-pointer shadow-sm transition-all hover:shadow-md hover:border-primary/50">
+<div class="flex items-center gap-sm">
+<div class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span>
 </div>
-<div class="relative inline-block w-12 mr-2 align-middle select-none transition duration-200 ease-in">
-<input class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer z-10 transition-transform duration-200 ease-in-out border-surface-variant" id="toggle-marketing" name="toggle" type="checkbox"/>
-<label class="toggle-label block overflow-hidden h-6 rounded-full bg-surface-variant cursor-pointer transition-colors duration-200 ease-in-out" for="toggle-marketing"></label>
+<p class="font-body-md text-body-md font-medium text-on-surface">Adaugă un card nou</p>
 </div>
+<input class="w-5 h-5 text-primary bg-surface-container-lowest border-outline-variant focus:ring-primary focus:ring-2 rounded-full cursor-pointer" name="payment_method" type="radio"/>
+</label>
+<!-- Other Methods -->
+<div class="flex gap-base mt-xs">
+<button class="flex-1 flex items-center justify-center gap-xs bg-surface-container-lowest p-sm rounded-xl border border-outline-variant/30 hover:bg-surface-container-low transition-colors shadow-sm">
+<span class="material-symbols-outlined" data-icon="account_balance_wallet">account_balance_wallet</span>
+<span class="font-body-md text-label-md">Apple Pay</span>
+</button>
+<button class="flex-1 flex items-center justify-center gap-xs bg-surface-container-lowest p-sm rounded-xl border border-outline-variant/30 hover:bg-surface-container-low transition-colors shadow-sm">
+<span class="material-symbols-outlined" data-icon="wallet">wallet</span>
+<span class="font-body-md text-label-md">Google Pay</span>
+</button>
 </div>
 </div>
 </section>
-<div class="pt-sm flex justify-center">
-<p class="font-label-sm text-label-sm text-on-surface-variant text-center max-w-md">Modificările sunt salvate automat. Setările de sistem pentru notificări push pot suprascrie aceste preferințe.</p>
+<!-- Order Summary -->
+<section class="bg-surface-container-lowest rounded-xl p-md shadow-sm border border-outline-variant/30 mt-xs">
+<h2 class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider mb-sm">Sumar Plată</h2>
+<div class="flex flex-col gap-xs">
+<div class="flex justify-between items-center">
+<span class="font-body-md text-body-md text-on-surface-variant">Taxă Consultație</span>
+<span class="font-body-md text-body-md text-on-surface">$85.00</span>
 </div>
+<div class="flex justify-between items-center">
+<span class="font-body-md text-body-md text-on-surface-variant">Taxă Serviciu</span>
+<span class="font-body-md text-body-md text-on-surface">$5.00</span>
+</div>
+<hr class="border-outline-variant/30 my-sm"/>
+<div class="flex justify-between items-center">
+<span class="font-headline-md text-[18px] font-bold text-on-surface">Total</span>
+<span class="font-headline-md text-headline-md font-bold text-primary">$90.00</span>
+</div>
+</div>
+</section>
 </main>
-<!-- Suppressed Bottom Navigation: Not rendering BottomNavBar because this is a Settings/Transactional sub-page, prioritizing the main canvas canvas as per instructions -->
+<!-- Fixed Bottom Action -->
+<div class="fixed bottom-0 left-0 w-full bg-surface/90 backdrop-blur-md border-t border-outline-variant/30 p-margin-mobile z-20 flex flex-col items-center gap-sm shadow-[0_-4px_20px_0_rgba(0,0,0,0.04)]">
+<div class="w-full max-w-md mx-auto">
+<button class="w-full h-12 bg-primary text-on-primary font-label-md text-label-md rounded-lg flex items-center justify-center gap-xs hover:opacity-90 active:scale-[0.98] transition-all shadow-md">
+<span class="material-symbols-outlined text-[20px]" data-icon="lock" data-weight="fill" style="font-variation-settings: 'FILL' 1;">lock</span>
+                    Plătește $90.00
+                </button>
+<p class="text-center font-label-sm text-[11px] text-on-surface-variant mt-sm flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="verified_user">verified_user</span>
+                    Tranzacție securizată prin Vitality Pay
+                </p>
+</div>
+</div>
+</div>
 </body></html>
