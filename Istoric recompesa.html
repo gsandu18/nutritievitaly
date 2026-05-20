@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+
+<html lang="ro"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Istoric Recompense - Vitality</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-primary-container": "#003c0b",
+                        "on-surface-variant": "#3f4a3c",
+                        "background": "#fbf9f9",
+                        "on-tertiary-fixed-variant": "#00497d",
+                        "on-error-container": "#93000a",
+                        "primary-fixed": "#94f990",
+                        "error-container": "#ffdad6",
+                        "error": "#ba1a1a",
+                        "outline-variant": "#becab9",
+                        "inverse-surface": "#303031",
+                        "on-error": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed-variant": "#005313",
+                        "on-tertiary-container": "#00355d",
+                        "on-primary-fixed": "#002204",
+                        "secondary-fixed-dim": "#ffb870",
+                        "surface-container-highest": "#e3e2e2",
+                        "inverse-on-surface": "#f2f0f0",
+                        "tertiary-fixed": "#d1e4ff",
+                        "secondary-container": "#ff9800",
+                        "primary-container": "#4caf50",
+                        "on-surface": "#1b1c1c",
+                        "inverse-primary": "#78dc77",
+                        "tertiary": "#0061a4",
+                        "surface-container-high": "#e9e8e7",
+                        "surface-container-low": "#f5f3f3",
+                        "surface-bright": "#fbf9f9",
+                        "surface-tint": "#006e1c",
+                        "tertiary-fixed-dim": "#9ecaff",
+                        "surface-variant": "#e3e2e2",
+                        "primary": "#006e1c",
+                        "on-secondary-fixed-variant": "#693c00",
+                        "on-secondary-container": "#653900",
+                        "surface-dim": "#dbdad9",
+                        "surface-container": "#efeded",
+                        "tertiary-container": "#33a0fe",
+                        "secondary-fixed": "#ffdcbe",
+                        "surface": "#fbf9f9",
+                        "on-tertiary-fixed": "#001d36",
+                        "outline": "#6f7a6b",
+                        "on-primary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary": "#8b5000",
+                        "primary-fixed-dim": "#78dc77",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-fixed": "#2c1600",
+                        "on-background": "#1b1c1c"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    spacing: {
+                        "xs": "4px",
+                        "lg": "40px",
+                        "gutter": "16px",
+                        "margin-mobile": "16px",
+                        "md": "24px",
+                        "base": "8px",
+                        "xl": "64px",
+                        "sm": "12px",
+                        "margin-desktop": "48px"
+                    },
+                    fontFamily: {
+                        "body-md": ["Inter"],
+                        "headline-xl": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "label-md": ["Inter"]
+                    },
+                    fontSize: {
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-xl": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .pb-safe { padding-bottom: env(safe-area-inset-bottom, 16px); }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen font-body-md text-body-md antialiased pb-24 md:pb-0">
+<!-- TopAppBar -->
+<header class="w-full top-0 sticky z-40 bg-surface shadow-[0px_4px_20px_rgba(0,0,0,0.04)] hidden md:block">
+<div class="flex justify-between items-center px-margin-mobile py-base w-full max-w-7xl mx-auto">
+<div class="flex items-center gap-4">
+<button aria-label="Menu" class="text-on-surface-variant hover:opacity-80 transition-opacity active:scale-95 transition-transform">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<img alt="Vitality Logo" class="h-8 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB5pkpYWStbR6JyB22ODCqxOa9TaBv4UPv4g0FT4TpmHSf2bPwmmvSY7ddN5mzFqbSeEfn2sSEcb7nwhK7xrKHdq-TlCjm1TYTqfiI8O7eIb3BBJoui9i_A0jd4pq_udLGj1evwhFQnsKrGlJDqI1nf0J3S8Zz0Wcp7t1Pr0k8znHA3ro796JI0ZpjVgnTEROGjjnelx9ZAmoY1zrqJqV5BlsVPLyKksumYabeW2PkorI1T4LZatoenOHbizo-QZNiPmcN2cyWvfNQB"/>
+</div>
+<nav class="flex gap-8">
+<a class="text-on-surface-variant font-label-md text-label-md hover:opacity-80 transition-opacity flex flex-col items-center" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="dashboard">dashboard</span>
+                    Dashboard
+                </a>
+<a class="text-on-surface-variant font-label-md text-label-md hover:opacity-80 transition-opacity flex flex-col items-center" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="menu_book">menu_book</span>
+                    Journal
+                </a>
+<a class="text-on-surface-variant font-label-md text-label-md hover:opacity-80 transition-opacity flex flex-col items-center" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="restaurant">restaurant</span>
+                    Plan
+                </a>
+<a class="text-primary font-label-md text-label-md hover:opacity-80 transition-opacity flex flex-col items-center" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="person" data-weight="fill" style="font-variation-settings: 'FILL' 1;">person</span>
+                    Profile
+                </a>
+</nav>
+<button aria-label="Notifications" class="text-on-surface-variant hover:opacity-80 transition-opacity active:scale-95 transition-transform">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+</div>
+</header>
+<!-- Mobile Header Container (Minimal) -->
+<header class="md:hidden sticky top-0 bg-surface z-40 shadow-sm px-margin-mobile py-4 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<button aria-label="Back" class="text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<h1 class="font-headline-md text-headline-md text-on-surface">Istoric Recompense</h1>
+</div>
+<img alt="Vitality Logo" class="h-6 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB5pkpYWStbR6JyB22ODCqxOa9TaBv4UPv4g0FT4TpmHSf2bPwmmvSY7ddN5mzFqbSeEfn2sSEcb7nwhK7xrKHdq-TlCjm1TYTqfiI8O7eIb3BBJoui9i_A0jd4pq_udLGj1evwhFQnsKrGlJDqI1nf0J3S8Zz0Wcp7t1Pr0k8znHA3ro796JI0ZpjVgnTEROGjjnelx9ZAmoY1zrqJqV5BlsVPLyKksumYabeW2PkorI1T4LZatoenOHbizo-QZNiPmcN2cyWvfNQB"/>
+</header>
+<!-- Main Content -->
+<main class="max-w-3xl mx-auto px-margin-mobile md:px-margin-desktop py-md md:py-lg">
+<div class="hidden md:block mb-lg">
+<h1 class="font-headline-xl text-headline-xl text-on-surface mb-2">Istoric Recompense</h1>
+<p class="text-on-surface-variant">Explorează realizările și cupoanele tale deblocate.</p>
+</div>
+<div class="space-y-4">
+<!-- Reward Item: Active Coupon -->
+<div class="bg-surface-container-lowest rounded-xl p-md shadow-[0px_4px_20px_rgba(0,0,0,0.04)] border border-surface-variant hover:shadow-[0px_8px_24px_rgba(0,0,0,0.08)] transition-shadow">
+<div class="flex items-start justify-between gap-4">
+<div class="flex items-start gap-4">
+<div class="w-12 h-12 rounded-full bg-primary-container flex items-center justify-center shrink-0 text-primary">
+<span class="material-symbols-outlined" data-icon="local_dining" data-weight="fill" style="font-variation-settings: 'FILL' 1;">local_dining</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-1">10% Reducere Chef Personal</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Deblocat: 15 Octombrie 2023</p><p class="text-sm text-on-surface-variant mb-3">Obținut prin acumularea a 1000 de puncte de fidelitate.</p>
+<div class="flex items-center gap-2 bg-surface-variant px-3 py-2 rounded-lg w-fit">
+<span class="font-label-md text-label-md tracking-wider">VITALITY10</span>
+<button class="text-primary hover:opacity-80 transition-opacity" onclick="alert('Cod copiat!')" title="Copy Code">
+<span class="material-symbols-outlined text-sm" data-icon="content_copy">content_copy</span>
+</button>
+</div>
+</div>
+</div>
+<span class="px-3 py-1 bg-primary-container text-on-primary-container rounded-full font-label-sm text-label-sm whitespace-nowrap">Activ</span>
+</div>
+</div>
+<!-- Reward Item: Medal -->
+<div class="bg-surface-container-lowest rounded-xl p-md shadow-[0px_4px_20px_rgba(0,0,0,0.04)] border border-surface-variant hover:shadow-[0px_8px_24px_rgba(0,0,0,0.08)] transition-shadow">
+<div class="flex items-start justify-between gap-4">
+<div class="flex items-start gap-4">
+<div class="w-12 h-12 rounded-full bg-surface-variant flex items-center justify-center shrink-0 text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="military_tech" data-weight="fill" style="font-variation-settings: 'FILL' 1;">military_tech</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-1">Medalie Argint</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Deblocat: 02 Octombrie 2023</p>
+<p class="mt-2 text-sm text-on-surface-variant">Pentru 30 de zile consecutive de logare a meselor.</p>
+</div>
+</div>
+<span class="px-3 py-1 bg-surface-variant text-on-surface-variant rounded-full font-label-sm text-label-sm whitespace-nowrap">Colectat</span>
+</div>
+</div>
+<!-- Reward Item: Used Coupon -->
+<div class="bg-surface-container-lowest rounded-xl p-md shadow-[0px_4px_20px_rgba(0,0,0,0.04)] border border-surface-variant opacity-75">
+<div class="flex items-start justify-between gap-4">
+<div class="flex items-start gap-4">
+<div class="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center shrink-0 text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="shopping_bag">shopping_bag</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface line-through mb-1">Voucher Echipament 50 RON</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Deblocat: 10 Septembrie 2023</p><p class="text-sm text-on-surface-variant mt-2">Deblocat la atingerea obiectivului lunar de hidratare.</p>
+</div>
+</div>
+<span class="px-3 py-1 bg-surface-dim text-on-surface-variant rounded-full font-label-sm text-label-sm whitespace-nowrap">Utilizat</span>
+</div>
+</div>
+<!-- Reward Item: Expired Coupon -->
+<div class="bg-surface-container-lowest rounded-xl p-md shadow-[0px_4px_20px_rgba(0,0,0,0.04)] border border-surface-variant opacity-60">
+<div class="flex items-start justify-between gap-4">
+<div class="flex items-start gap-4">
+<div class="w-12 h-12 rounded-full bg-error-container flex items-center justify-center shrink-0 text-on-error-container">
+<span class="material-symbols-outlined" data-icon="timer">timer</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-1">O sesiune gratuită antrenor</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Deblocat: 15 August 2023</p><p class="text-sm text-on-surface-variant mt-2">Recompensă specială pentru prima lună de abonament Vitality.</p>
+</div>
+</div>
+<span class="px-3 py-1 bg-error-container text-on-error-container rounded-full font-label-sm text-label-sm whitespace-nowrap">Expirat</span>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 py-2 pb-safe bg-surface shadow-[0px_-4px_20px_rgba(0,0,0,0.04)] rounded-t-xl z-50 md:hidden border-t-0">
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-surface-container-high transition-colors active:scale-90 transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-sm text-label-sm mt-1">Dashboard</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-surface-container-high transition-colors active:scale-90 transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
+<span class="font-label-sm text-label-sm mt-1">Journal</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-surface-container-high transition-colors active:scale-90 transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="restaurant">restaurant</span>
+<span class="font-label-sm text-label-sm mt-1">Plan</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 active:scale-90 transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="person" data-weight="fill" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-label-sm text-label-sm mt-1">Profile</span>
+</a>
+</nav>
+</body></html>
