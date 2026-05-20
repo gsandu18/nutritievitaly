@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+
+<html lang="ro"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Detalii Rezervare</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.filled {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline": "#6f7a6b",
+                        "on-surface-variant": "#3f4a3c",
+                        "on-secondary-fixed-variant": "#693c00",
+                        "secondary-fixed": "#ffdcbe",
+                        "on-primary": "#ffffff",
+                        "on-secondary-fixed": "#2c1600",
+                        "surface-variant": "#e3e2e2",
+                        "surface-container-low": "#f5f3f3",
+                        "surface-tint": "#006e1c",
+                        "secondary-fixed-dim": "#ffb870",
+                        "primary-fixed-dim": "#78dc77",
+                        "surface-container-high": "#e9e8e7",
+                        "tertiary-fixed": "#d1e4ff",
+                        "on-secondary-container": "#653900",
+                        "tertiary": "#0061a4",
+                        "on-surface": "#1b1c1c",
+                        "inverse-primary": "#78dc77",
+                        "on-primary-container": "#003c0b",
+                        "background": "#fbf9f9",
+                        "secondary-container": "#ff9800",
+                        "surface-container-highest": "#e3e2e2",
+                        "surface-dim": "#dbdad9",
+                        "on-error-container": "#93000a",
+                        "error-container": "#ffdad6",
+                        "on-error": "#ffffff",
+                        "tertiary-container": "#33a0fe",
+                        "on-tertiary-fixed-variant": "#00497d",
+                        "inverse-surface": "#303031",
+                        "secondary": "#8b5000",
+                        "surface-bright": "#fbf9f9",
+                        "surface": "#fbf9f9",
+                        "outline-variant": "#becab9",
+                        "surface-container": "#efeded",
+                        "primary-container": "#4caf50",
+                        "on-background": "#1b1c1c",
+                        "on-primary-fixed": "#002204",
+                        "on-primary-fixed-variant": "#005313",
+                        "on-tertiary-fixed": "#001d36",
+                        "primary": "#006e1c",
+                        "inverse-on-surface": "#f2f0f0",
+                        "on-secondary": "#ffffff",
+                        "tertiary-fixed-dim": "#9ecaff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-container": "#00355d",
+                        "on-tertiary": "#ffffff",
+                        "primary-fixed": "#94f990",
+                        "error": "#ba1a1a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "16px",
+                        "lg": "40px",
+                        "sm": "12px",
+                        "xs": "4px",
+                        "md": "24px",
+                        "xl": "64px",
+                        "margin-mobile": "16px",
+                        "margin-desktop": "48px",
+                        "base": "8px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "headline-xl": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-xl": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background min-h-screen pb-xl antialiased">
+<!-- Header (Task-focused, suppressing global nav) -->
+<header class="sticky top-0 z-50 bg-surface/90 backdrop-blur-md border-b border-surface-variant px-margin-mobile h-16 flex items-center justify-between">
+<button class="w-10 h-10 flex items-center justify-center rounded-full active:bg-surface-variant transition-colors text-on-surface">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="font-headline-md text-headline-md text-on-surface">Detalii Rezervare</h1>
+<div class="w-10 h-10 flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant">more_vert</span>
+</div>
+</header>
+<main class="max-w-3xl mx-auto px-margin-mobile py-md flex flex-col gap-md">
+<!-- Status & ID -->
+<div class="flex items-center justify-between">
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">ID Rezervare #VT-8924</p>
+</div>
+<div class="bg-primary-container text-on-primary-container px-sm py-xs rounded-full font-label-md text-label-md flex items-center gap-xs shadow-sm">
+<span class="material-symbols-outlined filled text-[16px]">check_circle</span>
+                Confirmată
+            </div>
+</div>
+<!-- Chef Info Card -->
+<section class="bg-surface-container-low rounded-xl p-md flex items-center justify-between shadow-sm">
+<div class="flex items-center gap-sm">
+<div class="w-14 h-14 rounded-full overflow-hidden bg-surface-variant">
+<img alt="Chef Andrei Popescu" class="w-full h-full object-cover" data-alt="A close-up portrait of a professional chef smiling warmly in a bright, modern kitchen environment. The lighting is soft and natural, emphasizing a fresh, clean, and welcoming aesthetic consistent with a premium health-conscious brand. The color palette features neutral greys and crisp whites." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQhtWd4DU4M330u5lQVW-P9mvVxbwj0a4C3o9QyTSqw1hVqX_Gbb8dwsjTd0Sff0y8rqSV2t2FEDidf-xXhd7D9VqTGHmGX86M8ho0HJlCRxVVCfXxT8fyZ-CYb48W_37q14yzlRudwxfncU7rSMtSpANiisj5Ic8hs0lnqSb8CtDP2tjIUY-x8n5iqNwyEi6s5XY0OF-GOLhwOE6JS40V_rsUSaG92i9uqpiCBTBcL-r4LEow_-o1oYOtzaXfwL5gZkNnI9xiqDPP"/>
+</div>
+<div>
+<h2 class="font-headline-md text-[18px] leading-snug text-on-surface">Chef Andrei Popescu</h2>
+<p class="font-body-md text-[14px] text-on-surface-variant">Specialist Mediteranean</p>
+</div>
+</div>
+<button class="w-10 h-10 rounded-full bg-surface text-primary border border-outline-variant flex items-center justify-center hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined">chat</span>
+</button>
+</section>
+<!-- Service Details Bento Grid -->
+<section class="grid grid-cols-2 gap-sm">
+<div class="bg-surface rounded-xl p-sm border border-surface-variant flex flex-col gap-xs shadow-[0_4px_20px_0_rgba(0,0,0,0.04)]">
+<span class="material-symbols-outlined text-primary">calendar_month</span>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Data</p>
+<p class="font-body-lg text-[16px] font-semibold text-on-surface">15 Nov 2023</p>
+</div>
+<div class="bg-surface rounded-xl p-sm border border-surface-variant flex flex-col gap-xs shadow-[0_4px_20px_0_rgba(0,0,0,0.04)]">
+<span class="material-symbols-outlined text-primary">schedule</span>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Ora</p>
+<p class="font-body-lg text-[16px] font-semibold text-on-surface">19:30</p>
+</div>
+<div class="bg-surface rounded-xl p-sm border border-surface-variant flex flex-col gap-xs shadow-[0_4px_20px_0_rgba(0,0,0,0.04)]">
+<span class="material-symbols-outlined text-primary">restaurant</span>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Serviciu</p>
+<p class="font-body-lg text-[16px] font-semibold text-on-surface">Cină Privată</p>
+</div>
+<div class="bg-surface rounded-xl p-sm border border-surface-variant flex flex-col gap-xs shadow-[0_4px_20px_0_rgba(0,0,0,0.04)]">
+<span class="material-symbols-outlined text-primary">group</span>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Persoane</p>
+<p class="font-body-lg text-[16px] font-semibold text-on-surface">2 Invitați</p>
+</div>
+</section>
+<!-- Menu Summary -->
+<section class="bg-surface rounded-xl border border-surface-variant p-md shadow-[0_4px_20px_0_rgba(0,0,0,0.04)]">
+<h3 class="font-label-md text-label-md text-on-surface-variant mb-sm uppercase tracking-widest flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">menu_book</span> Meniu Mediteranean
+            </h3>
+<ul class="flex flex-col gap-sm">
+<li class="flex justify-between items-start border-b border-surface-variant pb-xs last:border-0 last:pb-0">
+<div>
+<p class="font-body-md text-on-surface font-medium">Grilled Sea Bass</p>
+<p class="font-label-sm text-label-sm text-outline">Cu sparanghel și sos de lămâie</p>
+</div>
+</li>
+<li class="flex justify-between items-start border-b border-surface-variant pb-xs last:border-0 last:pb-0">
+<div>
+<p class="font-body-md text-on-surface font-medium">Greek Salad</p>
+<p class="font-label-sm text-label-sm text-outline">Feta autentică, măsline Kalamata</p>
+</div>
+</li>
+<li class="flex justify-between items-start border-b border-surface-variant pb-xs last:border-0 last:pb-0">
+<div>
+<p class="font-body-md text-on-surface font-medium">Lemon Sorbet</p>
+<p class="font-label-sm text-label-sm text-outline">Desert răcoritor</p>
+</div>
+</li>
+</ul>
+</section>
+<!-- Location -->
+<section class="bg-surface rounded-xl border border-surface-variant p-md shadow-[0_4px_20px_0_rgba(0,0,0,0.04)] flex items-start gap-sm">
+<span class="material-symbols-outlined text-primary mt-1">location_on</span>
+<div>
+<h3 class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest mb-xs">Locație</h3>
+<p class="font-body-md text-on-surface font-medium">Strada Primăverii nr. 14</p>
+<p class="font-label-sm text-label-sm text-outline">București, Sector 1</p>
+</div>
+</section>
+<!-- Payment Summary -->
+<section class="bg-surface-container-low rounded-xl p-md border border-surface-variant shadow-sm">
+<h3 class="font-label-md text-label-md text-on-surface-variant mb-sm uppercase tracking-widest">Plată</h3>
+<div class="flex justify-between items-center mb-xs">
+<p class="font-body-md text-on-surface">Total achitat</p>
+<p class="font-headline-md text-[20px] text-on-surface">350 RON</p>
+</div>
+<div class="flex justify-between items-center">
+<p class="font-label-sm text-label-sm text-outline">Metodă de plată</p>
+<div class="flex items-center gap-xs font-label-sm text-label-sm text-on-surface">
+<span class="material-symbols-outlined text-[16px]">credit_card</span>
+                    **** 4242
+                </div>
+</div>
+<div class="mt-md pt-sm border-t border-surface-variant flex justify-center">
+<img alt="Vitality Brand Logo" class="h-8 object-contain opacity-70" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDr1VIkdW6V5lZiTEA-4ToWDlF-WMmi4W1YqqfJ4Eepo4zHIvOFqjt-Uy2k-w5IC97TFfKwzebAsd0srtg6xl07c2pmN-pU7Y0fN9xiHYXABbjXPyXSQZlbiHPc6c3OwQiA9QdRofTbZi_9iE1cX5fVupMl_i5h-v0gCIoSNR6JtrPYV8xzb97LUvfdzCVm54SI56ahO_u_aJd-ImMOtKZ-u8JaROYqbMWIMvcZun7gl0vcxLzob8lec_gu9AT3drEHOVKXtr7nu7Mh"/>
+</div>
+</section>
+<!-- Actions -->
+<section class="flex flex-col gap-sm mt-sm">
+<button class="w-full h-12 bg-primary text-on-primary rounded-lg font-label-md text-label-md flex items-center justify-center gap-sm shadow-sm active:scale-[0.98] transition-transform">
+<span class="material-symbols-outlined">event</span>
+                Adaugă în Calendar
+            </button>
+<div class="flex gap-sm">
+<button class="flex-1 h-12 border border-primary text-primary rounded-lg font-label-md text-label-md flex items-center justify-center bg-transparent active:bg-surface-variant transition-colors">
+                    Modifică
+                </button>
+<button class="flex-1 h-12 border border-error-container text-error rounded-lg font-label-md text-label-md flex items-center justify-center bg-transparent active:bg-error-container transition-colors">
+                    Anulează Rezervarea
+                </button>
+</div>
+</section>
+</main>
+</body></html>
