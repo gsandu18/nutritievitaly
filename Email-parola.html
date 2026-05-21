@@ -140,4 +140,34 @@
             </a>
 </div>
 </main>
+        <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+    import { getAuth, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyDmKC06ObRWWvod2TYJUvEM-ULKrztw7Ts",
+        authDomain: "app-vitality.firebaseapp.com",
+        projectId: "app-vitality",
+        storageBucket: "app-vitality.firebasestorage.app",
+        messagingSenderId: "360982822240",
+        appId: "1:360982822240:web:a650b9289aabd9de80f205",
+        measurementId: "G-T8D7CTP5ZK"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    document.getElementById('reset-form').addEventListener('submit', (e) => {
+        e.preventDefault(); 
+        const email = document.getElementById('email-reset').value;
+
+        sendPasswordResetEmail(auth, email)
+            .then(() => {
+                window.location.href = "email-trimis.html"; 
+            })
+            .catch((error) => {
+                alert("A apărut o eroare: " + error.message);
+            });
+    });
+</script>
 </body></html>
