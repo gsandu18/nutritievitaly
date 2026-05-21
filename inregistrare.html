@@ -214,4 +214,70 @@
 </div>
 </div>
 </div>
+<script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
+        import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
+
+        // Datele tale de configurare Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyDmKC06ObRWWvod2TYJUvEM-ULKrztw7Ts",
+            authDomain: "app-vitality.firebaseapp.com",
+            projectId: "app-vitality",
+            storageBucket: "app-vitality.firebasestorage.app",
+            messagingSenderId: "360982822240",
+            appId: "1:360982822240:web:a650b9289aabd9de80f205",
+            measurementId: "G-T8D7CTP5ZK"
+        };
+
+        // Inițializăm Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        // Ascultăm când se apasă butonul de Creare Cont
+        document.getElementById('register-form').addEventListener('submit', async (e) => {
+            e.preventDefault(); // Oprim reîncărcarea paginii
+
+            // 1. Preluăm datele din formular
+            const nume = document.getElementById('nume').value;
+            const specializare = document.getElementById('specializare').value;
+            const acreditare = document.getElementById('acreditare').value;
+            const clinica = document.getElementById('clinica').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            try {
+                // 2. Creăm contul în Firebase Authentication
+                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                const user = userCredential.user;
+
+                // 3. Salvăm restul detaliilor în Firestore
+                // Folosim setDoc pentru a crea documentul EXACT cu UID-ul userului abia creat
+                await setDoc(doc(db, "User", user.uid), {
+                    nume: nume,
+                    specializare: specializare,
+                    acreditare: acreditare,
+                    clinica: clinica,
+                    email: email,
+                    rol: "nutritionist" // <-- FOARTE IMPORTANT PENTRU LOGIN!
+                });
+
+                // 4. Succes! Redirecționăm utilizatorul.
+                alert("Cont creat cu succes! Te redirecționăm către platformă...");
+                window.location.href = "meniu-personalizat.html"; // Sau unde vrei tu să ajungă
+
+            } catch (error) {
+                // Dacă parola e prea scurtă sau emailul există deja
+                console.error(error);
+                if (error.code === 'auth/email-already-in-use') {
+                    alert("Acest email este deja folosit pentru un cont.");
+                } else if (error.code === 'auth/weak-password') {
+                    alert("Parola trebuie să aibă cel puțin 6 caractere.");
+                } else {
+                    alert("A apărut o eroare: " + error.message);
+                }
+            }
+        });
+    </script>
 </body></html>
