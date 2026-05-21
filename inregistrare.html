@@ -1,13 +1,11 @@
 <!DOCTYPE html>
-
 <html lang="ro"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Vitality Professional - Înregistrare</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
@@ -115,7 +113,6 @@
   </style>
   </head>
 <body class="bg-background text-on-background font-body-md min-h-screen flex flex-col md:flex-row antialiased">
-<!-- Left Side: Branding / Imagery (Hidden on mobile) -->
 <div class="hidden md:flex md:w-1/2 lg:w-[45%] relative bg-surface-container-highest overflow-hidden items-center justify-center">
 <div class="absolute inset-0 bg-primary/10 z-10"></div>
 <img alt="Nutritionist Professional" class="absolute inset-0 w-full h-full object-cover z-0" data-alt="A professional female nutritionist in a modern, brightly lit clinical office, wearing a crisp white coat. She is holding a digital tablet and smiling warmly at the camera. The setting features high-key lighting, clean minimalist lines, and subtle vibrant green plant accents in the background, conveying a sense of vitality, professional reliability, and modern healthcare." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCe2DisCYzhiG2ri6XL1cVs-W6S02e5eaujnWo4SFlEtptbWqcEcghT473JBbETp5nB2KKTDsTzD0OIG4BpgSnnPOlCHMbIIgo2vdJcavqRHMlyWNBqfHIzuKSu5RXYttZuBCZBXWPc1fCL6S8A7FHiTrtk1_MfDxA0wZR_OANJRUkGbGcmGGhtGBnB7mr3E4K6fdlrYZ6en4U6rMpxxK7xKQQrn5CrDLXtMXKk7FZzSfo55zZrP76oelk2RnXBNJEfKg9pxWroKuWw"/>
@@ -130,10 +127,8 @@
 </div>
 </div>
 </div>
-<!-- Right Side: Form Canvas -->
 <div class="flex-1 flex flex-col items-center justify-center p-margin-mobile md:p-margin-desktop bg-background overflow-y-auto">
 <div class="w-full max-w-[480px]">
-<!-- Mobile Branding Header (Visible only on mobile) -->
 <div class="md:hidden flex flex-col items-center mb-lg">
 <div class="flex items-center gap-2 text-primary mb-xs">
 <span class="material-symbols-outlined" style="font-size: 32px; font-variation-settings: 'FILL' 1;">eco</span>
@@ -141,56 +136,47 @@
 </div>
 <h2 class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest">Professional</h2>
 </div>
-<!-- Form Header -->
 <div class="mb-lg text-left">
 <h2 class="font-headline-lg text-headline-lg text-on-surface mb-xs">Creează Cont Nou</h2>
 <p class="font-body-md text-body-md text-on-surface-variant">Completează detaliile de mai jos pentru a solicita accesul în platformă.</p>
 </div>
-<!-- Registration Form -->
-<form class="space-y-md bg-surface-container-lowest p-md md:p-lg rounded-xl custom-shadow border border-outline-variant/20">
-<!-- Nume Complet -->
+<form id="register-form" class="space-y-md bg-surface-container-lowest p-md md:p-lg rounded-xl custom-shadow border border-outline-variant/20">
 <div>
 <label class="block font-label-md text-label-md text-on-surface-variant mb-xs" for="fullName">Nume Complet</label>
-<input class="w-full bg-surface-container-low border-2 border-transparent focus:bg-surface-container-lowest focus:border-primary rounded-lg px-4 py-3 outline-none transition-colors font-body-md text-on-surface placeholder:text-outline-variant" id="fullName" placeholder="ex: Dr. Maria Ionescu" type="text"/>
+<input class="w-full bg-surface-container-low border-2 border-transparent focus:bg-surface-container-lowest focus:border-primary rounded-lg px-4 py-3 outline-none transition-colors font-body-md text-on-surface placeholder:text-outline-variant" id="fullName" placeholder="ex: Dr. Maria Ionescu" type="text" required/>
 </div>
 <div class="grid grid-cols-1 md:grid-cols-2 gap-md">
-<!-- Specializare -->
 <div>
 <label class="block font-label-md text-label-md text-on-surface-variant mb-xs" for="specialization">Specializare</label>
-<input class="w-full bg-surface-container-low border-2 border-transparent focus:bg-surface-container-lowest focus:border-primary rounded-lg px-4 py-3 outline-none transition-colors font-body-md text-on-surface placeholder:text-outline-variant" id="specialization" placeholder="ex: Nutriție Sportivă" type="text"/>
+<input class="w-full bg-surface-container-low border-2 border-transparent focus:bg-surface-container-lowest focus:border-primary rounded-lg px-4 py-3 outline-none transition-colors font-body-md text-on-surface placeholder:text-outline-variant" id="specialization" placeholder="ex: Nutriție Sportivă" type="text" required/>
 </div>
-<!-- Număr Acreditare -->
 <div>
 <label class="block font-label-md text-label-md text-on-surface-variant mb-xs" for="accreditation">Număr Acreditare</label>
-<input class="w-full bg-surface-container-low border-2 border-transparent focus:bg-surface-container-lowest focus:border-primary rounded-lg px-4 py-3 outline-none transition-colors font-body-md text-on-surface placeholder:text-outline-variant" id="accreditation" placeholder="ex: 12345678" type="text"/>
+<input class="w-full bg-surface-container-low border-2 border-transparent focus:bg-surface-container-lowest focus:border-primary rounded-lg px-4 py-3 outline-none transition-colors font-body-md text-on-surface placeholder:text-outline-variant" id="accreditation" placeholder="ex: 12345678" type="text" required/>
 </div>
 </div>
-<!-- Clinică/Cabinet -->
 <div>
 <label class="block font-label-md text-label-md text-on-surface-variant mb-xs" for="clinic">Clinică/Cabinet</label>
-<input class="w-full bg-surface-container-low border-2 border-transparent focus:bg-surface-container-lowest focus:border-primary rounded-lg px-4 py-3 outline-none transition-colors font-body-md text-on-surface placeholder:text-outline-variant" id="clinic" placeholder="ex: Clinica de Nutriție Vital" type="text"/>
+<input class="w-full bg-surface-container-low border-2 border-transparent focus:bg-surface-container-lowest focus:border-primary rounded-lg px-4 py-3 outline-none transition-colors font-body-md text-on-surface placeholder:text-outline-variant" id="clinic" placeholder="ex: Clinica de Nutriție Vital" type="text" required/>
 </div>
-<!-- Email -->
 <div>
 <label class="block font-label-md text-label-md text-on-surface-variant mb-xs" for="email">Email Profesional</label>
-<input class="w-full bg-surface-container-low border-2 border-transparent focus:bg-surface-container-lowest focus:border-primary rounded-lg px-4 py-3 outline-none transition-colors font-body-md text-on-surface placeholder:text-outline-variant" id="email" placeholder="maria.ionescu@clinica.ro" type="email"/>
+<input class="w-full bg-surface-container-low border-2 border-transparent focus:bg-surface-container-lowest focus:border-primary rounded-lg px-4 py-3 outline-none transition-colors font-body-md text-on-surface placeholder:text-outline-variant" id="email" placeholder="maria.ionescu@clinica.ro" type="email" required/>
 </div>
-<!-- Parolă -->
 <div>
 <label class="block font-label-md text-label-md text-on-surface-variant mb-xs" for="password">Parolă</label>
 <div class="relative">
-<input class="w-full bg-surface-container-low border-2 border-transparent focus:bg-surface-container-lowest focus:border-primary rounded-lg pl-4 pr-12 py-3 outline-none transition-colors font-body-md text-on-surface placeholder:text-outline-variant" id="password" placeholder="••••••••" type="password"/>
+<input class="w-full bg-surface-container-low border-2 border-transparent focus:bg-surface-container-lowest focus:border-primary rounded-lg pl-4 pr-12 py-3 outline-none transition-colors font-body-md text-on-surface placeholder:text-outline-variant" id="password" placeholder="••••••••" type="password" required/>
 <button class="absolute right-4 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-primary transition-colors" type="button">
 <span class="material-symbols-outlined">visibility</span>
 </button>
 </div>
-<p class="font-label-sm text-label-sm text-outline mt-xs">Minim 8 caractere, incluzând o literă mare și un număr.</p>
+<p class="font-label-sm text-label-sm text-outline mt-xs">Minim 6 caractere.</p>
 </div>
-<!-- Termeni și Condiții -->
 <div class="pt-sm">
 <label class="flex items-start gap-sm cursor-pointer group">
 <div class="relative flex items-center justify-center mt-1">
-<input class="peer appearance-none w-5 h-5 border-2 border-outline rounded bg-surface-container-lowest checked:bg-primary checked:border-primary transition-colors cursor-pointer" type="checkbox"/>
+<input class="peer appearance-none w-5 h-5 border-2 border-outline rounded bg-surface-container-lowest checked:bg-primary checked:border-primary transition-colors cursor-pointer" type="checkbox" required/>
 <span class="material-symbols-outlined absolute text-on-primary opacity-0 peer-checked:opacity-100 pointer-events-none text-[16px] font-bold">check</span>
 </div>
 <span class="font-body-md text-body-md text-on-surface-variant">
@@ -198,28 +184,26 @@
                         </span>
 </label>
 </div>
-<!-- Submit Action -->
 <div class="pt-md">
-<button class="w-full h-[48px] bg-primary hover:bg-on-primary-fixed-variant text-on-primary font-label-md text-label-md rounded-lg flex items-center justify-center transition-colors shadow-sm focus:ring-4 focus:ring-primary/20 outline-none" type="button">
+<button class="w-full h-[48px] bg-primary hover:bg-on-primary-fixed-variant text-on-primary font-label-md text-label-md rounded-lg flex items-center justify-center transition-colors shadow-sm focus:ring-4 focus:ring-primary/20 outline-none" type="submit">
                         Înregistrează-te
                     </button>
 </div>
 </form>
-<!-- Bottom Link -->
 <div class="mt-lg text-center">
 <p class="font-body-md text-body-md text-on-surface-variant">
                     Ai deja un cont aprobat? 
-                    <a class="text-primary font-label-md hover:underline ml-1" href="#">Conectează-te aici</a>
+                    <a class="text-primary font-label-md hover:underline ml-1" href="index.html">Conectează-te aici</a>
 </p>
 </div>
 </div>
 </div>
+
 <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
         import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
         import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
 
-        // Datele tale de configurare Firebase
         const firebaseConfig = {
             apiKey: "AIzaSyDmKC06ObRWWvod2TYJUvEM-ULKrztw7Ts",
             authDomain: "app-vitality.firebaseapp.com",
@@ -230,45 +214,37 @@
             measurementId: "G-T8D7CTP5ZK"
         };
 
-        // Inițializăm Firebase
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const db = getFirestore(app);
 
-        // Ascultăm când se apasă butonul de Creare Cont
         document.getElementById('register-form').addEventListener('submit', async (e) => {
-            e.preventDefault(); // Oprim reîncărcarea paginii
+            e.preventDefault(); 
 
-            // 1. Preluăm datele din formular
-            const nume = document.getElementById('nume').value;
-            const specializare = document.getElementById('specializare').value;
-            const acreditare = document.getElementById('acreditare').value;
-            const clinica = document.getElementById('clinica').value;
+            const nume = document.getElementById('fullName').value;
+            const specializare = document.getElementById('specialization').value;
+            const acreditare = document.getElementById('accreditation').value;
+            const clinica = document.getElementById('clinic').value;
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
 
             try {
-                // 2. Creăm contul în Firebase Authentication
                 const userCredential = await createUserWithEmailAndPassword(auth, email, password);
                 const user = userCredential.user;
 
-                // 3. Salvăm restul detaliilor în Firestore
-                // Folosim setDoc pentru a crea documentul EXACT cu UID-ul userului abia creat
                 await setDoc(doc(db, "User", user.uid), {
                     nume: nume,
                     specializare: specializare,
                     acreditare: acreditare,
                     clinica: clinica,
                     email: email,
-                    rol: "nutritionist" // <-- FOARTE IMPORTANT PENTRU LOGIN!
+                    rol: "nutritionist" 
                 });
 
-                // 4. Succes! Redirecționăm utilizatorul.
                 alert("Cont creat cu succes! Te redirecționăm către platformă...");
-                window.location.href = "meniu-personalizat.html"; // Sau unde vrei tu să ajungă
+                window.location.href = "meniu-personalizat.html"; 
 
             } catch (error) {
-                // Dacă parola e prea scurtă sau emailul există deja
                 console.error(error);
                 if (error.code === 'auth/email-already-in-use') {
                     alert("Acest email este deja folosit pentru un cont.");
