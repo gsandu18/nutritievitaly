@@ -140,4 +140,53 @@
             </a>
 </div>
 </main>
+        <script type="module">
+        // 1. Importăm funcțiile necesare din Firebase
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+        import { getAuth, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
+
+        // 2. Datele tale de configurare Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyDmKC06ObRWWvod2TYJUvEM-ULKrztw7Ts",
+            authDomain: "app-vitality.firebaseapp.com",
+            projectId: "app-vitality",
+            storageBucket: "app-vitality.firebasestorage.app",
+            messagingSenderId: "360982822240",
+            appId: "1:360982822240:web:a650b9289aabd9de80f205",
+            measurementId: "G-T8D7CTP5ZK"
+        };
+
+        // 3. Inițializăm aplicația
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // 4. Ascultăm apăsarea butonului de trimitere
+        document.getElementById('reset-form').addEventListener('submit', (e) => {
+            e.preventDefault(); // Oprim reîncărcarea paginii
+
+            const email = document.getElementById('email-reset').value;
+
+            // Funcția magică de la Firebase
+            sendPasswordResetEmail(auth, email)
+                .then(() => {
+                    // Dacă emailul a fost trimis cu succes:
+                    alert("Emailul de resetare a fost trimis! Verifică și folderul SPAM.");
+                    // Opțional: redirecționăm utilizatorul înapoi la login
+                    window.location.href = "autentificare.html"; 
+                })
+                .catch((error) => {
+                    // Dacă apare o eroare (ex: emailul nu există în baza de date)
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    
+                    if (errorCode === 'auth/user-not-found') {
+                        alert("Nu există niciun cont asociat cu acest email.");
+                    } else if (errorCode === 'auth/invalid-email') {
+                        alert("Te rugăm să introduci o adresă de email validă.");
+                    } else {
+                        alert("A apărut o eroare: " + errorMessage);
+                    }
+                });
+        });
+    </script>
 </body></html>
