@@ -299,5 +299,79 @@
 <a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface py-4" href="#">Jurnal</a>
 <a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface py-4" href="#">Plan</a>
 <a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface py-4" href="#">Profil</a>
-</nav>
+</nav><script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-analytics.js";
+        import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
+        import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDmKC06ObRWWvod2TYJUvEM-ULKrztw7Ts",
+            authDomain: "app-vitality.firebaseapp.com",
+            projectId: "app-vitality",
+            storageBucket: "app-vitality.firebasestorage.app",
+            messagingSenderId: "360982822240",
+            appId: "1:360982822240:web:a650b9289aabd9de80f205",
+            measurementId: "G-T8D7CTP5ZK"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        const loginForm = document.getElementById('login-form');
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault(); 
+
+            const email = emailInput.value;
+            const password = passwordInput.value;
+
+            signInWithEmailAndPassword(auth, email, password)
+                .then(async (userCredential) => {
+                    const user = userCredential.user;
+                    
+                    try {
+                        // Cautăm în colecția "User"
+                        const userDocRef = doc(db, "User", user.uid);
+                        const userDocSnap = await getDoc(userDocRef);
+
+                        if (userDocSnap.exists()) {
+                            const userData = userDocSnap.data();
+                            
+                            // PLASA DE SIGURANȚĂ: Preluăm rolul, tăiem spațiile din margini și facem totul litere mici
+                            const rolBrut = userData.rol || "";
+                            const rolCuratat = rolBrut.trim().toLowerCase();
+
+                            // Verificăm rolul curățat
+                            if (rolCuratat === 'nutritionist') {
+                                window.location.href = "dashboard-nutritionist.html"; 
+                            } else if (rolCuratat === 'client') {
+                                window.location.href = "dashboard-client.html";
+                            } else {
+                                // Dacă tot dă eroare, ne va arăta exact ce a găsit în baza de date
+                                alert("Eroare: În baza de date scrie exact [" + rolBrut + "]. Asigură-te că nu ai pus ghilimele!");
+                            }
+                        } else {
+                            alert("Contul există, dar nu s-au găsit detalii despre rol în baza de date.");
+                        }
+
+                    } catch (dbError) {
+                        console.error("Eroare la citirea rolului:", dbError);
+                        alert("Eroare la conexiunea cu baza de date.");
+                    }
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    if (errorCode === 'auth/invalid-credential') {
+                        alert("Email sau parolă incorecte. Te rugăm să încerci din nou.");
+                    } else {
+                        alert("A apărut o eroare: " + error.message);
+                    }
+                });
+        });
+    </script>        
 </body></html>
