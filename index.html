@@ -224,7 +224,7 @@
                     
                     try {
                         // Caută userul în colecția "clienti"
-                        const userDocRef = doc(db, "clienti", user.uid);
+                      const userDocRef = doc(db, "User", user.uid);
                         const userDocSnap = await getDoc(userDocRef);
 
                         if (userDocSnap.exists()) {
