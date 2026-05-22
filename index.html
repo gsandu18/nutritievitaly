@@ -1,19 +1,15 @@
 <!DOCTYPE html>
-
-<html lang="ro"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Vitality - Bun venit</title>
-<!-- Material Symbols -->
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<!-- Google Fonts: Inter -->
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
-<!-- Tailwind CSS -->
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<!-- Tailwind Configuration -->
-<script id="tailwind-config">
+<html lang="ro">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Vitality - Bun venit</title>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
             theme: {
@@ -109,72 +105,72 @@
             }
         }
     </script>
-<style>
-    body {
-      min-height: max(884px, 100dvh);
-    }
-  </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
 </head>
 <body class="bg-surface text-on-surface font-body-md text-body-md min-h-screen flex items-center justify-center selection:bg-primary-container selection:text-on-primary-container relative z-0">
-<!-- Subtle Background Texture / Organic Shapes -->
-<div class="fixed inset-0 overflow-hidden pointer-events-none -z-10 bg-[#fbf9f9]">
-<div class="absolute top-[-15%] left-[-10%] w-[60vw] h-[60vw] rounded-full bg-primary-container/10 blur-[120px] opacity-70"></div>
-<div class="absolute bottom-[-15%] right-[-10%] w-[60vw] h-[60vw] rounded-full bg-secondary-container/10 blur-[120px] opacity-70"></div>
-</div>
-<main class="w-full max-w-[1000px] mx-auto px-margin-mobile md:px-margin-desktop py-xl flex flex-col items-center relative z-10">
-<!-- Header Section -->
-<header class="text-center mb-xl flex flex-col items-center max-w-2xl">
-<!-- Brand Logo -->
-<img alt="Vitality Logo" class="h-[100px] w-auto object-contain mb-lg drop-shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbZQwvcdC9NyUP08NheUnA4axqKETcdSmXWYmqoPzJY7ZVFwfxFkz4Vnvvc5-Xf36S95fTXRXN6MJtf9M5P2Y311mHtnBjFmPz-GOFKLSN65FC7xmy6PXUe5KUYD8FN_yHe08YjIzHMUBwALPwRYUitnqAuU8iHLiXBmWiWl7RKYOGPu_RTS8K2Mloor51JDKy5Ai-ZmWhU_nXracXLjB30WtGvNiK5i7Szxuynw3SpbK1J4yE-8qQP2JkjcFy5ykRC1Ac4QyaF6Sd"/>
-<!-- Welcome Message -->
-<h1 class="font-headline-xl text-headline-xl text-on-surface mb-sm tracking-tight">Bun venit la Vitality</h1>
-<p class="font-body-lg text-body-lg text-on-surface-variant font-light leading-relaxed">
+    
+    <div class="fixed inset-0 overflow-hidden pointer-events-none -z-10 bg-[#fbf9f9]">
+        <div class="absolute top-[-15%] left-[-10%] w-[60vw] h-[60vw] rounded-full bg-primary-container/10 blur-[120px] opacity-70"></div>
+        <div class="absolute bottom-[-15%] right-[-10%] w-[60vw] h-[60vw] rounded-full bg-secondary-container/10 blur-[120px] opacity-70"></div>
+    </div>
+    
+    <main class="w-full max-w-[1000px] mx-auto px-margin-mobile md:px-margin-desktop py-xl flex flex-col items-center relative z-10">
+        
+        <header class="text-center mb-xl flex flex-col items-center max-w-2xl">
+            <img alt="Vitality Logo" class="h-[100px] w-auto object-contain mb-lg drop-shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbZQwvcdC9NyUP08NheUnA4axqKETcdSmXWYmqoPzJY7ZVFwfxFkz4Vnvvc5-Xf36S95fTXRXN6MJtf9M5P2Y311mHtnBjFmPz-GOFKLSN65FC7xmy6PXUe5KUYD8FN_yHe08YjIzHMUBwALPwRYUitnqAuU8iHLiXBmWiWl7RKYOGPu_RTS8K2Mloor51JDKy5Ai-ZmWhU_nXracXLjB30WtGvNiK5i7Szxuynw3SpbK1J4yE-8qQP2JkjcFy5ykRC1Ac4QyaF6Sd"/>
+            <h1 class="font-headline-xl text-headline-xl text-on-surface mb-sm tracking-tight">Bun venit la Vitality</h1>
+            <p class="font-body-lg text-body-lg text-on-surface-variant font-light leading-relaxed">
                 Începe-ți călătoria spre o viață mai sănătoasă. Alege modul în care dorești să interacționezi cu platforma noastră pentru o experiență personalizată și rafinată.
             </p>
-</header>
-<!-- Role Selection Grid -->
-<div class="grid grid-cols-1 md:grid-cols-2 gap-lg w-full max-w-4xl mx-auto">
-<!-- Option 1: Client Card -->
-<button class="group relative flex flex-col text-left bg-gradient-to-br from-surface-container-lowest to-surface-container-low rounded-2xl p-lg border border-outline-variant/50 shadow-sm hover:shadow-[0_20px_40px_-15px_rgba(0,110,28,0.15)] hover:border-primary/40 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-surface transition-all duration-500 overflow-hidden min-h-[320px]" type="button">
-<!-- Soft Inner Gradient Overlay -->
-<div class="absolute inset-0 bg-gradient-to-br from-primary-container/0 to-primary-container/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
-<div class="w-[64px] h-[64px] bg-surface-container rounded-xl flex items-center justify-center mb-md group-hover:bg-primary transition-colors duration-500 shadow-sm relative z-10">
-<span class="material-symbols-outlined text-[32px] text-on-surface-variant group-hover:text-on-primary transition-colors duration-500 font-light">vital_signs</span>
-</div>
-<h2 class="font-headline-lg text-headline-lg text-on-surface mb-xs relative z-10">Sunt Client</h2>
-<p class="font-body-md text-body-md text-on-surface-variant mb-lg flex-grow relative z-10 leading-relaxed">
+        </header>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-lg w-full max-w-4xl mx-auto">
+            
+            <a href="inregistrare-client.html" class="group relative flex flex-col text-left bg-gradient-to-br from-surface-container-lowest to-surface-container-low rounded-2xl p-lg border border-outline-variant/50 shadow-sm hover:shadow-[0_20px_40px_-15px_rgba(0,110,28,0.15)] hover:border-primary/40 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-surface transition-all duration-500 overflow-hidden min-h-[320px]">
+                <div class="absolute inset-0 bg-gradient-to-br from-primary-container/0 to-primary-container/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+                <div class="w-[64px] h-[64px] bg-surface-container rounded-xl flex items-center justify-center mb-md group-hover:bg-primary transition-colors duration-500 shadow-sm relative z-10">
+                    <span class="material-symbols-outlined text-[32px] text-on-surface-variant group-hover:text-on-primary transition-colors duration-500 font-light">vital_signs</span>
+                </div>
+                <h2 class="font-headline-lg text-headline-lg text-on-surface mb-xs relative z-10">Sunt Client</h2>
+                <p class="font-body-md text-body-md text-on-surface-variant mb-lg flex-grow relative z-10 leading-relaxed">
                     Vreau să îmi monitorizez alimentația zilnică, să primesc planuri personalizate și să colaborez eficient cu un expert în sănătate pentru rezultate optime.
                 </p>
-<div class="flex items-center text-primary font-label-md text-label-md mt-auto relative z-10 uppercase tracking-wider">
-<span>Continuă ca și Client</span>
-<span class="material-symbols-outlined text-[20px] ml-xs transform group-hover:translate-x-2 transition-transform duration-500">arrow_forward</span>
-</div>
-</button>
-<!-- Option 2: Nutritionist Card -->
-<button class="group relative flex flex-col text-left bg-gradient-to-br from-surface-container-lowest to-surface-container-low rounded-2xl p-lg border border-outline-variant/50 shadow-sm hover:shadow-[0_20px_40px_-15px_rgba(139,80,0,0.15)] hover:border-secondary/40 focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2 focus:ring-offset-surface transition-all duration-500 overflow-hidden min-h-[320px]" type="button">
-<!-- Soft Inner Gradient Overlay -->
-<div class="absolute inset-0 bg-gradient-to-br from-secondary-container/0 to-secondary-container/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
-<div class="w-[64px] h-[64px] bg-surface-container rounded-xl flex items-center justify-center mb-md group-hover:bg-secondary transition-colors duration-500 shadow-sm relative z-10">
-<span class="material-symbols-outlined text-[32px] text-on-surface-variant group-hover:text-on-secondary transition-colors duration-500 font-light">medical_information</span>
-</div>
-<h2 class="font-headline-lg text-headline-lg text-on-surface mb-xs relative z-10">Sunt Nutriționist</h2>
-<p class="font-body-md text-body-md text-on-surface-variant mb-lg flex-grow relative z-10 leading-relaxed">
+                <div class="flex items-center text-primary font-label-md text-label-md mt-auto relative z-10 uppercase tracking-wider">
+                    <span>Continuă ca și Client</span>
+                    <span class="material-symbols-outlined text-[20px] ml-xs transform group-hover:translate-x-2 transition-transform duration-500">arrow_forward</span>
+                </div>
+            </a>
+            
+            <a href="inregistrare-nutritionist.html" class="group relative flex flex-col text-left bg-gradient-to-br from-surface-container-lowest to-surface-container-low rounded-2xl p-lg border border-outline-variant/50 shadow-sm hover:shadow-[0_20px_40px_-15px_rgba(139,80,0,0.15)] hover:border-secondary/40 focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2 focus:ring-offset-surface transition-all duration-500 overflow-hidden min-h-[320px]">
+                <div class="absolute inset-0 bg-gradient-to-br from-secondary-container/0 to-secondary-container/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+                <div class="w-[64px] h-[64px] bg-surface-container rounded-xl flex items-center justify-center mb-md group-hover:bg-secondary transition-colors duration-500 shadow-sm relative z-10">
+                    <span class="material-symbols-outlined text-[32px] text-on-surface-variant group-hover:text-on-secondary transition-colors duration-500 font-light">medical_information</span>
+                </div>
+                <h2 class="font-headline-lg text-headline-lg text-on-surface mb-xs relative z-10">Sunt Nutriționist</h2>
+                <p class="font-body-md text-body-md text-on-surface-variant mb-lg flex-grow relative z-10 leading-relaxed">
                     Vreau un instrument clinic precis pentru a-mi gestiona portofoliul de pacienți, a crea planuri alimentare și a urmări progresul cu acuratețe profesională.
                 </p>
-<div class="flex items-center text-secondary font-label-md text-label-md mt-auto relative z-10 uppercase tracking-wider">
-<span>Continuă ca și Expert</span>
-<span class="material-symbols-outlined text-[20px] ml-xs transform group-hover:translate-x-2 transition-transform duration-500">arrow_forward</span>
-</div>
-</button>
-</div>
-<!-- Secondary Action / Sign In -->
-<div class="mt-xl text-center">
-<p class="font-body-md text-body-md text-on-surface-variant">
+                <div class="flex items-center text-secondary font-label-md text-label-md mt-auto relative z-10 uppercase tracking-wider">
+                    <span>Continuă ca și Expert</span>
+                    <span class="material-symbols-outlined text-[20px] ml-xs transform group-hover:translate-x-2 transition-transform duration-500">arrow_forward</span>
+                </div>
+            </a>
+            
+        </div>
+        
+        <div class="mt-xl text-center">
+            <p class="font-body-md text-body-md text-on-surface-variant">
                 Ai deja un cont deschis? 
-                <a class="font-label-md text-label-md text-primary hover:text-primary-fixed-dim underline-offset-8 hover:underline focus:outline-none focus:ring-2 focus:ring-primary rounded-DEFAULT px-xs transition-colors uppercase tracking-wider ml-1" href="#">
+                <a href="index.html" class="font-label-md text-label-md text-primary hover:text-primary-fixed-dim underline-offset-8 hover:underline focus:outline-none focus:ring-2 focus:ring-primary rounded-DEFAULT px-xs transition-colors uppercase tracking-wider ml-1">
                     Conectează-te aici
                 </a>
-</p>
-</div>
-</main>
-</body></html>
+            </p>
+        </div>
+        
+    </main>
+</body>
+</html>
