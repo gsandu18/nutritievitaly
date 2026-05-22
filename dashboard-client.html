@@ -1,110 +1,118 @@
 <!DOCTYPE html>
 
-<html lang="ro"><head>
+<html class="light" lang="en"><head>
 <meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
 <title>Vitality - Dashboard</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Material Symbols -->
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
             theme: {
                 extend: {
-                    "colors": {
-                        "on-secondary-fixed": "#2c1600",
-                        "secondary-fixed": "#ffdcbe",
-                        "on-error-container": "#93000a",
-                        "on-background": "#1b1c1c",
-                        "secondary": "#8b5000",
-                        "on-secondary-container": "#653900",
-                        "on-tertiary": "#ffffff",
-                        "inverse-primary": "#78dc77",
-                        "on-tertiary-fixed-variant": "#00497d",
-                        "tertiary-container": "#33a0fe",
-                        "tertiary": "#0061a4",
-                        "surface-container": "#efeded",
-                        "tertiary-fixed": "#d1e4ff",
-                        "surface-container-lowest": "#ffffff",
-                        "surface-bright": "#fbf9f9",
-                        "surface-variant": "#e3e2e2",
-                        "surface-tint": "#006e1c",
-                        "on-tertiary-container": "#00355d",
-                        "on-primary-fixed": "#002204",
-                        "on-error": "#ffffff",
-                        "error": "#ba1a1a",
-                        "background": "#fbf9f9",
-                        "inverse-surface": "#303031",
-                        "primary": "#006e1c",
-                        "on-primary-fixed-variant": "#005313",
-                        "primary-fixed-dim": "#78dc77",
-                        "on-secondary": "#ffffff",
-                        "secondary-fixed-dim": "#ffb870",
-                        "outline-variant": "#becab9",
-                        "outline": "#6f7a6b",
-                        "inverse-on-surface": "#f2f0f0",
-                        "surface": "#fbf9f9",
+                    colors: {
                         "primary-container": "#4caf50",
-                        "on-primary": "#ffffff",
-                        "surface-dim": "#dbdad9",
-                        "on-tertiary-fixed": "#001d36",
-                        "secondary-container": "#ff9800",
-                        "primary-fixed": "#94f990",
+                        "on-primary-fixed-variant": "#005313",
+                        "secondary-fixed": "#ffdcbe",
                         "tertiary-fixed-dim": "#9ecaff",
+                        "on-primary-fixed": "#002204",
                         "on-surface-variant": "#3f4a3c",
-                        "surface-container-highest": "#e3e2e2",
-                        "on-primary-container": "#003c0b",
-                        "surface-container-low": "#f5f3f3",
+                        "on-primary": "#ffffff",
+                        "secondary-container": "#ff9800",
+                        "on-secondary": "#ffffff",
+                        "inverse-primary": "#78dc77",
+                        "primary-fixed-dim": "#78dc77",
                         "on-secondary-fixed-variant": "#693c00",
-                        "surface-container-high": "#e9e8e7",
+                        "surface-container-highest": "#e3e2e2",
+                        "secondary-fixed-dim": "#ffb870",
+                        "background": "#fbf9f9",
+                        "on-surface": "#1b1c1c",
+                        "surface-tint": "#006e1c",
+                        "surface-bright": "#fbf9f9",
+                        "inverse-surface": "#303031",
+                        "on-tertiary-fixed": "#001d36",
+                        "surface-container": "#efeded",
+                        "primary": "#006e1c",
+                        "on-error": "#ffffff",
+                        "surface-variant": "#e3e2e2",
+                        "outline-variant": "#becab9",
+                        "on-tertiary-container": "#00355d",
+                        "surface": "#fbf9f9",
+                        "outline": "#6f7a6b",
+                        "on-secondary-fixed": "#2c1600",
                         "error-container": "#ffdad6",
-                        "on-surface": "#1b1c1c"
+                        "inverse-on-surface": "#f2f0f0",
+                        "on-primary-container": "#003c0b",
+                        "on-error-container": "#93000a",
+                        "on-secondary-container": "#653900",
+                        "primary-fixed": "#94f990",
+                        "surface-container-low": "#f5f3f3",
+                        "on-background": "#1b1c1c",
+                        "surface-container-high": "#e9e8e7",
+                        "on-tertiary-fixed-variant": "#00497d",
+                        "error": "#ba1a1a",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary": "#0061a4",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-fixed": "#d1e4ff",
+                        "tertiary-container": "#33a0fe",
+                        "surface-dim": "#dbdad9",
+                        "secondary": "#8b5000"
                     },
-                    "borderRadius": {
+                    borderRadius: {
                         "DEFAULT": "0.25rem",
                         "lg": "0.5rem",
                         "xl": "0.75rem",
                         "full": "9999px"
                     },
-                    "spacing": {
+                    spacing: {
                         "lg": "40px",
-                        "md": "24px",
-                        "xl": "64px",
+                        "sm": "12px",
+                        "base": "8px",
+                        "xs": "4px",
                         "margin-mobile": "16px",
                         "margin-desktop": "48px",
                         "gutter": "16px",
-                        "base": "8px",
-                        "xs": "4px",
-                        "sm": "12px"
+                        "md": "24px",
+                        "xl": "64px"
                     },
-                    "fontFamily": {
+                    fontFamily: {
+                        "headline-xl": ["Inter"],
+                        "headline-lg": ["Inter"],
                         "label-md": ["Inter"],
+                        "body-lg": ["Inter"],
                         "headline-md": ["Inter"],
                         "body-md": ["Inter"],
                         "label-sm": ["Inter"],
-                        "headline-lg": ["Inter"],
-                        "body-lg": ["Inter"],
-                        "headline-xl": ["Inter"],
                         "headline-lg-mobile": ["Inter"]
                     },
-                    "fontSize": {
-                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600" }],
-                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
-                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
-                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
-                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
-                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
-                        "headline-xl": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
-                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "700" }]
+                    fontSize: {
+                        "headline-xl": ["40px", { lineHeight: "48px", letterSpacing: "-0.02em", fontWeight: "700" }],
+                        "headline-lg": ["32px", { lineHeight: "40px", letterSpacing: "-0.02em", fontWeight: "700" }],
+                        "label-md": ["14px", { lineHeight: "20px", letterSpacing: "0.05em", fontWeight: "600" }],
+                        "body-lg": ["18px", { lineHeight: "28px", fontWeight: "400" }],
+                        "headline-md": ["24px", { lineHeight: "32px", fontWeight: "600" }],
+                        "body-md": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+                        "label-sm": ["12px", { lineHeight: "16px", fontWeight: "500" }],
+                        "headline-lg-mobile": ["28px", { lineHeight: "36px", letterSpacing: "-0.01em", fontWeight: "700" }]
                     }
                 }
             }
         }
     </script>
-<style>
-        body { font-family: 'Inter', sans-serif; }
+<style type="text/tailwindcss">
+        @layer utilities {
+            .pb-safe { padding-bottom: env(safe-area-inset-bottom); }
+            .shadow-ambient { box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04); }
+            .shadow-ambient-hover { box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08); }
+        }
     </style>
 <style>
     body {
@@ -112,266 +120,178 @@
     }
   </style>
 </head>
-<body class="bg-surface text-on-surface min-h-screen">
+<body class="bg-background text-on-background min-h-screen pb-[80px]">
 <!-- TopAppBar -->
-<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-mobile h-16 bg-surface shadow-sm">
-<div class="flex items-center"><img alt="Bucătarul Personal" class="h-10 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTfs8rws7VAhMgxzpGlKZd_g8Gu6w78AM4FF4zPUAe5Wiedcv1SjJJbTskoKnsW8olrvh70gIr1FkpqEWAoaCI_uj-gZOMHLebvztw6Kux6DACat4xAgNN9W70tAYE9m88Hm52DLcqP9CNI0is_xPtuaxa0gk7HbCf_tGJ3qA7MqOw1w0XonKrmBHkF0nf0LMhIgMKZJxm1ba56H9qsJZCXYqR5HPSTNF7oVaqZBjEvnBe0ESK9G3aGb1-VeA3s8ZopnO8b6HDXu9h"/></div>
-<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-variant transition-colors active:scale-95 duration-150 ease-in-out">
-<span class="material-symbols-outlined text-primary text-2xl">notifications</span>
+<header class="w-full top-0 sticky z-40 bg-surface dark:bg-surface-dim shadow-sm shadow-[0px_4px_20px_0px_rgba(0,0,0,0.04)] border-b border-outline-variant/30 flex items-center justify-between px-margin-mobile md:px-margin-desktop h-16 w-full">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed-dim" style="font-variation-settings: 'FILL' 1;">nutrition</span>
+<img alt="Vitality Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB5ZkWUV28LGXyZpJueJouQUixQIXV7XEVrfHvJXwEELYGK3mo8ta6x_VPrVN-siJE19y31RdGlO8DkEH45-SpYqn0lLahiR5Ka9AQE9RDjc4BmlEz3DHKZDT8DbZiqnRuHfiKi8IKN5oGfPOrhjwbryUgy5cYOipoxipQhoMbSqpvtxY0k5A2AF4YklclKCGeKnAIyiep1BmwyYy-gKz99Zbripf1Al8YmTILQ_fydT6KZjuv9tsFiRtKjZw6F0hxp4s3OM-ywP56N"/>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant hover:bg-surface-container-high transition-colors p-2 rounded-full cursor-pointer active:scale-95 transition-transform">
+<span class="material-symbols-outlined">notifications</span>
 </button>
+<div class="w-8 h-8 rounded-full bg-surface-container-highest overflow-hidden cursor-pointer active:scale-95 transition-transform border border-outline-variant/30">
+<img alt="User Avatar" class="w-full h-full object-cover" data-alt="A close-up portrait of a professional looking individual with a warm smile, set against a bright, modern, minimalist background. The lighting is soft and flattering, highlighting health and vitality, fitting a luxury wellness aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCIcIZRZaYImaEddYWknQuS5GPrXHKgI4ID8AHAtb7rHO9tDpqxDfVvbw0ycg_q1Mqm0KQ9cCxcDt6eHEiCYyFukT0nv0Jl8FlpdfbYJURMcDokFBm1EfmbaoTWKopWucVoZH5O1wejh2XD1s3opIRKiUWW4nJWHpLp0MVytkITXj6qvN6-xjkRW0emh-DnilK0mKtU7unGUGKVJZvUW2as17cSjgH8Z6HKbhvPanIOCV26m0d7GwITL9dPI_JY3SiYoTchGT-lhr4D"/>
+</div>
+</div>
 </header>
-<!-- Main Canvas -->
-<main class="pt-[80px] pb-[100px] px-margin-mobile md:px-margin-desktop max-w-7xl mx-auto flex flex-col gap-md">
-<!-- Greeting -->
-<section class="py-sm">
-<h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface">Salut, Andrei!</h2>
-<p class="font-body-md text-body-md text-on-surface-variant mt-xs">Iată rezumatul tău pentru astăzi.</p>
-</section><section class="bg-surface-container-low border border-outline-variant rounded-xl p-md flex flex-wrap items-center justify-between mb-sm">
-<div class="flex items-center gap-sm w-full">
-<div class="w-12 h-12 bg-primary-container rounded-full flex items-center justify-center">
-<span class="material-symbols-outlined text-on-primary-container text-2xl">stars</span>
+<main class="p-margin-mobile md:p-margin-desktop space-y-md">
+<!-- Loyalty Card -->
+<section class="bg-surface-container-lowest rounded-xl p-md shadow-ambient border border-outline-variant/30 relative overflow-hidden">
+<div class="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-bl-full -mr-4 -mt-4"></div>
+<div class="relative z-10">
+<div class="flex justify-between items-start mb-sm">
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase">SOLD CURENT</p>
+<p class="font-headline-md text-headline-md text-primary mt-1">1,250 <span class="font-body-md text-body-md text-on-surface-variant">Pct</span></p>
 </div>
-<div class="flex flex-col">
-<span class="font-headline-md text-primary">1,250 Puncte Vitality</span>
-<span class="font-label-sm text-on-surface-variant">Programul de Loialitate</span>
+<div class="bg-surface-container text-on-surface px-3 py-1 rounded-full flex items-center gap-1 border border-outline-variant/50">
+<span class="material-symbols-outlined text-[16px] text-outline">workspace_premium</span>
+<span class="font-label-sm text-label-sm">Silver</span>
 </div>
 </div>
-<div class="bg-surface-container-highest px-sm py-xs rounded-full flex items-center gap-xs mt-xs">
-<span class="material-symbols-outlined text-sm text-secondary">military_tech</span>
-<span class="font-label-md text-on-surface-variant">Nivel Silver</span>
+<div class="mt-4">
+<div class="flex justify-between font-label-sm text-label-sm text-on-surface-variant mb-2">
+<span>Progres către Gold</span>
+<span>750 rămași</span>
 </div>
-<div class="w-full flex flex-col gap-xs mt-md border-t border-outline-variant pt-md">
-<div class="flex justify-between items-center mb-1">
-<span class="font-label-sm text-on-surface-variant">Progres Nivel Gold</span>
-<span class="font-label-sm text-outline">83%</span>
+<div class="h-2 w-full bg-surface-variant rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full transition-all duration-1000" style="width: 62.5%"></div>
 </div>
-<div class="w-full h-2 bg-surface-variant rounded-full overflow-hidden">
-<div class="h-full bg-primary w-[83%] rounded-full"></div>
 </div>
-<p class="font-label-sm text-on-surface-variant mt-1 text-right">250 puncte pnă la Gold</p>
-</div></section><section class="border rounded-xl p-md flex flex-col md:flex-row items-center justify-between gap-md mb-md bg-surface-container-low border-outline-variant">
-<div class="flex flex-col gap-xs">
-<div class="flex items-center gap-xs">
-<img alt="Logo" class="h-6 w-auto object-contain mr-1" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTfs8rws7VAhMgxzpGlKZd_g8Gu6w78AM4FF4zPUAe5Wiedcv1SjJJbTskoKnsW8olrvh70gIr1FkpqEWAoaCI_uj-gZOMHLebvztw6Kux6DACat4xAgNN9W70tAYE9m88Hm52DLcqP9CNI0is_xPtuaxa0gk7HbCf_tGJ3qA7MqOw1w0XonKrmBHkF0nf0LMhIgMKZJxm1ba56H9qsJZCXYqR5HPSTNF7oVaqZBjEvnBe0ESK9G3aGb1-VeA3s8ZopnO8b6HDXu9h"/>
-<h3 class="font-headline-md text-headline-md text-on-secondary-container">Parteneriat cu bucatarulpersonal.ro</h3>
 </div>
-<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl">
-            Vrei să mănânci sănătos fără efort? Descoperă bucătari personali care îți pot pregăti mesele conform planului tău nutrițional Vitality.
-        </p>
-</div>
-<button class="bg-primary text-on-primary px-xl py-base rounded-full font-label-md hover:bg-primary/90 transition-colors whitespace-nowrap">
-        Descoperă acum
-    </button>
 </section>
-<!-- Bento Grid Layout -->
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-md">
-<!-- Calorie Progress Card (Large) -->
-<article class="bg-surface-container-lowest rounded-xl shadow-lg p-lg border border-surface-container-highest flex flex-col items-center justify-center md:col-span-2 lg:col-span-1 min-h-[320px]">
-<h3 class="font-label-md text-label-md text-outline mb-md w-full text-left uppercase">Progres Caloric</h3>
-<!-- Circular Progress Visual Simulation -->
-<div class="relative w-48 h-48 rounded-full bg-surface-container-high flex items-center justify-center shadow-inner overflow-hidden">
-<!-- Fake Progress Arc using split background -->
-<div class="absolute inset-0 bg-primary/20"></div>
-<div class="absolute bottom-0 left-0 right-0 h-[65%] bg-primary"></div>
-<div class="absolute inset-3 rounded-full bg-surface-container-lowest flex flex-col items-center justify-center shadow-sm z-10">
-<span class="font-headline-xl text-headline-xl text-primary">1540</span>
-<span class="font-label-sm text-label-sm text-on-surface-variant mt-1">kcal consumate</span>
-<div class="h-[1px] w-12 bg-surface-variant my-2"></div>
-<span class="font-label-sm text-label-sm text-outline">din 2200 kcal</span>
+<!-- Nutrition Overview (Bento) -->
+<section class="grid grid-cols-2 gap-sm">
+<!-- Calorie Gauge Card -->
+<div class="col-span-2 bg-surface-container-lowest rounded-xl p-md shadow-ambient border border-outline-variant/30 flex flex-col items-center justify-center relative min-h-[200px]">
+<p class="font-label-md text-label-md text-on-surface-variant mb-4 self-start absolute top-4 left-4">Nutriție Zilnică</p>
+<!-- SVG Gauge -->
+<div class="relative w-40 h-40 mt-4 flex items-center justify-center">
+<svg class="w-full h-full transform -rotate-90" viewbox="0 0 100 100">
+<circle class="text-surface-variant" cx="50" cy="50" fill="none" r="45" stroke="currentColor" stroke-width="8"></circle>
+<circle class="text-primary-container" cx="50" cy="50" fill="none" r="45" stroke="currentColor" stroke-dasharray="282.7" stroke-dashoffset="84.8" stroke-width="8"></circle>
+</svg>
+<div class="absolute flex flex-col items-center">
+<span class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">1,540</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant border-t border-outline-variant/50 pt-1 mt-1">/ 2,200 kcal</span>
 </div>
 </div>
-<p class="font-body-md text-body-md text-on-surface-variant mt-md text-center">Mai ai <strong class="text-on-surface">660 kcal</strong> disponibile astăzi.</p>
-</article>
-<!-- Secondary Column Container -->
-<div class="flex flex-col gap-md lg:col-span-2">
-<!-- Macronutrients (3 small indicators) -->
-<article class="bg-surface-container-lowest rounded-xl shadow-sm p-md border border-surface-container-highest">
-<h3 class="font-label-md text-label-md text-outline mb-sm uppercase">Macronutrienți</h3>
-<div class="grid grid-cols-3 gap-sm">
-<!-- Protein Chip -->
-<div class="bg-[#e8f5e9] rounded-xl p-sm flex flex-col items-center justify-center border border-[#c8e6c9]">
-<span class="font-label-sm text-label-sm text-[#2e7d32] uppercase tracking-wider mb-1">Proteine</span>
-<span class="font-headline-md text-headline-md text-[#1b5e20]">85g</span>
-<div class="w-full h-1 bg-[#c8e6c9] rounded-full mt-2 overflow-hidden">
-<div class="h-full bg-[#4caf50] w-[70%] rounded-full"></div>
+<p class="font-body-md text-body-md text-primary mt-4 font-medium"><div class="flex flex-col items-center gap-1 group cursor-pointer active:scale-95 transition-transform">
+<span class="text-primary font-medium animate-pulse">660 kcal rămase</span>
+<span class="text-[10px] uppercase tracking-widest text-outline opacity-60 group-hover:opacity-100 transition-opacity">APASĂ PENTRU ÎNREGISTRARE MASĂ</span>
+</div></p>
+</div>
+<!-- Macros -->
+<div class="bg-surface-container-lowest rounded-xl p-4 shadow-ambient border border-outline-variant/30 flex flex-col relative overflow-hidden cursor-pointer active:shadow-md transition-shadow">
+<div class="absolute bottom-0 left-0 w-full h-1 bg-[#ff5252]"></div>
+<div class="flex items-center gap-2 mb-2">
+<span class="w-3 h-3 rounded-full bg-[#ff5252]"></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Proteine</span>
+</div>
+<span class="font-headline-md text-headline-md text-on-surface">85g</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant mt-1">112g obiectiv</span>
+<div class="mt-3 h-1.5 w-full bg-surface-variant rounded-full overflow-hidden">
+<div class="h-full bg-[#ff5252] rounded-full transition-all duration-700" style="width: 76%"></div>
+</div></div>
+<div class="bg-surface-container-lowest rounded-xl p-4 shadow-ambient border border-outline-variant/30 flex flex-col relative overflow-hidden cursor-pointer active:shadow-md transition-shadow">
+<div class="absolute bottom-0 left-0 w-full h-1 bg-[#448aff]"></div>
+<div class="flex items-center gap-2 mb-2">
+<span class="w-3 h-3 rounded-full bg-[#448aff]"></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Carbohidrați</span>
+</div>
+<span class="font-headline-md text-headline-md text-on-surface">120g</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant mt-1">200g obiectiv</span>
+<div class="mt-3 h-1.5 w-full bg-surface-variant rounded-full overflow-hidden">
+<div class="h-full bg-[#448aff] rounded-full transition-all duration-700" style="width: 60%"></div>
+</div></div>
+<div class="col-span-2 bg-surface-container-lowest rounded-xl p-4 shadow-ambient border border-outline-variant/30 flex justify-between items-center relative overflow-hidden cursor-pointer active:shadow-md transition-shadow">
+<div class="absolute bottom-0 left-0 w-full h-1 bg-[#ffb300]"></div>
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-[#ffb300]"></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Grăsimi</span>
+</div>
+<div class="text-right">
+<span class="font-headline-md text-headline-md text-on-surface">42g</span><div class="mt-2 h-1.5 w-32 bg-surface-variant rounded-full overflow-hidden ml-auto">
+<div class="h-full bg-[#ffb300] rounded-full transition-all duration-700" style="width: 70%"></div>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant ml-2">/ 60g obiectiv</span>
+</div>
+<div class="mt-auto pt-2 flex items-center justify-end group cursor-pointer">
+<span class="font-label-sm text-label-sm text-primary group-hover:underline">Vezi Detalii</span>
+<span class="material-symbols-outlined text-primary text-[14px] ml-0.5 group-hover:translate-x-0.5 transition-transform">arrow_forward</span>
+</div></div>
+</section>
+<!-- Wellness Quick Stats -->
+<section class="grid grid-cols-2 gap-sm">
+<div class="bg-surface-container-lowest rounded-xl p-4 shadow-ambient border border-outline-variant/30 cursor-pointer active:shadow-md transition-shadow">
+<div class="flex items-center justify-between mb-2">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Hidratare</span>
+<span class="material-symbols-outlined text-tertiary-container text-[20px]">water_drop</span>
+</div>
+<div class="flex items-end gap-1 mt-2">
+<span class="font-headline-md text-headline-md text-on-surface">1.2</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant mb-1">Hidratare</span>
+</div>
+<div class="flex gap-1 mt-3">
+<div class="h-8 w-1/4 bg-tertiary-container rounded-sm"></div>
+<div class="h-8 w-1/4 bg-tertiary-container rounded-sm"></div>
+<div class="h-8 w-1/4 bg-tertiary-container/30 rounded-sm"></div>
+<div class="h-8 w-1/4 bg-tertiary-container/30 rounded-sm"></div>
 </div>
 </div>
-<!-- Carbs Chip -->
-<div class="bg-[#fff3e0] rounded-xl p-sm flex flex-col items-center justify-center border border-[#ffe0b2]">
-<span class="font-label-sm text-label-sm text-[#e65100] uppercase tracking-wider mb-1">Carbohidrați</span>
-<span class="font-headline-md text-headline-md text-[#e65100]">120g</span>
-<div class="w-full h-1 bg-[#ffe0b2] rounded-full mt-2 overflow-hidden">
-<div class="h-full bg-[#ff9800] w-[45%] rounded-full"></div>
+<div class="bg-surface-container-lowest rounded-xl p-4 shadow-ambient border border-outline-variant/30 flex flex-col justify-between cursor-pointer active:shadow-md transition-shadow">
+<div class="flex items-center justify-between mb-2">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Activitate</span>
+<span class="material-symbols-outlined text-secondary-container text-[20px]">directions_walk</span>
 </div>
+<div>
+<div class="flex items-end gap-1 mt-2">
+<span class="font-headline-md text-headline-md text-on-surface">6,430</span>
 </div>
-<!-- Fats Chip -->
-<div class="bg-[#e3f2fd] rounded-xl p-sm flex flex-col items-center justify-center border border-[#bbdefb]">
-<span class="font-label-sm text-label-sm text-[#1565c0] uppercase tracking-wider mb-1">Grăsimi</span>
-<span class="font-headline-md text-headline-md text-[#0d47a1]">42g</span>
-<div class="w-full h-1 bg-[#bbdefb] rounded-full mt-2 overflow-hidden">
-<div class="h-full bg-[#2196f3] w-[60%] rounded-full"></div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">pași</span>
 </div>
+<div class="h-2 w-full bg-surface-variant rounded-full overflow-hidden mt-3">
+<div class="h-full bg-secondary-container rounded-full" style="width: 64%"></div>
 </div>
+<div class="mt-3 h-1.5 w-full bg-surface-variant rounded-full overflow-hidden">
+<div class="h-full bg-[#ff5252] rounded-full transition-all duration-700" style="width: 76%"></div>
+</div></div>
+</section>
+<!-- Partnership Banner -->
+<section class="relative bg-surface-container-lowest rounded-xl overflow-hidden shadow-ambient border border-outline-variant/30 group">
+<div class="absolute inset-0 z-0">
+<img alt="Healthy Food" class="w-full h-full object-cover opacity-80" data-alt="A beautifully styled, top-down shot of a vibrant, healthy meal bowl featuring fresh greens, quinoa, and perfectly grilled salmon. The scene is brightly lit with natural, soft sunlight reflecting a clean, modern lifestyle aesthetic. The colors are rich and saturated, emphasizing freshness and high quality, matching a luxury health brand visual style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAV8GVIAK309vYQnLji-AhZShu6SQku_QBm2yxCUN3J5h7Xt58MGiHIr0KWDmEWXhtqqcHH6OraNJlzixt5DIzLJYROkScSQe35i42G7AF-Wkdtop74DVoubqp06kVga4OLUCpgaEWKLd7gAafzCf80VMr5dWzBogpNyM2Ngkz_bHIxrpHRguwHAtbcUjw4zDSUDK6F9PAb3V0sceYq9lDrrB2l5ERRFaPeL4Tis8sS0z7XbHKAkaeN2pqydBXYI4fFU4nq3Op8mRZB"/>
+<div class="absolute inset-0 bg-gradient-to-r from-surface via-surface/90 to-surface/20"></div>
 </div>
-</article>
-<!-- Bottom Row: Hydration & Steps -->
-<div class="grid grid-cols-1 md:grid-cols-2 gap-md flex-grow">
-<!-- Hydration Widget -->
-<article class="bg-surface-container-lowest rounded-xl shadow-sm p-md border border-surface-container-highest flex flex-col justify-between">
-<div class="flex justify-between items-start mb-sm">
-<h3 class="font-label-md text-label-md text-outline uppercase">Hidratare</h3>
-<span class="material-symbols-outlined text-tertiary">water_drop</span>
+<div class="relative z-10 p-md h-full flex flex-col justify-center">
+<span class="inline-block bg-primary text-on-primary font-label-sm text-label-sm px-2 py-1 rounded mb-3 self-start uppercase tracking-wider">EXCLUSIV</span>
+<h3 class="font-headline-md text-headline-md text-on-surface max-w-[200px] mb-2 leading-tight">Ridică-ți nutriția la următorul nivel.</h3>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-[220px] mb-4">Rezervă un bucătar personal adaptat macronutrienților tăi.</p>
+<button class="bg-on-surface text-surface font-label-md text-label-md px-4 py-2 rounded-lg self-start flex items-center gap-2 hover:bg-surface-tint hover:text-on-primary transition-colors">Explorează Bucătari <span class="material-symbols-outlined text-[18px]">arrow_forward</span></button>
 </div>
-<div class="flex items-center gap-2 mb-sm">
-<span class="font-headline-lg text-headline-lg text-tertiary">1.2</span>
-<span class="font-body-md text-body-md text-on-surface-variant self-end pb-1">Litri</span>
-</div>
-<div class="flex gap-1 justify-between mt-auto">
-<!-- Filled glasses -->
-<div class="flex-1 h-12 bg-tertiary-container rounded-lg flex items-center justify-center">
-<span class="material-symbols-outlined text-on-tertiary-container" style="font-variation-settings: 'FILL' 1;">water_drop</span>
-</div>
-<div class="flex-1 h-12 bg-tertiary-container rounded-lg flex items-center justify-center">
-<span class="material-symbols-outlined text-on-tertiary-container" style="font-variation-settings: 'FILL' 1;">water_drop</span>
-</div>
-<div class="flex-1 h-12 bg-tertiary-container rounded-lg flex items-center justify-center">
-<span class="material-symbols-outlined text-on-tertiary-container" style="font-variation-settings: 'FILL' 1;">water_drop</span>
-</div>
-<!-- Empty glasses -->
-<div class="flex-1 h-12 bg-surface-container-high rounded-lg flex items-center justify-center border border-surface-variant">
-<span class="material-symbols-outlined text-outline">water_drop</span>
-</div>
-<div class="flex-1 h-12 bg-surface-container-high rounded-lg flex items-center justify-center border border-surface-variant">
-<span class="material-symbols-outlined text-outline">water_drop</span>
-</div>
-</div>
-</article>
-<!-- Steps Summary -->
-<article class="bg-surface-container-lowest rounded-xl shadow-sm p-md border border-surface-container-highest flex flex-col justify-between">
-<div class="flex justify-between items-start mb-sm">
-<h3 class="font-label-md text-label-md text-outline uppercase">Activitate</h3>
-<span class="material-symbols-outlined text-secondary">directions_walk</span>
-</div>
-<div class="flex items-center gap-2 mb-sm">
-<span class="font-headline-lg text-headline-lg text-on-surface">6,430</span>
-<span class="font-body-md text-body-md text-on-surface-variant self-end pb-1">pași</span>
-</div>
-<div class="mt-auto">
-<div class="flex justify-between text-label-sm text-outline mb-1">
-<span>Progres zilnic</span>
-<span>10,000</span>
-</div>
-<div class="w-full h-2 bg-surface-variant rounded-full overflow-hidden">
-<div class="h-full bg-secondary w-[64%] rounded-full"></div>
-</div>
-</div>
-</article>
-</div>
-</div>
-</div>
+</section>
+<!-- Spacer for nav -->
+<div class="h-4"></div>
 </main>
 <!-- BottomNavBar -->
-<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-2 bg-surface shadow-[0_-4px_20px_0_rgba(0,0,0,0.04)] rounded-t-xl md:hidden">
-<!-- Active: Dashboard -->
-<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 active:scale-90 duration-200" href="#">
-<span class="material-symbols-outlined mb-xs" style="font-variation-settings: 'FILL' 1;">dashboard</span>
-<span class="font-label-sm text-label-sm">Dashboard</span>
-</a>
-<!-- Inactive: Jurnal -->
-<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant transition-all rounded-lg px-3 py-1 active:scale-90 duration-200" href="#">
-<span class="material-symbols-outlined mb-xs">description</span>
-<span class="font-label-sm text-label-sm">Jurnal</span>
-</a>
-<!-- Inactive: Plan -->
-<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant transition-all rounded-lg px-3 py-1 active:scale-90 duration-200" href="#">
-<span class="material-symbols-outlined mb-xs">restaurant_menu</span>
-<span class="font-label-sm text-label-sm">Plan</span>
-</a>
-<!-- Inactive: Profil -->
-<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant transition-all rounded-lg px-3 py-1 active:scale-90 duration-200" href="#">
-<span class="material-symbols-outlined mb-xs">person</span>
-<span class="font-label-sm text-label-sm">Profil</span>
-</a>
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center py-2 px-4 pb-safe bg-surface dark:bg-surface-container-low border-t border-outline-variant/20 shadow-[0px_-4px_20px_0px_rgba(0,0,0,0.04)] z-50">
+<button class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 tap-highlight-transparent active:scale-90 transition-all">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="font-label-sm text-label-sm mt-1">Acasă</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-highest transition-all px-4 py-1 rounded-full tap-highlight-transparent active:scale-90">
+<span class="material-symbols-outlined">restaurant</span>
+<span class="font-label-sm text-label-sm mt-1">Mese</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-highest transition-all px-4 py-1 rounded-full tap-highlight-transparent active:scale-90">
+<span class="material-symbols-outlined">insights</span>
+<span class="font-label-sm text-label-sm mt-1">Analiză</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-highest transition-all px-4 py-1 rounded-full tap-highlight-transparent active:scale-90">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-sm text-label-sm mt-1">Profil</span>
+</button>
 </nav>
-<!-- Desktop Nav Fallback (Optional, since mobile-first is standard, but good for completeness based on JSON rules) -->
-<nav class="hidden md:flex fixed top-0 left-0 w-full h-16 z-40 items-center justify-center gap-xl bg-surface/80 backdrop-blur-md border-b border-surface-variant pt-16 mt-1">
-<a class="font-label-md text-label-md text-primary border-b-2 border-primary py-4" href="#">Dashboard</a>
-<a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface py-4" href="#">Jurnal</a>
-<a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface py-4" href="#">Plan</a>
-<a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface py-4" href="#">Profil</a>
-</nav><script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
-        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-analytics.js";
-        import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
-        import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
-
-        const firebaseConfig = {
-            apiKey: "AIzaSyDmKC06ObRWWvod2TYJUvEM-ULKrztw7Ts",
-            authDomain: "app-vitality.firebaseapp.com",
-            projectId: "app-vitality",
-            storageBucket: "app-vitality.firebasestorage.app",
-            messagingSenderId: "360982822240",
-            appId: "1:360982822240:web:a650b9289aabd9de80f205",
-            measurementId: "G-T8D7CTP5ZK"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const analytics = getAnalytics(app);
-        const auth = getAuth(app);
-        const db = getFirestore(app);
-
-        const loginForm = document.getElementById('login-form');
-        const emailInput = document.getElementById('email');
-        const passwordInput = document.getElementById('password');
-
-        loginForm.addEventListener('submit', (e) => {
-            e.preventDefault(); 
-
-            const email = emailInput.value;
-            const password = passwordInput.value;
-
-            signInWithEmailAndPassword(auth, email, password)
-                .then(async (userCredential) => {
-                    const user = userCredential.user;
-                    
-                    try {
-                        // Cautăm în colecția "User"
-                        const userDocRef = doc(db, "User", user.uid);
-                        const userDocSnap = await getDoc(userDocRef);
-
-                        if (userDocSnap.exists()) {
-                            const userData = userDocSnap.data();
-                            
-                            // PLASA DE SIGURANȚĂ: Preluăm rolul, tăiem spațiile din margini și facem totul litere mici
-                            const rolBrut = userData.rol || "";
-                            const rolCuratat = rolBrut.trim().toLowerCase();
-
-                            // Verificăm rolul curățat
-                            if (rolCuratat === 'nutritionist') {
-                                window.location.href = "dashboard-nutritionist.html"; 
-                            } else if (rolCuratat === 'client') {
-                                window.location.href = "dashboard-client.html";
-                            } else {
-                                // Dacă tot dă eroare, ne va arăta exact ce a găsit în baza de date
-                                alert("Eroare: În baza de date scrie exact [" + rolBrut + "]. Asigură-te că nu ai pus ghilimele!");
-                            }
-                        } else {
-                            alert("Contul există, dar nu s-au găsit detalii despre rol în baza de date.");
-                        }
-
-                    } catch (dbError) {
-                        console.error("Eroare la citirea rolului:", dbError);
-                        alert("Eroare la conexiunea cu baza de date.");
-                    }
-                })
-                .catch((error) => {
-                    const errorCode = error.code;
-                    if (errorCode === 'auth/invalid-credential') {
-                        alert("Email sau parolă incorecte. Te rugăm să încerci din nou.");
-                    } else {
-                        alert("A apărut o eroare: " + error.message);
-                    }
-                });
-        });
-    </script>        
 </body></html>
