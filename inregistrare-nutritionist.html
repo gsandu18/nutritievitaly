@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html lang="ro"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Vitality Professional - Înregistrare</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
+<html lang="ro">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Vitality Professional - Înregistrare</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
             theme: {
@@ -101,105 +102,113 @@
             }
         }
     </script>
-<style>
+    <style>
         .custom-shadow {
             box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.04);
         }
+        body {
+            min-height: max(884px, 100dvh);
+        }
     </style>
-<style>
-    body {
-      min-height: max(884px, 100dvh);
-    }
-  </style>
-  </head>
+</head>
 <body class="bg-background text-on-background font-body-md min-h-screen flex flex-col md:flex-row antialiased">
-<div class="hidden md:flex md:w-1/2 lg:w-[45%] relative bg-surface-container-highest overflow-hidden items-center justify-center">
-<div class="absolute inset-0 bg-primary/10 z-10"></div>
-<img alt="Nutritionist Professional" class="absolute inset-0 w-full h-full object-cover z-0" data-alt="A professional female nutritionist in a modern, brightly lit clinical office, wearing a crisp white coat. She is holding a digital tablet and smiling warmly at the camera. The setting features high-key lighting, clean minimalist lines, and subtle vibrant green plant accents in the background, conveying a sense of vitality, professional reliability, and modern healthcare." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCe2DisCYzhiG2ri6XL1cVs-W6S02e5eaujnWo4SFlEtptbWqcEcghT473JBbETp5nB2KKTDsTzD0OIG4BpgSnnPOlCHMbIIgo2vdJcavqRHMlyWNBqfHIzuKSu5RXYttZuBCZBXWPc1fCL6S8A7FHiTrtk1_MfDxA0wZR_OANJRUkGbGcmGGhtGBnB7mr3E4K6fdlrYZ6en4U6rMpxxK7xKQQrn5CrDLXtMXKk7FZzSfo55zZrP76oelk2RnXBNJEfKg9pxWroKuWw"/>
-<div class="relative z-20 p-margin-desktop text-center flex flex-col items-center">
-<div class="bg-surface-container-lowest/80 backdrop-blur-md p-lg rounded-xl shadow-lg border border-outline-variant/30">
-<div class="flex items-center justify-center gap-2 mb-sm text-primary">
-<span class="material-symbols-outlined" style="font-size: 40px; font-variation-settings: 'FILL' 1;">eco</span>
-<h1 class="font-headline-xl text-headline-xl text-primary tracking-tight">Vitality</h1>
-</div>
-<h2 class="font-headline-md text-headline-md text-on-surface mb-xs">Portal Profesional</h2>
-<p class="font-body-md text-body-md text-on-surface-variant max-w-sm">Alătură-te rețelei noastre de experți în nutriție și gestionează-ți clienții cu eficiență clinică.</p>
-</div>
-</div>
-</div>
-<div class="flex-1 flex flex-col items-center justify-center p-margin-mobile md:p-margin-desktop bg-background overflow-y-auto">
-<div class="w-full max-w-[480px]">
-<div class="md:hidden flex flex-col items-center mb-lg">
-<div class="flex items-center gap-2 text-primary mb-xs">
-<span class="material-symbols-outlined" style="font-size: 32px; font-variation-settings: 'FILL' 1;">eco</span>
-<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary">Vitality</h1>
-</div>
-<h2 class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest">Professional</h2>
-</div>
-<div class="mb-lg text-left">
-<h2 class="font-headline-lg text-headline-lg text-on-surface mb-xs">Creează Cont Nou</h2>
-<p class="font-body-md text-body-md text-on-surface-variant">Completează detaliile de mai jos pentru a solicita accesul în platformă.</p>
-</div>
-<form id="register-form" class="space-y-md bg-surface-container-lowest p-md md:p-lg rounded-xl custom-shadow border border-outline-variant/20">
-<div>
-<label class="block font-label-md text-label-md text-on-surface-variant mb-xs" for="fullName">Nume Complet</label>
-<input class="w-full bg-surface-container-low border-2 border-transparent focus:bg-surface-container-lowest focus:border-primary rounded-lg px-4 py-3 outline-none transition-colors font-body-md text-on-surface placeholder:text-outline-variant" id="fullName" placeholder="ex: Dr. Maria Ionescu" type="text" required/>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
-<div>
-<label class="block font-label-md text-label-md text-on-surface-variant mb-xs" for="specialization">Specializare</label>
-<input class="w-full bg-surface-container-low border-2 border-transparent focus:bg-surface-container-lowest focus:border-primary rounded-lg px-4 py-3 outline-none transition-colors font-body-md text-on-surface placeholder:text-outline-variant" id="specialization" placeholder="ex: Nutriție Sportivă" type="text" required/>
-</div>
-<div>
-<label class="block font-label-md text-label-md text-on-surface-variant mb-xs" for="accreditation">Număr Acreditare</label>
-<input class="w-full bg-surface-container-low border-2 border-transparent focus:bg-surface-container-lowest focus:border-primary rounded-lg px-4 py-3 outline-none transition-colors font-body-md text-on-surface placeholder:text-outline-variant" id="accreditation" placeholder="ex: 12345678" type="text" required/>
-</div>
-</div>
-<div>
-<label class="block font-label-md text-label-md text-on-surface-variant mb-xs" for="clinic">Clinică/Cabinet</label>
-<input class="w-full bg-surface-container-low border-2 border-transparent focus:bg-surface-container-lowest focus:border-primary rounded-lg px-4 py-3 outline-none transition-colors font-body-md text-on-surface placeholder:text-outline-variant" id="clinic" placeholder="ex: Clinica de Nutriție Vital" type="text" required/>
-</div>
-<div>
-<label class="block font-label-md text-label-md text-on-surface-variant mb-xs" for="email">Email Profesional</label>
-<input class="w-full bg-surface-container-low border-2 border-transparent focus:bg-surface-container-lowest focus:border-primary rounded-lg px-4 py-3 outline-none transition-colors font-body-md text-on-surface placeholder:text-outline-variant" id="email" placeholder="maria.ionescu@clinica.ro" type="email" required/>
-</div>
-<div>
-<label class="block font-label-md text-label-md text-on-surface-variant mb-xs" for="password">Parolă</label>
-<div class="relative">
-<input class="w-full bg-surface-container-low border-2 border-transparent focus:bg-surface-container-lowest focus:border-primary rounded-lg pl-4 pr-12 py-3 outline-none transition-colors font-body-md text-on-surface placeholder:text-outline-variant" id="password" placeholder="••••••••" type="password" required/>
-<button class="absolute right-4 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-primary transition-colors" type="button">
-<span class="material-symbols-outlined">visibility</span>
-</button>
-</div>
-<p class="font-label-sm text-label-sm text-outline mt-xs">Minim 6 caractere.</p>
-</div>
-<div class="pt-sm">
-<label class="flex items-start gap-sm cursor-pointer group">
-<div class="relative flex items-center justify-center mt-1">
-<input class="peer appearance-none w-5 h-5 border-2 border-outline rounded bg-surface-container-lowest checked:bg-primary checked:border-primary transition-colors cursor-pointer" type="checkbox" required/>
-<span class="material-symbols-outlined absolute text-on-primary opacity-0 peer-checked:opacity-100 pointer-events-none text-[16px] font-bold">check</span>
-</div>
-<span class="font-body-md text-body-md text-on-surface-variant">
+    <div class="hidden md:flex md:w-1/2 lg:w-[45%] relative bg-surface-container-highest overflow-hidden items-center justify-center">
+        <div class="absolute inset-0 bg-primary/10 z-10"></div>
+        <img alt="Nutritionist Professional" class="absolute inset-0 w-full h-full object-cover z-0" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCe2DisCYzhiG2ri6XL1cVs-W6S02e5eaujnWo4SFlEtptbWqcEcghT473JBbETp5nB2KKTDsTzD0OIG4BpgSnnPOlCHMbIIgo2vdJcavqRHMlyWNBqfHIzuKSu5RXYttZuBCZBXWPc1fCL6S8A7FHiTrtk1_MfDxA0wZR_OANJRUkGbGcmGGhtGBnB7mr3E4K6fdlrYZ6en4U6rMpxxK7xKQQrn5CrDLXtMXKk7FZzSfo55zZrP76oelk2RnXBNJEfKg9pxWroKuWw"/>
+        <div class="relative z-20 p-margin-desktop text-center flex flex-col items-center">
+            <div class="bg-surface-container-lowest/80 backdrop-blur-md p-lg rounded-xl shadow-lg border border-outline-variant/30">
+                <div class="flex items-center justify-center gap-2 mb-sm text-primary">
+                    <span class="material-symbols-outlined" style="font-size: 40px; font-variation-settings: 'FILL' 1;">eco</span>
+                    <h1 class="font-headline-xl text-headline-xl text-primary tracking-tight">Vitality</h1>
+                </div>
+                <h2 class="font-headline-md text-headline-md text-on-surface mb-xs">Portal Profesional</h2>
+                <p class="font-body-md text-body-md text-on-surface-variant max-w-sm">Alătură-te rețelei noastre de experți în nutriție și gestionează-ți clienții cu eficiență clinică.</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="flex-1 flex flex-col items-center justify-center p-margin-mobile md:p-margin-desktop bg-background overflow-y-auto">
+        <div class="w-full max-w-[480px]">
+            <div class="md:hidden flex flex-col items-center mb-lg">
+                <div class="flex items-center gap-2 text-primary mb-xs">
+                    <span class="material-symbols-outlined" style="font-size: 32px; font-variation-settings: 'FILL' 1;">eco</span>
+                    <h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary">Vitality</h1>
+                </div>
+                <h2 class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest">Professional</h2>
+            </div>
+            
+            <div class="mb-lg text-left">
+                <h2 class="font-headline-lg text-headline-lg text-on-surface mb-xs">Creează Cont Nou</h2>
+                <p class="font-body-md text-body-md text-on-surface-variant">Completează detaliile de mai jos pentru a solicita accesul în platformă.</p>
+            </div>
+            
+            <form id="register-form" class="space-y-md bg-surface-container-lowest p-md md:p-lg rounded-xl custom-shadow border border-outline-variant/20">
+                <div>
+                    <label class="block font-label-md text-label-md text-on-surface-variant mb-xs" for="fullName">Nume Complet</label>
+                    <input class="w-full bg-surface-container-low border-2 border-transparent focus:bg-surface-container-lowest focus:border-primary rounded-lg px-4 py-3 outline-none transition-colors font-body-md text-on-surface placeholder:text-outline-variant" id="fullName" placeholder="ex: Dr. Maria Ionescu" type="text" required/>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+                    <div>
+                        <label class="block font-label-md text-label-md text-on-surface-variant mb-xs" for="specialization">Specializare</label>
+                        <input class="w-full bg-surface-container-low border-2 border-transparent focus:bg-surface-container-lowest focus:border-primary rounded-lg px-4 py-3 outline-none transition-colors font-body-md text-on-surface placeholder:text-outline-variant" id="specialization" placeholder="ex: Nutriție Sportivă" type="text" required/>
+                    </div>
+                    <div>
+                        <label class="block font-label-md text-label-md text-on-surface-variant mb-xs" for="accreditation">Număr Acreditare</label>
+                        <input class="w-full bg-surface-container-low border-2 border-transparent focus:bg-surface-container-lowest focus:border-primary rounded-lg px-4 py-3 outline-none transition-colors font-body-md text-on-surface placeholder:text-outline-variant" id="accreditation" placeholder="ex: 12345678" type="text" required/>
+                    </div>
+                </div>
+                
+                <div>
+                    <label class="block font-label-md text-label-md text-on-surface-variant mb-xs" for="clinic">Clinică/Cabinet</label>
+                    <input class="w-full bg-surface-container-low border-2 border-transparent focus:bg-surface-container-lowest focus:border-primary rounded-lg px-4 py-3 outline-none transition-colors font-body-md text-on-surface placeholder:text-outline-variant" id="clinic" placeholder="ex: Clinica de Nutriție Vital" type="text" required/>
+                </div>
+                
+                <div>
+                    <label class="block font-label-md text-label-md text-on-surface-variant mb-xs" for="email">Email Profesional</label>
+                    <input class="w-full bg-surface-container-low border-2 border-transparent focus:bg-surface-container-lowest focus:border-primary rounded-lg px-4 py-3 outline-none transition-colors font-body-md text-on-surface placeholder:text-outline-variant" id="email" placeholder="maria.ionescu@clinica.ro" type="email" required/>
+                </div>
+                
+                <div>
+                    <label class="block font-label-md text-label-md text-on-surface-variant mb-xs" for="password">Parolă</label>
+                    <div class="relative">
+                        <input class="w-full bg-surface-container-low border-2 border-transparent focus:bg-surface-container-lowest focus:border-primary rounded-lg pl-4 pr-12 py-3 outline-none transition-colors font-body-md text-on-surface placeholder:text-outline-variant" id="password" placeholder="••••••••" type="password" required/>
+                        <button class="absolute right-4 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-primary transition-colors" type="button">
+                            <span class="material-symbols-outlined">visibility</span>
+                        </button>
+                    </div>
+                    <p class="font-label-sm text-label-sm text-outline mt-xs">Minim 6 caractere.</p>
+                </div>
+                
+                <div class="pt-sm">
+                    <label class="flex items-start gap-sm cursor-pointer group">
+                        <div class="relative flex items-center justify-center mt-1">
+                            <input class="peer appearance-none w-5 h-5 border-2 border-outline rounded bg-surface-container-lowest checked:bg-primary checked:border-primary transition-colors cursor-pointer" type="checkbox" required/>
+                            <span class="material-symbols-outlined absolute text-on-primary opacity-0 peer-checked:opacity-100 pointer-events-none text-[16px] font-bold">check</span>
+                        </div>
+                        <span class="font-body-md text-body-md text-on-surface-variant">
                             Sunt de acord cu <a class="text-primary font-label-md hover:underline" href="#">Termenii și Condițiile</a> pentru profesioniști și <a class="text-primary font-label-md hover:underline" href="#">Politica de Confidențialitate</a>.
                         </span>
-</label>
-</div>
-<div class="pt-md">
-<button class="w-full h-[48px] bg-primary hover:bg-on-primary-fixed-variant text-on-primary font-label-md text-label-md rounded-lg flex items-center justify-center transition-colors shadow-sm focus:ring-4 focus:ring-primary/20 outline-none" type="verficare.html">
+                    </label>
+                </div>
+                
+                <div class="pt-md">
+                    <button class="w-full h-[48px] bg-primary hover:bg-on-primary-fixed-variant text-on-primary font-label-md text-label-md rounded-lg flex items-center justify-center transition-colors shadow-sm focus:ring-4 focus:ring-primary/20 outline-none" type="submit">
                         Înregistrează-te
                     </button>
-</div>
-</form>
-<div class="mt-lg text-center">
-<p class="font-body-md text-body-md text-on-surface-variant">
+                </div>
+            </form>
+            
+            <div class="mt-lg text-center">
+                <p class="font-body-md text-body-md text-on-surface-variant">
                     Ai deja un cont aprobat? 
                     <a class="text-primary font-label-md hover:underline ml-1" href="index.html">Conectează-te aici</a>
-</p>
-</div>
-</div>
-</div>
+                </p>
+            </div>
+        </div>
+    </div>
 
-<script type="module">
+    <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
         import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
         import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
@@ -241,8 +250,8 @@
                     rol: "nutritionist" 
                 });
 
-                alert("Cont creat cu succes! Te redirecționăm către platformă...");
-                window.location.href = "meniu-personalizat.html"; 
+                // Aici am schimbat linia de cod pentru redirecționare
+                window.location.href = "verificare.html"; 
 
             } catch (error) {
                 console.error(error);
@@ -256,4 +265,5 @@
             }
         });
     </script>
-</body></html>
+</body>
+</html>
