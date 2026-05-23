@@ -3,9 +3,11 @@
 <html lang="ro"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Vitality - Profil și Evoluție</title>
+<title>Profil - Vitality</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
@@ -14,53 +16,53 @@
             theme: {
                 extend: {
                     "colors": {
-                        "on-secondary-fixed": "#2c1600",
-                        "secondary-fixed": "#ffdcbe",
-                        "on-error-container": "#93000a",
-                        "on-background": "#1b1c1c",
-                        "secondary": "#8b5000",
-                        "on-secondary-container": "#653900",
-                        "on-tertiary": "#ffffff",
-                        "inverse-primary": "#78dc77",
-                        "on-tertiary-fixed-variant": "#00497d",
-                        "tertiary-container": "#33a0fe",
-                        "tertiary": "#0061a4",
-                        "surface-container": "#efeded",
-                        "tertiary-fixed": "#d1e4ff",
-                        "surface-container-lowest": "#ffffff",
-                        "surface-bright": "#fbf9f9",
-                        "surface-variant": "#e3e2e2",
-                        "surface-tint": "#006e1c",
-                        "on-tertiary-container": "#00355d",
-                        "on-primary-fixed": "#002204",
-                        "on-error": "#ffffff",
-                        "error": "#ba1a1a",
-                        "background": "#fbf9f9",
-                        "inverse-surface": "#303031",
-                        "primary": "#006e1c",
-                        "on-primary-fixed-variant": "#005313",
                         "primary-fixed-dim": "#78dc77",
-                        "on-secondary": "#ffffff",
+                        "secondary-fixed": "#ffdcbe",
+                        "surface-tint": "#006e1c",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-fixed-variant": "#693c00",
                         "secondary-fixed-dim": "#ffb870",
                         "outline-variant": "#becab9",
+                        "primary-fixed": "#94f990",
+                        "on-primary-container": "#003c0b",
+                        "on-tertiary-container": "#00355d",
+                        "secondary-container": "#ff9800",
+                        "on-error-container": "#93000a",
+                        "on-background": "#1b1c1c",
+                        "tertiary": "#0061a4",
+                        "surface-container-low": "#f5f3f3",
+                        "on-secondary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "tertiary-fixed-dim": "#9ecaff",
+                        "on-primary-fixed-variant": "#005313",
+                        "on-surface": "#1b1c1c",
+                        "surface-container-high": "#e9e8e7",
+                        "tertiary-fixed": "#d1e4ff",
+                        "surface-container": "#efeded",
                         "outline": "#6f7a6b",
-                        "inverse-on-surface": "#f2f0f0",
-                        "surface": "#fbf9f9",
-                        "primary-container": "#4caf50",
                         "on-primary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-fixed-variant": "#00497d",
+                        "on-surface-variant": "#3f4a3c",
+                        "inverse-on-surface": "#f2f0f0",
+                        "inverse-surface": "#303031",
+                        "background": "#fbf9f9",
+                        "secondary": "#8b5000",
+                        "on-primary-fixed": "#002204",
+                        "primary": "#006e1c",
+                        "on-error": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
                         "surface-dim": "#dbdad9",
                         "on-tertiary-fixed": "#001d36",
-                        "secondary-container": "#ff9800",
-                        "primary-fixed": "#94f990",
-                        "tertiary-fixed-dim": "#9ecaff",
-                        "on-surface-variant": "#3f4a3c",
+                        "primary-container": "#4caf50",
+                        "on-secondary-fixed": "#2c1600",
+                        "inverse-primary": "#78dc77",
+                        "surface": "#fbf9f9",
                         "surface-container-highest": "#e3e2e2",
-                        "on-primary-container": "#003c0b",
-                        "surface-container-low": "#f5f3f3",
-                        "on-secondary-fixed-variant": "#693c00",
-                        "surface-container-high": "#e9e8e7",
-                        "error-container": "#ffdad6",
-                        "on-surface": "#1b1c1c"
+                        "on-secondary-container": "#653900",
+                        "surface-variant": "#e3e2e2",
+                        "tertiary-container": "#33a0fe",
+                        "surface-bright": "#fbf9f9"
                     },
                     "borderRadius": {
                         "DEFAULT": "0.25rem",
@@ -69,44 +71,45 @@
                         "full": "9999px"
                     },
                     "spacing": {
-                        "lg": "40px",
-                        "md": "24px",
-                        "xl": "64px",
                         "margin-mobile": "16px",
-                        "margin-desktop": "48px",
-                        "gutter": "16px",
                         "base": "8px",
+                        "xl": "64px",
+                        "sm": "12px",
+                        "md": "24px",
+                        "lg": "40px",
+                        "gutter": "16px",
                         "xs": "4px",
-                        "sm": "12px"
+                        "margin-desktop": "48px"
                     },
                     "fontFamily": {
-                        "label-md": ["Inter"],
-                        "headline-md": ["Inter"],
-                        "body-md": ["Inter"],
-                        "label-sm": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
                         "headline-lg": ["Inter"],
-                        "body-lg": ["Inter"],
                         "headline-xl": ["Inter"],
-                        "headline-lg-mobile": ["Inter"]
+                        "headline-md": ["Inter"],
+                        "label-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"]
                     },
                     "fontSize": {
-                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600" }],
-                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
-                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
-                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
                         "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
-                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
                         "headline-xl": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
-                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "700" }]
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }]
                     }
                 }
             }
         }
     </script>
 <style>
-        body {
-            background-color: #fbf9f9;
-            color: #1b1c1c;
+        .glass-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
         }
     </style>
 <style>
@@ -115,154 +118,210 @@
     }
   </style>
   </head>
-<body class="bg-surface text-on-surface pb-24 md:pb-0 pt-16 font-body-md">
-<!-- TopAppBar -->
-<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-mobile h-16 bg-surface dark:bg-surface-dim shadow-sm dark:shadow-none">
-<div class="flex items-center gap-3">
-<img alt="User Profile Photo" class="w-10 h-10 rounded-full object-cover border-2 border-primary" data-alt="A close-up portrait of a healthy, active young woman smiling brightly. The lighting is soft and natural, emphasizing a fresh, clean aesthetic suitable for a health and wellness application profile picture. The background is slightly blurred and bright." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAPemGyaAkqzkSVX215I7uxDSGeLO10HVn34oI2YsPvEuuLkBubicG39JlBX8TZhhgzeGREhtQcOtG1nTx_3irsFPnHMxOHiXO7fMWb9TlNx6Qk7O6B3bGIzSVTvF0WB4uIUAT_NGY3bqox-CH4ztbIP3Ll2CqNle9_-5v2XG_4vucK3rbJw6DtPDtxsKBjFoMuo1CNve19LkVPYNQcXVMwFHCUB4Zswb6EJcFqivKwCV6_iW7hbyKOnS0RMbBBohyLOoUIwIdnUOvV"/>
-<span class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim">Vitality</span>
-</div>
-<button class="w-10 h-10 flex items-center justify-center rounded-full text-primary dark:text-primary-fixed-dim hover:bg-surface-variant dark:hover:bg-surface-container-highest transition-colors active:scale-95 duration-150 ease-in-out">
-<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
-</button>
+<body class="bg-background text-on-background antialiased pb-[90px] md:pb-0 min-h-screen flex justify-center">
+<div class="w-full max-w-[1280px] md:px-margin-desktop md:py-md">
+<!-- Header (Mobile mostly) -->
+<header class="flex items-center justify-between px-margin-mobile py-sm md:hidden bg-background sticky top-0 z-40">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">Profilul meu</h1>
 </header>
-<main class="max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop py-md">
-<!-- Header Section -->
-<section class="flex flex-col items-center justify-center mb-lg text-center">
-<div class="relative mb-4">
-<img alt="User Profile Large" class="w-24 h-24 rounded-full object-cover shadow-lg border-4 border-surface" data-alt="A high-quality, closely cropped portrait of a confident, athletic individual smiling. The lighting is bright and airy, communicating a sense of well-being and health. The image uses a modern, clean light-mode aesthetic consistent with a premium wellness app." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDv_vmNOmyA-cBNenOFay_9XCSG1Ya9mYGnmZGwdLDb5pi2OTkYrUqFuLcYFn1qK-hSrenjxaAtWCwasjIp8tixLbrrOAawT6-wwLsTzFyp2J1yAlDjrExt_BKoGEGGfY3KaEjVOzt9lso2SHT581AvqzbLjc2a-RSVbiVAPW6tH6XTw-dqsb6m51oT-OGpt7w0HtvrM5OoIP5ePRcTADSAcW-Tc-ZzomzuTmMBkNO3Xu3feYQyZECH9VLDrAbx35CLjKSgTEqCZ0aX"/>
-<div class="absolute bottom-0 right-0 bg-primary text-on-primary rounded-full p-1 border-2 border-surface flex items-center justify-center">
-<span class="material-symbols-outlined text-sm" style="font-size: 16px;">edit</span>
+<!-- Main Content Layout -->
+<main class="flex flex-col gap-md px-margin-mobile md:px-0 mt-sm md:mt-0">
+<!-- Desktop Header -->
+<h1 class="hidden md:block font-headline-lg text-headline-lg text-on-surface mb-md">Profilul meu</h1>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-md items-start">
+<!-- Left Column / Top Section: User Profile Card -->
+<div class="md:col-span-4 flex flex-col gap-md">
+<section class="glass-card rounded-xl p-lg shadow-sm border border-outline-variant/30 flex flex-col items-center text-center relative overflow-hidden">
+<!-- Decorative bg -->
+<div class="absolute top-0 left-0 w-full h-24 bg-gradient-to-b from-primary-container/20 to-transparent"></div>
+<div class="relative w-24 h-24 rounded-full border-4 border-surface shadow-sm mb-sm mt-4 overflow-hidden bg-surface-container">
+<img alt="Elena Popescu" class="w-full h-full object-cover" data-alt="A professional studio portrait of a young woman with a warm smile. She is looking directly at the camera. The lighting is soft and flattering, creating a bright, modern aesthetic suitable for a high-end corporate profile. The background is a clean, minimalist light gray, emphasizing a sense of freshness and reliability." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBepmlOF6NYjKPZvTrVb1pqoilqYekJLrurORmS7lt_9bavIAp8hzIgoECtGv2u2kt8M0zjv-bBKRzJETMXQGSo6WiqzpNgmwAlVb6a1UM0nZwAmO78itl57w2qB7OKXSE3_PnDOMWhsC8RQsu6d5zUewCBoQiAa6sd82RI_3w2tuZ9XoHneZPjc9moHUnW48saby3u_cTm2DG9AglrhkupUsk-F6Ie_MA2dTfWN8oSgWMVQTGuimkj8btDyd24DvK7vyLzeG7LzeRU"/>
 </div>
+<h2 class="font-headline-md text-headline-md text-on-surface">Elena Popescu</h2>
+<div class="flex items-center gap-xs mt-2 px-3 py-1 bg-surface-container-high rounded-full">
+<span class="material-symbols-outlined text-[16px] text-secondary-container" style="font-variation-settings: 'FILL' 1;">workspace_premium</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Silver Member</span>
 </div>
-<h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-xs">Ana Popescu</h1>
-<p class="font-body-md text-body-md text-on-surface-variant flex items-center justify-center gap-2">
-<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">flag</span>
-                Obiectiv: Scădere în greutate (-5kg)
-            </p>
+<p class="font-body-md text-body-md text-primary font-medium mt-sm">1,250 Pct</p>
 </section>
-<!-- Stats Grid -->
-<section class="grid grid-cols-1 sm:grid-cols-3 gap-md mb-lg">
-<div class="bg-surface-container-lowest rounded-xl p-md shadow-[0_4px_20px_0_rgba(0,0,0,0.04)] border border-surface-variant flex flex-col items-center text-center hover:shadow-[0_4px_20px_0_rgba(0,0,0,0.08)] transition-shadow">
-<div class="w-12 h-12 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center mb-sm">
-<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">monitor_weight</span>
 </div>
-<h3 class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mb-xs">Greutate Curentă</h3>
-<p class="font-headline-md text-headline-md text-on-surface">68.5 <span class="font-body-md text-body-md text-on-surface-variant">kg</span></p>
+<!-- Right Column / Settings Sections -->
+<div class="md:col-span-8 flex flex-col gap-md">
+<!-- Personal Information Bento Card -->
+<section class="glass-card rounded-xl shadow-sm border border-outline-variant/30 p-md md:p-lg flex flex-col gap-sm">
+<h3 class="font-headline-md text-[20px] text-on-surface mb-2">Informații Personale</h3>
+<div class="flex items-center justify-between py-sm border-b border-surface-variant last:border-0 cursor-pointer hover:bg-surface-container-low transition-colors rounded-lg px-2 -mx-2">
+<div class="flex items-center gap-sm">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">person</span>
 </div>
-<div class="bg-surface-container-lowest rounded-xl p-md shadow-[0_4px_20px_0_rgba(0,0,0,0.04)] border border-surface-variant flex flex-col items-center text-center hover:shadow-[0_4px_20px_0_rgba(0,0,0,0.08)] transition-shadow">
-<div class="w-12 h-12 rounded-full bg-tertiary-container text-on-tertiary-container flex items-center justify-center mb-sm">
-<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">accessibility_new</span>
+<div class="flex flex-col">
+<span class="font-body-md text-body-md text-on-surface">Nume complet</span>
+<span class="font-body-md text-[14px] text-on-surface-variant">Elena Popescu</span>
 </div>
-<h3 class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mb-xs">IMC (BMI)</h3>
-<p class="font-headline-md text-headline-md text-on-surface">22.4 <span class="font-body-md text-body-md text-primary ml-2 text-sm bg-primary-container/20 px-2 py-1 rounded-full">Normal</span></p>
 </div>
-<div class="bg-surface-container-lowest rounded-xl p-md shadow-[0_4px_20px_0_rgba(0,0,0,0.04)] border border-surface-variant flex flex-col items-center text-center hover:shadow-[0_4px_20px_0_rgba(0,0,0,0.08)] transition-shadow">
-<div class="w-12 h-12 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center mb-sm">
-<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+<span class="material-symbols-outlined text-outline">chevron_right</span>
 </div>
-<h3 class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mb-xs">Zile Consecutive</h3>
-<p class="font-headline-md text-headline-md text-on-surface">14 <span class="font-body-md text-body-md text-on-surface-variant">zile</span></p>
+<div class="flex items-center justify-between py-sm border-b border-surface-variant last:border-0 cursor-pointer hover:bg-surface-container-low transition-colors rounded-lg px-2 -mx-2">
+<div class="flex items-center gap-sm">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">mail</span>
 </div>
-</section>
-<!-- Chart Section -->
-<section class="bg-surface-container-lowest rounded-xl p-lg shadow-[0_4px_20px_0_rgba(0,0,0,0.04)] border border-surface-variant mb-lg">
-<div class="flex justify-between items-center mb-md">
-<h2 class="font-headline-md text-headline-md text-on-surface">Evoluție Greutate</h2>
-<select class="bg-surface-variant text-on-surface-variant font-label-md text-label-md rounded-full px-4 py-2 border-none focus:ring-2 focus:ring-primary outline-none">
-<option>Ultima lună</option>
-<option>Ultimele 3 luni</option>
-<option>Ultimul an</option>
-</select>
+<div class="flex flex-col">
+<span class="font-body-md text-body-md text-on-surface">Adresă de email</span>
+<span class="font-body-md text-[14px] text-on-surface-variant">elena.p@exemplu.ro</span>
 </div>
-<!-- Placeholder for Chart -->
-<div class="w-full h-64 relative border-b border-l border-outline-variant pb-6 pl-8">
-<!-- Y-Axis Labels -->
-<div class="absolute left-0 top-0 h-full flex flex-col justify-between text-xs text-on-surface-variant font-label-sm -ml-2 pb-6">
-<span>72kg</span>
-<span>70kg</span>
-<span>68kg</span>
 </div>
-<!-- X-Axis Labels -->
-<div class="absolute bottom-0 left-8 w-[calc(100%-2rem)] flex justify-between text-xs text-on-surface-variant font-label-sm pt-2">
-<span>1 Oct</span>
-<span>8 Oct</span>
-<span>15 Oct</span>
-<span>22 Oct</span>
-<span>Prezent</span>
+<span class="material-symbols-outlined text-outline">chevron_right</span>
 </div>
-<!-- Grid lines -->
-<div class="absolute left-8 right-0 top-0 h-[calc(100%-1.5rem)] flex flex-col justify-between">
-<div class="w-full h-px bg-surface-variant"></div>
-<div class="w-full h-px bg-surface-variant"></div>
-<div class="w-full h-px bg-surface-variant"></div>
+<div class="flex items-center justify-between py-sm border-b border-surface-variant last:border-0 cursor-pointer hover:bg-surface-container-low transition-colors rounded-lg px-2 -mx-2">
+<div class="flex items-center gap-sm">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">phone</span>
 </div>
-<!-- Simulated Line Chart -->
-<svg class="absolute left-8 top-0 w-[calc(100%-2rem)] h-[calc(100%-1.5rem)]" preserveaspectratio="none" viewbox="0 0 100 100">
-<path class="text-primary" d="M0,20 L25,35 L50,60 L75,55 L100,80" fill="none" stroke="currentColor" stroke-width="2"></path>
-<!-- Points -->
-<circle class="fill-surface stroke-primary stroke-2" cx="0" cy="20" r="1.5"></circle>
-<circle class="fill-surface stroke-primary stroke-2" cx="25" cy="35" r="1.5"></circle>
-<circle class="fill-surface stroke-primary stroke-2" cx="50" cy="60" r="1.5"></circle>
-<circle class="fill-surface stroke-primary stroke-2" cx="75" cy="55" r="1.5"></circle>
-<circle class="fill-primary stroke-primary stroke-2" cx="100" cy="80" r="1.5"></circle>
-</svg>
-<!-- Latest value indicator -->
-<div class="absolute right-0 top-[calc(80%-1.5rem)] bg-primary text-on-primary font-label-sm text-[10px] px-2 py-1 rounded transform translate-x-1/2 -translate-y-full">
-                    68.5kg
-                </div>
+<div class="flex flex-col">
+<span class="font-body-md text-body-md text-on-surface">Număr de telefon</span>
+<span class="font-body-md text-[14px] text-on-surface-variant">+40 712 345 678</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline">chevron_right</span>
+</div>
+<div class="flex items-center justify-between py-sm border-b border-surface-variant last:border-0 cursor-pointer hover:bg-surface-container-low transition-colors rounded-lg px-2 -mx-2">
+<div class="flex items-center gap-sm">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">credit_card</span>
+</div>
+<div class="flex flex-col">
+<span class="font-body-md text-body-md text-on-surface">Metode de Plată</span>
+<span class="font-body-md text-[14px] text-on-surface-variant">Visa terminat în 4242</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline">chevron_right</span>
 </div>
 </section>
-<!-- Actions -->
-<section class="flex flex-col gap-4 max-w-md mx-auto">
-<button class="w-full h-12 bg-surface text-on-surface border-2 border-outline-variant hover:bg-surface-variant rounded-full font-label-md text-label-md flex items-center justify-center gap-2 transition-colors">
-<span class="material-symbols-outlined text-on-surface-variant">settings</span>
-                Setări Cont
-            </button>
-<button class="w-full h-12 bg-error-container text-on-error-container hover:bg-error/20 rounded-full font-label-md text-label-md flex items-center justify-center gap-2 transition-colors">
+<!-- Security & Preferences Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<!-- Security -->
+<section class="glass-card rounded-xl shadow-sm border border-outline-variant/30 p-md flex flex-col gap-sm">
+<h3 class="font-headline-md text-[20px] text-on-surface mb-2">Securitate</h3>
+<div class="flex items-center justify-between py-sm border-b border-surface-variant last:border-0 cursor-pointer hover:bg-surface-container-low transition-colors rounded-lg px-2 -mx-2">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-outline">password</span>
+<span class="font-body-md text-body-md text-on-surface">Schimbă parola</span>
+</div>
+<span class="material-symbols-outlined text-outline">chevron_right</span>
+</div>
+<div class="flex items-center justify-between py-sm border-b border-surface-variant last:border-0 px-2 -mx-2">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-outline">fingerprint</span>
+<span class="font-body-md text-body-md text-on-surface">Autentificare biometrică</span>
+</div>
+<!-- Toggle Switch -->
+<button aria-checked="true" class="relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 bg-primary" role="switch" type="button">
+<span class="translate-x-5 pointer-events-none inline-block h-5 w-5 transform rounded-full bg-surface shadow ring-0 transition duration-200 ease-in-out"></span>
+</button>
+</div>
+</section>
+<!-- Preferences -->
+<section class="glass-card rounded-xl shadow-sm border border-outline-variant/30 p-md flex flex-col gap-sm">
+<h3 class="font-headline-md text-[20px] text-on-surface mb-2">Preferințe</h3>
+<div class="flex items-center justify-between py-sm border-b border-surface-variant last:border-0 cursor-pointer hover:bg-surface-container-low transition-colors rounded-lg px-2 -mx-2">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-outline">language</span>
+<span class="font-body-md text-body-md text-on-surface">Limbă</span>
+</div>
+<div class="flex items-center gap-xs">
+<span class="font-body-md text-[14px] text-on-surface-variant">Română</span>
+<span class="material-symbols-outlined text-outline text-[20px]">chevron_right</span>
+</div>
+</div>
+<div class="flex items-center justify-between py-sm border-b border-surface-variant last:border-0 px-2 -mx-2">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-outline">notifications</span>
+<span class="font-body-md text-body-md text-on-surface">Notificări Push</span>
+</div>
+<!-- Toggle Switch -->
+<button aria-checked="false" class="relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 bg-surface-variant" role="switch" type="button">
+<span class="translate-x-0 pointer-events-none inline-block h-5 w-5 transform rounded-full bg-surface shadow ring-0 transition duration-200 ease-in-out"></span>
+</button>
+</div>
+<div class="flex items-center justify-between py-sm border-b border-surface-variant last:border-0 px-2 -mx-2">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-outline">dark_mode</span>
+<span class="font-body-md text-body-md text-on-surface">Mod Întunecat</span>
+</div>
+<!-- Toggle Switch -->
+<button aria-checked="false" class="relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 bg-surface-variant" role="switch" type="button">
+<span class="translate-x-0 pointer-events-none inline-block h-5 w-5 transform rounded-full bg-surface shadow ring-0 transition duration-200 ease-in-out"></span>
+</button>
+</div>
+</section>
+</div>
+<!-- Support & Legal -->
+<section class="glass-card rounded-xl shadow-sm border border-outline-variant/30 p-md flex flex-col gap-sm">
+<div class="flex items-center justify-between py-sm border-b border-surface-variant last:border-0 cursor-pointer hover:bg-surface-container-low transition-colors rounded-lg px-2 -mx-2">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-outline">support_agent</span>
+<span class="font-body-md text-body-md text-on-surface">Centru de Suport</span>
+</div>
+<span class="material-symbols-outlined text-outline">chevron_right</span>
+</div>
+<div class="flex items-center justify-between py-sm border-b border-surface-variant last:border-0 cursor-pointer hover:bg-surface-container-low transition-colors rounded-lg px-2 -mx-2">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-outline">gavel</span>
+<span class="font-body-md text-body-md text-on-surface">Termeni și Condiții</span>
+</div>
+<span class="material-symbols-outlined text-outline">chevron_right</span>
+</div>
+</section>
+<!-- Logout Button -->
+<button class="w-full mt-4 mb-md md:mb-0 bg-error-container hover:bg-error/20 text-on-error-container font-label-md text-label-md py-4 rounded-xl flex items-center justify-center gap-sm transition-colors active:scale-[0.98]">
 <span class="material-symbols-outlined">logout</span>
-                Deconectare
-            </button>
-</section>
-</main>
-<!-- BottomNavBar -->
-<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-2 bg-surface dark:bg-surface-container-lowest shadow-[0_-4px_20px_0_rgba(0,0,0,0.04)] rounded-t-xl">
-<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline hover:bg-surface-variant dark:hover:bg-surface-container-high transition-all active:scale-90 duration-200 w-16 py-1 rounded-xl">
-<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
-<span class="font-label-sm text-label-sm mt-1">Dashboard</span>
-</button>
-<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline hover:bg-surface-variant dark:hover:bg-surface-container-high transition-all active:scale-90 duration-200 w-16 py-1 rounded-xl">
-<span class="material-symbols-outlined" data-icon="description">description</span>
-<span class="font-label-sm text-label-sm mt-1">Jurnal</span>
-</button>
-<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline hover:bg-surface-variant dark:hover:bg-surface-container-high transition-all active:scale-90 duration-200 w-16 py-1 rounded-xl">
-<span class="material-symbols-outlined" data-icon="restaurant_menu">restaurant_menu</span>
-<span class="font-label-sm text-label-sm mt-1">Plan</span>
-</button>
-<button class="flex flex-col items-center justify-center bg-primary-container dark:bg-on-primary-fixed-variant text-on-primary-container dark:text-primary-fixed rounded-full px-4 py-1 active:scale-90 duration-200">
-<span class="material-symbols-outlined" data-icon="person" style="font-variation-settings: 'FILL' 1;">person</span>
-<span class="font-label-sm text-label-sm mt-1">Profil</span>
-</button>
-</nav>
-<!-- Desktop SideNav (Hidden on Mobile) -->
-<nav class="hidden md:flex flex-col fixed top-16 left-0 h-[calc(100vh-64px)] w-64 bg-surface border-r border-surface-variant py-md px-margin-mobile">
-<div class="flex flex-col gap-2">
-<button class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant rounded-full transition-colors w-full text-left">
-<span class="material-symbols-outlined">dashboard</span>
-<span class="font-label-md text-label-md">Dashboard</span>
-</button>
-<button class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant rounded-full transition-colors w-full text-left">
-<span class="material-symbols-outlined">description</span>
-<span class="font-label-md text-label-md">Jurnal</span>
-</button>
-<button class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant rounded-full transition-colors w-full text-left">
-<span class="material-symbols-outlined">restaurant_menu</span>
-<span class="font-label-md text-label-md">Plan</span>
-</button>
-<button class="flex items-center gap-3 px-4 py-3 bg-primary-container text-on-primary-container rounded-full transition-colors w-full text-left">
-<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">person</span>
-<span class="font-label-md text-label-md">Profil</span>
-</button>
+                        Deconectare
+                    </button>
 </div>
+</div>
+</main>
+</div>
+<!-- BottomNavBar (Shared Component JSON definition) -->
+<nav class="md:hidden bg-surface dark:bg-surface-container-lowest shadow-[0_-4px_20px_0_rgba(0,0,0,0.04)] dark:border-t dark:border-outline-variant rounded-t-xl fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-2 py-3">
+<button class="flex flex-col items-center justify-center text-on-surface-variant active:scale-90 duration-200 hover:text-primary transition-all">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-md text-label-md mt-1">Home</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant active:scale-90 duration-200 hover:text-primary transition-all">
+<span class="material-symbols-outlined">description</span>
+<span class="font-label-md text-label-md mt-1">Diary</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant active:scale-90 duration-200 hover:text-primary transition-all">
+<span class="material-symbols-outlined">restaurant_menu</span>
+<span class="font-label-md text-label-md mt-1">Plans</span>
+</button>
+<button class="flex flex-col items-center justify-center text-primary dark:text-primary-fixed-dim bg-primary-container/20 rounded-xl px-4 py-1 active:scale-90 duration-200 hover:text-primary transition-all">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-label-md text-label-md mt-1 font-bold">Profile</span>
+</button>
 </nav>
+<script>
+        // Simple toggle interactivity for visual feedback
+        document.querySelectorAll('button[role="switch"]').forEach(toggle => {
+            toggle.addEventListener('click', function() {
+                const isChecked = this.getAttribute('aria-checked') === 'true';
+                this.setAttribute('aria-checked', !isChecked);
+                
+                const span = this.querySelector('span');
+                if (!isChecked) {
+                    this.classList.remove('bg-surface-variant');
+                    this.classList.add('bg-primary');
+                    span.classList.remove('translate-x-0');
+                    span.classList.add('translate-x-5');
+                } else {
+                    this.classList.remove('bg-primary');
+                    this.classList.add('bg-surface-variant');
+                    span.classList.remove('translate-x-5');
+                    span.classList.add('translate-x-0');
+                }
+            });
+        });
+    </script>
 </body></html>
