@@ -1,447 +1,786 @@
-<!DOCTYPE html><html lang="ro" style=""><head>
-<meta charset="utf-8">
-<meta content="width=device-width, initial-scale=1.0" name="viewport">
-<title>Vitality Pro - Hub Comunicare</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<script id="tailwind-config">
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Vitality - Dashboard Client</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    
+    <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
             theme: {
                 extend: {
                     "colors": {
-                        "surface-container-low": "#f5f3f3",
-                        "secondary-fixed-dim": "#ffb870",
-                        "tertiary": "#0061a4",
-                        "on-background": "#1b1c1c",
-                        "error": "#ba1a1a",
-                        "background": "#fbf9f9",
-                        "on-secondary": "#ffffff",
+                        "secondary-container": "#ff9800",
+                        "on-surface-variant": "#3f4a3c",
+                        "on-primary-container": "#003c0b",
+                        "inverse-on-surface": "#f2f0f0",
+                        "surface-container-highest": "#e3e2e2",
+                        "primary-fixed-dim": "#78dc77",
+                        "tertiary-fixed": "#d1e4ff",
+                        "surface-container-lowest": "#ffffff",
                         "on-secondary-fixed-variant": "#693c00",
-                        "on-secondary-fixed": "#2c1600",
-                        "on-error-container": "#93000a",
-                        "surface": "#fbf9f9",
+                        "inverse-primary": "#78dc77",
+                        "secondary-fixed-dim": "#ffb870",
+                        "on-primary-fixed-variant": "#005313",
+                        "surface-variant": "#e3e2e2",
+                        "surface-dim": "#dbdad9",
+                        "error": "#ba1a1a",
+                        "surface-container": "#efeded",
+                        "surface-container-low": "#f5f3f3",
+                        "on-tertiary": "#ffffff",
+                        "background": "#fbf9f9",
+                        "on-error": "#ffffff",
+                        "on-tertiary-fixed-variant": "#00497d",
+                        "tertiary-fixed-dim": "#9ecaff",
+                        "tertiary-container": "#33a0fe",
                         "surface-bright": "#fbf9f9",
                         "on-tertiary-container": "#00355d",
-                        "outline": "#6f7a6b",
-                        "error-container": "#ffdad6",
-                        "tertiary-container": "#33a0fe",
-                        "surface-container-highest": "#e3e2e2",
-                        "on-surface": "#1b1c1c",
-                        "on-tertiary": "#ffffff",
-                        "on-primary-fixed": "#002204",
+                        "on-error-container": "#93000a",
+                        "on-primary": "#ffffff",
+                        "surface": "#fbf9f9",
+                        "tertiary": "#0061a4",
+                        "on-secondary-container": "#653900",
                         "outline-variant": "#becab9",
                         "surface-container-high": "#e9e8e7",
-                        "on-secondary-container": "#653900",
-                        "inverse-surface": "#303031",
-                        "on-primary-container": "#003c0b",
-                        "surface-dim": "#dbdad9",
-                        "secondary-container": "#ff9800",
+                        "on-secondary-fixed": "#2c1600",
                         "primary": "#006e1c",
-                        "on-tertiary-fixed": "#001d36",
-                        "on-primary-fixed-variant": "#005313",
-                        "secondary": "#8b5000",
-                        "tertiary-fixed-dim": "#9ecaff",
-                        "surface-tint": "#006e1c",
-                        "surface-container": "#efeded",
-                        "on-primary": "#ffffff",
-                        "inverse-primary": "#78dc77",
-                        "surface-container-lowest": "#ffffff",
+                        "on-secondary": "#ffffff",
                         "primary-container": "#4caf50",
-                        "on-error": "#ffffff",
+                        "secondary": "#8b5000",
+                        "inverse-surface": "#303031",
+                        "surface-tint": "#006e1c",
+                        "on-surface": "#1b1c1c",
+                        "error-container": "#ffdad6",
+                        "outline": "#6f7a6b",
+                        "on-primary-fixed": "#002204",
                         "primary-fixed": "#94f990",
+                        "on-background": "#1b1c1c",
                         "secondary-fixed": "#ffdcbe",
-                        "tertiary-fixed": "#d1e4ff",
-                        "surface-variant": "#e3e2e2",
-                        "primary-fixed-dim": "#78dc77",
-                        "on-surface-variant": "#3f4a3c",
-                        "on-tertiary-fixed-variant": "#00497d",
-                        "inverse-on-surface": "#f2f0f0"
-                    },
-                    "borderRadius": {
-                        "DEFAULT": "0.25rem",
-                        "lg": "0.5rem",
-                        "xl": "0.75rem",
-                        "full": "9999px"
-                    },
-                    "spacing": {
-                        "md": "24px",
-                        "xs": "4px",
-                        "margin-desktop": "48px",
-                        "base": "8px",
-                        "margin-mobile": "16px",
-                        "xl": "64px",
-                        "sm": "12px",
-                        "lg": "40px",
-                        "gutter": "16px"
+                        "on-tertiary-fixed": "#001d36"
                     },
                     "fontFamily": {
-                        "headline-lg": ["Inter"],
-                        "headline-md": ["Inter"],
                         "headline-xl": ["Inter"],
-                        "body-lg": ["Inter"],
                         "body-md": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
                         "label-sm": ["Inter"],
                         "label-md": ["Inter"],
-                        "headline-lg-mobile": ["Inter"]
-                    },
-                    "fontSize": {
-                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
-                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
-                        "headline-xl": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
-                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
-                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
-                        "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
-                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
-                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "700"}]
+                        "body-lg": ["Inter"]
                     }
                 }
             }
         }
     </script>
-<style>
-        .glass-card {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+    <style>
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: #fbf9f9;
+            min-height: max(884px, 100dvh);
         }
-        .progress-ring-circle {
-            transition: stroke-dashoffset 0.5s ease-in-out;
+        .hide-scroll::-webkit-scrollbar { display: none; }
+        .hide-scroll { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        .card-shadow { box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.04); }
+        .card-shadow-hover:hover { box-shadow: 0px 6px 24px rgba(0, 0, 0, 0.08); }
+        
+        .progress-ring__circle {
+            transition: stroke-dashoffset 0.8s ease-in-out;
+            transform: rotate(-90deg);
+            transform-origin: 50% 50%;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.04);
+        }
+        
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        @media (min-width: 768px) {
+            .main-content-offset {
+                padding-left: 18rem; /* Offset for desktop sidebar (w-72) */
+            }
         }
     </style>
 </head>
-<body class="bg-surface text-on-surface font-body-md min-h-screen pb-24 md:pb-0">
-<!-- TopAppBar -->
-<header class="w-full top-0 sticky z-40 bg-surface shadow-sm dark:bg-surface-container-high shadow-[0_4px_20px_rgba(0,0,0,0.04)]">
-<div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop h-16 w-full max-w-[1280px] mx-auto">
-<div class="flex items-center gap-sm cursor-pointer" onclick="switchTab('dashboard')"><button class="hidden md:flex items-center gap-2 bg-secondary-container text-on-secondary-container hover:bg-secondary-fixed active:scale-95 px-4 py-2 rounded-full transition-all shadow-sm font-label-md"><span class="material-symbols-outlined text-sm">videocam</span> Începe Consultație Video</button>
-<img alt="Vitality Pro Logo" class="h-10 w-auto object-contain bg-white rounded-md" onclick="switchTab('dashboard')" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzuWsjwJpzryOHcvpVuuMOMUNbbs2PWrekP7Cor31pZyRxwIZOmBQuJpNFIkWInjZhv4_uI8CM70kFVRHXeQgE1dYiuQR3BEEXNFqdw0BAHfpTE1-uq78BQxkyeHoAoaqGpFfnh4TRtcuf9W3ZbsTC3e1DpjzU44eSJrphUYrbmeBvV6q6mDssneX4fVcq6kkJZ5AdKcRoCqfwCtgFS9f244Dx36_76bYFIkpoMYkdFFyi7nJU2JO9apZo6mSldJuFDlZzNs36Nmz8">
-<span class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim hidden sm:block ml-2" onclick="switchTab('dashboard')">Vitality by Bucătarul Personal</span>
-</div>
-<!-- Desktop Nav (Hidden on mobile) -->
-<nav class="hidden md:flex items-center gap-md">
-<button class="flex items-center gap-2 dark:text-primary-fixed-dim font-label-md px-4 py-2 rounded-full transition-colors active:scale-95 duration-200 cursor-pointer nav-desktop-btn text-on-surface-variant" data-tab="dashboard" onclick="switchTab('dashboard')">
-<span class="material-symbols-outlined" data-icon="dashboard" data-weight="fill" style="font-variation-settings: &quot;FILL&quot; 0;">dashboard</span>
-                    Panou
-                </button>
-<button class="flex items-center gap-2 text-on-surface-variant dark:text-outline font-label-md hover:bg-surface-container-high dark:hover:bg-surface-variant px-4 py-2 rounded-full transition-colors active:scale-95 duration-200 cursor-pointer nav-desktop-btn" data-tab="clients" onclick="switchTab('clients')">
-<span class="material-symbols-outlined" data-icon="group">group</span>
-                    Clienți
-                </button>
-<button class="flex items-center gap-2 text-on-surface-variant dark:text-outline font-label-md hover:bg-surface-container-high dark:hover:bg-surface-variant px-4 py-2 rounded-full transition-colors active:scale-95 duration-200 cursor-pointer nav-desktop-btn" data-tab="messages" onclick="switchTab('messages')">
-<span class="material-symbols-outlined" data-icon="chat">chat</span>
-                    Mesaje
-                </button>
-<button class="flex items-center gap-2 text-on-surface-variant dark:text-outline font-label-md hover:bg-surface-container-high dark:hover:bg-surface-variant px-4 py-2 rounded-full transition-colors active:scale-95 duration-200 cursor-pointer nav-desktop-btn" data-tab="financial" onclick="switchTab('financial')">
-<span class="material-symbols-outlined" data-icon="payments">payments</span>
-                    Financiar
-                </button>
-<button class="flex items-center gap-2 dark:text-outline font-label-md hover:bg-surface-container-high dark:hover:bg-surface-variant px-4 py-2 rounded-full transition-colors active:scale-95 duration-200 cursor-pointer nav-desktop-btn text-primary bg-primary-container/10" data-tab="profile" onclick="switchTab('profile')">
-<span class="material-symbols-outlined" data-icon="account_circle" style="font-variation-settings: &quot;FILL&quot; 1;">account_circle</span>
-                    Profil
-                </button>
-</nav>
-<div class="flex items-center gap-sm"><button class="hidden md:flex items-center gap-2 bg-secondary-container text-on-secondary-container hover:bg-secondary-fixed active:scale-95 px-4 py-2 rounded-full transition-all shadow-sm font-label-md"><span class="material-symbols-outlined text-sm">videocam</span> Începe Consultație Video</button>
-<button class="p-2 text-on-surface-variant dark:text-outline hover:bg-surface-container-high dark:hover:bg-surface-variant rounded-full transition-colors active:scale-95 duration-200">
-<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
-</button>
-<div class="h-8 w-8 rounded-full overflow-hidden bg-surface-container-highest cursor-pointer border-2 border-primary-container" onclick="switchTab('profile')">
-<img alt="Nutritionist Profile" class="w-full h-full object-cover" data-alt="A professional headshot of a friendly nutritionist smiling warmly in a bright, modern, minimalist clinic setting. The lighting is soft and natural, emphasizing approachability and clinical trust. The color palette features clean whites and subtle earthy tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDhRIleAaNKeA5vkdJ1q3Pm62gxq73e6ls2TNX1dGNl4-Aq9qJbYewiNKrgWnOIGR-j85Ywvatc8QL5tJmQUXZKJB1twakiwIbvfujXupw0gdgktH9smduRh8bxZxlrGab120W6aYEUirFr2PaCckY_QzpSul3l2XFFYzDcRmYwKD-0AkoPmSTwrdJo3PNUgj1Os2bF02TYwSwJyqqoztewCCMCfx_eu5ZNIvI1ywq1e6bBo5mCBG0gDL6zoiAF6NkEUn3j-NXUSGAZ">
-</div>
-</div>
-</div>
-</header>
-<main class="w-full max-w-[1280px] mx-auto px-margin-mobile md:px-margin-desktop py-md md:py-lg relative">
-<!-- DASHBOARD TAB -->
-<section class="animate-fade-in hidden" id="tab-dashboard">
-<h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-md">Panou de Control</h1>
-<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter md:gap-md mb-lg">
-<!-- Metrics Card 1 -->
-<div class="glass-card rounded-xl p-md flex flex-col justify-between h-32 relative overflow-hidden group cursor-pointer hover:shadow-[0_8px_24px_rgba(0,0,0,0.12)] transition-shadow" onclick="switchTab('clients')">
-<div class="flex justify-between items-start z-10">
-<span class="font-label-md text-label-md text-on-surface-variant group-hover:text-primary transition-colors">Clienți Activi</span>
-<span class="material-symbols-outlined text-primary-container bg-primary-container/10 p-2 rounded-full">group</span>
-</div>
-<div class="z-10">
-<span class="font-headline-xl text-headline-xl text-on-surface">42</span>
-<span class="font-label-sm text-label-sm text-primary ml-2">+3 luna aceasta</span>
-</div>
-<div class="absolute -bottom-4 -right-4 text-surface-container-highest opacity-50 group-hover:scale-110 transition-transform duration-500">
-<span class="material-symbols-outlined" style="font-size: 100px;">group</span>
-</div>
-</div>
-<!-- Metrics Card 2 -->
-<div class="glass-card rounded-xl p-md flex flex-col justify-between h-32 relative overflow-hidden group cursor-pointer hover:shadow-[0_8px_24px_rgba(0,0,0,0.12)] transition-shadow">
-<div class="flex justify-between items-start z-10">
-<span class="font-label-md text-label-md text-on-surface-variant group-hover:text-secondary-container transition-colors">Consultații Azi</span>
-<span class="material-symbols-outlined text-secondary-container bg-secondary-container/10 p-2 rounded-full">event</span>
-</div>
-<div class="z-10">
-<span class="font-headline-xl text-headline-xl text-on-surface">5</span>
-<span class="font-label-sm text-label-sm text-on-surface-variant ml-2">Următoarea la 11:30</span>
-</div>
-<div class="absolute -bottom-4 -right-4 text-surface-container-highest opacity-50 group-hover:scale-110 transition-transform duration-500">
-<span class="material-symbols-outlined" style="font-size: 100px;">event</span>
-</div>
-</div>
-<!-- Partnership Banner -->
-<div class="bg-gradient-to-br from-primary-container to-primary rounded-xl p-md flex flex-col justify-center text-on-primary h-32 relative overflow-hidden shadow-[0_4px_20px_rgba(76,175,80,0.3)] hover:shadow-[0_8px_24px_rgba(76,175,80,0.4)] transition-shadow cursor-pointer group">
-<div class="absolute top-0 right-0 w-32 h-32 bg-white opacity-10 rounded-full blur-2xl -mr-10 -mt-10"></div>
-<div class="z-10 flex items-center justify-between gap-3 mb-2">
-<div class="flex items-center gap-3">
-<img alt="Bucatarul Personal Logo" class="h-6 w-auto bg-white p-1 rounded" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDWW2JcO__kQeSpjXRQ4yD4UhQV-NlnFViQkrxfjCuerDnkyvTNshz04POE2lWnqAy6U1NHFDEU0mGFKFoZy4zxKgYD5Jd8phNjQOaervPxJ-mbnT9gtccYZ1shaJVBpvByRlQDLuuelzJ2F6IJ0GHazq9XJ34jpPjQ723BdO3tklEjF2QQQ6UcjQIH8J4c2IbYS2uV9rruL0Zjj7wdqw5qGhO8hUH49bTIryDLLXjTBgSBFhaHU9vFhiO-0gC_0DPvnry12nxNlYwS">
-<span class="font-label-md text-label-md font-bold uppercase tracking-wider">Parteneriat</span>
-</div>
-<span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
-</div>
-<p class="font-body-md text-body-md z-10 font-medium">Recomandă Bucătarul Personal și primești 10% comision.</p>
-</div>
-</div>
-<!-- Bento Grid: Recent Activity & Today's Schedule -->
-<div class="grid grid-cols-1 lg:grid-cols-3 gap-md">
-<!-- Recent Activity (Spans 2 cols on lg) -->
-<div class="glass-card rounded-xl p-lg lg:col-span-2 flex flex-col h-[400px]"><div class="flex justify-between items-center mb-md"><h2 class="font-headline-md text-headline-md text-on-surface">Mesaje Recente</h2><button class="text-primary font-label-sm text-label-sm hover:underline" onclick="switchTab('messages')">Vezi tot</button></div><div class="flex-1 overflow-y-auto pr-2 space-y-4 scrollbar-thin"><div class="flex items-center gap-4 p-3 rounded-lg hover:bg-surface-container-low transition-colors cursor-pointer" onclick="switchTab('messages')"><div class="w-10 h-10 rounded-full bg-primary-container/20 text-primary flex items-center justify-center font-bold">AP</div><div class="flex-1"><div class="flex justify-between"><p class="font-body-md text-on-surface font-semibold">Alexandru Popescu</p><span class="text-xs text-on-surface-variant">10:42</span></div><p class="font-label-sm text-on-surface-variant truncate">Salut, aș vrea să schimbăm programarea...</p></div></div><div class="flex items-center gap-4 p-3 rounded-lg hover:bg-surface-container-low transition-colors cursor-pointer" onclick="switchTab('messages')"><div class="w-10 h-10 rounded-full bg-secondary-container/20 text-secondary-container flex items-center justify-center font-bold">MI</div><div class="flex-1"><div class="flex justify-between"><p class="font-body-md text-on-surface font-semibold">Maria Ionescu</p><span class="text-xs text-on-surface-variant">Ieri</span></div><p class="font-label-sm text-on-surface-variant truncate">Am trimis pozele cu mesele de azi. Aștept feedback!</p></div></div><div class="flex items-center gap-4 p-3 rounded-lg hover:bg-surface-container-low transition-colors cursor-pointer" onclick="switchTab('messages')"><div class="w-10 h-10 rounded-full bg-tertiary-container/20 text-tertiary flex items-center justify-center font-bold">EP</div><div class="flex-1"><div class="flex justify-between"><p class="font-body-md text-on-surface font-semibold">Elena Popa</p><span class="text-xs text-on-surface-variant">Luni</span></div><p class="font-label-sm text-on-surface-variant truncate">Am o întrebare legată de gustarea de după-amiază...</p></div></div></div></div>
-<!-- Today's Schedule -->
-<div class="bg-surface-container-lowest rounded-xl p-lg border border-outline-variant/50 shadow-[0_4px_20px_rgba(0,0,0,0.02)] h-[400px] flex flex-col">
-<h2 class="font-headline-md text-headline-md text-on-surface mb-md flex items-center gap-2">
-<span class="material-symbols-outlined text-secondary-container">calendar_today</span>
-                        Program Azi
-                    </h2>
-<div class="flex-1 space-y-4 overflow-y-auto scrollbar-thin">
-<!-- Appointment 1 -->
-<div class="relative pl-6 border-l-2 border-primary-container pb-4 cursor-pointer hover:bg-surface-container-low transition-colors -ml-6 pl-12 py-2 rounded-r-lg">
-<div class="absolute w-3 h-3 bg-primary-container rounded-full -left-[7px] top-3 border-2 border-surface-container-lowest"></div>
-<p class="font-label-sm text-label-sm text-primary-container font-semibold mb-1">09:00 - 10:00 (Finalizat)</p>
-<p class="font-body-md text-body-md text-on-surface font-medium">Cosmin Rusu</p><button class="text-primary hover:text-surface-tint" onclick="switchTab('messages')"><span class="material-symbols-outlined text-sm">chat</span></button>
-<p class="font-label-sm text-label-sm text-on-surface-variant">Evaluare inițială</p>
-</div>
-<!-- Appointment 2 (Active/Next) -->
-<div class="relative pl-6 border-l-2 border-tertiary-container pb-4 bg-tertiary-container/5 -ml-6 pl-12 py-3 rounded-r-lg group">
-<div class="absolute w-4 h-4 bg-tertiary-container rounded-full -left-[9px] top-4 border-4 border-surface-container-lowest shadow-sm"></div>
-<p class="font-label-sm text-label-sm text-tertiary font-semibold mb-1">11:30 - 12:15 (Urmează)</p>
-<p class="font-body-md text-body-md text-on-surface font-medium">Laura Dinu</p>
-<p class="font-label-sm text-label-sm text-on-surface-variant mb-2">Follow-up lunar</p>
-<button class="flex items-center gap-2 text-sm font-medium bg-tertiary text-on-tertiary px-4 py-2 rounded-full hover:bg-tertiary/90 hover:shadow-md active:scale-95 transition-all w-fit">
-<span class="material-symbols-outlined text-sm">video_call</span>
-                                Alătură-te apelului
-                            </button>
-</div>
-<!-- Appointment 3 -->
-<div class="relative pl-6 border-l-2 border-outline-variant pb-4 mt-2 cursor-pointer hover:bg-surface-container-low transition-colors -ml-6 pl-12 py-2 rounded-r-lg">
-<div class="absolute w-3 h-3 bg-outline-variant rounded-full -left-[7px] top-3 border-2 border-surface-container-lowest"></div>
-<p class="font-label-sm text-label-sm text-on-surface-variant font-semibold mb-1">14:00 - 14:30</p>
-<p class="font-body-md text-body-md text-on-surface font-medium">Mihai Vasile</p>
-<p class="font-label-sm text-label-sm text-on-surface-variant">Ajustare plan nutrițional</p>
-</div>
-</div>
-</div>
-</div>
-</section>
-<!-- CLIENTS TAB -->
-<section class="hidden animate-fade-in" id="tab-clients">
-<div class="flex justify-between items-end mb-md">
-<h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface">Situație Financiară</h1>
-<button class="bg-primary hover:bg-surface-tint active:scale-95 text-on-primary font-label-md px-6 py-3 rounded-lg flex items-center gap-2 transition-all shadow-sm">
-<span class="material-symbols-outlined text-sm">person_add</span>
-                    Client Nou
-                </button>
-</div>
-<div class="glass-card rounded-xl p-md mb-md">
-<div class="relative">
-<span class="material-symbols-outlined absolute left-4 top-3 text-on-surface-variant">search</span>
-<input class="w-full pl-12 pr-4 py-3 bg-surface-container-lowest border border-outline-variant rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent font-body-md transition-shadow hover:shadow-sm" placeholder="Caută client după nume, email..." type="text">
-</div>
-<div class="flex gap-2 mt-4 overflow-x-auto pb-2 scrollbar-hide">
-<button class="px-4 py-1.5 rounded-full border border-primary bg-primary/10 text-primary font-label-sm whitespace-nowrap">Toți (42)</button>
-<button class="px-4 py-1.5 rounded-full border border-outline-variant text-on-surface-variant hover:bg-surface-container-low font-label-sm whitespace-nowrap">Progres Bun</button>
-<button class="px-4 py-1.5 rounded-full border border-outline-variant text-on-surface-variant hover:bg-surface-container-low font-label-sm whitespace-nowrap">Necesită Atenție</button>
-<button class="px-4 py-1.5 rounded-full border border-outline-variant text-on-surface-variant hover:bg-surface-container-low font-label-sm whitespace-nowrap">Recenți</button>
-</div>
-</div>
-<!-- List goes here -->
-<div class="bg-surface-container-lowest rounded-xl border border-outline-variant/50 overflow-hidden shadow-sm">
-<ul class="divide-y divide-outline-variant/30">
-<li class="p-md hover:bg-surface-container-low transition-colors flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-<div class="flex items-center gap-4">
-<div class="w-12 h-12 bg-primary-container/20 text-primary-container rounded-full flex items-center justify-center font-headline-md shrink-0">
-                                EP
+<body class="text-on-background pb-24 md:pb-0">
+
+    <aside class="hidden md:flex flex-col h-full py-6 px-4 bg-surface-container-lowest border-r border-outline-variant/50 shadow-sm fixed left-0 w-72 z-40">
+        <div class="flex items-center gap-3 mb-10 px-2">
+            <div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold text-xl overflow-hidden">
+                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">eco</span>
+            </div>
+            <div>
+                <h2 class="font-headline-md text-xl text-primary font-bold">Vitality</h2>
+                <p class="font-label-sm text-xs text-on-surface-variant">Andreea Popescu</p>
+            </div>
+        </div>
+        <nav class="flex-1 flex flex-col gap-2">
+            <button onclick="switchMainTab('home')" class="nav-btn-desktop flex items-center gap-3 px-4 py-3 rounded-xl mx-2 font-label-md transition-colors duration-200 bg-primary-container text-on-primary-container font-bold" data-target="home">
+                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home</span> Acasă
+            </button>
+            <button onclick="switchMainTab('diary')" class="nav-btn-desktop flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-xl mx-2 font-label-md transition-colors duration-200" data-target="diary">
+                <span class="material-symbols-outlined">menu_book</span> Jurnal
+            </button>
+            <button onclick="switchMainTab('plans')" class="nav-btn-desktop flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-xl mx-2 font-label-md transition-colors duration-200" data-target="plans">
+                <span class="material-symbols-outlined">assignment</span> Planuri
+            </button>
+            <button onclick="switchMainTab('communication')" class="nav-btn-desktop flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-xl mx-2 font-label-md transition-colors duration-200" data-target="communication">
+                <span class="material-symbols-outlined">chat</span> Comunicare
+            </button>
+            <button onclick="switchMainTab('profile')" class="nav-btn-desktop flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-xl mx-2 font-label-md transition-colors duration-200 mt-auto" data-target="profile">
+                <span class="material-symbols-outlined">person</span> Profil
+            </button>
+        </nav>
+    </aside>
+
+    <header class="md:hidden flex justify-between items-center w-full px-4 py-3 bg-surface shadow-sm sticky top-0 z-30 border-b border-outline-variant/30">
+        <div class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">eco</span>
+            <h1 class="font-headline-md text-lg font-bold text-primary" id="mobile-header-title">Vitality</h1>
+        </div>
+        <button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low transition-colors">
+            <span class="material-symbols-outlined">notifications</span>
+        </button>
+    </header>
+
+    <main class="main-content-offset max-w-[1280px] mx-auto px-4 md:px-8 py-6 md:py-8 w-full">
+        
+        <section id="tab-home" class="block animate-fade-in space-y-8">
+            <div class="space-y-1">
+                <h1 class="text-3xl md:text-4xl font-bold text-on-background">Bună dimineața, Andreea</h1>
+                <p class="text-on-surface-variant">Să facem din ziua de azi o zi grozavă.</p>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                <div class="col-span-2 md:col-span-1 bg-surface-container-lowest rounded-xl p-6 card-shadow border border-surface-variant flex items-center justify-between">
+                    <div>
+                        <h3 class="text-sm font-semibold text-on-surface-variant uppercase">Calorii</h3>
+                        <div class="mt-2">
+                            <span class="text-2xl font-bold text-primary">1,450</span>
+                            <span class="text-on-surface-variant"> / 2,200</span>
+                        </div>
+                        <p class="text-xs font-medium text-primary mt-1">+750 rămase</p>
+                    </div>
+                    <div class="relative w-20 h-20">
+                        <svg class="w-full h-full" viewBox="0 0 100 100">
+                            <circle class="text-surface-variant stroke-current" cx="50" cy="50" fill="transparent" r="40" stroke-width="8"></circle>
+                            <circle class="text-primary stroke-current progress-ring__circle" cx="50" cy="50" fill="transparent" r="40" stroke-dasharray="251.2" stroke-dashoffset="85" stroke-linecap="round" stroke-width="8"></circle>
+                        </svg>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-span-1 bg-surface-container-lowest rounded-xl p-4 card-shadow border border-surface-variant flex flex-col justify-between">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-xs font-semibold text-on-surface-variant uppercase">Hidratare</h3>
+                        <span class="material-symbols-outlined text-tertiary text-lg">water_drop</span>
+                    </div>
+                    <div class="mt-2">
+                        <span class="text-xl font-bold text-on-background">4</span>
+                        <span class="text-sm text-on-surface-variant">/ 8 pahare</span>
+                    </div>
+                    <div class="flex gap-1 mt-3">
+                        <div class="h-1.5 flex-1 rounded-full bg-tertiary"></div>
+                        <div class="h-1.5 flex-1 rounded-full bg-tertiary"></div>
+                        <div class="h-1.5 flex-1 rounded-full bg-tertiary"></div>
+                        <div class="h-1.5 flex-1 rounded-full bg-tertiary"></div>
+                        <div class="h-1.5 flex-1 rounded-full bg-surface-variant"></div>
+                        <div class="h-1.5 flex-1 rounded-full bg-surface-variant"></div>
+                        <div class="h-1.5 flex-1 rounded-full bg-surface-variant"></div>
+                        <div class="h-1.5 flex-1 rounded-full bg-surface-variant"></div>
+                    </div>
+                </div>
+                <div class="col-span-1 bg-surface-container-lowest rounded-xl p-4 card-shadow border border-surface-variant flex flex-col justify-between">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-xs font-semibold text-on-surface-variant uppercase">Pași</h3>
+                        <span class="material-symbols-outlined text-secondary text-lg">directions_walk</span>
+                    </div>
+                    <div class="mt-2">
+                        <span class="text-xl font-bold text-on-background">6,240</span>
+                    </div>
+                    <div class="w-full bg-surface-variant rounded-full h-1.5 mt-3">
+                        <div class="bg-secondary h-1.5 rounded-full" style="width: 60%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="space-y-4">
+                <div class="flex items-center justify-between">
+                    <h2 class="text-xl font-bold text-on-background">Mesele Zilei</h2>
+                    <button onclick="switchMainTab('diary')" class="text-sm font-semibold text-primary flex items-center gap-1 active:scale-95 transition-transform">
+                        Vezi Jurnal <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                    </button>
+                </div>
+                <div class="flex overflow-x-auto hide-scroll gap-4 pb-2 -mx-4 px-4 md:mx-0 md:px-0">
+                    <div class="min-w-[260px] bg-surface-container-lowest rounded-xl card-shadow border border-surface-variant overflow-hidden flex flex-col">
+                        <div class="h-32 bg-surface-variant relative">
+                            <img alt="Mic Dejun" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/ADBb0uhmVLuyDjNBk3LbmTYSMl-p1dQXrx4ihYrJObPF5VN25n8pP3yJnAJ8KsGu8P2b3yPAZt0UQi7wm605EpXQ6ziDh-9oAMhhclUBtC7jdoJ47zdAfy2fXoPDmxr56dvlAZI2avQW-3zTI_9ZonCR60svJHEQ57NtZPAZyb6SMn7RgRgr7w74r7Ty0YqTBGKAKfvsbA-ApSp40JSMMzt4Ejw6F6kLTFQprna_sybUzBvbZeYo5mHtHYz8aWwH"/>
+                            <div class="absolute top-2 right-2 bg-surface-container-lowest/90 backdrop-blur-sm px-2 py-1 rounded text-xs font-medium">450 kcal</div>
+                        </div>
+                        <div class="p-4 flex flex-col flex-grow justify-between">
+                            <div>
+                                <h3 class="text-xs font-bold text-primary uppercase mb-1">Mic Dejun</h3>
+                                <p class="font-medium">Salată Mediteraneană cu Somon</p>
                             </div>
-<div>
-<h3 class="font-body-lg font-semibold text-on-surface">Elena Popescu</h3>
-<p class="font-label-sm text-on-surface-variant">Scădere în greutate • Activ de 3 luni</p>
-</div>
-</div>
-<div class="flex items-center justify-between sm:justify-end gap-md w-full sm:w-auto">
-<div class="text-left sm:text-right">
-<p class="font-label-sm text-primary-container font-semibold">Progres bun</p>
-<p class="font-label-sm text-on-surface-variant">Ultima vizită: Acum 2 zile</p>
-</div>
-<div class="flex gap-2 shrink-0">
-<button class="p-2 text-on-surface-variant hover:bg-surface-variant rounded-full transition-colors" title="Vezi Profil">
-<span class="material-symbols-outlined">visibility</span>
-</button>
-<button class="p-2 text-on-surface-variant hover:bg-surface-variant rounded-full transition-colors" onclick="switchTab('messages')" title="Trimite Mesaj">
-<span class="material-symbols-outlined">mail</span>
-</button>
-</div>
-</div>
-</li>
-<li class="p-md hover:bg-surface-container-low transition-colors flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-<div class="flex items-center gap-4">
-<div class="w-12 h-12 bg-secondary-container/20 text-secondary-container rounded-full flex items-center justify-center font-headline-md shrink-0">
-                                MV
+                        </div>
+                    </div>
+                    <div class="min-w-[260px] bg-surface-container-lowest rounded-xl card-shadow border border-surface-variant overflow-hidden flex flex-col">
+                        <div class="h-32 bg-surface-variant relative">
+                            <img alt="Prânz" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/ADBb0ugYPQMXjl0swUCQ1LJzIWjLgVhhxb2-ipbMapTperWooVu77SE_J6XSm2hBVZUXwAhkqfX1v1s5LGZNUcNZlgwzOzGxAwPHmK8j4aSUCR_LC_u1ZguvwF2WSYQlNuedGvWoyhNh-zIXS3WJrUQ4JP6BRU9jS6ejbIcLEWabnPYuEnkzl5Ms1CghrCxe17pVifHbEBU8MKX3KTNG5zaO9d3_Lw1SozqBZodCMzK9g5Mgxh6eoONVPsH1OoOY"/>
+                            <div class="absolute top-2 right-2 bg-surface-container-lowest/90 backdrop-blur-sm px-2 py-1 rounded text-xs font-medium">620 kcal</div>
+                        </div>
+                        <div class="p-4 flex flex-col flex-grow justify-between">
+                            <div>
+                                <h3 class="text-xs font-bold text-primary uppercase mb-1">Prânz</h3>
+                                <p class="font-medium">Pui la Grătar cu Legume</p>
                             </div>
-<div>
-<h3 class="font-body-lg font-semibold text-on-surface">Mihai Vasile</h3>
-<p class="font-label-sm text-on-surface-variant">Menținere • Activ de 1 an</p>
-</div>
-</div>
-<div class="flex items-center justify-between sm:justify-end gap-md w-full sm:w-auto">
-<div class="text-left sm:text-right">
-<p class="font-label-sm text-secondary-container font-semibold">Stabil</p>
-<p class="font-label-sm text-on-surface-variant">Ultima vizită: Acum 1 săptămână</p>
-</div>
-<div class="flex gap-2 shrink-0">
-<button class="p-2 text-on-surface-variant hover:bg-surface-variant rounded-full transition-colors" title="Vezi Profil">
-<span class="material-symbols-outlined">visibility</span>
-</button>
-<button class="p-2 text-on-surface-variant hover:bg-surface-variant rounded-full transition-colors" onclick="switchTab('messages')" title="Trimite Mesaj">
-<span class="material-symbols-outlined">mail</span>
-</button>
-</div>
-</div>
-</li>
-<li class="p-md hover:bg-surface-container-low transition-colors flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-<div class="flex items-center gap-4">
-<div class="w-12 h-12 bg-error-container/20 text-error rounded-full flex items-center justify-center font-headline-md shrink-0">
-                                AD
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="space-y-4">
+                <h2 class="text-xl font-bold text-on-background">Sarcini Nutriționist</h2>
+                <div class="bg-surface-container-lowest rounded-xl card-shadow border border-surface-variant p-4 space-y-2">
+                    <label class="flex items-start gap-3 cursor-pointer p-2 rounded-lg hover:bg-surface-container-low transition-colors">
+                        <input checked type="checkbox" class="mt-1 w-5 h-5 text-primary rounded border-outline-variant"/>
+                        <div>
+                            <p class="line-through opacity-70">Bea un pahar de apă cu lămâie dimineața</p>
+                        </div>
+                    </label>
+                    <div class="h-px bg-surface-variant w-full"></div>
+                    <label class="flex items-start gap-3 cursor-pointer p-2 rounded-lg hover:bg-surface-container-low transition-colors">
+                        <input type="checkbox" class="mt-1 w-5 h-5 text-primary rounded border-outline-variant"/>
+                        <div>
+                            <p>Evită carbohidrații simpli după ora 18:00</p>
+                        </div>
+                    </label>
+                </div>
+            </div>
+        </section>
+
+        <section id="tab-diary" class="hidden animate-fade-in space-y-6">
+            <div class="flex justify-between items-center">
+                <div>
+                    <h1 class="text-2xl md:text-3xl font-bold text-on-surface mb-1">Astăzi, 24 Octombrie</h1>
+                    <p class="text-on-surface-variant">Jurnalul tău de nutriție.</p>
+                </div>
+                <button class="bg-surface-container-low hover:bg-surface-container-high px-4 py-2 rounded-lg text-sm font-semibold flex items-center gap-2 transition-colors">
+                    <span class="material-symbols-outlined text-lg">calendar_today</span> <span class="hidden sm:inline">Schimbă Data</span>
+                </button>
+            </div>
+
+            <div class="bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant/50 p-6 flex flex-col md:flex-row gap-8 items-center justify-between">
+                <div class="flex-1 w-full md:w-auto text-center md:text-left">
+                    <h2 class="text-lg font-bold text-on-surface mb-2">Calorii Consumate</h2>
+                    <div class="flex items-baseline justify-center md:justify-start gap-2 mb-3">
+                        <span class="text-4xl font-bold text-primary">1,450</span>
+                        <span class="text-on-surface-variant">/ 2,200 kcal</span>
+                    </div>
+                    <div class="w-full bg-surface-variant rounded-full h-2 mb-2 overflow-hidden">
+                        <div class="bg-primary h-2 rounded-full" style="width: 65%"></div>
+                    </div>
+                    <p class="text-xs text-on-surface-variant text-right">750 kcal rămase</p>
+                </div>
+                <div class="flex gap-4 w-full md:w-auto justify-center">
+                    <div class="flex flex-col items-center bg-tertiary-fixed/30 px-4 py-3 rounded-lg min-w-[80px]">
+                        <span class="text-xs font-semibold text-on-tertiary-container uppercase tracking-wider mb-1">Proteine</span>
+                        <span class="text-lg font-bold text-on-tertiary-container">85g</span>
+                        <span class="text-[10px] text-on-tertiary-container/70">/ 120g</span>
+                    </div>
+                    <div class="flex flex-col items-center bg-secondary-fixed/30 px-4 py-3 rounded-lg min-w-[80px]">
+                        <span class="text-xs font-semibold text-on-secondary-container uppercase tracking-wider mb-1">Carbo</span>
+                        <span class="text-lg font-bold text-on-secondary-container">120g</span>
+                        <span class="text-[10px] text-on-secondary-container/70">/ 200g</span>
+                    </div>
+                    <div class="flex flex-col items-center bg-error-container/30 px-4 py-3 rounded-lg min-w-[80px]">
+                        <span class="text-xs font-semibold text-on-error-container uppercase tracking-wider mb-1">Grăsimi</span>
+                        <span class="text-lg font-bold text-on-error-container">45g</span>
+                        <span class="text-[10px] text-on-error-container/70">/ 65g</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <article class="bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant/50 p-5">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="flex items-center gap-3">
+                            <div class="bg-primary-container/20 p-2 rounded-lg text-primary"><span class="material-symbols-outlined">bakery_dining</span></div>
+                            <div>
+                                <h3 class="text-lg font-bold text-on-surface">Mic Dejun</h3>
+                                <p class="text-sm font-semibold text-primary">420 kcal</p>
                             </div>
-<div>
-<h3 class="font-body-lg font-semibold text-on-surface">Ana Dumitrescu</h3>
-<p class="font-label-sm text-on-surface-variant">Nutriție sportivă • Activ de 1 lună</p>
-</div>
-</div>
-<div class="flex items-center justify-between sm:justify-end gap-md w-full sm:w-auto">
-<div class="text-left sm:text-right">
-<p class="font-label-sm text-error font-semibold">Necesită atenție</p>
-<p class="font-label-sm text-on-surface-variant">Jurnal incomplet</p>
-</div>
-<div class="flex gap-2 shrink-0">
-<button class="p-2 text-on-surface-variant hover:bg-surface-variant rounded-full transition-colors" title="Vezi Profil">
-<span class="material-symbols-outlined">visibility</span>
+                        </div>
+                        <button class="bg-primary text-on-primary hover:bg-primary/90 w-8 h-8 rounded-full flex items-center justify-center"><span class="material-symbols-outlined text-sm">add</span></button>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center py-2 border-b border-surface-variant">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded bg-surface-container overflow-hidden shrink-0">
+                                    <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCAms0dZY6OmkQ8ZOCYSDv9C2pQaVAaNl9CFntfmeQN39q4sO5Ov-uZvJjW5aLODn9jEaW1LBMIpvfE4ZX-pXWES1OvlS2U2wsA2xJ550PNH71RUh49HVstKccH0ikUeX5-ss-_Pp9roDbz5ltB_922xBiiTUM1-52_tYlDYWAP2e1J7-Rx6lyPbiz_6HSZePAufftE_XTFD3A4AJybMBg5nRujPmCGsT46z6IU6T2YMxm3yZLogf5nPhAg6mOoIK5QoMfLqsg0Wnbp" class="w-full h-full object-cover"/>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-sm">Ovăz cu fructe de pădure</p>
+                                    <p class="text-xs text-on-surface-variant">250g</p>
+                                </div>
+                            </div>
+                            <span class="text-sm font-semibold text-on-surface-variant">310 kcal</span>
+                        </div>
+                        <div class="flex justify-between items-center py-2">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded bg-surface-container overflow-hidden shrink-0">
+                                    <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuClTMxJmT0ILURrdD0z5yW50nYcSM7uKcjDQmRvzyIl-MjOCDucfBx4yTg3f_TAIl03aoavas3mfEyDsm2lB543oJco3qF-Vsh-iBHgMCZ-TdK5qZVaflUNTUgANHZJJo3IMiLlbAkglC2TBnrkwJ57AQ90LSpQDTlqMEDePcKKBreL28qugGsXffS3p-qTWNHbL9vBljN9wCi9XJDzvPirMzgdMFQ9GkSpaM_eJmzB6ncbXJjdpp2nXeU8_ijiAEccMEvDGxVcmCMD" class="w-full h-full object-cover"/>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-sm">Cafea Neagră</p>
+                                    <p class="text-xs text-on-surface-variant">1 cană</p>
+                                </div>
+                            </div>
+                            <span class="text-sm font-semibold text-on-surface-variant">5 kcal</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant/50 p-5">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="flex items-center gap-3">
+                            <div class="bg-primary-container/20 p-2 rounded-lg text-primary"><span class="material-symbols-outlined">dinner_dining</span></div>
+                            <div>
+                                <h3 class="text-lg font-bold text-on-surface">Cină</h3>
+                                <p class="text-sm font-semibold text-on-surface-variant">0 kcal</p>
+                            </div>
+                        </div>
+                        <button class="border border-primary text-primary hover:bg-primary/10 w-8 h-8 rounded-full flex items-center justify-center"><span class="material-symbols-outlined text-sm">add</span></button>
+                    </div>
+                    <div class="py-8 flex flex-col items-center justify-center text-center">
+                        <span class="material-symbols-outlined text-surface-variant text-4xl mb-2">restaurant_menu</span>
+                        <p class="text-on-surface-variant text-sm">Nu ai adăugat nimic încă.</p>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section id="tab-plans" class="hidden animate-fade-in space-y-6">
+            <div class="space-y-1">
+                <h1 class="text-2xl md:text-3xl font-bold text-on-surface">Planuri Nutriționale</h1>
+                <p class="text-on-surface-variant">Gestionează-ți alimentația și obiectivele curente.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="md:col-span-2 bg-surface-container-lowest rounded-xl p-6 shadow-sm border border-outline-variant/50">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-6 gap-4">
+                        <h3 class="text-xl font-bold">Plan Curent: Deficit Caloric</h3>
+                        <span class="bg-primary-container/20 text-primary-fixed-variant text-sm font-bold px-3 py-1.5 rounded-full flex items-center gap-1 w-fit">
+                            <span class="material-symbols-outlined text-sm">local_fire_department</span> Activ
+                        </span>
+                    </div>
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
+                        <div class="bg-surface-container-low p-3 rounded-lg text-center border border-surface-variant">
+                            <p class="text-xs text-on-surface-variant mb-1">Calorii</p>
+                            <p class="text-xl font-bold text-primary">1850</p>
+                        </div>
+                        <div class="bg-surface-container-low p-3 rounded-lg text-center border border-surface-variant">
+                            <p class="text-xs text-on-surface-variant mb-1">Proteine</p>
+                            <p class="text-xl font-bold text-tertiary">140g</p>
+                        </div>
+                        <div class="bg-surface-container-low p-3 rounded-lg text-center border border-surface-variant">
+                            <p class="text-xs text-on-surface-variant mb-1">Carbohidrați</p>
+                            <p class="text-xl font-bold text-secondary">180g</p>
+                        </div>
+                        <div class="bg-surface-container-low p-3 rounded-lg text-center border border-surface-variant">
+                            <p class="text-xs text-on-surface-variant mb-1">Grăsimi</p>
+                            <p class="text-xl font-bold text-secondary-container">55g</p>
+                        </div>
+                    </div>
+                    <div class="w-full bg-surface-variant rounded-full h-2 mb-2">
+                        <div class="bg-primary h-2 rounded-full" style="width: 70%"></div>
+                    </div>
+                    <p class="text-xs text-on-surface-variant text-right">70% respectat luna aceasta</p>
+                </div>
+                
+                <div class="col-span-1 bg-surface-container-lowest rounded-xl p-6 shadow-sm border border-outline-variant/50 flex flex-col items-center justify-center text-center">
+                    <span class="material-symbols-outlined text-primary text-5xl mb-3">restaurant</span>
+                    <h4 class="text-lg font-bold mb-1">Următoarea Masă</h4>
+                    <p class="text-on-surface-variant mb-4">Prânz - 13:00</p>
+                    <button class="bg-primary text-on-primary text-sm font-semibold px-6 py-2.5 rounded-lg w-full hover:bg-primary/90 transition-colors">Vezi Detalii</button>
+                </div>
+            </div>
+
+            <div>
+                <h3 class="text-xl font-bold mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-secondary">star</span> Rețete Recomandate</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm border border-outline-variant/50 group cursor-pointer">
+                        <div class="h-40 overflow-hidden relative">
+                            <img src="https://lh3.googleusercontent.com/aida/ADBb0ugYPQMXjl0swUCQ1LJzIWjLgVhhxb2-ipbMapTperWooVu77SE_J6XSm2hBVZUXwAhkqfX1v1s5LGZNUcNZlgwzOzGxAwPHmK8j4aSUCR_LC_u1ZguvwF2WSYQlNuedGvWoyhNh-zIXS3WJrUQ4JP6BRU9jS6ejbIcLEWabnPYuEnkzl5Ms1CghrCxe17pVifHbEBU8MKX3KTNG5zaO9d3_Lw1SozqBZodCMzK9g5Mgxh6eoONVPsH1OoOY" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+                            <div class="absolute top-2 right-2 bg-surface-container-lowest/90 px-2 py-1 rounded text-xs font-bold shadow-sm">350 kcal</div>
+                        </div>
+                        <div class="p-4">
+                            <h4 class="font-bold text-md mb-1">Pui la Grătar cu Legume</h4>
+                            <p class="text-sm text-on-surface-variant mb-3 line-clamp-2">Piept de pui suculent cu legume de sezon la cuptor.</p>
+                            <div class="flex gap-2 text-[10px] font-bold">
+                                <span class="bg-tertiary-container/30 text-on-tertiary-container px-2 py-1 rounded">Proteine: 45g</span>
+                                <span class="bg-secondary-container/30 text-on-secondary-container px-2 py-1 rounded">Timp: 25m</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="tab-communication" class="hidden animate-fade-in flex-col gap-4">
+            <div class="flex flex-col gap-2 mb-2">
+                <h1 class="text-2xl md:text-3xl font-bold text-on-surface">Comunicare & Programări</h1>
+                <p class="text-on-surface-variant">Discută cu specialiștii tăi.</p>
+            </div>
+            
+            <div class="bg-surface-container-low p-1 rounded-lg inline-flex w-full md:w-auto relative mb-2">
+                <div class="absolute inset-y-1 left-1 w-[calc(50%-4px)] bg-surface-container-lowest rounded shadow-sm transition-transform duration-300 ease-in-out" id="comm-indicator"></div>
+                <button onclick="switchCommTab('mesaje')" id="btn-comm-mesaje" class="flex-1 md:px-8 py-2 text-sm font-bold text-on-surface relative z-10 transition-colors">Mesaje</button>
+                <button onclick="switchCommTab('programari')" id="btn-comm-programari" class="flex-1 md:px-8 py-2 text-sm font-semibold text-on-surface-variant relative z-10 transition-colors">Programări</button>
+            </div>
+
+            <div id="subtab-mesaje" class="flex flex-col gap-4 transition-opacity duration-300 relative block">
+                <div class="bg-primary/10 border border-primary/20 rounded-xl p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center text-primary relative">
+                            <span class="material-symbols-outlined">chat</span>
+                            <span class="absolute top-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-surface"></span>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-on-surface">Dr. Sarah Miller este online</h3>
+                            <p class="text-sm text-on-surface-variant">Răspunde de obicei în 5 minute</p>
+                        </div>
+                    </div>
+                    <button class="w-full sm:w-auto px-6 py-2.5 bg-primary text-on-primary rounded-lg font-semibold flex items-center justify-center gap-2 hover:bg-primary/90 transition-colors">
+                        Deschide Chat
+                    </button>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="glass-card rounded-xl p-4 hover:shadow-md transition-shadow cursor-pointer border border-outline-variant/30 group">
+                        <div class="flex items-start gap-4">
+                            <div class="relative">
+                                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDfoH4MBfc1-mof4Nx_Z7s5K2YME2nw6YVgUS-idvdN6dXUIx9W0ZaFsFe0JhbC3JJwbZBvAAxQMPLJRQFMCRg6C3rov5osmjt2R4Ks53N-utaqnywCHAHVBPRDdjuGJLa_DJjOu2R1qVUgal4ySRoGdfNGXAnj-RQcn0XZq2QTiT00BsSuxkj9SdMvnZOUpa0M5YS8d5Q5pvfSGFveVSTCcU4U-z-NlXjR9VZXqAnlE8iJrjJrGP0eRRO1YIxr7q9uYCLBSTC4eVNl" class="w-12 h-12 rounded-full object-cover border border-surface"/>
+                                <span class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-surface"></span>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <div class="flex justify-between items-baseline mb-1">
+                                    <h4 class="font-bold text-on-surface group-hover:text-primary transition-colors">Dr. Sarah Miller</h4>
+                                    <span class="text-xs text-on-surface-variant">10:42</span>
+                                </div>
+                                <p class="text-xs text-primary mb-1">Nutriționist</p>
+                                <p class="text-sm text-on-surface-variant truncate">Analizele arată excelent. Să menținem planul...</p>
+                            </div>
+                            <div class="w-5 h-5 rounded-full bg-primary text-on-primary flex items-center justify-center text-[10px] font-bold flex-shrink-0">2</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="subtab-programari" class="hidden flex-col gap-4 transition-opacity duration-300 opacity-0 absolute top-14 w-full">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div class="glass-card rounded-xl p-5 border border-outline-variant/30 flex flex-col gap-4 relative overflow-hidden group">
+                        <div class="absolute top-0 left-0 w-1 h-full bg-primary"></div>
+                        <div class="flex justify-between items-start">
+                            <div class="flex flex-col">
+                                <span class="text-2xl text-primary font-bold">15</span>
+                                <span class="text-xs text-on-surface-variant uppercase font-bold">Oct</span>
+                            </div>
+                            <div class="bg-surface-container-low px-3 py-1 rounded text-xs font-semibold flex items-center gap-1 border border-surface-variant">
+                                <span class="material-symbols-outlined text-[14px]">schedule</span> 14:00 - 14:45
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-1">Evaluare Lunară Nutriție</h4>
+                            <p class="text-sm text-on-surface-variant flex items-center gap-1">
+                                <span class="material-symbols-outlined text-[16px]">person</span> Dr. Sarah Miller
+                            </p>
+                        </div>
+                        <div class="mt-auto pt-4 border-t border-surface-variant flex gap-2">
+                            <button class="flex-1 py-2 rounded border border-primary text-primary text-xs font-bold hover:bg-primary/5">Reprogramează</button>
+                            <button class="flex-1 py-2 rounded bg-surface-container-low text-on-surface-variant text-xs font-bold hover:bg-surface-container-high">Detalii</button>
+                        </div>
+                    </div>
+                    
+                    <button class="rounded-xl p-5 border-2 border-dashed border-outline-variant flex flex-col items-center justify-center gap-3 text-on-surface-variant hover:border-primary hover:text-primary transition-colors hover:bg-primary/5 min-h-[180px]">
+                        <div class="w-10 h-10 rounded-full bg-surface-container-low flex items-center justify-center">
+                            <span class="material-symbols-outlined">add</span>
+                        </div>
+                        <span class="text-sm font-bold">Programează Consultație Nouă</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section id="tab-profile" class="hidden animate-fade-in space-y-6">
+            <div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm border border-outline-variant/50 flex flex-col sm:flex-row items-center sm:items-start gap-6">
+                <div class="w-24 h-24 sm:w-32 sm:h-32 rounded-full overflow-hidden shrink-0 border-4 border-surface shadow-sm">
+                    <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCXfKD9SceclNunGTL1cwnnPyi8NnNwzubEK1gE29F7I8pqGNkqKQFi96cPhvepicdpxOyGouE-wDDmZ0mvcVkPq4Jyt2VcOw2IMV58EFNkQs-jaXra7KpURqE1_OHQHsakLcwbdEcOff4KcNyQA5bs4A6IyC6DiKPhqyWhJymivpm6eoJ5EcKOR3sRgy3msZfuQ0ZMQA5IAu06nwSfghzgKYyrQ2tUJYgREGzEFjvD4uu4n99_u3noUvrvp65rdzAodjIUBhz5_LnN" class="w-full h-full object-cover"/>
+                </div>
+                <div class="text-center sm:text-left flex-1">
+                    <h1 class="text-2xl sm:text-3xl font-bold text-on-surface mb-2">Andreea Popescu</h1>
+                    <p class="text-on-surface-variant flex items-center justify-center sm:justify-start gap-2 mb-4">
+                        <span class="material-symbols-outlined text-sm">mail</span> andreea.p@example.com
+                    </p>
+                    <div class="inline-flex items-center gap-1.5 bg-primary/10 text-primary px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide">
+                        <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">verified</span> Membru Premium
+                    </div>
+                </div>
+                <button onclick="toggleEditModal(true)" class="bg-primary-container text-on-primary px-6 py-2 rounded-lg font-label-md transition-colors w-full shadow-sm">
+    Editează Profilul
 </button>
-<button class="p-2 text-on-surface-variant hover:bg-surface-variant rounded-full transition-colors" onclick="switchTab('messages')" title="Trimite Mesaj">
-<span class="material-symbols-outlined">mail</span>
-</button>
-</div>
-</div>
-</li>
-</ul>
-</div>
-</section>
-<!-- MESSAGES TAB -->
-<section class="animate-fade-in block" id="tab-messages"><div class="mb-md"><h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-sm">Hub Comunicare</h1><div class="flex border-b border-outline-variant"><button class="px-6 py-3 font-label-md text-primary border-b-2 border-primary" onclick="switchCommTab('chats')">Conversații</button><button class="px-6 py-3 font-label-md text-on-surface-variant hover:text-primary transition-colors" onclick="switchCommTab('video-history')">Istoric Video</button><button class="px-6 py-3 font-label-md text-on-surface-variant hover:text-primary transition-colors" onclick="switchCommTab('waiting-room')">Sala de Așteptare</button></div></div><div class="glass-card rounded-xl p-md mb-md"><div class="relative"><span class="material-symbols-outlined absolute left-4 top-3 text-on-surface-variant">search</span><input class="w-full pl-12 pr-4 py-3 bg-surface-container-lowest border border-outline-variant rounded-lg focus:outline-none focus:ring-2 focus:ring-primary font-body-md transition-shadow shadow-sm" placeholder="Caută conversație sau pacient..." type="text"></div></div><div id="comm-content-area"><div class="bg-surface-container-lowest rounded-xl border border-outline-variant/50 overflow-hidden shadow-sm"><ul class="divide-y divide-outline-variant/20"><li class="p-md hover:bg-surface-container-low transition-colors flex flex-col sm:flex-row sm:items-center justify-between gap-4"><div class="flex items-center gap-4"><div class="w-12 h-12 bg-primary-container/20 text-primary rounded-full flex items-center justify-center font-bold shrink-0">AP</div><div><h3 class="font-body-lg font-semibold text-on-surface">Alexandru Popescu</h3><p class="font-label-sm text-on-surface-variant truncate max-w-[200px] md:max-w-md">Salut, aș vrea să schimbăm programarea...</p></div></div><div class="flex gap-2 w-full sm:w-auto"><button class="flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 py-2 bg-primary text-on-primary rounded-lg font-label-sm transition-all hover:shadow-md active:scale-95"><span class="material-symbols-outlined text-sm">chat</span>Mesaj</button><button class="flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 py-2 border border-primary text-primary rounded-lg font-label-sm transition-all hover:bg-primary/5 active:scale-95"><span class="material-symbols-outlined text-sm">videocam</span>Video Call</button></div></li><li class="p-md hover:bg-surface-container-low transition-colors flex flex-col sm:flex-row sm:items-center justify-between gap-4"><div class="flex items-center gap-4"><div class="w-12 h-12 bg-secondary-container/20 text-secondary-container rounded-full flex items-center justify-center font-bold shrink-0">MI</div><div><h3 class="font-body-lg font-semibold text-on-surface">Maria Ionescu</h3><p class="font-label-sm text-on-surface-variant truncate max-w-[200px] md:max-w-md">Am trimis pozele cu mesele de azi...</p></div></div><div class="flex gap-2 w-full sm:w-auto"><button class="flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 py-2 bg-primary text-on-primary rounded-lg font-label-sm transition-all hover:shadow-md active:scale-95"><span class="material-symbols-outlined text-sm">chat</span>Mesaj</button><button class="flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 py-2 border border-primary text-primary rounded-lg font-label-sm transition-all hover:bg-primary/5 active:scale-95"><span class="material-symbols-outlined text-sm">videocam</span>Video Call</button></div></li><li class="p-md hover:bg-surface-container-low transition-colors flex flex-col sm:flex-row sm:items-center justify-between gap-4"><div class="flex items-center gap-4"><div class="w-12 h-12 bg-tertiary-container/20 text-tertiary-container rounded-full flex items-center justify-center font-bold shrink-0">EP</div><div><h3 class="font-body-lg font-semibold text-on-surface">Elena Popa</h3><p class="font-label-sm text-on-surface-variant truncate max-w-[200px] md:max-w-md">Am o éntrebare legată de gustarea de după-amiază...</p></div></div><div class="flex gap-2 w-full sm:w-auto"><button class="flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 py-2 bg-primary text-on-primary rounded-lg font-label-sm transition-all hover:shadow-md active:scale-95"><span class="material-symbols-outlined text-sm">chat</span>Mesaj</button><button class="flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 py-2 border border-primary text-primary rounded-lg font-label-sm transition-all hover:bg-primary/5 active:scale-95"><span class="material-symbols-outlined text-sm">videocam</span>Video Call</button></div></li></ul></div></div></section>
-<!-- FINANCIAL TAB -->
-<section class="animate-fade-in hidden" id="tab-financial"><div class="flex justify-between items-end mb-md"><h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface">Situație Financiară</h1><button class="bg-primary hover:bg-surface-tint active:scale-95 text-on-primary font-label-md px-6 py-3 rounded-lg flex items-center gap-2 transition-all shadow-md"><span class="material-symbols-outlined text-sm">receipt_long</span>Generează Factură Nouă</button></div><div class="grid grid-cols-1 lg:grid-cols-3 gap-md mb-lg"><div class="glass-card rounded-xl p-md flex flex-col col-span-1 lg:col-span-2"><div class="flex justify-between items-start mb-4"><div><span class="font-label-md text-on-surface-variant mb-1 block">Total Venituri (Luna curentă)</span><div class="flex items-center gap-3"><span class="text-[32px] md:text-[40px] leading-tight text-primary font-bold tracking-tight">12.450 RON</span><div class="flex items-center gap-1 bg-primary/10 text-primary px-2 py-0.5 rounded-full"><span class="material-symbols-outlined text-sm font-bold">trending_up</span><span class="text-xs font-bold">+15%</span></div></div></div><div class="flex gap-2"><button class="p-1 text-on-surface-variant hover:bg-surface-container-high rounded-md transition-colors text-sm">Săptămână</button><button class="p-1 bg-primary/10 text-primary rounded-md transition-colors text-sm">Lună</button></div></div><div class="flex-1 h-48 flex items-end gap-4 px-2 mb-2"><div class="flex-1 bg-surface-container-highest rounded-t-sm relative group h-[40%]"><div class="absolute -top-6 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity text-[10px] bg-inverse-surface text-inverse-on-surface px-1 rounded">Mai</div></div><div class="flex-1 bg-surface-container-highest rounded-t-sm relative group h-[55%]"></div><div class="flex-1 bg-surface-container-highest rounded-t-sm relative group h-[45%]"></div><div class="flex-1 bg-surface-container-highest rounded-t-sm relative group h-[70%]"></div><div class="flex-1 bg-surface-container-highest rounded-t-sm relative group h-[60%]"></div><div class="flex-1 bg-primary/40 rounded-t-sm relative group h-[85%]"></div></div><div class="flex justify-between text-[10px] text-on-surface-variant px-2 uppercase"><span class="">Mai</span><span class="">Iun</span><span class="">Iul</span><span class="">Aug</span><span class="">Sep</span><span class="font-bold text-primary">Oct</span></div></div><div class="glass-card rounded-xl p-md flex flex-col justify-between"><div><h3 class="font-label-md font-bold mb-4 uppercase tracking-wider">Statistici Servicii</h3><div class="space-y-4"><div class="flex flex-col gap-2"><div class="flex justify-between font-label-md text-on-surface"><span class="font-medium">Consultații</span><span class="font-semibold">6.225 RON (50%)</span></div><div class="w-full bg-surface-container-highest h-2 rounded-full overflow-hidden"><div class="bg-primary h-full rounded-full" style="width: 50%"></div></div></div><div class="flex flex-col gap-2"><div class="flex justify-between font-label-md text-on-surface"><span class="font-medium">Planuri Alimentare</span><span class="font-semibold">3.735 RON (30%)</span></div><div class="w-full bg-surface-container-highest h-2 rounded-full overflow-hidden"><div class="bg-tertiary h-full rounded-full" style="width: 30%"></div></div></div><div class="flex flex-col gap-2"><div class="flex justify-between font-label-md text-on-surface"><span class="font-medium">Abonamente</span><span class="font-semibold">2.490 RON (20%)</span></div><div class="w-full bg-surface-container-highest h-2 rounded-full overflow-hidden"><div class="bg-secondary-container h-full rounded-full" style="width: 20%"></div></div></div></div></div><button class="mt-4 text-primary font-label-sm hover:underline flex items-center gap-1">Vezi raport detaliat <span class="material-symbols-outlined text-sm">arrow_forward</span></button></div></div><div class="grid grid-cols-1 lg:grid-cols-3 gap-md"><div class="lg:col-span-1 space-y-md"><div class="bg-surface-container-lowest border border-outline-variant/50 rounded-xl p-md shadow-sm"><h3 class="font-label-md font-bold mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-error">pending_actions</span>Facturare Rapidă</h3><div class="space-y-3 mb-4"><div class="flex items-center justify-between p-3 hover:bg-surface-container-low rounded-xl transition-all cursor-pointer border border-transparent hover:border-outline-variant/30"><div class="flex items-center gap-3"><div class="w-10 h-10 rounded-full bg-primary-container/10 text-primary flex items-center justify-center font-bold text-sm">AD</div><div><p class="font-label-md text-on-surface font-semibold">Ana Dumitrescu</p><p class="text-xs text-on-surface-variant">Scadență: Azi</p></div></div><span class="font-label-md font-bold text-on-surface">300 RON</span></div><div class="flex items-center justify-between p-3 hover:bg-surface-container-low rounded-xl transition-all cursor-pointer border border-transparent hover:border-outline-variant/30"><div class="flex items-center gap-3"><div class="w-10 h-10 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center font-bold text-sm">MV</div><div><p class="font-label-md text-on-surface font-semibold">Mihai Vasile</p><p class="text-xs text-on-surface-variant">Scadență: 2 zile</p></div></div><span class="font-label-md font-bold text-on-surface">250 RON</span></div></div><button class="w-full py-2 border-2 border-primary text-primary hover:bg-primary/5 rounded-lg font-label-sm transition-colors">Trimite toate memento-urile</button></div></div><div class="lg:col-span-2 bg-surface-container-lowest border border-outline-variant/50 rounded-xl overflow-hidden shadow-sm"><div class="p-4 border-b border-outline-variant/30 flex justify-between items-center"><h3 class="font-headline-md text-on-surface">Istoric Tranzacții</h3><div class="flex items-center gap-2"><button class="p-2 hover:bg-surface-container-low rounded-full transition-colors"><span class="material-symbols-outlined text-lg">filter_list</span></button><button class="text-primary font-label-md hover:underline flex items-center gap-1">Raport <span class="material-symbols-outlined text-sm">download</span></button></div></div><div class="overflow-x-auto"><table class="w-full text-left border-collapse"><thead><tr class="bg-surface-container-low/50 text-on-surface-variant font-label-md"><th class="p-4 border-b border-outline-variant/30">Dată</th><th class="p-4 border-b border-outline-variant/30">Client</th><th class="p-4 border-b border-outline-variant/30">Sumă</th><th class="p-4 border-b border-outline-variant/30 text-center">Status</th></tr></thead><tbody class="divide-y divide-outline-variant/20"><tr class="hover:bg-surface-container-low/50 transition-colors"><td class="p-gutter font-body-md text-on-surface-variant">15 Oct 2023</td><td class="p-gutter"><div class="font-body-md font-bold text-on-surface">Elena Popescu</div><div class="text-xs text-on-surface-variant font-medium">Pachet Lunar</div></td><td class="p-gutter font-body-md font-bold text-primary">450 RON</td><td class="p-gutter text-center"><span class="bg-primary-container/20 text-on-primary-container px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wide">Plătit</span></td></tr><tr class="hover:bg-surface-container-low/50 transition-colors"><td class="p-gutter font-body-md text-on-surface-variant">14 Oct 2023</td><td class="p-gutter"><div class="font-body-md font-bold text-on-surface">Andrei Stan</div><div class="text-xs text-on-surface-variant font-medium">Consultație</div></td><td class="p-gutter font-body-md font-bold text-primary">250 RON</td><td class="p-gutter text-center"><span class="bg-primary-container/20 text-on-primary-container px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wide">Plătit</span></td></tr><tr class="hover:bg-surface-container-low/50 transition-colors"><td class="p-gutter font-body-md text-on-surface-variant">12 Oct 2023</td><td class="p-gutter"><div class="font-body-md font-bold text-on-surface">Maria Ionescu</div><div class="text-xs text-on-surface-variant font-medium">Plan Nutriție</div></td><td class="p-gutter font-body-md font-bold text-secondary">300 RON</td><td class="p-gutter text-center"><span class="bg-secondary-container/20 text-on-secondary-container px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wide">În așteptare</span></td></tr><tr class="hover:bg-surface-container-low/50 transition-colors"><td class="p-gutter font-body-md text-on-surface-variant">10 Oct 2023</td><td class="p-gutter"><div class="font-body-md font-bold text-on-surface">Cristian M.</div><div class="text-xs text-on-surface-variant font-medium">Consultație</div></td><td class="p-gutter font-body-md font-bold text-on-surface-variant">250 RON</td><td class="p-gutter text-center"><span class="bg-surface-container-highest text-on-surface-variant px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wide">Anulat</span></td></tr></tbody></table></div></div></div></section>
-<!-- PROFILE TAB -->
-<section class="hidden animate-fade-in" id="tab-profile"><h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-md">Situație Financiară</h1><div class="grid grid-cols-1 lg:grid-cols-3 gap-md pb-24 md:pb-0"><div class="glass-card rounded-lg p-lg col-span-1 flex flex-col items-center text-center"><div class="relative w-32 h-32 rounded-full overflow-hidden mb-4 border-4 border-surface-container-lowest shadow-md"><img alt="Dr. Sarah Miller" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4ktnBmIkP7DIXMmVvXcDB5yHSMu4Spx_i5rF_U26MuZTysA3NfV1p92TQcmA-pUxE3fvUVipGJY0W6U-irvZA7plKZ7RjPykF2IDbvDaiM6vuXCAbFfY2QAGGOCf2ZWt864wu_i9CYlgyvCVYkFNWcLpvUJELVuz7O2p5iA1BECBzWJ1SKzjT4Obx17-IvAhjDQAS4Uo7BqtnOdD3XXBSjn-GXWNTlPc1y10CmjmIRO8clFJsPe3AwcWoGOPMZl8UlF55h3ML7sz9"><button class="absolute bottom-0 left-0 w-full bg-black/50 text-white py-1 font-label-sm hover:bg-black/70 transition-colors">Modifică</button></div><h2 class="font-headline-md text-on-surface">Dr. Sarah Miller</h2><p class="font-body-md text-on-surface-variant mb-4">Nutrișionist Dietetician Principal</p><button class="bg-primary-container text-on-primary hover:bg-primary px-6 py-2 rounded-lg font-label-md transition-colors w-full shadow-sm">Editează Profilul</button></div><div class="lg:col-span-2 space-y-md"><div class="bg-surface-container-lowest rounded-lg border border-outline-variant/50 p-md shadow-sm"><div class="flex justify-between items-center mb-4 border-b border-outline-variant/30 pb-2"><h3 class="font-headline-md text-on-surface">Descriere Profesională</h3><button class="text-primary font-label-md flex items-center gap-1 hover:underline"><span class="material-symbols-outlined text-sm">edit</span> Editează</button></div><div class="p-4 bg-surface-container-low rounded-lg text-on-surface-variant font-body-md"><p class="mb-2"><span class="font-bold text-primary">Experienșă: 12+ Ani</span></p><p class="">Cu o experienșă de peste 12 ani ##238;n nutrișia clinică și sportivă, sunt specializată ##238;n sănătatea metabolică și scăderea sustenabilă ##238;n greutate. Sunt pasionată să ##238;mi ajut clienșii să obșină vitalitate și o stare de bine optimă prin schimbări alimentare bazate pe știinșă. Cred ##238;ntr-o abordare holistică, care combină planuri de masă personalizate, educașie nutrișională și asistenșă continuă pentru a asigura succesul pe termen lung.</p></div></div><div class="bg-surface-container-lowest rounded-lg border border-outline-variant/50 p-md shadow-sm"><div class="flex justify-between items-center mb-4 border-b border-outline-variant/30 pb-2"><h3 class="font-headline-md text-on-surface">Documente și Certificări</h3><button class="text-primary font-label-md flex items-center gap-1 hover:underline"><span class="material-symbols-outlined text-sm">add_circle</span> Adaugă Document</button></div><div class="space-y-3"><div class="flex items-center justify-between p-3 bg-surface-container-low rounded-lg border border-transparent hover:border-primary-container transition-all cursor-pointer"><div class="flex items-center gap-3"><span class="material-symbols-outlined text-primary">description</span><div><p class="font-label-md font-semibold text-on-surface">Diplomă de Licenșă Nutrișie și Dietetică</p><p class="text-[10px] text-on-surface-variant">UMF "Iuliu Hașieganu" Cluj-Napoca ##8226; 2011</p></div></div><div class="flex gap-2"><span class="material-symbols-outlined text-on-surface-variant hover:text-primary">visibility</span><span class="material-symbols-outlined text-error hover:text-error/80">delete</span></div></div><div class="flex items-center justify-between p-3 bg-surface-container-low rounded-lg border border-transparent hover:border-primary-container transition-all cursor-pointer"><div class="flex items-center gap-3"><span class="material-symbols-outlined text-primary">workspace_premium</span><div><p class="font-label-md font-semibold text-on-surface">Certificare Nutrișie Sportivă Avansată</p><p class="text-[10px] text-on-surface-variant">Verificat ##8226; 2015</p></div></div><div class="flex gap-2"><span class="material-symbols-outlined text-on-surface-variant hover:text-primary">visibility</span><span class="material-symbols-outlined text-error hover:text-error/80">delete</span></div></div></div></div><div class="bg-surface-container-lowest rounded-lg border border-outline-variant/50 p-md shadow-sm"><div class="flex justify-between items-center mb-4 border-b border-outline-variant/30 pb-2"><h3 class="font-headline-md text-on-surface">Program și Disponibilitate</h3><button class="text-primary font-label-md flex items-center gap-1 hover:underline"><span class="material-symbols-outlined text-sm">edit_calendar</span> Editează Orar</button></div><div class="space-y-4"><div class="flex flex-wrap gap-2 mb-4"><button class="px-3 py-1 bg-primary text-on-primary rounded-full text-sm font-medium">Luni</button><button class="px-3 py-1 bg-primary text-on-primary rounded-full text-sm font-medium">Marși</button><button class="px-3 py-1 bg-primary text-on-primary rounded-full text-sm font-medium">Miercuri</button><button class="px-3 py-1 bg-primary text-on-primary rounded-full text-sm font-medium">Joi</button><button class="px-3 py-1 bg-surface-container-high text-on-surface-variant rounded-full text-sm font-medium">Vineri</button><button class="px-3 py-1 bg-surface-container-high text-on-surface-variant rounded-full text-sm font-medium">S##226;mbătă</button><button class="px-3 py-1 bg-surface-container-high text-on-surface-variant rounded-full text-sm font-medium">Duminică</button></div><div class="grid grid-cols-1 md:grid-cols-2 gap-4"><div class="p-3 bg-surface-container-low rounded-lg border-l-4 border-primary"><p class="font-label-sm text-on-surface-variant uppercase tracking-wider mb-2">Ore Disponibile (Luni-Joi)</p><p class="font-body-md font-medium text-on-surface">09:00 - 14:00</p><p class="font-body-md font-medium text-on-surface">15:00 - 18:00</p></div><div class="p-3 bg-surface-container-low rounded-lg"><p class="font-label-sm text-on-surface-variant uppercase tracking-wider mb-2">Sincronizare Calendar</p><div class="flex items-center gap-2"><span class="material-symbols-outlined text-tertiary">event</span><p class="font-body-md font-medium text-on-surface">Google Calendar</p></div><p class="font-label-sm text-primary-container font-semibold mt-1">Conectat activ</p></div></div></div></div><div class="bg-surface-container-lowest rounded-lg border border-outline-variant/50 p-md shadow-sm"><div class="flex justify-between items-center mb-4 border-b border-outline-variant/30 pb-2"><h3 class="font-headline-md text-on-surface">Pachete de Servicii și Tarife</h3><button class="text-primary font-label-md flex items-center gap-1 hover:underline"><span class="material-symbols-outlined text-sm">add_box</span> Adaugă Serviciu</button></div><div class="space-y-3"><div class="flex justify-between items-center p-3 bg-surface-container-low rounded-lg group hover:bg-white hover:shadow-sm border border-transparent hover:border-primary-container transition-all"><div class="flex-1"><div class="flex items-center gap-2"><h4 class="font-label-md font-semibold text-on-surface">Consultașie Inișială</h4><span class="bg-primary-container/20 text-primary text-[10px] px-2 py-0.5 rounded-full">Popular</span></div><p class="font-label-sm text-on-surface-variant">Evaluare completă și plan de acșiune (60 min)</p></div><div class="text-right flex items-center gap-4"><span class="font-body-md font-bold text-primary">300 RON</span><button class="p-1 text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined text-lg">edit</span></button></div></div><div class="flex justify-between items-center p-3 bg-surface-container-low rounded-lg group hover:bg-white hover:shadow-sm border border-transparent hover:border-primary-container transition-all"><div class="flex-1"><h4 class="font-label-md font-semibold text-on-surface">Pachet Nutrișie (4 săptăm##226;ni)</h4><p class="font-label-sm text-on-surface-variant">Plan alimentar personalizat + suport chat zilnic + 2 reevaluări</p></div><div class="text-right flex items-center gap-4"><span class="font-body-md font-bold text-primary">800 RON</span><button class="p-1 text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined text-lg">edit</span></button></div></div><div class="flex justify-between items-center p-3 bg-surface-container-low rounded-lg group hover:bg-white hover:shadow-sm border border-transparent hover:border-primary-container transition-all"><div class="flex-1"><h4 class="font-label-md font-semibold text-on-surface">Monitorizare Săptăm##226;nală (Follow-up)</h4><p class="font-label-sm text-on-surface-variant">Sesiuni de reevaluare scurte (30 min)</p></div><div class="text-right flex items-center gap-4"><span class="font-body-md font-bold text-primary">150 RON</span><button class="p-1 text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined text-lg">edit</span></button></div></div></div></div><div class="grid grid-cols-1 md:grid-cols-2 gap-md"><div class="bg-surface-container-lowest rounded-lg border border-outline-variant/50 p-md shadow-sm"><div class="flex justify-between items-center mb-4 border-b border-outline-variant/30 pb-2"><h3 class="font-headline-md text-on-surface">Informașii Cabinet</h3><button class="text-primary font-label-md flex items-center gap-1 hover:underline"><span class="material-symbols-outlined text-sm">edit</span></button></div><div class="space-y-4"><div><p class="font-label-sm text-on-surface-variant uppercase tracking-wider mb-1">Denumire Cabinet</p><p class="font-body-md font-medium text-on-surface">Cabinet Individual de Nutrișie Dr. Sarah Miller</p></div><div><p class="font-label-sm text-on-surface-variant uppercase tracking-wider mb-1">Adresă Sediu Fizic</p><p class="font-body-md font-medium text-on-surface">Bulevardul Unirii Nr. 45, Sector 3, București</p></div><div><p class="font-label-sm text-on-surface-variant uppercase tracking-wider mb-1">Contact Public</p><p class="font-body-md font-medium text-on-surface">contact@sarahmiller.ro</p><p class="font-body-md font-medium text-on-surface">+40 722 123 456</p></div></div></div><div class="bg-surface-container-lowest rounded-lg border border-outline-variant/50 p-md shadow-sm"><div class="flex justify-between items-center mb-4 border-b border-outline-variant/30 pb-2"><h3 class="font-headline-md text-on-surface">Date Juridice</h3><button class="text-primary font-label-md flex items-center gap-1 hover:underline"><span class="material-symbols-outlined text-sm">edit</span></button></div><div class="space-y-4"><div><p class="font-label-sm text-on-surface-variant uppercase tracking-wider mb-1">CUI / CIF</p><p class="font-body-md font-medium text-on-surface">RO 12345678</p></div><div><p class="font-label-sm text-on-surface-variant uppercase tracking-wider mb-1">Nr. ##206;nreg. Reg. Comerșului</p><p class="font-body-md font-medium text-on-surface">J40/1234/2012</p></div><div><p class="font-label-sm text-on-surface-variant uppercase tracking-wider mb-1">Nr. Autorizașie Libera Practică</p><p class="font-body-md font-medium text-on-surface">ALP-987654</p></div></div></div></div><div class="bg-surface-container-lowest rounded-lg border border-outline-variant/50 p-md shadow-sm mb-lg"><div class="flex justify-between items-center mb-4 border-b border-outline-variant/30 pb-2"><h3 class="font-headline-md text-on-surface">Conturi Bancare pentru ##206;ncasări</h3><button class="text-primary font-label-md flex items-center gap-1 hover:underline"><span class="material-symbols-outlined text-sm">add_card</span> Adaugă Cont</button></div><div class="space-y-3"><div class="flex justify-between items-center p-4 bg-surface-container-low rounded-lg border border-outline-variant/50 relative overflow-hidden"><div class="absolute right-0 top-0 w-16 h-full bg-gradient-to-l from-primary/10 to-transparent"></div><div class="flex items-center gap-4 relative z-10"><div class="w-12 h-8 bg-surface rounded flex items-center justify-center border border-outline-variant/30 font-bold text-on-surface-variant text-xs">ING</div><div><h4 class="font-label-md font-semibold text-on-surface">Cont Principal RON</h4><p class="font-label-sm text-on-surface-variant font-mono">RO89 INGB 0000 9999 8888 7777</p></div></div><div class="flex items-center gap-3 relative z-10"><span class="bg-primary/10 text-primary text-[10px] px-2 py-1 rounded-full font-bold uppercase">Implicit</span><button class="p-1 text-on-surface-variant hover:text-error transition-colors"><span class="material-symbols-outlined">delete</span></button></div></div><div class="flex justify-between items-center p-4 bg-surface-container-low rounded-lg border border-outline-variant/50"><div class="flex items-center gap-4"><div class="w-12 h-8 bg-surface rounded flex items-center justify-center border border-outline-variant/30 font-bold text-tertiary text-xs">BT</div><div><h4 class="font-label-md font-semibold text-on-surface">Cont Secundar (Revolut/Online)</h4><p class="font-label-sm text-on-surface-variant font-mono">RO12 BTRL 0000 1111 2222 3333</p></div></div><div class="flex items-center gap-3"><button class="text-primary font-label-sm hover:underline">Setează implicit</button><button class="p-1 text-on-surface-variant hover:text-error transition-colors"><span class="material-symbols-outlined">delete</span></button></div></div></div></div></div></div></section>
-<!-- Floating Action Button (Quick Actions) -->
-<div class="fixed bottom-20 md:bottom-8 right-4 md:right-8 z-50 group">
-<div class="absolute bottom-full right-0 mb-4 hidden group-hover:flex flex-col gap-2 w-48 items-end">
-<button class="bg-surface-container-lowest border border-outline-variant text-on-surface hover:bg-surface-container-low px-4 py-2 rounded-lg shadow-md flex items-center gap-2 text-sm font-medium w-full justify-end transition-colors" onclick="switchTab('clients')">
-                    Adaugă Client
-                    <span class="material-symbols-outlined text-sm text-primary">person_add</span>
-</button>
-<button class="bg-surface-container-lowest border border-outline-variant text-on-surface hover:bg-surface-container-low px-4 py-2 rounded-lg shadow-md flex items-center gap-2 text-sm font-medium w-full justify-end transition-colors">
-                    Plan Nou
-                    <span class="material-symbols-outlined text-sm text-tertiary">edit_document</span>
-</button>
-<button class="bg-surface-container-lowest border border-outline-variant text-on-surface hover:bg-surface-container-low px-4 py-2 rounded-lg shadow-md flex items-center gap-2 text-sm font-medium w-full justify-end transition-colors">
-                    Programare
-                    <span class="material-symbols-outlined text-sm text-secondary-container">calendar_add_on</span>
-</button>
-</div>
-<button class="bg-primary text-on-primary w-14 h-14 rounded-full shadow-lg flex items-center justify-center hover:shadow-xl hover:bg-surface-tint active:scale-95 transition-all">
-<span class="material-symbols-outlined text-3xl group-hover:rotate-90 transition-transform duration-300">add</span>
-</button>
-</div>
-</main>
-<!-- BottomNavBar (Mobile only) -->
-<nav class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center px-2 py-2 bg-surface dark:bg-surface-dim shadow-[0_-4px_20px_rgba(0,0,0,0.04)] z-50 rounded-t-xl border-t border-outline-variant/20"><button class="mobile-nav-btn flex flex-col items-center justify-center text-on-surface-variant px-3 py-1 active:scale-90 transition-transform duration-150" onclick="switchTabMobile('dashboard', this)"><span class="material-symbols-outlined text-xl mb-1" data-icon="dashboard">dashboard</span><span class="font-label-sm text-[10px] font-medium leading-none">Panou</span></button><button class="mobile-nav-btn flex flex-col items-center justify-center text-on-surface-variant px-3 py-1 active:scale-90 transition-transform duration-150" onclick="switchTabMobile('clients', this)"><span class="material-symbols-outlined text-xl mb-1" data-icon="group">group</span><span class="font-label-sm text-[10px] font-medium leading-none text-nowrap">Clienți</span></button><button class="mobile-nav-btn flex flex-col items-center justify-center px-3 py-1 active:scale-90 transition-transform duration-150 font-bold bg-primary-container text-on-primary-container" onclick="switchTabMobile('messages', this)"><span class="material-symbols-outlined text-xl mb-1" data-icon="chat" style="font-variation-settings: &quot;FILL&quot; 1;">chat</span><span class="font-label-sm text-[10px] font-medium leading-none">Mesaje</span></button><button class="mobile-nav-btn flex flex-col items-center justify-center px-3 py-1 active:scale-90 transition-transform duration-150 text-on-surface-variant" onclick="switchTabMobile('financial', this)"><span class="material-symbols-outlined text-xl mb-1" data-icon="payments" style="font-variation-settings: &quot;FILL&quot; 0;">payments</span><span class="font-label-sm text-[10px] font-medium leading-none font-bold">Financiar</span></button><button class="mobile-nav-btn flex flex-col items-center justify-center px-3 py-1 active:scale-90 transition-transform duration-150 active text-on-surface-variant" onclick="switchTabMobile('profile', this)"><span class="material-symbols-outlined text-xl mb-1" data-icon="account_circle" style="font-variation-settings: 'FILL' 0;">account_circle</span><span class="font-label-sm text-[10px] font-medium leading-none font-bold">Profil</span></button></nav>
-<script>
-        // Simple tab switching logic
-        function switchTab(tabId) {
-            // Hide all tabs
-            const tabs = ['dashboard', 'clients', 'messages', 'financial', 'profile'];
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm border border-outline-variant/50 flex flex-col justify-between">
+                    <div class="flex justify-between items-start mb-6">
+                        <h2 class="text-xs font-bold text-on-surface-variant uppercase tracking-wider">Obiectiv Curent</h2>
+                        <span class="material-symbols-outlined text-secondary-container">target</span>
+                    </div>
+                    <p class="text-2xl font-bold text-on-surface mb-6">Scădere în greutate</p>
+                    <div>
+                        <div class="flex justify-between text-xs font-bold mb-2 text-on-surface-variant">
+                            <span>Progres General</span>
+                            <span class="text-primary">65%</span>
+                        </div>
+                        <div class="h-2 bg-surface-container-high rounded-full overflow-hidden">
+                            <div class="h-full bg-primary rounded-full w-[65%]"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm border border-outline-variant/50">
+                    <h3 class="text-lg font-bold text-on-surface mb-4 flex items-center gap-2">
+                        <span class="material-symbols-outlined text-tertiary">devices_wearables</span> Dispozitive & Aplicații
+                    </h3>
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between p-3 border border-outline-variant/30 rounded-lg bg-surface-container-low">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 bg-surface rounded flex items-center justify-center shadow-sm">
+                                    <span class="material-symbols-outlined text-primary">watch</span>
+                                </div>
+                                <div>
+                                    <p class="font-bold text-sm">Smartwatch Vitality</p>
+                                    <p class="text-xs text-primary font-medium">Conectat acum 2h</p>
+                                </div>
+                            </div>
+                            <button class="text-xs font-bold text-error bg-error/10 px-3 py-1.5 rounded hover:bg-error/20 transition-colors">Deconectare</button>
+                        </div>
+                        <div class="flex items-center justify-between p-3 border border-outline-variant/30 rounded-lg">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 bg-surface-container rounded flex items-center justify-center">
+                                    <span class="material-symbols-outlined text-on-surface-variant">monitor_weight</span>
+                                </div>
+                                <div>
+                                    <p class="font-bold text-sm text-on-surface-variant">Cântar Inteligent</p>
+                                    <p class="text-xs text-on-surface-variant">Neconectat</p>
+                                </div>
+                            </div>
+                            <button class="text-xs font-bold text-primary bg-primary/10 px-3 py-1.5 rounded hover:bg-primary/20 transition-colors">Conectare</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pt-4 flex justify-center">
+                <button class="flex items-center gap-2 px-6 py-2.5 border-2 border-error/30 text-error rounded-lg font-bold hover:bg-error hover:text-on-error transition-all active:scale-95">
+                    <span class="material-symbols-outlined text-sm">logout</span> Deconectare
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <nav class="md:hidden bg-surface shadow-[0_-4px_20px_0_rgba(0,0,0,0.04)] border-t border-outline-variant/30 fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-2 py-2 pb-safe rounded-t-2xl">
+        <button onclick="switchMainTab('home')" class="nav-btn-mobile flex flex-col items-center justify-center w-16 py-1 rounded-xl transition-all duration-200 bg-primary-container text-on-primary-container" data-target="home">
+            <span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">home</span>
+            <span class="text-[10px] font-bold mt-1">Acasă</span>
+        </button>
+        <button onclick="switchMainTab('diary')" class="nav-btn-mobile flex flex-col items-center justify-center w-16 py-1 rounded-xl transition-all duration-200 text-on-surface-variant" data-target="diary">
+            <span class="material-symbols-outlined text-[22px]">menu_book</span>
+            <span class="text-[10px] font-medium mt-1">Jurnal</span>
+        </button>
+        <button onclick="switchMainTab('plans')" class="nav-btn-mobile flex flex-col items-center justify-center w-16 py-1 rounded-xl transition-all duration-200 text-on-surface-variant" data-target="plans">
+            <span class="material-symbols-outlined text-[22px]">assignment</span>
+            <span class="text-[10px] font-medium mt-1">Planuri</span>
+        </button>
+        <button onclick="switchMainTab('communication')" class="nav-btn-mobile flex flex-col items-center justify-center w-16 py-1 rounded-xl transition-all duration-200 text-on-surface-variant" data-target="communication">
+            <span class="material-symbols-outlined text-[22px]">chat</span>
+            <span class="text-[10px] font-medium mt-1">Contact</span>
+        </button>
+        <button onclick="switchMainTab('profile')" class="nav-btn-mobile flex flex-col items-center justify-center w-16 py-1 rounded-xl transition-all duration-200 text-on-surface-variant" data-target="profile">
+            <span class="material-symbols-outlined text-[22px]">person</span>
+            <span class="text-[10px] font-medium mt-1">Profil</span>
+        </button>
+    </nav>
+
+    <script>
+        // Logica Principală de Navigare (Între Pagini/Secțiuni)
+        function switchMainTab(tabId) {
+            // Ascunde toate secțiunile principale
+            const tabs = ['home', 'diary', 'plans', 'communication', 'profile'];
             tabs.forEach(id => {
                 const el = document.getElementById(`tab-${id}`);
-                if(el) {
+                if (el) {
                     el.classList.add('hidden');
                     el.classList.remove('block');
                 }
             });
 
-            // Show selected tab
+            // Afișează secțiunea selectată
             const selectedTab = document.getElementById(`tab-${tabId}`);
-            if(selectedTab) {
+            if (selectedTab) {
                 selectedTab.classList.remove('hidden');
                 selectedTab.classList.add('block');
             }
-            
-            // Update desktop nav styling
-            const desktopBtns = document.querySelectorAll('.nav-desktop-btn');
-            desktopBtns.forEach(btn => {
-                if(btn.dataset.tab === tabId) {
-                    btn.classList.remove('text-on-surface-variant', 'dark:text-outline', 'hover:bg-surface-container-high', 'dark:hover:bg-surface-variant');
-                    btn.classList.add('text-primary', 'dark:text-primary-fixed-dim', 'bg-primary-container/10');
-                    const icon = btn.querySelector('.material-symbols-outlined');
-                    if(icon) {
-                        icon.style.fontVariationSettings = "'FILL' 1";
-                    }
+
+            // Actualizare Header Mobil (Numele paginii sus)
+            const mobileTitles = {
+                'home': 'Vitality',
+                'diary': 'Jurnal',
+                'plans': 'Planuri',
+                'communication': 'Comunicare',
+                'profile': 'Profil'
+            };
+            const headerTitle = document.getElementById('mobile-header-title');
+            if(headerTitle) headerTitle.innerText = mobileTitles[tabId];
+
+            // Actualizare stare vizuală butoane Desktop
+            document.querySelectorAll('.nav-btn-desktop').forEach(btn => {
+                const icon = btn.querySelector('.material-symbols-outlined');
+                if (btn.dataset.target === tabId) {
+                    btn.classList.add('bg-primary-container', 'text-on-primary-container', 'font-bold');
+                    btn.classList.remove('text-on-surface-variant', 'hover:bg-surface-container-high');
+                    if (icon) icon.style.fontVariationSettings = "'FILL' 1";
                 } else {
-                    btn.classList.add('text-on-surface-variant', 'dark:text-outline', 'hover:bg-surface-container-high', 'dark:hover:bg-surface-variant');
-                    btn.classList.remove('text-primary', 'dark:text-primary-fixed-dim', 'bg-primary-container/10');
-                    const icon = btn.querySelector('.material-symbols-outlined');
-                    if(icon) {
-                        icon.style.fontVariationSettings = "normal";
-                    }
+                    btn.classList.remove('bg-primary-container', 'text-on-primary-container', 'font-bold');
+                    btn.classList.add('text-on-surface-variant', 'hover:bg-surface-container-high');
+                    if (icon) icon.style.fontVariationSettings = "'FILL' 0";
                 }
             });
 
-            // Update mobile nav styling if triggered from desktop/links
-            const btns = document.querySelectorAll('.mobile-nav-btn');
-            btns.forEach(btn => {
-                const btnIcon = btn.querySelector('.material-symbols-outlined').getAttribute('data-icon');
-                // map tab id to icon
-                const iconMap = {
-                    'dashboard': 'dashboard',
-                    'clients': 'group',
-                    'messages': 'chat',
-                    'financial': 'payments',
-                    'profile': 'account_circle'
-                };
-                if(iconMap[tabId] === btnIcon) {
-                    btn.classList.remove('text-on-surface-variant');
+            // Actualizare stare vizuală butoane Mobile
+            document.querySelectorAll('.nav-btn-mobile').forEach(btn => {
+                const icon = btn.querySelector('.material-symbols-outlined');
+                const text = btn.querySelector('span:last-child');
+                
+                if (btn.dataset.target === tabId) {
                     btn.classList.add('bg-primary-container', 'text-on-primary-container');
-                    const icon = btn.querySelector('.material-symbols-outlined');
-                    if(icon) {
-                        icon.style.fontVariationSettings = "'FILL' 1";
-                    }
+                    btn.classList.remove('text-on-surface-variant');
+                    text.classList.replace('font-medium', 'font-bold');
+                    if (icon) icon.style.fontVariationSettings = "'FILL' 1";
                 } else {
                     btn.classList.remove('bg-primary-container', 'text-on-primary-container');
                     btn.classList.add('text-on-surface-variant');
-                    const icon = btn.querySelector('.material-symbols-outlined');
-                    if(icon) {
-                        icon.style.fontVariationSettings = "normal";
-                    }
+                    text.classList.replace('font-bold', 'font-medium');
+                    if (icon) icon.style.fontVariationSettings = "'FILL' 0";
                 }
             });
         }
 
-        function switchTabMobile(tabId, btnElement) {
-            switchTab(tabId);
+        // Logica Secundară (Sub-navigarea din interiorul tab-ului de Comunicare)
+        function switchCommTab(subTabId) {
+            const indicator = document.getElementById('comm-indicator');
+            const subMesaje = document.getElementById('subtab-mesaje');
+            const subProgramari = document.getElementById('subtab-programari');
+            const btnMesaje = document.getElementById('btn-comm-mesaje');
+            const btnProgramari = document.getElementById('btn-comm-programari');
+
+            if (subTabId === 'mesaje') {
+                // UI changes
+                indicator.style.transform = 'translateX(0)';
+                btnMesaje.classList.replace('text-on-surface-variant', 'text-on-surface');
+                btnMesaje.classList.replace('font-semibold', 'font-bold');
+                btnProgramari.classList.replace('text-on-surface', 'text-on-surface-variant');
+                btnProgramari.classList.replace('font-bold', 'font-semibold');
+                
+                // Content changes
+                subProgramari.style.opacity = '0';
+                setTimeout(() => {
+                    subProgramari.classList.add('hidden', 'absolute');
+                    subProgramari.classList.remove('flex', 'relative');
+                    
+                    subMesaje.classList.remove('hidden', 'absolute');
+                    subMesaje.classList.add('flex', 'relative');
+                    setTimeout(() => subMesaje.style.opacity = '1', 10);
+                }, 150);
+
+            } else {
+                // UI changes
+                indicator.style.transform = 'translateX(100%)';
+                btnProgramari.classList.replace('text-on-surface-variant', 'text-on-surface');
+                btnProgramari.classList.replace('font-semibold', 'font-bold');
+                btnMesaje.classList.replace('text-on-surface', 'text-on-surface-variant');
+                btnMesaje.classList.replace('font-bold', 'font-semibold');
+
+                // Content changes
+                subMesaje.style.opacity = '0';
+                setTimeout(() => {
+                    subMesaje.classList.add('hidden', 'absolute');
+                    subMesaje.classList.remove('flex', 'relative');
+
+                    subProgramari.classList.remove('hidden', 'absolute');
+                    subProgramari.classList.add('flex', 'relative');
+                    setTimeout(() => subProgramari.style.opacity = '1', 10);
+                }, 150);
+            }
         }
     </script>
-</body></html>
+  <div id="edit-profile-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
+    <div class="bg-surface rounded-2xl w-full max-w-lg p-6 shadow-xl m-4">
+        <h2 class="text-xl font-bold mb-4">Editează Profilul</h2>
+        <form id="profile-form" class="space-y-4">
+            <div>
+                <label class="block text-sm font-medium text-on-surface-variant">Nume Complet</label>
+                <input type="text" id="edit-name" class="w-full mt-1 p-2 border border-outline rounded-lg" value="Andreea Popescu">
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-on-surface-variant">Email</label>
+                <input type="email" id="edit-email" class="w-full mt-1 p-2 border border-outline rounded-lg" value="andreea.p@example.com">
+            </div>
+            <div class="flex justify-end gap-3 mt-6">
+                <button type="button" onclick="toggleEditModal(false)" class="px-4 py-2 text-on-surface-variant">Anulează</button>
+                <button type="submit" class="px-4 py-2 bg-primary text-on-primary rounded-lg">Salvează</button>
+            </div>
+        </form>
+    </div>
+</div>
+  <script>
+  // Funcție pentru a deschide/închide modalul
+function toggleEditModal(show) {
+    const modal = document.getElementById('edit-profile-modal');
+    show ? modal.classList.remove('hidden') : modal.classList.add('hidden');
+}
+
+// Conectarea butonului "Editează Profilul"
+document.querySelector('[onclick="switchMainTab(\'profile\')"]').addEventListener('click', () => {
+    // Aici adaugi evenimentul pentru butonul din interiorul tab-ului Profile
+});
+
+// Salvarea datelor (simulare cu console.log)
+document.getElementById('profile-form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const newName = document.getElementById('edit-name').value;
+    const newEmail = document.getElementById('edit-email').value;
+    
+    // Aici ar veni logica de trimitere către Firebase:
+    // db.collection('users').doc(userId).update({ name: newName, email: newEmail });
+    
+    alert('Profil actualizat pentru: ' + newName);
+    toggleEditModal(false);
+});
+  </script>
+</body>
+</html>
