@@ -7,6 +7,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    
+    <!-- SDK-urile Firebase (Compat mode pentru integrare rapida in script script) -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+    
+    <!-- API-ul extern Jitsi Meet pentru Video Chat integrat direct in pagina -->
+    <script src="https://meet.jit.si/external_api.js"></script>
+
     <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
@@ -116,7 +124,6 @@
             display: inline-flex;
             text-decoration: none;
         }
-        /* Custom scrollbar for chat */
         .chat-scroll::-webkit-scrollbar {
             width: 6px;
         }
@@ -128,12 +135,14 @@
 </head>
 <body class="bg-surface text-on-surface font-body-md min-h-screen pb-24 md:pb-0">
 
+    <!-- TopAppBar -->
     <header class="w-full top-0 sticky z-40 bg-surface shadow-sm dark:bg-surface-container-high shadow-[0_4px_20px_rgba(0,0,0,0.04)]">
         <div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop h-16 w-full max-w-[1280px] mx-auto">
             <div class="flex items-center gap-sm cursor-pointer" onclick="switchTab('dashboard')">
                 <img alt="Vitality Pro Logo" class="h-10 w-auto object-contain bg-white rounded-md" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzuWsjwJpzryOHcvpVuuMOMUNbbs2PWrekP7Cor31pZyRxwIZOmBQuJpNFIkWInjZhv4_uI8CM70kFVRHXeQgE1dYiuQR3BEEXNFqdw0BAHfpTE1-uq78BQxkyeHoAoaqGpFfnh4TRtcuf9W3ZbsTC3e1DpjzU44eSJrphUYrbmeBvV6q6mDssneX4fVcq6kkJZ5AdKcRoCqfwCtgFS9f244Dx36_76bYFIkpoMYkdFFyi7nJU2JO9apZo6mSldJuFDlZzNs36Nmz8">
                 <span class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim hidden sm:block ml-2">Vitality by Bucătarul Personal</span>
             </div>
+            <!-- Desktop Nav -->
             <nav class="hidden md:flex items-center gap-md">
                 <button class="flex items-center gap-2 text-primary bg-primary-container/10 font-label-md px-4 py-2 rounded-full transition-colors active:scale-95 duration-200 cursor-pointer nav-desktop-btn" data-tab="dashboard" onclick="switchTab('dashboard')">
                     <span class="material-symbols-outlined" data-icon="dashboard" data-weight="fill" style="font-variation-settings: 'FILL' 1;">dashboard</span>
@@ -169,9 +178,11 @@
 
     <main class="w-full max-w-[1280px] mx-auto px-margin-mobile md:px-margin-desktop py-md md:py-lg relative">
         
+        <!-- DASHBOARD TAB -->
         <section class="animate-fade-in block" id="tab-dashboard">
             <h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-md">Panou de Control</h1>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter md:gap-md mb-lg">
+                <!-- Metrics Card 1 -->
                 <div class="glass-card rounded-xl p-md flex flex-col justify-between h-32 relative overflow-hidden group cursor-pointer hover:shadow-[0_8px_24px_rgba(0,0,0,0.12)] transition-shadow" onclick="switchTab('clients')">
                     <div class="flex justify-between items-start z-10">
                         <span class="font-label-md text-label-md text-on-surface-variant group-hover:text-primary transition-colors">Clienți Activi</span>
@@ -185,6 +196,7 @@
                         <span class="material-symbols-outlined" style="font-size: 100px;">group</span>
                     </div>
                 </div>
+                <!-- Metrics Card 2 -->
                 <div class="glass-card rounded-xl p-md flex flex-col justify-between h-32 relative overflow-hidden group cursor-pointer hover:shadow-[0_8px_24px_rgba(0,0,0,0.12)] transition-shadow">
                     <div class="flex justify-between items-start z-10">
                         <span class="font-label-md text-label-md text-on-surface-variant group-hover:text-secondary-container transition-colors">Programări Azi</span>
@@ -198,6 +210,7 @@
                         <span class="material-symbols-outlined" style="font-size: 100px;">event</span>
                     </div>
                 </div>
+                <!-- Partnership Banner -->
                 <div class="bg-gradient-to-br from-primary-container to-primary rounded-xl p-md flex flex-col justify-center text-on-primary h-32 relative overflow-hidden shadow-[0_4px_20px_rgba(76,175,80,0.3)] hover:shadow-[0_8px_24px_rgba(76,175,80,0.4)] transition-shadow cursor-pointer group">
                     <div class="absolute top-0 right-0 w-32 h-32 bg-white opacity-10 rounded-full blur-2xl -mr-10 -mt-10"></div>
                     <div class="z-10 flex items-center justify-between gap-3 mb-2">
@@ -212,6 +225,7 @@
             </div>
             
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-md">
+                <!-- Recent Activity -->
                 <div class="glass-card rounded-xl p-lg lg:col-span-2 flex flex-col h-[400px]">
                     <div class="flex justify-between items-center mb-md">
                         <h2 class="font-headline-md text-headline-md text-on-surface">Ultimele Interacțiuni</h2>
@@ -234,6 +248,7 @@
                         </div>
                     </div>
                 </div>
+                <!-- Today's Schedule -->
                 <div class="bg-surface-container-lowest rounded-xl p-lg border border-outline-variant/50 shadow-[0_4px_20px_rgba(0,0,0,0.02)] h-[400px] flex flex-col">
                     <h2 class="font-headline-md text-headline-md text-on-surface mb-md flex items-center gap-2">
                         <span class="material-symbols-outlined text-secondary-container">calendar_today</span> Program Azi
@@ -254,6 +269,7 @@
             </div>
         </section>
 
+        <!-- CLIENTS TAB -->
         <section class="hidden animate-fade-in" id="tab-clients">
             <div class="flex justify-between items-end mb-md">
                 <h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface">Clienții Mei</h1>
@@ -264,7 +280,7 @@
             <div class="glass-card rounded-xl p-md mb-md">
                 <div class="relative">
                     <span class="material-symbols-outlined absolute left-4 top-3 text-on-surface-variant">search</span>
-                    <input class="w-full pl-12 pr-4 py-3 bg-surface-container-lowest border border-outline-variant rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent font-body-md transition-shadow hover:shadow-sm" placeholder="Caută client..." type="text">
+                    <input class="w-full pl-12 pr-4 py-3 bg-surface-container-lowest border border-outline-variant rounded-lg" placeholder="Caută client..." type="text">
                 </div>
             </div>
             <div class="bg-surface-container-lowest rounded-xl border border-outline-variant/50 overflow-hidden shadow-sm">
@@ -293,19 +309,22 @@
             </div>
         </section>
 
+        <!-- MESSAGES TAB (INTERFAȚĂ INTEGRATĂ CHAT + EXPERIENȚĂ APEL VIDEO) -->
         <section class="hidden animate-fade-in" id="tab-messages">
             <h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-md">Hub Comunicare</h1>
             
-            <div class="flex h-[600px] bg-surface-container-lowest rounded-xl border border-outline-variant/50 overflow-hidden shadow-sm">
+            <div class="flex h-[620px] bg-surface-container-lowest rounded-xl border border-outline-variant/50 overflow-hidden shadow-sm relative">
                 
+                <!-- Sidebar stânga (Lista de conversații) -->
                 <div class="w-full md:w-1/3 border-r border-outline-variant/50 flex flex-col bg-surface-container-lowest">
                     <div class="p-4 border-b border-outline-variant/30">
                         <div class="relative">
                             <span class="material-symbols-outlined absolute left-3 top-2.5 text-on-surface-variant text-sm">search</span>
-                            <input class="w-full pl-9 pr-3 py-2 bg-surface-container-low border border-transparent rounded-lg focus:outline-none focus:ring-1 focus:ring-primary text-sm" placeholder="Caută mesaj..." type="text">
+                            <input class="w-full pl-9 pr-3 py-2 bg-surface-container-low border border-transparent rounded-lg focus:outline-none text-sm" placeholder="Caută mesaj..." type="text">
                         </div>
                     </div>
                     <div class="flex-1 overflow-y-auto chat-scroll">
+                        <!-- Contact activ -->
                         <div class="p-4 bg-primary/10 border-l-4 border-primary cursor-pointer flex items-center justify-between">
                             <div class="flex items-center gap-3">
                                 <div class="relative">
@@ -314,93 +333,67 @@
                                 </div>
                                 <div>
                                     <h4 class="font-label-md text-on-surface">Alexandru Popescu</h4>
-                                    <p class="font-label-sm text-primary truncate max-w-[120px]">Scrie...</p>
+                                    <p id="chat-sidebar-subtitle" class="font-label-sm text-primary truncate max-w-[120px]">Suport nutriție activ</p>
                                 </div>
                             </div>
-                            <span class="text-[10px] text-primary font-medium">10:45</span>
-                        </div>
-                        
-                        <div class="p-4 hover:bg-surface-container-low cursor-pointer flex items-center justify-between transition-colors">
-                            <div class="flex items-center gap-3">
-                                <div class="w-10 h-10 bg-secondary-container/20 text-secondary-container rounded-full flex items-center justify-center font-bold">MI</div>
-                                <div>
-                                    <h4 class="font-label-md text-on-surface">Maria Ionescu</h4>
-                                    <p class="font-label-sm text-on-surface-variant truncate max-w-[120px]">Mulțumesc mult!</p>
-                                </div>
-                            </div>
-                            <span class="text-[10px] text-on-surface-variant">Ieri</span>
+                            <span class="text-[10px] text-primary font-medium">Acum</span>
                         </div>
                     </div>
                 </div>
 
-                <div class="hidden md:flex flex-col w-2/3 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] bg-surface">
+                <!-- Zona dreaptă (Spațiul de lucru principal pentru Chat și Video) -->
+                <div class="hidden md:flex flex-col w-2/3 relative bg-surface">
                     
+                    <!-- Antet Chat -->
                     <div class="h-16 px-4 py-3 bg-surface-container-lowest border-b border-outline-variant/50 flex justify-between items-center z-10 shadow-sm">
                         <div class="flex items-center gap-3">
                             <div class="w-10 h-10 bg-primary text-on-primary rounded-full flex items-center justify-center font-bold">AP</div>
                             <div>
                                 <h3 class="font-label-md font-bold text-on-surface">Alexandru Popescu</h3>
-                                <p class="text-[11px] text-green-600 font-medium">Online</p>
+                                <p class="text-[11px] text-green-600 font-medium">Conectat în timp real</p>
                             </div>
                         </div>
                         <div class="flex items-center gap-2">
-                            <button class="flex items-center gap-2 bg-tertiary text-on-tertiary px-4 py-2 rounded-lg text-sm font-medium hover:bg-tertiary/90 active:scale-95 transition-all shadow-sm">
+                            <!-- BUTON CONECTARE VIDEO APEL INTEGRAT -->
+                            <button id="btn-toggle-video" onclick="startVideoCall('Vitality_Room_Alexandru')" class="flex items-center gap-2 bg-tertiary text-on-tertiary px-4 py-2 rounded-lg text-sm font-medium hover:bg-tertiary/90 active:scale-95 transition-all shadow-sm">
                                 <span class="material-symbols-outlined text-sm">videocam</span>
                                 Apel Video
                             </button>
-                            <button class="p-2 text-on-surface-variant hover:bg-surface-container-low rounded-full transition-colors">
-                                <span class="material-symbols-outlined">more_vert</span>
+                        </div>
+                    </div>
+
+                    <!-- CONTAINER DINAMIC PENTRU EMITTING VIDEO CHAT (NATIV ÎN INTERFAȚĂ) -->
+                    <div id="video-chat-workspace" class="hidden absolute top-16 left-0 w-full bottom-0 bg-black z-20 flex flex-col">
+                        <div class="p-2 bg-surface-container-highest flex justify-between items-center text-on-surface">
+                            <span class="text-xs font-semibold px-2 flex items-center gap-1"><span class="w-2 h-2 bg-red-600 rounded-full animate-pulse"></span> Sesiune Video Live</span>
+                            <button onclick="stopVideoCall()" class="text-xs bg-error text-on-secondary px-3 py-1 rounded hover:bg-error/90 transition-all font-medium">
+                                Închide Apelul
                             </button>
                         </div>
+                        <!-- Frame-ul Jitsi se va ancora perfect aici -->
+                        <div id="jitsi-container" class="flex-1 w-full bg-neutral-900"></div>
                     </div>
 
-                    <div class="flex-1 overflow-y-auto p-4 space-y-4 chat-scroll flex flex-col">
-                        
-                        <div class="flex justify-center">
-                            <span class="bg-surface-container-high text-on-surface-variant text-[10px] px-3 py-1 rounded-full font-medium">Azi</span>
-                        </div>
-
-                        <div class="flex justify-start">
-                            <div class="bg-surface-container-lowest border border-outline-variant/30 text-on-surface px-4 py-2 rounded-2xl rounded-tl-none max-w-[70%] shadow-sm">
-                                <p class="font-body-md text-sm">Bună ziua! Poți să îmi confirmi dacă rețeta de diseară poate include cartofi dulci în loc de orez?</p>
-                                <p class="text-[10px] text-on-surface-variant text-right mt-1">10:42</p>
-                            </div>
-                        </div>
-
-                        <div class="flex justify-end">
-                            <div class="bg-primary text-on-primary px-4 py-2 rounded-2xl rounded-tr-none max-w-[70%] shadow-sm">
-                                <p class="font-body-md text-sm">Salut Alexandru! Da, sigur. Poți folosi 150g de cartof dulce copt. Este o alternativă excelentă.</p>
-                                <p class="text-[10px] text-primary-fixed text-right mt-1 flex justify-end items-center gap-1">10:44 <span class="material-symbols-outlined text-[12px]">done_all</span></p>
-                            </div>
-                        </div>
-                        
-                        <div class="flex justify-start">
-                            <div class="bg-surface-container-lowest border border-outline-variant/30 text-on-surface-variant px-4 py-2 rounded-2xl rounded-tl-none text-xs flex items-center gap-1 shadow-sm">
-                                <span class="w-1.5 h-1.5 bg-primary/50 rounded-full animate-pulse"></span>
-                                <span class="w-1.5 h-1.5 bg-primary/50 rounded-full animate-pulse delay-75"></span>
-                                <span class="w-1.5 h-1.5 bg-primary/50 rounded-full animate-pulse delay-150"></span>
-                            </div>
-                        </div>
+                    <!-- Fereastra de mesaje text (Sincronizată cu Firebase) -->
+                    <div id="chat-messages-box" class="flex-1 overflow-y-auto p-4 space-y-4 chat-scroll flex flex-col">
+                        <!-- Mesajele se randează dinamic din JavaScript -->
                     </div>
 
+                    <!-- Zona de trimis text mesaj -->
                     <div class="p-3 bg-surface-container-lowest border-t border-outline-variant/50">
-                        <div class="flex items-end gap-2 bg-surface-container-low rounded-xl p-1 border border-transparent focus-within:border-primary/50 transition-colors">
-                            <button class="p-2 text-on-surface-variant hover:text-primary rounded-full transition-colors flex-shrink-0">
-                                <span class="material-symbols-outlined">attach_file</span>
-                            </button>
-                            <textarea class="w-full bg-transparent border-none focus:ring-0 resize-none max-h-32 text-sm font-body-md py-2.5 px-1 scrollbar-hide" rows="1" placeholder="Scrie un mesaj..."></textarea>
-                            <button class="p-2 text-on-surface-variant hover:text-primary rounded-full transition-colors flex-shrink-0">
-                                <span class="material-symbols-outlined">mood</span>
-                            </button>
-                            <button class="p-2 bg-primary text-on-primary hover:bg-primary/90 rounded-full transition-colors flex-shrink-0 active:scale-95 shadow-sm m-0.5">
+                        <form id="chat-form" onsubmit="handleSendMessage(event)" class="flex items-end gap-2 bg-surface-container-low rounded-xl p-1 border border-transparent focus-within:border-primary/50 transition-colors">
+                            <input type="text" id="chat-input" class="w-full bg-transparent border-none focus:ring-0 text-sm font-body-md py-2.5 px-3 focus:outline-none" placeholder="Scrie un mesaj securizat..." autocomplete="off">
+                            <button type="submit" class="p-2 bg-primary text-on-primary hover:bg-primary/90 rounded-full transition-colors flex-shrink-0 active:scale-95 shadow-sm m-0.5">
                                 <span class="material-symbols-outlined text-sm">send</span>
                             </button>
-                        </div>
+                        </form>
                     </div>
+
                 </div>
             </div>
         </section>
 
+        <!-- FINANCIAL TAB -->
         <section class="hidden animate-fade-in" id="tab-financial">
             <div class="flex justify-between items-end mb-md">
                 <h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface">Situație Financiară</h1>
@@ -444,160 +437,38 @@
                     </div>
                 </div>
             </div>
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-md">
-                <div class="lg:col-span-3 bg-surface-container-lowest border border-outline-variant/50 rounded-xl overflow-hidden shadow-sm">
-                    <div class="p-4 border-b border-outline-variant/30 flex justify-between items-center">
-                        <h3 class="font-headline-md text-on-surface">Istoric Tranzacții</h3>
-                    </div>
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-left border-collapse">
-                            <thead>
-                                <tr class="bg-surface-container-low/50 text-on-surface-variant font-label-md">
-                                    <th class="p-4 border-b border-outline-variant/30">Dată</th>
-                                    <th class="p-4 border-b border-outline-variant/30">Client</th>
-                                    <th class="p-4 border-b border-outline-variant/30">Sumă</th>
-                                    <th class="p-4 border-b border-outline-variant/30 text-center">Status</th>
-                                </tr>
-                            </thead>
-                            <tbody class="divide-y divide-outline-variant/20">
-                                <tr class="hover:bg-surface-container-low/50 transition-colors">
-                                    <td class="p-gutter font-body-md text-on-surface-variant">15 Oct 2023</td>
-                                    <td class="p-gutter"><div class="font-body-md font-bold text-on-surface">Elena Popescu</div><div class="text-xs text-on-surface-variant font-medium">Pachet Lunar</div></td>
-                                    <td class="p-gutter font-body-md font-bold text-primary">450 RON</td>
-                                    <td class="p-gutter text-center"><span class="bg-primary-container/20 text-on-primary-container px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wide">Plătit</span></td>
-                                </tr>
-                                <tr class="hover:bg-surface-container-low/50 transition-colors">
-                                    <td class="p-gutter font-body-md text-on-surface-variant">12 Oct 2023</td>
-                                    <td class="p-gutter"><div class="font-body-md font-bold text-on-surface">Maria Ionescu</div><div class="text-xs text-on-surface-variant font-medium">Plan Nutriție</div></td>
-                                    <td class="p-gutter font-body-md font-bold text-secondary">300 RON</td>
-                                    <td class="p-gutter text-center"><span class="bg-secondary-container/20 text-on-secondary-container px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wide">În așteptare</span></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
         </section>
 
+        <!-- PROFILE TAB -->
         <section class="hidden animate-fade-in" id="tab-profile">
             <h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-md">Profil Profesional</h1>
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-md pb-24 md:pb-0">
                 <div class="glass-card rounded-lg p-lg col-span-1 flex flex-col items-center text-center">
                     <div class="relative w-32 h-32 rounded-full overflow-hidden mb-4 border-4 border-surface-container-lowest shadow-md">
                         <img alt="Dr. Sarah Miller" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4ktnBmIkP7DIXMmVvXcDB5yHSMu4Spx_i5rF_U26MuZTysA3NfV1p92TQcmA-pUxE3fvUVipGJY0W6U-irvZA7plKZ7RjPykF2IDbvDaiM6vuXCAbFfY2QAGGOCf2ZWt864wu_i9CYlgyvCVYkFNWcLpvUJELVuz7O2p5iA1BECBzWJ1SKzjT4Obx17-IvAhjDQAS4Uo7BqtnOdD3XXBSjn-GXWNTlPc1y10CmjmIRO8clFJsPe3AwcWoGOPMZl8UlF55h3ML7sz9">
-                        <button class="absolute bottom-0 left-0 w-full bg-black/50 text-white py-1 font-label-sm hover:bg-black/70 transition-colors">Modifică</button>
                     </div>
                     <h2 class="font-headline-md text-on-surface">Dr. Sarah Miller</h2>
                     <p class="font-body-md text-on-surface-variant mb-4">Nutriționist Dietetician Principal</p>
-                    <button class="bg-primary-container text-on-primary hover:bg-primary px-6 py-2 rounded-lg font-label-md transition-colors w-full shadow-sm">Editează Profilul</button>
                 </div>
                 
                 <div class="lg:col-span-2 space-y-md">
                     <div class="bg-surface-container-lowest rounded-lg border border-outline-variant/50 p-md shadow-sm">
                         <div class="flex justify-between items-center mb-4 border-b border-outline-variant/30 pb-2">
                             <h3 class="font-headline-md text-on-surface">Descriere Profesională</h3>
-                            <button class="text-primary font-label-md flex items-center gap-1 hover:underline"><span class="material-symbols-outlined text-sm">edit</span> Editează</button>
                         </div>
                         <div class="p-4 bg-surface-container-low rounded-lg text-on-surface-variant font-body-md">
                             <p class="mb-2"><span class="font-bold text-primary">Experiență: 12+ Ani</span></p>
-                            <p>Cu o experiență de peste 12 ani în nutriția clinică și sportivă, sunt specializată în sănătatea metabolică și scăderea sustenabilă în greutate. Sunt pasionată să îmi ajut clienții să obțină vitalitate și o stare de bine optimă prin schimbări alimentare bazate pe știință. Cred într-o abordare holistică, care combină planuri de masă personalizate, educație nutrițională și asistență continuă pentru a asigura succesul pe termen lung.</p>
+                            <p>Cu o experiență de peste 12 ani în nutriția clinică și sportivă, sunt specializată în sănătatea metabolică și scăderea sustenabilă în greutate. Sunt pasionată să îmi ajut clienții să obțină vitalitate și o stare de bine optimă.</p>
                         </div>
                     </div>
                     
-                    <div class="bg-surface-container-lowest rounded-lg border border-outline-variant/50 p-md shadow-sm">
-                        <div class="flex justify-between items-center mb-4 border-b border-outline-variant/30 pb-2">
-                            <h3 class="font-headline-md text-on-surface">Documente și Certificări</h3>
-                            <button class="text-primary font-label-md flex items-center gap-1 hover:underline"><span class="material-symbols-outlined text-sm">add_circle</span> Adaugă Document</button>
-                        </div>
-                        <div class="space-y-3">
-                            <div class="flex items-center justify-between p-3 bg-surface-container-low rounded-lg border border-transparent transition-all">
-                                <div class="flex items-center gap-3">
-                                    <span class="material-symbols-outlined text-primary">description</span>
-                                    <div>
-                                        <p class="font-label-md font-semibold text-on-surface">Diplomă de Licență Nutriție și Dietetică</p>
-                                        <p class="text-[10px] text-on-surface-variant">UMF "Iuliu Hațieganu" Cluj-Napoca • 2011</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="flex items-center justify-between p-3 bg-surface-container-low rounded-lg border border-transparent transition-all">
-                                <div class="flex items-center gap-3">
-                                    <span class="material-symbols-outlined text-primary">workspace_premium</span>
-                                    <div>
-                                        <p class="font-label-md font-semibold text-on-surface">Certificare Nutriție Sportivă Avansată</p>
-                                        <p class="text-[10px] text-on-surface-variant">Verificat • 2015</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="bg-surface-container-lowest rounded-lg border border-outline-variant/50 p-md shadow-sm">
-                        <div class="flex justify-between items-center mb-4 border-b border-outline-variant/30 pb-2">
-                            <h3 class="font-headline-md text-on-surface">Pachete de Servicii și Tarife</h3>
-                            <button class="text-primary font-label-md flex items-center gap-1 hover:underline"><span class="material-symbols-outlined text-sm">add_box</span> Adaugă Serviciu</button>
-                        </div>
-                        <div class="space-y-3">
-                            <div class="flex justify-between items-center p-3 bg-surface-container-low rounded-lg border border-transparent transition-all">
-                                <div class="flex-1">
-                                    <h4 class="font-label-md font-semibold text-on-surface">Consultație Inițială</h4>
-                                    <p class="font-label-sm text-on-surface-variant">Evaluare completă și plan de acțiune (60 min)</p>
-                                </div>
-                                <div class="text-right">
-                                    <span class="font-body-md font-bold text-primary">300 RON</span>
-                                </div>
-                            </div>
-                            <div class="flex justify-between items-center p-3 bg-surface-container-low rounded-lg border border-transparent transition-all">
-                                <div class="flex-1">
-                                    <h4 class="font-label-md font-semibold text-on-surface">Pachet Nutriție (4 săptămâni)</h4>
-                                    <p class="font-label-sm text-on-surface-variant">Plan alimentar personalizat + suport chat</p>
-                                </div>
-                                <div class="text-right">
-                                    <span class="font-body-md font-bold text-primary">800 RON</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-md">
-                        <div class="bg-surface-container-lowest rounded-lg border border-outline-variant/50 p-md shadow-sm">
-                            <div class="flex justify-between items-center mb-4 border-b border-outline-variant/30 pb-2">
-                                <h3 class="font-headline-md text-on-surface">Informații Cabinet</h3>
-                            </div>
-                            <div class="space-y-4">
-                                <div>
-                                    <p class="font-label-sm text-on-surface-variant uppercase tracking-wider mb-1">Denumire Cabinet</p>
-                                    <p class="font-body-md font-medium text-on-surface">Cabinet Individual de Nutriție Dr. Sarah Miller</p>
-                                </div>
-                                <div>
-                                    <p class="font-label-sm text-on-surface-variant uppercase tracking-wider mb-1">Adresă Sediu Fizic</p>
-                                    <p class="font-body-md font-medium text-on-surface">Bulevardul Unirii Nr. 45, Sector 3, București</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="bg-surface-container-lowest rounded-lg border border-outline-variant/50 p-md shadow-sm">
-                            <div class="flex justify-between items-center mb-4 border-b border-outline-variant/30 pb-2">
-                                <h3 class="font-headline-md text-on-surface">Date Juridice</h3>
-                            </div>
-                            <div class="space-y-4">
-                                <div>
-                                    <p class="font-label-sm text-on-surface-variant uppercase tracking-wider mb-1">CUI / CIF</p>
-                                    <p class="font-body-md font-medium text-on-surface">RO 12345678</p>
-                                </div>
-                                <div>
-                                    <p class="font-label-sm text-on-surface-variant uppercase tracking-wider mb-1">Nr. Autorizație</p>
-                                    <p class="font-body-md font-medium text-on-surface">ALP-987654</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
+                    <!-- CARDURI STRIPE -->
                     <div class="bg-surface-container-lowest rounded-lg border border-outline-variant/50 p-md shadow-sm mb-lg">
                         <div class="flex justify-between items-center mb-4 border-b border-outline-variant/30 pb-2">
                             <h3 class="font-headline-md text-on-surface flex items-center gap-2">
                                 <span class="material-symbols-outlined text-primary">credit_card</span>
                                 Carduri Înrolate (Stripe)
                             </h3>
-                            <button class="text-primary font-label-md flex items-center gap-1 hover:underline"><span class="material-symbols-outlined text-sm">add_card</span> Adaugă Card</button>
                         </div>
                         <div class="space-y-3">
                             <div class="flex justify-between items-center p-4 bg-surface-container-low rounded-lg border border-outline-variant/50 relative overflow-hidden">
@@ -611,26 +482,7 @@
                                         <p class="font-label-sm text-on-surface-variant">Expiră 12/2026</p>
                                     </div>
                                 </div>
-                                <div class="flex items-center gap-3 relative z-10">
-                                    <span class="bg-primary/10 text-primary text-[10px] px-2 py-1 rounded-full font-bold uppercase">Card Principal</span>
-                                    <button class="p-1 text-on-surface-variant hover:text-error transition-colors"><span class="material-symbols-outlined">delete</span></button>
-                                </div>
-                            </div>
-                            
-                            <div class="flex justify-between items-center p-4 bg-surface-container-low rounded-lg border border-outline-variant/50">
-                                <div class="flex items-center gap-4">
-                                    <div class="w-12 h-8 bg-surface rounded flex items-center justify-center border border-outline-variant/30 text-tertiary">
-                                        <span class="material-symbols-outlined text-lg">credit_card</span>
-                                    </div>
-                                    <div>
-                                        <h4 class="font-label-md font-semibold text-on-surface">Mastercard terminat în 8834</h4>
-                                        <p class="font-label-sm text-on-surface-variant">Expiră 05/2025</p>
-                                    </div>
-                                </div>
-                                <div class="flex items-center gap-3">
-                                    <button class="text-primary font-label-sm hover:underline">Setează principal</button>
-                                    <button class="p-1 text-on-surface-variant hover:text-error transition-colors"><span class="material-symbols-outlined">delete</span></button>
-                                </div>
+                                <span class="bg-primary/10 text-primary text-[10px] px-2 py-1 rounded-full font-bold uppercase relative z-10">Activ</span>
                             </div>
                         </div>
                     </div>
@@ -641,54 +493,76 @@
 
     </main>
 
-    <div class="fixed bottom-20 md:bottom-8 right-4 md:right-8 z-50 group">
-        <button class="bg-primary text-on-primary w-14 h-14 rounded-full shadow-lg flex items-center justify-center hover:shadow-xl hover:bg-surface-tint active:scale-95 transition-all">
-            <span class="material-symbols-outlined text-3xl transition-transform duration-300">add</span>
-        </button>
-    </div>
-
+    <!-- Meniu Mobil Navigation -->
     <nav class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center px-2 py-2 bg-surface shadow-[0_-4px_20px_rgba(0,0,0,0.04)] z-50 rounded-t-xl border-t border-outline-variant/20">
-        <button class="mobile-nav-btn flex flex-col items-center justify-center text-primary bg-primary-container/20 rounded-lg px-3 py-1 active:scale-90 transition-transform" data-tab="dashboard" onclick="switchTab('dashboard')">
+        <button class="mobile-nav-btn flex flex-col items-center justify-center text-primary bg-primary-container/20 rounded-lg px-3 py-1" data-tab="dashboard" onclick="switchTab('dashboard')">
             <span class="material-symbols-outlined text-xl mb-1" style="font-variation-settings: 'FILL' 1;">dashboard</span>
             <span class="font-label-sm text-[10px] font-medium leading-none">Panou</span>
         </button>
-        <button class="mobile-nav-btn flex flex-col items-center justify-center text-on-surface-variant px-3 py-1 active:scale-90 transition-transform" data-tab="clients" onclick="switchTab('clients')">
+        <button class="mobile-nav-btn flex flex-col items-center justify-center text-on-surface-variant px-3 py-1" data-tab="clients" onclick="switchTab('clients')">
             <span class="material-symbols-outlined text-xl mb-1">group</span>
             <span class="font-label-sm text-[10px] font-medium leading-none text-nowrap">Clienți</span>
         </button>
-        <button class="mobile-nav-btn flex flex-col items-center justify-center text-on-surface-variant px-3 py-1 active:scale-90 transition-transform" data-tab="messages" onclick="switchTab('messages')">
+        <button class="mobile-nav-btn flex flex-col items-center justify-center text-on-surface-variant px-3 py-1" data-tab="messages" onclick="switchTab('messages')">
             <span class="material-symbols-outlined text-xl mb-1">chat</span>
             <span class="font-label-sm text-[10px] font-medium leading-none">Mesaje</span>
         </button>
-        <button class="mobile-nav-btn flex flex-col items-center justify-center text-on-surface-variant px-3 py-1 active:scale-90 transition-transform" data-tab="financial" onclick="switchTab('financial')">
+        <button class="mobile-nav-btn flex flex-col items-center justify-center text-on-surface-variant px-3 py-1" data-tab="financial" onclick="switchTab('financial')">
             <span class="material-symbols-outlined text-xl mb-1">payments</span>
             <span class="font-label-sm text-[10px] font-medium leading-none font-bold">Financiar</span>
         </button>
-        <button class="mobile-nav-btn flex flex-col items-center justify-center text-on-surface-variant px-3 py-1 active:scale-90 transition-transform" data-tab="profile" onclick="switchTab('profile')">
+        <button class="mobile-nav-btn flex flex-col items-center justify-center text-on-surface-variant px-3 py-1" data-tab="profile" onclick="switchTab('profile')">
             <span class="material-symbols-outlined text-xl mb-1">account_circle</span>
             <span class="font-label-sm text-[10px] font-medium leading-none font-bold">Profil</span>
         </button>
     </nav>
 
+    <!-- LOGICA JAVASCRIPT DETALIATĂ PENTRU TAB-URI, FIREBASE ȘI APEL VIDEO INTEGRAT -->
     <script>
+        // --- 1. CONFIGURARE FIREBASE (COPIAZĂ CHEILE TALE DIN CONSOLA FIREBASE COPIATE ANTERIOR) ---
+        const firebaseConfig = {
+            apiKey: "AICI_PUI_API_KEY_PENTRU_CHAT",
+            authDomain: "PROIECTUL-TAU.firebaseapp.com",
+            projectId: "PROIECTUL-TAU",
+            storageBucket: "PROIECTUL-TAU.appspot.com",
+            messagingSenderId: "1234567890",
+            appId: "1:123456:web:abcd1234"
+        };
+
+        // Instanțe globale pentru funcționalități
+        let db = null;
+        let jitsiApi = null;
+
+        // Mesaje mockup/offline folosite ca siguranță (dacă Firebase nu are cheile introduse)
+        let localMessages = [
+            { sender: "client", text: "Bună ziua! Am o întrebare legată de planul alimentar de azi.", time: "10:40" },
+            { sender: "nutritionist", text: "Salut Alexandru! Desigur, spune-mi despre ce este vorba.", time: "10:41" }
+        ];
+
+        // Inițializare sigură Firebase client-side
+        try {
+            if (firebaseConfig.apiKey !== "AICI_PUI_API_KEY_PENTRU_CHAT") {
+                firebase.initializeApp(firebaseConfig);
+                db = firebase.firestore();
+                console.log("Firebase conectat cu succes pentru Chat real-time!");
+            }
+        } catch (error) {
+            console.error("Eroare la inițializarea Firebase:", error);
+        }
+
+        // --- 2. MANAGEMENT LOGICĂ TAB-URI ---
         function switchTab(tabId) {
             const tabs = ['dashboard', 'clients', 'messages', 'financial', 'profile'];
             tabs.forEach(id => {
                 const el = document.getElementById(`tab-${id}`);
-                if (el) {
-                    el.classList.add('hidden');
-                    el.classList.remove('block');
-                }
+                if (el) el.classList.replace('block', 'hidden');
             });
 
             const selectedTab = document.getElementById(`tab-${tabId}`);
-            if (selectedTab) {
-                selectedTab.classList.remove('hidden');
-                selectedTab.classList.add('block');
-            }
+            if (selectedTab) selectedTab.classList.replace('hidden', 'block');
             
-            const desktopBtns = document.querySelectorAll('.nav-desktop-btn');
-            desktopBtns.forEach(btn => {
+            // Actualizare butoane desktop
+            document.querySelectorAll('.nav-desktop-btn').forEach(btn => {
                 const icon = btn.querySelector('.material-symbols-outlined');
                 if (btn.dataset.tab === tabId) {
                     btn.classList.remove('text-on-surface-variant');
@@ -701,8 +575,8 @@
                 }
             });
 
-            const mobileBtns = document.querySelectorAll('.mobile-nav-btn');
-            mobileBtns.forEach(btn => {
+            // Actualizare butoane mobil
+            document.querySelectorAll('.mobile-nav-btn').forEach(btn => {
                 const icon = btn.querySelector('.material-symbols-outlined');
                 if (btn.dataset.tab === tabId) {
                     btn.classList.remove('text-on-surface-variant');
@@ -714,7 +588,122 @@
                     if (icon) icon.style.fontVariationSettings = "'FILL' 0";
                 }
             });
+
+            if (tabId === 'messages') {
+                renderMessages();
+                listenForMessages();
+            }
         }
+
+        // --- 3. LOGICĂ TRIMITERE ȘI SINCRONIZARE MESAJE CHAT ---
+        function renderMessages() {
+            const container = document.getElementById('chat-messages-box');
+            if (!container) return;
+            container.innerHTML = '';
+
+            localMessages.forEach(msg => {
+                const isMe = msg.sender === 'nutritionist';
+                const wrapper = document.createElement('div');
+                wrapper.className = `flex ${isMe ? 'justify-end' : 'justify-start'}`;
+
+                const bubble = document.createElement('div');
+                bubble.className = isMe 
+                    ? "bg-primary text-on-primary px-4 py-2 rounded-2xl rounded-tr-none max-w-[75%] shadow-sm"
+                    : "bg-surface-container-lowest border border-outline-variant/30 text-on-surface px-4 py-2 rounded-2xl rounded-tl-none max-w-[75%] shadow-sm";
+
+                bubble.innerHTML = `<p class="text-sm font-body-md">${msg.text}</p>
+                                    <p class="text-[9px] ${isMe ? 'text-primary-fixed' : 'text-on-surface-variant'} text-right mt-1">${msg.time}</p>`;
+                
+                wrapper.appendChild(bubble);
+                container.appendChild(wrapper);
+            });
+
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function listenForMessages() {
+            if (!db) return; // Rămâne pe backup offline dacă nu s-au pus credențiale
+
+            db.collection('conversations').doc('conversație_popescu')
+              .collection('messages').orderBy('timestamp', 'asc')
+              .onSnapshot(snapshot => {
+                  if (!snapshot.empty) {
+                      localMessages = [];
+                      snapshot.forEach(doc => {
+                          const data = doc.data();
+                          localMessages.push({
+                              sender: data.sender,
+                              text: data.text,
+                              time: data.time || new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
+                          });
+                      });
+                      renderMessages();
+                  }
+              });
+        }
+
+        function handleSendMessage(event) {
+            event.preventDefault();
+            const input = document.getElementById('chat-input');
+            if (!input || !input.value.trim()) return;
+
+            const text = input.value.trim();
+            const now = new Date();
+            const timeStr = now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+
+            // 1. Salvare în UI local
+            localMessages.push({ sender: 'nutritionist', text: text, time: timeStr });
+            renderMessages();
+            input.value = '';
+
+            // 2. Transmitere securizată în baza de date Firebase dacă este activată
+            if (db) {
+                db.collection('conversations').doc('conversație_popescu').collection('messages').add({
+                    sender: 'nutritionist',
+                    text: text,
+                    time: timeStr,
+                    timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                }).catch(err => console.error("Eroare trimitere Firebase:", err));
+            }
+        }
+
+        // --- 4. LOGICĂ APEL VIDEO INTEGRATĂ (JITSI MEET EMBED NATIV) ---
+        function startVideoCall(roomName) {
+            const workspace = document.getElementById('video-chat-workspace');
+            workspace.classList.remove('hidden');
+
+            const domain = "meet.jit.si";
+            const options = {
+                roomName: roomName,
+                width: "100%",
+                height: "100%",
+                parentNode: document.getElementById('jitsi-container'),
+                configOverwrite: { startWithAudioMuted: false, startWithVideoMuted: false },
+                interfaceConfigOverwrite: { FILM_STRIP_MAX_HEIGHT: 120 }
+            };
+            
+            // Instanțiere video-chat securizat în interiorul div-ului propriu
+            if (!jitsiApi) {
+                jitsiApi = new JitsiMeetExternalAPI(domain, options);
+                console.log("Apel video nativ inițiat!");
+            }
+        }
+
+        function stopVideoCall() {
+            const workspace = document.getElementById('video-chat-workspace');
+            workspace.classList.add('hidden');
+            
+            if (jitsiApi) {
+                jitsiApi.dispose();
+                jitsiApi = null;
+                document.getElementById('jitsi-container').innerHTML = '';
+                console.log("Apel video terminat cu succes.");
+            }
+        }
+
+        // Auto-renderează mesajele inițiale la deschidere
+        window.onload = function() {
+            renderMessages();
+        };
     </script>
 </body>
-</html>
