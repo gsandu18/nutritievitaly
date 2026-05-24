@@ -521,5 +521,287 @@
     </main>
 
     <script src="script.js"></script>
+<script>
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
+import { getFirestore, collection, addDoc, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-firestore.js";
+import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-auth.js";
+
+// Configuratia ta Firebase
+const firebaseConfig = {
+    apiKey: "AICI_PUI_API_KEY_UL_TAU",
+    authDomain: "vitality-app.firebaseapp.com",
+    projectId: "vitality-app",
+    storageBucket: "vitality-app.appspot.com",
+    messagingSenderId: "1234567890",
+    appId: "1:1234567890:web:abcdef123456"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const auth = getAuth(app);
+
+// ==========================================
+// 1. ANIMAȚII FORMULARE (Selecție Rol)
+// ==========================================
+window.showForm = function(role) {
+    const isPacient = role === 'pacient';
+    document.getElementById('role-selection')?.classList.add('hidden');
+    document.getElementById('registration-forms')?.classList.remove('hidden');
+    
+    document.getElementById('client-form')?.classList.toggle('hidden', !isPacient);
+    document.getElementById('nutritionist-form')?.classList.toggle('hidden', isPacient);
+    
+    document.getElementById('hero-pacient')?.classList.toggle('hidden', !isPacient);
+    document.getElementById('hero-nutritionist')?.classList.toggle('hidden', isPacient);
+}
+
+window.showRoleSelection = function() {
+    document.getElementById('role-selection')?.classList.remove('hidden');
+    document.getElementById('registration-forms')?.classList.add('hidden');
+    
+    document.getElementById('hero-pacient')?.classList.remove('hidden');
+    document.getElementById('hero-nutritionist')?.classList.add('hidden');
+}
+
+// ==========================================
+// 2. LOGICĂ DE ÎNREGISTRARE ȘI REDIRECȚIONARE
+// ==========================================
+
+// Pacient (Redirecționează către index/Acasă)
+const clientForm = document.getElementById('client-form');
+if (clientForm) {
+    clientForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const email = document.getElementById('reg-pacient-email').value;
+        const parola = document.getElementById('reg-pacient-parola').value;
+        const nume = document.getElementById('reg-pacient-nume').value;
+
+        try {
+            const userCredential = await createUserWithEmailAndPassword(auth, email, parola);
+            await addDoc(collection(db, "pacienti"), {
+                authId: userCredential.user.uid,
+                numeComplet: nume,
+                email: email
+            });
+            alert("Cont pacient creat cu succes!");
+            window.location.href = "index.html"; 
+        } catch (error) {
+            alert("Eroare: " + error.message);
+        }
+    });
+}
+
+// Nutriționist (Redirecționează către PROFILUL LOR UNIC)
+const nutriForm = document.getElementById('nutritionist-form');
+if (nutriForm) {
+    nutriForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        // Preluăm toate datele din formular
+        const nume = document.getElementById('reg-nutri-nume').value;
+        const specializare = document.getElementById('reg-nutri-specializare').value;
+        const pret = document.getElementById('reg-nutri-pret').value;
+        const email = document.getElementById('reg-nutri-email').value;
+        const parola = document.getElementById('reg-nutri-parola').value;
+
+        try {
+            // 1. Creare cont în Firebase Auth
+            const userCredential = await createUserWithEmailAndPassword(auth, email, parola);
+            const uid = userCredential.user.uid;
+
+            // 2. Salvare date in Firestore (Colecția 'medici')
+            const docRef = await addDoc(collection(db, "medici"), {
+                authId: uid,
+                numeComplet: nume,
+                specializare: specializare,
+                pretConsultatie: pret,
+                email: email,
+                descriere: "Medic specialist proaspăt înregistrat în rețeaua Vitality.",
+                rating: "5.0",
+                recenzii: "0"
+            });
+
+            // 3. Redirecționarea magică către profilul generat
+            alert("Cabinet înregistrat cu succes! Ești redirecționat către profilul tău.");
+            window.location.href = `profil.html?id=${docRef.id}`;
+
+        } catch (error) {
+            alert("Eroare la înregistrare: " + error.message);
+        }
+    });
+}
+
+// ==========================================
+// 3. CITIRE DATE PENTRU PAGINA DE PROFIL
+// ==========================================
+async function incarcaProfilMedic() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const medicId = urlParams.get('id');
+
+    if (!medicId) return;
+
+    try {
+        const docRef = doc(db, "medici", medicId);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+            const date = docSnap.data();
+            
+            // Plasăm datele în HTML pe baza ID-urilor 
+            if(document.getElementById('ui-nume')) document.getElementById('ui-nume').innerText = date.numeComplet;
+            if(document.getElementById('ui-specializare')) document.getElementById('ui-specializare').innerText = date.specializare;
+            if(document.getElementById('ui-pret')) document.getElementById('ui-pret').innerText = date.pretConsultatie + " RON";
+            if(document.getElementById('ui-descriere')) document.getElementById('ui-descriere').innerText = date.descriere;
+        } else {
+            console.error("Profilul căutat nu există.");
+        }
+    } catch (error) {
+        console.error("Eroare:", error);
+    }
+}
+
+if (window.location.pathname.includes('profil.html')) {
+    incarcaProfilMedic();
+}import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
+import { getFirestore, collection, addDoc, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-firestore.js";
+import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-auth.js";
+
+// Configuratia ta Firebase
+const firebaseConfig = {
+    apiKey: "AICI_PUI_API_KEY_UL_TAU",
+    authDomain: "vitality-app.firebaseapp.com",
+    projectId: "vitality-app",
+    storageBucket: "vitality-app.appspot.com",
+    messagingSenderId: "1234567890",
+    appId: "1:1234567890:web:abcdef123456"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const auth = getAuth(app);
+
+// ==========================================
+// 1. ANIMAȚII FORMULARE (Selecție Rol)
+// ==========================================
+window.showForm = function(role) {
+    const isPacient = role === 'pacient';
+    document.getElementById('role-selection')?.classList.add('hidden');
+    document.getElementById('registration-forms')?.classList.remove('hidden');
+    
+    document.getElementById('client-form')?.classList.toggle('hidden', !isPacient);
+    document.getElementById('nutritionist-form')?.classList.toggle('hidden', isPacient);
+    
+    document.getElementById('hero-pacient')?.classList.toggle('hidden', !isPacient);
+    document.getElementById('hero-nutritionist')?.classList.toggle('hidden', isPacient);
+}
+
+window.showRoleSelection = function() {
+    document.getElementById('role-selection')?.classList.remove('hidden');
+    document.getElementById('registration-forms')?.classList.add('hidden');
+    
+    document.getElementById('hero-pacient')?.classList.remove('hidden');
+    document.getElementById('hero-nutritionist')?.classList.add('hidden');
+}
+
+// ==========================================
+// 2. LOGICĂ DE ÎNREGISTRARE ȘI REDIRECȚIONARE
+// ==========================================
+
+// Pacient (Redirecționează către index/Acasă)
+const clientForm = document.getElementById('client-form');
+if (clientForm) {
+    clientForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const email = document.getElementById('reg-pacient-email').value;
+        const parola = document.getElementById('reg-pacient-parola').value;
+        const nume = document.getElementById('reg-pacient-nume').value;
+
+        try {
+            const userCredential = await createUserWithEmailAndPassword(auth, email, parola);
+            await addDoc(collection(db, "pacienti"), {
+                authId: userCredential.user.uid,
+                numeComplet: nume,
+                email: email
+            });
+            alert("Cont pacient creat cu succes!");
+            window.location.href = "index.html"; 
+        } catch (error) {
+            alert("Eroare: " + error.message);
+        }
+    });
+}
+
+// Nutriționist (Redirecționează către PROFILUL LOR UNIC)
+const nutriForm = document.getElementById('nutritionist-form');
+if (nutriForm) {
+    nutriForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        // Preluăm toate datele din formular
+        const nume = document.getElementById('reg-nutri-nume').value;
+        const specializare = document.getElementById('reg-nutri-specializare').value;
+        const pret = document.getElementById('reg-nutri-pret').value;
+        const email = document.getElementById('reg-nutri-email').value;
+        const parola = document.getElementById('reg-nutri-parola').value;
+
+        try {
+            // 1. Creare cont în Firebase Auth
+            const userCredential = await createUserWithEmailAndPassword(auth, email, parola);
+            const uid = userCredential.user.uid;
+
+            // 2. Salvare date in Firestore (Colecția 'medici')
+            const docRef = await addDoc(collection(db, "medici"), {
+                authId: uid,
+                numeComplet: nume,
+                specializare: specializare,
+                pretConsultatie: pret,
+                email: email,
+                descriere: "Medic specialist proaspăt înregistrat în rețeaua Vitality.",
+                rating: "5.0",
+                recenzii: "0"
+            });
+
+            // 3. Redirecționarea magică către profilul generat
+            alert("Cabinet înregistrat cu succes! Ești redirecționat către profilul tău.");
+            window.location.href = `profil.html?id=${docRef.id}`;
+
+        } catch (error) {
+            alert("Eroare la înregistrare: " + error.message);
+        }
+    });
+}
+
+// ==========================================
+// 3. CITIRE DATE PENTRU PAGINA DE PROFIL
+// ==========================================
+async function incarcaProfilMedic() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const medicId = urlParams.get('id');
+
+    if (!medicId) return;
+
+    try {
+        const docRef = doc(db, "medici", medicId);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+            const date = docSnap.data();
+            
+            // Plasăm datele în HTML pe baza ID-urilor 
+            if(document.getElementById('ui-nume')) document.getElementById('ui-nume').innerText = date.numeComplet;
+            if(document.getElementById('ui-specializare')) document.getElementById('ui-specializare').innerText = date.specializare;
+            if(document.getElementById('ui-pret')) document.getElementById('ui-pret').innerText = date.pretConsultatie + " RON";
+            if(document.getElementById('ui-descriere')) document.getElementById('ui-descriere').innerText = date.descriere;
+        } else {
+            console.error("Profilul căutat nu există.");
+        }
+    } catch (error) {
+        console.error("Eroare:", error);
+    }
+}
+
+if (window.location.pathname.includes('profil.html')) {
+    incarcaProfilMedic();
+}    
 </body>
 </html>
