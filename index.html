@@ -38,6 +38,7 @@
         body { background-color: #fbf9f9; color: #1b1c1c; -webkit-font-smoothing: antialiased; }
         .gradient-text { background: linear-gradient(135deg, #006e1c 0%, #4caf50 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body class="min-h-screen pb-24 md:pb-0 font-sans">
@@ -82,8 +83,7 @@
 
                 <div class="max-w-4xl mx-auto pt-8" id="registration-section">
                     
-                    <div id="role-selection" class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        
+                    <div id="role-selection" class="grid grid-cols-1 md:grid-cols-2 gap-6 animate-[fadeIn_0.3s]">
                         <div class="bg-white rounded-3xl border border-gray-200 p-8 flex flex-col items-center text-center shadow-sm hover:shadow-md transition-shadow">
                             <div class="w-16 h-16 bg-[#f0f5f1] rounded-2xl flex items-center justify-center mb-6">
                                 <span class="material-symbols-outlined text-card-green text-3xl" style="font-variation-settings: 'FILL' 1;">health_and_safety</span>
@@ -105,10 +105,9 @@
                                 Înregistrează Cabinetul <span class="material-symbols-outlined text-sm">arrow_forward</span>
                             </button>
                         </div>
-
                     </div>
 
-                    <div id="registration-forms" class="hidden bg-white rounded-3xl shadow-lg border border-gray-200 overflow-hidden relative max-w-xl mx-auto">
+                    <div id="registration-forms" class="hidden bg-white rounded-3xl shadow-lg border border-gray-200 overflow-hidden relative max-w-xl mx-auto animate-[fadeIn_0.3s]">
                         <div class="bg-gray-50 border-b border-gray-200 px-6 py-4 flex items-center">
                             <button onclick="showRoleSelection()" class="text-gray-500 hover:text-gray-800 flex items-center gap-1 text-sm font-semibold transition-colors">
                                 <span class="material-symbols-outlined text-[18px]">arrow_back</span> Înapoi la selecție
@@ -120,15 +119,15 @@
                                 <h3 class="text-2xl font-bold text-gray-900 mb-6 text-center">Cont Pacient</h3>
                                 <div class="space-y-1">
                                     <label class="text-sm text-gray-700 ml-1 font-medium">Nume Complet</label>
-                                    <input class="w-full rounded-xl border-gray-300 focus:border-card-green focus:ring-card-green py-3" placeholder="ex. Ioana Popescu" type="text">
+                                    <input id="reg-pacient-nume" required class="w-full rounded-xl border-gray-300 focus:border-card-green focus:ring-card-green py-3" placeholder="ex. Ioana Popescu" type="text">
                                 </div>
                                 <div class="space-y-1">
                                     <label class="text-sm text-gray-700 ml-1 font-medium">Email</label>
-                                    <input class="w-full rounded-xl border-gray-300 focus:border-card-green focus:ring-card-green py-3" placeholder="ioana@exemplu.ro" type="email">
+                                    <input id="reg-pacient-email" required class="w-full rounded-xl border-gray-300 focus:border-card-green focus:ring-card-green py-3" placeholder="ioana@exemplu.ro" type="email">
                                 </div>
                                 <div class="space-y-1">
                                     <label class="text-sm text-gray-700 ml-1 font-medium">Parolă</label>
-                                    <input class="w-full rounded-xl border-gray-300 focus:border-card-green focus:ring-card-green py-3" placeholder="••••••••" type="password">
+                                    <input id="reg-pacient-parola" required class="w-full rounded-xl border-gray-300 focus:border-card-green focus:ring-card-green py-3" placeholder="••••••••" type="password">
                                 </div>
                                 <div class="flex items-center gap-2 pt-1 pb-2">
                                     <input class="w-4 h-4 rounded border-gray-300 text-card-green focus:ring-card-green" id="terms-pacient" required type="checkbox">
@@ -137,31 +136,36 @@
                                 <button class="w-full mt-6 py-3.5 bg-card-green text-white rounded-xl text-sm font-bold hover:bg-[#255228] transition-all shadow-md" type="submit">
                                     Creează Cont
                                 </button>
-                                <div class="text-center mt-4"><a class="text-sm text-card-green font-medium hover:underline" href="#">Ai deja un cont? Autentifică-te</a></div>
                             </form>
 
                             <form class="space-y-4 text-left hidden" id="nutritionist-form">
                                 <h3 class="text-2xl font-bold text-gray-900 mb-6 text-center">Înregistrare Cabinet</h3>
+                                
                                 <div class="space-y-1">
-                                    <label class="text-sm text-gray-700 ml-1 font-medium">Nume Complet</label>
-                                    <input class="w-full rounded-xl border-gray-300 focus:border-gray-800 focus:ring-gray-800 py-3" placeholder="ex. Dr. Andrei Mureșan" type="text">
+                                    <label class="text-sm text-gray-700 ml-1 font-medium">Nume Complet (inclusiv Dr.)</label>
+                                    <input id="reg-nutri-nume" required class="w-full rounded-xl border-gray-300 focus:border-gray-800 focus:ring-gray-800 py-3" placeholder="ex. Dr. Andrei Mureșan" type="text">
                                 </div>
+                                
                                 <div class="space-y-1">
-                                    <label class="text-sm text-gray-700 ml-1 font-medium">Titlu Profesional</label>
-                                    <input class="w-full rounded-xl border-gray-300 focus:border-gray-800 focus:ring-gray-800 py-3" placeholder="ex. Medic Specialist Nutriție" type="text">
+                                    <label class="text-sm text-gray-700 ml-1 font-medium">Specializare / Titlu Profesional</label>
+                                    <input id="reg-nutri-specializare" required class="w-full rounded-xl border-gray-300 focus:border-gray-800 focus:ring-gray-800 py-3" placeholder="ex. Medic Specialist Nutriție" type="text">
                                 </div>
+                                
                                 <div class="space-y-1">
-                                    <label class="text-sm text-gray-700 ml-1 font-medium">Email</label>
-                                    <input class="w-full rounded-xl border-gray-300 focus:border-gray-800 focus:ring-gray-800 py-3" placeholder="doctor@vitality.ro" type="email">
+                                    <label class="text-sm text-gray-700 ml-1 font-medium">Preț Consultație Standard (RON)</label>
+                                    <input id="reg-nutri-pret" required class="w-full rounded-xl border-gray-300 focus:border-gray-800 focus:ring-gray-800 py-3" placeholder="ex. 200" type="number">
                                 </div>
+
+                                <div class="space-y-1">
+                                    <label class="text-sm text-gray-700 ml-1 font-medium">Email Profesional</label>
+                                    <input id="reg-nutri-email" required class="w-full rounded-xl border-gray-300 focus:border-gray-800 focus:ring-gray-800 py-3" placeholder="doctor@vitality.ro" type="email">
+                                </div>
+                                
                                 <div class="space-y-1">
                                     <label class="text-sm text-gray-700 ml-1 font-medium">Parolă</label>
-                                    <input class="w-full rounded-xl border-gray-300 focus:border-gray-800 focus:ring-gray-800 py-3" placeholder="••••••••" type="password">
+                                    <input id="reg-nutri-parola" required class="w-full rounded-xl border-gray-300 focus:border-gray-800 focus:ring-gray-800 py-3" placeholder="••••••••" type="password">
                                 </div>
-                                <div class="flex items-center gap-2 pt-1 pb-2">
-                                    <input class="w-4 h-4 rounded border-gray-300 text-gray-800 focus:ring-gray-800" id="terms-nutritionist" required type="checkbox">
-                                    <label class="text-sm text-gray-600 cursor-pointer" for="terms-nutritionist">Sunt de acord cu Termenii și Condițiile</label>
-                                </div>
+
                                 <div class="space-y-1">
                                     <label class="text-sm text-gray-700 ml-1 font-medium">Încarcă Diplomă (PDF/JPG)</label>
                                     <div class="w-full border-2 border-dashed border-gray-300 rounded-xl p-4 text-center cursor-pointer hover:bg-gray-50 transition-colors">
@@ -169,9 +173,16 @@
                                         <p class="text-xs text-gray-500 mt-1">Apasă pentru a alege fișierul</p>
                                     </div>
                                 </div>
+
+                                <div class="flex items-center gap-2 pt-1 pb-2">
+                                    <input class="w-4 h-4 rounded border-gray-300 text-gray-800 focus:ring-gray-800" id="terms-nutritionist" required type="checkbox">
+                                    <label class="text-sm text-gray-600 cursor-pointer" for="terms-nutritionist">Sunt de acord cu Termenii și Condițiile</label>
+                                </div>
+                                
                                 <div class="space-y-3 pt-4">
-                                    <button class="w-full py-3.5 bg-gray-900 text-white rounded-xl text-sm font-bold hover:bg-gray-800 transition-all shadow-md" type="submit">Înregistrează Cabinet</button>
-                                    <div class="text-center mt-2"><a class="text-sm text-gray-700 font-medium hover:underline" href="#">Ai deja un cont? Autentifică-te</a></div>
+                                    <button class="w-full py-3.5 bg-gray-900 text-white rounded-xl text-sm font-bold hover:bg-gray-800 transition-all shadow-md" type="submit">
+                                        Înregistrează Cabinet & Vezi Profilul
+                                    </button>
                                 </div>
                             </form>
                         </div>
@@ -280,7 +291,7 @@
                                 <div class="absolute bottom-0 right-0 w-5 h-5 bg-green-500 border-2 border-white rounded-full"></div>
                             </div>
                             <div class="space-y-1">
-                                <h3 class="text-xl font-bold text-on-surface" id="doc-name-1">Dr. Elena Popescu</h3>
+                                <h3 class="text-xl font-bold text-on-surface">Dr. Elena Popescu</h3>
                                 <p class="text-sm text-primary font-medium">Medic Specialist Nutriție</p>
                                 <div class="flex items-center gap-1 text-secondary-container">
                                     <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
@@ -308,9 +319,9 @@
                                 <span class="text-on-surface-variant">Următorul loc liber:</span><span class="font-medium text-on-surface">Mâine, 10:00</span>
                             </div>
                             
-                            <button class="w-full py-2.5 bg-gray-100 text-gray-800 border border-gray-200 rounded-lg text-sm font-semibold hover:bg-gray-200 transition-colors">
+                            <a href="profil.html?id=1" class="w-full py-2.5 bg-gray-100 text-gray-800 border border-gray-200 rounded-lg text-sm font-semibold hover:bg-gray-200 transition-colors text-center">
                                 Vezi profilul meu
-                            </button>
+                            </a>
                             <a href="rezervare.html?doctor_id=1&name=Dr.%20Elena%20Popescu&price=200" class="block w-full text-center py-2.5 bg-card-green text-white rounded-lg text-sm font-semibold hover:bg-[#255228] transition-colors shadow-sm">
                                 Programează Consultație
                             </a>
@@ -324,7 +335,7 @@
                                 <div class="absolute bottom-0 right-0 w-5 h-5 bg-green-500 border-2 border-white rounded-full"></div>
                             </div>
                             <div class="space-y-1">
-                                <h3 class="text-xl font-bold text-on-surface" id="doc-name-2">Dr. Andrei Mureșan</h3>
+                                <h3 class="text-xl font-bold text-on-surface">Dr. Andrei Mureșan</h3>
                                 <p class="text-sm text-primary font-medium">Medic Primar Diabet</p>
                                 <div class="flex items-center gap-1 text-secondary-container">
                                     <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
@@ -352,9 +363,9 @@
                                 <span class="text-on-surface-variant">Următorul loc liber:</span><span class="font-medium text-on-surface">Azi, 15:30</span>
                             </div>
                             
-                            <button class="w-full py-2.5 bg-gray-100 text-gray-800 border border-gray-200 rounded-lg text-sm font-semibold hover:bg-gray-200 transition-colors">
+                            <a href="profil.html?id=2" class="w-full py-2.5 bg-gray-100 text-gray-800 border border-gray-200 rounded-lg text-sm font-semibold hover:bg-gray-200 transition-colors text-center">
                                 Vezi profilul meu
-                            </button>
+                            </a>
                             <a href="rezervare.html?doctor_id=2&name=Dr.%20Andrei%20Mureșan&price=180" class="block w-full text-center py-2.5 bg-card-green text-white rounded-lg text-sm font-semibold hover:bg-[#255228] transition-colors shadow-sm">
                                 Programează Consultație
                             </a>
@@ -368,8 +379,8 @@
                                 <div class="absolute bottom-0 right-0 w-5 h-5 bg-green-500 border-2 border-white rounded-full"></div>
                             </div>
                             <div class="space-y-1">
-                                <h3 class="text-xl font-bold text-on-surface" id="doc-name-3">Dr. Maria Ionescu</h3>
-                                <p class="text-sm text-primary font-medium">Dietetician Clinicizat</p>
+                                <h3 class="text-xl font-bold text-on-surface">Dr. Maria Ionescu</h3>
+                                <p class="text-sm text-primary font-medium">Dietetician Clinic</p>
                                 <div class="flex items-center gap-1 text-secondary-container">
                                     <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
                                     <span class="text-xs text-on-surface-variant font-medium">5.0 (210+ recenzii)</span>
@@ -396,9 +407,9 @@
                                 <span class="text-on-surface-variant">Următorul loc liber:</span><span class="font-medium text-on-surface">Joi, 09:00</span>
                             </div>
                             
-                            <button class="w-full py-2.5 bg-gray-100 text-gray-800 border border-gray-200 rounded-lg text-sm font-semibold hover:bg-gray-200 transition-colors">
+                            <a href="profil.html?id=3" class="w-full py-2.5 bg-gray-100 text-gray-800 border border-gray-200 rounded-lg text-sm font-semibold hover:bg-gray-200 transition-colors text-center">
                                 Vezi profilul meu
-                            </button>
+                            </a>
                             <a href="rezervare.html?doctor_id=3&name=Dr.%20Maria%20Ionescu&price=150" class="block w-full text-center py-2.5 bg-card-green text-white rounded-lg text-sm font-semibold hover:bg-[#255228] transition-colors shadow-sm">
                                 Programează Consultație
                             </a>
@@ -519,13 +530,14 @@
             </section>
         </div>
     </main>
-<script src="script.js"></script>
+
+    <script type="module" src="script.js"></script>
     <script>
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
 import { getFirestore, collection, addDoc, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-firestore.js";
 import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-auth.js";
 
-// Configuratia ta Firebase (NU UITA SĂ O ÎNLOCUIEȘTI)
+// Configuratia Firebase (INLOCUIESTE CU DATELE TALE)
 const firebaseConfig = {
     apiKey: "AICI_PUI_API_KEY_UL_TAU",
     authDomain: "vitality-app.firebaseapp.com",
@@ -540,7 +552,7 @@ const db = getFirestore(app);
 const auth = getAuth(app);
 
 // ==========================================
-// 1. ANIMAȚII FORMULARE 
+// 1. ANIMAȚII FORMULARE (Selecție Rol)
 // ==========================================
 window.showForm = function(role) {
     const isPacient = role === 'pacient';
@@ -549,15 +561,29 @@ window.showForm = function(role) {
     
     document.getElementById('client-form')?.classList.toggle('hidden', !isPacient);
     document.getElementById('nutritionist-form')?.classList.toggle('hidden', isPacient);
+    
     document.getElementById('hero-pacient')?.classList.toggle('hidden', !isPacient);
     document.getElementById('hero-nutritionist')?.classList.toggle('hidden', isPacient);
+    document.getElementById('how-it-works-pacient')?.classList.toggle('hidden', !isPacient);
+    document.getElementById('how-it-works-nutritionist')?.classList.toggle('hidden', isPacient);
+    document.getElementById('ecosystem-pacient')?.classList.toggle('hidden', !isPacient);
+    document.getElementById('ecosystem-nutritionist')?.classList.toggle('hidden', isPacient);
+    document.getElementById('faq-pacient')?.classList.toggle('hidden', !isPacient);
+    document.getElementById('faq-nutritionist')?.classList.toggle('hidden', isPacient);
 }
 
 window.showRoleSelection = function() {
     document.getElementById('role-selection')?.classList.remove('hidden');
     document.getElementById('registration-forms')?.classList.add('hidden');
+    
     document.getElementById('hero-pacient')?.classList.remove('hidden');
     document.getElementById('hero-nutritionist')?.classList.add('hidden');
+    document.getElementById('how-it-works-pacient')?.classList.remove('hidden');
+    document.getElementById('how-it-works-nutritionist')?.classList.add('hidden');
+    document.getElementById('ecosystem-pacient')?.classList.remove('hidden');
+    document.getElementById('ecosystem-nutritionist')?.classList.add('hidden');
+    document.getElementById('faq-pacient')?.classList.remove('hidden');
+    document.getElementById('faq-nutritionist')?.classList.add('hidden');
 }
 
 // ==========================================
@@ -588,7 +614,7 @@ if (clientForm) {
     });
 }
 
-// Nutriționist (Redirecționează către PROFILUL LOR UNIC)
+// Nutriționist
 const nutriForm = document.getElementById('nutritionist-form');
 if (nutriForm) {
     nutriForm.addEventListener('submit', async (e) => {
@@ -601,9 +627,11 @@ if (nutriForm) {
         const parola = document.getElementById('reg-nutri-parola').value;
 
         try {
+            // 1. Auth
             const userCredential = await createUserWithEmailAndPassword(auth, email, parola);
             const uid = userCredential.user.uid;
 
+            // 2. Firestore
             const docRef = await addDoc(collection(db, "medici"), {
                 authId: uid,
                 numeComplet: nume,
@@ -615,6 +643,7 @@ if (nutriForm) {
                 recenzii: "0"
             });
 
+            // 3. Redirecționare
             alert("Cabinet înregistrat cu succes! Ești redirecționat către profilul tău.");
             window.location.href = `profil.html?id=${docRef.id}`;
 
@@ -655,6 +684,5 @@ async function incarcaProfilMedic() {
 if (window.location.pathname.includes('profil.html')) {
     incarcaProfilMedic();
 }
-
 </body>
 </html>
