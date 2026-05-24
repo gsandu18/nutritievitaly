@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Rezervare Consultație - Vitality</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script id="tailwind-config">
+        tailwind.config = { theme: { extend: { colors: { primary: "#006e1c" } } } }
+    </script>
+    <style> body { background-color: #fbf9f9; font-family: 'Inter', sans-serif; } </style>
+</head>
+<body class="min-h-screen">
+
+    <header class="bg-white w-full top-0 sticky shadow-sm z-40 border-b border-gray-200">
+        <div class="flex items-center px-4 py-3 w-full max-w-3xl mx-auto">
+            <a href="index.html" class="text-xl text-primary font-bold flex items-center gap-2">Vitality</a>
+        </div>
+    </header>
+
+    <main class="w-full max-w-3xl mx-auto px-4 pt-10 pb-16">
+        <a href="index.html" class="text-gray-500 hover:text-primary text-sm mb-6 inline-flex items-center gap-1 font-medium transition-colors">&larr; Înapoi la Experți</a>
+        
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
+            <div class="bg-green-50 p-6 border-b border-gray-200 flex justify-between items-center">
+                <div>
+                    <h2 class="text-2xl font-bold text-gray-900">Finalizare Programare</h2>
+                    <p class="text-primary font-medium mt-1" id="booking-doc-name">Se încarcă datele medicului...</p>
+                </div>
+                <div class="text-right">
+                    <p class="text-sm text-gray-500">Total de plată:</p>
+                    <p class="text-xl font-bold text-gray-900" id="booking-price">-- RON</p>
+                </div>
+            </div>
+
+            <div class="px-8 py-6 flex justify-between items-center border-b border-gray-100">
+                <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-bold text-sm progress-dot" id="dot-1">1</div>
+                    <span class="text-sm font-medium text-gray-900">Data & Ora</span>
+                </div>
+                <div class="flex-1 h-0.5 bg-gray-200 mx-4 progress-line" id="line-1"></div>
+                <div class="flex items-center gap-2 opacity-50">
+                    <div class="w-8 h-8 rounded-full border-2 border-gray-300 text-gray-400 flex items-center justify-center font-bold text-sm progress-dot" id="dot-2">2</div>
+                    <span class="text-sm font-medium text-gray-500">Detalii & Plată</span>
+                </div>
+                <div class="flex-1 h-0.5 bg-gray-200 mx-4 progress-line hidden sm:block" id="line-2"></div>
+                <div class="hidden sm:flex items-center gap-2 opacity-50">
+                    <div class="w-8 h-8 rounded-full border-2 border-gray-300 text-gray-400 flex items-center justify-center font-bold text-sm progress-dot" id="dot-3">3</div>
+                    <span class="text-sm font-medium text-gray-500">Confirmare</span>
+                </div>
+            </div>
+
+            <div class="p-8 space-y-6" id="calendar-step">
+                <h3 class="text-lg font-bold text-gray-900">Alege o dată disponibilă</h3>
+                
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                    <button class="time-slot p-3 rounded-lg border border-gray-200 text-center hover:border-primary transition-colors focus:outline-none" onclick="selectTimeSlot(this)">
+                        <span class="block text-sm text-gray-500 mb-1">Azi</span>
+                        <span class="block font-bold text-gray-900">14:00</span>
+                    </button>
+                    <button class="time-slot p-3 rounded-lg border border-gray-200 text-center hover:border-primary transition-colors focus:outline-none" onclick="selectTimeSlot(this)">
+                        <span class="block text-sm text-gray-500 mb-1">Azi</span>
+                        <span class="block font-bold text-gray-900">15:30</span>
+                    </button>
+                    <button class="time-slot p-3 rounded-lg border border-gray-200 text-center hover:border-primary transition-colors focus:outline-none" onclick="selectTimeSlot(this)">
+                        <span class="block text-sm text-gray-500 mb-1">Mâine</span>
+                        <span class="block font-bold text-gray-900">10:00</span>
+                    </button>
+                    <button class="time-slot p-3 rounded-lg border border-gray-200 text-center hover:border-primary transition-colors focus:outline-none" onclick="selectTimeSlot(this)">
+                        <span class="block text-sm text-gray-500 mb-1">Mâine</span>
+                        <span class="block font-bold text-gray-900">11:30</span>
+                    </button>
+                </div>
+
+                <div class="pt-6 flex justify-end">
+                    <button id="continue-to-payment" disabled class="px-6 py-3 bg-primary text-white rounded-lg font-bold opacity-50 cursor-not-allowed transition-all" onclick="showStep('payment-step')">
+                        Continuă către plată
+                    </button>
+                </div>
+            </div>
+
+            <div class="p-8 space-y-6 hidden" id="payment-step">
+                <h3 class="text-lg font-bold text-gray-900">Introdu datele cardului</h3>
+                <div class="space-y-4 max-w-md">
+                    <input class="w-full rounded-xl border border-gray-300 px-4 py-3 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary" placeholder="Număr Card (XXXX XXXX XXXX XXXX)" type="text">
+                    <div class="flex gap-4">
+                        <input class="w-1/2 rounded-xl border border-gray-300 px-4 py-3 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary" placeholder="MM/YY" type="text">
+                        <input class="w-1/2 rounded-xl border border-gray-300 px-4 py-3 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary" placeholder="CVC" type="text">
+                    </div>
+                </div>
+                <div class="pt-6 flex justify-between">
+                    <button class="px-6 py-3 text-gray-600 font-bold hover:text-gray-900" onclick="showStep('calendar-step')">Înapoi</button>
+                    <button class="px-6 py-3 bg-primary text-white rounded-lg font-bold hover:bg-green-700 transition-all shadow-md" onclick="showStep('success-step')">
+                        Plătește și Confirmă
+                    </button>
+                </div>
+            </div>
+
+            <div class="p-12 text-center space-y-4 hidden" id="success-step">
+                <div class="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-4 text-3xl">✓</div>
+                <h3 class="text-2xl font-bold text-gray-900">Programare Confirmată!</h3>
+                <p class="text-gray-600">Vei primi un email cu detaliile de conectare pentru consultația ta.</p>
+                <div class="pt-8">
+                    <a href="index.html" class="px-6 py-3 border border-gray-300 text-gray-700 rounded-lg font-bold hover:bg-gray-50 transition-all">Revino la Acasă</a>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
