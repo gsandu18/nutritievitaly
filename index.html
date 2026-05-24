@@ -1,176 +1,729 @@
-<!DOCTYPE html>
-<html lang="ro">
-<head>
-    <meta charset="utf-8"/>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>Vitality - Bun venit</title>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com" rel="preconnect"/>
-    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    "colors": {
-                        "surface-tint": "#006e1c",
-                        "on-secondary-fixed-variant": "#693c00",
-                        "on-primary": "#ffffff",
-                        "inverse-on-surface": "#f2f0f0",
-                        "on-secondary-fixed": "#2c1600",
-                        "surface-bright": "#fbf9f9",
-                        "on-error-container": "#93000a",
-                        "inverse-primary": "#78dc77",
-                        "on-tertiary": "#ffffff",
-                        "error-container": "#ffdad6",
-                        "on-tertiary-container": "#00355d",
-                        "on-error": "#ffffff",
-                        "inverse-surface": "#303031",
-                        "surface-container": "#efeded",
-                        "on-background": "#1b1c1c",
-                        "error": "#ba1a1a",
-                        "surface-container-highest": "#e3e2e2",
-                        "on-tertiary-fixed-variant": "#00497d",
-                        "on-surface-variant": "#3f4a3c",
-                        "tertiary": "#0061a4",
-                        "surface-variant": "#e3e2e2",
-                        "secondary": "#8b5000",
-                        "tertiary-fixed-dim": "#9ecaff",
-                        "primary-fixed": "#94f990",
-                        "primary": "#006e1c",
-                        "surface-container-high": "#e9e8e7",
-                        "outline": "#6f7a6b",
-                        "on-primary-container": "#003c0b",
-                        "on-secondary-container": "#653900",
-                        "secondary-container": "#ff9800",
-                        "on-surface": "#1b1c1c",
-                        "secondary-fixed": "#ffdcbe",
-                        "outline-variant": "#becab9",
-                        "on-primary-fixed-variant": "#005313",
-                        "primary-fixed-dim": "#78dc77",
-                        "primary-container": "#4caf50",
-                        "tertiary-fixed": "#d1e4ff",
-                        "surface-container-lowest": "#ffffff",
-                        "tertiary-container": "#33a0fe",
-                        "surface-dim": "#dbdad9",
-                        "surface-container-low": "#f5f3f3",
-                        "surface": "#fbf9f9",
-                        "secondary-fixed-dim": "#ffb870",
-                        "on-tertiary-fixed": "#001d36",
-                        "on-primary-fixed": "#002204",
-                        "on-secondary": "#ffffff",
-                        "background": "#fbf9f9"
-                    },
-                    "borderRadius": {
-                        "DEFAULT": "0.25rem",
-                        "lg": "0.5rem",
-                        "xl": "0.75rem",
-                        "2xl": "1rem",
-                        "full": "9999px"
-                    },
-                    "spacing": {
-                        "gutter": "16px",
-                        "xs": "4px",
-                        "xl": "64px",
-                        "sm": "12px",
-                        "margin-desktop": "48px",
-                        "md": "24px",
-                        "base": "8px",
-                        "margin-mobile": "16px",
-                        "lg": "40px"
-                    },
-                    "fontFamily": {
-                        "headline-md": ["Inter", "sans-serif"],
-                        "headline-xl": ["Inter", "sans-serif"],
-                        "body-lg": ["Inter", "sans-serif"],
-                        "label-sm": ["Inter", "sans-serif"],
-                        "label-md": ["Inter", "sans-serif"],
-                        "headline-lg-mobile": ["Inter", "sans-serif"],
-                        "headline-lg": ["Inter", "sans-serif"],
-                        "body-md": ["Inter", "sans-serif"]
-                    },
-                    "fontSize": {
-                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
-                        "headline-xl": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
-                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
-                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
-                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600" }],
-                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
-                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
-                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
-                    }
-                }
+<!DOCTYPE html><html lang="ro" style=""><head></head><body class="min-h-screen pb-24 md:pb-0 font-sans">```html
+
+
+
+    <meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Nutriționiști - Vitality</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-dim": "#dbdad9",
+                    "inverse-on-surface": "#f2f0f0",
+                    "error-container": "#ffdad6",
+                    "on-error-container": "#93000a",
+                    "tertiary": "#0061a4",
+                    "primary-fixed-dim": "#78dc77",
+                    "on-error": "#ffffff",
+                    "on-secondary-container": "#653900",
+                    "inverse-primary": "#78dc77",
+                    "primary-fixed": "#94f990",
+                    "primary-container": "#4caf50",
+                    "on-primary-container": "#003c0b",
+                    "tertiary-fixed-dim": "#9ecaff",
+                    "on-tertiary-fixed": "#001d36",
+                    "secondary-fixed-dim": "#ffb870",
+                    "on-primary": "#ffffff",
+                    "surface-container-high": "#e9e8e7",
+                    "surface-bright": "#fbf9f9",
+                    "outline-variant": "#becab9",
+                    "on-background": "#1b1c1c",
+                    "background": "#fbf9f9",
+                    "secondary-fixed": "#ffdcbe",
+                    "surface-container-low": "#f5f3f3",
+                    "surface-variant": "#e3e2e2",
+                    "tertiary-container": "#33a0fe",
+                    "secondary": "#8b5000",
+                    "on-tertiary-fixed-variant": "#00497d",
+                    "surface": "#fbf9f9",
+                    "on-secondary": "#ffffff",
+                    "on-primary-fixed": "#002204",
+                    "secondary-container": "#ff9800",
+                    "primary": "#006e1c",
+                    "surface-container-highest": "#e3e2e2",
+                    "on-secondary-fixed": "#2c1600",
+                    "on-primary-fixed-variant": "#005313",
+                    "surface-container": "#efeded",
+                    "error": "#ba1a1a",
+                    "surface-tint": "#006e1c",
+                    "on-tertiary": "#ffffff",
+                    "on-surface-variant": "#3f4a3c",
+                    "tertiary-fixed": "#d1e4ff",
+                    "inverse-surface": "#303031",
+                    "on-tertiary-container": "#00355d",
+                    "outline": "#6f7a6b",
+                    "on-secondary-fixed-variant": "#693c00",
+                    "on-surface": "#1b1c1c",
+                    "surface-container-lowest": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "base": "8px",
+                    "xs": "4px",
+                    "sm": "12px",
+                    "md": "24px",
+                    "margin-desktop": "48px",
+                    "margin-mobile": "16px",
+                    "lg": "40px",
+                    "xl": "64px",
+                    "gutter": "16px"
+            },
+            "fontFamily": {
+                    "headline-lg": [
+                            "Inter"
+                    ],
+                    "body-lg": [
+                            "Inter"
+                    ],
+                    "headline-md": [
+                            "Inter"
+                    ],
+                    "headline-xl": [
+                            "Inter"
+                    ],
+                    "headline-lg-mobile": [
+                            "Inter"
+                    ],
+                    "label-md": [
+                            "Inter"
+                    ],
+                    "label-sm": [
+                            "Inter"
+                    ],
+                    "body-md": [
+                            "Inter"
+                    ]
+            },
+            "fontSize": {
+                    "headline-lg": [
+                            "32px",
+                            {
+                                    "lineHeight": "40px",
+                                    "letterSpacing": "-0.02em",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "body-lg": [
+                            "18px",
+                            {
+                                    "lineHeight": "28px",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "headline-md": [
+                            "24px",
+                            {
+                                    "lineHeight": "32px",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "headline-xl": [
+                            "40px",
+                            {
+                                    "lineHeight": "48px",
+                                    "letterSpacing": "-0.02em",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "headline-lg-mobile": [
+                            "28px",
+                            {
+                                    "lineHeight": "36px",
+                                    "letterSpacing": "-0.01em",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "label-md": [
+                            "14px",
+                            {
+                                    "lineHeight": "20px",
+                                    "letterSpacing": "0.05em",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "label-sm": [
+                            "12px",
+                            {
+                                    "lineHeight": "16px",
+                                    "fontWeight": "500"
+                            }
+                    ],
+                    "body-md": [
+                            "16px",
+                            {
+                                    "lineHeight": "24px",
+                                    "fontWeight": "400"
+                            }
+                    ]
             }
-        }
+    },
+        },
+      }
     </script>
-    <style>
+<style>
         body {
-            min-height: max(884px, 100dvh);
+            background-color: #fbf9f9;
+            color: #1b1c1c;
+            -webkit-font-smoothing: antialiased;
+        }
+        .bento-glass {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(190, 202, 185, 0.3);
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #006e1c 0%, #4caf50 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
     </style>
-</head>
-<body class="bg-surface text-on-surface font-body-md text-body-md min-h-screen flex items-center justify-center selection:bg-primary-container selection:text-on-primary-container relative z-0">
-    
-    <div class="fixed inset-0 overflow-hidden pointer-events-none -z-10 bg-[#fbf9f9]">
-        <div class="absolute top-[-15%] left-[-10%] w-[60vw] h-[60vw] rounded-full bg-primary-container/10 blur-[120px] opacity-70"></div>
-        <div class="absolute bottom-[-15%] right-[-10%] w-[60vw] h-[60vw] rounded-full bg-secondary-container/10 blur-[120px] opacity-70"></div>
-    </div>
-    
-    <main class="w-full max-w-[1000px] mx-auto px-margin-mobile md:px-margin-desktop py-xl flex flex-col items-center relative z-10">
-        
-        <header class="text-center mb-xl flex flex-col items-center max-w-2xl">
-            <img alt="Vitality Logo" class="h-[100px] w-auto object-contain mb-lg drop-shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbZQwvcdC9NyUP08NheUnA4axqKETcdSmXWYmqoPzJY7ZVFwfxFkz4Vnvvc5-Xf36S95fTXRXN6MJtf9M5P2Y311mHtnBjFmPz-GOFKLSN65FC7xmy6PXUe5KUYD8FN_yHe08YjIzHMUBwALPwRYUitnqAuU8iHLiXBmWiWl7RKYOGPu_RTS8K2Mloor51JDKy5Ai-ZmWhU_nXracXLjB30WtGvNiK5i7Szxuynw3SpbK1J4yE-8qQP2JkjcFy5ykRC1Ac4QyaF6Sd"/>
-            <h1 class="font-headline-xl text-headline-xl text-on-surface mb-sm tracking-tight">Bun venit la Vitality</h1>
-            <p class="font-body-lg text-body-lg text-on-surface-variant font-light leading-relaxed">
-                Începe-ți călătoria spre o viață mai sănătoasă. Alege modul în care dorești să interacționezi cu platforma noastră pentru o experiență personalizată și rafinată.
-            </p>
-        </header>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-lg w-full max-w-4xl mx-auto">
+<script>
+        function toggleRole(role) {
+            const isPacient = role === 'pacient';
             
-            <a href="inregistrare-client.html" class="group relative flex flex-col text-left bg-gradient-to-br from-surface-container-lowest to-surface-container-low rounded-2xl p-lg border border-outline-variant/50 shadow-sm hover:shadow-[0_20px_40px_-15px_rgba(0,110,28,0.15)] hover:border-primary/40 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-surface transition-all duration-500 overflow-hidden min-h-[320px]">
-                <div class="absolute inset-0 bg-gradient-to-br from-primary-container/0 to-primary-container/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
-                <div class="w-[64px] h-[64px] bg-surface-container rounded-xl flex items-center justify-center mb-md group-hover:bg-primary transition-colors duration-500 shadow-sm relative z-10">
-                    <span class="material-symbols-outlined text-[32px] text-on-surface-variant group-hover:text-on-primary transition-colors duration-500 font-light">vital_signs</span>
-                </div>
-                <h2 class="font-headline-lg text-headline-lg text-on-surface mb-xs relative z-10">Sunt Client</h2>
-                <p class="font-body-md text-body-md text-on-surface-variant mb-lg flex-grow relative z-10 leading-relaxed">
-                    Vreau să îmi monitorizez alimentația zilnică, să primesc planuri personalizate și să colaborez eficient cu un expert în sănătate pentru rezultate optime.
-                </p>
-                <div class="flex items-center text-primary font-label-md text-label-md mt-auto relative z-10 uppercase tracking-wider">
-                    <span>Continuă ca și Client</span>
-                    <span class="material-symbols-outlined text-[20px] ml-xs transform group-hover:translate-x-2 transition-transform duration-500">arrow_forward</span>
-                </div>
-            </a>
+            // Toggle forms
+            document.getElementById('client-form').classList.toggle('hidden', !isPacient);
+            document.getElementById('nutritionist-form').classList.toggle('hidden', isPacient);
             
-            <a href="inregistrare-nutritionist.html" class="group relative flex flex-col text-left bg-gradient-to-br from-surface-container-lowest to-surface-container-low rounded-2xl p-lg border border-outline-variant/50 shadow-sm hover:shadow-[0_20px_40px_-15px_rgba(139,80,0,0.15)] hover:border-secondary/40 focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2 focus:ring-offset-surface transition-all duration-500 overflow-hidden min-h-[320px]">
-                <div class="absolute inset-0 bg-gradient-to-br from-secondary-container/0 to-secondary-container/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
-                <div class="w-[64px] h-[64px] bg-surface-container rounded-xl flex items-center justify-center mb-md group-hover:bg-secondary transition-colors duration-500 shadow-sm relative z-10">
-                    <span class="material-symbols-outlined text-[32px] text-on-surface-variant group-hover:text-on-secondary transition-colors duration-500 font-light">medical_information</span>
-                </div>
-                <h2 class="font-headline-lg text-headline-lg text-on-surface mb-xs relative z-10">Sunt Nutriționist</h2>
-                <p class="font-body-md text-body-md text-on-surface-variant mb-lg flex-grow relative z-10 leading-relaxed">
-                    Vreau un instrument clinic precis pentru a-mi gestiona portofoliul de pacienți, a crea planuri alimentare și a urmări progresul cu acuratețe profesională.
-                </p>
-                <div class="flex items-center text-secondary font-label-md text-label-md mt-auto relative z-10 uppercase tracking-wider">
-                    <span>Continuă ca și Expert</span>
-                    <span class="material-symbols-outlined text-[20px] ml-xs transform group-hover:translate-x-2 transition-transform duration-500">arrow_forward</span>
-                </div>
-            </a>
+            // Toggle tabs
+            document.getElementById('tab-pacient').classList.toggle('border-primary', isPacient);
+            document.getElementById('tab-pacient').classList.toggle('text-primary', isPacient);
+            document.getElementById('tab-nutritionist').classList.toggle('border-primary', !isPacient);
+            document.getElementById('tab-nutritionist').classList.toggle('text-primary', !isPacient);
             
-        </div>
+            // Toggle hero content
+            document.getElementById('hero-pacient').classList.toggle('hidden', !isPacient);
+            document.getElementById('hero-nutritionist').classList.toggle('hidden', isPacient);
+            
+            // Toggle How it works content
+            document.getElementById('how-it-works-pacient').classList.toggle('hidden', !isPacient);
+            document.getElementById('how-it-works-nutritionist').classList.toggle('hidden', isPacient);
+            
+            // Toggle Ecosystem content
+            document.getElementById('ecosystem-pacient').classList.toggle('hidden', !isPacient);
+            document.getElementById('ecosystem-nutritionist').classList.toggle('hidden', isPacient);
+            
+            // Toggle FAQ content
+            document.getElementById('faq-pacient').classList.toggle('hidden', !isPacient);
+            document.getElementById('faq-nutritionist').classList.toggle('hidden', isPacient);
+            
+            // Toggle Experts section (hide for nutritionist)
+            document.getElementById('experts-section').classList.toggle('hidden', !isPacient);
+        }
+
+        function showBookingFlow(doctorId) {
+            document.getElementById('landing-view').classList.add('hidden');
+            document.getElementById('booking-view').classList.remove('hidden');
+            window.scrollTo(0, 0);
+            
+            // Reset booking flow
+            showStep('calendar-step');
+            
+            // Update doctor info in booking header (mock implementation)
+            const docName = document.getElementById(`doc-name-${doctorId}`).innerText;
+            document.getElementById('booking-doc-name').innerText = docName;
+        }
+
+        function showLanding() {
+            document.getElementById('landing-view').classList.remove('hidden');
+            document.getElementById('booking-view').classList.add('hidden');
+            window.scrollTo(0, 0);
+        }
         
-        <div class="mt-xl text-center">
-            <p class="font-body-md text-body-md text-on-surface-variant">
-                Ai deja un cont deschis? 
-                <a href="autentificare.html" class="font-label-md text-label-md text-primary hover:text-primary-fixed-dim underline-offset-8 hover:underline focus:outline-none focus:ring-2 focus:ring-primary rounded-DEFAULT px-xs transition-colors uppercase tracking-wider ml-1">
-                    Conectează-te aici
-                </a>
-            </p>
-        </div>
+        function showStep(stepId) {
+            document.getElementById('calendar-step').classList.add('hidden');
+            document.getElementById('payment-step').classList.add('hidden');
+            document.getElementById('success-step').classList.add('hidden');
+            
+            document.getElementById(stepId).classList.remove('hidden');
+            
+            // Update progress
+            updateProgress(stepId);
+        }
         
-    </main>
-</body>
-</html>
+        function updateProgress(stepId) {
+            const steps = ['calendar-step', 'payment-step', 'success-step'];
+            const currentIndex = steps.indexOf(stepId);
+            
+            const progressDots = document.querySelectorAll('.progress-dot');
+            const progressLines = document.querySelectorAll('.progress-line');
+            
+            progressDots.forEach((dot, index) => {
+                if (index <= currentIndex) {
+                    dot.classList.add('bg-primary', 'text-on-primary', 'border-primary');
+                    dot.classList.remove('bg-surface', 'text-outline', 'border-outline-variant');
+                } else {
+                    dot.classList.remove('bg-primary', 'text-on-primary', 'border-primary');
+                    dot.classList.add('bg-surface', 'text-outline', 'border-outline-variant');
+                }
+            });
+            
+            progressLines.forEach((line, index) => {
+                if (index < currentIndex) {
+                    line.classList.add('bg-primary');
+                    line.classList.remove('bg-outline-variant');
+                } else {
+                    line.classList.remove('bg-primary');
+                    line.classList.add('bg-outline-variant');
+                }
+            });
+        }
+        
+        function selectTimeSlot(element) {
+            document.querySelectorAll('.time-slot').forEach(el => {
+                el.classList.remove('bg-primary', 'text-on-primary', 'border-primary');
+                el.classList.add('bg-surface-container-lowest', 'text-on-surface', 'border-outline-variant/30');
+            });
+            
+            element.classList.add('bg-primary', 'text-on-primary', 'border-primary');
+            element.classList.remove('bg-surface-container-lowest', 'text-on-surface', 'border-outline-variant/30');
+            
+            document.getElementById('continue-to-payment').removeAttribute('disabled');
+            document.getElementById('continue-to-payment').classList.remove('opacity-50', 'cursor-not-allowed');
+        }
+    </script>
+<header class="bg-surface w-full top-0 sticky bg-surface/90 backdrop-blur-md shadow-sm z-40 border-b border-surface-variant/50">
+<div class="flex justify-between items-center px-margin-mobile py-sm w-full max-w-7xl mx-auto">
+<div class="flex items-center gap-sm cursor-pointer" onclick="showLanding()">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-primary tracking-tight font-bold flex items-center gap-2"><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuD80bAc1ajXMKYJ3F3VVe4KSP1hxJ4kXYvc6PElyDx_L3L0qoEZQJ3y-b2ER_I5A9Hr2TcxhO_tmF59aUkzusVhtJcwWueqG5DYaxzuALEEdEtZbR0uHohiyGDZvb88Z-mR3QoUnX76VhWVzYitTi3fRCrj3nZ40r1j74DuKvsa0ezvbKLTzD1bmg6v75bu_l9iehhgpUbwC3KeyGhTQ-eCz3-HAMrS8EyY6PsUPni95-iDtuMZ-jphwU-xwXS2aZ8YCusNjs8-O9zm" alt="Vitality Logo" class="h-12 w-auto object-contain"></h1>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden md:flex items-center gap-sm text-sm font-medium text-on-surface-variant">
+<span class="">Aplicație Medicală</span>
+<span class="w-1 h-1 rounded-full bg-surface-variant"></span>
+<span class="">Rețea de Experți</span>
+</div>
+<div class="w-10 h-10 rounded-full bg-surface-container-high overflow-hidden flex-shrink-0 border border-outline-variant/30">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="A close-up, highly professional studio portrait of a young woman looking confidently into the camera. The lighting is soft and bright, emphasizing a clean, modern aesthetic suitable for a premium health app. The background is a soft, neutral off-white to maintain focus on the subject. The overall mood is approachable, healthy, and pristine." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDs6CRivJBkiZv03_hEbM1TZT4PjsIJc7DOIFeJRuE1LEYv_0Tst7ePnivNT4EO-KtPtM3fg1DT7cK57zyILIy1ZOMQoF79K0s4Uc_CJ_efDEg8nszmh5vm9OaDqAk9vU6Y1MZ2Q_xd0wUuEOAEYxFsEMTTCkoju73WK9vCTVCos8W8i5JJxpNkfabbRPwytUuKLHiCF38xZWKZpmv83IgrFGBvpmi3FY5Ynpej7mGAug7hHSx9v9n63EnalFjme5KgENr_nt0ah-ef">
+</div>
+</div>
+</div>
+</header>
+<main class="w-full max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop pt-lg pb-xl" id="main-canvas">
+<!-- Landing View -->
+<div class="space-y-24" id="landing-view">
+<!-- Hero Section -->
+<section class="text-center space-y-8 py-8 md:py-16">
+<div class="space-y-4 max-w-3xl mx-auto" id="hero-pacient">
+<span class="px-4 py-1.5 rounded-full bg-primary-container/10 text-primary font-label-md text-label-md border border-primary-container/20 inline-block mb-2">Platformă Premium de Nutriție</span>
+<h2 class="font-headline-xl text-4xl md:text-5xl lg:text-6xl text-on-surface font-extrabold tracking-tight leading-tight">
+                                Sănătatea ta ghidată de <span class="gradient-text">Experți</span>
+</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">Conectăm pacienții cu nutriționiști certificați și bucătari personali pentru o abordare completă și științifică a stilului de viață.</p>
+</div>
+<div class="space-y-4 max-w-3xl mx-auto hidden" id="hero-nutritionist">
+<span class="px-4 py-1.5 rounded-full bg-primary-container/10 text-primary font-label-md text-label-md border border-primary-container/20 inline-block mb-2">Pentru Profesioniști</span>
+<h2 class="font-headline-xl text-4xl md:text-5xl lg:text-6xl text-on-surface font-extrabold tracking-tight leading-tight">
+                                Crește-ți cabinetul cu <span class="gradient-text">Vitality Pro</span>
+</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">Toate instrumentele de care ai nevoie pentru a-ți gestiona pacienții și planurile nutriționale într-un singur loc.</p>
+</div>
+<div class="max-w-xl mx-auto pt-8" id="registration-section">
+<div class="bg-surface-container-lowest rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-outline-variant/40 overflow-hidden">
+<div class="flex border-b border-surface-variant/30">
+<button class="reg-tab flex-1 py-4 font-label-md text-label-md text-on-surface-variant border-b-2 border-transparent transition-all hover:text-primary active:scale-95 border-primary text-primary" id="tab-pacient" onclick="toggleRole('pacient')">
+                            Pacient
+                        </button>
+<button class="reg-tab flex-1 py-4 font-label-md text-label-md text-on-surface-variant border-b-2 border-transparent transition-all hover:text-primary active:scale-95" id="tab-nutritionist" onclick="toggleRole('nutritionist')">
+                            Nutriționist
+                        </button>
+</div>
+<div class="p-8">
+<form class="reg-form space-y-4 text-left" id="client-form">
+<div class="space-y-1">
+<label class="font-label-sm text-on-surface-variant ml-1">Nume Complet</label>
+<input class="w-full rounded-xl border-outline-variant focus:border-primary focus:ring-primary py-3" placeholder="ex. Ioana Popescu" type="text">
+</div>
+<div class="space-y-1">
+<label class="font-label-sm text-on-surface-variant ml-1">Email</label>
+<input class="w-full rounded-xl border-outline-variant focus:border-primary focus:ring-primary py-3" placeholder="ioana@exemplu.ro" type="email">
+</div>
+<div class="space-y-1">
+<label class="font-label-sm text-on-surface-variant ml-1">Parolă</label>
+<input class="w-full rounded-xl border-outline-variant focus:border-primary focus:ring-primary py-3" placeholder="••••••••" type="password">
+</div><div class="flex items-center gap-2 pt-1 pb-2"><input class="w-4 h-4 rounded border-outline-variant text-primary focus:ring-primary" id="terms-pacient" required="" type="checkbox"><label class="font-label-sm text-on-surface-variant cursor-pointer" for="terms-pacient">Sunt de acord cu Termenii și Condișiile</label></div>
+<button class="w-full mt-6 py-3.5 bg-primary text-on-primary rounded-xl font-label-md text-label-md hover:bg-surface-tint transition-all active:scale-95 shadow-lg shadow-primary/20" type="submit">
+                            Creează Cont Client
+                            </button><div class="text-center mt-4"><a class="text-label-md font-label-md text-primary hover:underline transition-all active:scale-95" href="#"> Ai deja un cont? Autentifică-te</a></div>
+</form>
+<form class="reg-form space-y-4 text-left hidden" id="nutritionist-form">
+<div class="space-y-1">
+<label class="font-label-sm text-on-surface-variant ml-1">Nume Complet</label>
+<input class="w-full rounded-xl border-outline-variant focus:border-primary focus:ring-primary py-3" placeholder="ex. Dr. Andrei Mureșan" type="text">
+</div>
+<div class="space-y-1">
+<label class="font-label-sm text-on-surface-variant ml-1">Titlu Profesional</label>
+<input class="w-full rounded-xl border-outline-variant focus:border-primary focus:ring-primary py-3" placeholder="ex. Medic Specialist Nutriție" type="text">
+</div>
+<div class="space-y-1">
+<label class="font-label-sm text-on-surface-variant ml-1">Email</label>
+<input class="w-full rounded-xl border-outline-variant focus:border-primary focus:ring-primary py-3" placeholder="doctor@vitality.ro" type="email">
+</div>
+<div class="space-y-1">
+<label class="font-label-sm text-on-surface-variant ml-1">Parolă</label>
+<input class="w-full rounded-xl border-outline-variant focus:border-primary focus:ring-primary py-3" placeholder="••••••••" type="password">
+</div><div class="flex items-center gap-2 pt-1 pb-2"><input class="w-4 h-4 rounded border-outline-variant text-primary focus:ring-primary" id="terms-nutritionist" required="" type="checkbox"><label class="font-label-sm text-on-surface-variant cursor-pointer" for="terms-nutritionist">Sunt de acord cu Termenii și Condișiile</label></div>
+<div class="space-y-1">
+<label class="font-label-sm text-on-surface-variant ml-1">Încarcă Diplomă (PDF/JPG)</label>
+<div class="w-full border-2 border-dashed border-outline-variant rounded-xl p-4 text-center cursor-pointer hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-outline-variant">upload_file</span>
+<p class="text-xs text-on-surface-variant mt-1">Apasă pentru a alege fișierul</p>
+</div>
+</div>
+<div class="space-y-3 pt-4">
+<button class="w-full py-3.5 bg-primary text-on-primary rounded-xl font-label-md text-label-md hover:bg-surface-tint transition-all active:scale-95 shadow-lg shadow-primary/20" type="submit">
+                                Înregistrează Cabinet
+                            </button>
+<button class="w-full py-3.5 bg-surface-container-high text-on-surface rounded-xl font-label-md text-label-md border border-outline-variant/50 hover:bg-surface-container-highest transition-all active:scale-95" type="button">
+                                Vezi profilul meu
+                            </button>
+<div class="text-center mt-2"><a class="text-label-md font-label-md text-primary hover:underline transition-all active:scale-95" href="#"> Ai deja un cont? Autentifică-te</a></div>
+</div>
+</form>
+</div>
+</div>
+</div>
+</section>
+<!-- Trust Bar -->
+<section class="border-y border-surface-variant/50 py-8 bg-surface-container-lowest/50">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center divide-y md:divide-y-0 md:divide-x divide-surface-variant/50">
+<div class="space-y-1">
+<p class="font-headline-lg text-3xl font-bold text-primary">5000+</p>
+<p class="font-label-md text-on-surface-variant uppercase tracking-wider text-xs">Clienți Mulțumiți</p>
+</div>
+<div class="space-y-1 pt-8 md:pt-0">
+<p class="font-headline-lg text-3xl font-bold text-primary">150+</p>
+<p class="font-label-md text-on-surface-variant uppercase tracking-wider text-xs">Nutriționiști Certificați</p>
+</div>
+<div class="space-y-1 pt-8 md:pt-0">
+<p class="font-headline-lg text-3xl font-bold text-primary flex items-center justify-center gap-1">
+                                    4.9/5 
+                                    <span class="material-symbols-outlined text-secondary-container" style="font-variation-settings: &quot;FILL&quot; 1;">star</span>
+</p>
+<p class="font-label-md text-on-surface-variant uppercase tracking-wider text-xs">Rating Mediu</p>
+</div>
+</div>
+</section>
+<!-- How it works -->
+<section class="space-y-12">
+<div class="text-center space-y-4">
+<h2 class="font-headline-xl text-3xl md:text-4xl text-on-surface font-bold">Cum Funcționează</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto" id="how-it-works-subtitle-pacient">Un proces simplu și eficient pentru a-ți transforma stilul de viață, ghidat de profesioniști la fiecare pas.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative" id="how-it-works-pacient">
+<div class="hidden md:block absolute top-12 left-1/6 right-1/6 h-0.5 bg-gradient-to-r from-primary/10 via-primary/30 to-primary/10 -z-10"></div>
+<div class="flex flex-col items-center text-center space-y-4">
+<div class="w-24 h-24 bg-surface-container-lowest rounded-full shadow-sm border-2 border-primary-container/20 flex items-center justify-center text-primary relative">
+<span class="absolute -top-2 -left-2 w-8 h-8 bg-primary text-on-primary rounded-full flex items-center justify-center font-bold text-sm shadow-md">1</span>
+<span class="material-symbols-outlined text-4xl">search_hands_free</span>
+</div>
+<h3 class="font-headline-md text-xl font-bold text-on-surface">Alege Expertul</h3>
+<p class="font-body-md text-on-surface-variant">Filtrează după obiectivele tale, afecțiuni medicale sau preferințe dietetice pentru a găsi potrivirea perfectă.</p>
+</div>
+<div class="flex flex-col items-center text-center space-y-4">
+<div class="w-24 h-24 bg-surface-container-lowest rounded-full shadow-sm border-2 border-primary-container/20 flex items-center justify-center text-primary relative">
+<span class="absolute -top-2 -left-2 w-8 h-8 bg-primary text-on-primary rounded-full flex items-center justify-center font-bold text-sm shadow-md">2</span>
+<span class="material-symbols-outlined text-4xl">videocam</span>
+</div>
+<h3 class="font-headline-md text-xl font-bold text-on-surface">Consultație Video</h3>
+<p class="font-body-md text-on-surface-variant">Discută detaliat cu specialistul ales direct din aplicație. Analizați istoricul medical și setati obiective.</p>
+</div>
+<div class="flex flex-col items-center text-center space-y-4">
+<div class="w-24 h-24 bg-surface-container-lowest rounded-full shadow-sm border-2 border-primary-container/20 flex items-center justify-center text-primary relative">
+<span class="absolute -top-2 -left-2 w-8 h-8 bg-primary text-on-primary rounded-full flex items-center justify-center font-bold text-sm shadow-md">3</span>
+<span class="material-symbols-outlined text-4xl">restaurant_menu</span>
+</div>
+<h3 class="font-headline-md text-xl font-bold text-on-surface">Plan Personalizat</h3>
+<p class="font-body-md text-on-surface-variant">Primești meniul adaptat și opțiunea de a rezerva un bucătar personal pentru a-l prepara.</p>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative hidden" id="how-it-works-nutritionist">
+<div class="hidden md:block absolute top-12 left-1/6 right-1/6 h-0.5 bg-gradient-to-r from-primary/10 via-primary/30 to-primary/10 -z-10"></div>
+<div class="flex flex-col items-center text-center space-y-4">
+<div class="w-24 h-24 bg-surface-container-lowest rounded-full shadow-sm border-2 border-primary-container/20 flex items-center justify-center text-primary relative">
+<span class="absolute -top-2 -left-2 w-8 h-8 bg-primary text-on-primary rounded-full flex items-center justify-center font-bold text-sm shadow-md">1</span>
+<span class="material-symbols-outlined text-4xl">person_add</span>
+</div>
+<h3 class="font-headline-md text-xl font-bold text-on-surface">Creează-ți profilul</h3>
+<p class="font-body-md text-on-surface-variant">Completează detaliile, biografia și certificările pentru a atrage pacienții potriviți expertizei tale.</p>
+</div>
+<div class="flex flex-col items-center text-center space-y-4">
+<div class="w-24 h-24 bg-surface-container-lowest rounded-full shadow-sm border-2 border-primary-container/20 flex items-center justify-center text-primary relative">
+<span class="absolute -top-2 -left-2 w-8 h-8 bg-primary text-on-primary rounded-full flex items-center justify-center font-bold text-sm shadow-md">2</span>
+<span class="material-symbols-outlined text-4xl">payments</span>
+</div>
+<h3 class="font-headline-md text-xl font-bold text-on-surface">Configurează tarifele</h3>
+<p class="font-body-md text-on-surface-variant">Setează-ți serviciile și disponibilitatea în calendarul integrat. Gestionează totul dintr-un singur loc.</p>
+</div>
+<div class="flex flex-col items-center text-center space-y-4">
+<div class="w-24 h-24 bg-surface-container-lowest rounded-full shadow-sm border-2 border-primary-container/20 flex items-center justify-center text-primary relative">
+<span class="absolute -top-2 -left-2 w-8 h-8 bg-primary text-on-primary rounded-full flex items-center justify-center font-bold text-sm shadow-md">3</span>
+<span class="material-symbols-outlined text-4xl">group</span>
+</div>
+<h3 class="font-headline-md text-xl font-bold text-on-surface">Gestionează pacienții</h3>
+<p class="font-body-md text-on-surface-variant">Primește programări și creează planuri personalizate eficiente folosind instrumentele noastre profesionale.</p>
+</div>
+</div>
+</section>
+<!-- Experts Section -->
+<section class="space-y-10" id="experts-section">
+<div class="flex flex-col md:flex-row justify-between items-center gap-4">
+<div class="text-center md:text-left space-y-2">
+<h2 class="font-headline-xl text-3xl md:text-4xl text-on-surface font-bold">Experții Tăi în Nutriție</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">Specialiști clinicieni cu experiență dovedită.</p>
+</div>
+<button class="text-primary font-label-md hover:bg-primary/5 px-4 py-2 rounded-lg transition-colors flex items-center gap-1">
+                                Vezi toți experții
+                                <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Expert 1 -->
+<article class="bg-surface-container-lowest rounded-2xl p-6 shadow-[0_4px_20px_0_rgba(0,0,0,0.04)] border border-outline-variant/30 hover:shadow-[0_12px_40px_0_rgba(0,0,0,0.08)] transition-all duration-300 group flex flex-col h-full">
+<div class="flex items-start gap-4 mb-4">
+<div class="w-20 h-20 rounded-full overflow-hidden flex-shrink-0 border-2 border-primary-container/30 relative">
+<img alt="Dr. Elena Popescu" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A professional headshot of a female doctor in a crisp white lab coat, standing in a brightly lit, modern clinical office with subtle green accents. She has a warm, reassuring smile, conveying expertise and empathy. The lighting is high-key and natural, creating a clean, trustworthy, and premium healthcare aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9CmZI3AhnYgiODPOzhsnfuIVQOr56Mn0zTYYeON96ZZXQEzZ_nlMO5wsMYG48e43jNx9MxgXFIvqEmM3dDFjW2493QdznfjjfEiQam1DbzHPzqOtZKw68TzonQw7k3hW2cVk02nKGDBimQouaQbKZGq-vfbKef5vdIkkEzYxGeEUEJBhKFud7twc-_syVbDtde2lEzcqQmugPqw58E1_5F_j-axSf5Vwxp4Na21u5TPZlqVy_svfH6l6x0CdyP5o5pNytuiG0iF0S">
+<div class="absolute bottom-0 right-0 w-5 h-5 bg-green-500 border-2 border-white rounded-full"></div>
+</div>
+<div class="space-y-1">
+<h3 class="font-headline-md text-xl font-bold text-on-surface" id="doc-name-1">Dr. Elena Popescu</h3>
+<p class="font-label-md text-sm text-primary font-medium">Medic Specialist Nutriție</p>
+<div class="flex items-center gap-1 text-secondary-container">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: &quot;FILL&quot; 1;">star</span>
+<span class="font-label-sm text-xs text-on-surface-variant font-medium">4.9 (120+ recenzii)</span>
+</div>
+</div>
+</div>
+<div class="space-y-3 mb-6 flex-grow">
+<div class="flex items-center gap-2 text-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+<span class="">Certificare ESPEN</span>
+</div>
+<div class="flex items-center gap-2 text-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">work_history</span>
+<span class="">Peste 12 ani experiență clinică</span>
+</div>
+<div class="flex flex-wrap gap-2 pt-2">
+<span class="px-3 py-1 rounded-md bg-surface-container-high text-on-surface-variant font-label-sm text-xs border border-outline-variant/20">Nutriție Sportivă</span>
+<span class="px-3 py-1 rounded-md bg-surface-container-high text-on-surface-variant font-label-sm text-xs border border-outline-variant/20">Dietoterapie</span>
+</div>
+</div>
+<div class="pt-4 border-t border-surface-variant/50 flex flex-col gap-3 mt-auto">
+<div class="flex justify-between items-center text-sm mb-1"><span class="text-on-surface-variant">Preț ședință:</span><span class="font-bold text-primary">200 RON</span></div><div class="flex justify-between items-center text-sm">
+<span class="text-on-surface-variant">Următorul loc liber:</span>
+<span class="font-medium text-on-surface">Mâine, 10:00</span>
+</div>
+<button class="w-full py-2.5 bg-surface-container-high text-on-surface rounded-lg font-label-md text-sm border border-outline-variant/50 hover:bg-surface-container-highest transition-colors">Vezi profilul meu</button>
+<button class="w-full py-2.5 bg-primary text-on-primary rounded-lg font-label-md text-sm hover:bg-surface-tint transition-colors shadow-sm" onclick="showBookingFlow(1)">Programează Consultație</button>
+</div>
+</article>
+<!-- Expert 2 -->
+<article class="bg-surface-container-lowest rounded-2xl p-6 shadow-[0_4px_20px_0_rgba(0,0,0,0.04)] border border-outline-variant/30 hover:shadow-[0_12px_40px_0_rgba(0,0,0,0.08)] transition-all duration-300 group flex flex-col h-full">
+<div class="flex items-start gap-4 mb-4">
+<div class="w-20 h-20 rounded-full overflow-hidden flex-shrink-0 border-2 border-primary-container/30 relative">
+<img alt="Dr. Andrei Mureșan" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A portrait of a male nutritionist in a smart-casual outfit with a stethoscope draped lightly around his neck, located in a sunlit consultation room featuring minimalist decor. He exudes confidence and professionalism. The color palette is dominated by soft whites and muted earthy tones, emphasizing a holistic and premium health approach." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCuBpRxKTGi_z96OvB0nh9yEEVB58wCoMnIJw1P5hpEUgjAY7ZjXbyVu-kXnZ_ASC7XpBWJ6Z-aaEuc9IdYlNLmN0wBaX6wHgO_6NGWC9erwtjK5WFfF3BnN9o3lL0O2F6T8ZIZSVwQubJZpZJpGA2sNy-A-Jb_XJw6WQBRTasbhkA-zsFEdhIaSqKbChp7_JKTsMvPmzeCn9lCNf4vcZqCAmS_VWPxzZdM34eCA4QY7n4U5kCJTF321enXDP3ZsMB7tUFzzjRIRyY7">
+<div class="absolute bottom-0 right-0 w-5 h-5 bg-green-500 border-2 border-white rounded-full"></div>
+</div>
+<div class="space-y-1">
+<h3 class="font-headline-md text-xl font-bold text-on-surface" id="doc-name-2">Dr. Andrei Mureșan</h3>
+<p class="font-label-md text-sm text-primary font-medium">Medic Primar Diabet</p>
+<div class="flex items-center gap-1 text-secondary-container">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: &quot;FILL&quot; 1;">star</span>
+<span class="font-label-sm text-xs text-on-surface-variant font-medium">4.8 (85+ recenzii)</span>
+</div>
+</div>
+</div>
+<div class="space-y-3 mb-6 flex-grow">
+<div class="flex items-center gap-2 text-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+<span class="">Membru SRDNBM</span>
+</div>
+<div class="flex items-center gap-2 text-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">work_history</span>
+<span class="">Peste 15 ani experiență clinică</span>
+</div>
+<div class="flex flex-wrap gap-2 pt-2">
+<span class="px-3 py-1 rounded-md bg-surface-container-high text-on-surface-variant font-label-sm text-xs border border-outline-variant/20">Diabet</span>
+<span class="px-3 py-1 rounded-md bg-surface-container-high text-on-surface-variant font-label-sm text-xs border border-outline-variant/20">Scădere în greutate</span>
+</div>
+</div>
+<div class="pt-4 border-t border-surface-variant/50 flex flex-col gap-3 mt-auto">
+<div class="flex justify-between items-center text-sm mb-1"><span class="text-on-surface-variant">Preț ședință:</span><span class="font-bold text-primary">180 RON</span></div><div class="flex justify-between items-center text-sm">
+<span class="text-on-surface-variant">Următorul loc liber:</span>
+<span class="font-medium text-on-surface">Azi, 15:30</span>
+</div>
+<button class="w-full py-2.5 bg-surface-container-high text-on-surface rounded-lg font-label-md text-sm border border-outline-variant/50 hover:bg-surface-container-highest transition-colors">Vezi profilul meu</button>
+<button class="w-full py-2.5 bg-primary text-on-primary rounded-lg font-label-md text-sm hover:bg-surface-tint transition-colors shadow-sm" onclick="showBookingFlow(2)">Programează Consultație</button>
+</div>
+</article>
+<!-- Expert 3 -->
+<article class="bg-surface-container-lowest rounded-2xl p-6 shadow-[0_4px_20px_0_rgba(0,0,0,0.04)] border border-outline-variant/30 hover:shadow-[0_12px_40px_0_rgba(0,0,0,0.08)] transition-all duration-300 group flex flex-col h-full">
+<div class="flex items-start gap-4 mb-4">
+<div class="w-20 h-20 rounded-full overflow-hidden flex-shrink-0 border-2 border-primary-container/30 relative">
+<img alt="Dr. Maria Ionescu" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A serene portrait of a young female dietician sitting at a sleek, wooden desk with a bowl of fresh fruit visible in the foreground blur. The environment is bright, airy, and inviting, with a focus on natural light. The overall composition feels premium, fresh, and deeply connected to organic health and wellness." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQNpTNWMryeEb2o5GqutpYm0I734HD3hJXXdL3p7UJeTxZvyyhbCMWNpf1kGilQZnqE9E-hZNRNaLlM5TKHfsVpekECyng5fL_aSSRjLi1ZPrYTKbz7FkdIxU3w1Qp3FimKDrR0TOzjQ--M2mFezVkjNGep3F3j0cBbiIagZqxrFfRQ6BQh4qS8dcoW6ciG3aYLeUwNPPN2hYbI3Nb_Y-h4EiJ8Wxy1bnH89e-bozOVCkixWPzOfuUnjGOGbe11-RcLwWoOOMXBSjH">
+<div class="absolute bottom-0 right-0 w-5 h-5 bg-green-500 border-2 border-white rounded-full"></div>
+</div>
+<div class="space-y-1">
+<h3 class="font-headline-md text-xl font-bold text-on-surface" id="doc-name-3">Dr. Maria Ionescu</h3>
+<p class="font-label-md text-sm text-primary font-medium">Dietetician Clinicizat</p>
+<div class="flex items-center gap-1 text-secondary-container">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: &quot;FILL&quot; 1;">star</span>
+<span class="font-label-sm text-xs text-on-surface-variant font-medium">5.0 (210+ recenzii)</span>
+</div>
+</div>
+</div>
+<div class="space-y-3 mb-6 flex-grow">
+<div class="flex items-center gap-2 text-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+<span class="">Licențiat UMF</span>
+</div>
+<div class="flex items-center gap-2 text-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">work_history</span>
+<span class="">Peste 8 ani experiență clinică</span>
+</div>
+<div class="flex flex-wrap gap-2 pt-2">
+<span class="px-3 py-1 rounded-md bg-surface-container-high text-on-surface-variant font-label-sm text-xs border border-outline-variant/20">Nutriție Pediatrică</span>
+<span class="px-3 py-1 rounded-md bg-surface-container-high text-on-surface-variant font-label-sm text-xs border border-outline-variant/20">Alergii</span>
+</div>
+</div>
+<div class="pt-4 border-t border-surface-variant/50 flex flex-col gap-3 mt-auto">
+<div class="flex justify-between items-center text-sm mb-1"><span class="text-on-surface-variant">Preț ședință:</span><span class="font-bold text-primary">150 RON</span></div><div class="flex justify-between items-center text-sm">
+<span class="text-on-surface-variant">Următorul loc liber:</span>
+<span class="font-medium text-on-surface">Joi, 09:00</span>
+</div>
+<button class="w-full py-2.5 bg-surface-container-high text-on-surface rounded-lg font-label-md text-sm border border-outline-variant/50 hover:bg-surface-container-highest transition-colors">Vezi profilul meu</button>
+<button class="w-full py-2.5 bg-primary text-on-primary rounded-lg font-label-md text-sm hover:bg-surface-tint transition-colors shadow-sm" onclick="showBookingFlow(3)">Programează Consultație</button>
+</div>
+</article>
+</div>
+</section>
+<!-- Ecosystem Section -->
+<section class="bg-surface-container rounded-3xl p-8 md:p-12 border border-outline-variant/20 relative overflow-hidden">
+<div class="absolute -right-20 -top-20 w-80 h-80 bg-primary-container/10 rounded-full blur-3xl"></div>
+<div class="absolute -left-20 -bottom-20 w-60 h-60 bg-secondary-container/10 rounded-full blur-3xl"></div>
+<div class="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-12 items-center" id="ecosystem-pacient">
+<div class="space-y-6">
+<div class="flex items-center gap-3">
+<span class="px-3 py-1 bg-surface-container-lowest rounded-full text-xs font-bold uppercase tracking-wider text-on-surface-variant border border-outline-variant/30">Parteneriat Exclusiv</span>
+</div>
+<h2 class="font-headline-xl text-3xl md:text-4xl text-on-surface font-bold">Ecosistemul Vitality</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Nu te lăsăm doar cu o listă pe hârtie. Închidem cercul sănătății tale prin integrarea cu serviciul de personal chef.</p>
+<ul class="space-y-4 pt-2">
+<li class="flex gap-4">
+<div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center text-primary flex-shrink-0">
+<span class="material-symbols-outlined">description</span>
+</div>
+<div>
+<h4 class="font-bold text-on-surface">1. Nutriționistul creează meniul</h4>
+<p class="text-sm text-on-surface-variant mt-1">Bazat pe consultația ta, medicul generează planul nutrițional exact, cu gramaje și macronutrienți calculați.</p>
+</div>
+</li>
+<li class="flex gap-4">
+<div class="w-10 h-10 bg-secondary/10 rounded-full flex items-center justify-center text-secondary flex-shrink-0">
+<span class="material-symbols-outlined">soup_kitchen</span>
+</div>
+<div>
+<h4 class="font-bold text-on-surface">2. Bucătarul gătește pentru tine</h4>
+<p class="text-sm text-on-surface-variant mt-1">Planul ajunge direct la 'Bucătarul Personal', care îți prepară și livrează mesele proaspete, exact cum a prescris medicul.</p>
+</div>
+</li>
+</ul>
+</div>
+<div class="flex justify-center md:justify-end">
+<div class="bg-surface-container-lowest p-6 rounded-2xl shadow-lg border border-outline-variant/30 max-w-sm w-full text-center space-y-4">
+<img alt="Bucătarul Personal Logo" class="w-48 mx-auto h-auto mix-blend-multiply" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJvTN_-unKWdS3PsZfS9Z57eK4ecVitbya8JWaw8LbE14HxTaBOEr-Qau261LiSdubz-34Ntu12pYyCV5okaaIDWwuuDynP4z9Vz6-ydhZur_a4u8g0mRZB_jkJ0XbzOAJTMUXls2UV61XJIUQnL1rIzhd4GnZjarMcuMrvkMDJgiJy0Oir-L0UAUVBC3AcHYJ6u4Nodpsokq2JisoWahvwZ3y6u2PQpJ5jXJktOjIO-nd-OLZKTFP0_i7n3sI8cMHglauLShXdS__">
+<p class="text-sm font-medium text-on-surface-variant">Gătit sănătos, la tine acasă, respectând indicațiile medicale.</p>
+<button class="w-full py-2 border border-outline text-on-surface rounded-lg text-sm font-medium hover:bg-surface-container transition-colors">Află mai multe</button>
+</div>
+</div>
+</div>
+<div class="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-12 items-center hidden" id="ecosystem-nutritionist">
+<div class="space-y-6">
+<div class="flex items-center gap-3">
+<span class="px-3 py-1 bg-surface-container-lowest rounded-full text-xs font-bold uppercase tracking-wider text-on-surface-variant border border-outline-variant/30">Livrăm Rezultatele Tale</span>
+</div>
+<h2 class="font-headline-xl text-3xl md:text-4xl text-on-surface font-bold">Ecosistemul Vitality</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Asigură-te că pacienții tăi urmează planul. Parteneriatul nostru cu Personal Chefs transformă indicațiile tale în mese livrate direct la ușa lor.</p>
+<ul class="space-y-4 pt-2">
+<li class="flex gap-4">
+<div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center text-primary flex-shrink-0">
+<span class="material-symbols-outlined">analytics</span>
+</div>
+<div>
+<h4 class="font-bold text-on-surface">1. Tu creezi planul perfect</h4>
+<p class="text-sm text-on-surface-variant mt-1">Folosind platforma noastră, generezi planul nutrițional cu detaliile necesare.</p>
+</div>
+</li>
+<li class="flex gap-4">
+<div class="w-10 h-10 bg-secondary/10 rounded-full flex items-center justify-center text-secondary flex-shrink-0">
+<span class="material-symbols-outlined">local_shipping</span>
+</div>
+<div>
+<h4 class="font-bold text-on-surface">2. Noi livrăm execuția</h4>
+<p class="text-sm text-on-surface-variant mt-1">Recomandă serviciul integrat de bucătari personali pacienților pentru a garanta respectarea dietei prescrise.</p>
+</div>
+</li>
+</ul>
+</div>
+<div class="flex justify-center md:justify-end">
+<div class="bg-surface-container-lowest p-6 rounded-2xl shadow-lg border border-outline-variant/30 max-w-sm w-full text-center space-y-4">
+<img alt="Bucătarul Personal Logo" class="w-48 mx-auto h-auto mix-blend-multiply" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJvTN_-unKWdS3PsZfS9Z57eK4ecVitbya8JWaw8LbE14HxTaBOEr-Qau261LiSdubz-34Ntu12pYyCV5okaaIDWwuuDynP4z9Vz6-ydhZur_a4u8g0mRZB_jkJ0XbzOAJTMUXls2UV61XJIUQnL1rIzhd4GnZjarMcuMrvkMDJgiJy0Oir-L0UAUVBC3AcHYJ6u4Nodpsokq2JisoWahvwZ3y6u2PQpJ5jXJktOjIO-nd-OLZKTFP0_i7n3sI8cMHglauLShXdS__">
+<p class="text-sm font-medium text-on-surface-variant">Oferă pacienților tăi soluția completă pentru succes.</p>
+<button class="w-full py-2 border border-outline text-on-surface rounded-lg text-sm font-medium hover:bg-surface-container transition-colors">Vezi cum funcționează integrarea</button>
+</div>
+</div>
+</div>
+</section>
+<!-- FAQ Section -->
+<section class="max-w-3xl mx-auto space-y-8">
+<div class="text-center">
+<h2 class="font-headline-xl text-3xl font-bold text-on-surface mb-4">Întrebări Frecvente</h2>
+</div>
+<div class="space-y-4" id="faq-pacient">
+<details class="group bg-surface-container-lowest rounded-xl border border-outline-variant/30 p-6 shadow-sm [&amp;_summary::-webkit-details-marker]:hidden cursor-pointer">
+<summary class="flex justify-between items-center font-headline-md text-lg text-on-surface font-semibold">
+<span class="">Cum aleg nutriționistul potrivit?</span>
+<span class="transition group-open:rotate-180 material-symbols-outlined">expand_more</span>
+</summary>
+<p class="text-on-surface-variant mt-4 text-base leading-relaxed">
+                                        Platforma noastră îți permite să filtrezi specialiștii în funcție de obiectivul tău (ex. slăbire, managementul diabetului, nutriție sportivă). Poți citi profilul fiecărui medic, vedea certificările și recenziile altor pacienți înainte de a lua o decizie.
+                                    </p>
+</details>
+<details class="group bg-surface-container-lowest rounded-xl border border-outline-variant/30 p-6 shadow-sm [&amp;_summary::-webkit-details-marker]:hidden cursor-pointer">
+<summary class="flex justify-between items-center font-headline-md text-lg text-on-surface font-semibold">
+<span class="">Pot schimba planul ulterior?</span>
+<span class="transition group-open:rotate-180 material-symbols-outlined">expand_more</span>
+</summary>
+<p class="text-on-surface-variant mt-4 text-base leading-relaxed">
+                                        Da, planul este flexibil. Vei avea consultații de monitorizare (follow-up) în care medicul va ajusta planul în funcție de progresul tău, feedback-ul privind mesele și orice schimbări în stilul de viață.
+                                    </p>
+</details>
+<details class="group bg-surface-container-lowest rounded-xl border border-outline-variant/30 p-6 shadow-sm [&amp;_summary::-webkit-details-marker]:hidden cursor-pointer">
+<summary class="flex justify-between items-center font-headline-md text-lg text-on-surface font-semibold">
+<span class="">Consultațiile se desfășoară doar online?</span>
+<span class="transition group-open:rotate-180 material-symbols-outlined">expand_more</span>
+</summary>
+<p class="text-on-surface-variant mt-4 text-base leading-relaxed">
+                                        Majoritatea consultațiilor au loc video, direct din platformă, pentru confortul tău. Totuși, unii medici oferă și opțiunea de consultație fizică la cabinetele lor partenere, opțiune vizibilă pe profilul acestora.
+                                    </p>
+</details>
+</div>
+<div class="space-y-4 hidden" id="faq-nutritionist">
+</div></section></div></main>
+
+</body></html>
