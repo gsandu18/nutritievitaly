@@ -70,7 +70,7 @@
     </header>
 
     <!-- Main Content -->
-    <main class="flex-grow flex items-center justify-center p-4 sm:p-8">
+    <main class="flex-grow flex items-center justify-center p-4 sm:p-8 my-8">
         <div class="w-full max-w-3xl bg-surface-card rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-border-light overflow-hidden">
             
             <!-- Card Header -->
@@ -162,14 +162,28 @@
                 </form>
             </div>
         </div>
-        
-        <!-- Footer -->
-        <div class="absolute bottom-4 text-xs text-text-muted font-medium text-center w-full">
-            &copy; 2024 NutriChef Technologies. Platformă dedicată exclusiv profesioniștilor din domeniul sănătății.
-        </div>
     </main>
 
-    <!-- Firebase Logic (Nemodificat, adaptat pe elementele din DOM) -->
+    <!-- Footer Dedicat -->
+    <footer class="w-full py-6 mt-auto border-t border-border-light bg-surface-card/50 backdrop-blur-sm">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <p class="text-sm font-medium text-text-muted">
+                &copy; 2024 NutriChef Technologies. Toate drepturile rezervate.
+            </p>
+            <p class="text-xs text-text-muted mt-1 opacity-80">
+                Platformă dezvoltată și menținută exclusiv pentru profesioniștii din domeniul sănătății, nutriției și dieteticii.
+            </p>
+            <div class="flex justify-center gap-4 mt-3">
+                <a href="#" class="text-xs text-primary hover:underline">Politică de Confidențialitate</a>
+                <span class="text-text-muted text-xs">•</span>
+                <a href="#" class="text-xs text-primary hover:underline">Termeni și Condiții</a>
+                <span class="text-text-muted text-xs">•</span>
+                <a href="#" class="text-xs text-primary hover:underline">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Firebase Logic -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
         import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
@@ -192,7 +206,6 @@
         document.getElementById('register-form').addEventListener('submit', async (e) => {
             e.preventDefault(); 
 
-            // Prelucrarea stării de încărcare a butonului (UI feedback)
             const submitBtn = e.target.querySelector('button[type="submit"]');
             const originalBtnText = submitBtn.innerHTML;
             submitBtn.innerHTML = '<span class="material-symbols-outlined animate-spin text-[18px]">sync</span> Procesare...';
@@ -230,7 +243,6 @@
                     alert("A apărut o eroare: " + error.message);
                 }
                 
-                // Resetare buton în caz de eroare
                 submitBtn.innerHTML = originalBtnText;
                 submitBtn.disabled = false;
             }
