@@ -1,251 +1,109 @@
 <!DOCTYPE html>
-<html lang="ro">
+<html lang="ro" class="h-full bg-slate-50">
 <head>
-    <meta charset="utf-8"/>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>NutriChef Professional - Înregistrare Specialist</title>
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-    <script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    colors: {
-                        primary: "#006e1c",
-                        "primary-hover": "#005313",
-                        "surface-main": "#f4f7f6",
-                        "surface-card": "#ffffff",
-                        text: {
-                            main: "#1b1c1c",
-                            muted: "#5a6358",
-                            light: "#ffffff"
-                        },
-                        border: {
-                            light: "#e3e2e2",
-                            focus: "#006e1c"
-                        }
-                    },
-                    fontFamily: {
-                        sans: ["Inter", "sans-serif"],
-                    }
-                }
-            }
-        }
-    </script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NutriChef Pro | Înregistrare Profesională</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f4f7f6;
-            background-image: radial-gradient(#e3e2e2 1px, transparent 1px);
-            background-size: 24px 24px;
-        }
-        .glass-header {
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(8px);
-            border-bottom: 1px solid #e3e2e2;
-        }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .form-card { @apply bg-white p-8 md:p-10 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100; }
+        .input-group { @apply space-y-1.5; }
+        .input-label { @apply text-[11px] font-bold text-slate-400 uppercase tracking-wider; }
+        .input-field { @apply w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-sm font-medium focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 outline-none transition-all; }
     </style>
 </head>
-<body class="min-h-screen flex flex-col text-text-main antialiased selection:bg-primary selection:text-white">
+<body class="min-h-screen flex items-center justify-center p-6 bg-slate-50">
 
-    <!-- Header / Navbar -->
-    <header class="glass-header sticky top-0 z-50 w-full px-6 py-4 flex justify-between items-center shadow-sm">
-        <div class="flex items-center gap-2">
-            <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center text-white shadow-md">
-                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">restaurant_menu</span>
+    <div class="w-full max-w-2xl">
+        <div class="text-center mb-10">
+            <div class="inline-flex items-center gap-2 mb-4">
+                <div class="w-10 h-10 rounded-xl bg-dark-900 flex items-center justify-center">
+                    <span class="material-symbols-rounded text-primary-500">restaurant</span>
+                </div>
+                <span class="text-2xl font-bold tracking-tighter text-slate-900">NutriChef Pro</span>
             </div>
-            <div>
-                <h1 class="text-xl font-bold text-primary leading-tight tracking-tight">NutriChef</h1>
-                <span class="text-xs font-semibold text-text-muted uppercase tracking-widest">Professional</span>
-            </div>
+            <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight">Activează Contul Profesional</h1>
+            <p class="text-slate-500 mt-2 font-medium">30 de zile gratuit pentru a testa platforma NutriChef.</p>
         </div>
-        <div class="hidden sm:flex items-center gap-4 text-sm font-medium text-text-muted">
-            <span>Ai nevoie de ajutor?</span>
-            <a href="#" class="text-primary hover:underline flex items-center gap-1">
-                <span class="material-symbols-outlined text-[18px]">support_agent</span> Suport Tehnic
-            </a>
-        </div>
-    </header>
 
-    <!-- Main Content -->
-    <main class="flex-grow flex items-center justify-center p-4 sm:p-8 my-8">
-        <div class="w-full max-w-3xl bg-surface-card rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-border-light overflow-hidden">
-            
-            <!-- Card Header -->
-            <div class="bg-primary px-8 py-10 text-center relative overflow-hidden">
-                <div class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
-                <h2 class="text-3xl font-bold text-text-light mb-2 relative z-10">Înregistrare Specialist</h2>
-                <p class="text-primary-100 text-sm md:text-base text-white/80 max-w-xl mx-auto relative z-10">
-                    Alătură-te rețelei NutriChef. Gestionează pacienții, creează planuri alimentare și monitorizează evoluția acestora dintr-un singur dashboard dedicat.
-                </p>
+        <form id="reg-form" class="form-card space-y-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="input-group">
+                    <label class="input-label">Nume Complet</label>
+                    <input type="text" id="name" required class="input-field" placeholder="Ex: Dr. Popescu Ana">
+                </div>
+                <div class="input-group">
+                    <label class="input-label">Specializare</label>
+                    <input type="text" id="specializare" required class="input-field" placeholder="Ex: Nutriție Clinică">
+                </div>
             </div>
 
-            <!-- Form Section -->
-            <div class="p-8 md:p-10">
-                <form id="register-form" class="space-y-6">
-                    
-                    <!-- Secțiunea Date Personale -->
-                    <div>
-                        <h3 class="text-lg font-semibold border-b border-border-light pb-2 mb-4 flex items-center gap-2">
-                            <span class="material-symbols-outlined text-primary">person</span> Date Personale
-                        </h3>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-                            <div class="md:col-span-2">
-                                <label class="block text-sm font-medium text-text-muted mb-1" for="fullName">Nume Complet și Titulatură</label>
-                                <input class="w-full bg-surface-main border border-border-light focus:bg-white focus:border-border-focus focus:ring-2 focus:ring-primary/20 rounded-lg px-4 py-2.5 outline-none transition-all text-sm" id="fullName" placeholder="ex: Dr. Maria Ionescu" type="text" required/>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Secțiunea Date Profesionale -->
-                    <div>
-                        <h3 class="text-lg font-semibold border-b border-border-light pb-2 mb-4 mt-8 flex items-center gap-2">
-                            <span class="material-symbols-outlined text-primary">work</span> Date Profesionale
-                        </h3>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-                            <div>
-                                <label class="block text-sm font-medium text-text-muted mb-1" for="specialization">Specializare</label>
-                                <input class="w-full bg-surface-main border border-border-light focus:bg-white focus:border-border-focus focus:ring-2 focus:ring-primary/20 rounded-lg px-4 py-2.5 outline-none transition-all text-sm" id="specialization" placeholder="ex: Nutriție Sportivă, Diabet" type="text" required/>
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-text-muted mb-1" for="accreditation">Număr Acreditare (CUIM / Parafă)</label>
-                                <input class="w-full bg-surface-main border border-border-light focus:bg-white focus:border-border-focus focus:ring-2 focus:ring-primary/20 rounded-lg px-4 py-2.5 outline-none transition-all text-sm" id="accreditation" placeholder="ex: 12345678" type="text" required/>
-                            </div>
-                            <div class="md:col-span-2">
-                                <label class="block text-sm font-medium text-text-muted mb-1" for="clinic">Clinică / Cabinet Medical</label>
-                                <input class="w-full bg-surface-main border border-border-light focus:bg-white focus:border-border-focus focus:ring-2 focus:ring-primary/20 rounded-lg px-4 py-2.5 outline-none transition-all text-sm" id="clinic" placeholder="ex: Clinica NutriChef București" type="text" required/>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Secțiunea Cont & Securitate -->
-                    <div>
-                        <h3 class="text-lg font-semibold border-b border-border-light pb-2 mb-4 mt-8 flex items-center gap-2">
-                            <span class="material-symbols-outlined text-primary">lock</span> Cont și Securitate
-                        </h3>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-                            <div>
-                                <label class="block text-sm font-medium text-text-muted mb-1" for="email">Email Profesional</label>
-                                <input class="w-full bg-surface-main border border-border-light focus:bg-white focus:border-border-focus focus:ring-2 focus:ring-primary/20 rounded-lg px-4 py-2.5 outline-none transition-all text-sm" id="email" placeholder="contact@dr-ionescu.ro" type="email" required/>
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-text-muted mb-1" for="password">Parolă</label>
-                                <input class="w-full bg-surface-main border border-border-light focus:bg-white focus:border-border-focus focus:ring-2 focus:ring-primary/20 rounded-lg px-4 py-2.5 outline-none transition-all text-sm" id="password" placeholder="••••••••" type="password" required minlength="6"/>
-                                <p class="text-[11px] text-text-muted mt-1">Parola trebuie să conțină minim 6 caractere.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Termeni și Acțiuni -->
-                    <div class="pt-6 mt-4 border-t border-border-light">
-                        <label class="flex items-start gap-3 cursor-pointer group mb-6">
-                            <div class="relative flex items-center justify-center mt-0.5">
-                                <input class="peer appearance-none w-5 h-5 border-2 border-border-light rounded bg-surface-main checked:bg-primary checked:border-primary transition-colors cursor-pointer" type="checkbox" required/>
-                                <span class="material-symbols-outlined absolute text-white opacity-0 peer-checked:opacity-100 pointer-events-none text-[16px] font-bold">check</span>
-                            </div>
-                            <span class="text-sm text-text-muted leading-tight">
-                                Declar pe proprie răspundere că datele introduse sunt corecte și sunt de acord cu <a class="text-primary font-semibold hover:underline" href="#">Termenii de Utilizare</a> și <a class="text-primary font-semibold hover:underline" href="#">Acordul de Procesare a Datelor (DPA)</a>.
-                            </span>
-                        </label>
-                        
-                        <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
-                            <a class="text-sm font-medium text-text-muted hover:text-primary transition-colors order-2 sm:order-1" href="autentificare.html">
-                                ← Mergi la Autentificare
-                            </a>
-                            <button class="w-full sm:w-auto px-8 py-3 bg-primary hover:bg-primary-hover text-white font-semibold text-sm rounded-lg flex items-center justify-center gap-2 transition-all shadow-[0_4px_14px_0_rgba(0,110,28,0.2)] hover:shadow-[0_6px_20px_rgba(0,110,28,0.23)] order-1 sm:order-2" type="submit">
-                                Solicită Contul <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
-                            </button>
-                        </div>
-                    </div>
-                </form>
+            <div class="input-group">
+                <label class="input-label">Adresă Email</label>
+                <input type="email" id="email" required class="input-field" placeholder="nume@clinica.ro">
             </div>
-        </div>
-    </main>
 
-    <!-- Footer Dedicat -->
-    <footer class="w-full py-6 mt-auto border-t border-border-light bg-surface-card/50 backdrop-blur-sm">
-        <div class="max-w-4xl mx-auto px-4 text-center">
-            <p class="text-sm font-medium text-text-muted">
-                &copy; 2024 NutriChef Technologies. Toate drepturile rezervate.
-            </p>
-            <p class="text-xs text-text-muted mt-1 opacity-80">
-                Platformă dezvoltată și menținută exclusiv pentru profesioniștii din domeniul sănătății, nutriției și dieteticii.
-            </p>
-            <div class="flex justify-center gap-4 mt-3">
-                <a href="#" class="text-xs text-primary hover:underline">Politică de Confidențialitate</a>
-                <span class="text-text-muted text-xs">•</span>
-                <a href="#" class="text-xs text-primary hover:underline">Termeni și Condiții</a>
-                <span class="text-text-muted text-xs">•</span>
-                <a href="#" class="text-xs text-primary hover:underline">Contact</a>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="input-group">
+                    <label class="input-label">Parolă</label>
+                    <input type="password" id="password" required class="input-field" placeholder="••••••••">
+                </div>
+                <div class="input-group">
+                    <label class="input-label">Nr. Aviz Liberă Practică</label>
+                    <input type="text" id="aviz" required class="input-field" placeholder="RO-123456">
+                </div>
             </div>
-        </div>
-    </footer>
 
-    <!-- Firebase Logic -->
+            <div class="input-group">
+                <label class="input-label">Documente Verificare</label>
+                <div class="border-2 border-dashed border-slate-200 p-6 rounded-2xl flex flex-col items-center justify-center text-center cursor-pointer bg-slate-50 hover:border-primary-500 transition-all">
+                    <span class="material-symbols-rounded text-slate-400 text-3xl mb-2">upload_file</span>
+                    <p class="text-sm font-bold text-slate-700">Încarcă Aviz/Diplomă (PDF)</p>
+                    <input type="file" id="file-upload" class="hidden">
+                </div>
+            </div>
+
+            <button type="submit" class="w-full bg-slate-900 hover:bg-slate-800 text-white py-4 rounded-2xl font-bold transition-all shadow-lg hover:shadow-xl active:scale-[0.98]">
+                Activează Contul (30 Zile Gratuit)
+            </button>
+        </form>
+    </div>
+
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
         import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
         import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
+        import { getStorage, ref, uploadBytes } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-storage.js";
 
-        const firebaseConfig = {
-            apiKey: "AIzaSyDmKC06ObRWWvod2TYJUvEM-ULKrztw7Ts",
-            authDomain: "app-vitality.firebaseapp.com",
-            projectId: "app-vitality",
-            storageBucket: "app-vitality.firebasestorage.app",
-            messagingSenderId: "360982822240",
-            appId: "1:360982822240:web:a650b9289aabd9de80f205",
-            measurementId: "G-T8D7CTP5ZK"
-        };
-
+        // Config Firebase (Inserează datele tale)
+        const firebaseConfig = { /* ... */ };
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const db = getFirestore(app);
+        const storage = getStorage(app);
 
-        document.getElementById('register-form').addEventListener('submit', async (e) => {
-            e.preventDefault(); 
-
-            const submitBtn = e.target.querySelector('button[type="submit"]');
-            const originalBtnText = submitBtn.innerHTML;
-            submitBtn.innerHTML = '<span class="material-symbols-outlined animate-spin text-[18px]">sync</span> Procesare...';
-            submitBtn.disabled = true;
-
-            const nume = document.getElementById('fullName').value;
-            const specializare = document.getElementById('specialization').value;
-            const acreditare = document.getElementById('accreditation').value;
-            const clinica = document.getElementById('clinic').value;
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-
+        document.getElementById('reg-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
             try {
-                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-                const user = userCredential.user;
-
-                await setDoc(doc(db, "User", user.uid), {
-                    nume: nume,
-                    specializare: specializare,
-                    acreditare: acreditare,
-                    clinica: clinica,
-                    email: email,
-                    rol: "nutritionist" 
-                });
-
-                window.location.href = "verificare.html"; 
-
-            } catch (error) {
-                console.error(error);
-                if (error.code === 'auth/email-already-in-use') {
-                    alert("Acest email este deja folosit pentru un cont.");
-                } else if (error.code === 'auth/weak-password') {
-                    alert("Parola trebuie să aibă cel puțin 6 caractere.");
-                } else {
-                    alert("A apărut o eroare: " + error.message);
-                }
+                const cred = await createUserWithEmailAndPassword(auth, document.getElementById('email').value, document.getElementById('password').value);
                 
-                submitBtn.innerHTML = originalBtnText;
-                submitBtn.disabled = false;
-            }
+                // Upload document
+                const file = document.getElementById('file-upload').files[0];
+                if(file) await uploadBytes(ref(storage, 'documente/' + cred.user.uid), file);
+
+                // Salvare date
+                await setDoc(doc(db, "User", cred.user.uid), {
+                    nume: document.getElementById('name').value,
+                    rol: 'nutritionist',
+                    aviz: document.getElementById('aviz').value,
+                    status: 'trial_activ',
+                    dataStart: new Date()
+                });
+                window.location.href = "dashboard-nutritionist.html";
+            } catch (err) { alert("Eroare: " + err.message); }
         });
     </script>
 </body>
