@@ -43,22 +43,28 @@
 <body class="min-h-screen pb-24 md:pb-0 font-sans">
 
     <header class="bg-surface w-full top-0 sticky bg-surface/90 backdrop-blur-md shadow-sm z-40 border-b border-surface-variant/50">
-        <div class="flex justify-between items-center px-4 py-3 w-full max-w-7xl mx-auto">
-            <div class="flex items-center gap-2 cursor-pointer">
-                <h1 class="text-2xl text-primary font-bold flex items-center gap-2">Vitality</h1>
+    <div class="flex justify-between items-center px-4 py-3 w-full max-w-7xl mx-auto">
+        <div class="flex items-center gap-2 cursor-pointer">
+            <!-- Logo-ul NutriChef modificat aici -->
+            <h1 class="text-2xl text-primary font-bold flex items-center gap-2">
+                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">restaurant_menu</span>
+                NutriChef
+            </h1>
+        </div>
+        <div class="flex items-center gap-4">
+            <!-- Restul codului rămâne la fel -->
+            <div class="hidden md:flex items-center gap-4 text-sm font-medium text-on-surface-variant">
+                <span>Aplicație Medicală</span>
+                <span class="w-1 h-1 rounded-full bg-surface-variant"></span>
+                <span>Rețea de Experți</span>
             </div>
-            <div class="flex items-center gap-4">
-                <div class="hidden md:flex items-center gap-4 text-sm font-medium text-on-surface-variant">
-                    <span>Aplicație Medicală</span>
-                    <span class="w-1 h-1 rounded-full bg-surface-variant"></span>
-                    <span>Rețea de Experți</span>
-                </div>
-                <div class="w-10 h-10 rounded-full bg-surface-container-high overflow-hidden flex-shrink-0 border border-outline-variant/30">
-                    <img alt="User Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDs6CRivJBkiZv03_hEbM1TZT4PjsIJc7DOIFeJRuE1LEYv_0Tst7ePnivNT4EO-KtPtM3fg1DT7cK57zyILIy1ZOMQoF79K0s4Uc_CJ_efDEg8nszmh5vm9OaDqAk9vU6Y1MZ2Q_xd0wUuEOAEYxFsEMTTCkoju73WK9vCTVCos8W8i5JJxpNkfabbRPwytUuKLHiCF38xZWKZpmv83IgrFGBvpmi3FY5Ynpej7mGAug7hHSx9v9n63EnalFjme5KgENr_nt0ah-ef">
-                </div>
+            <div class="w-10 h-10 rounded-full bg-surface-container-high overflow-hidden flex-shrink-0 border border-outline-variant/30">
+                <img alt="User Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDs6CRivJBkiZv03_hEbM1TZT4PjsIJc7DOIFeJRuE1LEYv_0Tst7ePnivNT4EO-KtPtM3fg1DT7cK57zyILIy1ZOMQoF79K0s4Uc_CJ_efDEg8nszmh5vm9OaDqAk9vU6Y1MZ2Q_xd0wUuEOAEYxFsEMTTCkoju73WK9vCTVCos8W8i5JJxpNkfabbRPwytUuKLHiCF38xZWKZpmv83IgrFGBvpmi3FY5Ynpej7mGAug7hHSx9v9n63EnalFjme5KgENr_nt0ah-ef">
             </div>
         </div>
-    </header>
+    </div>
+</header>
+
 
     <main class="w-full max-w-7xl mx-auto px-4 md:px-12 pt-10 pb-16" id="main-canvas">
         <div class="space-y-24" id="landing-view">
@@ -273,17 +279,14 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="space-y-3 mb-6 flex-grow">
-                            <div class="flex items-center gap-2 text-sm text-on-surface-variant">
-                                <span class="material-symbols-outlined text-[18px]">verified</span> <span>Licențiat UMF</span>
-                            </div>
-                            <div class="flex items-center gap-2 text-sm text-on-surface-variant">
-                                <span class="material-symbols-outlined text-[18px]">work_history</span> <span>Peste 8 ani experiență clinică</span>
-                            </div>
-                            <div class="flex flex-wrap gap-2 pt-2">
-                                <span class="px-3 py-1 rounded-md bg-surface-container-high text-on-surface-variant text-xs border border-outline-variant/20">Nutriție Pediatrică</span>
-                                <span class="px-3 py-1 rounded-md bg-surface-container-high text-on-surface-variant text-xs border border-outline-variant/20">Alergii</span>
-                            </div>
+                       <div class="space-y-6">
+    <div class="flex items-center gap-3">
+        <span class="px-3 py-1 bg-surface-container-lowest rounded-full text-xs font-bold uppercase tracking-wider text-on-surface-variant border border-outline-variant/30">Parteneriat Exclusiv</span>
+    </div>
+    <!-- Titlul actualizat aici -->
+    <h2 class="text-3xl md:text-4xl text-on-surface font-bold">Ecosistemul NutriChef</h2>
+    <p class="text-lg text-on-surface-variant">Nu te lăsăm doar cu o listă pe hârtie. Închidem cercul sănătății tale prin integrarea cu serviciul de personal chef.</p>
+
                         </div>
                         <div class="pt-4 border-t border-surface-variant/50 flex flex-col gap-3 mt-auto">
                             <div class="flex justify-between items-center text-sm mb-1">
