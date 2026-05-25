@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Creare Cont - NutriChef Pro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'] },
+                    colors: {
+                        primary: { 50: '#f0fdfa', 100: '#ccfbf1', 500: '#14b8a6', 600: '#0d9488', 900: '#134e4a' },
+                        dark: { 800: '#1e293b', 900: '#0f172a' },
+                    },
+                    boxShadow: {
+                        'card': '0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-primary-500 selection:text-white">
+    <div class="min-h-screen flex flex-col md:flex-row w-full">
+        
+        <div class="hidden md:flex md:w-1/2 relative overflow-hidden bg-dark-900 items-center justify-center">
+            <div class="absolute inset-0 bg-cover bg-center opacity-40" style="background-image: url('https://images.unsplash.com/photo-1498837167922-41c53bbf4031?q=80&w=2070&auto=format&fit=crop');"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-dark-900 via-dark-900/60 to-transparent"></div>
+            
+            <div class="relative z-10 p-12 text-white flex flex-col justify-end h-full w-full pb-20">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center shadow-lg">
+                        <span class="material-symbols-rounded text-[28px] text-white">restaurant</span>
+                    </div>
+                    <span class="font-bold text-4xl tracking-tight">NutriChef <span class="text-primary-500 font-light">Pro</span></span>
+                </div>
+                <p class="text-lg font-medium text-slate-300 max-w-md leading-relaxed">
+                    Începe-ți călătoria alături de noi. Creează-ți contul și oferă clienților tăi cea mai bună experiență nutrițională.
+                </p>
+            </div>
+        </div>
+
+        <div class="w-full md:w-1/2 flex items-center justify-center p-6 md:p-12 bg-slate-50 relative">
+            
+            <div class="md:hidden absolute top-8 left-0 w-full flex items-center justify-center gap-2">
+                <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center shadow-md">
+                    <span class="material-symbols-rounded text-[20px] text-white">restaurant</span>
+                </div>
+                <span class="font-bold text-xl tracking-tight text-slate-900">NutriChef <span class="text-primary-600 font-light">Pro</span></span>
+            </div>
+
+            <div class="w-full max-w-[460px] bg-white rounded-2xl shadow-card p-8 md:p-10 border border-slate-200 mt-16 md:mt-0">
+                
+                <div class="flex flex-col gap-2 mb-8">
+                    <h1 class="text-2xl md:text-3xl font-bold text-slate-900 tracking-tight">
+                        Creează Cont Nou
+                    </h1>
+                    <p class="text-sm font-medium text-slate-500">
+                        Completează datele de mai jos pentru a-ți configura profilul.
+                    </p>
+                </div>
+
+                <form id="register-form" class="flex flex-col gap-5">
+                    
+                    <div class="flex flex-col gap-1.5">
+                        <label class="text-xs font-bold text-slate-500 uppercase tracking-wider" for="name">Nume Complet</label>
+                        <input id="name" type="text" placeholder="Ex: Sarah Miller" required class="h-12 px-4 rounded-xl w-full border border-slate-200 bg-slate-50 focus:bg-white focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 outline-none transition-all font-medium text-sm" />
+                    </div>
+
+                    <div class="flex flex-col gap-1.5">
+                        <label class="text-xs font-bold text-slate-500 uppercase tracking-wider" for="email">Adresă de email</label>
+                        <input id="email" type="email" placeholder="nume@email.com" required class="h-12 px-4 rounded-xl w-full border border-slate-200 bg-slate-50 focus:bg-white focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 outline-none transition-all font-medium text-sm" />
+                    </div>
+            
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div class="flex flex-col gap-1.5">
+                            <label class="text-xs font-bold text-slate-500 uppercase tracking-wider" for="password">Parolă</label>
+                            <input id="password" type="password" placeholder="Min. 6 caractere" required class="h-12 px-4 rounded-xl w-full border border-slate-200 bg-slate-50 focus:bg-white focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 outline-none transition-all font-medium text-sm" />
+                        </div>
+                        <div class="flex flex-col gap-1.5">
+                            <label class="text-xs font-bold text-slate-500 uppercase tracking-wider" for="role">Tip Cont</label>
+                            <select id="role" required class="h-12 px-4 rounded-xl w-full border border-slate-200 bg-slate-50 focus:bg-white focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 outline-none transition-all font-medium text-sm">
+                                <option value="nutritionist">Nutriționist</option>
+                                <option value="client">Client / Pacient</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button class="mt-4 h-12 w-full flex items-center justify-center gap-2 bg-dark-900 text-white font-bold text-sm rounded-xl hover:bg-slate-800 transition-all shadow-md active:scale-[0.98]" type="submit">
+                        <span>Înregistrează-te</span>
+                        <span class="material-symbols-rounded text-[18px]">person_add</span>
+                    </button>
+                </form>
+
+                <div class="flex items-center gap-4 my-8">
+                    <div class="flex-1 h-px bg-slate-200"></div>
+                    <span class="text-xs font-bold text-slate-400 uppercase tracking-widest">Sau</span>
+                    <div class="flex-1 h-px bg-slate-200"></div>
+                </div>
+
+                <div class="text-center">
+                    <p class="text-sm font-medium text-slate-500">
+                        Ai deja un cont? 
+                        <a class="text-primary-600 font-bold hover:text-primary-700 hover:underline transition-colors ml-1" href="login.html">
+                            Autentifică-te aici
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword, updateProfile } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
+        import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
+
+        // Configurarea ta Firebase (Păstrată din fișierul anterior)
+        const firebaseConfig = {
+            apiKey: "AIzaSyDmKC06ObRWWvod2TYJUvEM-ULKrztw7Ts",
+            authDomain: "app-vitality.firebaseapp.com",
+            projectId: "app-vitality",
+            storageBucket: "app-vitality.firebasestorage.app",
+            messagingSenderId: "360982822240",
+            appId: "1:360982822240:web:a650b9289aabd9de80f205"
+        };
+
+        // Inițializare
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        // Preia elementele
+        const registerForm = document.getElementById('register-form');
+        const nameInput = document.getElementById('name');
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+        const roleInput = document.getElementById('role');
+
+        registerForm.addEventListener('submit', async (e) => {
+            e.preventDefault(); 
+
+            const nume = nameInput.value;
+            const email = emailInput.value;
+            const password = passwordInput.value;
+            const rol = roleInput.value;
+
+            try {
+                // 1. Creează utilizatorul în Firebase Authentication
+                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                const user = userCredential.user;
+
+                // 2. Actualizează numele în profilul de bază Auth
+                await updateProfile(user, { displayName: nume });
+
+                // 3. Salvează detaliile (inclusiv rolul) în Cloud Firestore în colecția "User"
+                await setDoc(doc(db, "User", user.uid), {
+                    nume: nume,
+                    email: email,
+                    rol: rol,
+                    dataCreare: new Date()
+                });
+
+                alert("Contul a fost creat cu succes!");
+
+                // Redirecționează utilizatorul la pagina corectă
+                if (rol === 'nutritionist') {
+                    window.location.href = "dashboard-nutritionist.html"; 
+                } else {
+                    window.location.href = "dashboard-client.html";
+                }
+
+            } catch (error) {
+                const errorCode = error.code;
+                if (errorCode === 'auth/email-already-in-use') {
+                    alert("Această adresă de email este deja folosită de un alt cont.");
+                } else if (errorCode === 'auth/weak-password') {
+                    alert("Parola trebuie să aibă cel puțin 6 caractere.");
+                } else {
+                    alert("A apărut o eroare: " + error.message);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
