@@ -1,261 +1,194 @@
 <!DOCTYPE html>
-<html class="light" lang="ro">
+<html lang="ro">
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>NutriChef - Înregistrare Client</title>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com" rel="preconnect"/>
-    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <script id="tailwind-config">
+    <title>Creare Cont - NutriChef Pro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
         tailwind.config = {
-            darkMode: "class",
             theme: {
                 extend: {
-                    "colors": {
-                        "secondary-fixed": "#ffdcbe",
-                        "on-tertiary-fixed": "#001d36",
-                        "surface-variant": "#e3e2e2",
-                        "surface-dim": "#dbdad9",
-                        "inverse-on-surface": "#f2f0f0",
-                        "on-error": "#ffffff",
-                        "secondary": "#8b5000",
-                        "on-secondary-fixed-variant": "#693c00",
-                        "outline": "#6f7a6b",
-                        "inverse-primary": "#78dc77",
-                        "on-primary-fixed": "#002204",
-                        "error-container": "#ffdad6",
-                        "on-tertiary-fixed-variant": "#00497d",
-                        "on-primary": "#ffffff",
-                        "primary-fixed": "#94f990",
-                        "secondary-fixed-dim": "#ffb870",
-                        "on-tertiary": "#ffffff",
-                        "surface-container": "#efeded",
-                        "inverse-surface": "#303031",
-                        "on-background": "#1b1c1c",
-                        "tertiary": "#0061a4",
-                        "surface-bright": "#fbf9f9",
-                        "surface-container-high": "#e9e8e7",
-                        "on-secondary": "#ffffff",
-                        "on-error-container": "#93000a",
-                        "tertiary-fixed": "#d1e4ff",
-                        "tertiary-container": "#33a0fe",
-                        "surface-container-lowest": "#ffffff",
-                        "on-primary-fixed-variant": "#005313",
-                        "surface-container-low": "#f5f3f3",
-                        "surface-tint": "#006e1c",
-                        "surface-container-highest": "#e3e2e2",
-                        "on-secondary-container": "#653900",
-                        "background": "#fbf9f9",
-                        "primary": "#006e1c",
-                        "on-tertiary-container": "#00355d",
-                        "surface": "#fbf9f9",
-                        "primary-fixed-dim": "#78dc77",
-                        "on-surface": "#1b1c1c",
-                        "on-primary-container": "#003c0b",
-                        "tertiary-fixed-dim": "#9ecaff",
-                        "on-surface-variant": "#3f4a3c",
-                        "error": "#ba1a1a",
-                        "on-secondary-fixed": "#2c1600",
-                        "outline-variant": "#becab9",
-                        "secondary-container": "#ff9800",
-                        "primary-container": "#4caf50"
+                    fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'] },
+                    colors: {
+                        primary: { 50: '#f0fdfa', 100: '#ccfbf1', 500: '#14b8a6', 600: '#0d9488', 900: '#134e4a' },
+                        dark: { 800: '#1e293b', 900: '#0f172a' },
                     },
-                    "borderRadius": {
-                        "DEFAULT": "0.25rem",
-                        "lg": "0.5rem",
-                        "xl": "0.75rem",
-                        "full": "9999px"
-                    },
-                    "spacing": {
-                        "md": "24px",
-                        "xl": "64px",
-                        "margin-desktop": "48px",
-                        "xs": "4px",
-                        "margin-mobile": "16px",
-                        "gutter": "16px",
-                        "sm": "12px",
-                        "lg": "40px",
-                        "base": "8px"
-                    },
-                    "fontFamily": {
-                        "body-lg": ["Inter"],
-                        "body-md": ["Inter"],
-                        "headline-md": ["Inter"],
-                        "label-md": ["Inter"],
-                        "headline-xl": ["Inter"],
-                        "headline-lg-mobile": ["Inter"],
-                        "label-sm": ["Inter"],
-                        "headline-lg": ["Inter"]
-                    },
-                    "fontSize": {
-                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
-                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
-                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
-                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
-                        "headline-xl": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
-                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
-                        "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
-                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+                    boxShadow: {
+                        'card': '0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01)',
                     }
                 }
             }
         }
     </script>
     <style>
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
-        ::-webkit-scrollbar {
-            width: 6px;
-        }
-        ::-webkit-scrollbar-track {
-            background: transparent;
-        }
-        ::-webkit-scrollbar-thumb {
-            background-color: #e3e2e2;
-            border-radius: 10px;
-        }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
     </style>
 </head>
-<body class="bg-background text-on-surface min-h-screen flex items-center justify-center p-margin-mobile sm:p-margin-desktop antialiased">
-    <main class="w-full max-w-[560px] bg-surface-container-lowest rounded-xl shadow-[0_4px_20px_0_rgba(0,0,0,0.04)] border border-outline-variant/20 p-lg sm:p-[48px] relative overflow-hidden transition-all duration-300">
-        <div class="absolute top-0 right-0 w-64 h-64 bg-primary-fixed/20 rounded-full blur-[80px] -z-10 pointer-events-none transform translate-x-1/3 -translate-y-1/3"></div>
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-primary-500 selection:text-white">
+    <div class="min-h-screen flex flex-col md:flex-row w-full">
         
-        <header class="flex flex-col items-center mb-lg text-center">
-            <img alt="NutriChef" class="h-16 w-auto object-contain mb-md mix-blend-multiply" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwK5ETACq4EZUdtS3bzV1xIaO61qC_Z1nEKtP8BXEWHW_P37sb2dsz8BuycTRtlHSbzPQ45aEfmCgBxxsgVxU0TU_ovMWkXDRLZMaX9oLqWnEK2EkTsuBCQ6JUo4xAuB1BxrPNccB7C1Bg2y0MQc_m6CG9UYg3n8nStnX-rjAbOHhDePj00tUIbUL0Pk1Whu8HCda6s2drfLrO6Xdkwv-C6S4VckDm4xkybWtIjw4iWGB3UQYgs2RTpeWYxoq7Lc6OGysSn7gHq-Gt"/>
-            <h1 class="font-headline-lg-mobile text-headline-lg-mobile sm:font-headline-lg sm:text-headline-lg text-on-surface">Alătură-te NutriChef</h1>
-            <p class="font-body-md text-body-md text-on-surface-variant mt-2 max-w-sm">Începe-ți călătoria către un stil de viață echilibrat și precis.</p>
-        </header>
-
-        <form class="flex flex-col gap-sm" onsubmit="event.preventDefault();">
+        <div class="hidden md:flex md:w-1/2 relative overflow-hidden bg-dark-900 items-center justify-center">
+            <div class="absolute inset-0 bg-cover bg-center opacity-40" style="background-image: url('https://images.unsplash.com/photo-1498837167922-41c53bbf4031?q=80&w=2070&auto=format&fit=crop');"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-dark-900 via-dark-900/60 to-transparent"></div>
             
-            <div class="flex flex-col gap-xs">
-                <label class="font-label-sm text-label-sm text-on-surface-variant ml-1" for="fullName">Nume Complet</label>
-                <div class="relative group">
-                    <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant group-focus-within:text-primary transition-colors">person</span>
-                    <input class="w-full h-12 pl-12 pr-4 rounded-lg bg-surface-container-low border border-transparent focus:bg-surface-container-lowest focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all duration-200 font-body-md text-body-md text-on-surface placeholder:text-outline" id="fullName" placeholder="ex. Alex Popescu" type="text"/>
-                </div>
-            </div>
-
-            <div class="flex flex-col gap-xs">
-                <label class="font-label-sm text-label-sm text-on-surface-variant ml-1" for="email">Email</label>
-                <div class="relative group">
-                    <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant group-focus-within:text-primary transition-colors">mail</span>
-                    <input class="w-full h-12 pl-12 pr-4 rounded-lg bg-surface-container-low border border-transparent focus:bg-surface-container-lowest focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all duration-200 font-body-md text-body-md text-on-surface placeholder:text-outline" id="email" placeholder="alex@exemplu.ro" type="email"/>
-                </div>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-sm">
-                <div class="flex flex-col gap-xs">
-                    <label class="font-label-sm text-label-sm text-on-surface-variant ml-1" for="age">Vârstă</label>
-                    <input class="w-full h-12 px-4 rounded-lg bg-surface-container-low border border-transparent focus:bg-surface-container-lowest focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all duration-200 font-body-md text-body-md text-on-surface placeholder:text-outline" id="age" placeholder="Ani" type="number"/>
-                </div>
-                
-                <div class="flex flex-col gap-xs">
-                    <label class="font-label-sm text-label-sm text-on-surface-variant ml-1" for="currentWeight">Greutate Curentă</label>
-                    <div class="relative">
-                        <input class="w-full h-12 pl-4 pr-10 rounded-lg bg-surface-container-low border border-transparent focus:bg-surface-container-lowest focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all duration-200 font-body-md text-body-md text-on-surface placeholder:text-outline" id="currentWeight" placeholder="0.0" step="0.1" type="number"/>
-                        <span class="absolute right-4 top-1/2 -translate-y-1/2 font-label-sm text-label-sm text-outline">kg</span>
+            <div class="relative z-10 p-12 text-white flex flex-col justify-end h-full w-full pb-20">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center shadow-lg">
+                        <span class="material-symbols-rounded text-[28px] text-white">restaurant</span>
                     </div>
+                    <span class="font-bold text-4xl tracking-tight">NutriChef <span class="text-primary-500 font-light">Pro</span></span>
                 </div>
-
-                <div class="flex flex-col gap-xs">
-                    <label class="font-label-sm text-label-sm text-on-surface-variant ml-1" for="targetWeight">Greutate Dorită</label>
-                    <div class="relative">
-                        <input class="w-full h-12 pl-4 pr-10 rounded-lg bg-surface-container-low border border-transparent focus:bg-surface-container-lowest focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all duration-200 font-body-md text-body-md text-on-surface placeholder:text-outline" id="targetWeight" placeholder="0.0" step="0.1" type="number"/>
-                        <span class="absolute right-4 top-1/2 -translate-y-1/2 font-label-sm text-label-sm text-outline">kg</span>
-                    </div>
-                </div>
+                <p class="text-lg font-medium text-slate-300 max-w-md leading-relaxed">
+                    Începe-ți călătoria alături de noi. Creează-ți contul și oferă clienților tăi cea mai bună experiență nutrițională.
+                </p>
             </div>
-
-            <div class="flex flex-col gap-xs mb-sm">
-                <label class="font-label-sm text-label-sm text-on-surface-variant ml-1" for="password">Parolă</label>
-                <div class="relative group">
-                    <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant group-focus-within:text-primary transition-colors">lock</span>
-                    <input class="w-full h-12 pl-12 pr-12 rounded-lg bg-surface-container-low border border-transparent focus:bg-surface-container-lowest focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all duration-200 font-body-md text-body-md text-on-surface placeholder:text-outline" id="password" placeholder="••••••••" type="password"/>
-                    <button aria-label="Afișează/Ascunde parola" class="absolute right-4 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-on-surface transition-colors focus:outline-none" type="button">
-                        <span class="material-symbols-outlined">visibility_off</span>
-                    </button>
-                </div>
-            </div>
-            
-            <div class="flex justify-end -mt-2 mb-4">
-                <a class="font-label-sm text-label-sm text-primary hover:underline hover:text-on-primary-fixed-variant transition-colors" href="#">Am uitat parola?</a>
-            </div>
-
-            <div class="flex items-start gap-3 mt-2 mb-md">
-                <div class="flex items-center h-6">
-                    <input class="w-5 h-5 rounded bg-surface-container-low border-outline-variant text-primary focus:ring-primary focus:ring-offset-surface-container-lowest transition-all cursor-pointer" id="terms" type="checkbox"/>
-                </div>
-                <label class="font-body-md text-body-md text-on-surface-variant cursor-pointer select-none" for="terms">
-                    Sunt de acord cu <a class="text-primary hover:underline font-medium" href="#">Termenii și Condițiile</a>
-                </label>
-            </div>
-
-            <div class="flex flex-col gap-sm mt-4 border-t border-outline-variant/30 pt-6 mb-6">
-                <h2 class="font-label-md text-label-md text-on-surface uppercase tracking-wider mb-2">Metodă de Plată</h2>
-                
-                <div class="flex flex-col gap-xs">
-                    <label class="font-label-sm text-label-sm text-on-surface-variant ml-1" for="cardNumber">Număr Card</label>
-                    <div class="relative group">
-                        <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant group-focus-within:text-primary transition-colors">credit_card</span>
-                        <input class="w-full h-12 pl-12 pr-4 rounded-lg bg-surface-container-low border border-transparent focus:bg-surface-container-lowest focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all duration-200 font-body-md text-body-md text-on-surface placeholder:text-outline" id="cardNumber" inputmode="numeric" placeholder="0000 0000 0000 0000" type="text"/>
-                    </div>
-                </div>
-                
-                <div class="grid grid-cols-2 gap-sm">
-                    <div class="flex flex-col gap-xs">
-                        <label class="font-label-sm text-label-sm text-on-surface-variant ml-1" for="expiryDate">Data Expirării</label>
-                        <input class="w-full h-12 px-4 rounded-lg bg-surface-container-low border border-transparent focus:bg-surface-container-lowest focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all duration-200 font-body-md text-body-md text-on-surface placeholder:text-outline" id="expiryDate" placeholder="LL/AA" type="text"/>
-                    </div>
-                    <div class="flex flex-col gap-xs">
-                        <label class="font-label-sm text-label-sm text-on-surface-variant ml-1" for="cvv">CVV</label>
-                        <input class="w-full h-12 px-4 rounded-lg bg-surface-container-low border border-transparent focus:bg-surface-container-lowest focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all duration-200 font-body-md text-body-md text-on-surface placeholder:text-outline" id="cvv" maxlength="3" placeholder="123" type="password"/>
-                    </div>
-                </div>
-            </div>
-            
-            <button class="w-full h-12 min-h-[48px] rounded-lg bg-primary text-on-primary font-label-md text-label-md flex items-center justify-center gap-2 hover:bg-on-primary-fixed-variant active:scale-[0.98] transition-all duration-200 shadow-[0_2px_8px_0_rgba(0,110,28,0.2)] hover:shadow-[0_4px_12px_0_rgba(0,110,28,0.3)]" type="submit">
-                Creează Cont
-                <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
-            </button>
-
-            <div class="relative flex items-center my-md">
-                <div class="flex-grow border-t border-outline-variant/30"></div>
-                <span class="flex-shrink mx-4 font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">sau</span>
-                <div class="flex-grow border-t border-outline-variant/30"></div>
-            </div>
-
-            <div class="flex flex-col gap-sm">
-                <button class="w-full h-12 flex items-center justify-center gap-3 border border-outline-variant rounded-lg bg-surface-container-lowest hover:bg-surface-container-low transition-all duration-200 active:scale-[0.98] group" type="button">
-                    <svg class="w-5 h-5 group-hover:scale-110 transition-transform" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"></path>
-                        <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"></path>
-                        <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"></path>
-                        <path d="M12 5.38c1.62 0 3.06.56 4.21 1.66l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"></path>
-                    </svg>
-                    <span class="font-label-md text-label-md text-on-surface">Continuă cu Google</span>
-                </button>
-                <button class="w-full h-12 flex items-center justify-center gap-3 border border-outline-variant rounded-lg bg-surface-container-lowest hover:bg-surface-container-low transition-all duration-200 active:scale-[0.98] group" type="button">
-                    <svg class="w-5 h-5 text-[#1877F2] group-hover:scale-110 transition-transform" fill="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"></path>
-                    </svg>
-                    <span class="font-label-md text-label-md text-on-surface">Continuă cu Facebook</span>
-                </button>
-            </div>
-        </form>
-
-        <div class="mt-lg text-center">
-            <p class="font-body-md text-body-md text-on-surface-variant">
-                Ai deja un cont? 
-                <a class="font-label-md text-label-md text-primary hover:text-on-primary-fixed-variant hover:underline transition-colors ml-1" href="#">
-                    Conectează-te aici
-                </a>
-            </p>
         </div>
-    </main>
+
+        <div class="w-full md:w-1/2 flex items-center justify-center p-6 md:p-12 bg-slate-50 relative">
+            
+            <div class="md:hidden absolute top-8 left-0 w-full flex items-center justify-center gap-2">
+                <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center shadow-md">
+                    <span class="material-symbols-rounded text-[20px] text-white">restaurant</span>
+                </div>
+                <span class="font-bold text-xl tracking-tight text-slate-900">NutriChef <span class="text-primary-600 font-light">Pro</span></span>
+            </div>
+
+            <div class="w-full max-w-[460px] bg-white rounded-2xl shadow-card p-8 md:p-10 border border-slate-200 mt-16 md:mt-0">
+                
+                <div class="flex flex-col gap-2 mb-8">
+                    <h1 class="text-2xl md:text-3xl font-bold text-slate-900 tracking-tight">
+                        Creează Cont Nou
+                    </h1>
+                    <p class="text-sm font-medium text-slate-500">
+                        Completează datele de mai jos pentru a-ți configura profilul.
+                    </p>
+                </div>
+
+                <form id="register-form" class="flex flex-col gap-5">
+                    
+                    <div class="flex flex-col gap-1.5">
+                        <label class="text-xs font-bold text-slate-500 uppercase tracking-wider" for="name">Nume Complet</label>
+                        <input id="name" type="text" placeholder="Ex: Sarah Miller" required class="h-12 px-4 rounded-xl w-full border border-slate-200 bg-slate-50 focus:bg-white focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 outline-none transition-all font-medium text-sm" />
+                    </div>
+
+                    <div class="flex flex-col gap-1.5">
+                        <label class="text-xs font-bold text-slate-500 uppercase tracking-wider" for="email">Adresă de email</label>
+                        <input id="email" type="email" placeholder="nume@email.com" required class="h-12 px-4 rounded-xl w-full border border-slate-200 bg-slate-50 focus:bg-white focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 outline-none transition-all font-medium text-sm" />
+                    </div>
+            
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div class="flex flex-col gap-1.5">
+                            <label class="text-xs font-bold text-slate-500 uppercase tracking-wider" for="password">Parolă</label>
+                            <input id="password" type="password" placeholder="Min. 6 caractere" required class="h-12 px-4 rounded-xl w-full border border-slate-200 bg-slate-50 focus:bg-white focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 outline-none transition-all font-medium text-sm" />
+                        </div>
+                        <div class="flex flex-col gap-1.5">
+                            <label class="text-xs font-bold text-slate-500 uppercase tracking-wider" for="role">Tip Cont</label>
+                            <select id="role" required class="h-12 px-4 rounded-xl w-full border border-slate-200 bg-slate-50 focus:bg-white focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 outline-none transition-all font-medium text-sm">
+                                <option value="nutritionist">Nutriționist</option>
+                                <option value="client">Client / Pacient</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button class="mt-4 h-12 w-full flex items-center justify-center gap-2 bg-dark-900 text-white font-bold text-sm rounded-xl hover:bg-slate-800 transition-all shadow-md active:scale-[0.98]" type="submit">
+                        <span>Înregistrează-te</span>
+                        <span class="material-symbols-rounded text-[18px]">person_add</span>
+                    </button>
+                </form>
+
+                <div class="flex items-center gap-4 my-8">
+                    <div class="flex-1 h-px bg-slate-200"></div>
+                    <span class="text-xs font-bold text-slate-400 uppercase tracking-widest">Sau</span>
+                    <div class="flex-1 h-px bg-slate-200"></div>
+                </div>
+
+                <div class="text-center">
+                    <p class="text-sm font-medium text-slate-500">
+                        Ai deja un cont? 
+                        <a class="text-primary-600 font-bold hover:text-primary-700 hover:underline transition-colors ml-1" href="login.html">
+                            Autentifică-te aici
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword, updateProfile } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
+        import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
+
+        // Configurarea ta Firebase (Păstrată din fișierul anterior)
+        const firebaseConfig = {
+            apiKey: "AIzaSyDmKC06ObRWWvod2TYJUvEM-ULKrztw7Ts",
+            authDomain: "app-vitality.firebaseapp.com",
+            projectId: "app-vitality",
+            storageBucket: "app-vitality.firebasestorage.app",
+            messagingSenderId: "360982822240",
+            appId: "1:360982822240:web:a650b9289aabd9de80f205"
+        };
+
+        // Inițializare
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        // Preia elementele
+        const registerForm = document.getElementById('register-form');
+        const nameInput = document.getElementById('name');
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+        const roleInput = document.getElementById('role');
+
+        registerForm.addEventListener('submit', async (e) => {
+            e.preventDefault(); 
+
+            const nume = nameInput.value;
+            const email = emailInput.value;
+            const password = passwordInput.value;
+            const rol = roleInput.value;
+
+            try {
+                // 1. Creează utilizatorul în Firebase Authentication
+                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                const user = userCredential.user;
+
+                // 2. Actualizează numele în profilul de bază Auth
+                await updateProfile(user, { displayName: nume });
+
+                // 3. Salvează detaliile (inclusiv rolul) în Cloud Firestore în colecția "User"
+                await setDoc(doc(db, "User", user.uid), {
+                    nume: nume,
+                    email: email,
+                    rol: rol,
+                    dataCreare: new Date()
+                });
+
+                alert("Contul a fost creat cu succes!");
+
+                // Redirecționează utilizatorul la pagina corectă
+                if (rol === 'nutritionist') {
+                    window.location.href = "dashboard-nutritionist.html"; 
+                } else {
+                    window.location.href = "dashboard-client.html";
+                }
+
+            } catch (error) {
+                const errorCode = error.code;
+                if (errorCode === 'auth/email-already-in-use') {
+                    alert("Această adresă de email este deja folosită de un alt cont.");
+                } else if (errorCode === 'auth/weak-password') {
+                    alert("Parola trebuie să aibă cel puțin 6 caractere.");
+                } else {
+                    alert("A apărut o eroare: " + error.message);
+                }
+            }
+        });
+    </script>
 </body>
 </html>
