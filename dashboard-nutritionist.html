@@ -15,14 +15,12 @@
                 extend: {
                     fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'] },
                     colors: {
-                        // Paletă Premium: Teal (Smarald elegant) & Slate (Gri-albăstrui)
                         primary: { 50: '#f0fdfa', 100: '#ccfbf1', 500: '#14b8a6', 600: '#0d9488', 900: '#134e4a' },
-                        accent: { 500: '#f59e0b', 600: '#d97706' }, // Amber pentru elemente de atenție
+                        accent: { 500: '#f59e0b', 600: '#d97706' },
                         dark: { 800: '#1e293b', 900: '#0f172a' },
                     },
                     boxShadow: {
                         'card': '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1)',
-                        'float': '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1)',
                     }
                 }
             }
@@ -32,12 +30,8 @@
         body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8fafc; }
         .hide-scrollbar::-webkit-scrollbar { display: none; }
         .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-        
-        /* Toggle Switch */
         .toggle-checkbox:checked { right: 0; border-color: #0d9488; }
         .toggle-checkbox:checked + .toggle-label { background-color: #0d9488; }
-        
-        /* Efect de sticlă (Glassmorphism) */
         .glass-header { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(226, 232, 240, 0.8); }
     </style>
 </head>
@@ -64,10 +58,10 @@
         </div>
 
         <div class="p-4 border-t border-slate-800">
-            <div onclick="switchView('profile')" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-slate-800 cursor-pointer transition-colors border border-transparent hover:border-slate-700">
+            <div onclick="switchView('profile')" id="nav-profile-btn" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-slate-800 cursor-pointer transition-colors border border-transparent hover:border-slate-700">
                 <div class="w-10 h-10 rounded-full bg-slate-800 border border-slate-700 text-white flex items-center justify-center font-bold text-sm">SM</div>
                 <div class="flex-1 min-w-0">
-                    <p id="sidebar-user-name" class="text-sm font-semibold text-white truncate">Sarah Miller</p>
+                    <p class="text-sm font-semibold text-white truncate">Sarah Miller</p>
                     <p class="text-xs text-slate-400 truncate">Nutriționist Șef</p>
                 </div>
                 <span class="material-symbols-rounded text-slate-500 text-[18px]">tune</span>
@@ -115,7 +109,7 @@
             <div class="flex items-center gap-3 md:gap-5">
                 <button class="relative text-slate-400 hover:text-slate-700 transition-colors">
                     <span class="material-symbols-rounded text-[24px]">notifications</span>
-                    <span class="absolute 1 top-0 right-0.5 w-2 h-2 bg-accent-500 rounded-full border border-white"></span>
+                    <span class="absolute top-0 right-0.5 w-2 h-2 bg-accent-500 rounded-full border border-white"></span>
                 </button>
                 <div class="w-px h-6 bg-slate-200 hidden md:block"></div>
                 <button onclick="logout()" class="hidden md:flex items-center gap-2 text-sm font-medium text-slate-500 hover:text-slate-800 transition-colors">
@@ -124,17 +118,17 @@
             </div>
         </header>
 
-        <div class="flex-1 overflow-y-auto hide-scrollbar relative w-full">
+        <div id="main-scroll-container" class="flex-1 overflow-y-auto hide-scrollbar relative w-full flex flex-col">
             
-            <div id="view-dashboard" class="p-4 md:p-10 max-w-[1400px] mx-auto space-y-6 md:space-y-8 block w-full">
-                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div id="view-dashboard" class="p-4 md:p-10 max-w-[1400px] mx-auto space-y-6 block w-full shrink-0">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div class="bg-white p-6 rounded-2xl shadow-card border border-slate-200 flex flex-col justify-between">
                         <div class="flex justify-between items-start mb-4"><p class="text-sm font-semibold text-slate-500 uppercase tracking-wider">Clienți Activi</p><div class="w-10 h-10 rounded-full bg-primary-50 flex items-center justify-center text-primary-600"><span class="material-symbols-rounded">group</span></div></div>
                         <div><h2 class="text-4xl font-bold text-slate-900">124</h2><p class="text-sm font-medium text-primary-600 mt-2 flex items-center gap-1"><span class="material-symbols-rounded text-[16px]">trending_up</span> +12 luna aceasta</p></div>
                     </div>
                     <div class="bg-white p-6 rounded-2xl shadow-card border border-slate-200 flex flex-col justify-between">
                         <div class="flex justify-between items-start mb-4"><p class="text-sm font-semibold text-slate-500 uppercase tracking-wider">Consultații Astăzi</p><div class="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center text-blue-600"><span class="material-symbols-rounded">videocam</span></div></div>
-                        <div><h2 class="text-4xl font-bold text-slate-900">4</h2><p class="text-sm font-medium text-slate-500 mt-2">Următoarea la 11:30</p></div>
+                        <div><h2 class="text-4xl font-bold text-slate-900">2</h2><p class="text-sm font-medium text-slate-500 mt-2">Următoarea la 11:30</p></div>
                     </div>
                     <div class="bg-white p-6 rounded-2xl shadow-card border border-slate-200 flex flex-col justify-between relative overflow-hidden">
                         <div class="absolute right-0 bottom-0 opacity-5"><span class="material-symbols-rounded text-[120px]">account_balance_wallet</span></div>
@@ -142,38 +136,66 @@
                         <div class="relative z-10"><h2 class="text-4xl font-bold text-slate-900">8.450 <span class="text-xl text-slate-400 font-medium">RON</span></h2><p class="text-sm font-medium text-emerald-600 mt-2 flex items-center gap-1"><span class="material-symbols-rounded text-[16px]">check_circle</span> Obiectiv atins 85%</p></div>
                     </div>
                 </div>
-                
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    <div class="bg-white rounded-2xl shadow-card border border-slate-200 p-6">
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    
+                    <div class="lg:col-span-2 bg-white rounded-2xl shadow-card border border-slate-200 p-6">
                         <div class="flex justify-between items-center mb-6">
-                            <h3 class="font-bold text-slate-900 text-lg">Top Rețete Recomandate</h3>
-                            <button class="text-sm font-medium text-primary-600 hover:text-primary-700">Vezi catalogul</button>
+                            <h3 class="font-bold text-slate-900 flex items-center gap-2"><span class="material-symbols-rounded text-primary-500">event</span> Programările de Astăzi</h3>
+                            <button onclick="switchView('clients')" class="text-sm font-medium text-primary-600 hover:underline">Vezi tot calendarul</button>
                         </div>
-                        <div class="space-y-3">
-                            <div class="flex items-center justify-between p-4 bg-slate-50 hover:bg-slate-100 transition-colors rounded-xl border border-slate-100 cursor-pointer">
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between p-4 bg-slate-50 rounded-xl border border-slate-100 hover:border-slate-300 transition-colors">
                                 <div class="flex items-center gap-4">
-                                    <div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-sm border border-slate-200"><span class="material-symbols-rounded text-primary-500 text-[24px]">breakfast_dining</span></div>
-                                    <div><p class="text-sm font-bold text-slate-900">Smoothie Proteic Matinal</p><p class="text-xs text-slate-500 mt-0.5">Mic dejun • 350 kcal</p></div>
+                                    <div class="w-12 h-12 bg-white rounded-lg shadow-sm border border-slate-200 flex flex-col items-center justify-center text-primary-600"><span class="text-xs font-bold uppercase">Azi</span><span class="text-lg font-bold leading-none">11:30</span></div>
+                                    <div><p class="text-sm font-bold text-slate-900">Consultație Inițială - Elena Anton</p><p class="text-xs text-slate-500">Sesiune Video • 45 min</p></div>
                                 </div>
-                                <span class="text-xs font-bold bg-white border border-slate-200 text-slate-600 px-3 py-1.5 rounded-full shadow-sm">45 trimiteri</span>
+                                <button onclick="switchView('messages')" class="px-4 py-2 bg-dark-900 text-white rounded-lg text-sm font-semibold hover:bg-slate-800 transition-colors shadow-sm">Pornește Sesiunea</button>
                             </div>
-                            <div class="flex items-center justify-between p-4 bg-slate-50 hover:bg-slate-100 transition-colors rounded-xl border border-slate-100 cursor-pointer">
+                            <div class="flex items-center justify-between p-4 bg-slate-50 rounded-xl border border-slate-100 hover:border-slate-300 transition-colors">
                                 <div class="flex items-center gap-4">
-                                    <div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-sm border border-slate-200"><span class="material-symbols-rounded text-accent-500 text-[24px]">set_meal</span></div>
-                                    <div><p class="text-sm font-bold text-slate-900">Cina Low-Carb cu Somon</p><p class="text-xs text-slate-500 mt-0.5">Cină • 420 kcal</p></div>
+                                    <div class="w-12 h-12 bg-white rounded-lg shadow-sm border border-slate-200 flex flex-col items-center justify-center text-slate-500"><span class="text-xs font-bold uppercase">Azi</span><span class="text-lg font-bold leading-none">14:00</span></div>
+                                    <div><p class="text-sm font-bold text-slate-900">Follow-up Lunar - Radu Ionescu</p><p class="text-xs text-slate-500">Sesiune Video • 30 min</p></div>
                                 </div>
-                                <span class="text-xs font-bold bg-white border border-slate-200 text-slate-600 px-3 py-1.5 rounded-full shadow-sm">32 trimiteri</span>
+                                <button class="px-4 py-2 bg-white border border-slate-200 text-slate-700 rounded-lg text-sm font-semibold hover:bg-slate-50 transition-colors shadow-sm">Vezi Fișa</button>
                             </div>
                         </div>
                     </div>
+
+                    <div class="bg-white rounded-2xl shadow-card border border-slate-200 p-6">
+                        <div class="flex justify-between items-center mb-6">
+                            <h3 class="font-bold text-slate-900 flex items-center gap-2"><span class="material-symbols-rounded text-accent-500">mark_chat_unread</span> Mesaje Recente</h3>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="flex items-start gap-3 cursor-pointer group" onclick="switchView('messages')">
+                                <div class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center font-bold text-xs text-slate-600 shrink-0 relative">
+                                    EA
+                                    <span class="absolute top-0 right-0 w-2.5 h-2.5 bg-accent-500 rounded-full border-2 border-white"></span>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <div class="flex justify-between items-baseline"><p class="text-sm font-bold text-slate-900 truncate">Elena Anton</p><p class="text-[10px] text-slate-400 font-medium">10:42</p></div>
+                                    <p class="text-xs text-slate-600 truncate mt-0.5 group-hover:text-primary-600 transition-colors">Am o întrebare legată de gustare...</p>
+                                </div>
+                            </div>
+                            <div class="w-full h-px bg-slate-100"></div>
+                            <div class="flex items-start gap-3 cursor-pointer group opacity-60">
+                                <div class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center font-bold text-xs text-slate-600 shrink-0">MI</div>
+                                <div class="flex-1 min-w-0">
+                                    <div class="flex justify-between items-baseline"><p class="text-sm font-bold text-slate-900 truncate">Maria Iordan</p><p class="text-[10px] text-slate-400 font-medium">Ieri</p></div>
+                                    <p class="text-xs text-slate-600 truncate mt-0.5 group-hover:text-primary-600 transition-colors">Mulțumesc mult pentru rețete!</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
-            <div id="view-clients" class="hidden p-4 md:p-10 max-w-[1400px] mx-auto space-y-6 w-full">
+            <div id="view-clients" class="hidden p-4 md:p-10 max-w-[1400px] mx-auto space-y-6 w-full shrink-0">
                 <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                     <div class="relative w-full sm:w-96">
                         <span class="material-symbols-rounded absolute left-4 top-3 text-slate-400 text-[20px]">search</span>
-                        <input type="text" placeholder="Caută după nume, email sau obiectiv..." class="w-full pl-12 pr-4 py-3 bg-white border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none shadow-sm transition-all">
+                        <input type="text" placeholder="Caută după nume sau email..." class="w-full pl-12 pr-4 py-3 bg-white border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-primary-500 outline-none shadow-sm transition-all">
                     </div>
                     <button onclick="togglePatientModal()" class="flex items-center gap-2 px-5 py-3 bg-dark-900 hover:bg-slate-800 text-white rounded-xl text-sm font-semibold transition-all shadow-md w-full sm:w-auto justify-center">
                         <span class="material-symbols-rounded text-[18px]">add</span> Client Nou
@@ -198,14 +220,11 @@
                                         <div class="w-10 h-10 rounded-full bg-slate-100 border border-slate-200 text-slate-700 flex items-center justify-center font-bold text-sm">EA</div>
                                         <div><p class="text-sm font-bold text-slate-900">Elena Anton</p><p class="text-xs text-slate-500 mt-0.5">elena@email.com</p></div>
                                     </td>
-                                    <td class="p-5 text-sm font-medium text-slate-600">Slăbire Sustenabilă & Detox</td>
+                                    <td class="p-5 text-sm font-medium text-slate-600">Slăbire Sustenabilă</td>
                                     <td class="p-5 text-sm font-semibold text-slate-800"><span class="flex items-center gap-2"><span class="material-symbols-rounded text-[18px] text-slate-400">calendar_month</span> 15 Mai, 11:30</span></td>
-                                    <td class="p-5"><span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>Activ</span></td>
+                                    <td class="p-5"><span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">Activ</span></td>
                                     <td class="p-5 pr-6 text-right">
-                                        <div class="flex items-center justify-end gap-2 opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity">
-                                            <button onclick="switchView('messages')" class="p-2 text-slate-500 hover:text-primary-600 hover:bg-primary-50 rounded-lg transition-colors border border-transparent hover:border-primary-100" title="Trimite Mesaj"><span class="material-symbols-rounded text-[20px]">chat_bubble</span></button>
-                                            <button class="p-2 text-slate-500 hover:text-slate-900 hover:bg-slate-100 rounded-lg transition-colors border border-transparent hover:border-slate-200"><span class="material-symbols-rounded text-[20px]">more_vert</span></button>
-                                        </div>
+                                        <button onclick="switchView('messages')" class="p-2 text-slate-500 hover:text-primary-600 hover:bg-primary-50 rounded-lg transition-colors border border-transparent hover:border-primary-100" title="Trimite Mesaj"><span class="material-symbols-rounded text-[20px]">chat_bubble</span></button>
                                     </td>
                                 </tr>
                             </tbody>
@@ -214,18 +233,16 @@
                 </div>
             </div>
 
-            <div id="view-financial" class="hidden p-4 md:p-10 max-w-[1400px] mx-auto space-y-6 w-full">
+            <div id="view-financial" class="hidden p-4 md:p-10 max-w-[1400px] mx-auto space-y-6 w-full shrink-0">
                 <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                     <div>
                         <h2 class="text-2xl font-bold text-slate-900">Financiar & Plăți</h2>
-                        <p class="text-sm text-slate-500 mt-1">Gestionează cardurile, conturile bancare și istoricul tranzacțiilor.</p>
+                        <p class="text-sm text-slate-500 mt-1">Gestionează cardurile și urmărește încasările.</p>
                     </div>
-                    <a href="https://buy.stripe.com/LINK" target="_blank" class="px-5 py-2.5 bg-white border border-slate-200 hover:border-slate-300 hover:bg-slate-50 text-slate-700 rounded-xl text-sm font-semibold shadow-sm inline-flex items-center gap-2 transition-all">
-                        <span class="material-symbols-rounded text-[18px]">open_in_new</span> Portal Stripe
-                    </a>
                 </div>
-
+                
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-6">
+                    
                     <div class="space-y-6">
                         <div class="bg-white rounded-2xl shadow-card border border-slate-200 p-6">
                             <div class="flex justify-between items-center mb-6">
@@ -251,43 +268,47 @@
                             <div class="flex items-center justify-between p-4 border border-slate-200 rounded-xl hover:bg-slate-50 transition-colors cursor-pointer">
                                 <div class="flex items-center gap-4">
                                     <div class="w-12 h-10 bg-slate-100 rounded-lg text-slate-600 flex items-center justify-center font-bold text-xs border border-slate-200">IBAN</div>
-                                    <div>
-                                        <p class="text-sm font-bold text-slate-900">RO49 INGB •••• 1234</p>
-                                        <p class="text-xs text-slate-500">Cont curent (RON)</p>
-                                    </div>
+                                    <div><p class="text-sm font-bold text-slate-900">RO49 INGB •••• 1234</p><p class="text-xs text-slate-500">Cont curent (RON)</p></div>
                                 </div>
                                 <button class="text-slate-400 hover:text-red-600 transition-colors"><span class="material-symbols-rounded text-[20px]">delete</span></button>
                             </div>
                         </div>
                     </div>
 
-                    <div class="bg-white rounded-2xl shadow-card border border-slate-200 p-0 flex flex-col h-full overflow-hidden">
+                    <div class="bg-white rounded-2xl shadow-card border border-slate-200 flex flex-col overflow-hidden h-full">
                         <div class="p-6 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
                             <h3 class="font-bold text-slate-900">Istoric Tranzacții</h3>
                             <button class="text-sm font-medium text-slate-500 hover:text-slate-900"><span class="material-symbols-rounded text-[20px]">filter_list</span></button>
                         </div>
-                        <div class="flex-1 overflow-y-auto">
+                        <div class="flex-1 overflow-y-auto max-h-[400px]">
                             <div class="divide-y divide-slate-100">
                                 <div class="p-5 flex items-center justify-between hover:bg-slate-50 transition-colors">
                                     <div class="flex items-center gap-4">
                                         <div class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-600"><span class="material-symbols-rounded text-[18px]">account_balance</span></div>
                                         <div><p class="text-sm font-bold text-slate-900">Retragere Bancară</p><p class="text-xs text-slate-500">Azi, 09:30</p></div>
                                     </div>
-                                    <div class="text-right"><p class="text-sm font-bold text-slate-900">- 4.500 RON</p><p class="text-[11px] font-bold text-emerald-600">Finalizat</p></div>
+                                    <div class="text-right"><p class="text-sm font-bold text-slate-900">- 4.500 RON</p><p class="text-[11px] font-bold text-emerald-600">Procesat</p></div>
                                 </div>
                                 <div class="p-5 flex items-center justify-between hover:bg-slate-50 transition-colors">
                                     <div class="flex items-center gap-4">
                                         <div class="w-10 h-10 rounded-full bg-primary-50 flex items-center justify-center text-primary-600"><span class="material-symbols-rounded text-[18px]">add_card</span></div>
                                         <div><p class="text-sm font-bold text-slate-900">Abonament Lunar (V. Radu)</p><p class="text-xs text-slate-500">10 Mai 2024</p></div>
                                     </div>
-                                    <div class="text-right"><p class="text-sm font-bold text-primary-600">+ 350 RON</p><p class="text-[11px] text-slate-500">Stripe</p></div>
+                                    <div class="text-right"><p class="text-sm font-bold text-primary-600">+ 350 RON</p><p class="text-[11px] text-slate-500">Încasat via Stripe</p></div>
                                 </div>
                                 <div class="p-5 flex items-center justify-between hover:bg-slate-50 transition-colors">
                                     <div class="flex items-center gap-4">
                                         <div class="w-10 h-10 rounded-full bg-primary-50 flex items-center justify-center text-primary-600"><span class="material-symbols-rounded text-[18px]">add_card</span></div>
                                         <div><p class="text-sm font-bold text-slate-900">Consultație (M. Popa)</p><p class="text-xs text-slate-500">08 Mai 2024</p></div>
                                     </div>
-                                    <div class="text-right"><p class="text-sm font-bold text-primary-600">+ 150 RON</p><p class="text-[11px] text-slate-500">Stripe</p></div>
+                                    <div class="text-right"><p class="text-sm font-bold text-primary-600">+ 150 RON</p><p class="text-[11px] text-slate-500">Încasat via Stripe</p></div>
+                                </div>
+                                <div class="p-5 flex items-center justify-between hover:bg-slate-50 transition-colors">
+                                    <div class="flex items-center gap-4">
+                                        <div class="w-10 h-10 rounded-full bg-accent-50 flex items-center justify-center text-accent-600"><span class="material-symbols-rounded text-[18px]">workspace_premium</span></div>
+                                        <div><p class="text-sm font-bold text-slate-900">Abonament NutriChef Pro</p><p class="text-xs text-slate-500">01 Mai 2024</p></div>
+                                    </div>
+                                    <div class="text-right"><p class="text-sm font-bold text-slate-900">- 145 RON</p><p class="text-[11px] font-bold text-emerald-600">Plătit</p></div>
                                 </div>
                             </div>
                         </div>
@@ -295,54 +316,54 @@
                 </div>
             </div>
 
-            <div id="view-messages" class="hidden h-full w-full">
-                <div class="flex h-[calc(100vh-80px)] bg-white max-w-[1200px] mx-auto shadow-sm border-x border-slate-200">
-                    <div class="flex-1 flex flex-col relative bg-white">
-                        <div class="h-[76px] px-6 border-b border-slate-200 flex justify-between items-center shrink-0 z-10 bg-white">
-                            <div class="flex items-center gap-4">
-                                <div class="w-11 h-11 rounded-full bg-slate-100 border border-slate-200 text-slate-700 flex items-center justify-center font-bold text-sm">EA</div>
-                                <div>
-                                    <h3 class="text-sm font-bold text-slate-900">Elena Anton</h3>
-                                    <p class="text-xs text-emerald-600 font-medium flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Online acum</p>
-                                </div>
-                            </div>
-                            <button onclick="toggleVideoCall()" id="btn-video" class="flex items-center gap-2 px-4 py-2.5 bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 rounded-xl text-sm font-bold shadow-sm transition-all"><span class="material-symbols-rounded text-[20px]">videocam</span> Consult Video</button>
-                        </div>
-                        
-                        <div id="video-container" class="hidden h-[350px] bg-dark-900 relative border-b border-slate-200"><div id="jitsi-meet-frame" class="w-full h-full"></div></div>
-                        
-                        <div class="flex-1 overflow-y-auto p-6 space-y-6 bg-slate-50" id="chat-messages-box">
-                            <div class="flex justify-center"><span class="text-xs font-bold text-slate-400 uppercase tracking-wider bg-slate-100 px-3 py-1 rounded-full">Astăzi, 10:42 AM</span></div>
-                            
-                            <div class="flex justify-start items-end gap-2">
-                                <div class="w-8 h-8 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center text-xs font-bold shrink-0">EA</div>
-                                <div class="max-w-[75%] bg-white border border-slate-200 p-4 rounded-2xl rounded-bl-none shadow-sm">
-                                    <p class="text-sm text-slate-700 leading-relaxed">Bună ziua! Am urmat planul, dar am o întrebare legată de gustarea de după-amiază.</p>
-                                    <p class="text-[10px] text-slate-400 font-medium mt-2">10:42 AM</p>
-                                </div>
+            <div id="view-messages" class="hidden h-full w-full flex-col">
+                <div class="flex flex-col flex-1 bg-white max-w-[1200px] mx-auto shadow-sm border-x border-slate-200 w-full h-full">
+                    
+                    <div class="h-[76px] px-6 border-b border-slate-200 flex justify-between items-center shrink-0 z-10 bg-white">
+                        <div class="flex items-center gap-4">
+                            <div class="w-11 h-11 rounded-full bg-slate-100 border border-slate-200 text-slate-700 flex items-center justify-center font-bold text-sm">EA</div>
+                            <div>
+                                <h3 class="text-sm font-bold text-slate-900">Elena Anton</h3>
+                                <p class="text-xs text-emerald-600 font-medium flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Online acum</p>
                             </div>
                         </div>
-                        
-                        <div class="p-4 bg-white border-t border-slate-200 shrink-0">
-                            <form onsubmit="sendMessage(event);" class="flex items-center gap-3">
-                                <button type="button" class="p-2 text-slate-400 hover:text-slate-600 transition-colors"><span class="material-symbols-rounded">attach_file</span></button>
-                                <input type="text" id="chat-input-field" placeholder="Scrie un mesaj aici..." class="flex-1 bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:bg-white focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all">
-                                <button type="submit" class="w-12 h-12 rounded-xl bg-dark-900 hover:bg-slate-800 transition-colors text-white flex items-center justify-center shadow-md shrink-0"><span class="material-symbols-rounded text-[20px]">send</span></button>
-                            </form>
+                        <button onclick="toggleVideoCall()" id="btn-video" class="flex items-center gap-2 px-4 py-2.5 bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 rounded-xl text-sm font-bold shadow-sm transition-all"><span class="material-symbols-rounded text-[20px]">videocam</span> Consult Video</button>
+                    </div>
+                    
+                    <div id="video-container" class="hidden h-[350px] shrink-0 bg-dark-900 relative border-b border-slate-200"><div id="jitsi-meet-frame" class="w-full h-full"></div></div>
+                    
+                    <div class="flex-1 overflow-y-auto p-6 space-y-6 bg-slate-50 flex flex-col" id="chat-messages-box">
+                        <div class="flex justify-center"><span class="text-xs font-bold text-slate-400 uppercase tracking-wider bg-slate-100 px-3 py-1 rounded-full">Astăzi, 10:42 AM</span></div>
+                        <div class="flex justify-start items-end gap-2">
+                            <div class="w-8 h-8 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center text-xs font-bold shrink-0">EA</div>
+                            <div class="max-w-[75%] bg-white border border-slate-200 p-4 rounded-2xl rounded-bl-none shadow-sm">
+                                <p class="text-sm text-slate-700 leading-relaxed">Bună ziua! Am urmat planul, dar am o întrebare legată de gustarea de după-amiază.</p>
+                                <p class="text-[10px] text-slate-400 font-medium mt-2">10:42 AM</p>
+                            </div>
                         </div>
+                    </div>
+                    
+                    <div class="p-4 bg-white border-t border-slate-200 shrink-0">
+                        <form onsubmit="sendMessage(event);" class="flex items-center gap-3">
+                            <button type="button" class="p-2 text-slate-400 hover:text-slate-600 transition-colors"><span class="material-symbols-rounded">attach_file</span></button>
+                            <input type="text" id="chat-input-field" placeholder="Scrie un mesaj aici..." autocomplete="off" class="flex-1 bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:bg-white focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all">
+                            <button type="submit" class="w-12 h-12 rounded-xl bg-dark-900 hover:bg-slate-800 transition-colors text-white flex items-center justify-center shadow-md shrink-0"><span class="material-symbols-rounded text-[20px]">send</span></button>
+                        </form>
                     </div>
                 </div>
             </div>
 
-            <div id="view-profile" class="hidden p-4 md:p-10 max-w-[1200px] mx-auto space-y-8 w-full pb-20">
+            <div id="view-profile" class="hidden p-4 md:p-10 max-w-[1400px] mx-auto space-y-8 w-full shrink-0 pb-20">
                 <div>
                     <h2 class="text-2xl font-bold text-slate-900">Setări Cont & Profil</h2>
-                    <p class="text-sm text-slate-500 mt-1">Gestionează informațiile vizibile pentru clienții tăi.</p>
+                    <p class="text-sm text-slate-500 mt-1">Gestionează informațiile vizibile pentru clienții tăi, documentele și securitatea.</p>
                 </div>
                 
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
                     <div class="lg:col-span-1 space-y-6">
+                        
                         <div class="bg-white p-6 rounded-2xl shadow-card border border-slate-200">
+                            <h3 class="font-bold text-slate-900 mb-6 border-b border-slate-100 pb-3">Profil Public</h3>
                             <div class="flex flex-col items-center text-center gap-4 mb-6">
                                 <div class="relative group">
                                     <div class="w-24 h-24 rounded-full bg-slate-100 border-4 border-white shadow-md flex items-center justify-center text-3xl font-bold text-slate-700">SM</div>
@@ -350,62 +371,98 @@
                                 </div>
                             </div>
                             <div class="space-y-4">
-                                <div><label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Nume Complet</label><input type="text" value="Sarah Miller" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm outline-none focus:bg-white focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 transition-all font-medium"></div>
-                                <div><label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Email Cont</label><input type="email" value="sarah@nutrichef.ro" class="w-full p-3 bg-slate-100 border border-slate-200 rounded-xl text-sm outline-none text-slate-500 cursor-not-allowed" disabled></div>
-                                <div><label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Specializare</label><input type="text" value="Nutriție Sportivă & Dietetică" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm outline-none focus:bg-white focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 transition-all font-medium"></div>
+                                <div><label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Nume Complet</label><input type="text" value="Sarah Miller" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm outline-none focus:bg-white focus:border-primary-500 transition-all font-medium"></div>
+                                <div><label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Specializare</label><input type="text" value="Nutriție Sportivă & Dietetică" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm outline-none focus:bg-white focus:border-primary-500 transition-all font-medium"></div>
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Descriere / Biografie</label>
+                                    <textarea rows="4" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm outline-none focus:bg-white focus:border-primary-500 transition-all resize-none">Sunt un nutriționist dedicat, cu o experiență de peste 5 ani în optimizarea planurilor alimentare pentru performanță sportivă și slăbire sustenabilă.</textarea>
+                                </div>
                             </div>
                         </div>
+
+                        <div class="bg-white p-6 rounded-2xl shadow-card border border-slate-200">
+                            <h3 class="font-bold text-slate-900 mb-6 border-b border-slate-100 pb-3 flex items-center gap-2"><span class="material-symbols-rounded text-[20px] text-slate-400">lock</span> Securitate Cont</h3>
+                            <div class="space-y-4">
+                                <div><label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Email Cont</label><input type="email" value="sarah@nutrichef.ro" class="w-full p-3 bg-slate-100 border border-slate-200 rounded-xl text-sm text-slate-500 cursor-not-allowed" disabled></div>
+                                <div><label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Parola Curentă</label><input type="password" placeholder="••••••••" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm outline-none focus:bg-white focus:border-primary-500 transition-all"></div>
+                                <div><label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Parola Nouă</label><input type="password" placeholder="Noua parolă" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm outline-none focus:bg-white focus:border-primary-500 transition-all"></div>
+                                <button class="w-full py-2.5 bg-slate-100 hover:bg-slate-200 text-dark-900 rounded-xl text-sm font-bold transition-colors border border-slate-200 mt-2">Actualizează Parola</button>
+                            </div>
+                        </div>
+
                     </div>
 
                     <div class="lg:col-span-2 space-y-6">
-                        <div class="bg-white p-6 rounded-2xl shadow-card border border-slate-200">
-                            <div class="flex justify-between items-center mb-6">
+                        
+                        <div class="bg-gradient-to-br from-slate-900 to-slate-800 p-6 rounded-2xl shadow-card border border-slate-700 text-white relative overflow-hidden">
+                            <div class="absolute top-0 right-0 w-48 h-48 bg-white/5 rounded-full -mr-16 -mt-16 blur-2xl"></div>
+                            <h3 class="font-bold text-lg mb-2 flex items-center gap-2 relative z-10"><span class="material-symbols-rounded text-accent-500">workspace_premium</span> Abonamentul Tău NutriChef</h3>
+                            <p class="text-sm text-slate-300 relative z-10">Beneficiezi de acces complet la platformă, calendar nelimitat și apeluri video securizate.</p>
+                            
+                            <div class="mt-6 flex flex-col sm:flex-row justify-between items-center bg-white/10 p-5 rounded-xl border border-white/10 relative z-10 gap-4">
                                 <div>
-                                    <h3 class="font-bold text-slate-900">Pachete de Servicii</h3>
-                                    <p class="text-xs text-slate-500 mt-1">Ce pot achiziționa clienții de la tine.</p>
+                                    <p class="text-xs text-slate-400 uppercase tracking-wider font-bold mb-1">Plan Activ</p>
+                                    <p class="font-bold text-xl text-white">Pro Nelimitat <span class="text-sm font-normal text-slate-300 ml-1">(145 RON/lună)</span></p>
                                 </div>
-                                <button class="text-sm font-bold text-dark-900 bg-slate-100 hover:bg-slate-200 px-4 py-2 rounded-lg transition-colors">+ Adaugă</button>
+                                <div class="sm:text-right">
+                                    <p class="text-xs text-slate-400 uppercase tracking-wider font-bold mb-1">Următoarea plată</p>
+                                    <p class="font-bold text-emerald-400 text-lg">15 Iun 2026</p>
+                                </div>
                             </div>
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                <div class="border border-slate-200 hover:border-slate-300 transition-colors p-5 rounded-xl relative bg-white shadow-sm group">
-                                    <h4 class="font-bold text-slate-900">Consultație Inițială</h4>
-                                    <p class="text-xs text-slate-500 mt-1.5 leading-relaxed">Evaluare corporală, analiză analize și jurnal alimentar curent.</p>
-                                    <div class="mt-4 flex items-center justify-between">
-                                        <p class="text-primary-600 font-bold text-lg">150 RON</p>
-                                        <button class="text-slate-400 hover:text-slate-900 opacity-0 group-hover:opacity-100 transition-opacity"><span class="material-symbols-rounded text-[20px]">edit</span></button>
+                            
+                            <div class="mt-4 flex gap-3 relative z-10">
+                                <button class="flex-1 py-2.5 bg-white text-dark-900 rounded-xl text-sm font-bold hover:bg-slate-100 transition-colors shadow-sm">Gestionează Facturarea</button>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-6 rounded-2xl shadow-card border border-slate-200">
+                            <h3 class="font-bold text-slate-900 mb-6 border-b border-slate-100 pb-3 flex items-center gap-2"><span class="material-symbols-rounded text-[20px] text-slate-400">badge</span> Documente & Certificări</h3>
+                            
+                            <div class="border-2 border-dashed border-slate-300 hover:border-primary-500 bg-slate-50 hover:bg-primary-50/50 transition-all rounded-xl p-8 flex flex-col items-center justify-center text-center cursor-pointer mb-6">
+                                <span class="material-symbols-rounded text-slate-400 text-4xl mb-3">cloud_upload</span>
+                                <p class="text-sm font-bold text-slate-700">Trage fișierele aici sau click pentru a încărca</p>
+                                <p class="text-xs font-medium text-slate-500 mt-1">Sunt acceptate formate PDF, JPG, PNG (Max 5MB)</p>
+                            </div>
+
+                            <div class="space-y-3">
+                                <div class="flex items-center justify-between p-3 bg-white border border-slate-200 rounded-xl shadow-sm">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-10 h-10 bg-red-50 text-red-500 rounded-lg flex items-center justify-center"><span class="material-symbols-rounded text-[20px]">picture_as_pdf</span></div>
+                                        <div><p class="text-sm font-bold text-slate-900">Certificat_Nutritie_2024.pdf</p><p class="text-xs text-slate-500">2.4 MB • Încărcat azi</p></div>
                                     </div>
+                                    <button class="text-slate-400 hover:text-red-500 transition-colors p-2"><span class="material-symbols-rounded text-[20px]">delete</span></button>
                                 </div>
-                                <div class="border border-slate-200 hover:border-slate-300 transition-colors p-5 rounded-xl relative bg-white shadow-sm group">
-                                    <h4 class="font-bold text-slate-900">Abonament Premium</h4>
-                                    <p class="text-xs text-slate-500 mt-1.5 leading-relaxed">Meniu personalizat pe 4 săptămâni + suport WhatsApp zilnic.</p>
-                                    <div class="mt-4 flex items-center justify-between">
-                                        <p class="text-primary-600 font-bold text-lg">350 RON</p>
-                                        <button class="text-slate-400 hover:text-slate-900 opacity-0 group-hover:opacity-100 transition-opacity"><span class="material-symbols-rounded text-[20px]">edit</span></button>
+                                <div class="flex items-center justify-between p-3 bg-white border border-slate-200 rounded-xl shadow-sm">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-10 h-10 bg-red-50 text-red-500 rounded-lg flex items-center justify-center"><span class="material-symbols-rounded text-[20px]">picture_as_pdf</span></div>
+                                        <div><p class="text-sm font-bold text-slate-900">Aviz_Liber_Practica.pdf</p><p class="text-xs text-slate-500">1.1 MB • Încărcat luna trecută</p></div>
                                     </div>
+                                    <button class="text-slate-400 hover:text-red-500 transition-colors p-2"><span class="material-symbols-rounded text-[20px]">delete</span></button>
                                 </div>
                             </div>
                         </div>
 
                         <div class="bg-white p-6 rounded-2xl shadow-card border border-slate-200">
-                            <h3 class="font-bold text-slate-900 mb-6">Program Disponibilitate Sesiuni</h3>
-                            <div class="space-y-4">
-                                <div class="flex items-center justify-between p-4 border border-slate-100 bg-slate-50 rounded-xl">
-                                    <span class="text-sm font-bold text-slate-700 w-24">Luni - Vineri</span>
-                                    <div class="flex items-center gap-3">
-                                        <input type="time" value="09:00" class="text-sm font-medium bg-white border border-slate-200 rounded-lg p-2 outline-none"> 
-                                        <span class="text-slate-400">-</span> 
-                                        <input type="time" value="17:00" class="text-sm font-medium bg-white border border-slate-200 rounded-lg p-2 outline-none">
-                                    </div>
-                                    <label class="relative inline-flex items-center cursor-pointer">
-                                        <input type="checkbox" checked class="sr-only peer toggle-checkbox">
-                                        <div class="w-10 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all toggle-label"></div>
-                                    </label>
+                            <div class="flex justify-between items-center mb-6 border-b border-slate-100 pb-3">
+                                <h3 class="font-bold text-slate-900 flex items-center gap-2"><span class="material-symbols-rounded text-[20px] text-slate-400">local_mall</span> Pachetele Mele de Servicii</h3>
+                                <button class="text-sm font-bold text-dark-900 bg-slate-100 hover:bg-slate-200 px-4 py-2 rounded-lg transition-colors">+ Adaugă Pachet</button>
+                            </div>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div class="border border-slate-200 p-5 rounded-xl bg-white shadow-sm">
+                                    <h4 class="font-bold text-slate-900">Consultație Inițială</h4>
+                                    <p class="text-xs text-slate-500 mt-1.5 leading-relaxed">Evaluare corporală, analiză analize și jurnal alimentar curent.</p>
+                                    <div class="mt-4 flex items-center justify-between"><p class="text-primary-600 font-bold text-lg">150 RON</p></div>
+                                </div>
+                                <div class="border border-slate-200 p-5 rounded-xl bg-white shadow-sm">
+                                    <h4 class="font-bold text-slate-900">Abonament Premium</h4>
+                                    <p class="text-xs text-slate-500 mt-1.5 leading-relaxed">Meniu personalizat pe 4 săptămâni + suport WhatsApp zilnic.</p>
+                                    <div class="mt-4 flex items-center justify-between"><p class="text-primary-600 font-bold text-lg">350 RON</p></div>
                                 </div>
                             </div>
                         </div>
                         
                         <div class="flex justify-end pt-4 border-t border-slate-200">
-                            <button onclick="alert('Setările profilului au fost salvate cu succes!')" class="px-8 py-3 bg-dark-900 text-white rounded-xl text-sm font-bold hover:bg-slate-800 transition-colors shadow-md">Salvează Modificările</button>
+                            <button onclick="alert('Informațiile profilului au fost salvate cu succes!')" class="px-8 py-3 bg-dark-900 text-white rounded-xl text-sm font-bold hover:bg-slate-800 transition-colors shadow-md">Salvează Toate Modificările</button>
                         </div>
                     </div>
                 </div>
@@ -418,34 +475,36 @@
         <div class="absolute inset-0 bg-dark-900/40 backdrop-blur-sm" onclick="togglePatientModal()"></div>
         <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-md bg-white rounded-2xl shadow-2xl p-8">
             <div class="flex justify-between items-center mb-6">
-                <h2 class="text-xl font-bold text-slate-900">Adaugă Client Nou</h2>
+                <h2 class="text-xl font-bold text-slate-900">Adaugă Client</h2>
                 <button onclick="togglePatientModal()" class="text-slate-400 hover:text-slate-900 transition-colors"><span class="material-symbols-rounded">close</span></button>
             </div>
             <form onsubmit="handleAddPatient(event)" class="space-y-5">
                 <div>
                     <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Nume Complet</label>
-                    <input type="text" id="new-patient-name" required placeholder="ex: Radu Ionescu" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:bg-white focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all">
+                    <input type="text" id="new-patient-name" required placeholder="Ex: Radu Ionescu" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm outline-none focus:bg-white focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 transition-all">
                 </div>
                 <div>
-                    <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Adresă de Email</label>
-                    <input type="email" id="new-patient-email" required placeholder="radu@email.com" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:bg-white focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all">
+                    <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Email</label>
+                    <input type="email" id="new-patient-email" required placeholder="radu@email.com" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm outline-none focus:bg-white focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 transition-all">
                 </div>
                 <div>
-                    <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Obiectiv Principal</label>
-                    <select id="new-patient-goal" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium focus:bg-white focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all">
+                    <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Obiectiv</label>
+                    <select id="new-patient-goal" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm outline-none focus:bg-white focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 transition-all">
                         <option>Slăbire Sustenabilă</option>
                         <option>Creștere Masă Musculară</option>
                         <option>Nutriție Sportivă</option>
                     </select>
                 </div>
-                <button type="submit" class="w-full py-3.5 bg-dark-900 text-white rounded-xl text-sm font-bold mt-2 shadow-md hover:bg-slate-800 transition-all">Salvează Clientul</button>
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Data Programare</label>
+                    <input type="datetime-local" id="new-patient-date" required class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm outline-none focus:bg-white focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 transition-all">
+                </div>
+                <button type="submit" class="w-full py-3.5 bg-dark-900 text-white rounded-xl text-sm font-bold mt-2 hover:bg-slate-800 transition-all">Salvează Clientul</button>
             </form>
         </div>
     </div>
 
     <script>
-        // Logica Funcțională existentă (Intactă)
-
         function logout() {
             if(confirm("Ești sigur că vrei să te deconectezi?")) { window.location.href = "login.html"; }
         }
@@ -456,9 +515,14 @@
 
         function handleAddPatient(event) {
             event.preventDefault();
+            
             const name = document.getElementById('new-patient-name').value;
             const email = document.getElementById('new-patient-email').value;
             const goal = document.getElementById('new-patient-goal').value;
+            const dateInput = document.getElementById('new-patient-date').value;
+            
+            const dateObj = new Date(dateInput);
+            const formattedDate = dateObj.toLocaleDateString('ro-RO', { day: 'numeric', month: 'short' }) + ', ' + dateObj.toLocaleTimeString('ro-RO', { hour: '2-digit', minute: '2-digit' });
             
             const initials = name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
             const tableBody = document.getElementById('patients-table-body');
@@ -466,18 +530,17 @@
             newRow.className = "hover:bg-slate-50/50 transition-colors group";
             newRow.innerHTML = `
                 <td class="p-5 pl-6 flex items-center gap-4">
-                    <div class="w-10 h-10 rounded-full bg-slate-100 border border-slate-200 text-slate-700 flex items-center justify-center font-bold text-sm">${initials}</div>
+                    <div class="w-10 h-10 rounded-full bg-primary-50 border border-primary-200 text-primary-700 flex items-center justify-center font-bold text-sm">${initials}</div>
                     <div><p class="text-sm font-bold text-slate-900">${name}</p><p class="text-xs text-slate-500 mt-0.5">${email}</p></div>
                 </td>
                 <td class="p-5 text-sm font-medium text-slate-600">${goal}</td>
-                <td class="p-5 text-sm font-semibold text-slate-800"><span class="flex items-center gap-2"><span class="material-symbols-rounded text-[18px] text-slate-400">calendar_month</span> Data nestabilită</span></td>
-                <td class="p-5"><span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-slate-100 text-slate-700 border border-slate-200">În Așteptare</span></td>
+                <td class="p-5 text-sm font-semibold text-slate-800"><span class="flex items-center gap-2"><span class="material-symbols-rounded text-[18px] text-primary-500">calendar_month</span> ${formattedDate}</span></td>
+                <td class="p-5"><span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">Activ</span></td>
                 <td class="p-5 pr-6 text-right">
-                    <div class="flex items-center justify-end gap-2 opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity">
-                        <button onclick="switchView('messages'); togglePatientModal();" class="p-2 text-slate-500 hover:text-primary-600 hover:bg-primary-50 rounded-lg transition-colors border border-transparent hover:border-primary-100"><span class="material-symbols-rounded text-[20px]">chat_bubble</span></button>
-                    </div>
+                    <button onclick="switchView('messages')" class="p-2 text-slate-500 hover:text-primary-600 hover:bg-primary-50 rounded-lg transition-colors border border-transparent hover:border-primary-100" title="Trimite Mesaj"><span class="material-symbols-rounded text-[20px]">chat_bubble</span></button>
                 </td>
             `;
+            
             tableBody.insertBefore(newRow, tableBody.firstChild);
             event.target.reset();
             togglePatientModal();
@@ -487,6 +550,7 @@
             const menu = document.getElementById('mobile-menu');
             const overlay = document.getElementById('mobile-menu-overlay');
             const container = document.getElementById('mobile-menu-container');
+
             if (menu.classList.contains('hidden')) {
                 menu.classList.remove('hidden');
                 setTimeout(() => {
@@ -502,12 +566,33 @@
 
         function switchView(viewId) {
             const views = ['dashboard', 'messages', 'clients', 'financial', 'profile'];
+            const container = document.getElementById('main-scroll-container');
+            
+            if(viewId === 'messages') {
+                container.classList.remove('overflow-y-auto');
+                container.classList.add('overflow-hidden');
+            } else {
+                container.classList.remove('overflow-hidden');
+                container.classList.add('overflow-y-auto');
+            }
+            
             views.forEach(v => {
                 const el = document.getElementById('view-' + v);
-                if(el) el.classList.replace('block', 'hidden');
+                if(el) {
+                    el.classList.add('hidden');
+                    el.classList.remove('block', 'flex'); 
+                }
             });
+            
             const currentView = document.getElementById('view-' + viewId);
-            if(currentView) currentView.classList.replace('hidden', 'block');
+            if(currentView) {
+                currentView.classList.remove('hidden');
+                if(viewId === 'messages') {
+                    currentView.classList.add('flex');
+                } else {
+                    currentView.classList.add('block');
+                }
+            }
 
             views.forEach(n => {
                 const btn = document.getElementById('nav-' + n);
@@ -519,19 +604,23 @@
                     }
                 }
             });
-
-            const titles = { 'dashboard': 'Panou Central', 'messages': 'Mesaje & Suport', 'clients': 'Baza de Clienți', 'financial': 'Financiar & Plăți', 'profile': 'Setări Cont' };
-            const subTitles = { 'dashboard': 'Bine ai revenit, ai 2 sesiuni programate astăzi.', 'messages': 'Comunicare directă și sigură.', 'clients': 'Gestionează progresele.', 'financial': 'Rapoarte și facturare.', 'profile': 'Date vizibile public.' };
             
+            const profileBtn = document.getElementById('nav-profile-btn');
+            if(viewId === 'profile') {
+                profileBtn.classList.add('bg-slate-800', 'border-slate-700');
+            } else {
+                profileBtn.classList.remove('bg-slate-800', 'border-slate-700');
+            }
+
+            const titles = { 'dashboard': 'Panou Central', 'messages': 'Mesaje & Suport', 'clients': 'Baza de Clienți', 'financial': 'Financiar', 'profile': 'Setări Cont' };
             document.getElementById('page-title').innerText = titles[viewId] || 'NutriChef Pro';
-            const sub = document.getElementById('page-subtitle');
-            if(sub) sub.innerText = subTitles[viewId] || '';
         }
 
         function sendMessage(event) {
             event.preventDefault();
             const input = document.getElementById('chat-input-field');
             const box = document.getElementById('chat-messages-box');
+            
             if(!input.value.trim()) return;
 
             const now = new Date();
@@ -545,6 +634,7 @@
                     <p class="text-[10px] text-slate-400 font-medium mt-2 text-right">${timestamp}</p>
                 </div>
             `;
+            
             box.appendChild(msgRow);
             input.value = '';
             box.scrollTop = box.scrollHeight;
@@ -555,19 +645,26 @@
         function toggleVideoCall() {
             const container = document.getElementById('video-container');
             const btn = document.getElementById('btn-video');
+            
             if (!isVideoActive) {
                 container.classList.remove('hidden');
-                btn.className = "flex items-center gap-2 px-4 py-2.5 bg-red-50 hover:bg-red-100 text-red-600 border border-red-200 rounded-xl text-sm font-bold shadow-sm transition-all";
                 btn.innerHTML = `<span class="material-symbols-rounded text-[20px]">call_end</span> Închide`;
+                btn.classList.replace('text-slate-700', 'text-red-600');
                 
                 const domain = "meet.jit.si";
-                const options = { roomName: "NutriChef_Premium_Consult", width: "100%", height: "100%", parentNode: document.getElementById('jitsi-meet-frame') };
+                const options = { 
+                    roomName: "NutriChef_Premium_Consultation_123", 
+                    width: "100%", 
+                    height: "100%", 
+                    parentNode: document.getElementById('jitsi-meet-frame'),
+                    configOverwrite: { startWithAudioMuted: false, startWithVideoMuted: false }
+                };
                 jitsiApi = new JitsiMeetExternalAPI(domain, options);
                 isVideoActive = true;
             } else {
                 container.classList.add('hidden');
-                btn.className = "flex items-center gap-2 px-4 py-2.5 bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 rounded-xl text-sm font-bold shadow-sm transition-all";
                 btn.innerHTML = `<span class="material-symbols-rounded text-[20px]">videocam</span> Consult Video`;
+                btn.classList.replace('text-red-600', 'text-slate-700');
                 if (jitsiApi) jitsiApi.dispose();
                 isVideoActive = false;
             }
