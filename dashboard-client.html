@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html lang="ro">
+<html lang="ro" class="light">
 <head>
     <meta charset="utf-8">
+    <!-- Viewport ajustat pentru a preveni zoom-ul automat pe mobil la inputuri -->
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
     <title>Portal Client - NutriChef Pro</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -11,6 +12,7 @@
 
     <script>
         tailwind.config = {
+            darkMode: 'class',
             theme: {
                 extend: {
                     fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'] },
@@ -18,7 +20,7 @@
                         primary: { 50: '#f0fdfa', 100: '#ccfbf1', 500: '#14b8a6', 600: '#0d9488', 900: '#134e4a' },
                         accent: { 500: '#f59e0b', 600: '#d97706' },
                         macro: { carb: '#3b82f6', fat: '#eab308', protein: '#ef4444' },
-                        dark: { 800: '#1e293b', 900: '#0f172a' },
+                        dark: { 800: '#1e293b', 900: '#0f172a', 950: '#020617' },
                     },
                     boxShadow: {
                         'card': '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1)',
@@ -28,17 +30,20 @@
         }
     </script>
     <style>
-        /* Folosim 100dvh pentru adaptare perfectă pe mobil la tastatură/bara de adrese */
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8fafc; height: 100dvh; }
+        /* Optimizări esențiale pentru comportamentul pe mobil */
+        body { font-family: 'Plus Jakarta Sans', sans-serif; height: 100dvh; -webkit-tap-highlight-color: transparent; }
         .hide-scrollbar::-webkit-scrollbar { display: none; }
         .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
         .glass-header { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(226, 232, 240, 0.8); }
-        .progress-bar { transition: width 1s ease-in-out; }
+        .dark .glass-header { background: rgba(15, 23, 42, 0.85); border-bottom: 1px solid rgba(30, 41, 59, 0.8); }
+        .progress-bar { transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1); width: 0%; }
+        .task-cb:checked + div { text-decoration: line-through; opacity: 0.5; }
     </style>
 </head>
-<body class="text-slate-800 flex overflow-hidden antialiased selection:bg-primary-500 selection:text-white">
+<body class="text-slate-800 dark:text-slate-200 flex overflow-hidden antialiased selection:bg-primary-500 selection:text-white bg-slate-50 dark:bg-dark-950 transition-colors duration-300">
 
-    <aside class="w-64 bg-dark-900 flex flex-col justify-between hidden md:flex shrink-0 z-20 text-slate-300">
+    <!-- SIDEBAR (Desktop) -->
+    <aside class="w-64 bg-dark-900 flex flex-col justify-between hidden md:flex shrink-0 z-20 text-slate-300 border-r border-slate-800">
         <div>
             <div class="h-20 flex items-center px-8 border-b border-slate-800">
                 <div class="flex items-center gap-3 cursor-pointer" onclick="switchView('dashboard')">
@@ -47,20 +52,20 @@
                 </div>
             </div>
 
-            <nav class="p-4 space-y-2 mt-4">
-                <button onclick="switchView('dashboard')" id="nav-dashboard" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold transition-all bg-primary-600/10 text-primary-500"><span class="material-symbols-rounded text-[20px]">space_dashboard</span>Evoluția Mea</button>
-                <button onclick="switchView('diet')" id="nav-diet" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium hover:bg-slate-800 hover:text-white transition-all"><span class="material-symbols-rounded text-[20px]">restaurant_menu</span>Plan Alimentar</button>
-                <button onclick="switchView('messages')" id="nav-messages" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium hover:bg-slate-800 hover:text-white transition-all relative">
+            <nav class="p-4 space-y-2 mt-4" id="sidebar-nav">
+                <button onclick="switchView('dashboard')" id="nav-dashboard" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold transition-all bg-primary-600/10 text-primary-500 relative"><span class="material-symbols-rounded text-[20px]">space_dashboard</span>Evoluția Mea</button>
+                <button onclick="switchView('diet')" id="nav-diet" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium hover:bg-slate-800 hover:text-white transition-all"><span class="material-symbols-rounded text-[20px]">restaurant_menu</span>Plan Alimentar</button>
+                <button onclick="switchView('messages')" id="nav-messages" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium hover:bg-slate-800 hover:text-white transition-all relative">
                     <span class="material-symbols-rounded text-[20px]">chat_bubble</span>Mesaje
                     <span class="absolute right-4 w-2 h-2 rounded-full bg-accent-500"></span>
                 </button>
-                <button onclick="switchView('financial')" id="nav-financial" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium hover:bg-slate-800 hover:text-white transition-all"><span class="material-symbols-rounded text-[20px]">credit_card</span>Plăți & Abonament</button>
+                <button onclick="switchView('financial')" id="nav-financial" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium hover:bg-slate-800 hover:text-white transition-all"><span class="material-symbols-rounded text-[20px]">credit_card</span>Plăți & Abonament</button>
             </nav>
         </div>
 
         <div class="p-4 border-t border-slate-800">
             <div onclick="switchView('profile')" id="nav-profile-btn" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-slate-800 cursor-pointer transition-colors border border-transparent hover:border-slate-700">
-                <div class="w-10 h-10 rounded-full bg-slate-800 border border-slate-700 text-white flex items-center justify-center font-bold text-sm">RI</div>
+                <div class="w-10 h-10 rounded-full bg-slate-800 border border-slate-700 text-white flex items-center justify-center font-bold text-sm bg-cover bg-center" id="sidebar-avatar">RI</div>
                 <div class="flex-1 min-w-0">
                     <p class="text-sm font-semibold text-white truncate">Radu Ionescu</p>
                     <p class="text-xs text-primary-500 truncate font-medium">Nutriționist: Sarah M.</p>
@@ -70,250 +75,501 @@
         </div>
     </aside>
 
+    <!-- MENIU MOBIL (Slide-in) -->
     <div id="mobile-menu" class="fixed inset-0 z-50 pointer-events-none hidden">
         <div id="mobile-menu-overlay" onclick="toggleMobileMenu()" class="absolute inset-0 bg-dark-900/60 backdrop-blur-sm opacity-0 transition-opacity duration-300 pointer-events-auto"></div>
-        <div id="mobile-menu-container" class="absolute top-0 left-0 bottom-0 w-72 bg-dark-900 text-slate-300 flex flex-col justify-between shadow-2xl transform -translate-x-full transition-transform duration-300 ease-out pointer-events-auto">
-            <div>
-                <div class="h-20 flex items-center justify-between px-6 border-b border-slate-800">
+        <div id="mobile-menu-container" class="absolute top-0 left-0 bottom-0 w-[80%] max-w-sm bg-dark-900 text-slate-300 flex flex-col justify-between shadow-2xl transform -translate-x-full transition-transform duration-300 ease-out pointer-events-auto">
+            <div class="overflow-y-auto">
+                <div class="h-20 flex items-center justify-between px-6 border-b border-slate-800 shrink-0">
                     <div class="flex items-center gap-3">
                         <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-primary-500 to-primary-600 text-white flex items-center justify-center"><span class="material-symbols-rounded text-[20px]">restaurant</span></div>
                         <span class="font-bold text-lg tracking-tight text-white">NutriChef</span>
                     </div>
-                    <button onclick="toggleMobileMenu()" class="w-9 h-9 flex items-center justify-center rounded-xl text-slate-400 hover:bg-slate-800"><span class="material-symbols-rounded">close</span></button>
+                    <button onclick="toggleMobileMenu()" class="w-10 h-10 flex items-center justify-center rounded-xl text-slate-400 hover:bg-slate-800 active:bg-slate-800 transition-colors"><span class="material-symbols-rounded">close</span></button>
                 </div>
                 <nav class="p-4 space-y-2">
-                    <button onclick="switchView('dashboard'); toggleMobileMenu();" id="mob-nav-dashboard" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold bg-primary-600/10 text-primary-500"><span class="material-symbols-rounded">space_dashboard</span>Evoluția Mea</button>
-                    <button onclick="switchView('diet'); toggleMobileMenu();" id="mob-nav-diet" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium hover:bg-slate-800 hover:text-white"><span class="material-symbols-rounded">restaurant_menu</span>Plan Alimentar</button>
-                    <button onclick="switchView('messages'); toggleMobileMenu();" id="mob-nav-messages" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium hover:bg-slate-800 hover:text-white"><span class="material-symbols-rounded">chat_bubble</span>Mesaje</button>
-                    <button onclick="switchView('financial'); toggleMobileMenu();" id="mob-nav-financial" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium hover:bg-slate-800 hover:text-white"><span class="material-symbols-rounded">credit_card</span>Plăți</button>
-                    <button onclick="switchView('profile'); toggleMobileMenu();" id="mob-nav-profile" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium hover:bg-slate-800 hover:text-white"><span class="material-symbols-rounded">person</span>Profil</button>
+                    <button onclick="switchView('dashboard'); toggleMobileMenu();" class="w-full flex items-center gap-4 px-4 py-3.5 rounded-xl text-sm font-medium hover:bg-slate-800 hover:text-white transition-colors"><span class="material-symbols-rounded text-[22px]">space_dashboard</span>Evoluția Mea</button>
+                    <button onclick="switchView('diet'); toggleMobileMenu();" class="w-full flex items-center gap-4 px-4 py-3.5 rounded-xl text-sm font-medium hover:bg-slate-800 hover:text-white transition-colors"><span class="material-symbols-rounded text-[22px]">restaurant_menu</span>Plan Alimentar</button>
+                    <button onclick="switchView('messages'); toggleMobileMenu();" class="w-full flex items-center gap-4 px-4 py-3.5 rounded-xl text-sm font-medium hover:bg-slate-800 hover:text-white transition-colors"><span class="material-symbols-rounded text-[22px]">chat_bubble</span>Mesaje</button>
+                    <button onclick="switchView('financial'); toggleMobileMenu();" class="w-full flex items-center gap-4 px-4 py-3.5 rounded-xl text-sm font-medium hover:bg-slate-800 hover:text-white transition-colors"><span class="material-symbols-rounded text-[22px]">credit_card</span>Plăți & Abonament</button>
+                    <button onclick="switchView('profile'); toggleMobileMenu();" class="w-full flex items-center gap-4 px-4 py-3.5 rounded-xl text-sm font-medium hover:bg-slate-800 hover:text-white transition-colors"><span class="material-symbols-rounded text-[22px]">person</span>Profil & Măsurători</button>
                 </nav>
             </div>
-            <div class="p-4 border-t border-slate-800">
-                <button onclick="logout()" class="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800 transition-colors">
+            <div class="p-4 border-t border-slate-800 shrink-0">
+                <button onclick="logout()" class="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-sm font-bold bg-slate-800 text-white hover:bg-slate-700 transition-colors">
                     <span class="material-symbols-rounded text-[18px]">logout</span> Deconectare
                 </button>
             </div>
         </div>
     </div>
 
-    <main class="flex-1 flex flex-col h-full relative overflow-hidden bg-slate-50">
+    <!-- CONȚINUT PRINCIPAL -->
+    <main class="flex-1 flex flex-col h-full relative overflow-hidden bg-slate-50 dark:bg-dark-950 transition-colors duration-300">
         
         <header class="h-16 md:h-20 glass-header flex justify-between items-center px-4 md:px-10 z-10 shrink-0">
             <div class="flex items-center gap-3 md:gap-4">
-                <button onclick="toggleMobileMenu()" class="md:hidden text-slate-600 p-1.5 hover:bg-slate-100 rounded-xl transition-colors"><span class="material-symbols-rounded text-[26px]">menu</span></button>
+                <button onclick="toggleMobileMenu()" class="md:hidden text-slate-600 dark:text-slate-300 p-2 hover:bg-slate-100 dark:hover:bg-slate-800 active:bg-slate-200 rounded-xl transition-colors"><span class="material-symbols-rounded text-[26px]">menu</span></button>
                 <div>
-                    <h1 id="page-title" class="text-lg md:text-xl font-bold text-slate-900 tracking-tight">Evoluția Mea</h1>
-                    <p id="page-subtitle" class="text-xs md:text-sm text-slate-500 hidden md:block">Rezumatul zilnic al macronutrienților tăi.</p>
+                    <h1 id="page-title" class="text-lg md:text-xl font-bold text-slate-900 dark:text-white tracking-tight transition-colors">Evoluția Mea</h1>
+                    <p id="page-subtitle" class="text-xs md:text-sm text-slate-500 dark:text-slate-400 hidden md:block">Rezumatul zilnic al macronutrienților tăi.</p>
                 </div>
             </div>
-            <div class="flex items-center gap-3 md:gap-5">
-                <button class="relative text-slate-400 hover:text-slate-700 transition-colors">
-                    <span class="material-symbols-rounded text-[24px]">notifications</span>
-                    <span class="absolute top-0 right-0.5 w-2 h-2 bg-accent-500 rounded-full border border-white"></span>
+            <div class="flex items-center gap-4 md:gap-5">
+                <button onclick="toggleDarkMode()" class="text-slate-400 hover:text-slate-700 dark:hover:text-white transition-colors focus:outline-none flex items-center justify-center">
+                    <span id="theme-icon" class="material-symbols-rounded text-[24px]">dark_mode</span>
                 </button>
-                <div class="w-px h-6 bg-slate-200 hidden md:block"></div>
-                <button onclick="logout()" class="hidden md:flex items-center gap-2 text-sm font-medium text-slate-500 hover:text-slate-800 transition-colors">
+                
+                <!-- Notificări Dropdown -->
+                <div class="relative">
+                    <button onclick="toggleNotificationsMenu()" class="relative text-slate-400 hover:text-slate-700 dark:hover:text-white transition-colors focus:outline-none">
+                        <span class="material-symbols-rounded text-[24px]">notifications</span>
+                        <span class="absolute top-0 right-0.5 w-2.5 h-2.5 md:w-2 md:h-2 bg-accent-500 rounded-full border border-white dark:border-dark-900"></span>
+                    </button>
+                    <!-- Meniul ascuns - Lățime adaptată pentru mobil -->
+                    <div id="notifications-dropdown" class="hidden absolute top-full right-[-10px] md:right-0 mt-4 w-[280px] md:w-80 bg-white dark:bg-dark-900 rounded-2xl shadow-2xl border border-slate-100 dark:border-slate-800 overflow-hidden z-50">
+                        <div class="p-4 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center bg-slate-50 dark:bg-dark-800">
+                            <h3 class="font-bold text-slate-900 dark:text-white text-sm">Notificări</h3>
+                            <span class="text-[10px] md:text-xs font-bold bg-accent-100 text-accent-700 px-2 py-0.5 rounded-full">1 Nouă</span>
+                        </div>
+                        <div class="divide-y divide-slate-100 dark:divide-slate-800 max-h-72 overflow-y-auto">
+                            <div class="p-4 hover:bg-slate-50 dark:hover:bg-dark-800 transition-colors cursor-pointer flex gap-3">
+                                <div class="w-8 h-8 rounded-full bg-primary-50 dark:bg-primary-900/30 text-primary-600 flex items-center justify-center shrink-0"><span class="material-symbols-rounded text-[16px]">task_alt</span></div>
+                                <div>
+                                    <p class="text-xs md:text-sm font-semibold text-slate-900 dark:text-white">Sarcină nouă de la Sarah M.</p>
+                                    <p class="text-[10px] md:text-xs text-slate-500 mt-0.5">Ai primit o sarcină nouă: "Trimite poza la cântar".</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-3 border-t border-slate-100 dark:border-slate-800 text-center">
+                            <button onclick="toggleNotificationsMenu()" class="text-xs font-bold text-primary-600 hover:text-primary-700 p-2">Închide</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="w-px h-6 bg-slate-200 dark:bg-slate-700 hidden md:block"></div>
+                <button onclick="logout()" class="hidden md:flex items-center gap-2 text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white transition-colors">
                     Deconectare
                 </button>
             </div>
         </header>
 
+        <!-- Conținutul cu Scroll -->
         <div id="main-scroll-container" class="flex-1 overflow-y-auto hide-scrollbar relative w-full flex flex-col min-h-0">
             
-            <div id="view-dashboard" class="p-4 md:p-10 max-w-[1400px] mx-auto space-y-6 block w-full shrink-0">
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                    <div class="lg:col-span-2 bg-white p-6 md:p-8 rounded-3xl shadow-card border border-slate-200">
-                        <div class="flex justify-between items-center mb-8">
-                            <div>
-                                <h2 class="text-xl md:text-2xl font-bold text-slate-900">Jurnal Astăzi</h2>
-                                <p class="text-xs md:text-sm text-slate-500 mt-1">Obiectivul zilnic stabilit de nutriționist.</p>
+            <!-- VIEW: DASHBOARD (Evoluția Mea) -->
+            <div id="view-dashboard" class="p-4 md:p-10 max-w-[1400px] mx-auto space-y-4 md:space-y-6 block w-full shrink-0 pb-20 md:pb-10">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6">
+                    <div class="lg:col-span-2 space-y-4 md:space-y-6">
+                        <!-- Card Jurnal Astăzi -->
+                        <div class="bg-white dark:bg-dark-900 p-5 md:p-8 rounded-[1.5rem] md:rounded-3xl shadow-card border border-slate-200 dark:border-slate-800 transition-colors">
+                            <div class="flex justify-between items-center mb-6 md:mb-8">
+                                <div>
+                                    <h2 class="text-lg md:text-2xl font-bold text-slate-900 dark:text-white">Jurnal Astăzi</h2>
+                                    <p class="text-[11px] md:text-sm text-slate-500 mt-1">Obiectivul zilnic stabilit de nutriționist.</p>
+                                </div>
+                                <div class="w-10 h-10 md:w-14 md:h-14 rounded-full bg-primary-50 dark:bg-primary-900/30 flex items-center justify-center text-primary-600 dark:text-primary-400 shrink-0"><span class="material-symbols-rounded text-[20px] md:text-[28px]">monitoring</span></div>
                             </div>
-                            <div class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-primary-50 flex items-center justify-center text-primary-600 shrink-0"><span class="material-symbols-rounded text-[24px] md:text-[28px]">monitoring</span></div>
-                        </div>
 
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10">
-                            <div class="flex flex-col items-center justify-center bg-slate-50 p-6 rounded-2xl border border-slate-100">
-                                <div class="relative w-40 h-40 md:w-48 md:h-48 flex items-center justify-center rounded-full border-8 border-slate-200">
-                                    <div class="absolute inset-0 rounded-full border-8 border-primary-500" style="clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);"></div>
-                                    <div class="text-center bg-white w-32 h-32 md:w-40 md:h-40 rounded-full flex flex-col items-center justify-center shadow-sm z-10">
-                                        <span class="text-3xl md:text-4xl font-bold text-slate-900">1450</span>
-                                        <span class="text-[10px] md:text-xs font-bold text-slate-400 uppercase tracking-widest mt-1">/ 2000 Kcal</span>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
+                                <div class="flex flex-col items-center justify-center bg-slate-50 dark:bg-dark-800 p-5 md:p-6 rounded-2xl border border-slate-100 dark:border-slate-700 transition-colors">
+                                    <!-- Dimensiuni reduse pe mobil pentru cerc -->
+                                    <div class="relative w-32 h-32 md:w-48 md:h-48 flex items-center justify-center rounded-full border-[6px] md:border-8 border-slate-200 dark:border-slate-700">
+                                        <div class="absolute inset-0 rounded-full border-[6px] md:border-8 border-primary-500" style="clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);"></div>
+                                        <div class="text-center bg-white dark:bg-dark-900 w-24 h-24 md:w-40 md:h-40 rounded-full flex flex-col items-center justify-center shadow-sm z-10">
+                                            <span class="text-2xl md:text-4xl font-bold text-slate-900 dark:text-white">1450</span>
+                                            <span class="text-[9px] md:text-xs font-bold text-slate-400 uppercase tracking-widest mt-0.5 md:mt-1">/ 2000 Kcal</span>
+                                        </div>
+                                    </div>
+                                    <p class="text-[11px] md:text-sm font-bold text-primary-600 dark:text-primary-400 mt-4 bg-primary-50 dark:bg-primary-900/30 px-4 py-1.5 rounded-full">550 kcal rămase</p>
+                                </div>
+
+                                <div class="flex flex-col justify-center space-y-5 md:space-y-6">
+                                    <div>
+                                        <div class="flex justify-between text-[11px] md:text-sm mb-1.5 md:mb-2"><span class="font-bold text-slate-700 dark:text-slate-300 flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-macro-protein"></span> Proteine</span><span class="font-medium text-slate-500">85 / 120g</span></div>
+                                        <div class="w-full bg-slate-100 dark:bg-slate-800 rounded-full h-2 md:h-2.5 shadow-inner"><div class="bg-macro-protein h-2 md:h-2.5 rounded-full progress-bar" data-width="70%"></div></div>
+                                    </div>
+                                    <div>
+                                        <div class="flex justify-between text-[11px] md:text-sm mb-1.5 md:mb-2"><span class="font-bold text-slate-700 dark:text-slate-300 flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-macro-carb"></span> Carbohidrați</span><span class="font-medium text-slate-500">120 / 200g</span></div>
+                                        <div class="w-full bg-slate-100 dark:bg-slate-800 rounded-full h-2 md:h-2.5 shadow-inner"><div class="bg-macro-carb h-2 md:h-2.5 rounded-full progress-bar" data-width="60%"></div></div>
+                                    </div>
+                                    <div>
+                                        <div class="flex justify-between text-[11px] md:text-sm mb-1.5 md:mb-2"><span class="font-bold text-slate-700 dark:text-slate-300 flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-macro-fat"></span> Grăsimi</span><span class="font-medium text-slate-500">40 / 65g</span></div>
+                                        <div class="w-full bg-slate-100 dark:bg-slate-800 rounded-full h-2 md:h-2.5 shadow-inner"><div class="bg-macro-fat h-2 md:h-2.5 rounded-full progress-bar" data-width="61%"></div></div>
                                     </div>
                                 </div>
-                                <p class="text-xs md:text-sm font-bold text-primary-600 mt-4 bg-primary-50 px-4 py-1.5 rounded-full">550 kcal rămase</p>
                             </div>
-
-                            <div class="flex flex-col justify-center space-y-6">
-                                <div>
-                                    <div class="flex justify-between text-xs md:text-sm mb-2"><span class="font-bold text-slate-700 flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-macro-protein"></span> Proteine</span><span class="font-medium text-slate-500">85 / 120g</span></div>
-                                    <div class="w-full bg-slate-100 rounded-full h-2.5 shadow-inner"><div class="bg-macro-protein h-2.5 rounded-full progress-bar" style="width: 70%"></div></div>
-                                </div>
-                                <div>
-                                    <div class="flex justify-between text-xs md:text-sm mb-2"><span class="font-bold text-slate-700 flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-macro-carb"></span> Carbohidrați</span><span class="font-medium text-slate-500">120 / 200g</span></div>
-                                    <div class="w-full bg-slate-100 rounded-full h-2.5 shadow-inner"><div class="bg-macro-carb h-2.5 rounded-full progress-bar" style="width: 60%"></div></div>
-                                </div>
-                                <div>
-                                    <div class="flex justify-between text-xs md:text-sm mb-2"><span class="font-bold text-slate-700 flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-macro-fat"></span> Grăsimi</span><span class="font-medium text-slate-500">40 / 65g</span></div>
-                                    <div class="w-full bg-slate-100 rounded-full h-2.5 shadow-inner"><div class="bg-macro-fat h-2.5 rounded-full progress-bar" style="width: 61%"></div></div>
-                                </div>
+                        </div>
+                        
+                        <!-- Sarcini de la Nutriționist -->
+                        <div class="bg-white dark:bg-dark-900 p-5 md:p-6 rounded-[1.5rem] md:rounded-3xl shadow-card border border-slate-200 dark:border-slate-800 transition-colors">
+                            <h3 class="font-bold text-slate-900 dark:text-white text-base md:text-lg mb-4 flex items-center gap-2"><span class="material-symbols-rounded text-primary-500">task_alt</span> Sarcini de la Nutriționist</h3>
+                            <div class="space-y-3">
+                                <label class="flex items-start gap-3 p-3 bg-slate-50 dark:bg-dark-800 rounded-xl cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors border border-slate-100 dark:border-slate-700">
+                                    <input type="checkbox" class="task-cb mt-0.5 md:mt-1 rounded text-primary-500 w-4 h-4 md:w-auto md:h-auto cursor-pointer" onclick="showNotification('Sarcină completată!', 'success')">
+                                    <div class="text-[13px] md:text-sm font-medium text-slate-700 dark:text-slate-300 transition-all leading-snug">Bea 2L de apă astăzi.</div>
+                                </label>
+                                <label class="flex items-start gap-3 p-3 bg-slate-50 dark:bg-dark-800 rounded-xl cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors border border-slate-100 dark:border-slate-700">
+                                    <input type="checkbox" class="task-cb mt-0.5 md:mt-1 rounded text-primary-500 w-4 h-4 md:w-auto md:h-auto cursor-pointer" onclick="showNotification('Sarcină completată!', 'success')">
+                                    <div class="text-[13px] md:text-sm font-medium text-slate-700 dark:text-slate-300 transition-all leading-snug">Trimite poza cu greutatea pe cântar.</div>
+                                </label>
                             </div>
                         </div>
                     </div>
 
-                    <div class="bg-white p-6 md:p-8 rounded-3xl shadow-card border border-slate-200 flex flex-col">
-                        <div class="flex justify-between items-center mb-6">
+                    <!-- Modul Recompense -->
+                    <div class="bg-white dark:bg-dark-900 p-5 md:p-8 rounded-[1.5rem] md:rounded-3xl shadow-card border border-slate-200 dark:border-slate-800 flex flex-col transition-colors">
+                        <div class="flex justify-between items-center mb-5 md:mb-6">
                             <div>
-                                <h3 class="font-bold text-slate-900 text-lg">Recompense</h3>
-                                <p class="text-xs text-slate-500 mt-1">Obiective atinse</p>
+                                <h3 class="font-bold text-slate-900 dark:text-white text-base md:text-lg">Recompense</h3>
+                                <p class="text-[11px] md:text-xs text-slate-500 mt-0.5">Obiective și realizări</p>
                             </div>
-                            <div class="w-12 h-12 rounded-full bg-accent-50 text-accent-500 flex items-center justify-center shrink-0"><span class="material-symbols-rounded text-[24px]">military_tech</span></div>
+                            <div class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-accent-50 dark:bg-accent-900/30 text-accent-500 flex items-center justify-center shrink-0"><span class="material-symbols-rounded text-[20px] md:text-[24px]">military_tech</span></div>
                         </div>
                         
-                        <div class="flex-1 space-y-4">
-                            <div class="bg-slate-50 border border-slate-100 p-4 rounded-2xl">
-                                <div class="flex items-center gap-3 mb-2">
-                                    <span class="material-symbols-rounded text-accent-500 text-[20px]">local_fire_department</span>
-                                    <span class="text-sm font-bold text-slate-900">Seria de Dietă</span>
+                        <div class="flex-1 space-y-3 md:space-y-4 overflow-y-auto hide-scrollbar max-h-[400px] md:max-h-[500px]">
+                            <!-- Recompensă 1 -->
+                            <div class="bg-slate-50 dark:bg-dark-800 border border-slate-100 dark:border-slate-700 p-4 rounded-2xl transition-colors">
+                                <div class="flex items-center gap-2 md:gap-3 mb-2">
+                                    <span class="material-symbols-rounded text-accent-500 text-[18px] md:text-[20px]">local_fire_department</span>
+                                    <span class="text-[13px] md:text-sm font-bold text-slate-900 dark:text-white">Seria de Dietă</span>
                                 </div>
-                                <div class="flex items-end gap-1 mb-3">
-                                    <span class="text-3xl font-bold text-slate-900">14</span>
-                                    <span class="text-sm font-medium text-slate-500 mb-1">zile la rând</span>
+                                <div class="flex items-end gap-1 mb-2 md:mb-3">
+                                    <span class="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white leading-none">14</span>
+                                    <span class="text-[11px] md:text-sm font-medium text-slate-500 mb-0.5 md:mb-1">zile la rând</span>
                                 </div>
-                                <div class="w-full bg-slate-200 rounded-full h-2"><div class="bg-accent-500 h-2 rounded-full" style="width: 70%"></div></div>
-                                <p class="text-[10px] font-bold text-slate-400 mt-2 text-right">Mai ai 6 zile până la următorul bonus</p>
+                                <div class="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-1.5 md:h-2"><div class="bg-accent-500 h-1.5 md:h-2 rounded-full progress-bar" data-width="70%"></div></div>
+                                <p class="text-[9px] md:text-[10px] font-bold text-slate-400 mt-2 text-right">Mai ai 6 zile până la bonus</p>
                             </div>
 
-                            <div class="bg-emerald-50 border border-emerald-100 p-4 rounded-2xl relative overflow-hidden group cursor-pointer transition-colors hover:bg-emerald-100">
-                                <div class="absolute right-0 top-0 w-16 h-16 bg-emerald-500/10 rounded-bl-full -mr-2 -mt-2"></div>
+                            <!-- Recompensă 2 -->
+                            <div class="bg-slate-50 dark:bg-dark-800 border border-slate-100 dark:border-slate-700 p-4 rounded-2xl transition-colors">
+                                <div class="flex items-center gap-2 md:gap-3 mb-2">
+                                    <span class="material-symbols-rounded text-blue-500 text-[18px] md:text-[20px]">water_drop</span>
+                                    <span class="text-[13px] md:text-sm font-bold text-slate-900 dark:text-white">Hidratare Perfectă</span>
+                                </div>
+                                <div class="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-1.5 md:h-2 mt-3 md:mt-4"><div class="bg-blue-500 h-1.5 md:h-2 rounded-full progress-bar" data-width="30%"></div></div>
+                                <p class="text-[9px] md:text-[10px] font-bold text-slate-400 mt-2 text-right">3/10 zile completate</p>
+                            </div>
+
+                            <!-- Recompensă 3: Deblocată -->
+                            <div onclick="showNotification('Reducerea a fost deja aplicată.', 'success')" class="bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-100 dark:border-emerald-800 p-4 rounded-2xl relative overflow-hidden group cursor-pointer transition-colors hover:bg-emerald-100 dark:hover:bg-emerald-900/40">
+                                <div class="absolute right-0 top-0 w-12 h-12 md:w-16 md:h-16 bg-emerald-500/10 rounded-bl-full -mr-2 -mt-2"></div>
                                 <div class="flex justify-between items-center relative z-10">
                                     <div>
-                                        <p class="text-xs font-bold text-emerald-700 uppercase tracking-widest mb-1">Deblocat!</p>
-                                        <p class="text-sm font-bold text-slate-900">-10% la abonament</p>
+                                        <p class="text-[9px] md:text-xs font-bold text-emerald-700 dark:text-emerald-400 uppercase tracking-widest mb-0.5 md:mb-1">Deblocat!</p>
+                                        <p class="text-[13px] md:text-sm font-bold text-slate-900 dark:text-white">-10% la abonament</p>
+                                        <p class="text-[9px] md:text-[10px] text-slate-500 mt-0.5">Pentru primele 5kg slăbite.</p>
                                     </div>
-                                    <span class="material-symbols-rounded text-emerald-600">redeem</span>
+                                    <span class="material-symbols-rounded text-emerald-600 dark:text-emerald-400 text-[20px] md:text-[24px]">redeem</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Recompensă 4: Blocată -->
+                            <div class="bg-slate-50 dark:bg-dark-800 border border-slate-100 dark:border-slate-700 p-4 rounded-2xl transition-colors opacity-60 grayscale">
+                                <div class="flex justify-between items-center relative z-10">
+                                    <div>
+                                        <p class="text-[9px] md:text-xs font-bold text-slate-500 uppercase tracking-widest mb-0.5 md:mb-1 flex items-center gap-1"><span class="material-symbols-rounded text-[12px] md:text-[14px]">lock</span> Blocat</p>
+                                        <p class="text-[13px] md:text-sm font-bold text-slate-900 dark:text-white">Consultație Gratuită</p>
+                                        <p class="text-[9px] md:text-[10px] text-slate-500 mt-0.5">La atingerea a 10.000 pași/zi o lună.</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="bg-gradient-to-br from-slate-900 to-slate-800 p-5 md:p-6 rounded-2xl shadow-card border border-slate-700 text-white relative overflow-hidden flex flex-col md:flex-row justify-between items-center gap-4">
-                    <div class="absolute top-0 right-0 w-48 h-48 bg-white/5 rounded-full -mr-16 -mt-16 blur-2xl"></div>
-                    <div class="relative z-10 flex items-center gap-4 w-full md:w-auto">
-                        <div class="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center border border-white/20 shrink-0"><span class="material-symbols-rounded text-primary-400">event</span></div>
+                <!-- Call to action mobil -->
+                <div class="bg-gradient-to-br from-slate-900 to-slate-800 p-5 md:p-6 rounded-2xl shadow-card border border-slate-700 text-white relative overflow-hidden flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                    <div class="absolute top-0 right-0 w-32 h-32 md:w-48 md:h-48 bg-white/5 rounded-full -mr-10 -mt-10 md:-mr-16 md:-mt-16 blur-xl md:blur-2xl"></div>
+                    <div class="relative z-10 flex items-center gap-3 md:gap-4 w-full sm:w-auto">
+                        <div class="w-10 h-10 md:w-12 md:h-12 bg-white/10 rounded-xl flex items-center justify-center border border-white/20 shrink-0"><span class="material-symbols-rounded text-primary-400 text-[20px] md:text-[24px]">event</span></div>
                         <div>
-                            <p class="text-[10px] md:text-xs text-slate-400 uppercase tracking-widest font-bold mb-1">Următoarea Consultație</p>
-                            <p class="font-bold text-base md:text-lg">15 Mai, Ora 11:30</p>
+                            <p class="text-[9px] md:text-[10px] text-slate-400 uppercase tracking-widest font-bold mb-0.5 md:mb-1">Următoarea Consultație</p>
+                            <p class="font-bold text-sm md:text-lg">15 Mai, Ora 11:30</p>
                         </div>
                     </div>
-                    <button onclick="switchView('messages')" class="relative z-10 w-full md:w-auto px-6 py-3 bg-primary-500 hover:bg-primary-600 text-white rounded-xl text-sm font-bold shadow-md transition-colors flex items-center justify-center gap-2">
+                    <button onclick="switchView('messages')" class="relative z-10 w-full sm:w-auto px-5 md:px-6 py-2.5 md:py-3 bg-primary-500 hover:bg-primary-600 text-white rounded-xl text-[13px] md:text-sm font-bold shadow-md transition-colors flex items-center justify-center gap-2">
                         <span class="material-symbols-rounded text-[18px]">videocam</span> Intră în apel
                     </button>
                 </div>
             </div>
 
-            <div id="view-diet" class="hidden p-4 md:p-10 max-w-[1000px] mx-auto space-y-6 w-full shrink-0">
-                <div class="flex justify-between items-center">
-                    <h2 class="text-xl md:text-2xl font-bold text-slate-900">Meniul de Astăzi</h2>
-                    <button class="text-xs md:text-sm font-bold text-primary-600 hover:underline">Descarcă PDF</button>
+            <!-- VIEW: PLAN ALIMENTAR (Optimizat Mobile-First) -->
+            <div id="view-diet" class="hidden p-4 md:p-10 max-w-[1000px] mx-auto space-y-4 md:space-y-6 w-full shrink-0 pb-20 md:pb-10">
+                <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-3 md:gap-0 mb-2">
+                    <div>
+                        <h2 class="text-xl md:text-2xl font-bold text-slate-900 dark:text-white">Meniul de Astăzi</h2>
+                        <p class="text-[11px] md:text-sm text-slate-500 dark:text-slate-400 mt-0.5 md:mt-1">Planul tău nutrițional detaliat.</p>
+                    </div>
+                    <button onclick="showNotification('Meniul a fost descărcat în format PDF.', 'success')" class="flex items-center justify-center gap-2 px-4 py-2.5 bg-white dark:bg-dark-800 border border-slate-200 dark:border-slate-700 rounded-xl text-[13px] md:text-sm font-bold text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-dark-700 transition-colors shadow-sm w-full sm:w-auto">
+                        <span class="material-symbols-rounded text-[18px]">download</span> Descarcă PDF
+                    </button>
                 </div>
-                <div class="space-y-4">
-                    <div class="bg-white p-4 md:p-5 rounded-2xl shadow-card border border-slate-200 hover:border-primary-200 transition-colors flex flex-col sm:flex-row gap-4 items-start sm:items-center">
-                        <div class="w-14 h-14 md:w-16 md:h-16 bg-orange-50 text-orange-500 rounded-xl flex items-center justify-center shrink-0"><span class="material-symbols-rounded text-[28px] md:text-[32px]">breakfast_dining</span></div>
-                        <div class="flex-1">
-                            <h3 class="font-bold text-slate-900 text-base md:text-lg">Mic Dejun</h3>
-                            <p class="text-xs md:text-sm text-slate-600 mt-1">Omletă din 2 ouă, 30g telemea, 1 roșie, 1 felie pâine prăjită.</p>
+                
+                <div class="space-y-3 md:space-y-4">
+                    <!-- Mic Dejun -->
+                    <div class="bg-white dark:bg-dark-900 p-4 md:p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-800 transition-colors">
+                        <div class="flex items-center justify-between mb-3">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 md:w-12 md:h-12 bg-orange-50 dark:bg-orange-900/30 text-orange-500 rounded-xl flex items-center justify-center shrink-0">
+                                    <span class="material-symbols-rounded text-[22px] md:text-[24px]">breakfast_dining</span>
+                                </div>
+                                <h3 class="font-bold text-slate-900 dark:text-white text-base md:text-lg">Mic Dejun</h3>
+                            </div>
+                            <div class="text-right">
+                                <p class="font-bold text-primary-600 dark:text-primary-400 text-sm md:text-base">350 kcal</p>
+                            </div>
                         </div>
-                        <div class="sm:text-right shrink-0">
-                            <p class="font-bold text-primary-600 text-base md:text-lg">350 kcal</p>
-                            <p class="text-[10px] md:text-xs font-bold text-slate-400 mt-1">20g Prot | 15g Carb | 18g Grăs</p>
+                        <p class="text-[13px] md:text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-4">Omletă din 2 ouă, 30g telemea light, 1 roșie mare, o mână de spanac și 1 felie de pâine integrală prăjită.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-2.5 py-1 bg-slate-50 dark:bg-dark-800 text-[10px] md:text-xs font-bold text-slate-500 dark:text-slate-400 rounded-lg border border-slate-100 dark:border-slate-700">20g Prot</span>
+                            <span class="px-2.5 py-1 bg-slate-50 dark:bg-dark-800 text-[10px] md:text-xs font-bold text-slate-500 dark:text-slate-400 rounded-lg border border-slate-100 dark:border-slate-700">15g Carb</span>
+                            <span class="px-2.5 py-1 bg-slate-50 dark:bg-dark-800 text-[10px] md:text-xs font-bold text-slate-500 dark:text-slate-400 rounded-lg border border-slate-100 dark:border-slate-700">18g Grăs</span>
+                        </div>
+                    </div>
+
+                    <!-- Prânz -->
+                    <div class="bg-white dark:bg-dark-900 p-4 md:p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-800 transition-colors">
+                        <div class="flex items-center justify-between mb-3">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 md:w-12 md:h-12 bg-blue-50 dark:bg-blue-900/30 text-blue-500 rounded-xl flex items-center justify-center shrink-0">
+                                    <span class="material-symbols-rounded text-[22px] md:text-[24px]">lunch_dining</span>
+                                </div>
+                                <h3 class="font-bold text-slate-900 dark:text-white text-base md:text-lg">Prânz</h3>
+                            </div>
+                            <div class="text-right">
+                                <p class="font-bold text-primary-600 dark:text-primary-400 text-sm md:text-base">450 kcal</p>
+                            </div>
+                        </div>
+                        <p class="text-[13px] md:text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-4">150g piept de pui la grătar, 100g orez basmati fiert, 200g broccoli la abur cu o linguriță de ulei de măsline.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-2.5 py-1 bg-slate-50 dark:bg-dark-800 text-[10px] md:text-xs font-bold text-slate-500 dark:text-slate-400 rounded-lg border border-slate-100 dark:border-slate-700">35g Prot</span>
+                            <span class="px-2.5 py-1 bg-slate-50 dark:bg-dark-800 text-[10px] md:text-xs font-bold text-slate-500 dark:text-slate-400 rounded-lg border border-slate-100 dark:border-slate-700">45g Carb</span>
+                            <span class="px-2.5 py-1 bg-slate-50 dark:bg-dark-800 text-[10px] md:text-xs font-bold text-slate-500 dark:text-slate-400 rounded-lg border border-slate-100 dark:border-slate-700">10g Grăs</span>
+                        </div>
+                    </div>
+
+                    <!-- Gustare (Folosind eco) -->
+                    <div class="bg-white dark:bg-dark-900 p-4 md:p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-800 transition-colors">
+                        <div class="flex items-center justify-between mb-3">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 md:w-12 md:h-12 bg-emerald-50 dark:bg-emerald-900/30 text-emerald-500 rounded-xl flex items-center justify-center shrink-0">
+                                    <span class="material-symbols-rounded text-[22px] md:text-[24px]">eco</span>
+                                </div>
+                                <h3 class="font-bold text-slate-900 dark:text-white text-base md:text-lg">Gustare</h3>
+                            </div>
+                            <div class="text-right">
+                                <p class="font-bold text-primary-600 dark:text-primary-400 text-sm md:text-base">200 kcal</p>
+                            </div>
+                        </div>
+                        <p class="text-[13px] md:text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-4">150g iaurt grecesc 2%, o mână de afine proaspete și 15g migdale crude.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-2.5 py-1 bg-slate-50 dark:bg-dark-800 text-[10px] md:text-xs font-bold text-slate-500 dark:text-slate-400 rounded-lg border border-slate-100 dark:border-slate-700">12g Prot</span>
+                            <span class="px-2.5 py-1 bg-slate-50 dark:bg-dark-800 text-[10px] md:text-xs font-bold text-slate-500 dark:text-slate-400 rounded-lg border border-slate-100 dark:border-slate-700">15g Carb</span>
+                            <span class="px-2.5 py-1 bg-slate-50 dark:bg-dark-800 text-[10px] md:text-xs font-bold text-slate-500 dark:text-slate-400 rounded-lg border border-slate-100 dark:border-slate-700">10g Grăs</span>
+                        </div>
+                    </div>
+
+                    <!-- Cină -->
+                    <div class="bg-white dark:bg-dark-900 p-4 md:p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-800 transition-colors">
+                        <div class="flex items-center justify-between mb-3">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 md:w-12 md:h-12 bg-purple-50 dark:bg-purple-900/30 text-purple-500 rounded-xl flex items-center justify-center shrink-0">
+                                    <span class="material-symbols-rounded text-[22px] md:text-[24px]">set_meal</span>
+                                </div>
+                                <h3 class="font-bold text-slate-900 dark:text-white text-base md:text-lg">Cină</h3>
+                            </div>
+                            <div class="text-right">
+                                <p class="font-bold text-primary-600 dark:text-primary-400 text-sm md:text-base">400 kcal</p>
+                            </div>
+                        </div>
+                        <p class="text-[13px] md:text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-4">120g somon la cuptor cu lămâie, servit cu 150g sparanghel și o salată verde mare.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-2.5 py-1 bg-slate-50 dark:bg-dark-800 text-[10px] md:text-xs font-bold text-slate-500 dark:text-slate-400 rounded-lg border border-slate-100 dark:border-slate-700">28g Prot</span>
+                            <span class="px-2.5 py-1 bg-slate-50 dark:bg-dark-800 text-[10px] md:text-xs font-bold text-slate-500 dark:text-slate-400 rounded-lg border border-slate-100 dark:border-slate-700">10g Carb</span>
+                            <span class="px-2.5 py-1 bg-slate-50 dark:bg-dark-800 text-[10px] md:text-xs font-bold text-slate-500 dark:text-slate-400 rounded-lg border border-slate-100 dark:border-slate-700">22g Grăs</span>
                         </div>
                     </div>
                 </div>
             </div>
 
+            <!-- VIEW: MESAJE & VIDEO -->
             <div id="view-messages" class="hidden flex-1 min-h-0 w-full flex-col">
-                <div class="flex flex-col flex-1 min-h-0 bg-white md:max-w-[1200px] mx-auto md:shadow-sm md:border-x border-slate-200 w-full">
+                <div class="flex flex-col flex-1 min-h-0 bg-white dark:bg-dark-900 md:max-w-[1200px] mx-auto md:shadow-sm md:border-x border-slate-200 dark:border-slate-800 w-full transition-colors">
                     
-                    <div class="h-16 md:h-[76px] px-4 md:px-6 border-b border-slate-200 flex justify-between items-center shrink-0 z-10 bg-white">
-                        <div class="flex items-center gap-3 md:gap-4">
-                            <div class="w-10 h-10 md:w-11 md:h-11 rounded-full bg-primary-50 border border-primary-200 text-primary-700 flex items-center justify-center font-bold text-sm shrink-0">SM</div>
+                    <div class="h-[68px] md:h-[76px] px-4 md:px-6 border-b border-slate-200 dark:border-slate-800 flex justify-between items-center shrink-0 z-10 bg-white dark:bg-dark-900">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-primary-50 dark:bg-primary-900/30 border border-primary-200 dark:border-primary-800 text-primary-700 dark:text-primary-400 flex items-center justify-center font-bold text-sm shrink-0">SM</div>
                             <div class="min-w-0">
-                                <h3 class="text-sm font-bold text-slate-900 truncate">Dr. Sarah Miller</h3>
+                                <h3 class="text-[13px] md:text-sm font-bold text-slate-900 dark:text-white truncate">Dr. Sarah Miller</h3>
                                 <p class="text-[10px] md:text-xs text-slate-500 font-medium truncate">Nutriționistul Tău</p>
                             </div>
                         </div>
-                        <button onclick="toggleVideoCall()" id="btn-video" class="flex items-center gap-2 px-3 py-2 md:px-4 md:py-2.5 bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 rounded-xl text-sm font-bold shadow-sm transition-all shrink-0">
-                            <span class="material-symbols-rounded text-[20px]">videocam</span>
+                        <button onclick="toggleVideoCall()" id="btn-video" class="flex items-center gap-1.5 px-3 py-2 md:px-4 md:py-2.5 bg-white dark:bg-dark-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-dark-700 rounded-xl text-xs md:text-sm font-bold shadow-sm transition-all shrink-0">
+                            <span class="material-symbols-rounded text-[18px] md:text-[20px]">videocam</span>
                             <span class="hidden sm:inline">Consult Video</span>
                         </button>
                     </div>
                     
-                    <div id="video-container" class="hidden h-[250px] md:h-[350px] shrink-0 bg-dark-900 relative border-b border-slate-200"><div id="jitsi-meet-frame" class="w-full h-full"></div></div>
+                    <div id="video-container" class="hidden h-[30vh] md:h-[350px] shrink-0 bg-dark-900 relative border-b border-slate-200 dark:border-slate-800"><div id="jitsi-meet-frame" class="w-full h-full"></div></div>
                     
-                    <div class="flex-1 min-h-0 overflow-y-auto p-4 md:p-6 space-y-4 md:space-y-6 bg-slate-50 flex flex-col" id="chat-messages-box">
-                        <div class="flex justify-center"><span class="text-[10px] md:text-xs font-bold text-slate-400 uppercase tracking-wider bg-slate-100 px-3 py-1 rounded-full">Astăzi, 10:42 AM</span></div>
+                    <div class="flex-1 min-h-0 overflow-y-auto p-4 md:p-6 space-y-4 bg-slate-50 dark:bg-dark-950 flex flex-col" id="chat-messages-box">
+                        <div class="flex justify-center"><span class="text-[9px] md:text-[10px] font-bold text-slate-400 uppercase tracking-wider bg-slate-100 dark:bg-dark-800 px-3 py-1 rounded-full">Astăzi, 10:42 AM</span></div>
                         
                         <div class="flex justify-end items-end gap-2 mt-2">
-                            <div class="max-w-[85%] md:max-w-[75%] bg-dark-900 text-white p-3 md:p-4 rounded-2xl rounded-br-none shadow-sm">
-                                <p class="text-xs md:text-sm leading-relaxed">Bună ziua! Am urmat planul, dar am o întrebare legată de gustarea de după-amiază.</p>
+                            <div class="max-w-[85%] md:max-w-[75%] bg-dark-900 dark:bg-primary-600 text-white p-3 md:p-4 rounded-xl md:rounded-2xl rounded-br-none shadow-sm">
+                                <p class="text-[13px] md:text-sm leading-relaxed">Bună ziua! Am urmat planul, dar am o întrebare legată de gustarea de după-amiază.</p>
                                 <p class="text-[9px] md:text-[10px] text-slate-400 font-medium mt-1 md:mt-2 text-right">10:42 AM</p>
                             </div>
                         </div>
 
                         <div class="flex justify-start items-end gap-2">
-                            <div class="w-8 h-8 rounded-full bg-primary-100 text-primary-700 flex items-center justify-center text-[10px] md:text-xs font-bold shrink-0">SM</div>
-                            <div class="max-w-[85%] md:max-w-[75%] bg-white border border-slate-200 p-3 md:p-4 rounded-2xl rounded-bl-none shadow-sm">
-                                <p class="text-xs md:text-sm text-slate-700 leading-relaxed">Salutare Radu! Sigur, o poți înlocui cu un măr și o mână mică de migdale. Amintește-ți să bei apă!</p>
+                            <div class="w-7 h-7 md:w-8 md:h-8 rounded-full bg-primary-100 dark:bg-primary-900/50 text-primary-700 dark:text-primary-300 flex items-center justify-center text-[10px] md:text-xs font-bold shrink-0">SM</div>
+                            <div class="max-w-[85%] md:max-w-[75%] bg-white dark:bg-dark-900 border border-slate-200 dark:border-slate-800 p-3 md:p-4 rounded-xl md:rounded-2xl rounded-bl-none shadow-sm transition-colors">
+                                <p class="text-[13px] md:text-sm text-slate-700 dark:text-slate-300 leading-relaxed">Salutare Radu! Sigur, o poți înlocui cu un măr și o mână mică de migdale. Amintește-ți să bei apă!</p>
                                 <p class="text-[9px] md:text-[10px] text-slate-400 font-medium mt-1 md:mt-2">10:45 AM</p>
                             </div>
                         </div>
                     </div>
                     
-                    <div class="p-3 md:p-4 bg-white border-t border-slate-200 shrink-0 pb-safe">
-                        <form onsubmit="sendMessage(event);" class="flex items-center gap-2 md:gap-3">
-                            <button type="button" class="p-2 text-slate-400 hover:text-slate-600 transition-colors shrink-0"><span class="material-symbols-rounded">attach_file</span></button>
-                            <input type="text" id="chat-input-field" placeholder="Scrie un mesaj..." autocomplete="off" class="flex-1 min-w-0 bg-slate-50 border border-slate-200 rounded-xl px-3 md:px-4 py-2.5 md:py-3 text-sm focus:bg-white focus:ring-2 focus:ring-primary-500 outline-none transition-all">
+                    <div class="p-3 md:p-4 bg-white dark:bg-dark-900 border-t border-slate-200 dark:border-slate-800 shrink-0 transition-colors">
+                        <form onsubmit="sendMessage(event);" class="flex items-center gap-2">
+                            <button type="button" class="p-2 text-slate-400 hover:text-slate-600 dark:hover:text-white transition-colors shrink-0"><span class="material-symbols-rounded text-[22px]">attach_file</span></button>
+                            <input type="text" id="chat-input-field" placeholder="Scrie un mesaj..." autocomplete="off" class="flex-1 min-w-0 bg-slate-50 dark:bg-dark-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2.5 md:py-3 text-[13px] md:text-sm focus:border-primary-500 dark:text-white outline-none transition-all">
                             <button type="submit" class="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-primary-600 hover:bg-primary-700 transition-colors text-white flex items-center justify-center shadow-md shrink-0"><span class="material-symbols-rounded text-[18px] md:text-[20px]">send</span></button>
                         </form>
                     </div>
                 </div>
             </div>
 
-            <div id="view-financial" class="hidden p-4 md:p-10 max-w-[1200px] mx-auto space-y-6 w-full shrink-0">
+            <!-- VIEW: FINANCIAR & ABONAMENT -->
+            <div id="view-financial" class="hidden p-4 md:p-10 max-w-[1200px] mx-auto space-y-4 md:space-y-6 w-full shrink-0 pb-20 md:pb-10">
                 <div>
-                    <h2 class="text-xl md:text-2xl font-bold text-slate-900">Plăți & Abonament</h2>
-                    <p class="text-xs md:text-sm text-slate-500 mt-1">Gestionează metodele de plată și urmărește facturile.</p>
+                    <h2 class="text-xl md:text-2xl font-bold text-slate-900 dark:text-white">Plăți & Abonament</h2>
+                    <p class="text-[11px] md:text-sm text-slate-500 mt-0.5 md:mt-1">Gestionează metodele de plată și urmărește facturile.</p>
                 </div>
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 mt-4 md:mt-6">
-                    <div class="bg-white rounded-2xl shadow-card border border-slate-200 p-6">
-                        <div class="flex justify-between items-center mb-6">
-                            <h3 class="font-bold text-slate-900">Metode de Plată</h3>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-8 mt-4 md:mt-6">
+                    
+                    <!-- Abonamentul Tău -->
+                    <div class="bg-gradient-to-br from-primary-600 to-primary-800 p-5 md:p-6 rounded-[1.5rem] md:rounded-2xl shadow-card border border-primary-700 text-white relative overflow-hidden h-fit">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-10 -mt-10 blur-xl"></div>
+                        <h3 class="font-bold text-base md:text-lg mb-1 md:mb-2 flex items-center gap-2 relative z-10"><span class="material-symbols-rounded text-accent-400 text-[20px]">workspace_premium</span> Abonament Curent</h3>
+                        <p class="text-[11px] md:text-xs text-primary-100 relative z-10 mb-5 md:mb-6">Ai acces complet la planul nutrițional și chat.</p>
+                        
+                        <div class="bg-white/10 border border-white/20 p-4 rounded-xl relative z-10 flex justify-between items-center mb-4">
+                            <div>
+                                <p class="text-[9px] md:text-[10px] text-primary-200 uppercase font-bold tracking-wider mb-0.5">Plan</p>
+                                <p class="font-bold text-base md:text-lg">Nutriție Premium</p>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-[9px] md:text-[10px] text-primary-200 uppercase font-bold tracking-wider mb-1">Status</p>
+                                <span class="px-2.5 py-1 bg-emerald-500/20 text-emerald-100 text-[10px] md:text-xs font-bold rounded-lg border border-emerald-500/30">Activ</span>
+                            </div>
                         </div>
-                        <div class="relative w-full h-48 rounded-2xl bg-gradient-to-tr from-slate-900 via-slate-800 to-slate-900 p-6 text-white shadow-xl overflow-hidden mb-6">
-                            <div class="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -mr-10 -mt-10 blur-2xl"></div>
-                            <div class="flex justify-between items-start">
-                                <span class="font-bold tracking-widest text-lg opacity-90">VISA</span>
+                        
+                        <div class="flex justify-between items-center relative z-10 text-[11px] md:text-sm">
+                            <p class="text-primary-100">Următoarea facturare:</p>
+                            <p class="font-bold">15 Iunie 2026</p>
+                        </div>
+                    </div>
+
+                    <!-- Carduri Salvate -->
+                    <div class="bg-white dark:bg-dark-900 rounded-[1.5rem] md:rounded-2xl shadow-card border border-slate-200 dark:border-slate-800 p-5 md:p-6 transition-colors h-fit">
+                        <div class="flex justify-between items-center mb-5 md:mb-6">
+                            <h3 class="font-bold text-slate-900 dark:text-white text-base md:text-lg">Metoda de Plată</h3>
+                            <button onclick="showNotification('Te redirecționăm pentru adăugarea cardului.', 'info')" class="text-[11px] md:text-sm font-semibold text-primary-600 hover:text-primary-700 dark:text-primary-400">+ Schimbă</button>
+                        </div>
+                        <div class="relative w-full h-40 md:h-48 rounded-xl md:rounded-2xl bg-gradient-to-tr from-slate-900 via-slate-800 to-slate-900 p-5 md:p-6 text-white shadow-xl overflow-hidden mb-2">
+                            <div class="absolute top-0 right-0 w-24 h-24 md:w-32 md:h-32 bg-white/5 rounded-full -mr-8 -mt-8 md:-mr-10 md:-mt-10 blur-xl md:blur-2xl"></div>
+                            <div class="flex justify-between items-start relative z-10">
+                                <span class="font-bold tracking-widest text-base md:text-lg opacity-90">VISA</span>
                                 <span class="material-symbols-rounded opacity-50">contactless</span>
                             </div>
-                            <div class="mt-8"><p class="font-mono text-xl tracking-widest opacity-90">•••• •••• •••• 1234</p></div>
-                            <div class="flex justify-between items-end mt-6 text-sm opacity-80">
-                                <div><p class="text-[10px] opacity-70 mb-1">Titular</p><p class="font-medium tracking-wide text-xs">RADU IONESCU</p></div>
-                                <div><p class="text-[10px] opacity-70 mb-1">Expiră</p><p class="font-medium tracking-wide text-xs">08/27</p></div>
+                            <div class="mt-6 md:mt-8 relative z-10"><p class="font-mono text-lg md:text-xl tracking-widest opacity-90">•••• •••• •••• 1234</p></div>
+                            <div class="flex justify-between items-end mt-4 md:mt-6 text-[11px] md:text-sm opacity-80 relative z-10">
+                                <div><p class="text-[9px] md:text-[10px] opacity-70 mb-0.5">Titular</p><p class="font-medium tracking-wide">RADU IONESCU</p></div>
+                                <div><p class="text-[9px] md:text-[10px] opacity-70 mb-0.5">Expiră</p><p class="font-medium tracking-wide">08/27</p></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Istoric Tranzacții -->
+                    <div class="lg:col-span-2 bg-white dark:bg-dark-900 rounded-[1.5rem] md:rounded-2xl shadow-card border border-slate-200 dark:border-slate-800 p-5 md:p-6 transition-colors">
+                        <div class="flex justify-between items-center mb-4 md:mb-6 border-b border-slate-100 dark:border-slate-800 pb-3">
+                            <h3 class="font-bold text-slate-900 dark:text-white text-base md:text-lg">Istoric Facturi</h3>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between p-3 hover:bg-slate-50 dark:hover:bg-dark-800 rounded-xl transition-colors cursor-pointer">
+                                <div class="flex items-center gap-3 md:gap-4">
+                                    <div class="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-emerald-50 dark:bg-emerald-900/30 flex items-center justify-center text-emerald-600 dark:text-emerald-400 shrink-0"><span class="material-symbols-rounded text-[20px]">receipt_long</span></div>
+                                    <div><p class="text-[13px] md:text-sm font-bold text-slate-900 dark:text-white">Abonament Premium</p><p class="text-[10px] md:text-xs text-slate-500">Plătit pe 1 Mai 2026</p></div>
+                                </div>
+                                <div class="text-right shrink-0">
+                                    <p class="text-[13px] md:text-sm font-bold text-slate-900 dark:text-white">350 RON</p>
+                                    <button onclick="showNotification('Factura se descarcă.', 'info')" class="text-[9px] md:text-[10px] font-bold text-primary-600 uppercase mt-0.5 md:mt-1 hover:underline">Descarcă</button>
+                                </div>
+                            </div>
+                            <div class="w-full h-px bg-slate-100 dark:bg-slate-800"></div>
+                            <div class="flex items-center justify-between p-3 hover:bg-slate-50 dark:hover:bg-dark-800 rounded-xl transition-colors cursor-pointer">
+                                <div class="flex items-center gap-3 md:gap-4">
+                                    <div class="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-emerald-50 dark:bg-emerald-900/30 flex items-center justify-center text-emerald-600 dark:text-emerald-400 shrink-0"><span class="material-symbols-rounded text-[20px]">receipt_long</span></div>
+                                    <div><p class="text-[13px] md:text-sm font-bold text-slate-900 dark:text-white">Consultație Inițială</p><p class="text-[10px] md:text-xs text-slate-500">Plătit pe 15 Apr 2026</p></div>
+                                </div>
+                                <div class="text-right shrink-0">
+                                    <p class="text-[13px] md:text-sm font-bold text-slate-900 dark:text-white">150 RON</p>
+                                    <button onclick="showNotification('Factura se descarcă.', 'info')" class="text-[9px] md:text-[10px] font-bold text-primary-600 uppercase mt-0.5 md:mt-1 hover:underline">Descarcă</button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div id="view-profile" class="hidden p-4 md:p-10 max-w-[1200px] mx-auto space-y-6 md:space-y-8 w-full shrink-0 pb-20">
-                <h2 class="text-xl md:text-2xl font-bold text-slate-900">Setări Cont & Profil</h2>
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
-                    <div class="bg-white p-5 md:p-6 rounded-2xl shadow-card border border-slate-200 space-y-5">
-                        <h3 class="font-bold text-slate-900 border-b border-slate-100 pb-3">Date Personale</h3>
-                        <div><label class="block text-[10px] md:text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">Nume</label><input type="text" value="Radu Ionescu" class="w-full p-2.5 md:p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm outline-none" disabled></div>
-                        <div><label class="block text-[10px] md:text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">Email</label><input type="email" value="radu@email.com" class="w-full p-2.5 md:p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm outline-none" disabled></div>
+            <!-- VIEW: PROFIL (Complet, optimizat mobil) -->
+            <div id="view-profile" class="hidden p-4 md:p-10 max-w-[1200px] mx-auto space-y-4 md:space-y-8 w-full shrink-0 pb-20 md:pb-10">
+                <h2 class="text-xl md:text-2xl font-bold text-slate-900 dark:text-white">Setări Cont & Profil</h2>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-8">
+                    
+                    <!-- Date Personale & Poza de Profil -->
+                    <div class="bg-white dark:bg-dark-900 p-5 md:p-6 rounded-[1.5rem] md:rounded-2xl shadow-card border border-slate-200 dark:border-slate-800 space-y-4 md:space-y-5 transition-colors h-fit">
+                        <h3 class="font-bold text-slate-900 dark:text-white border-b border-slate-100 dark:border-slate-800 pb-3 text-base md:text-lg">Date Personale</h3>
+                        
+                        <div class="flex flex-col items-center text-center gap-2 md:gap-4 mb-2">
+                            <input type="file" id="client-profile-upload" accept="image/*" class="hidden" onchange="updateClientProfilePic(event)">
+                            <div class="relative group cursor-pointer" onclick="document.getElementById('client-profile-upload').click()">
+                                <div id="client-profile-avatar" class="w-20 h-20 md:w-24 md:h-24 rounded-full bg-slate-100 dark:bg-dark-800 border-4 border-white dark:border-dark-900 shadow-md flex items-center justify-center text-2xl md:text-3xl font-bold text-slate-700 dark:text-slate-300 bg-cover bg-center">RI</div>
+                                <button class="absolute bottom-0 right-0 w-7 h-7 md:w-8 md:h-8 bg-white dark:bg-dark-800 border border-slate-200 dark:border-slate-700 rounded-full flex items-center justify-center shadow-sm text-slate-600 dark:text-slate-300 hover:text-primary-600 transition-colors"><span class="material-symbols-rounded text-[14px] md:text-[16px]">edit</span></button>
+                            </div>
+                            <p class="text-[11px] md:text-xs text-slate-500">Apasă pentru poză nouă</p>
+                        </div>
+
+                        <div><label class="block text-[10px] md:text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">Nume Complet</label><input type="text" value="Radu Ionescu" class="w-full p-3 bg-slate-50 dark:bg-dark-800 border border-slate-200 dark:border-slate-700 rounded-xl text-[13px] md:text-sm outline-none dark:text-white focus:border-primary-500 transition-colors"></div>
+                        <div><label class="block text-[10px] md:text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">Email</label><input type="email" value="radu@email.com" class="w-full p-3 bg-slate-50 dark:bg-dark-800 border border-slate-200 dark:border-slate-700 rounded-xl text-[13px] md:text-sm outline-none dark:text-white focus:border-primary-500 transition-colors"></div>
+                        <div><label class="block text-[10px] md:text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">Telefon</label><input type="text" value="0722 123 456" class="w-full p-3 bg-slate-50 dark:bg-dark-800 border border-slate-200 dark:border-slate-700 rounded-xl text-[13px] md:text-sm outline-none dark:text-white focus:border-primary-500 transition-colors"></div>
+                        <button onclick="showNotification('Datele personale salvate!', 'success')" class="w-full py-3 bg-dark-900 dark:bg-primary-600 hover:bg-slate-800 text-white rounded-xl text-[13px] md:text-sm font-bold transition-colors shadow-md mt-2">Salvează Modificările</button>
+                    </div>
+
+                    <div class="space-y-4 md:space-y-8">
+                        <!-- Masuratori Fizice -->
+                        <div class="bg-white dark:bg-dark-900 p-5 md:p-6 rounded-[1.5rem] md:rounded-2xl shadow-card border border-slate-200 dark:border-slate-800 transition-colors">
+                            <h3 class="font-bold text-slate-900 dark:text-white border-b border-slate-100 dark:border-slate-800 pb-3 mb-4 md:mb-5 text-base md:text-lg">Măsurători & Obiective</h3>
+                            <div class="grid grid-cols-2 gap-3 md:gap-4">
+                                <div><label class="block text-[10px] md:text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">Curentă</label><div class="relative"><input type="number" value="85" class="w-full p-3 bg-slate-50 dark:bg-dark-800 border border-slate-200 dark:border-slate-700 rounded-xl text-[13px] md:text-sm outline-none dark:text-white focus:border-primary-500 transition-colors font-bold"><span class="absolute right-3 top-3 text-[13px] text-slate-400">kg</span></div></div>
+                                <div><label class="block text-[10px] md:text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">Țintă</label><div class="relative"><input type="number" value="75" class="w-full p-3 bg-slate-50 dark:bg-dark-800 border border-slate-200 dark:border-slate-700 rounded-xl text-[13px] md:text-sm outline-none dark:text-white focus:border-primary-500 transition-colors font-bold text-primary-600 dark:text-primary-400"><span class="absolute right-3 top-3 text-[13px] text-slate-400">kg</span></div></div>
+                                <div class="col-span-2"><label class="block text-[10px] md:text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">Înălțime</label><div class="relative"><input type="number" value="180" class="w-full p-3 bg-slate-50 dark:bg-dark-800 border border-slate-200 dark:border-slate-700 rounded-xl text-[13px] md:text-sm outline-none dark:text-white focus:border-primary-500 transition-colors"><span class="absolute right-3 top-3 text-[13px] text-slate-400">cm</span></div></div>
+                            </div>
+                            <button onclick="showNotification('Măsurătorile trimise nutriționistului.', 'success')" class="w-full py-3 bg-slate-100 dark:bg-dark-800 hover:bg-slate-200 text-slate-900 dark:text-white rounded-xl text-[13px] md:text-sm font-bold transition-colors mt-4 md:mt-5 border border-slate-200 dark:border-slate-700">Actualizează Măsurătorile</button>
+                        </div>
+
+                        <!-- Securitate -->
+                        <div class="bg-white dark:bg-dark-900 p-5 md:p-6 rounded-[1.5rem] md:rounded-2xl shadow-card border border-slate-200 dark:border-slate-800 transition-colors">
+                            <h3 class="font-bold text-slate-900 dark:text-white border-b border-slate-100 dark:border-slate-800 pb-3 mb-4 md:mb-5 flex items-center gap-2 text-base md:text-lg"><span class="material-symbols-rounded text-[18px] md:text-[20px] text-slate-400">lock</span> Securitate Cont</h3>
+                            <div class="space-y-3 md:space-y-4">
+                                <div><label class="block text-[10px] md:text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">Parola Curentă</label><input type="password" placeholder="••••••••" class="w-full p-3 bg-slate-50 dark:bg-dark-800 border border-slate-200 dark:border-slate-700 rounded-xl text-[13px] md:text-sm outline-none dark:text-white focus:border-primary-500 transition-colors"></div>
+                                <div><label class="block text-[10px] md:text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">Parola Nouă</label><input type="password" placeholder="Noua parolă" class="w-full p-3 bg-slate-50 dark:bg-dark-800 border border-slate-200 dark:border-slate-700 rounded-xl text-[13px] md:text-sm outline-none dark:text-white focus:border-primary-500 transition-colors"></div>
+                                <button onclick="showNotification('Parola schimbată cu succes.', 'success')" class="w-full py-3 bg-slate-100 dark:bg-dark-800 hover:bg-slate-200 text-slate-900 dark:text-white rounded-xl text-[13px] md:text-sm font-bold transition-colors mt-2 border border-slate-200 dark:border-slate-700">Schimbă Parola</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -321,9 +577,93 @@
         </div>
     </main>
 
+    <!-- TOAST CONTAINER -->
+    <div id="toast-container" class="fixed bottom-[80px] md:bottom-5 right-4 md:right-5 z-[200] flex flex-col gap-3 pointer-events-none w-[calc(100%-32px)] md:w-auto"></div>
+
     <script>
+        // Actualizare poză client
+        function updateClientProfilePic(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const imageUrl = URL.createObjectURL(file);
+                const profileAvatar = document.getElementById('client-profile-avatar');
+                if(profileAvatar) {
+                    profileAvatar.style.backgroundImage = `url(${imageUrl})`;
+                    profileAvatar.innerText = '';
+                }
+                const sidebarAvatar = document.getElementById('sidebar-avatar');
+                if(sidebarAvatar) {
+                    sidebarAvatar.style.backgroundImage = `url(${imageUrl})`;
+                    sidebarAvatar.innerText = '';
+                }
+                showNotification('Fotografia de profil a fost actualizată!', 'success');
+            }
+        }
+
+        // Meniu Notificari
+        function toggleNotificationsMenu() { 
+            document.getElementById('notifications-dropdown').classList.toggle('hidden'); 
+        }
+        
+        document.addEventListener('click', function(event) {
+            const dropdown = document.getElementById('notifications-dropdown');
+            const bellBtn = event.target.closest('button[onclick="toggleNotificationsMenu()"]');
+            const isInsideDropdown = event.target.closest('#notifications-dropdown');
+            
+            if (!bellBtn && !isInsideDropdown && dropdown && !dropdown.classList.contains('hidden')) {
+                dropdown.classList.add('hidden');
+            }
+        });
+
+        // Bare Progres Animatie
+        function animateProgressBars() {
+            setTimeout(() => {
+                const bars = document.querySelectorAll('.progress-bar');
+                bars.forEach(bar => {
+                    const targetWidth = bar.getAttribute('data-width');
+                    if (targetWidth) { bar.style.width = targetWidth; }
+                });
+            }, 100);
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            animateProgressBars();
+        });
+
+        // TOAST NOTIFICATIONS (adaptat pentru mobil lățime full)
+        function showNotification(message, type = 'success') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            const bgColor = type === 'success' ? 'bg-emerald-50 dark:bg-emerald-900 border-emerald-200 dark:border-emerald-700 text-emerald-800 dark:text-emerald-200' : 'bg-blue-50 dark:bg-blue-900 border-blue-200 dark:border-blue-700 text-blue-800 dark:text-blue-200';
+            const icon = type === 'success' ? 'check_circle' : 'info';
+            
+            toast.className = `flex items-center gap-3 px-4 py-3.5 rounded-xl border shadow-lg transform transition-all duration-300 translate-y-10 opacity-0 pointer-events-auto w-full md:w-[350px] ${bgColor}`;
+            toast.innerHTML = `
+                <span class="material-symbols-rounded shrink-0">${icon}</span>
+                <p class="text-[13px] md:text-sm font-semibold leading-snug flex-1">${message}</p>
+                <button onclick="this.parentElement.remove()" class="text-slate-400 hover:text-slate-600 dark:hover:text-white shrink-0 p-1"><span class="material-symbols-rounded text-[18px]">close</span></button>
+            `;
+            
+            container.appendChild(toast);
+            setTimeout(() => toast.classList.remove('translate-y-10', 'opacity-0'), 10);
+            setTimeout(() => { toast.classList.add('opacity-0', 'translate-x-10'); setTimeout(() => toast.remove(), 300); }, 4000);
+        }
+
+        // DARK MODE
+        function toggleDarkMode() {
+            const htmlClasses = document.documentElement.classList;
+            const icon = document.getElementById('theme-icon');
+            if (htmlClasses.contains('dark')) {
+                htmlClasses.remove('dark'); htmlClasses.add('light');
+                icon.innerText = 'dark_mode';
+            } else {
+                htmlClasses.remove('light'); htmlClasses.add('dark');
+                icon.innerText = 'light_mode';
+            }
+        }
+
         function logout() {
-            if(confirm("Ești sigur că vrei să te deconectezi?")) { window.location.href = "login.html"; }
+            if(confirm("Ești sigur că vrei să te deconectezi?")) { location.reload(); }
         }
 
         function toggleMobileMenu() {
@@ -348,7 +688,6 @@
             const views = ['dashboard', 'diet', 'messages', 'financial', 'profile'];
             const container = document.getElementById('main-scroll-container');
             
-            // Setăm containerele pentru adaptabilitate la chat pe mobil
             if(viewId === 'messages') {
                 container.classList.remove('overflow-y-auto');
                 container.classList.add('overflow-hidden');
@@ -369,13 +708,13 @@
             if(currentView) {
                 currentView.classList.remove('hidden');
                 if(viewId === 'messages') {
-                    // Adăugăm flex și min-h-0 pentru ca chat-ul să respecte viewport-ul pe mobil
                     currentView.classList.add('flex', 'flex-1', 'min-h-0');
                 } else {
                     currentView.classList.add('block');
                 }
             }
 
+            // Update desktop sidebar classes
             views.forEach(n => {
                 const btn = document.getElementById('nav-' + n);
                 if(btn) {
@@ -400,6 +739,12 @@
             document.getElementById('page-title').innerText = titles[viewId] || 'Portal Client';
             const sub = document.getElementById('page-subtitle');
             if(sub) sub.innerText = subtitles[viewId] || '';
+
+            if(viewId === 'dashboard') {
+                const bars = document.querySelectorAll('.progress-bar');
+                bars.forEach(bar => bar.style.width = '0%');
+                animateProgressBars();
+            }
         }
 
         function sendMessage(event) {
@@ -415,15 +760,14 @@
             const msgRow = document.createElement('div');
             msgRow.className = "flex justify-end items-end gap-2 mt-2 md:mt-4";
             msgRow.innerHTML = `
-                <div class="max-w-[85%] md:max-w-[75%] bg-dark-900 text-white p-3 md:p-4 rounded-2xl rounded-br-none shadow-sm">
-                    <p class="text-xs md:text-sm leading-relaxed">${input.value}</p>
+                <div class="max-w-[85%] md:max-w-[75%] bg-dark-900 dark:bg-primary-600 text-white p-3 md:p-4 rounded-xl md:rounded-2xl rounded-br-none shadow-sm">
+                    <p class="text-[13px] md:text-sm leading-relaxed">${input.value}</p>
                     <p class="text-[9px] md:text-[10px] text-slate-400 font-medium mt-1 md:mt-2 text-right">${timestamp}</p>
                 </div>
             `;
             
             box.appendChild(msgRow);
             input.value = '';
-            // Auto-scroll la ultimul mesaj trimis
             box.scrollTop = box.scrollHeight;
         }
 
@@ -438,8 +782,9 @@
             if (!isVideoActive) {
                 container.classList.remove('hidden');
                 btnIcon.innerText = 'call_end';
-                btnText.innerText = 'Închide';
+                if(btnText) btnText.innerText = 'Închide';
                 btn.classList.replace('text-slate-700', 'text-red-600');
+                btn.classList.replace('dark:text-slate-300', 'dark:text-red-500');
                 
                 const domain = "meet.jit.si";
                 const options = { 
@@ -451,11 +796,13 @@
                 };
                 jitsiApi = new JitsiMeetExternalAPI(domain, options);
                 isVideoActive = true;
+                showNotification("Conectare la apelul video...", "info");
             } else {
                 container.classList.add('hidden');
                 btnIcon.innerText = 'videocam';
-                btnText.innerText = 'Consult Video';
+                if(btnText) btnText.innerText = 'Consult Video';
                 btn.classList.replace('text-red-600', 'text-slate-700');
+                btn.classList.replace('dark:text-red-500', 'dark:text-slate-300');
                 if (jitsiApi) jitsiApi.dispose();
                 isVideoActive = false;
             }
