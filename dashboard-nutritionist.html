@@ -35,7 +35,7 @@
         .glass-header { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(226, 232, 240, 0.8); }
     </style>
 </head>
-<body class="text-slate-800 flex h-[100dvh] overflow-hidden antialiased selection:bg-primary-500 selection:text-white">
+<body class="text-slate-800 flex h-[100dvh] overflow-hidden antialiased selection:bg-primary-500 selection:text-white relative">
 
     <aside class="w-64 bg-dark-900 flex flex-col justify-between hidden md:flex shrink-0 z-20 text-slate-300">
         <div>
@@ -47,19 +47,19 @@
             </div>
 
             <nav class="p-4 space-y-2 mt-4">
-                <button onclick="switchView('dashboard')" id="nav-dashboard" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold transition-all bg-primary-600/10 text-primary-500"><span class="material-symbols-rounded text-[20px]">space_dashboard</span>Panou Central</button>
-                <button onclick="switchView('clients')" id="nav-clients" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium hover:bg-slate-800 hover:text-white transition-all"><span class="material-symbols-rounded text-[20px]">group</span>Clienți</button>
+                <button onclick="switchView('dashboard')" id="nav-dashboard" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold transition-all bg-primary-600/10 text-primary-500 relative"><span class="material-symbols-rounded text-[20px]">space_dashboard</span>Panou Central</button>
+                <button onclick="switchView('clients')" id="nav-clients" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium hover:bg-slate-800 hover:text-white transition-all relative"><span class="material-symbols-rounded text-[20px]">group</span>Clienți</button>
                 <button onclick="switchView('messages')" id="nav-messages" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium hover:bg-slate-800 hover:text-white transition-all relative">
                     <span class="material-symbols-rounded text-[20px]">chat_bubble</span>Mesaje
                     <span class="absolute right-4 w-2 h-2 rounded-full bg-accent-500"></span>
                 </button>
-                <button onclick="switchView('financial')" id="nav-financial" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium hover:bg-slate-800 hover:text-white transition-all"><span class="material-symbols-rounded text-[20px]">wallet</span>Financiar</button>
+                <button onclick="switchView('financial')" id="nav-financial" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium hover:bg-slate-800 hover:text-white transition-all relative"><span class="material-symbols-rounded text-[20px]">wallet</span>Financiar</button>
             </nav>
         </div>
 
         <div class="p-4 border-t border-slate-800">
             <div onclick="switchView('profile')" id="nav-profile-btn" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-slate-800 cursor-pointer transition-colors border border-transparent hover:border-slate-700">
-                <div class="w-10 h-10 rounded-full bg-slate-800 border border-slate-700 text-white flex items-center justify-center font-bold text-sm">SM</div>
+                <div class="w-10 h-10 rounded-full bg-slate-800 border border-slate-700 text-white flex items-center justify-center font-bold text-sm bg-cover bg-center" id="sidebar-avatar">SM</div>
                 <div class="flex-1 min-w-0">
                     <p class="text-sm font-semibold text-white truncate">Sarah Miller</p>
                     <p class="text-xs text-slate-400 truncate">Nutriționist Șef</p>
@@ -107,10 +107,42 @@
                 </div>
             </div>
             <div class="flex items-center gap-3 md:gap-5">
-                <button class="relative text-slate-400 hover:text-slate-700 transition-colors">
-                    <span class="material-symbols-rounded text-[24px]">notifications</span>
-                    <span class="absolute top-0 right-0.5 w-2 h-2 bg-accent-500 rounded-full border border-white"></span>
-                </button>
+                
+                <div class="relative">
+                    <button onclick="toggleNotificationsMenu()" class="relative text-slate-400 hover:text-slate-700 transition-colors focus:outline-none">
+                        <span class="material-symbols-rounded text-[24px]">notifications</span>
+                        <span class="absolute top-0 right-0.5 w-2 h-2 bg-accent-500 rounded-full border border-white"></span>
+                    </button>
+                    
+                    <div id="notifications-dropdown" class="hidden absolute top-full right-0 mt-4 w-80 bg-white rounded-2xl shadow-2xl border border-slate-100 overflow-hidden z-50">
+                        <div class="p-4 border-b border-slate-100 flex justify-between items-center bg-slate-50">
+                            <h3 class="font-bold text-slate-900 text-sm">Notificări</h3>
+                            <span class="text-xs font-bold bg-accent-100 text-accent-700 px-2 py-0.5 rounded-full">2 Noi</span>
+                        </div>
+                        <div class="divide-y divide-slate-100 max-h-80 overflow-y-auto">
+                            <div class="p-4 hover:bg-slate-50 transition-colors cursor-pointer flex gap-3">
+                                <div class="w-8 h-8 rounded-full bg-primary-50 text-primary-600 flex items-center justify-center shrink-0"><span class="material-symbols-rounded text-[16px]">event</span></div>
+                                <div>
+                                    <p class="text-sm font-semibold text-slate-900">Programare nouă</p>
+                                    <p class="text-xs text-slate-500 mt-0.5">Radu Ionescu a programat o sesiune vineri la 14:00.</p>
+                                    <p class="text-[10px] text-slate-400 mt-1 font-medium">Acum 10 minute</p>
+                                </div>
+                            </div>
+                            <div class="p-4 hover:bg-slate-50 transition-colors cursor-pointer flex gap-3">
+                                <div class="w-8 h-8 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0"><span class="material-symbols-rounded text-[16px]">payments</span></div>
+                                <div>
+                                    <p class="text-sm font-semibold text-slate-900">Plată încasată</p>
+                                    <p class="text-xs text-slate-500 mt-0.5">Abonamentul Premium (M. Popa) a fost reînnoit.</p>
+                                    <p class="text-[10px] text-slate-400 mt-1 font-medium">Acum 2 ore</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-3 border-t border-slate-100 text-center">
+                            <button onclick="toggleNotificationsMenu()" class="text-xs font-bold text-primary-600 hover:text-primary-700">Marchează toate ca citite</button>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="w-px h-6 bg-slate-200 hidden md:block"></div>
                 <button onclick="logout()" class="hidden md:flex items-center gap-2 text-sm font-medium text-slate-500 hover:text-slate-800 transition-colors">
                     Deconectare
@@ -138,7 +170,6 @@
                 </div>
 
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                    
                     <div class="lg:col-span-2 bg-white rounded-2xl shadow-card border border-slate-200 p-6">
                         <div class="flex justify-between items-center mb-6">
                             <h3 class="font-bold text-slate-900 flex items-center gap-2"><span class="material-symbols-rounded text-primary-500">event</span> Programările de Astăzi</h3>
@@ -187,7 +218,6 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
 
@@ -242,7 +272,6 @@
                 </div>
                 
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-6">
-                    
                     <div class="space-y-6">
                         <div id="payment-methods-container" class="bg-white rounded-2xl shadow-card border border-slate-200 p-6">
                             <div class="flex justify-between items-center mb-6">
@@ -318,7 +347,6 @@
 
             <div id="view-messages" class="hidden h-full w-full flex-col">
                 <div class="flex flex-col flex-1 bg-white max-w-[1200px] mx-auto shadow-sm border-x border-slate-200 w-full h-full">
-                    
                     <div class="h-[76px] px-6 border-b border-slate-200 flex justify-between items-center shrink-0 z-10 bg-white">
                         <div class="flex items-center gap-4">
                             <div class="w-11 h-11 rounded-full bg-slate-100 border border-slate-200 text-slate-700 flex items-center justify-center font-bold text-sm">EA</div>
@@ -466,7 +494,7 @@
                         </div>
                         
                         <div class="flex justify-end pt-4 border-t border-slate-200">
-                            <button onclick="alert('Informațiile profilului au fost salvate cu succes!')" class="px-8 py-3 bg-dark-900 text-white rounded-xl text-sm font-bold hover:bg-slate-800 transition-colors shadow-md">Salvează Toate Modificările</button>
+                            <button onclick="showNotification('Informațiile profilului au fost salvate cu succes!', 'success')" class="px-8 py-3 bg-dark-900 text-white rounded-xl text-sm font-bold hover:bg-slate-800 transition-colors shadow-md">Salvează Toate Modificările</button>
                         </div>
                     </div>
                 </div>
@@ -508,6 +536,8 @@
         </div>
     </div>
 
+    <div id="toast-container" class="fixed bottom-5 right-5 z-[200] flex flex-col gap-3 pointer-events-none"></div>
+
     <script>
         function logout() {
             if(confirm("Ești sigur că vrei să te deconectezi?")) { window.location.href = "login.html"; }
@@ -548,6 +578,8 @@
             tableBody.insertBefore(newRow, tableBody.firstChild);
             event.target.reset();
             togglePatientModal();
+            
+            showNotification(`Clientul ${name} a fost adăugat cu succes!`, 'success');
         }
 
         function toggleMobileMenu() {
@@ -665,6 +697,8 @@
                 };
                 jitsiApi = new JitsiMeetExternalAPI(domain, options);
                 isVideoActive = true;
+                
+                showNotification("Sesiunea video a fost pornită.", "info");
             } else {
                 container.classList.add('hidden');
                 btn.innerHTML = `<span class="material-symbols-rounded text-[20px]">videocam</span> Consult Video`;
@@ -674,15 +708,22 @@
             }
         }
 
-        // --- FUNCȚII NOI ADAUGATE --- //
+        // --- FUNCȚII NOI PENTRU PROFIL, DOCUMENTE, PACHETE ȘI PLĂȚI --- //
 
         function updateProfilePic(event) {
             const file = event.target.files[0];
             if (file) {
                 const imageUrl = URL.createObjectURL(file);
                 const avatarDiv = document.getElementById('profile-avatar');
+                const sidebarAvatar = document.getElementById('sidebar-avatar');
+                
                 avatarDiv.style.backgroundImage = `url(${imageUrl})`;
                 avatarDiv.innerText = '';
+                
+                sidebarAvatar.style.backgroundImage = `url(${imageUrl})`;
+                sidebarAvatar.innerText = '';
+                
+                showNotification("Fotografia de profil a fost actualizată.", "success");
             }
         }
 
@@ -702,15 +743,16 @@
                         <div class="w-10 h-10 ${colorClass} rounded-lg flex items-center justify-center"><span class="material-symbols-rounded text-[20px]">${icon}</span></div>
                         <div><p class="text-sm font-bold text-slate-900 truncate max-w-[200px]">${file.name}</p><p class="text-xs text-slate-500">${fileSizeMB} MB • Încărcat acum</p></div>
                     </div>
-                    <button onclick="this.parentElement.remove()" class="text-slate-400 hover:text-red-500 transition-colors p-2"><span class="material-symbols-rounded text-[20px]">delete</span></button>
+                    <button onclick="this.parentElement.remove(); showNotification('Documentul a fost șters.', 'info');" class="text-slate-400 hover:text-red-500 transition-colors p-2"><span class="material-symbols-rounded text-[20px]">delete</span></button>
                 </div>
             `;
             
             docList.insertAdjacentHTML('afterbegin', newDocHTML);
+            showNotification(`Fișierul ${file.name} a fost încărcat cu succes!`, "success");
         }
 
         function downloadInvoice() {
-            alert("Te redirecționăm către portalul securizat de facturare (ex: Stripe Billing) pentru a descărca factura aferentă lunii curente.");
+            showNotification("Factura a fost generată și trimisă către adresa ta de email.", "info");
         }
 
         function addPackage() {
@@ -723,7 +765,7 @@
             const grid = document.getElementById('packages-grid');
             const newPackageHTML = `
                 <div class="border border-slate-200 p-5 rounded-xl bg-white shadow-sm relative group">
-                    <button onclick="this.parentElement.remove()" class="absolute top-3 right-3 text-slate-300 hover:text-red-500 hidden group-hover:block transition-colors"><span class="material-symbols-rounded text-[18px]">delete</span></button>
+                    <button onclick="this.parentElement.remove(); showNotification('Pachetul a fost eliminat.', 'info');" class="absolute top-3 right-3 text-slate-300 hover:text-red-500 hidden group-hover:block transition-colors"><span class="material-symbols-rounded text-[18px]">delete</span></button>
                     <h4 class="font-bold text-slate-900 pr-6">${nume}</h4>
                     <p class="text-xs text-slate-500 mt-1.5 leading-relaxed">${descriere}</p>
                     <div class="mt-4 flex items-center justify-between"><p class="text-primary-600 font-bold text-lg">${pret}</p></div>
@@ -731,6 +773,7 @@
             `;
             
             grid.insertAdjacentHTML('beforeend', newPackageHTML);
+            showNotification(`Pachetul "${nume}" a fost adăugat cu succes!`, "success");
         }
 
         function addCard() {
@@ -746,13 +789,58 @@
                         <div class="w-12 h-10 bg-blue-50 text-blue-600 rounded-lg flex items-center justify-center font-bold text-xs border border-blue-100">CARD</div>
                         <div><p class="text-sm font-bold text-slate-900">Mastercard •••• ${last4}</p><p class="text-xs text-slate-500">Adăugat recent</p></div>
                     </div>
-                    <button onclick="this.parentElement.remove()" class="text-slate-400 hover:text-red-600 transition-colors"><span class="material-symbols-rounded text-[20px]">delete</span></button>
+                    <button onclick="this.parentElement.remove(); showNotification('Metoda de plată a fost ștearsă.', 'info');" class="text-slate-400 hover:text-red-600 transition-colors"><span class="material-symbols-rounded text-[20px]">delete</span></button>
                 </div>
             `;
 
             const container = document.getElementById('payment-methods-container');
             container.insertAdjacentHTML('beforeend', newCardHTML);
+            showNotification("Noul card a fost adăugat cu succes!", "success");
         }
+
+        // --- SISTEM DE NOTIFICĂRI TOAST ȘI MENIU DROP-DOWN --- //
+
+        function showNotification(message, type = 'success') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            
+            const bgColor = type === 'success' ? 'bg-emerald-50 border-emerald-200 text-emerald-800' : 'bg-blue-50 border-blue-200 text-blue-800';
+            const icon = type === 'success' ? 'check_circle' : 'info';
+            const iconColor = type === 'success' ? 'text-emerald-500' : 'text-blue-500';
+
+            toast.className = `flex items-center gap-3 px-4 py-3 rounded-xl border shadow-lg transform transition-all duration-300 translate-y-10 opacity-0 pointer-events-auto ${bgColor}`;
+            toast.innerHTML = `
+                <span class="material-symbols-rounded ${iconColor}">${icon}</span>
+                <p class="text-sm font-semibold">${message}</p>
+                <button onclick="this.parentElement.remove()" class="ml-2 text-slate-400 hover:text-slate-600 ml-auto"><span class="material-symbols-rounded text-[18px]">close</span></button>
+            `;
+            
+            container.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.classList.remove('translate-y-10', 'opacity-0');
+            }, 10);
+
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-x-10');
+                setTimeout(() => toast.remove(), 300);
+            }, 4000);
+        }
+
+        function toggleNotificationsMenu() {
+            const dropdown = document.getElementById('notifications-dropdown');
+            dropdown.classList.toggle('hidden');
+        }
+
+        document.addEventListener('click', function(event) {
+            const dropdown = document.getElementById('notifications-dropdown');
+            const bellBtn = event.target.closest('button[onclick="toggleNotificationsMenu()"]');
+            const isInsideDropdown = event.target.closest('#notifications-dropdown');
+            
+            if (!bellBtn && !isInsideDropdown && dropdown && !dropdown.classList.contains('hidden')) {
+                dropdown.classList.add('hidden');
+            }
+        });
     </script>
 </body>
 </html>
