@@ -3,7 +3,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dr. Sarah Miller - Profil & Programare | NutriChef Pro</title>
+    <title>Dr. Sarah Miller - NutriChef Pro</title>
+    
+    <meta name="theme-color" content="#0f172a">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
@@ -16,6 +18,7 @@
                     colors: {
                         primary: { 50: '#f0fdfa', 100: '#ccfbf1', 500: '#14b8a6', 600: '#0d9488', 900: '#134e4a' },
                         dark: { 800: '#1e293b', 900: '#0f172a', 950: '#020617' },
+                        accent: { 500: '#f59e0b', 600: '#d97706' },
                     }
                 }
             }
@@ -23,171 +26,166 @@
     </script>
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8fafc; }
-        .glass-nav { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(226, 232, 240, 0.8); }
-        .input-field { @apply w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm font-medium focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 outline-none transition-all; }
-        .package-radio:checked + label { @apply border-primary-500 bg-primary-50 ring-1 ring-primary-500; }
+        .glass-nav { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(226, 232, 240, 0.8); }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
-<body class="text-slate-900 antialiased selection:bg-primary-500 selection:text-white pb-20 lg:pb-0">
+<body class="bg-slate-50 text-slate-900 antialiased selection:bg-primary-500 selection:text-white pb-20 md:pb-0">
 
-    <nav class="fixed top-0 left-0 right-0 z-50 glass-nav transition-all duration-300">
-        <div class="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
+    <!-- NAVIGATION -->
+    <nav class="fixed top-0 left-0 right-0 z-50 glass-nav transition-all duration-300 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
             <a href="index.html" class="flex items-center gap-2 hover:opacity-80 transition-opacity">
-                <div class="w-8 h-8 rounded-lg bg-dark-950 flex items-center justify-center shadow-md">
-                    <span class="material-symbols-rounded text-primary-500 text-[16px]">restaurant</span>
+                <div class="w-10 h-10 rounded-xl bg-dark-950 flex items-center justify-center shadow-md">
+                    <span class="material-symbols-rounded text-primary-500">arrow_back</span>
                 </div>
-                <span class="text-lg font-bold tracking-tight text-slate-900">NutriChef</span>
+                <span class="text-sm font-bold tracking-tight text-slate-900 hidden sm:block">Înapoi la platformă</span>
             </a>
+
             <div class="flex items-center gap-4">
-                <a href="login.html" class="text-sm font-bold text-slate-600 hover:text-slate-900 transition-colors">Login Client</a>
+                <a href="index.html" class="text-sm font-bold text-slate-700 hover:text-primary-600 transition-colors">Nu ai cont?</a>
+                <button onclick="openModal('modal-reg-pacient')" class="bg-primary-600 hover:bg-primary-700 text-white px-5 py-2.5 rounded-xl text-sm font-bold transition-all shadow-md">
+                    Înregistrare Pacient
+                </button>
             </div>
         </div>
     </nav>
 
-    <div class="relative pt-20">
-        <div class="h-64 w-full bg-dark-900 relative overflow-hidden">
-            <div class="absolute inset-0 bg-cover bg-center opacity-40 mix-blend-overlay" style="background-image: url('https://images.unsplash.com/photo-1490645935967-10de6ba17061?q=80&w=2053&auto=format&fit=crop');"></div>
-            <div class="absolute inset-0 bg-gradient-to-t from-dark-950/80 to-transparent"></div>
-        </div>
-
-        <div class="max-w-6xl mx-auto px-6 relative -mt-20">
-            <div class="flex flex-col md:flex-row items-center md:items-end gap-6 pb-8 border-b border-slate-200">
-                <div class="w-32 h-32 rounded-full border-4 border-white bg-white shadow-xl relative shrink-0">
-                    <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&w=2070&auto=format&fit=crop" alt="Dr. Sarah Miller" class="w-full h-full rounded-full object-cover">
-                    <div class="absolute bottom-0 right-0 w-8 h-8 bg-emerald-500 border-2 border-white rounded-full flex items-center justify-center text-white shadow-sm" title="Nutriționist Verificat">
-                        <span class="material-symbols-rounded text-[16px]">verified</span>
-                    </div>
-                </div>
-                <div class="text-center md:text-left flex-1 mb-2">
-                    <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight">Dr. Sarah Miller</h1>
-                    <p class="text-primary-600 font-bold mt-1">Nutriție Clinică & Dietetică Sportivă</p>
-                    <div class="flex flex-wrap items-center justify-center md:justify-start gap-4 mt-3 text-sm font-medium text-slate-500">
-                        <span class="flex items-center gap-1.5"><span class="material-symbols-rounded text-[18px]">location_on</span> București / Online</span>
-                        <span class="flex items-center gap-1.5"><span class="material-symbols-rounded text-[18px] text-accent-500" style="font-variation-settings: 'FILL' 1;">star</span> 4.9 (124 recenzii)</span>
-                        <span class="flex items-center gap-1.5"><span class="material-symbols-rounded text-[18px]">badge</span> Aviz: RO-74839</span>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <!-- HEADER PROFIL (Background Banner) -->
+    <div class="w-full h-48 md:h-64 bg-slate-900 mt-20 relative overflow-hidden">
+        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1543362906-acfc16c67564?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center opacity-30 mix-blend-overlay"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent"></div>
     </div>
 
-    <main class="max-w-6xl mx-auto px-6 py-8">
-        <div class="flex flex-col lg:flex-row gap-10 relative">
+    <!-- CONȚINUT PROFIL -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 -mt-20 md:-mt-24 relative z-10">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
             
-            <div class="w-full lg:w-3/5 space-y-10">
+            <!-- COLOANA STÂNGA (Detalii & Despre) -->
+            <div class="lg:col-span-2 space-y-6">
                 
-                <section>
-                    <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><span class="material-symbols-rounded text-primary-500">person</span> Despre Mine</h2>
-                    <div class="prose prose-slate max-w-none text-slate-600 leading-relaxed text-sm">
-                        <p class="mb-4">Bună! Sunt Sarah, un medic nutriționist pasionat de optimizarea sănătății prin alimentație conștientă. Cu peste 10 ani de experiență, abordarea mea combină știința medicală cu planuri alimentare practice, adaptate stilului tău de viață.</p>
-                        <p>Nu cred în diete restrictive pe termen scurt, ci în educație nutrițională, reechilibrare metabolică și rezultate sustenabile. Fie că vrei să slăbești, să îți îmbunătățești performanțele sportive sau să gestionezi o afecțiune cronică, sunt aici să te ghidez pas cu pas.</p>
+                <!-- Info Header -->
+                <div class="bg-white p-6 md:p-8 rounded-[2rem] shadow-sm border border-slate-200">
+                    <div class="flex flex-col sm:flex-row gap-6 items-start sm:items-center">
+                        <div class="relative shrink-0">
+                            <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&w=500&auto=format&fit=crop" alt="Dr. Sarah Miller" class="w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-white shadow-lg object-cover">
+                            <div class="absolute bottom-2 right-2 w-8 h-8 bg-emerald-500 border-2 border-white rounded-full flex items-center justify-center text-white" title="Specialist Verificat">
+                                <span class="material-symbols-rounded text-[18px]">verified</span>
+                            </div>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex flex-wrap items-center gap-2 mb-2">
+                                <span class="px-3 py-1 bg-primary-50 text-primary-700 text-xs font-bold rounded-lg border border-primary-100">Medic Nutriționist</span>
+                                <span class="px-3 py-1 bg-slate-100 text-slate-600 text-xs font-bold rounded-lg border border-slate-200">Acceptă Pacienți Noi</span>
+                            </div>
+                            <h1 class="text-3xl md:text-4xl font-extrabold text-slate-900">Dr. Sarah Miller</h1>
+                            <p class="text-slate-500 font-medium mt-1">Specializată în Slăbire Sustenabilă & Nutriție Sportivă</p>
+                            
+                            <div class="flex flex-wrap gap-4 mt-4 text-sm font-semibold text-slate-700">
+                                <div class="flex items-center gap-1.5"><span class="material-symbols-rounded text-accent-500 text-[20px]">star</span> 5.0 (124 Recenzii)</div>
+                                <div class="flex items-center gap-1.5"><span class="material-symbols-rounded text-blue-500 text-[20px]">work_history</span> 10+ Ani Experiență</div>
+                                <div class="flex items-center gap-1.5"><span class="material-symbols-rounded text-emerald-500 text-[20px]">videocam</span> Consultații Online</div>
+                            </div>
+                        </div>
                     </div>
-                </section>
+                </div>
 
-                <section>
-                    <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><span class="material-symbols-rounded text-primary-500">workspace_premium</span> Certificări & Educație</h2>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex items-start gap-3">
-                            <div class="w-10 h-10 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-center shrink-0"><span class="material-symbols-rounded text-slate-400">school</span></div>
-                            <div><h4 class="text-sm font-bold text-slate-900">Licență Nutriție și Dietetică</h4><p class="text-xs text-slate-500 mt-0.5">UMF "Carol Davila" (2014)</p></div>
-                        </div>
-                        <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex items-start gap-3">
-                            <div class="w-10 h-10 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-center shrink-0"><span class="material-symbols-rounded text-slate-400">fitness_center</span></div>
-                            <div><h4 class="text-sm font-bold text-slate-900">Specializare Nutriție Sportivă</h4><p class="text-xs text-slate-500 mt-0.5">Institutul Național de Sport</p></div>
-                        </div>
+                <!-- Despre Mine -->
+                <div class="bg-white p-6 md:p-8 rounded-[2rem] shadow-sm border border-slate-200">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-4">Despre Mine</h2>
+                    <div class="prose prose-slate max-w-none text-slate-600 leading-relaxed space-y-4">
+                        <p>Bună! Sunt Sarah, medic nutriționist pasionat de transformarea vieților prin educație alimentară și echilibru. Filosofia mea nu este despre diete stricte, ci despre construirea unui stil de viață sustenabil, personalizat pe nevoile și ritmul fiecărui pacient.</p>
+                        <p>Am absolvit Facultatea de Medicină și m-am specializat pe nutriție clinică și sportivă. Te pot ajuta dacă:</p>
+                        <ul class="list-disc pl-5 font-medium text-slate-700 space-y-2">
+                            <li>Îți dorești să slăbești fără să te înfometezi.</li>
+                            <li>Ai nevoie de un plan pentru creșterea masei musculare.</li>
+                            <li>Suferi de afecțiuni metabolice (rezistență la insulină, diabet etc.) și ai nevoie de un regim terapeutic.</li>
+                        </ul>
+                        <p>Prin platforma NutriChef, vom comunica direct, îți vei putea urmări mesele în jurnalul interactiv, iar eu îți voi adapta planul în timp real.</p>
                     </div>
-                </section>
+                </div>
 
-                <section>
-                    <h2 class="text-xl font-bold text-slate-900 mb-6 flex items-center gap-2"><span class="material-symbols-rounded text-primary-500">route</span> Cum vom colabora</h2>
-                    <div class="space-y-6 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-slate-200 before:to-transparent">
-                        <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
-                            <div class="flex items-center justify-center w-10 h-10 rounded-full border-4 border-white bg-primary-100 text-primary-600 shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 font-bold text-sm">1</div>
-                            <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
-                                <h4 class="font-bold text-slate-900 text-sm">Consultația Inițială</h4>
-                                <p class="text-xs text-slate-500 mt-1 leading-relaxed">Discutăm obiectivele, analizăm istoricul medical și analizele de sânge (Video sau Fizic).</p>
+                <!-- Recenzii -->
+                <div class="bg-white p-6 md:p-8 rounded-[2rem] shadow-sm border border-slate-200">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-6">Părerea Pacienților</h2>
+                    
+                    <div class="space-y-6">
+                        <div class="pb-6 border-b border-slate-100">
+                            <div class="flex justify-between items-start mb-2">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center font-bold text-slate-600">MI</div>
+                                    <div><p class="text-sm font-bold text-slate-900">Maria Iordan</p><p class="text-[10px] text-slate-400">Acum 2 săptămâni</p></div>
+                                </div>
+                                <div class="flex text-accent-500"><span class="material-symbols-rounded text-[18px]" style="font-variation-settings:'FILL' 1">star</span><span class="material-symbols-rounded text-[18px]" style="font-variation-settings:'FILL' 1">star</span><span class="material-symbols-rounded text-[18px]" style="font-variation-settings:'FILL' 1">star</span><span class="material-symbols-rounded text-[18px]" style="font-variation-settings:'FILL' 1">star</span><span class="material-symbols-rounded text-[18px]" style="font-variation-settings:'FILL' 1">star</span></div>
                             </div>
+                            <p class="text-sm text-slate-600 leading-relaxed">„Un profesionist desăvârșit. Nu am simțit că sunt la dietă nicio secundă, rețetele au fost delicioase și aplicația super ușor de folosit. Am dat jos 6 kg într-o lună și jumătate!”</p>
                         </div>
-                        <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
-                            <div class="flex items-center justify-center w-10 h-10 rounded-full border-4 border-white bg-slate-100 text-slate-500 shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 font-bold text-sm">2</div>
-                            <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
-                                <h4 class="font-bold text-slate-900 text-sm">Planul Personalizat</h4>
-                                <p class="text-xs text-slate-500 mt-1 leading-relaxed">Primești planul alimentar adaptat gusturilor tale direct în contul tău de pacient NutriChef.</p>
+                        <div>
+                            <div class="flex justify-between items-start mb-2">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center font-bold text-slate-600">A</div>
+                                    <div><p class="text-sm font-bold text-slate-900">Alexandru</p><p class="text-[10px] text-slate-400">Acum o lună</p></div>
+                                </div>
+                                <div class="flex text-accent-500"><span class="material-symbols-rounded text-[18px]" style="font-variation-settings:'FILL' 1">star</span><span class="material-symbols-rounded text-[18px]" style="font-variation-settings:'FILL' 1">star</span><span class="material-symbols-rounded text-[18px]" style="font-variation-settings:'FILL' 1">star</span><span class="material-symbols-rounded text-[18px]" style="font-variation-settings:'FILL' 1">star</span><span class="material-symbols-rounded text-[18px]" style="font-variation-settings:'FILL' 1">star</span></div>
                             </div>
-                        </div>
-                        <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
-                            <div class="flex items-center justify-center w-10 h-10 rounded-full border-4 border-white bg-slate-100 text-slate-500 shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 font-bold text-sm">3</div>
-                            <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
-                                <h4 class="font-bold text-slate-900 text-sm">Monitorizare (Follow-up)</h4>
-                                <p class="text-xs text-slate-500 mt-1 leading-relaxed">Ajustăm planul bilunar, monitorizăm progresul și comunicăm pe chat-ul integrat.</p>
-                            </div>
+                            <p class="text-sm text-slate-600 leading-relaxed">„Aveam nevoie de ajutor pentru nutriția sportivă înainte de maraton. Sarah a fost exact ce îmi trebuia. Totul structurat, clar și m-a ajutat imens.”</p>
                         </div>
                     </div>
-                </section>
+                </div>
+
             </div>
 
-            <div class="w-full lg:w-2/5">
+            <!-- COLOANA DREAPTA (Pachete & Programare STICKY) -->
+            <div class="lg:col-span-1">
                 <div class="sticky top-24 space-y-6">
                     
-                    <div class="bg-white rounded-3xl p-6 lg:p-8 border border-slate-200 shadow-[0_8px_30px_rgb(0,0,0,0.06)]">
-                        <h3 class="text-xl font-extrabold text-slate-900 mb-1">Fă o programare</h3>
-                        <p class="text-sm text-slate-500 mb-6 font-medium">Selectează pachetul și alege o dată disponibilă.</p>
-
-                        <form id="booking-form" class="space-y-6">
+                    <!-- Formular Programare Rapidă -->
+                    <div class="bg-white p-6 rounded-[2rem] shadow-card border border-slate-200">
+                        <h2 class="text-xl font-bold text-slate-900 mb-4">Programează-te</h2>
+                        <form onsubmit="handleBooking(event)" class="space-y-4">
+                            <select required class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:border-primary-500 outline-none transition-colors cursor-pointer">
+                                <option value="">Alege Serviciul...</option>
+                                <option value="150">Consultație Inițială (150 RON)</option>
+                                <option value="350">Abonament Premium (350 RON / lună)</option>
+                            </select>
                             
-                            <div class="space-y-3">
-                                <label class="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">1. Alege Pachetul</label>
-                                
-                                <div>
-                                    <input type="radio" name="package" id="pkg-consult" value="consult" class="package-radio hidden" checked>
-                                    <label for="pkg-consult" class="flex items-center justify-between p-4 rounded-xl border-2 border-slate-100 cursor-pointer transition-all hover:border-slate-300">
-                                        <div>
-                                            <h4 class="font-bold text-slate-900 text-sm">Consultație Inițială</h4>
-                                            <p class="text-xs text-slate-500 mt-0.5">Sesiune Video (45 min) + Evaluare</p>
-                                        </div>
-                                        <span class="font-bold text-primary-600">150 RON</span>
-                                    </label>
-                                </div>
-
-                                <div>
-                                    <input type="radio" name="package" id="pkg-sub" value="abonament" class="package-radio hidden">
-                                    <label for="pkg-sub" class="flex items-center justify-between p-4 rounded-xl border-2 border-slate-100 cursor-pointer transition-all hover:border-slate-300">
-                                        <div>
-                                            <div class="flex items-center gap-2"><h4 class="font-bold text-slate-900 text-sm">Abonament Premium</h4><span class="bg-dark-900 text-white text-[9px] uppercase px-2 py-0.5 rounded-full font-bold">Recomandat</span></div>
-                                            <p class="text-xs text-slate-500 mt-0.5">Plan lunar + 2 sesiuni follow-up + Chat</p>
-                                        </div>
-                                        <span class="font-bold text-primary-600">350 RON</span>
-                                    </label>
-                                </div>
-                            </div>
-
-                            <div class="space-y-3">
-                                <label class="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">2. Alege Data și Ora</label>
-                                <div class="grid grid-cols-2 gap-3">
-                                    <input type="date" required class="input-field" min="2024-05-26">
-                                    <select required class="input-field appearance-none bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMCAyMCIgZmlsbD0iIzY0NzQ4YiI+PHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNNi4yOTMgNy4yOTNhMSAxIDAgMDExLjQxNCAwbDIgMmExIDEgMCAwMTEuNDE0IDBsMi0yYTEgMSAwMDExLjQxNCAxLjQxNGwtMyAzYTEgMSAwMDAtMS40MTRsLTMtM2ExIDEgMCAwMTAtMS40MTR6IiBjbGlwLXJ1bGU9ImV2ZW5vZGQiLz48L3N2Zz4=')] bg-no-repeat bg-[position:right_1rem_center] bg-[size:1.5em]">
-                                        <option value="" disabled selected>Selectează ora</option>
-                                        <option value="09:00">09:00</option>
-                                        <option value="10:00">10:00</option>
-                                        <option value="11:30">11:30</option>
-                                        <option value="14:00">14:00</option>
-                                        <option value="16:00">16:00</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="space-y-3">
-                                <label class="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">3. Datele Tale</label>
-                                <input type="text" placeholder="Numele tău complet" required class="input-field">
-                                <input type="email" placeholder="Adresa de email" required class="input-field">
-                                <textarea placeholder="Care este obiectivul tău principal? (opțional)" rows="2" class="input-field resize-none"></textarea>
-                            </div>
-
-                            <button type="submit" class="w-full bg-dark-950 hover:bg-dark-800 text-white py-4 rounded-xl font-bold transition-all shadow-lg active:scale-[0.98] flex items-center justify-center gap-2">
-                                <span class="material-symbols-rounded text-[20px]">calendar_month</span> Confirmă Programarea
+                            <input type="date" required class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:border-primary-500 outline-none transition-colors">
+                            
+                            <button type="submit" class="w-full py-4 bg-dark-900 hover:bg-dark-800 text-white rounded-xl text-sm font-bold shadow-lg transition-colors flex items-center justify-center gap-2">
+                                Continuă Către Plată <span class="material-symbols-rounded text-[18px]">arrow_forward</span>
                             </button>
-                            <p class="text-[10px] text-center text-slate-400 font-medium px-4">Programarea va fi trimisă nutriționistului. Vei primi un email de confirmare cu link-ul de plată și detaliile sesiunii video.</p>
+                            <p class="text-xs text-center text-slate-500 font-medium">Platformă 100% Securizată</p>
                         </form>
+                    </div>
+
+                    <!-- Pachetele Detaliate -->
+                    <div class="bg-slate-900 p-6 rounded-[2rem] shadow-xl border border-slate-800 text-white relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-primary-500/20 rounded-full blur-2xl"></div>
+                        <h2 class="text-xl font-bold mb-6 relative z-10">Pachetele Mele</h2>
+                        
+                        <div class="space-y-4 relative z-10">
+                            <!-- Pachet 1 -->
+                            <div class="bg-slate-800/80 p-4 rounded-2xl border border-slate-700 hover:border-primary-500 transition-colors cursor-pointer group">
+                                <div class="flex justify-between items-start mb-2">
+                                    <h3 class="font-bold text-sm">Consultație Inițială</h3>
+                                    <span class="text-primary-400 font-bold">150 RON</span>
+                                </div>
+                                <p class="text-xs text-slate-400 leading-relaxed mb-3">Evaluare corporală, istoric medical, analiză analize și stabilirea obiectivului (45 min).</p>
+                                <button onclick="document.querySelector('select').value='150'; window.scrollTo(0,0);" class="text-xs font-bold text-primary-400 group-hover:text-primary-300">Alege acest pachet →</button>
+                            </div>
+
+                            <!-- Pachet 2 -->
+                            <div class="bg-primary-900/40 p-4 rounded-2xl border border-primary-500/50 hover:border-primary-400 transition-colors cursor-pointer group relative overflow-hidden">
+                                <div class="absolute top-0 right-0 bg-primary-500 text-white text-[9px] font-bold uppercase px-2 py-0.5 rounded-bl-lg">Recomandat</div>
+                                <div class="flex justify-between items-start mb-2 mt-1">
+                                    <h3 class="font-bold text-sm">Abonament Premium</h3>
+                                    <span class="text-primary-400 font-bold">350 RON</span>
+                                </div>
+                                <p class="text-xs text-slate-300 leading-relaxed mb-3">Include consultația inițială + plan alimentar pe 4 săptămâni + suport zilnic pe chat.</p>
+                                <button onclick="document.querySelector('select').value='350'; window.scrollTo(0,0);" class="text-xs font-bold text-primary-400 group-hover:text-primary-300">Alege acest pachet →</button>
+                            </div>
+                        </div>
                     </div>
 
                 </div>
@@ -196,30 +194,114 @@
         </div>
     </main>
 
-    <footer class="bg-white border-t border-slate-200 py-8 mt-12">
-        <div class="max-w-6xl mx-auto px-6 text-center text-xs text-slate-400 font-medium">
-            Acest profil este găzduit și verificat de platforma <strong>NutriChef Pro</strong>. Toate datele sunt securizate GDPR.
-        </div>
+    <!-- FOOTER SIMPLU -->
+    <footer class="mt-16 bg-white border-t border-slate-200 py-8 text-center pb-24 md:pb-8">
+        <p class="text-sm text-slate-500 font-medium">Profil găzduit securizat pe platforma <a href="index.html" class="text-primary-600 font-bold hover:underline">NutriChef Pro</a></p>
     </footer>
 
-    <script type="module">
-        // Logica pentru Submit Programare (Mockup pentru Firebase)
-        document.getElementById('booking-form').addEventListener('submit', (e) => {
-            e.preventDefault();
-            const btn = e.target.querySelector('button[type="submit"]');
-            const originalText = btn.innerHTML;
-            
-            btn.innerHTML = '<span class="material-symbols-rounded animate-spin">progress_activity</span> Se procesează...';
-            btn.disabled = true;
+    <!-- MODAL INREGISTRARE PACIENT PENTRU PROGRAMARE COMPLET -->
+    <div id="modal-reg-pacient" class="fixed inset-0 z-[100] hidden items-center justify-center p-4">
+        <div class="absolute inset-0 bg-dark-900/60 backdrop-blur-sm transition-opacity" onclick="closeModal('modal-reg-pacient')"></div>
+        <div class="relative w-full max-w-2xl bg-white rounded-3xl shadow-2xl p-6 sm:p-8 transform transition-all max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-6 border-b border-slate-100 pb-4">
+                <div>
+                    <h2 class="text-2xl font-bold text-slate-900">Date Pacient & Programare</h2>
+                    <p class="text-sm text-slate-500 mt-1">Completează detaliile pentru programarea la <strong class="text-primary-600">Dr. Sarah Miller</strong>.</p>
+                </div>
+                <button onclick="closeModal('modal-reg-pacient')" class="w-8 h-8 flex items-center justify-center rounded-full bg-slate-100 text-slate-500 hover:bg-slate-200">
+                    <span class="material-symbols-rounded text-[20px]">close</span>
+                </button>
+            </div>
 
-            // Simulare trimitere date către Firebase / Email
+            <form onsubmit="submitForm(event)" class="space-y-5">
+                
+                <!-- Secțiunea 1: Date de Contact -->
+                <div>
+                    <h3 class="text-sm font-bold text-slate-900 mb-3 flex items-center gap-2"><span class="material-symbols-rounded text-primary-500 text-[18px]">person</span> 1. Date Personale</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <input type="text" required placeholder="Nume Complet" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:border-primary-500 outline-none">
+                        <input type="email" required placeholder="Adresă Email" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:border-primary-500 outline-none">
+                        <input type="tel" required placeholder="Telefon" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:border-primary-500 outline-none">
+                        <input type="password" required placeholder="Creează o Parolă pentru cont" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:border-primary-500 outline-none">
+                    </div>
+                </div>
+
+                <!-- Secțiunea 2: Date Medicale și Fizice -->
+                <div class="pt-2 border-t border-slate-100">
+                    <h3 class="text-sm font-bold text-slate-900 mb-3 flex items-center gap-2"><span class="material-symbols-rounded text-primary-500 text-[18px]">monitor_weight</span> 2. Profil Nutrițional</h3>
+                    
+                    <div class="grid grid-cols-3 gap-3 mb-3">
+                        <input type="number" required placeholder="Vârstă" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:border-primary-500 outline-none">
+                        <input type="number" required placeholder="Greutate (kg)" step="0.1" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:border-primary-500 outline-none">
+                        <input type="number" required placeholder="Înălțime (cm)" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:border-primary-500 outline-none">
+                    </div>
+
+                    <select required class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:border-primary-500 outline-none mb-3 cursor-pointer">
+                        <option value="">Alege obiectivul principal...</option>
+                        <option value="slabire">Slăbire / Remodelare corporală</option>
+                        <option value="masa">Creștere masă musculară</option>
+                        <option value="mentinere">Menținere / Stil de viață sănătos</option>
+                        <option value="medical">Nutriție terapeutică (diabet, colesterol etc.)</option>
+                    </select>
+
+                    <textarea placeholder="Istoric medical pe scurt (Alergii, afecțiuni curente, medicamente)..." rows="3" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:border-primary-500 outline-none resize-none"></textarea>
+                </div>
+                
+                <input type="hidden" value="NUTRI-SARAH" id="hidden-nutri-code">
+
+                <button type="submit" class="w-full py-4 bg-primary-600 hover:bg-primary-700 text-white rounded-xl text-sm font-bold shadow-lg transition-colors mt-2">
+                    Confirmă & Finalizează Programarea
+                </button>
+                <div class="text-center">
+                    <p class="text-xs text-slate-500">Ai deja cont NutriChef? <a href="login.html" class="text-primary-600 font-bold hover:underline">Autentifică-te aici</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATIONS -->
+    <div id="toast-container" class="fixed bottom-5 right-5 z-[200] flex flex-col gap-3 pointer-events-none"></div>
+
+    <script>
+        function showNotification(message, type = 'success') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            const bgColor = type === 'success' ? 'bg-emerald-50 border-emerald-200 text-emerald-800' : 'bg-blue-50 border-blue-200 text-blue-800';
+            const icon = type === 'success' ? 'check_circle' : 'info';
+            
+            toast.className = `flex items-center gap-3 px-4 py-3.5 rounded-xl border shadow-lg transform transition-all duration-300 translate-y-10 opacity-0 pointer-events-auto ${bgColor}`;
+            toast.innerHTML = `<span class="material-symbols-rounded shrink-0">${icon}</span><p class="text-sm font-semibold flex-1">${message}</p>`;
+            
+            container.appendChild(toast);
+            setTimeout(() => toast.classList.remove('translate-y-10', 'opacity-0'), 10);
+            setTimeout(() => { toast.classList.add('opacity-0', 'translate-x-10'); setTimeout(() => toast.remove(), 300); }, 4000);
+        }
+
+        function handleBooking(e) {
+            e.preventDefault();
+            // Deschidem fereastra de creare cont pacient pre-conectată la acest nutriționist
+            openModal('modal-reg-pacient');
+        }
+
+        function openModal(id) {
+            document.getElementById(id).classList.remove('hidden');
+            document.getElementById(id).classList.add('flex');
+            document.body.style.overflow = 'hidden'; 
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).classList.add('hidden');
+            document.body.style.overflow = 'auto'; 
+        }
+
+        function submitForm(event) {
+            event.preventDefault();
+            // Simulează logarea și trimiterea spre platforma pacientului
+            showNotification('Programare înregistrată cu succes! Procesăm plata...', 'success');
             setTimeout(() => {
-                alert("Programarea a fost trimisă cu succes către Dr. Sarah Miller! Vei primi un email în scurt timp.");
-                e.target.reset();
-                btn.innerHTML = originalText;
-                btn.disabled = false;
+                window.location.href = 'portal-pacient.html'; // Te trimite la portal
             }, 1500);
-        });
+        }
     </script>
 </body>
 </html>
