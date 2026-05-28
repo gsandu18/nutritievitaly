@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NutriChef Pro | Platforma Supremă pentru Nutriționiști și Pacienți</title>
     
-    <!-- OPTIMIZARE SEO PENTRU GOOGLE -->
-    <meta name="description" content="NutriChef Pro este platforma și software-ul complet pentru nutriționiști, dieteticieni și antrenori. Gestionează planuri alimentare, consultații video online și monitorizează progresul pacienților tăi.">
+    <meta name="description" content="NutriChef Pro este software-ul complet pentru nutriționiști, dieteticieni și antrenori. Gestionează planuri alimentare, consultații video online și aplicația de dietă pentru pacienți.">
     <meta name="keywords" content="software nutriție, aplicație dietă, platformă nutriționiști, program slăbit online, plan alimentar personalizat, jurnal alimentar pacient, telemedicină nutriție, soft cabinet dietetică, calcule calorii macro, bucatarul personal">
     <meta name="author" content="NutriChef Pro">
 
@@ -46,7 +45,6 @@
 </head>
 <body class="bg-slate-50 text-slate-900 antialiased selection:bg-primary-500 selection:text-white overflow-x-hidden">
 
-    <!-- NAVIGATION -->
     <nav class="fixed top-0 left-0 right-0 z-50 glass-nav transition-all duration-300 shadow-sm">
         <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
             <div class="flex items-center gap-2 cursor-pointer" onclick="window.scrollTo(0,0)">
@@ -64,14 +62,11 @@
             </div>
 
             <div class="flex items-center gap-4">
-                <!-- LOGIN PACIENT -->
                 <button onclick="openModal('modal-login-pacient')" class="hidden md:flex items-center gap-1.5 text-sm font-bold text-slate-500 hover:text-primary-600 transition-colors bg-slate-100 hover:bg-primary-50 px-4 py-2 rounded-lg">
                     <span class="material-symbols-rounded text-[18px]">person</span> Login Pacient
                 </button>
                 <div class="hidden md:block w-px h-6 bg-slate-200 mx-1"></div>
-                <!-- LOGIN SPECIALIST -->
                 <button onclick="openModal('modal-login-nutri')" class="hidden sm:block text-sm font-bold text-slate-700 hover:text-slate-900 transition-colors">Login Specialist</button>
-                <!-- INREGISTRARE -->
                 <button onclick="openModal('modal-reg-nutri')" class="bg-dark-950 hover:bg-dark-800 text-white px-5 py-2.5 rounded-xl text-sm font-bold transition-all shadow-lg active:scale-[0.98]">
                     Începe Gratuit
                 </button>
@@ -79,14 +74,13 @@
         </div>
     </nav>
 
-    <!-- HERO SECTION -->
     <section class="relative pt-32 pb-16 lg:pt-40 lg:pb-24 overflow-hidden">
         <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary-500/10 rounded-full blur-[120px] -z-10 pointer-events-none"></div>
         
         <div class="max-w-7xl mx-auto px-6 text-center">
             <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-slate-200 text-slate-600 text-xs font-bold uppercase tracking-wider mb-8 shadow-sm">
                 <span class="w-2 h-2 rounded-full bg-primary-500 animate-pulse"></span>
-                Platforma Digitală Nr. 1 în România
+                Aplicația de Nutriție Nr. 1 în România
             </div>
             
             <h1 class="text-[2.75rem] sm:text-5xl lg:text-7xl font-extrabold tracking-tight text-slate-900 leading-[1.1] mb-6 max-w-4xl mx-auto text-balance">
@@ -94,11 +88,11 @@
             </h1>
             
             <p class="text-lg lg:text-xl text-slate-500 font-medium max-w-2xl mx-auto mb-10 leading-relaxed text-balance">
-                Singurul ecosistem digital complet. Oferim un panou de control avansat pentru clinici și o aplicație mobilă interactivă care ține pacienții motivați zilnic.
+                NutriChef Pro este singurul ecosistem digital complet. Oferim un software avansat pentru clinicile de dietetică și o aplicație mobilă de jurnal alimentar care ține pacienții motivați zilnic.
             </p>
             
             <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
-                <button onclick="openModal('modal-reg-nutri')" class="w-full sm:w-auto bg-primary-600 hover:bg-primary-700 text-white px-8 py-4 rounded-2xl text-base font-bold transition-all shadow-xl shadow-primary-500/20 flex items-center justify-center gap-2">
+                <button onclick="openModal('modal-reg-nutri')" class="w-full sm:w-auto bg-primary-600 hover:bg-primary-700 text-white px-8 py-4 rounded-2xl text-base font-bold transition-all shadow-xl shadow-primary-500/20 active:scale-[0.98] flex items-center justify-center gap-2">
                     Sunt Nutriționist <span class="material-symbols-rounded text-[20px]">arrow_forward</span>
                 </button>
                 <button onclick="openModal('modal-reg-pacient')" class="w-full sm:w-auto bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 px-8 py-4 rounded-2xl text-base font-bold transition-all shadow-sm flex items-center justify-center gap-2">
@@ -106,9 +100,8 @@
                 </button>
             </div>
 
-            <!-- HERO MOCKUP -->
             <div class="relative max-w-5xl mx-auto rounded-[2rem] p-4 bg-white/50 backdrop-blur-sm border border-white/40 shadow-2xl">
-                <img src="https://images.unsplash.com/photo-1498837167922-41cfa6f5ce0f?q=80&w=2070&auto=format&fit=crop" alt="Interfața Platformei NutriChef" class="rounded-2xl w-full h-[300px] md:h-[500px] object-cover shadow-inner">
+                <img src="https://images.unsplash.com/photo-1498837167922-41cfa6f5ce0f?q=80&w=2070&auto=format&fit=crop" alt="Interfața Platformei NutriChef Software Nutriție" class="rounded-2xl w-full h-[300px] md:h-[500px] object-cover shadow-inner">
                 <div class="absolute -bottom-6 -right-6 bg-white p-4 rounded-2xl shadow-xl border border-slate-100 flex items-center gap-4 hidden md:flex">
                     <div class="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-full flex items-center justify-center">
                         <span class="material-symbols-rounded">check_circle</span>
@@ -122,14 +115,13 @@
         </div>
     </section>
 
-    <!-- SECTION: PENTRU NUTRIȚIONIȘTI -->
-    <section id="nutritionisti" class="py-20 lg:py-32 bg-white">
+    <section id="nutritionisti" class="py-20 lg:py-32 bg-white border-t border-slate-100">
         <div class="max-w-7xl mx-auto px-6">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                 <div>
                     <span class="text-primary-600 font-bold tracking-wider uppercase text-sm mb-4 block">Pentru Specialiști</span>
                     <h2 class="text-3xl md:text-4xl lg:text-5xl font-extrabold text-slate-900 mb-6 leading-tight">
-                        Putere absolută pentru cabinetul tău de nutriție.
+                        Software complet pentru cabinetul tău de nutriție.
                     </h2>
                     <p class="text-slate-500 text-lg mb-8 leading-relaxed">
                         Automatizează sarcinile repetitive, creează planuri alimentare în minute și monitorizează evoluția pacienților în timp real. Toate într-un singur panou de comandă securizat.
@@ -142,7 +134,7 @@
                             </div>
                             <div>
                                 <h4 class="text-xl font-bold text-slate-900">Planificator Inteligent de Mese</h4>
-                                <p class="text-slate-500 mt-1">Creează diete folosind o bază de date cu peste 10.000 de alimente. Calculează automat macro și micronutrienții.</p>
+                                <p class="text-slate-500 mt-1">Creează diete folosind o bază de date cu peste 10.000 de alimente. Calculează automat macro și micronutrienții pentru orice program de slăbit.</p>
                             </div>
                         </div>
                         <div class="flex items-start gap-4">
@@ -151,7 +143,7 @@
                             </div>
                             <div>
                                 <h4 class="text-xl font-bold text-slate-900">Telemedicină Integrată</h4>
-                                <p class="text-slate-500 mt-1">Consultații nutriționale video 1-la-1 direct din platformă prin sistemul securizat Jitsi.</p>
+                                <p class="text-slate-500 mt-1">Consultații nutriționale video 1-la-1 direct din platformă prin sistemul securizat, ideal pentru pacienții de la distanță.</p>
                             </div>
                         </div>
                         <div class="flex items-start gap-4">
@@ -160,26 +152,25 @@
                             </div>
                             <div>
                                 <h4 class="text-xl font-bold text-slate-900">Facturare & Plăți Automate</h4>
-                                <p class="text-slate-500 mt-1">Încasează abonamentele recurente direct pe card via Stripe și emite facturi automate către pacienți.</p>
+                                <p class="text-slate-500 mt-1">Încasează abonamentele direct pe card via Stripe și emite facturi automate către pacienți. Scapi de birocrație.</p>
                             </div>
                         </div>
                     </div>
                 </div>
                 
                 <div class="relative">
-                    <img src="https://images.unsplash.com/photo-1664575602276-cd0709a6c682?q=80&w=2000&auto=format&fit=crop" alt="Nutritionist working on laptop" class="rounded-[2rem] shadow-2xl relative z-10 w-full object-cover h-[600px]">
+                    <img src="https://images.unsplash.com/photo-1664575602276-cd0709a6c682?q=80&w=2000&auto=format&fit=crop" alt="Software Nutritie Dietetica" class="rounded-[2rem] shadow-2xl relative z-10 w-full object-cover h-[600px]">
                     <div class="absolute -top-6 -right-6 w-72 h-72 bg-accent-500/20 rounded-full blur-3xl -z-10"></div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SECTION: PENTRU PACIENȚI -->
     <section id="pacienti" class="py-20 lg:py-32 bg-slate-900 text-white overflow-hidden">
         <div class="max-w-7xl mx-auto px-6">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                 <div class="order-2 lg:order-1 relative">
-                    <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?q=80&w=2070&auto=format&fit=crop" alt="Mâncare Sănătoasă Dieta" class="rounded-[2rem] shadow-2xl relative z-10 w-full object-cover h-[600px] border border-slate-700">
+                    <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?q=80&w=2070&auto=format&fit=crop" alt="Aplicație Dietă Jurnal Alimentar" class="rounded-[2rem] shadow-2xl relative z-10 w-full object-cover h-[600px] border border-slate-700">
                     <div class="absolute top-1/2 -right-8 -translate-y-1/2 w-64 bg-slate-800 border border-slate-700 p-4 rounded-3xl shadow-2xl z-20 hidden md:block">
                         <div class="flex items-center justify-between mb-4 pb-4 border-b border-slate-700">
                             <span class="font-bold">Astăzi</span>
@@ -201,10 +192,10 @@
                 <div class="order-1 lg:order-2">
                     <span class="text-primary-400 font-bold tracking-wider uppercase text-sm mb-4 block">Pentru Pacienți & Clienți</span>
                     <h2 class="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-6 leading-tight text-balance">
-                        Aplicația care transformă dieta într-un stil de viață.
+                        Aplicația de dietă care transformă regimul într-un stil de viață.
                     </h2>
                     <p class="text-slate-400 text-lg mb-8 leading-relaxed">
-                        Pacienții tăi primesc propriul lor portal (accesibil de pe orice dispozitiv mobil). Vor avea la dispoziție instrumente de top care cresc retenția și complianța cu până la 80%.
+                        Pacienții tăi primesc propriul lor portal (accesibil de pe orice telefon). Vor avea la dispoziție un jurnal alimentar care crește retenția și complianța cu planul de slăbit.
                     </p>
                     
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -226,7 +217,7 @@
                         <div class="bg-slate-800/50 border border-slate-700 p-6 rounded-2xl">
                             <span class="material-symbols-rounded text-purple-400 text-3xl mb-3 block">shopping_cart</span>
                             <h4 class="font-bold text-lg mb-2">Listă Cumpărături</h4>
-                            <p class="text-sm text-slate-400">Meniul se transformă automat într-o listă clară de ingrediente pentru supermarket.</p>
+                            <p class="text-sm text-slate-400">Meniul alimentar se transformă automat într-o listă clară de ingrediente pentru cumpărături.</p>
                         </div>
                     </div>
                 </div>
@@ -234,17 +225,15 @@
         </div>
     </section>
 
-    <!-- SECTION: EXPERȚI (Aici am adăugat butonul "Vezi Profilul Meu") -->
-    <section id="experti" class="py-16 lg:py-24 bg-white border-t border-slate-200">
+    <section id="experti" class="py-16 lg:py-24 bg-white">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center max-w-xl mx-auto mb-12 lg:mb-16">
                 <span class="text-primary-600 font-bold tracking-wider uppercase text-sm mb-4 block">Comunitatea NutriChef</span>
-                <h2 class="text-3xl font-extrabold text-slate-900 mb-4">Experți de top ne recomandă</h2>
-                <p class="text-slate-500 font-medium leading-relaxed">Peste 500+ de nutriționiști și-au creat deja un profil public pe platforma noastră, fiind vizibili pentru sute de noi pacienți.</p>
+                <h2 class="text-3xl font-extrabold text-slate-900 mb-4">Nutriționiști de top ne recomandă</h2>
+                <p class="text-slate-500 font-medium leading-relaxed">Peste 500+ de medici și dieteticieni și-au creat deja un profil public pe platforma noastră, fiind vizibili pentru mii de pacienți noi.</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Expert 1 -->
                 <div class="bg-slate-50 p-8 rounded-3xl border border-slate-200 shadow-sm flex flex-col items-center text-center">
                     <div class="w-24 h-24 rounded-full border-4 border-white bg-slate-200 shadow-md mb-4 overflow-hidden relative">
                         <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&w=2070&auto=format&fit=crop" alt="Dr. Sarah Miller" class="w-full h-full object-cover">
@@ -258,7 +247,6 @@
                     </a>
                 </div>
 
-                <!-- Expert 2 -->
                 <div class="bg-slate-50 p-8 rounded-3xl border border-slate-200 shadow-sm flex flex-col items-center text-center relative">
                     <div class="absolute top-6 right-6 w-8 h-8 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center shadow-sm" title="Expert Verificat">
                         <span class="material-symbols-rounded text-lg">verified</span>
@@ -274,7 +262,6 @@
                     </a>
                 </div>
 
-                <!-- Expert 3 -->
                 <div class="bg-slate-50 p-8 rounded-3xl border border-slate-200 shadow-sm flex flex-col items-center text-center">
                     <div class="w-24 h-24 rounded-full border-4 border-white bg-slate-200 shadow-md mb-4 overflow-hidden">
                         <img src="https://images.unsplash.com/photo-1594824436998-f2b7a0f9a2ce?q=80&w=2070&auto=format&fit=crop" alt="Andreea Ionescu" class="w-full h-full object-cover">
@@ -290,38 +277,16 @@
         </div>
     </section>
 
-    <!-- SECTION: VIDEO DEMO -->
-    <section id="video-demo" class="py-20 lg:py-32 bg-white border-t border-slate-200">
-        <div class="max-w-7xl mx-auto px-6 text-center">
-            <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4">Vezi NutriChef în Acțiune</h2>
-            <p class="text-slate-500 font-medium mb-12 max-w-2xl mx-auto">Urmărește demonstrația completă a platformei. Descoperă cum poți reduce timpul administrativ cu până la 15 ore pe săptămână.</p>
-            
-            <div class="relative max-w-4xl mx-auto rounded-[2rem] overflow-hidden shadow-2xl group cursor-pointer border border-slate-200">
-                <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=2070&auto=format&fit=crop" alt="Video Thumbnail" class="w-full h-[300px] md:h-[500px] object-cover transition-transform duration-700 group-hover:scale-105">
-                
-                <div class="absolute inset-0 video-overlay flex flex-col items-center justify-center transition-opacity duration-300 group-hover:bg-slate-900/40">
-                    <div class="w-20 h-20 md:w-24 md:h-24 bg-primary-600/90 backdrop-blur-sm text-white rounded-full flex items-center justify-center shadow-2xl shadow-primary-500/40 group-hover:scale-110 transition-transform duration-300 mb-6 border border-white/20">
-                        <span class="material-symbols-rounded text-5xl ml-2">play_arrow</span>
-                    </div>
-                    <p class="text-white font-bold text-lg md:text-xl tracking-wide">Urmărește Prezentarea Platformei</p>
-                    <p class="text-primary-200 text-sm mt-2">Durată: 3:45 min</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SECTION: PRICING (Abonamente) -->
     <section id="pricing" class="py-16 lg:py-24 bg-slate-50 border-t border-slate-200">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center max-w-xl mx-auto mb-12 lg:mb-16">
                 <span class="text-primary-600 font-bold tracking-wider uppercase text-sm mb-4 block">Abonamente Specialiști</span>
                 <h2 class="text-3xl font-extrabold text-slate-900 mb-4">Alege planul potrivit</h2>
-                <p class="text-slate-500 font-medium leading-relaxed">Pacienții tăi primesc acces gratuit la portal. Tu plătești doar pentru softul de gestiune a clinicii.</p>
+                <p class="text-slate-500 font-medium leading-relaxed">Pacienții tăi primesc acces gratuit la aplicația de dietă. Tu plătești doar pentru softul de gestiune a clinicii.</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto items-center">
                 
-                <!-- TRIAL GRATUIT -->
                 <div class="bg-white p-8 lg:p-10 rounded-3xl border border-slate-200 shadow-sm flex flex-col h-full">
                     <h3 class="text-2xl font-bold text-slate-900">Trial Gratuit</h3>
                     <p class="text-slate-500 text-sm mt-2">Testează platforma 30 de zile, fără card atașat.</p>
@@ -337,7 +302,6 @@
                     <button onclick="openModal('modal-reg-nutri')" class="w-full text-center bg-slate-50 border border-slate-300 hover:bg-slate-100 text-slate-900 py-3.5 rounded-xl font-bold transition-colors shadow-sm">Încearcă Gratuit</button>
                 </div>
 
-                <!-- STARTER -->
                 <div class="bg-white p-8 lg:p-10 rounded-3xl border border-slate-200 shadow-sm flex flex-col h-full relative">
                     <h3 class="text-2xl font-bold text-slate-900">Starter</h3>
                     <p class="text-slate-500 text-sm mt-2">Pentru specialiștii la început de drum.</p>
@@ -354,7 +318,6 @@
                     <button onclick="openModal('modal-reg-nutri')" class="w-full text-center bg-primary-50 hover:bg-primary-100 text-primary-700 py-3.5 rounded-xl font-bold transition-colors border border-primary-200">Alege Starter</button>
                 </div>
 
-                <!-- PRO UNLIMITED -->
                 <div class="bg-dark-950 p-8 lg:p-10 rounded-3xl border border-slate-800 shadow-2xl flex flex-col relative overflow-hidden h-full transform md:scale-105 z-10">
                     <div class="absolute top-0 right-0 bg-primary-500 text-white text-xs font-bold uppercase tracking-wider px-4 py-1.5 rounded-bl-xl">Cel mai popular</div>
                     <h3 class="text-2xl font-bold text-white">Pro Unlimited</h3>
@@ -376,7 +339,6 @@
         </div>
     </section>
 
-    <!-- SECTION: PARTENERI -->
     <section id="partners" class="py-16 lg:py-20 bg-white border-t border-slate-200">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center max-w-xl mx-auto mb-12">
@@ -387,7 +349,6 @@
             <div class="flex justify-center">
                 <a href="https://www.bucatarulpersonal.ro/" target="_blank" rel="noopener noreferrer" class="group bg-slate-50 border border-slate-200 p-6 sm:p-8 rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col sm:flex-row items-center gap-6 w-full max-w-3xl">
                     <div class="w-40 h-24 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform duration-300">
-                        <!-- LOGO BUCĂTARUL PERSONAL INTEGRAT -->
                         <img src="image_3.png" alt="Logo Bucătarul Personal" class="max-h-full object-contain mix-blend-multiply">
                     </div>
                     <div class="text-center sm:text-left flex-1">
@@ -395,31 +356,31 @@
                             <h3 class="text-2xl font-bold text-slate-900 group-hover:text-primary-600 transition-colors">Bucătarul Personal</h3>
                             <span class="material-symbols-rounded text-slate-300 text-lg group-hover:text-primary-500 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform">open_in_new</span>
                         </div>
-                        <p class="text-sm text-slate-500 leading-relaxed mt-2">Dacă pacientul nu are timp să gătească rețetele din platformă, planul generat de tine poate fi trimis automat către <strong>Bucătarul Personal</strong>, care va găti și livra mâncarea direct la domiciliu.</p>
+                        <p class="text-sm text-slate-500 leading-relaxed mt-2">Dacă pacientul tău nu are timp să gătească rețetele din platformă, planul alimentar generat de tine poate fi trimis automat către <strong>Bucătarul Personal</strong>, care va găti și livra mâncarea direct la domiciliu.</p>
                     </div>
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- SECTION: SEO & FAQ -->
     <section class="py-16 bg-slate-50 border-t border-slate-200">
         <div class="max-w-4xl mx-auto px-6">
             <h2 class="text-2xl font-bold text-slate-900 mb-8 text-center">De ce aleg profesioniștii platforma NutriChef Pro?</h2>
+            
             <div class="space-y-6">
                 <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
-                    <h3 class="font-bold text-slate-900 mb-2">Software complet pentru nutriționiști și dieteticieni</h3>
-                    <p class="text-sm text-slate-600 leading-relaxed">În căutarea celui mai bun soft pentru cabinetul de nutriție, specialiștii au nevoie de instrumente de calcul rapid al caloriilor și de generare a unui plan alimentar personalizat. NutriChef integrează aceste elemente într-un dashboard intuitiv, conectat direct cu pacienții.</p>
+                    <h3 class="font-bold text-slate-900 mb-2">Cel mai bun software pentru nutriționiști și dieteticieni</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">În căutarea celui mai eficient <strong class="text-slate-800">soft pentru cabinetul de nutriție</strong>, specialiștii au nevoie de instrumente de calcul rapid al caloriilor și de generare a unui <strong class="text-slate-800">plan alimentar personalizat</strong>. NutriChef integrează aceste elemente într-un dashboard intuitiv care calculează instantaneu toți macronutrienții.</p>
                 </div>
+                
                 <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
-                    <h3 class="font-bold text-slate-900 mb-2">Aplicație dietă și jurnal alimentar pentru pacienți</h3>
-                    <p class="text-sm text-slate-600 leading-relaxed">Persoanele care caută un „program de slăbit” își doresc o monitorizare clară. Prin aplicația noastră web, pacienții își bifează zilnic jurnalul alimentar, menținând astfel o comunicare perfectă prin telemedicină nutrițională.</p>
+                    <h3 class="font-bold text-slate-900 mb-2">Aplicație de dietă și jurnal alimentar pentru pacienți</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">Mii de persoane caută lunar un <strong class="text-slate-800">program de slăbit eficient</strong> sau o aplicație de dietă pe Google. Prin portalul nostru conectat, pacienții își bifează zilnic <strong class="text-slate-800">jurnalul alimentar online</strong>, menținând astfel comunicarea cu medicul prin funcții de <strong class="text-slate-800">telemedicină nutrițională</strong> și consultații video direct în browser.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- FOOTER CTA & FOOTER -->
     <section class="bg-primary-900 py-16 relative overflow-hidden">
         <div class="absolute top-0 left-0 w-full h-full bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4wNSkiLz48L3N2Zz4=')]"></div>
         <div class="max-w-7xl mx-auto px-6 relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
@@ -459,11 +420,6 @@
         </div>
     </footer>
 
-    <!-- ============================================== -->
-    <!-- MODALE ÎNREGISTRARE / LOGIN / TERMENI -->
-    <!-- ============================================== -->
-
-    <!-- REGISTRARE NUTRIȚIONIST -->
     <div id="modal-reg-nutri" class="fixed inset-0 z-[100] hidden items-center justify-center p-4">
         <div class="absolute inset-0 bg-dark-900/60 backdrop-blur-sm transition-opacity" onclick="closeModal('modal-reg-nutri')"></div>
         <div class="relative w-full max-w-lg bg-white rounded-3xl shadow-2xl p-6 sm:p-8 transform transition-all max-h-[90vh] overflow-y-auto hide-scrollbar">
@@ -483,12 +439,12 @@
                 </div>
                 <input type="email" id="reg-spec-email" required placeholder="Adresă Email" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:border-primary-500 focus:bg-white outline-none">
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <select required class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:border-primary-500 focus:bg-white outline-none">
+                    <select required id="reg-spec-rol" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:border-primary-500 focus:bg-white outline-none">
                         <option value="">Specializare...</option>
-                        <option>Medic Nutriționist</option>
-                        <option>Dietetician Autorizat</option>
+                        <option value="medic">Medic Nutriționist</option>
+                        <option value="dietetician">Dietetician Autorizat</option>
                     </select>
-                    <input type="text" required placeholder="Cod Parafă" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:border-primary-500 focus:bg-white outline-none">
+                    <input type="text" id="reg-spec-parafa" required placeholder="Cod Parafă" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:border-primary-500 focus:bg-white outline-none">
                 </div>
                 <input type="password" id="reg-spec-pass" required placeholder="Parolă (Min 6 caractere)" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:border-primary-500 focus:bg-white outline-none">
                 <button type="submit" class="w-full mt-6 py-4 bg-dark-900 hover:bg-dark-800 text-white rounded-xl text-sm font-bold shadow-lg transition-colors">Activează Cont Specialist</button>
@@ -499,7 +455,6 @@
         </div>
     </div>
 
-    <!-- REGISTRARE PACIENT -->
     <div id="modal-reg-pacient" class="fixed inset-0 z-[100] hidden items-center justify-center p-4">
         <div class="absolute inset-0 bg-dark-900/60 backdrop-blur-sm transition-opacity" onclick="closeModal('modal-reg-pacient')"></div>
         <div class="relative w-full max-w-lg bg-white rounded-3xl shadow-2xl p-6 sm:p-8 transform transition-all max-h-[90vh] overflow-y-auto hide-scrollbar">
@@ -528,7 +483,6 @@
         </div>
     </div>
 
-    <!-- LOGIN SPECIALIST -->
     <div id="modal-login-nutri" class="fixed inset-0 z-[100] hidden items-center justify-center p-4">
         <div class="absolute inset-0 bg-dark-900/60 backdrop-blur-sm transition-opacity" onclick="closeModal('modal-login-nutri')"></div>
         <div class="relative w-full max-w-sm bg-white rounded-3xl shadow-2xl p-6 sm:p-8 transform transition-all">
@@ -547,7 +501,6 @@
         </div>
     </div>
 
-    <!-- LOGIN PACIENT -->
     <div id="modal-login-pacient" class="fixed inset-0 z-[100] hidden items-center justify-center p-4">
         <div class="absolute inset-0 bg-dark-900/60 backdrop-blur-sm transition-opacity" onclick="closeModal('modal-login-pacient')"></div>
         <div class="relative w-full max-w-sm bg-white rounded-3xl shadow-2xl p-6 sm:p-8 transform transition-all">
@@ -566,7 +519,6 @@
         </div>
     </div>
 
-    <!-- MODAL TERMENI -->
     <div id="modal-termeni" class="fixed inset-0 z-[100] hidden items-center justify-center p-4">
         <div class="absolute inset-0 bg-dark-900/60 backdrop-blur-sm" onclick="closeModal('modal-termeni')"></div>
         <div class="relative w-full max-w-2xl bg-white rounded-3xl shadow-2xl p-6 sm:p-8 max-h-[80vh] overflow-y-auto">
@@ -576,7 +528,6 @@
         </div>
     </div>
 
-    <!-- MODAL GDPR -->
     <div id="modal-gdpr" class="fixed inset-0 z-[100] hidden items-center justify-center p-4">
         <div class="absolute inset-0 bg-dark-900/60 backdrop-blur-sm" onclick="closeModal('modal-gdpr')"></div>
         <div class="relative w-full max-w-2xl bg-white rounded-3xl shadow-2xl p-6 sm:p-8 max-h-[80vh] overflow-y-auto">
@@ -586,9 +537,6 @@
         </div>
     </div>
 
-    <!-- ============================================== -->
-    <!-- LOGICA FIREBASE INTEGRATĂ & SCRIPTURI UI       -->
-    <!-- ============================================== -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
@@ -608,10 +556,10 @@
         const auth = getAuth(app);
         const db = getFirestore(app);
 
-        // FORMULARE AUTENTIFICARE
         window.handleAuth = async function(event, action, type) {
             event.preventDefault();
             
+            // Asigură-te că aceste fișiere există în proiectul tău!
             const URL_DASHBOARD_NUTRI = 'dashboard-nutritionist.html';
             const URL_PORTAL_PACIENT = 'portal-pacient.html';
 
@@ -620,21 +568,27 @@
                     const email = document.getElementById('reg-spec-email').value;
                     const pass = document.getElementById('reg-spec-pass').value;
                     const nume = document.getElementById('reg-spec-nume').value;
+                    const parafa = document.getElementById('reg-spec-parafa').value;
+                    const rol = document.getElementById('reg-spec-rol').value;
                     
                     try {
                         const res = await createUserWithEmailAndPassword(auth, email, pass);
-                        await setDoc(doc(db, "users", res.user.uid), { nume: nume, email: email, role: "nutritionist", createdAt: new Date().toISOString() });
-                        alert('Cont înregistrat! Redirecționare...'); window.location.href = URL_DASHBOARD_NUTRI;
+                        await setDoc(doc(db, "users", res.user.uid), { nume: nume, email: email, rol: rol, codParafa: parafa, tipCont: "nutritionist", createdAt: new Date().toISOString() });
+                        alert('Cont înregistrat cu succes! Redirecționare...'); 
+                        window.location.href = URL_DASHBOARD_NUTRI;
                     } catch (err) { fallbackLocalAuth(email, pass, type, URL_DASHBOARD_NUTRI); }
                 } else {
                     const email = document.getElementById('reg-pac-email').value;
                     const pass = document.getElementById('reg-pac-pass').value;
                     const nume = document.getElementById('reg-pac-nume').value;
+                    const varsta = document.getElementById('reg-pac-varsta').value;
+                    const greutate = document.getElementById('reg-pac-greutate').value;
 
                     try {
                         const res = await createUserWithEmailAndPassword(auth, email, pass);
-                        await setDoc(doc(db, "users", res.user.uid), { nume: nume, email: email, role: "pacient", createdAt: new Date().toISOString() });
-                        alert('Cont înregistrat! Redirecționare...'); window.location.href = URL_PORTAL_PACIENT;
+                        await setDoc(doc(db, "users", res.user.uid), { nume: nume, email: email, varsta: varsta, greutate: greutate, tipCont: "pacient", createdAt: new Date().toISOString() });
+                        alert('Cont înregistrat cu succes! Redirecționare...'); 
+                        window.location.href = URL_PORTAL_PACIENT;
                     } catch (err) { fallbackLocalAuth(email, pass, type, URL_PORTAL_PACIENT); }
                 }
             } else if (action === 'login') {
@@ -649,11 +603,12 @@
             }
         };
 
-        // FALLBACK LOCAL STORAGE (PENTRU TESTARE FĂRĂ BAZĂ DE DATE SETATĂ)
+        // FALLBACK LOCAL STORAGE (Dacă cheile Firebase nu sunt setate corect, site-ul tot funcționează)
         function fallbackLocalAuth(email, pass, type, url) {
             localStorage.setItem(`account_${email}`, JSON.stringify({ password: pass, type: type }));
             alert(`[MOD DEMO] Cont ${type} creat cu succes!`); window.location.href = url;
         }
+        
         function fallbackLocalLogin(email, pass, type, url) {
             let account = JSON.parse(localStorage.getItem(`account_${email}`));
             if(account && account.password === pass && account.type === type) {
@@ -683,4 +638,3 @@
     </script>
 </body>
 </html>
-hh
