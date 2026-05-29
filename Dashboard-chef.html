@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="ro" class="h-full bg-stone-50" id="app-html">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Chef Dashboard Premium | NutriChef Pro</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'] },
+                    colors: {
+                        rubin: {
+                            50: '#f0fdf4',
+                            100: '#e6f4ea',
+                            500: '#107c41',
+                            600: '#064e3b', /* Verde Rubin Epic */
+                            700: '#043e2e',
+                            950: '#012017'
+                        },
+                        darkmode: {
+                            bg: '#0f172a',
+                            card: '#1e293b',
+                            border: '#334155',
+                            text: '#f8fafc'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; transition: background-color 0.3s, color 0.3s; }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .glass-header { backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0, 0, 0, 0.05); }
+        .dark .glass-header { border-bottom: 1px solid #334155; }
+        .nav-item { @apply w-full flex items-center gap-3 px-4 py-3.5 rounded-xl text-sm font-semibold transition-all duration-200; }
+        .nav-item.active { @apply bg-black text-white dark:bg-white dark:text-black shadow-md; }
+        .nav-item.inactive { @apply text-stone-400 dark:text-slate-400 hover:text-black dark:hover:text-white hover:bg-stone-100 dark:hover:bg-slate-800; }
+        .badge { @apply inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold; }
+        .input-field { @apply w-full bg-stone-50 dark:bg-slate-800 border border-stone-200 dark:border-slate-700 rounded-xl px-4 py-3 text-sm font-medium focus:bg-white dark:focus:bg-slate-900 focus:ring-4 focus:ring-rubin-600/10 outline-none transition-all text-stone-900 dark:text-white shadow-sm; }
+        .input-label { @apply text-[11px] font-bold text-stone-400 dark:text-slate-400 uppercase tracking-wider mb-1 block pl-1; }
+    </style>
+</head>
+<body class="flex h-screen overflow-hidden antialiased text-stone-900 bg-stone-50 dark:bg-slate-900 dark:text-slate-100">
+
+    <div id="mobile-overlay" onclick="toggleMenu()" class="fixed inset-0 bg-black/30 backdrop-blur-sm z-40 hidden opacity-0 transition-opacity duration-300 lg:hidden"></div>
+
+    <!-- CENTRU URGENȚĂ: POP-UP NOTIFICARE LIVE (TOAST) -->
+    <div id="notification-toast" class="fixed top-6 right-6 z-50 max-w-sm w-full bg-white dark:bg-slate-800 border border-stone-200 dark:border-slate-700 shadow-2xl rounded-2xl p-4 hidden transform transition-all duration-300 translate-y-2 opacity-0">
+        <div class="flex items-start gap-3">
+            <div class="w-8 h-8 rounded-full bg-rubin-50 dark:bg-rubin-950 text-rubin-600 dark:text-rubin-100 flex items-center justify-center shrink-0">
+                <span class="material-symbols-rounded text-sm">notifications_active</span>
+            </div>
+            <div class="flex-1">
+                <h4 class="text-xs font-bold text-stone-900 dark:text-white" id="toast-title">Notificare Nouă</h4>
+                <p class="text-[11px] text-stone-400 dark:text-slate-400 mt-0.5" id="toast-body">Dr. Sarah Miller a adăugat detalii noi în fișa pacientului Ana Ionescu.</p>
+            </div>
+            <button onclick="dismissToast()" class="text-stone-300 hover:text-stone-500"><span class="material-symbols-rounded text-base">close</span></button>
+        </div>
+    </div>
+
+    <!-- MODAL 1: ÎNREGISTRARE VIZITĂ -->
+    <div id="visit-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white dark:bg-slate-800 rounded-3xl max-w-md w-full p-6 shadow-2xl border border-stone-100 dark:border-slate-700 animate-in fade-in zoom-in-95 duration-200">
+            <div class="flex justify-between items-center border-b dark:border-slate-700 pb-3 mb-5">
+                <h3 class="text-base font-bold text-stone-900 dark:text-white flex items-center gap-2"><span class="material-symbols-rounded text-rubin-600">calendar_month</span> Înregistrare Vizită NOUĂ</h3>
+                <button type="button" onclick="toggleVisitModal()" class="text-stone-400 hover:text-black dark:hover:text-white"><span class="material-symbols-rounded">close</span></button>
+            </div>
+            <form id="add-visit-form" onsubmit="handleVisitSubmit(event)" class="space-y-4">
+                <div>
+                    <label class="input-label">Selectează Clientul</label>
+                    <select id="modal-visit-client" class="input-field font-bold text-xs"></select>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="input-label">Data Vizitei</label>
+                        <input type="date" id="modal-visit-date" required class="input-field">
+                    </div>
+                    <div>
+                        <label class="input-label">Caserole Gătite</label>
+                        <input type="number" id="modal-visit-meals" required placeholder="Ex: 8" class="input-field">
+                    </div>
+                </div>
+                <div>
+                    <label class="input-label">Luna de decontat</label>
+                    <select id="modal-visit-month" class="input-field font-bold text-xs">
+                        <option value="Mai 2026">Mai 2026</option>
+                        <option value="Iunie 2026">Iunie 2026</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="input-label">Notițe Culinare</label>
+                    <input type="text" id="modal-visit-notes" placeholder="Ex: S-au lăsat caserolele vidate." class="input-field">
+                </div>
+                <div class="flex gap-3 pt-2">
+                    <button type="button" onclick="toggleVisitModal()" class="w-full bg-stone-100 dark:bg-slate-700 hover:bg-stone-200 text-stone-700 dark:text-slate-200 py-3 rounded-xl text-xs font-bold">Anulează</button>
+                    <button type="submit" class="w-full bg-black dark:bg-white text-white dark:text-black py-3 rounded-xl text-xs font-bold shadow-md">Salvează Vizita</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL 2: ADĂUGARE CLIENT NOU -->
+    <div id="client-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white dark:bg-slate-800 rounded-3xl max-w-md w-full p-6 shadow-2xl border border-stone-100 dark:border-slate-700 animate-in fade-in zoom-in-95 duration-200">
+            <div class="flex justify-between items-center border-b dark:border-slate-700 pb-3 mb-5">
+                <h3 class="text-base font-bold text-stone-900 dark:text-white flex items-center gap-2"><span class="material-symbols-rounded text-rubin-600">person_add</span> Adaugă Client Nou</h3>
+                <button type="button" onclick="toggleClientModal()" class="text-stone-400 hover:text-black dark:hover:text-white"><span class="material-symbols-rounded">close</span></button>
+            </div>
+            <form onsubmit="handleClientSubmit(event)" class="space-y-4">
+                <div><label class="input-label">Nume Complet Client</label><input type="text" id="modal-cust-name" required placeholder="Ex: Mihai Popescu" class="input-field"></div>
+                <div><label class="input-label">Program Meal Prep / Dieta alocată</label><input type="text" id="modal-cust-diet" required placeholder="Ex: Hipertrofie / Keto" class="input-field"></div>
+                <div><label class="input-label">Buget Lunar Alocat (RON)</label><input type="number" id="modal-cust-budget" required placeholder="Ex: 1500" class="input-field"></div>
+                <div class="flex gap-3 pt-2">
+                    <button type="button" onclick="toggleClientModal()" class="w-full bg-stone-100 dark:bg-slate-700 hover:bg-stone-200 text-stone-700 dark:text-slate-200 py-3 rounded-xl text-xs font-bold">Anulează</button>
+                    <button type="submit" class="w-full bg-black dark:bg-white text-white dark:text-black py-3 rounded-xl text-xs font-bold shadow-md">Adaugă Client</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL 3: TRIMITERE RAPORT LUNAR -->
+    <div id="report-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white dark:bg-slate-800 rounded-3xl max-w-md w-full p-6 shadow-2xl border border-stone-100 dark:border-slate-700 animate-in fade-in zoom-in-95 duration-200">
+            <div class="flex justify-between items-center border-b dark:border-slate-700 pb-3 mb-5">
+                <h3 class="text-base font-bold text-stone-900 dark:text-white flex items-center gap-2"><span class="material-symbols-rounded text-rubin-600">send_to_mobile</span> Trimite Raport Vizite</h3>
+                <button type="button" onclick="toggleReportModal()" class="text-stone-400 hover:text-black dark:hover:text-white"><span class="material-symbols-rounded">close</span></button>
+            </div>
+            <div class="space-y-4">
+                <p class="text-xs text-stone-500 dark:text-slate-400 leading-relaxed">Selectează luna pentru care dorești să generezi și să trimiți fișa de vizite prestate direct pe emailul și aplicația clientului.</p>
+                <div>
+                    <label class="input-label">Selectează Luna</label>
+                    <select id="modal-report-month" class="input-field font-bold text-xs">
+                        <option>Mai 2026 (Luna Curentă)</option>
+                        <option>Aprilie 2026</option>
+                    </select>
+                </div>
+                <div class="flex gap-3 pt-2">
+                    <button type="button" onclick="toggleReportModal()" class="w-full bg-stone-100 dark:bg-slate-700 hover:bg-stone-200 text-stone-700 dark:text-slate-200 py-3 rounded-xl text-xs font-bold">Anulează</button>
+                    <button onclick="sendReportAction()" class="w-full bg-rubin-600 hover:bg-rubin-700 text-white py-3 rounded-xl text-xs font-bold shadow-md">Generează & Trimite</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SIDEBAR -->
+    <aside id="sidebar" class="fixed lg:static top-0 left-0 h-full w-72 bg-white dark:bg-slate-950 text-stone-800 dark:text-slate-300 flex flex-col z-50 transform -translate-x-full lg:translate-x-0 transition-transform duration-300 shrink-0 border-r border-stone-200/60 dark:border-slate-800 shadow-sm">
+        <div class="h-20 flex items-center px-6 border-b border-stone-100 dark:border-slate-800 shrink-0 justify-between">
+            <div class="flex items-center gap-2.5">
+                <div class="w-8 h-8 rounded-lg bg-rubin-600 text-white flex items-center justify-center shadow-md">
+                    <span class="material-symbols-rounded text-[18px]">skillet</span>
+                </div>
+                <span class="font-bold text-lg tracking-tight text-black dark:text-white">NutriChef <span class="text-rubin-600 font-medium">Kitchen</span></span>
+            </div>
+            <button onclick="toggleMenu()" class="lg:hidden text-stone-500 hover:text-black dark:hover:text-white"><span class="material-symbols-rounded">close</span></button>
+        </div>
+
+        <nav class="flex-1 overflow-y-auto hide-scrollbar p-4 space-y-1 mt-4">
+            <button onclick="switchView('dashboard')" id="nav-dashboard" class="nav-item active"><span class="material-symbols-rounded text-[20px]">dashboard</span> Panou Central</button>
+            <button onclick="switchView('orders')" id="nav-orders" class="nav-item inactive"><span class="material-symbols-rounded text-[20px]">local_shipping</span> Meniuri Pacienți</button>
+            <button onclick="switchView('visits')" id="nav-visits" class="nav-item inactive"><span class="material-symbols-rounded text-[20px]">assignment_turned_in</span> Registru Vizite & Clienți</button>
+            <button onclick="switchView('comms')" id="nav-comms" class="nav-item inactive"><span class="material-symbols-rounded text-[20px]">forum</span> Chat & Sesiuni Video</button>
+            <button onclick="switchView('chef-financial')" id="nav-chef-financial" class="nav-item inactive"><span class="material-symbols-rounded text-[20px]">payments</span> Portofel Financiar</button>
+            <button onclick="switchView('chef-profile')" id="nav-chef-profile" class="nav-item inactive"><span class="material-symbols-rounded text-[20px]">account_circle</span> Profilul Meu Public</button>
+        </nav>
+
+        <div class="p-4 border-t border-stone-100 dark:border-slate-800 shrink-0 bg-stone-50/50 dark:bg-slate-900/40 flex items-center gap-3">
+            <div class="w-9 h-9 rounded-full bg-rubin-600 text-white flex items-center justify-center font-bold text-xs shadow-sm">BP</div>
+            <div class="flex-1 min-w-0">
+                <p class="text-xs font-bold text-black dark:text-white truncate">Bucătarul Personal</p>
+                <p class="text-[10px] text-rubin-500 font-bold">Premium Partner</p>
+            </div>
+        </div>
+    </aside>
+
+    <!-- MAIN APP WRAPPER -->
+    <div class="flex-1 flex flex-col h-screen relative w-full overflow-hidden">
+        
+        <!-- HEADER CU MOD NOAPTE/ZI ȘI CLOPOȚEL NOTIFICĂRI -->
+        <header class="h-20 glass-header bg-white/90 dark:bg-slate-900/90 flex justify-between items-center px-4 sm:px-6 lg:px-8 z-10 shrink-0">
+            <div class="flex items-center gap-3">
+                <button onclick="toggleMenu()" class="lg:hidden text-stone-600 dark:text-slate-300 p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl"><span class="material-symbols-rounded text-[24px]">menu</span></button>
+                <h2 id="page-title" class="text-lg sm:text-xl font-bold text-black dark:text-white tracking-tight">Panou Central</h2>
+            </div>
+            
+            <!-- CONTROALE: ZI/NOAPTE ȘI ALERTE NOTIFICĂRI REALE -->
+            <div class="flex items-center gap-4">
+                <!-- Clopoțel Notificări Sistem -->
+                <div class="relative cursor-pointer p-2 hover:bg-stone-100 dark:hover:bg-slate-800 rounded-xl transition-colors" onclick="triggerMockNotification()">
+                    <span class="material-symbols-rounded text-stone-600 dark:text-slate-300">notifications</span>
+                    <span class="absolute top-1 right-1 w-2 h-2 bg-rubin-600 rounded-full" id="noti-indicator"></span>
+                </div>
+                
+                <!-- Toggle Noapte / Zi (Dark Mode Switcher) -->
+                <button onclick="toggleDayNightMode()" class="p-2 hover:bg-stone-100 dark:hover:bg-slate-800 rounded-xl text-stone-600 dark:text-slate-300 transition-colors flex items-center justify-center">
+                    <span class="material-symbols-rounded hidden dark:block">wb_sunny</span>
+                    <span class="material-symbols-rounded block dark:hidden">bedtime</span>
+                </button>
+                
+                <button onclick="window.location.href='index.html'" class="text-xs font-bold text-stone-500 dark:text-slate-400 hover:text-black dark:hover:text-white transition-colors bg-stone-100 dark:bg-slate-800 px-3 py-2 rounded-xl border border-stone-200/50 dark:border-slate-700">Ieșire</button>
+            </div>
+        </header>
+
+        <div class="flex-1 overflow-y-auto hide-scrollbar w-full p-4 sm:p-6 lg:p-8">
+            
+            <!-- ================= VIEW 1: PANOU CENTRAL ================= -->
+            <div id="view-dashboard" class="max-w-5xl mx-auto space-y-6 block">
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
+                    <div class="bg-white dark:bg-slate-800 p-5 rounded-2xl border border-stone-200 dark:border-slate-700 shadow-sm">
+                        <div class="flex justify-between items-center text-stone-400 mb-2"><span class="text-[11px] font-bold uppercase tracking-wider">Clienți Activi</span><span class="material-symbols-rounded text-black dark:text-white">person</span></div>
+                        <h2 id="stats-total-clients" class="text-2xl font-black text-black dark:text-white">2</h2>
+                    </div>
+                    <div class="bg-white dark:bg-slate-800 p-5 rounded-2xl border border-stone-200 dark:border-slate-700 shadow-sm">
+                        <div class="flex justify-between items-center text-stone-400 mb-2"><span class="text-[11px] font-bold uppercase tracking-wider">Sesiuni Gătite</span><span class="material-symbols-rounded text-rubin-600">done_all</span></div>
+                        <h2 id="stats-total-visits" class="text-2xl font-black text-black dark:text-white">5 Sesiuni</h2>
+                    </div>
+                    <div class="bg-white dark:bg-slate-800 p-5 rounded-2xl border border-stone-200 dark:border-slate-700 shadow-sm">
+                        <div class="flex justify-between items-center text-stone-400 mb-2"><span class="text-[11px] font-bold uppercase tracking-wider">Venit Colectat</span><span class="material-symbols-rounded text-emerald-600">payments</span></div>
+                        <h2 class="text-2xl font-black text-emerald-600">2.450,00 <span class="text-xs text-stone-400 font-bold">RON</span></h2>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <!-- TODO LIST -->
+                    <div class="lg:col-span-2 bg-white dark:bg-slate-800 p-6 rounded-3xl border border-stone-200 dark:border-slate-700 shadow-sm space-y-4">
+                        <h3 class="text-xs font-bold uppercase tracking-wider text-black dark:text-white border-b dark:border-slate-700 pb-2 flex items-center gap-1.5"><span class="material-symbols-rounded text-base text-rubin-600">list_alt</span> Planificator Sarcini Zilnice (To-Do List)</h3>
+                        <div class="flex gap-2">
+                            <input type="text" id="todo-input-text" placeholder="Adaugă o nouă sarcină în bucătărie..." class="w-full bg-stone-50 border rounded-xl px-3 py-2 text-xs outline-none focus:border-black dark:focus:border-white">
+                            <button onclick="addTodoAction()" class="bg-black dark:bg-white text-white dark:text-black px-4 rounded-xl text-xs font-bold shadow-sm transition-transform active:scale-95">Adaugă</button>
+                        </div>
+                        <ul id="todo-list-container" class="space-y-2.5 pt-2 text-xs font-semibold text-stone-700 dark:text-slate-300">
+                            <li class="flex items-center justify-between p-3 bg-stone-50 dark:bg-slate-900 rounded-xl border border-stone-100 dark:border-slate-700"><div class="flex items-center gap-2"><input type="checkbox" class="w-4 h-4 rounded text-rubin-600 focus:ring-0"> <span>Pregătire caserole vidate pentru Ana Ionescu</span></div><button onclick="this.parentElement.remove()" class="text-stone-400 hover:text-red-500"><span class="material-symbols-rounded text-sm">delete</span></button></li>
+                        </ul>
+                    </div>
+                    <div class="bg-white dark:bg-slate-800 p-6 rounded-3xl border border-stone-200 dark:border-slate-700 shadow-sm space-y-4">
+                        <h3 class="text-xs font-bold uppercase tracking-wider text-stone-400 border-b dark:border-slate-700 pb-2">Evenimente Rețea</h3>
+                        <div class="space-y-3 text-xs font-medium">
+                            <div class="p-3 bg-stone-50/50 dark:bg-slate-900/50 rounded-xl border border-stone-100 dark:border-slate-700"><p class="text-black dark:text-white font-bold">Meniu Meal Prep Actualizat</p><p class="text-[10px] text-stone-400 mt-0.5">De către Dr. Sarah Miller</p></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ================= VIEW 2: MENIURI PACIENȚI ================= -->
+            <div id="view-orders" class="max-w-4xl mx-auto space-y-6 hidden">
+                <div class="bg-white dark:bg-slate-800 border border-stone-200 dark:border-slate-700 rounded-3xl shadow-sm p-6 space-y-6">
+                    <div class="border-b border-stone-100 dark:border-slate-700 pb-4">
+                        <h3 class="text-base font-extrabold text-black dark:text-white uppercase tracking-tight">Fișe Nutriționale Sincronizate</h3>
+                    </div>
+                    <div class="p-5 border border-stone-200/80 dark:border-slate-700 rounded-2xl space-y-4 bg-stone-50/40 relative overflow-hidden">
+                        <div class="absolute left-0 top-0 h-full w-1.5 bg-rubin-600"></div>
+                        <div class="flex justify-between items-start flex-wrap gap-2 pl-2">
+                            <div><h4 class="text-sm font-bold text-black dark:text-white">Client: Ana Ionescu</h4><p class="text-[11px] text-stone-400 font-semibold">Dietă: Slăbire Sustenabilă</p></div>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs font-semibold text-stone-700 dark:text-slate-300 bg-white dark:bg-slate-900 p-4 rounded-xl border border-stone-100 dark:border-slate-700 shadow-sm pl-4">
+                            <div class="space-y-1"><p class="text-stone-400 font-bold text-[10px] uppercase tracking-wider flex items-center gap-1"><span class="material-symbols-rounded text-sm text-amber-500">wb_twilight</span> Mic Dejun</p><p class="text-black dark:text-white">Puding de Chia cu lapte de migdale și fructe</p></div>
+                            <div class="space-y-1"><p class="text-stone-400 font-bold text-[10px] uppercase tracking-wider flex items-center gap-1"><span class="material-symbols-rounded text-sm text-amber-600">wb_sunny</span> Prânz</p><p class="text-black dark:text-white">Piept de curcan la grătar cu quinoa organică</p></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ================= VIEW 3: REGISTRU VIZITE & CLIENȚI ================= -->
+            <div id="view-visits" class="max-w-4xl mx-auto space-y-6 hidden">
+                <div class="flex justify-between items-center flex-wrap gap-4 px-1">
+                    <div>
+                        <h3 class="text-base font-extrabold text-black dark:text-white uppercase tracking-tight">Management Portofoliu & Sesiuni</h3>
+                    </div>
+                    <div class="flex gap-2">
+                        <button onclick="toggleClientModal()" class="px-3 py-2 bg-stone-100 dark:bg-slate-800 text-stone-800 dark:text-slate-200 text-xs font-bold rounded-xl border dark:border-slate-700 shadow-sm flex items-center gap-1"><span class="material-symbols-rounded text-sm">person_add</span> + Client Nou</button>
+                        <button onclick="toggleVisitModal()" class="px-4 py-2 bg-black dark:bg-white text-white dark:text-black text-xs font-bold rounded-xl shadow-sm flex items-center gap-1.5"><span class="material-symbols-rounded text-sm">calendar_add_on</span> + Înregistrează Vizită</button>
+                    </div>
+                </div>
+                <div class="bg-white dark:bg-slate-800 border border-stone-200 dark:border-slate-700 rounded-2xl shadow-sm overflow-hidden">
+                    <div class="overflow-x-auto w-full">
+                        <table class="min-w-full text-left border-collapse whitespace-nowrap">
+                            <thead>
+                                <tr class="bg-stone-50 dark:bg-slate-900 border-b border-stone-100 dark:border-slate-700 text-[10px] font-bold text-stone-400 uppercase tracking-wider">
+                                    <th class="p-4 pl-6">Nume Client</th>
+                                    <th class="p-4">Program Nutrițional</th>
+                                    <th class="p-4">Sesiuni/Lună Curentă</th>
+                                    <th class="p-4">Venit Generat</th>
+                                    <th class="p-4 text-right pr-6">Acțiuni Raportare</th>
+                                </tr>
+                            </thead>
+                            <tbody id="visits-table-body" class="text-xs font-semibold text-stone-700 dark:text-slate-300 divide-y divide-stone-50 dark:divide-slate-700">
+                                <tr>
+                                    <td class="p-4 pl-6 flex items-center gap-2.5">
+                                        <div class="w-7 h-7 rounded-full bg-rubin-50 dark:bg-rubin-950 text-rubin-700 dark:text-rubin-100 font-bold text-[11px] flex items-center justify-center shrink-0">AI</div>
+                                        <span class="text-black dark:text-white font-bold">Ana Ionescu</span>
+                                    </td>
+                                    <td class="p-4"><span class="badge bg-stone-100 dark:bg-slate-700 text-stone-700 dark:text-slate-300">Slăbire Sustenabilă</span></td>
+                                    <td class="p-4 font-bold text-black dark:text-white"><span class="text-rubin-600">4 Vizite</span> efectuate</td>
+                                    <td class="p-4 text-emerald-600 font-bold">1.400,00 RON</td>
+                                    <td class="p-4 text-right pr-6"><button onclick="toggleReportModal()" class="px-2.5 py-1.5 bg-stone-900 dark:bg-white hover:bg-black dark:hover:bg-stone-100 text-white dark:text-black rounded-lg font-bold text-[11px] flex items-center gap-1 ml-auto shadow-sm"><span class="material-symbols-rounded text-xs">send_to_mobile</span> Trimite Fișa Lunară</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ================= VIEW 4: CHAT ȘI VIDEO ================= -->
+            <div id="view-comms" class="max-w-5xl mx-auto hidden space-y-6">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <div class="bg-white dark:bg-slate-800 border border-stone-200 dark:border-slate-700 rounded-3xl p-4 shadow-sm space-y-3 h-auto lg:h-[550px]">
+                        <h3 class="text-xs font-bold text-stone-400 uppercase tracking-wider pl-1 mb-2">Canale Active</h3>
+                        <div onclick="changeChatChannel('doctor')" id="channel-doctor" class="p-3 bg-stone-100 dark:bg-slate-700 rounded-2xl border border-stone-200 dark:border-slate-600 flex items-center gap-3 cursor-pointer transition-all">
+                            <div class="w-9 h-9 rounded-full bg-rubin-600 text-white font-bold text-xs flex items-center justify-center shrink-0">SM</div>
+                            <div class="flex-1 min-w-0"><p class="text-xs font-bold text-stone-900 dark:text-white">Dr. Sarah Miller (Medic)</p><p class="text-[10px] text-rubin-600 dark:text-rubin-400 font-semibold truncate">Canal Clinic Activ</p></div>
+                        </div>
+                    </div>
+                    <div class="lg:col-span-2 flex flex-col gap-6">
+                        <div class="bg-stone-950 rounded-3xl overflow-hidden shadow-xl text-white h-[320px] relative flex flex-col justify-between">
+                            <div class="p-4 bg-stone-900/80 border-b border-stone-800 flex justify-between items-center z-10">
+                                <div><h4 class="text-xs font-bold" id="video-stream-title">Sesiune Consultare Gastronomică: Dr. Sarah Miller</h4></div>
+                                <button id="chef-call-btn" onclick="startChefCall()" class="px-3 py-1.5 bg-rubin-600 hover:bg-rubin-500 rounded-xl text-[11px] font-bold flex items-center gap-1 transition-colors shadow-sm"><span class="material-symbols-rounded text-xs">videocam</span> Apelează Video</button>
+                            </div>
+                            <div class="absolute inset-0 flex items-center justify-center bg-stone-900"><span id="chef-call-status" class="text-xs text-stone-500 font-semibold">Apasă pe "Apelează Video" pentru a deschide camera web</span></div>
+                        </div>
+                        <div class="bg-white dark:bg-slate-800 border border-stone-200 dark:border-slate-700 rounded-3xl flex flex-col shadow-sm h-[300px]">
+                            <div id="chef-chat-messages-container" class="flex-1 p-4 overflow-y-auto space-y-3 text-xs flex flex-col">
+                                <div class="bg-stone-100 dark:bg-slate-700 p-2.5 rounded-xl max-w-[85%] self-start"><p class="text-stone-700 dark:text-slate-200">Bună ziua, Chef! Te rog să reduci carbohidrații la porțiile de prânz săptămâna aceasta.</p></div>
+                            </div>
+                            <div class="p-3 border-t dark:border-slate-700 flex gap-2">
+                                <input type="text" id="chef-chat-input-text" placeholder="Scrie un mesaj..." class="w-full bg-stone-50 border dark:bg-slate-900 rounded-xl px-3 py-2 text-xs outline-none">
+                                <button onclick="sendChefMessageAction()" class="bg-black dark:bg-white text-white dark:text-black px-4 rounded-xl flex items-center justify-center shadow-md"><span class="material-symbols-rounded text-sm">send</span></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ================= VIEW 5: FINANCIAR ================= -->
+            <div id="view-chef-financial" class="max-w-4xl mx-auto space-y-6 hidden">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
+                    <div class="bg-white dark:bg-slate-800 p-5 rounded-3xl border border-stone-200 dark:border-slate-700 shadow-sm space-y-4">
+                        <h3 class="text-xs font-bold uppercase tracking-wider text-black dark:text-white border-b dark:border-slate-700 pb-2 flex items-center gap-1"><span class="material-symbols-rounded text-base text-rubin-600">account_balance</span> Date Bancare Decontare</h3>
+                        <form onsubmit="event.preventDefault(); alert('Contul IBAN a fost salvat.')" class="space-y-3">
+                            <div><label class="input-label">Nume Bancă</label><input type="text" required placeholder="Ex: Banca Transilvania" class="input-field py-2.5 text-xs font-bold"></div>
+                            <div><label class="input-label">Cont IBAN Valid</label><input type="text" required placeholder="RO00 BTRL XXXX XXXX XXXX XXXX" class="input-field py-2.5 text-xs font-bold uppercase"></div>
+                            <button type="submit" class="w-full py-2.5 bg-black dark:bg-white text-white dark:text-black font-bold text-xs rounded-xl shadow-md">Salvează Datele</button>
+                        </form>
+                    </div>
+                    <div class="md:col-span-2 bg-white dark:bg-slate-800 p-5 rounded-3xl border border-stone-200 dark:border-slate-700 shadow-sm space-y-4">
+                        <div class="overflow-x-auto w-full">
+                            <table class="min-w-full text-left border-collapse whitespace-nowrap text-xs">
+                                <thead>
+                                    <tr class="bg-stone-50 dark:bg-slate-900 border-b border-stone-100 dark:border-slate-700 text-[10px] font-bold text-stone-400 uppercase tracking-wider">
+                                        <th class="p-3 pl-4">ID Transfer</th>
+                                        <th class="p-3 pr-4 text-right">Sumă Payout</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="font-semibold text-stone-700 dark:text-slate-300 divide-y divide-stone-50 dark:divide-slate-700">
+                                    <tr>
+                                        <td class="p-3 pl-4"><p class="text-black dark:text-white font-bold">TRF-9482104</p></td>
+                                        <td class="p-3 text-right pr-4 font-black text-emerald-600">+ 1.400,00 RON</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ================= VIEW 6: PROFILUL CONTULUI ================= -->
+            <div id="view-chef-profile" class="max-w-5xl mx-auto hidden">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 items-start">
+                    <div class="lg:col-span-2 space-y-6">
+                        <div class="bg-white dark:bg-slate-800 p-5 sm:p-8 rounded-3xl border border-stone-200 dark:border-slate-700 shadow-sm space-y-6">
+                            <h3 class="text-base font-extrabold text-black dark:text-white uppercase tracking-tight border-b dark:border-slate-700 pb-3">Profil Public Bucătar</h3>
+                            <div class="flex flex-col sm:flex-row gap-5 items-center sm:items-start bg-stone-50 dark:bg-slate-900 p-4 rounded-2xl">
+                                <div class="w-24 h-24 rounded-2xl border-4 border-white bg-stone-200 shadow-md overflow-hidden shrink-0"><img src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?q=80&w=1977&auto=format&fit=crop" class="w-full h-full object-cover"></div>
+                                <div class="space-y-1 text-center sm:text-left">
+                                    <h4 class="text-sm font-bold text-black dark:text-white">Identitate Vizuală Bucătărie</h4>
+                                    <button type="button" onclick="alert('Upload')" class="mt-2 inline-flex items-center gap-1 text-xs font-bold text-rubin-600 bg-white dark:bg-slate-800 border dark:border-slate-700 px-2.5 py-1.5 rounded-lg shadow-sm"><span class="material-symbols-rounded text-sm">upload</span> Schimbă imaginea</button>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                                <div class="relative flex flex-col gap-1.5"><label class="input-label">Denumire Brand</label><input type="text" value="Bucătarul Personal" class="input-field"></div>
+                                <div class="relative flex flex-col gap-1.5"><label class="input-label">Oraș deservit</label><input type="text" value="București și Ilfov" class="input-field"></div>
+                            </div>
+                            <div class="relative flex flex-col gap-1.5"><label class="input-label">Descriere Abordare Culinara</label><textarea rows="4" class="input-field resize-none">Bucătărie gourmet dedicată planurilor metabolice clinice.</textarea></div>
+                        </div>
+                    </div>
+                    <div class="space-y-6 w-full">
+                        <button type="button" onclick="alert('Profil salvat')" class="w-full bg-black dark:bg-white text-white dark:text-black py-4 rounded-xl text-sm font-bold shadow-lg">Salvează Datele Contului</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- LOGICĂ JAVASCRIPT AVANSATĂ -->
+    <script>
+        let clientsList = [
+            { id: "AI", name: "Ana Ionescu", diet: "Slăbire Sustenabilă", visits: 4, budget: 1400 }
+        ];
+
+        // 1. Schimbare Zi / Noapte (Dark Mode)
+        function toggleDayNightMode() {
+            const htmlElement = document.getElementById('app-html');
+            htmlElement.classList.toggle('dark');
+            const isDark = htmlElement.classList.contains('dark');
+            localStorage.setItem('chef-theme', isDark ? 'dark' : 'light');
+        }
+
+        // 2. Funcție de Simulare și Afișare Notificare Live (Toast)
+        function triggerMockNotification() {
+            const toast = document.getElementById('notification-toast');
+            document.getElementById('noti-indicator').classList.add('hidden'); // ascunde indicatorul roșu din clopoțel
+            
+            toast.classList.remove('hidden');
+            setTimeout(() => {
+                toast.classList.remove('translate-y-2', 'opacity-0');
+            }, 50);
+
+            // Auto-închidere după 5 secunde
+            setTimeout(() => { dismissToast(); }, 5000);
+        }
+
+        function dismissToast() {
+            const toast = document.getElementById('notification-toast');
+            toast.classList.add('translate-y-2', 'opacity-0');
+            setTimeout(() => { toast.classList.add('hidden'); }, 300);
+        }
+
+        function toggleMenu() {
+            document.getElementById('sidebar').classList.toggle('-translate-x-full');
+            document.getElementById('mobile-overlay').classList.toggle('hidden');
+        }
+
+        function toggleVisitModal() { document.getElementById('visit-modal').classList.toggle('hidden'); }
+        function toggleClientModal() { document.getElementById('client-modal').classList.toggle('hidden'); }
+        function toggleReportModal() { document.getElementById('report-modal').classList.toggle('hidden'); }
+
+        function syncClientDropdowns() {
+            const select = document.getElementById('modal-visit-client');
+            if(select) {
+                select.innerHTML = "";
+                clientsList.forEach(c => { select.innerHTML += `<option value="${c.name}">${c.name}</option>`; });
+            }
+        }
+
+        function addTodoAction() {
+            const text = document.getElementById('todo-input-text').value;
+            if(!text) return;
+            const ul = document.getElementById('todo-list-container');
+            const li = document.createElement('li');
+            li.className = "flex items-center justify-between p-3 bg-stone-50 dark:bg-slate-900 rounded-xl border border-stone-100 dark:border-slate-700 shadow-sm";
+            li.innerHTML = `<div class="flex items-center gap-2"><input type="checkbox" class="w-4 h-4 rounded text-rubin-600 focus:ring-0"> <span>${text}</span></div><button onclick="this.parentElement.remove()"><span class="material-symbols-rounded text-sm text-stone-400">delete</span></button>`;
+            ul.appendChild(li);
+            document.getElementById('todo-input-text').value = "";
+        }
+
+        function handleClientSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('modal-cust-name').value;
+            const diet = document.getElementById('modal-cust-diet').value;
+            const budget = parseFloat(document.getElementById('modal-cust-budget').value) || 0;
+            const initials = name.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase();
+
+            clientsList.push({ id: initials, name: name, diet: diet, visits: 0, budget: budget });
+            
+            const tableBody = document.getElementById('visits-table-body');
+            const tr = document.createElement('tr');
+            tr.className = "text-xs font-semibold divide-y divide-stone-50 dark:divide-slate-700";
+            tr.innerHTML = `
+                <td class="p-4 pl-6 flex items-center gap-2.5"><div class="w-7 h-7 rounded-full bg-rubin-50 text-rubin-700 font-bold flex items-center justify-center shrink-0">${initials}</div><span class="font-bold">${name}</span></td>
+                <td class="p-4"><span class="badge bg-stone-100 dark:bg-slate-700 text-stone-700 dark:text-slate-300">${diet}</span></td>
+                <td class="p-4 font-bold">0 Vizite efectuate</td>
+                <td class="p-4 text-emerald-600 font-bold">${budget.toLocaleString('ro-RO')},00 RON</td>
+                <td class="p-4 text-right pr-6"><button onclick="toggleReportModal()" class="px-2.5 py-1.5 bg-stone-900 dark:bg-white text-white dark:text-black rounded-lg font-bold shadow-sm"><span class="material-symbols-rounded text-xs">send_to_mobile</span> Trimite Fișa Lunară</button></td>
+            `;
+            tableBody.appendChild(tr);
+            document.getElementById('stats-total-clients').innerText = clientsList.length;
+            syncClientDropdowns();
+            toggleClientModal();
+        }
+
+        function handleVisitSubmit(e) { e.preventDefault(); toggleVisitModal(); alert('Vizită salvată!'); }
+        function sendReportAction() { toggleReportModal(); alert('Fișă trimisă!'); }
+
+        function switchView(id) {
+            const views = ['dashboard', 'orders', 'visits', 'comms', 'chef-financial', 'chef-profile'];
+            views.forEach(v => document.getElementById('view-' + v)?.classList.add('hidden'));
+            document.getElementById('view-' + id)?.classList.remove('hidden');
+
+            const titles = { 'dashboard': 'Panou Central', 'orders': 'Meniuri Pacienți', 'visits': 'Portofoliu & Sesiuni', 'comms': 'Chat & Sesiuni Video', 'chef-financial': 'Portofel Financiar', 'chef-profile': 'Profil & Setări Securitate' };
+            document.getElementById('page-title').innerText = titles[id];
+
+            views.forEach(v => { document.getElementById('nav-' + v).className = "nav-item inactive"; });
+            document.getElementById('nav-' + id).className = "nav-item active";
+        }
+
+        // Verificare temă salvată la încărcare
+        if (localStorage.getItem('chef-theme') === 'dark') {
+            document.getElementById('app-html').classList.add('dark');
+        }
+
+        syncClientDropdowns();
+    </script>
+</body>
+</html>
