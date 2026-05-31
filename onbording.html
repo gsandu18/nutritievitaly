@@ -2,12 +2,12 @@
 <html lang="ro">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Noura. — Bun venit</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
- 
+
 :root {
   --forest:  #0F2E28;
   --forestd: #0a1f1b;
@@ -24,9 +24,9 @@
   --white:   #FFFFFF;
   --red:     #D85A30;
 }
- 
+
 html, body { height: 100%; }
- 
+
 body {
   font-family: 'DM Sans', sans-serif;
   font-weight: 300;
@@ -34,8 +34,9 @@ body {
   color: var(--dark);
   display: flex;
   min-height: 100vh;
+  flex-direction: row;
 }
- 
+
 /* ─── SIDEBAR ──────────────────────────────────────── */
 .sidebar {
   width: 320px;
@@ -47,8 +48,9 @@ body {
   position: sticky;
   top: 0;
   height: 100vh;
+  z-index: 10;
 }
- 
+
 .sb-logo {
   font-family: 'Cormorant Garamond', serif;
   font-size: 28px;
@@ -58,9 +60,9 @@ body {
   margin-bottom: 3rem;
 }
 .sb-logo span { color: var(--sage); }
- 
+
 .sb-steps { flex: 1; display: flex; flex-direction: column; gap: 0; }
- 
+
 .step-item {
   display: flex;
   align-items: flex-start;
@@ -72,7 +74,7 @@ body {
 }
 .step-item:not(.active):not(.done) { opacity: 0.4; }
 .step-item:not(.active):not(.done):hover { opacity: 0.6; }
- 
+
 .step-line {
   position: absolute;
   left: 15px;
@@ -82,7 +84,7 @@ body {
   background: rgba(29,158,117,0.25);
 }
 .step-item:last-child .step-line { display: none; }
- 
+
 .step-circle {
   width: 32px;
   height: 32px;
@@ -109,7 +111,7 @@ body {
   color: white;
   box-shadow: 0 0 0 4px rgba(29,158,117,0.2);
 }
- 
+
 .step-info { padding-top: 4px; }
 .step-label {
   font-size: 13px;
@@ -123,7 +125,7 @@ body {
   color: rgba(93,202,165,0.5);
 }
 .step-item.active .step-desc { color: rgba(93,202,165,0.8); }
- 
+
 .sb-bottom {
   padding-top: 2rem;
   border-top: 0.5px solid rgba(29,158,117,0.15);
@@ -149,19 +151,20 @@ body {
 }
 .sb-name { font-size: 13px; color: var(--mintl); }
 .sb-email { font-size: 11px; color: rgba(93,202,165,0.5); }
- 
+
 /* ─── MAIN ─────────────────────────────────────────── */
 .main {
   flex: 1;
   display: flex;
   flex-direction: column;
   padding: 3rem 4rem;
-  max-width: 700px;
+  max-width: 800px;
+  margin: 0 auto;
   overflow-y: auto;
 }
- 
+
 .progress-bar-outer {
-  height: 3px;
+  height: 4px;
   background: var(--linend);
   border-radius: 2px;
   margin-bottom: 3rem;
@@ -173,12 +176,12 @@ body {
   border-radius: 2px;
   transition: width 0.5s ease;
 }
- 
+
 /* Step panels */
 .step-panel { display: none; animation: stepIn 0.35s ease; }
 .step-panel.visible { display: block; }
 @keyframes stepIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
- 
+
 .panel-eyebrow {
   font-size: 11px;
   letter-spacing: 0.16em;
@@ -204,7 +207,7 @@ body {
   font-family: 'Cormorant Garamond', serif;
   font-size: 18px;
 }
- 
+
 /* Form elements */
 .form-group { margin-bottom: 1.5rem; }
 .form-label {
@@ -213,20 +216,21 @@ body {
   font-weight: 500;
   color: var(--forest);
   letter-spacing: 0.04em;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
   text-transform: uppercase;
 }
 .form-input {
   width: 100%;
   padding: 13px 16px;
   background: var(--white);
-  border: 0.5px solid rgba(15,46,40,0.2);
+  border: 1px solid rgba(15,46,40,0.15);
   border-radius: 8px;
   font-size: 14px;
   font-family: 'DM Sans', sans-serif;
   color: var(--dark);
   outline: none;
   transition: border-color 0.2s, box-shadow 0.2s;
+  -webkit-appearance: none;
 }
 .form-input:focus {
   border-color: var(--sage);
@@ -234,16 +238,16 @@ body {
 }
 .form-input::placeholder { color: rgba(136,135,128,0.5); }
 .form-hint {
-  font-size: 11px;
+  font-size: 12px;
   color: var(--gray);
-  margin-top: 5px;
+  margin-top: 6px;
   line-height: 1.5;
 }
- 
+
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
- 
+
 /* Role selector */
-.role-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 2rem; }
+.role-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 2rem; }
 .role-card {
   border: 1.5px solid rgba(15,46,40,0.12);
   border-radius: 12px;
@@ -262,7 +266,7 @@ body {
 .role-check {
   position: absolute;
   top: 12px; right: 12px;
-  width: 20px; height: 20px;
+  width: 22px; height: 22px;
   border-radius: 50%;
   background: var(--sage);
   display: none;
@@ -270,34 +274,34 @@ body {
   justify-content: center;
 }
 .role-card.selected .role-check { display: flex; }
-.role-check::after { content: '✓'; color: white; font-size: 11px; font-weight: 600; }
+.role-check::after { content: '✓'; color: white; font-size: 12px; font-weight: 600; }
 .role-icon {
-  width: 44px; height: 44px;
+  width: 48px; height: 48px;
   border-radius: 10px;
   background: var(--mintl);
   display: flex; align-items: center; justify-content: center;
   margin-bottom: 12px;
-  font-size: 22px;
+  font-size: 24px;
 }
 .role-card.selected .role-icon { background: rgba(29,158,117,0.2); }
 .role-name {
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 500;
   color: var(--forest);
-  margin-bottom: 4px;
+  margin-bottom: 6px;
 }
 .role-desc {
-  font-size: 12px;
+  font-size: 13px;
   color: var(--gray);
   line-height: 1.5;
 }
- 
+
 /* Tag selector (specializations) */
 .tag-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 2rem; }
 .tag-pill {
-  padding: 6px 14px;
+  padding: 8px 16px;
   border-radius: 20px;
-  border: 0.5px solid rgba(15,46,40,0.15);
+  border: 1px solid rgba(15,46,40,0.15);
   font-size: 13px;
   color: var(--gray);
   cursor: pointer;
@@ -312,11 +316,11 @@ body {
   color: var(--forest);
   font-weight: 500;
 }
- 
+
 /* Invite section */
 .invite-box {
   background: var(--white);
-  border: 0.5px solid rgba(15,46,40,0.12);
+  border: 1px solid rgba(15,46,40,0.12);
   border-radius: 12px;
   padding: 1.5rem;
   margin-bottom: 1.5rem;
@@ -329,21 +333,21 @@ body {
 }
 .invite-title { font-size: 14px; font-weight: 500; color: var(--forest); }
 .invite-badge {
-  font-size: 10px;
+  font-size: 11px;
   background: var(--saffl);
   color: #633806;
-  padding: 3px 10px;
+  padding: 4px 10px;
   border-radius: 20px;
   font-weight: 500;
 }
-.invite-row { display: flex; gap: 8px; align-items: center; }
+.invite-row { display: flex; gap: 10px; align-items: center; }
 .invite-input {
   flex: 1;
-  padding: 10px 14px;
+  padding: 12px 14px;
   background: var(--linen);
-  border: 0.5px solid rgba(15,46,40,0.1);
+  border: 1px solid rgba(15,46,40,0.1);
   border-radius: 8px;
-  font-size: 13px;
+  font-size: 14px;
   font-family: 'DM Sans', sans-serif;
   color: var(--dark);
   outline: none;
@@ -351,12 +355,12 @@ body {
 }
 .invite-input:focus { border-color: var(--sage); }
 .invite-btn-small {
-  padding: 10px 16px;
+  padding: 12px 20px;
   background: var(--forest);
   color: var(--mintl);
   border: none;
   border-radius: 8px;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 500;
   cursor: pointer;
   font-family: 'DM Sans', sans-serif;
@@ -364,28 +368,28 @@ body {
   transition: background 0.2s;
 }
 .invite-btn-small:hover { background: var(--sage); }
-.invited-list { display: flex; flex-direction: column; gap: 6px; margin-top: 12px; }
+.invited-list { display: flex; flex-direction: column; gap: 8px; margin-top: 16px; }
 .invited-item {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 8px 12px;
+  gap: 12px;
+  padding: 10px 14px;
   background: var(--mintl);
   border-radius: 8px;
-  font-size: 13px;
+  font-size: 14px;
   color: var(--forest);
 }
 .invited-item .remove {
   margin-left: auto;
   color: var(--gray);
   cursor: pointer;
-  font-size: 16px;
+  font-size: 18px;
   line-height: 1;
   transition: color 0.15s;
 }
 .invited-item .remove:hover { color: var(--red); }
 .skip-invite {
-  font-size: 13px;
+  font-size: 14px;
   color: var(--gray);
   cursor: pointer;
   text-decoration: underline;
@@ -396,11 +400,11 @@ body {
   transition: color 0.2s;
 }
 .skip-invite:hover { color: var(--forest); }
- 
+
 /* Welcome screen */
 .welcome-hero {
   text-align: center;
-  padding: 3rem 0 2rem;
+  padding: 2rem 0;
 }
 .welcome-logo {
   font-family: 'Cormorant Garamond', serif;
@@ -413,7 +417,7 @@ body {
 .welcome-logo span { color: var(--sage); }
 .welcome-tagline {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 22px;
+  font-size: 24px;
   font-style: italic;
   color: var(--gray);
   margin-bottom: 3rem;
@@ -421,59 +425,59 @@ body {
 .welcome-cards {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
+  gap: 1rem;
   margin-bottom: 3rem;
   text-align: left;
 }
 .welcome-card {
   background: var(--white);
-  border: 0.5px solid rgba(15,46,40,0.1);
+  border: 1px solid rgba(15,46,40,0.1);
   border-radius: 12px;
-  padding: 1.25rem;
+  padding: 1.5rem;
 }
 .wc-icon {
-  font-size: 24px;
-  margin-bottom: 10px;
+  font-size: 28px;
+  margin-bottom: 12px;
 }
 .wc-title {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 500;
   color: var(--forest);
-  margin-bottom: 4px;
+  margin-bottom: 6px;
 }
-.wc-desc { font-size: 12px; color: var(--gray); line-height: 1.5; }
- 
+.wc-desc { font-size: 13px; color: var(--gray); line-height: 1.5; }
+
 /* Summary card */
 .summary-card {
   background: var(--forest);
   border-radius: 12px;
   padding: 1.5rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 1.25rem;
 }
 .sum-av {
-  width: 48px; height: 48px;
+  width: 56px; height: 56px;
   border-radius: 50%;
   background: rgba(29,158,117,0.25);
   display: flex; align-items: center; justify-content: center;
   font-family: 'Cormorant Garamond', serif;
-  font-size: 20px; font-weight: 600;
+  font-size: 24px; font-weight: 600;
   color: var(--mint);
   flex-shrink: 0;
 }
-.sum-name { font-size: 16px; font-weight: 500; color: var(--mintl); }
-.sum-details { font-size: 12px; color: rgba(93,202,165,0.6); margin-top: 2px; }
- 
+.sum-name { font-size: 18px; font-weight: 500; color: var(--mintl); margin-bottom: 4px; }
+.sum-details { font-size: 13px; color: rgba(93,202,165,0.7); }
+
 /* Buttons */
-.btn-row { display: flex; align-items: center; justify-content: space-between; margin-top: 2rem; }
+.btn-row { display: flex; align-items: center; justify-content: space-between; margin-top: 2.5rem; }
 .btn-primary {
   background: var(--forest);
   color: var(--linen);
   padding: 14px 32px;
   border-radius: 8px;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 500;
   cursor: pointer;
   border: none;
@@ -488,7 +492,7 @@ body {
   background: none;
   border: none;
   color: var(--gray);
-  font-size: 14px;
+  font-size: 15px;
   cursor: pointer;
   font-family: 'DM Sans', sans-serif;
   padding: 0;
@@ -496,12 +500,12 @@ body {
   display: flex; align-items: center; gap: 6px;
 }
 .btn-back:hover { color: var(--forest); }
- 
+
 .btn-cta-large {
   width: 100%;
   background: var(--sage);
   color: white;
-  padding: 16px;
+  padding: 18px;
   border-radius: 10px;
   font-size: 16px;
   font-weight: 500;
@@ -512,23 +516,84 @@ body {
   margin-top: 1rem;
 }
 .btn-cta-large:hover { background: var(--mint); transform: translateY(-1px); }
- 
+
 /* ─── RESPONSIVE ───────────────────────────────────── */
+@media (max-width: 992px) {
+  .sidebar { width: 280px; padding: 2rem 1.5rem; }
+  .main { padding: 3rem 2rem; }
+  .panel-title { font-size: 34px; }
+}
+
 @media (max-width: 768px) {
-  .sidebar { display: none; }
-  .main { padding: 2rem 1.5rem; max-width: 100%; }
-  .form-row { grid-template-columns: 1fr; }
-  .role-grid { grid-template-columns: 1fr; }
-  .welcome-cards { grid-template-columns: 1fr; }
+  body { flex-direction: column; }
+  
+  /* Transformă sidebar-ul într-un antet fix pe mobil */
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: sticky;
+    top: 0;
+    padding: 1rem 1.5rem;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid rgba(29,158,117,0.15);
+    z-index: 100;
+  }
+  
+  .sb-logo { margin-bottom: 0; font-size: 24px; }
+  .sb-steps, .sb-bottom { display: none; } /* Ascunde progresia verticală și profilul din stânga pe mobil */
+
+  .main { padding: 2rem 1.5rem; width: 100%; }
+  .progress-bar-outer { margin-bottom: 2rem; }
+  
+  .panel-title { font-size: 28px; }
+  .panel-subtitle { font-size: 16px; margin-bottom: 2rem; }
+
+  .form-row { grid-template-columns: 1fr; gap: 0; }
+  .form-group { margin-bottom: 1.25rem; }
+
+  .role-grid { grid-template-columns: 1fr; gap: 1rem; }
+  
+  .invite-header { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .invite-row { flex-direction: column; align-items: stretch; gap: 10px; }
+  .invite-input { width: 100%; }
+  .invite-btn-small { width: 100%; text-align: center; justify-content: center; }
+
+  .welcome-hero { padding: 1rem 0; }
+  .welcome-logo { font-size: 48px; }
+  .welcome-tagline { font-size: 20px; margin-bottom: 2rem; }
+  .welcome-cards { grid-template-columns: 1fr; gap: 1rem; }
+
+  .summary-card { flex-direction: column; text-align: center; gap: 1rem; padding: 1.5rem 1rem; }
+  .sum-name { margin-bottom: 6px; }
+
+  .btn-row { 
+    flex-direction: column-reverse; 
+    gap: 1rem; 
+    margin-top: 2rem; 
+  }
+  .btn-row > div { 
+    display: flex; 
+    flex-direction: column-reverse; 
+    width: 100%; 
+    gap: 1rem; 
+  }
+  .btn-primary, .btn-back, .skip-invite { 
+    width: 100%; 
+    justify-content: center; 
+    padding: 16px; 
+    text-align: center;
+  }
 }
 </style>
 </head>
 <body>
- 
-<!-- SIDEBAR -->
+
+<!-- SIDEBAR / HEADER -->
 <aside class="sidebar">
   <div class="sb-logo">Noura<span>.</span></div>
- 
+
   <div class="sb-steps" id="sidebarSteps">
     <div class="step-item active" data-step="1">
       <div class="step-circle" id="sc1">1</div>
@@ -570,7 +635,7 @@ body {
       </div>
     </div>
   </div>
- 
+
   <div class="sb-bottom">
     <div class="sb-user">
       <div class="sb-av" id="sidebarInitials">?</div>
@@ -581,19 +646,20 @@ body {
     </div>
   </div>
 </aside>
- 
+
 <!-- MAIN -->
 <main class="main">
+  <!-- Bară de progres (foarte utilă pe mobil) -->
   <div class="progress-bar-outer">
     <div class="progress-bar-fill" id="progressBar" style="width: 20%"></div>
   </div>
- 
+
   <!-- ─── STEP 1: ROLE ─────────────────────────────── -->
   <div class="step-panel visible" id="panel1">
     <div class="panel-eyebrow">Pasul 1 din 5</div>
     <h1 class="panel-title">Cine ești tu?</h1>
     <p class="panel-subtitle">Noura se adaptează rolului tău — alegerea ta configurează experiența.</p>
- 
+
     <div class="role-grid">
       <div class="role-card" onclick="selectRole(this,'nutritionist')" id="roleNutri">
         <div class="role-check"></div>
@@ -608,19 +674,19 @@ body {
         <div class="role-desc">Primești planuri nutriționale și le transformi în rețete executabile.</div>
       </div>
     </div>
- 
+
     <div class="btn-row">
       <span></span>
       <button class="btn-primary" onclick="goTo(2)">Continuă <span class="arrow">→</span></button>
     </div>
   </div>
- 
+
   <!-- ─── STEP 2: PROFILE ──────────────────────────── -->
   <div class="step-panel" id="panel2">
     <div class="panel-eyebrow">Pasul 2 din 5</div>
     <h1 class="panel-title">Profilul tău</h1>
     <p class="panel-subtitle">Câteva date esențiale — îți personalizăm experiența.</p>
- 
+
     <div class="form-row">
       <div class="form-group">
         <label class="form-label">Prenume</label>
@@ -631,37 +697,37 @@ body {
         <input class="form-input" type="text" placeholder="Ionescu" id="lname">
       </div>
     </div>
- 
+
     <div class="form-group">
       <label class="form-label">Email profesional</label>
       <input class="form-input" type="email" placeholder="maria@cabinetnutritie.ro" id="email">
       <div class="form-hint">Acesta va fi ID-ul tău unic în Noura.</div>
     </div>
- 
+
     <div class="form-group">
       <label class="form-label">Numele cabinetului / clinicii</label>
       <input class="form-input" type="text" placeholder="Cabinet Nutriție & Wellness" id="cabinet">
       <div class="form-hint">Opțional — apare pe rapoartele trimise clienților.</div>
     </div>
- 
+
     <div class="form-group">
       <label class="form-label">Telefon</label>
       <input class="form-input" type="tel" placeholder="+40 700 000 000" id="phone">
       <div class="form-hint">Folosit doar pentru notificări critice.</div>
     </div>
- 
+
     <div class="btn-row">
       <button class="btn-back" onclick="goTo(1)">← Înapoi</button>
       <button class="btn-primary" onclick="goTo(3)">Continuă <span class="arrow">→</span></button>
     </div>
   </div>
- 
+
   <!-- ─── STEP 3: SPECIALIZATION ───────────────────── -->
   <div class="step-panel" id="panel3">
     <div class="panel-eyebrow">Pasul 3 din 5</div>
     <h1 class="panel-title">Specializarea ta</h1>
     <p class="panel-subtitle">Selectează domeniile în care lucrezi — Noura îți va sugera rețete și planuri relevante.</p>
- 
+
     <div class="form-group">
       <label class="form-label">Domenii de expertiză <span style="color:var(--gray); font-weight:300; text-transform:none; letter-spacing:0;">(alege oricâte)</span></label>
       <div class="tag-grid" id="tagGrid">
@@ -679,7 +745,7 @@ body {
         <div class="tag-pill" onclick="toggleTag(this)">Patiserie sănătoasă</div>
       </div>
     </div>
- 
+
     <div class="form-group">
       <label class="form-label">Număr clienți activi în prezent</label>
       <select class="form-input" id="clientCount" style="cursor:pointer;">
@@ -690,7 +756,7 @@ body {
         <option>60+ clienți</option>
       </select>
     </div>
- 
+
     <div class="form-group">
       <label class="form-label">Cum ai auzit de Noura?</label>
       <select class="form-input" id="source" style="cursor:pointer;">
@@ -703,19 +769,19 @@ body {
         <option>Altul</option>
       </select>
     </div>
- 
+
     <div class="btn-row">
       <button class="btn-back" onclick="goTo(2)">← Înapoi</button>
       <button class="btn-primary" onclick="goTo(4)">Continuă <span class="arrow">→</span></button>
     </div>
   </div>
- 
+
   <!-- ─── STEP 4: TEAM INVITE ──────────────────────── -->
   <div class="step-panel" id="panel4">
     <div class="panel-eyebrow">Pasul 4 din 5</div>
     <h1 class="panel-title">Invită-ți echipa</h1>
     <p class="panel-subtitle">Collaboration layer-ul funcționează cel mai bine când și bucătarul tău e în Noura.</p>
- 
+
     <div class="invite-box">
       <div class="invite-header">
         <span class="invite-title">Bucătari personali</span>
@@ -727,7 +793,7 @@ body {
       </div>
       <div class="invited-list" id="invitedList"></div>
     </div>
- 
+
     <div class="invite-box" style="border-color: rgba(239,159,39,0.2);">
       <div class="invite-header">
         <span class="invite-title">Colegi nutriționiști</span>
@@ -739,23 +805,23 @@ body {
       </div>
       <div class="invited-list" id="invitedList2"></div>
     </div>
- 
+
     <div class="btn-row">
       <button class="btn-back" onclick="goTo(3)">← Înapoi</button>
-      <div style="display:flex; align-items:center; gap:1.5rem;">
+      <div>
         <button class="skip-invite" onclick="goTo(5)">Sari peste</button>
         <button class="btn-primary" onclick="goTo(5)">Trimite invitații <span class="arrow">→</span></button>
       </div>
     </div>
   </div>
- 
+
   <!-- ─── STEP 5: DONE ─────────────────────────────── -->
   <div class="step-panel" id="panel5">
     <div class="welcome-hero">
       <div class="welcome-logo">Noura<span>.</span></div>
       <div class="welcome-tagline">Bun venit în platformă, <span id="welcomeName">profesionistule</span>.</div>
     </div>
- 
+
     <div class="summary-card">
       <div class="sum-av" id="summaryAv">?</div>
       <div>
@@ -763,7 +829,7 @@ body {
         <div class="sum-details" id="summaryDetails">Rol · Specializare</div>
       </div>
     </div>
- 
+
     <div class="welcome-cards">
       <div class="welcome-card">
         <div class="wc-icon">👤</div>
@@ -781,26 +847,26 @@ body {
         <div class="wc-desc">Biblioteca are 200+ rețete gata calibrate nutrițional.</div>
       </div>
     </div>
- 
+
     <button class="btn-cta-large" onclick="alert('Bun venit în Noura! 🌿')">
       Intră în dashboard →
     </button>
- 
-    <p style="text-align:center; font-size:12px; color:var(--gray); margin-top:1rem;">
+
+    <p style="text-align:center; font-size:13px; color:var(--gray); margin-top:1.5rem;">
       14 zile trial gratuit · Nicio obligație · Anulezi oricând
     </p>
   </div>
- 
+
 </main>
- 
+
 <script>
 let currentStep = 1;
 let selectedRole = null;
 const invitedEmails  = [];
 const invitedEmails2 = [];
- 
+
 const progressMap = { 1:20, 2:40, 3:60, 4:80, 5:100 };
- 
+
 function goTo(step) {
   document.getElementById(`panel${currentStep}`).classList.remove('visible');
   currentStep = step;
@@ -810,44 +876,48 @@ function goTo(step) {
   if (step === 5) buildSummary();
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
- 
+
 function updateSidebar(activeStep) {
   for (let i = 1; i <= 5; i++) {
     const el = document.querySelector(`[data-step="${i}"]`);
     const circ = document.getElementById(`sc${i}`);
-    el.classList.remove('active','done');
-    if (i < activeStep) {
-      el.classList.add('done');
-      circ.textContent = '✓';
-    } else if (i === activeStep) {
-      el.classList.add('active');
-      circ.textContent = i;
-    } else {
-      circ.textContent = i;
+    if(el) {
+      el.classList.remove('active','done');
+      if (i < activeStep) {
+        el.classList.add('done');
+        circ.textContent = '✓';
+      } else if (i === activeStep) {
+        el.classList.add('active');
+        circ.textContent = i;
+      } else {
+        circ.textContent = i;
+      }
     }
   }
   const fname = document.getElementById('fname').value;
   const lname = document.getElementById('lname').value;
   if (fname || lname) {
     const full = `${fname} ${lname}`.trim();
-    document.getElementById('sidebarName').textContent = full;
-    document.getElementById('sidebarInitials').textContent =
-      ((fname[0]||'') + (lname[0]||'')).toUpperCase() || '?';
+    const nameEl = document.getElementById('sidebarName');
+    const initEl = document.getElementById('sidebarInitials');
+    if(nameEl) nameEl.textContent = full;
+    if(initEl) initEl.textContent = ((fname[0]||'') + (lname[0]||'')).toUpperCase() || '?';
   }
   const email = document.getElementById('email').value;
-  if (email) document.getElementById('sidebarEmail').textContent = email;
+  const emailEl = document.getElementById('sidebarEmail');
+  if (email && emailEl) emailEl.textContent = email;
 }
- 
+
 function selectRole(el, role) {
   document.querySelectorAll('.role-card').forEach(c => c.classList.remove('selected'));
   el.classList.add('selected');
   selectedRole = role;
 }
- 
+
 function toggleTag(el) {
   el.classList.toggle('selected');
 }
- 
+
 function addInvite() {
   const input = document.getElementById('inviteInput');
   const val = input.value.trim();
@@ -856,7 +926,7 @@ function addInvite() {
   renderInvited();
   input.value = '';
 }
- 
+
 function addInvite2() {
   const input = document.getElementById('inviteInput2');
   const val = input.value.trim();
@@ -865,7 +935,7 @@ function addInvite2() {
   renderInvited2();
   input.value = '';
 }
- 
+
 function renderInvited() {
   const list = document.getElementById('invitedList');
   list.innerHTML = invitedEmails.map((e,i) =>
@@ -875,7 +945,7 @@ function renderInvited() {
      </div>`
   ).join('');
 }
- 
+
 function renderInvited2() {
   const list = document.getElementById('invitedList2');
   list.innerHTML = invitedEmails2.map((e,i) =>
@@ -885,10 +955,10 @@ function renderInvited2() {
      </div>`
   ).join('');
 }
- 
+
 function removeInvite(i)  { invitedEmails.splice(i,1);  renderInvited(); }
 function removeInvite2(i) { invitedEmails2.splice(i,1); renderInvited2(); }
- 
+
 function buildSummary() {
   const fname = document.getElementById('fname').value || 'Profesionistule';
   const lname = document.getElementById('lname').value || '';
@@ -898,16 +968,17 @@ function buildSummary() {
                  selectedRole === 'chef'          ? 'Bucătar personal' : 'Profesionist';
   const tags   = [...document.querySelectorAll('.tag-pill.selected')]
                    .map(t => t.textContent).slice(0,3).join(' · ') || 'Nicio specializare';
- 
+
   document.getElementById('welcomeName').textContent = fname;
   document.getElementById('summaryAv').textContent   = initials;
   document.getElementById('summaryName').textContent = full;
   document.getElementById('summaryDetails').textContent = `${role} · ${tags}`;
 }
- 
+
 // Enter key on invite
 document.getElementById('inviteInput').addEventListener('keydown', e => { if (e.key==='Enter') addInvite(); });
 document.getElementById('inviteInput2').addEventListener('keydown', e => { if (e.key==='Enter') addInvite2(); });
 </script>
 </body>
 </html>
+  
