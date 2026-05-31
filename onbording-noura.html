@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Noura. — Bun venit</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+ 
+:root {
+  --forest:  #0F2E28;
+  --forestd: #0a1f1b;
+  --forest2: #1a3d36;
+  --sage:    #1D9E75;
+  --mint:    #5DCAA5;
+  --mintl:   #E1F5EE;
+  --saffron: #EF9F27;
+  --saffl:   #FAEEDA;
+  --linen:   #FAFAF8;
+  --linend:  #F1EFE8;
+  --gray:    #888780;
+  --dark:    #2C2C2A;
+  --white:   #FFFFFF;
+  --red:     #D85A30;
+}
+ 
+html, body { height: 100%; }
+ 
+body {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  background: var(--linen);
+  color: var(--dark);
+  display: flex;
+  min-height: 100vh;
+}
+ 
+/* ─── SIDEBAR ──────────────────────────────────────── */
+.sidebar {
+  width: 320px;
+  flex-shrink: 0;
+  background: var(--forest);
+  display: flex;
+  flex-direction: column;
+  padding: 2.5rem 2rem;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+ 
+.sb-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--mintl);
+  letter-spacing: 0.03em;
+  margin-bottom: 3rem;
+}
+.sb-logo span { color: var(--sage); }
+ 
+.sb-steps { flex: 1; display: flex; flex-direction: column; gap: 0; }
+ 
+.step-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 16px 0;
+  position: relative;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+.step-item:not(.active):not(.done) { opacity: 0.4; }
+.step-item:not(.active):not(.done):hover { opacity: 0.6; }
+ 
+.step-line {
+  position: absolute;
+  left: 15px;
+  top: 44px;
+  width: 1px;
+  height: calc(100% - 12px);
+  background: rgba(29,158,117,0.25);
+}
+.step-item:last-child .step-line { display: none; }
+ 
+.step-circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.3s;
+  border: 1.5px solid rgba(29,158,117,0.3);
+  color: rgba(159,225,203,0.5);
+  background: transparent;
+}
+.step-item.done .step-circle {
+  background: var(--sage);
+  border-color: var(--sage);
+  color: white;
+}
+.step-item.active .step-circle {
+  background: var(--sage);
+  border-color: var(--sage);
+  color: white;
+  box-shadow: 0 0 0 4px rgba(29,158,117,0.2);
+}
+ 
+.step-info { padding-top: 4px; }
+.step-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--mintl);
+  margin-bottom: 2px;
+}
+.step-item:not(.active):not(.done) .step-label { color: rgba(225,245,238,0.5); }
+.step-desc {
+  font-size: 11px;
+  color: rgba(93,202,165,0.5);
+}
+.step-item.active .step-desc { color: rgba(93,202,165,0.8); }
+ 
+.sb-bottom {
+  padding-top: 2rem;
+  border-top: 0.5px solid rgba(29,158,117,0.15);
+}
+.sb-user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.sb-av {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(29,158,117,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--mint);
+  flex-shrink: 0;
+}
+.sb-name { font-size: 13px; color: var(--mintl); }
+.sb-email { font-size: 11px; color: rgba(93,202,165,0.5); }
+ 
+/* ─── MAIN ─────────────────────────────────────────── */
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 3rem 4rem;
+  max-width: 700px;
+  overflow-y: auto;
+}
+ 
+.progress-bar-outer {
+  height: 3px;
+  background: var(--linend);
+  border-radius: 2px;
+  margin-bottom: 3rem;
+  overflow: hidden;
+}
+.progress-bar-fill {
+  height: 100%;
+  background: var(--sage);
+  border-radius: 2px;
+  transition: width 0.5s ease;
+}
+ 
+/* Step panels */
+.step-panel { display: none; animation: stepIn 0.35s ease; }
+.step-panel.visible { display: block; }
+@keyframes stepIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+ 
+.panel-eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--sage);
+  font-weight: 500;
+  margin-bottom: 0.75rem;
+}
+.panel-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 40px;
+  font-weight: 600;
+  color: var(--forest);
+  line-height: 1.1;
+  margin-bottom: 0.5rem;
+}
+.panel-subtitle {
+  font-size: 15px;
+  color: var(--gray);
+  line-height: 1.7;
+  margin-bottom: 2.5rem;
+  font-style: italic;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+}
+ 
+/* Form elements */
+.form-group { margin-bottom: 1.5rem; }
+.form-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--forest);
+  letter-spacing: 0.04em;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+}
+.form-input {
+  width: 100%;
+  padding: 13px 16px;
+  background: var(--white);
+  border: 0.5px solid rgba(15,46,40,0.2);
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: 'DM Sans', sans-serif;
+  color: var(--dark);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.form-input:focus {
+  border-color: var(--sage);
+  box-shadow: 0 0 0 3px rgba(29,158,117,0.12);
+}
+.form-input::placeholder { color: rgba(136,135,128,0.5); }
+.form-hint {
+  font-size: 11px;
+  color: var(--gray);
+  margin-top: 5px;
+  line-height: 1.5;
+}
+ 
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+ 
+/* Role selector */
+.role-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 2rem; }
+.role-card {
+  border: 1.5px solid rgba(15,46,40,0.12);
+  border-radius: 12px;
+  padding: 1.5rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  background: var(--white);
+  position: relative;
+}
+.role-card:hover { border-color: var(--mint); background: var(--mintl); }
+.role-card.selected {
+  border-color: var(--sage);
+  background: var(--mintl);
+  box-shadow: 0 0 0 3px rgba(29,158,117,0.12);
+}
+.role-check {
+  position: absolute;
+  top: 12px; right: 12px;
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  background: var(--sage);
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+.role-card.selected .role-check { display: flex; }
+.role-check::after { content: '✓'; color: white; font-size: 11px; font-weight: 600; }
+.role-icon {
+  width: 44px; height: 44px;
+  border-radius: 10px;
+  background: var(--mintl);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 12px;
+  font-size: 22px;
+}
+.role-card.selected .role-icon { background: rgba(29,158,117,0.2); }
+.role-name {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--forest);
+  margin-bottom: 4px;
+}
+.role-desc {
+  font-size: 12px;
+  color: var(--gray);
+  line-height: 1.5;
+}
+ 
+/* Tag selector (specializations) */
+.tag-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 2rem; }
+.tag-pill {
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 0.5px solid rgba(15,46,40,0.15);
+  font-size: 13px;
+  color: var(--gray);
+  cursor: pointer;
+  transition: all 0.15s;
+  background: var(--white);
+  user-select: none;
+}
+.tag-pill:hover { border-color: var(--mint); color: var(--forest); }
+.tag-pill.selected {
+  background: var(--mintl);
+  border-color: var(--sage);
+  color: var(--forest);
+  font-weight: 500;
+}
+ 
+/* Invite section */
+.invite-box {
+  background: var(--white);
+  border: 0.5px solid rgba(15,46,40,0.12);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.invite-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+.invite-title { font-size: 14px; font-weight: 500; color: var(--forest); }
+.invite-badge {
+  font-size: 10px;
+  background: var(--saffl);
+  color: #633806;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-weight: 500;
+}
+.invite-row { display: flex; gap: 8px; align-items: center; }
+.invite-input {
+  flex: 1;
+  padding: 10px 14px;
+  background: var(--linen);
+  border: 0.5px solid rgba(15,46,40,0.1);
+  border-radius: 8px;
+  font-size: 13px;
+  font-family: 'DM Sans', sans-serif;
+  color: var(--dark);
+  outline: none;
+  transition: border-color 0.2s;
+}
+.invite-input:focus { border-color: var(--sage); }
+.invite-btn-small {
+  padding: 10px 16px;
+  background: var(--forest);
+  color: var(--mintl);
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  white-space: nowrap;
+  transition: background 0.2s;
+}
+.invite-btn-small:hover { background: var(--sage); }
+.invited-list { display: flex; flex-direction: column; gap: 6px; margin-top: 12px; }
+.invited-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  background: var(--mintl);
+  border-radius: 8px;
+  font-size: 13px;
+  color: var(--forest);
+}
+.invited-item .remove {
+  margin-left: auto;
+  color: var(--gray);
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1;
+  transition: color 0.15s;
+}
+.invited-item .remove:hover { color: var(--red); }
+.skip-invite {
+  font-size: 13px;
+  color: var(--gray);
+  cursor: pointer;
+  text-decoration: underline;
+  background: none;
+  border: none;
+  font-family: 'DM Sans', sans-serif;
+  padding: 0;
+  transition: color 0.2s;
+}
+.skip-invite:hover { color: var(--forest); }
+ 
+/* Welcome screen */
+.welcome-hero {
+  text-align: center;
+  padding: 3rem 0 2rem;
+}
+.welcome-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 72px;
+  font-weight: 600;
+  color: var(--forest);
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+.welcome-logo span { color: var(--sage); }
+.welcome-tagline {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-style: italic;
+  color: var(--gray);
+  margin-bottom: 3rem;
+}
+.welcome-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 3rem;
+  text-align: left;
+}
+.welcome-card {
+  background: var(--white);
+  border: 0.5px solid rgba(15,46,40,0.1);
+  border-radius: 12px;
+  padding: 1.25rem;
+}
+.wc-icon {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+.wc-title {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--forest);
+  margin-bottom: 4px;
+}
+.wc-desc { font-size: 12px; color: var(--gray); line-height: 1.5; }
+ 
+/* Summary card */
+.summary-card {
+  background: var(--forest);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.sum-av {
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  background: rgba(29,158,117,0.25);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px; font-weight: 600;
+  color: var(--mint);
+  flex-shrink: 0;
+}
+.sum-name { font-size: 16px; font-weight: 500; color: var(--mintl); }
+.sum-details { font-size: 12px; color: rgba(93,202,165,0.6); margin-top: 2px; }
+ 
+/* Buttons */
+.btn-row { display: flex; align-items: center; justify-content: space-between; margin-top: 2rem; }
+.btn-primary {
+  background: var(--forest);
+  color: var(--linen);
+  padding: 14px 32px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  font-family: 'DM Sans', sans-serif;
+  transition: all 0.2s;
+  display: flex; align-items: center; gap: 8px;
+}
+.btn-primary:hover { background: var(--sage); }
+.btn-primary .arrow { font-size: 18px; transition: transform 0.2s; }
+.btn-primary:hover .arrow { transform: translateX(3px); }
+.btn-back {
+  background: none;
+  border: none;
+  color: var(--gray);
+  font-size: 14px;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  padding: 0;
+  transition: color 0.2s;
+  display: flex; align-items: center; gap: 6px;
+}
+.btn-back:hover { color: var(--forest); }
+ 
+.btn-cta-large {
+  width: 100%;
+  background: var(--sage);
+  color: white;
+  padding: 16px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  font-family: 'DM Sans', sans-serif;
+  transition: all 0.2s;
+  margin-top: 1rem;
+}
+.btn-cta-large:hover { background: var(--mint); transform: translateY(-1px); }
+ 
+/* ─── RESPONSIVE ───────────────────────────────────── */
+@media (max-width: 768px) {
+  .sidebar { display: none; }
+  .main { padding: 2rem 1.5rem; max-width: 100%; }
+  .form-row { grid-template-columns: 1fr; }
+  .role-grid { grid-template-columns: 1fr; }
+  .welcome-cards { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+ 
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="sb-logo">Noura<span>.</span></div>
+ 
+  <div class="sb-steps" id="sidebarSteps">
+    <div class="step-item active" data-step="1">
+      <div class="step-circle" id="sc1">1</div>
+      <div class="step-line"></div>
+      <div class="step-info">
+        <div class="step-label">Rolul tău</div>
+        <div class="step-desc">Nutriționist sau bucătar?</div>
+      </div>
+    </div>
+    <div class="step-item" data-step="2">
+      <div class="step-circle" id="sc2">2</div>
+      <div class="step-line"></div>
+      <div class="step-info">
+        <div class="step-label">Profilul tău</div>
+        <div class="step-desc">Informații de bază</div>
+      </div>
+    </div>
+    <div class="step-item" data-step="3">
+      <div class="step-circle" id="sc3">3</div>
+      <div class="step-line"></div>
+      <div class="step-info">
+        <div class="step-label">Specializarea</div>
+        <div class="step-desc">Domenii de expertiză</div>
+      </div>
+    </div>
+    <div class="step-item" data-step="4">
+      <div class="step-circle" id="sc4">4</div>
+      <div class="step-line"></div>
+      <div class="step-info">
+        <div class="step-label">Echipa ta</div>
+        <div class="step-desc">Invită colaboratori</div>
+      </div>
+    </div>
+    <div class="step-item" data-step="5">
+      <div class="step-circle" id="sc5">5</div>
+      <div class="step-info">
+        <div class="step-label">Gata!</div>
+        <div class="step-desc">Intră în Noura</div>
+      </div>
+    </div>
+  </div>
+ 
+  <div class="sb-bottom">
+    <div class="sb-user">
+      <div class="sb-av" id="sidebarInitials">?</div>
+      <div>
+        <div class="sb-name" id="sidebarName">Contul tău</div>
+        <div class="sb-email" id="sidebarEmail">hello@noura.app</div>
+      </div>
+    </div>
+  </div>
+</aside>
+ 
+<!-- MAIN -->
+<main class="main">
+  <div class="progress-bar-outer">
+    <div class="progress-bar-fill" id="progressBar" style="width: 20%"></div>
+  </div>
+ 
+  <!-- ─── STEP 1: ROLE ─────────────────────────────── -->
+  <div class="step-panel visible" id="panel1">
+    <div class="panel-eyebrow">Pasul 1 din 5</div>
+    <h1 class="panel-title">Cine ești tu?</h1>
+    <p class="panel-subtitle">Noura se adaptează rolului tău — alegerea ta configurează experiența.</p>
+ 
+    <div class="role-grid">
+      <div class="role-card" onclick="selectRole(this,'nutritionist')" id="roleNutri">
+        <div class="role-check"></div>
+        <div class="role-icon">🥗</div>
+        <div class="role-name">Nutriționist</div>
+        <div class="role-desc">Creezi planuri nutriționale, monitorizezi clienți și colaborezi cu bucătari.</div>
+      </div>
+      <div class="role-card" onclick="selectRole(this,'chef')" id="roleChef">
+        <div class="role-check"></div>
+        <div class="role-icon">👨‍🍳</div>
+        <div class="role-name">Bucătar personal</div>
+        <div class="role-desc">Primești planuri nutriționale și le transformi în rețete executabile.</div>
+      </div>
+    </div>
+ 
+    <div class="btn-row">
+      <span></span>
+      <button class="btn-primary" onclick="goTo(2)">Continuă <span class="arrow">→</span></button>
+    </div>
+  </div>
+ 
+  <!-- ─── STEP 2: PROFILE ──────────────────────────── -->
+  <div class="step-panel" id="panel2">
+    <div class="panel-eyebrow">Pasul 2 din 5</div>
+    <h1 class="panel-title">Profilul tău</h1>
+    <p class="panel-subtitle">Câteva date esențiale — îți personalizăm experiența.</p>
+ 
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Prenume</label>
+        <input class="form-input" type="text" placeholder="Maria" id="fname">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Nume</label>
+        <input class="form-input" type="text" placeholder="Ionescu" id="lname">
+      </div>
+    </div>
+ 
+    <div class="form-group">
+      <label class="form-label">Email profesional</label>
+      <input class="form-input" type="email" placeholder="maria@cabinetnutritie.ro" id="email">
+      <div class="form-hint">Acesta va fi ID-ul tău unic în Noura.</div>
+    </div>
+ 
+    <div class="form-group">
+      <label class="form-label">Numele cabinetului / clinicii</label>
+      <input class="form-input" type="text" placeholder="Cabinet Nutriție & Wellness" id="cabinet">
+      <div class="form-hint">Opțional — apare pe rapoartele trimise clienților.</div>
+    </div>
+ 
+    <div class="form-group">
+      <label class="form-label">Telefon</label>
+      <input class="form-input" type="tel" placeholder="+40 700 000 000" id="phone">
+      <div class="form-hint">Folosit doar pentru notificări critice.</div>
+    </div>
+ 
+    <div class="btn-row">
+      <button class="btn-back" onclick="goTo(1)">← Înapoi</button>
+      <button class="btn-primary" onclick="goTo(3)">Continuă <span class="arrow">→</span></button>
+    </div>
+  </div>
+ 
+  <!-- ─── STEP 3: SPECIALIZATION ───────────────────── -->
+  <div class="step-panel" id="panel3">
+    <div class="panel-eyebrow">Pasul 3 din 5</div>
+    <h1 class="panel-title">Specializarea ta</h1>
+    <p class="panel-subtitle">Selectează domeniile în care lucrezi — Noura îți va sugera rețete și planuri relevante.</p>
+ 
+    <div class="form-group">
+      <label class="form-label">Domenii de expertiză <span style="color:var(--gray); font-weight:300; text-transform:none; letter-spacing:0;">(alege oricâte)</span></label>
+      <div class="tag-grid" id="tagGrid">
+        <div class="tag-pill" onclick="toggleTag(this)">Nutriție clinică</div>
+        <div class="tag-pill" onclick="toggleTag(this)">Performanță sportivă</div>
+        <div class="tag-pill selected" onclick="toggleTag(this)">Slăbire & menținere</div>
+        <div class="tag-pill" onclick="toggleTag(this)">Diabet & metabolic</div>
+        <div class="tag-pill" onclick="toggleTag(this)">Cardiovascular</div>
+        <div class="tag-pill" onclick="toggleTag(this)">Pediatric</div>
+        <div class="tag-pill" onclick="toggleTag(this)">Oncologie</div>
+        <div class="tag-pill selected" onclick="toggleTag(this)">Vegetarian / Vegan</div>
+        <div class="tag-pill" onclick="toggleTag(this)">Gastronomie fine dining</div>
+        <div class="tag-pill" onclick="toggleTag(this)">Cuisine mediteraneană</div>
+        <div class="tag-pill" onclick="toggleTag(this)">Raw / plant-based</div>
+        <div class="tag-pill" onclick="toggleTag(this)">Patiserie sănătoasă</div>
+      </div>
+    </div>
+ 
+    <div class="form-group">
+      <label class="form-label">Număr clienți activi în prezent</label>
+      <select class="form-input" id="clientCount" style="cursor:pointer;">
+        <option value="">Alege...</option>
+        <option>1–10 clienți</option>
+        <option>11–30 clienți</option>
+        <option>31–60 clienți</option>
+        <option>60+ clienți</option>
+      </select>
+    </div>
+ 
+    <div class="form-group">
+      <label class="form-label">Cum ai auzit de Noura?</label>
+      <select class="form-input" id="source" style="cursor:pointer;">
+        <option value="">Alege...</option>
+        <option>Recomandare coleg</option>
+        <option>LinkedIn</option>
+        <option>Instagram</option>
+        <option>Google</option>
+        <option>Conferință / eveniment</option>
+        <option>Altul</option>
+      </select>
+    </div>
+ 
+    <div class="btn-row">
+      <button class="btn-back" onclick="goTo(2)">← Înapoi</button>
+      <button class="btn-primary" onclick="goTo(4)">Continuă <span class="arrow">→</span></button>
+    </div>
+  </div>
+ 
+  <!-- ─── STEP 4: TEAM INVITE ──────────────────────── -->
+  <div class="step-panel" id="panel4">
+    <div class="panel-eyebrow">Pasul 4 din 5</div>
+    <h1 class="panel-title">Invită-ți echipa</h1>
+    <p class="panel-subtitle">Collaboration layer-ul funcționează cel mai bine când și bucătarul tău e în Noura.</p>
+ 
+    <div class="invite-box">
+      <div class="invite-header">
+        <span class="invite-title">Bucătari personali</span>
+        <span class="invite-badge">Recomandat</span>
+      </div>
+      <div class="invite-row">
+        <input class="invite-input" type="email" placeholder="chef@email.com" id="inviteInput">
+        <button class="invite-btn-small" onclick="addInvite()">+ Adaugă</button>
+      </div>
+      <div class="invited-list" id="invitedList"></div>
+    </div>
+ 
+    <div class="invite-box" style="border-color: rgba(239,159,39,0.2);">
+      <div class="invite-header">
+        <span class="invite-title">Colegi nutriționiști</span>
+        <span class="invite-badge" style="background: var(--linend); color: var(--forest);">Opțional</span>
+      </div>
+      <div class="invite-row">
+        <input class="invite-input" type="email" placeholder="coleg@cabinet.ro" id="inviteInput2">
+        <button class="invite-btn-small" onclick="addInvite2()" style="background: var(--forest2);">+ Adaugă</button>
+      </div>
+      <div class="invited-list" id="invitedList2"></div>
+    </div>
+ 
+    <div class="btn-row">
+      <button class="btn-back" onclick="goTo(3)">← Înapoi</button>
+      <div style="display:flex; align-items:center; gap:1.5rem;">
+        <button class="skip-invite" onclick="goTo(5)">Sari peste</button>
+        <button class="btn-primary" onclick="goTo(5)">Trimite invitații <span class="arrow">→</span></button>
+      </div>
+    </div>
+  </div>
+ 
+  <!-- ─── STEP 5: DONE ─────────────────────────────── -->
+  <div class="step-panel" id="panel5">
+    <div class="welcome-hero">
+      <div class="welcome-logo">Noura<span>.</span></div>
+      <div class="welcome-tagline">Bun venit în platformă, <span id="welcomeName">profesionistule</span>.</div>
+    </div>
+ 
+    <div class="summary-card">
+      <div class="sum-av" id="summaryAv">?</div>
+      <div>
+        <div class="sum-name" id="summaryName">Profilul tău</div>
+        <div class="sum-details" id="summaryDetails">Rol · Specializare</div>
+      </div>
+    </div>
+ 
+    <div class="welcome-cards">
+      <div class="welcome-card">
+        <div class="wc-icon">👤</div>
+        <div class="wc-title">Adaugă primul client</div>
+        <div class="wc-desc">Creează un profil complet cu obiective și restricții alimentare.</div>
+      </div>
+      <div class="welcome-card">
+        <div class="wc-icon">📋</div>
+        <div class="wc-title">Creează un plan</div>
+        <div class="wc-desc">Folosește builder-ul vizual pentru primul plan nutrițional.</div>
+      </div>
+      <div class="welcome-card">
+        <div class="wc-icon">🍽️</div>
+        <div class="wc-title">Explorează rețete</div>
+        <div class="wc-desc">Biblioteca are 200+ rețete gata calibrate nutrițional.</div>
+      </div>
+    </div>
+ 
+    <button class="btn-cta-large" onclick="alert('Bun venit în Noura! 🌿')">
+      Intră în dashboard →
+    </button>
+ 
+    <p style="text-align:center; font-size:12px; color:var(--gray); margin-top:1rem;">
+      14 zile trial gratuit · Nicio obligație · Anulezi oricând
+    </p>
+  </div>
+ 
+</main>
+ 
+<script>
+let currentStep = 1;
+let selectedRole = null;
+const invitedEmails  = [];
+const invitedEmails2 = [];
+ 
+const progressMap = { 1:20, 2:40, 3:60, 4:80, 5:100 };
+ 
+function goTo(step) {
+  document.getElementById(`panel${currentStep}`).classList.remove('visible');
+  currentStep = step;
+  document.getElementById(`panel${step}`).classList.add('visible');
+  document.getElementById('progressBar').style.width = progressMap[step] + '%';
+  updateSidebar(step);
+  if (step === 5) buildSummary();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+ 
+function updateSidebar(activeStep) {
+  for (let i = 1; i <= 5; i++) {
+    const el = document.querySelector(`[data-step="${i}"]`);
+    const circ = document.getElementById(`sc${i}`);
+    el.classList.remove('active','done');
+    if (i < activeStep) {
+      el.classList.add('done');
+      circ.textContent = '✓';
+    } else if (i === activeStep) {
+      el.classList.add('active');
+      circ.textContent = i;
+    } else {
+      circ.textContent = i;
+    }
+  }
+  const fname = document.getElementById('fname').value;
+  const lname = document.getElementById('lname').value;
+  if (fname || lname) {
+    const full = `${fname} ${lname}`.trim();
+    document.getElementById('sidebarName').textContent = full;
+    document.getElementById('sidebarInitials').textContent =
+      ((fname[0]||'') + (lname[0]||'')).toUpperCase() || '?';
+  }
+  const email = document.getElementById('email').value;
+  if (email) document.getElementById('sidebarEmail').textContent = email;
+}
+ 
+function selectRole(el, role) {
+  document.querySelectorAll('.role-card').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  selectedRole = role;
+}
+ 
+function toggleTag(el) {
+  el.classList.toggle('selected');
+}
+ 
+function addInvite() {
+  const input = document.getElementById('inviteInput');
+  const val = input.value.trim();
+  if (!val || !val.includes('@')) return;
+  invitedEmails.push(val);
+  renderInvited();
+  input.value = '';
+}
+ 
+function addInvite2() {
+  const input = document.getElementById('inviteInput2');
+  const val = input.value.trim();
+  if (!val || !val.includes('@')) return;
+  invitedEmails2.push(val);
+  renderInvited2();
+  input.value = '';
+}
+ 
+function renderInvited() {
+  const list = document.getElementById('invitedList');
+  list.innerHTML = invitedEmails.map((e,i) =>
+    `<div class="invited-item">
+       <span style="font-size:16px;">👨‍🍳</span> ${e}
+       <span class="remove" onclick="removeInvite(${i})">×</span>
+     </div>`
+  ).join('');
+}
+ 
+function renderInvited2() {
+  const list = document.getElementById('invitedList2');
+  list.innerHTML = invitedEmails2.map((e,i) =>
+    `<div class="invited-item" style="background: var(--saffl);">
+       <span style="font-size:16px;">👤</span> ${e}
+       <span class="remove" onclick="removeInvite2(${i})">×</span>
+     </div>`
+  ).join('');
+}
+ 
+function removeInvite(i)  { invitedEmails.splice(i,1);  renderInvited(); }
+function removeInvite2(i) { invitedEmails2.splice(i,1); renderInvited2(); }
+ 
+function buildSummary() {
+  const fname = document.getElementById('fname').value || 'Profesionistule';
+  const lname = document.getElementById('lname').value || '';
+  const full   = `${fname} ${lname}`.trim();
+  const initials = ((fname[0]||'?') + (lname[0]||'')).toUpperCase();
+  const role   = selectedRole === 'nutritionist' ? 'Nutriționist' :
+                 selectedRole === 'chef'          ? 'Bucătar personal' : 'Profesionist';
+  const tags   = [...document.querySelectorAll('.tag-pill.selected')]
+                   .map(t => t.textContent).slice(0,3).join(' · ') || 'Nicio specializare';
+ 
+  document.getElementById('welcomeName').textContent = fname;
+  document.getElementById('summaryAv').textContent   = initials;
+  document.getElementById('summaryName').textContent = full;
+  document.getElementById('summaryDetails').textContent = `${role} · ${tags}`;
+}
+ 
+// Enter key on invite
+document.getElementById('inviteInput').addEventListener('keydown', e => { if (e.key==='Enter') addInvite(); });
+document.getElementById('inviteInput2').addEventListener('keydown', e => { if (e.key==='Enter') addInvite2(); });
+</script>
+</body>
+</html>
