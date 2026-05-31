@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Noura. — Prețuri</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --forest:  #0F2E28; --forestd: #0a1f1b; --forest2: #1a3d36;
+  --sage:    #1D9E75; --mint:    #5DCAA5; --mintl:   #E1F5EE;
+  --saffron: #EF9F27; --saffl:   #FAEEDA;
+  --linen:   #FAFAF8; --linend:  #F1EFE8;
+  --gray:    #888780; --dark:    #2C2C2A; --white:   #FFFFFF;
+}
+html { scroll-behavior: smooth; }
+body { font-family: 'DM Sans', sans-serif; font-weight: 300; background: var(--linen); color: var(--dark); overflow-x: hidden; }
+
+/* NAV */
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(250,250,248,0.93); backdrop-filter: blur(12px); border-bottom: 0.5px solid rgba(15,46,40,0.1); display: flex; align-items: center; justify-content: space-between; padding: 0 3rem; height: 64px; }
+.nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 600; color: var(--forest); text-decoration: none; }
+.nav-logo span { color: var(--sage); }
+.nav-links { display: flex; align-items: center; gap: 2rem; }
+.nav-links a { font-size: 13px; color: var(--gray); text-decoration: none; transition: color 0.2s; }
+.nav-links a:hover { color: var(--forest); }
+.nav-links a.active { color: var(--forest); font-weight: 500; }
+.nav-cta { background: var(--forest); color: var(--linen) !important; padding: 8px 20px; border-radius: 6px; font-weight: 500 !important; transition: background 0.2s !important; }
+.nav-cta:hover { background: var(--sage) !important; }
+
+/* HERO */
+.page-hero { background: var(--forest); padding: 120px 3rem 72px; text-align: center; position: relative; overflow: hidden; }
+.page-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at center, rgba(29,158,117,0.13) 0%, transparent 65%); }
+.hero-inner { position: relative; z-index: 1; max-width: 600px; margin: 0 auto; }
+.hero-eyebrow { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--mint); font-weight: 500; margin-bottom: 1rem; }
+.hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(44px,6vw,68px); font-weight: 600; color: var(--mintl); line-height: 1.05; margin-bottom: 0.75rem; }
+.hero-sub { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-style: italic; color: rgba(159,225,203,0.7); margin-bottom: 2rem; line-height: 1.5; }
+
+/* Billing toggle */
+.billing-toggle { display: inline-flex; align-items: center; gap: 12px; background: rgba(26,61,54,0.6); border-radius: 10px; padding: 6px 16px; }
+.bt-label { font-size: 13px; color: rgba(159,225,203,0.6); transition: color 0.2s; }
+.bt-label.active { color: var(--mintl); font-weight: 500; }
+.toggle-switch { position: relative; width: 44px; height: 24px; cursor: pointer; }
+.toggle-switch input { opacity: 0; width: 0; height: 0; }
+.toggle-track { position: absolute; inset: 0; background: rgba(29,158,117,0.3); border-radius: 12px; transition: background 0.2s; }
+.toggle-thumb { position: absolute; top: 3px; left: 3px; width: 18px; height: 18px; background: var(--sage); border-radius: 50%; transition: transform 0.2s; }
+.toggle-switch input:checked + .toggle-track { background: var(--sage); }
+.toggle-switch input:checked + .toggle-track + .toggle-thumb { transform: translateX(20px); }
+.save-badge { background: rgba(239,159,39,0.2); color: var(--saffron); font-size: 10px; padding: 3px 10px; border-radius: 20px; font-weight: 600; letter-spacing: 0.06em; }
+
+/* PLANS */
+.plans-section { padding: 5rem 3rem; max-width: 1120px; margin: 0 auto; }
+.plans-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; margin-bottom: 1rem; }
+.plan-card { border-radius: 16px; border: 0.5px solid rgba(15,46,40,0.12); background: var(--white); overflow: hidden; display: flex; flex-direction: column; transition: transform 0.2s, box-shadow 0.2s; }
+.plan-card:hover { transform: translateY(-4px); box-shadow: 0 20px 60px rgba(15,46,40,0.1); }
+.plan-card.featured { border-color: var(--sage); border-width: 1.5px; background: var(--forest); }
+.plan-top { padding: 2rem 2rem 1.5rem; }
+.plan-badge { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; padding: 3px 12px; border-radius: 20px; margin-bottom: 1rem; display: inline-block; }
+.plan-card:not(.featured) .plan-badge { background: var(--mintl); color: var(--sage); }
+.plan-card.featured .plan-badge { background: rgba(29,158,117,0.2); color: var(--mint); }
+.plan-name { font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 600; margin-bottom: 8px; }
+.plan-card:not(.featured) .plan-name { color: var(--forest); }
+.plan-card.featured .plan-name { color: var(--mintl); }
+.plan-desc { font-size: 13px; line-height: 1.6; margin-bottom: 1.5rem; }
+.plan-card:not(.featured) .plan-desc { color: var(--gray); }
+.plan-card.featured .plan-desc { color: rgba(159,225,203,0.65); }
+.plan-price { display: flex; align-items: baseline; gap: 4px; margin-bottom: 4px; }
+.price-amount { font-family: 'Cormorant Garamond', serif; font-size: 52px; font-weight: 600; line-height: 1; transition: all 0.3s; }
+.plan-card:not(.featured) .price-amount { color: var(--forest); }
+.plan-card.featured .price-amount { color: var(--mintl); }
+.price-period { font-size: 14px; }
+.plan-card:not(.featured) .price-period { color: var(--gray); }
+.plan-card.featured .price-period { color: rgba(93,202,165,0.6); }
+.price-annual-note { font-size: 11px; margin-bottom: 0; min-height: 16px; }
+.plan-card:not(.featured) .price-annual-note { color: var(--sage); }
+.plan-card.featured .price-annual-note { color: var(--mint); }
+.plan-divider { height: 0.5px; margin: 0 2rem; }
+.plan-card:not(.featured) .plan-divider { background: var(--linend); }
+.plan-card.featured .plan-divider { background: rgba(29,158,117,0.2); }
+.plan-features { padding: 1.5rem 2rem; flex: 1; }
+.feat-group-label { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 500; margin-bottom: 10px; margin-top: 16px; }
+.plan-card:not(.featured) .feat-group-label { color: var(--gray); }
+.plan-card.featured .feat-group-label { color: rgba(93,202,165,0.5); }
+.feat-group-label:first-child { margin-top: 0; }
+.feat-item { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 8px; font-size: 13px; line-height: 1.5; }
+.feat-check { width: 16px; height: 16px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; font-size: 9px; font-weight: 700; }
+.plan-card:not(.featured) .feat-check { background: var(--mintl); color: var(--sage); }
+.plan-card.featured .feat-check { background: rgba(29,158,117,0.25); color: var(--mint); }
+.feat-dash { width: 16px; height: 16px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: rgba(136,135,128,0.4); font-size: 14px; margin-top: 1px; }
+.feat-text { }
+.plan-card:not(.featured) .feat-text { color: var(--dark); }
+.plan-card.featured .feat-text { color: rgba(225,245,238,0.8); }
+.feat-text em { font-style: normal; font-weight: 500; }
+.plan-card:not(.featured) .feat-text em { color: var(--forest); }
+.plan-card.featured .feat-text em { color: var(--mintl); }
+.plan-bottom { padding: 1.5rem 2rem 2rem; }
+.plan-btn { width: 100%; padding: 14px; border-radius: 8px; font-size: 14px; font-weight: 500; cursor: pointer; border: none; font-family: 'DM Sans', sans-serif; transition: all 0.2s; text-align: center; display: block; text-decoration: none; }
+.plan-card:not(.featured) .plan-btn { background: var(--mintl); color: var(--forest); }
+.plan-card:not(.featured) .plan-btn:hover { background: var(--sage); color: white; }
+.plan-card.featured .plan-btn { background: var(--sage); color: white; }
+.plan-card.featured .plan-btn:hover { background: var(--mint); }
+.plan-trial-note { font-size: 11px; text-align: center; margin-top: 8px; }
+.plan-card:not(.featured) .plan-trial-note { color: var(--gray); }
+.plan-card.featured .plan-trial-note { color: rgba(93,202,165,0.4); }
+
+/* ENTERPRISE */
+.enterprise-banner { background: var(--linend); border-radius: 16px; padding: 2rem 2.5rem; display: flex; align-items: center; justify-content: space-between; gap: 2rem; border: 0.5px solid rgba(15,46,40,0.1); }
+.eb-left {}
+.eb-title { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 600; color: var(--forest); margin-bottom: 6px; }
+.eb-desc { font-size: 14px; color: var(--gray); line-height: 1.6; }
+.eb-features { display: flex; gap: 1.5rem; margin-top: 12px; flex-wrap: wrap; }
+.eb-feat { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--dark); }
+.eb-feat::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--sage); flex-shrink: 0; }
+.eb-cta { flex-shrink: 0; }
+.btn-outline { padding: 13px 28px; border: 1.5px solid var(--forest); color: var(--forest); border-radius: 8px; font-size: 14px; font-weight: 500; text-decoration: none; transition: all 0.2s; white-space: nowrap; display: block; text-align: center; font-family: 'DM Sans', sans-serif; }
+.btn-outline:hover { background: var(--forest); color: var(--linen); }
+
+/* COMPARISON TABLE */
+.comparison-section { padding: 4rem 3rem; max-width: 1120px; margin: 0 auto; }
+.section-header { text-align: center; margin-bottom: 3rem; }
+.sec-eyebrow { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--sage); font-weight: 500; margin-bottom: 8px; }
+.sec-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(32px,4vw,46px); font-weight: 600; color: var(--forest); line-height: 1.1; }
+
+.comp-table { width: 100%; border-collapse: collapse; border-radius: 12px; overflow: hidden; }
+.comp-table th, .comp-table td { padding: 14px 20px; text-align: left; font-size: 13px; }
+.comp-table thead th { background: var(--forest); color: var(--mintl); font-size: 14px; font-weight: 500; }
+.comp-table thead th:first-child { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 600; }
+.comp-table thead th:not(:first-child) { text-align: center; }
+.comp-table thead th.col-featured { background: var(--sage); }
+.comp-table tbody tr:nth-child(even) td { background: var(--linen); }
+.comp-table tbody tr:nth-child(odd) td { background: var(--white); }
+.comp-table tbody td:not(:first-child) { text-align: center; }
+.comp-table tbody td:first-child { color: var(--dark); font-weight: 400; }
+.comp-table .cat-row td { background: var(--linend); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray); font-weight: 500; padding: 8px 20px; }
+.check { color: var(--sage); font-size: 16px; font-weight: 600; }
+.dash { color: rgba(136,135,128,0.35); font-size: 18px; }
+.partial { font-size: 11px; color: var(--saffron); font-weight: 500; }
+
+/* FAQ */
+.faq-section { padding: 4rem 3rem; max-width: 760px; margin: 0 auto; }
+.faq-item { border-bottom: 0.5px solid var(--linend); }
+.faq-q { width: 100%; text-align: left; padding: 18px 0; font-size: 15px; font-weight: 400; color: var(--forest); cursor: pointer; background: none; border: none; font-family: 'DM Sans', sans-serif; display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+.faq-q:hover { color: var(--sage); }
+.faq-icon { font-size: 20px; color: var(--sage); flex-shrink: 0; transition: transform 0.2s; font-weight: 300; }
+.faq-item.open .faq-icon { transform: rotate(45deg); }
+.faq-a { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+.faq-a-inner { padding: 0 0 16px; font-size: 14px; color: var(--gray); line-height: 1.8; }
+.faq-item.open .faq-a { max-height: 300px; }
+
+/* LOGOS / SOCIAL PROOF */
+.proof-section { background: var(--white); padding: 3rem; text-align: center; border-top: 0.5px solid var(--linend); border-bottom: 0.5px solid var(--linend); }
+.proof-label { font-size: 12px; color: var(--gray); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1.5rem; }
+.proof-logos { display: flex; align-items: center; justify-content: center; gap: 3rem; flex-wrap: wrap; }
+.proof-logo { font-family: 'Cormorant Garamond', serif; font-size: 18px; color: rgba(15,46,40,0.25); font-weight: 600; letter-spacing: 0.04em; }
+
+/* CTA */
+.page-cta { background: var(--forest); padding: 5rem 3rem; text-align: center; }
+.cta-inner { max-width: 540px; margin: 0 auto; }
+.cta-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(36px,5vw,52px); font-weight: 600; color: var(--mintl); margin-bottom: 1rem; line-height: 1.1; }
+.cta-sub { font-size: 15px; color: rgba(159,225,203,0.6); margin-bottom: 2.5rem; }
+.cta-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.btn-primary { background: var(--sage); color: white; padding: 14px 32px; border-radius: 8px; font-size: 14px; font-weight: 500; text-decoration: none; transition: all 0.2s; }
+.btn-primary:hover { background: var(--mint); transform: translateY(-1px); }
+.btn-ghost { color: var(--mintl); padding: 14px 24px; border-radius: 8px; font-size: 14px; font-weight: 400; text-decoration: none; border: 0.5px solid rgba(93,202,165,0.25); transition: all 0.2s; }
+.btn-ghost:hover { border-color: var(--mint); color: var(--mint); }
+
+@media (max-width: 900px) {
+  nav { padding: 0 1.5rem; }
+  .plans-grid { grid-template-columns: 1fr; }
+  .enterprise-banner { flex-direction: column; }
+  .plans-section, .comparison-section, .faq-section { padding: 3rem 1.5rem; }
+  .proof-section { padding: 2rem 1.5rem; }
+  .comp-table { font-size: 12px; }
+  .comp-table th, .comp-table td { padding: 10px 12px; }
+  .page-hero { padding: 100px 1.5rem 60px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="noura-landing.html" class="nav-logo">Noura<span>.</span></a>
+  <div class="nav-links">
+    <a href="noura-landing.html">Acasă</a>
+    <a href="noura-how-it-works.html">Cum funcționează</a>
+    <a href="#" class="active">Prețuri</a>
+    <a href="noura-onboarding.html" class="nav-cta">Începe gratuit</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="page-hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Prețuri transparente</div>
+    <h1 class="hero-title">Simplu. Onest. Scalabil.</h1>
+    <p class="hero-sub">14 zile trial gratuit pe orice plan, fără card de credit.</p>
+    <div class="billing-toggle">
+      <span class="bt-label active" id="lblMonthly">Lunar</span>
+      <label class="toggle-switch">
+        <input type="checkbox" id="billingToggle" onchange="switchBilling(this)">
+        <div class="toggle-track"></div>
+        <div class="toggle-thumb"></div>
+      </label>
+      <span class="bt-label" id="lblAnnual">Anual</span>
+      <span class="save-badge" id="saveBadge">Economisești 20%</span>
+    </div>
+  </div>
+</section>
+
+<!-- PLANS -->
+<div class="plans-section">
+  <div class="plans-grid">
+
+    <!-- SOLO -->
+    <div class="plan-card">
+      <div class="plan-top">
+        <div class="plan-badge">Solo</div>
+        <div class="plan-name">Solo</div>
+        <div class="plan-desc">Perfectă pentru nutriționistul care lucrează independent și vrea să înlocuiască Excel-ul și PDF-urile.</div>
+        <div class="plan-price">
+          <span class="price-amount" id="price-solo">€79</span>
+          <span class="price-period">/ lună</span>
+        </div>
+        <div class="price-annual-note" id="note-solo"></div>
+      </div>
+      <div class="plan-divider"></div>
+      <div class="plan-features">
+        <div class="feat-group-label">Clienți & planuri</div>
+        <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text"><em>1 nutriționist</em></div></div>
+        <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text">Până la <em>30 clienți activi</em></div></div>
+        <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text">Plan nutrițional builder complet</div></div>
+        <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text">Calcul automat macronutrienți</div></div>
+        <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text">Export PDF <em>nelimitat</em></div></div>
+        <div class="feat-group-label">Recipe Studio</div>
+        <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text">Bibliotecă rețete personală</div></div>
+        <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text">Verificare compatibilitate alergeni</div></div>
+        <div class="feat-item"><div class="feat-dash">—</div><div class="feat-text" style="color:var(--gray);">Collaboration layer</div></div>
+        <div class="feat-group-label">Suport</div>
+        <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text">Email support (48h)</div></div>
+        <div class="feat-item"><div class="feat-dash">—</div><div class="feat-text" style="color:var(--gray);">Chat live</div></div>
+      </div>
+      <div class="plan-bottom">
+        <a href="noura-onboarding.html" class="plan-btn">Începe trial 14 zile</a>
+        <div class="plan-trial-note">Fără card de credit</div>
+      </div>
+    </div>
+
+    <!-- PRO (featured) -->
+    <div class="plan-card featured">
+      <div class="plan-top">
+        <div class="plan-badge">⭐ Cel mai popular</div>
+        <div class="plan-name">Pro</div>
+        <div class="plan-desc">Pentru nutriționistul care colaborează cu unul sau mai mulți bucătari personali și vrea vizibilitate completă.</div>
+        <div class="plan-price">
+          <span class="price-amount" id="price-pro">€179</span>
+          <span class="price-period">/ lună</span>
+        </div>
+        <div class="price-annual-note" id="note-pro"></div>
+      </div>
+      <div class="plan-divider"></div>
+      <div class="plan-features">
+        <div class="feat-group-label">Clienți & planuri</div>
+        <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text"><em>1 nutriționist + 2 bucătari</em></div></div>
+        <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text">Clienți <em>nelimitați</em></div></div>
+        <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text">Plan nutrițional builder complet</div></div>
+        <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text">Calcul automat macronutrienți</div></div>
+        <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text">Template-uri reutilizabile</div></div>
+        <div class="feat-group-label">Collaboration</div>
+        <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text"><em>Collaboration layer complet</em></div></div>
+        <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text">Flux aprobare modificări</div></div>
+        <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text">Notificări real-time</div></div>
+        <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text"><em>Analytics dashboard avansat</em></div></div>
+        <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text">Rapoarte lunare automate</div></div>
+        <div class="feat-group-label">Suport</div>
+        <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text"><em>Priority support (12h)</em></div></div>
+        <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text">Chat live</div></div>
+      </div>
+      <div class="plan-bottom">
+        <a href="noura-onboarding.html" class="plan-btn">Începe trial 14 zile</a>
+        <div class="plan-trial-note">Fără card de credit · Cel mai ales plan</div>
+      </div>
+    </div>
+
+    <!-- CLINIC -->
+    <div class="plan-card">
+      <div class="plan-top">
+        <div class="plan-badge">Clinic</div>
+        <div class="plan-name">Clinic</div>
+        <div class="plan-desc">Pentru cabinete și clinici cu echipe mai mari, nevoi de branding propriu și integrări avansate.</div>
+        <div class="plan-price">
+          <span class="price-amount" id="price-clinic">€490</span>
+          <span class="price-period">/ lună</span>
+        </div>
+        <div class="price-annual-note" id="note-clinic"></div>
+      </div>
+      <div class="plan-divider"></div>
+      <div class="plan-features">
+        <div class="feat-group-label">Echipă & clienți</div>
+        <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text">Nutriționiști <em>nelimitați</em></div></div>
+        <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text">Bucătari <em>nelimitați</em></div></div>
+        <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text">Clienți <em>nelimitați</em></div></div>
+        <div class="feat-group-label">Funcționalități avansate</div>
+        <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text"><em>White-label</em> — logo & culori proprii</div></div>
+        <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text"><em>API access</em> pentru integrări</div></div>
+        <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text">Rapoarte personalizate avansate</div></div>
+        <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text">SSO (Single Sign-On)</div></div>
+        <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text">Audit log complet GDPR</div></div>
+        <div class="feat-group-label">Suport dedicat</div>
+        <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text"><em>Account manager dedicat</em></div></div>
+        <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text">Onboarding asistat (4h)</div></div>
+        <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text">SLA garantat 99.5% uptime</div></div>
+      </div>
+      <div class="plan-bottom">
+        <a href="mailto:hello@noura.app" class="plan-btn">Contactează echipa</a>
+        <div class="plan-trial-note">Demo personalizat disponibil</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ENTERPRISE BANNER -->
+  <div class="enterprise-banner">
+    <div class="eb-left">
+      <div class="eb-title">Ai o rețea de cabinete sau un spital?</div>
+      <div class="eb-desc">Oferim planuri Enterprise personalizate cu prețuri bazate pe volum, integrări HL7/FHIR și suport dedicat pentru conformitate medicală.</div>
+      <div class="eb-features">
+        <div class="eb-feat">Prețuri bazate pe volum</div>
+        <div class="eb-feat">Integrare EHR / HL7</div>
+        <div class="eb-feat">Contract SLA personalizat</div>
+        <div class="eb-feat">Training echipă inclus</div>
+      </div>
+    </div>
+    <div class="eb-cta">
+      <a href="mailto:enterprise@noura.app" class="btn-outline">Discutăm →</a>
+    </div>
+  </div>
+</div>
+
+<!-- SOCIAL PROOF -->
+<div class="proof-section">
+  <div class="proof-label">Folosit de profesioniști din</div>
+  <div class="proof-logos">
+    <div class="proof-logo">Cabinet NutriLife</div>
+    <div class="proof-logo">Wellness Clinic BCN</div>
+    <div class="proof-logo">SportNutri Pro</div>
+    <div class="proof-logo">Atelier Culinar Sănătos</div>
+    <div class="proof-logo">Med & Food Center</div>
+  </div>
+</div>
+
+<!-- COMPARISON TABLE -->
+<div class="comparison-section">
+  <div class="section-header">
+    <div class="sec-eyebrow">Comparație detaliată</div>
+    <h2 class="sec-title">Tot ce primești, plan cu plan.</h2>
+  </div>
+  <table class="comp-table">
+    <thead>
+      <tr>
+        <th>Funcționalitate</th>
+        <th>Solo</th>
+        <th class="col-featured">Pro</th>
+        <th>Clinic</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="cat-row"><td colspan="4">Clienți & utilizatori</td></tr>
+      <tr><td>Nutriționiști incluși</td><td>1</td><td>1</td><td>Nelimitați</td></tr>
+      <tr><td>Bucătari incluși</td><td>—</td><td>2</td><td>Nelimitați</td></tr>
+      <tr><td>Clienți activi</td><td>30</td><td>Nelimitați</td><td>Nelimitați</td></tr>
+      <tr class="cat-row"><td colspan="4">Plan nutrițional</td></tr>
+      <tr><td>Builder drag-and-drop</td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+      <tr><td>Calcul macro automat</td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+      <tr><td>Export PDF</td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+      <tr><td>Template-uri reutilizabile</td><td><span class="partial">3 template-uri</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+      <tr><td>PDF cu branding propriu</td><td><span class="dash">—</span></td><td><span class="partial">Logo cabinet</span></td><td><span class="check">✓</span></td></tr>
+      <tr class="cat-row"><td colspan="4">Recipe Studio</td></tr>
+      <tr><td>Bibliotecă rețete</td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+      <tr><td>Verificare alergeni în timp real</td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+      <tr><td>Mod cooking step-by-step</td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+      <tr><td>Scalare automată porții</td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+      <tr class="cat-row"><td colspan="4">Colaborare</td></tr>
+      <tr><td>Collaboration layer</td><td><span class="dash">—</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+      <tr><td>Flux aprobare modificări</td><td><span class="dash">—</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+      <tr><td>Notificări real-time</td><td><span class="dash">—</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+      <tr><td>Shopping list automată</td><td><span class="dash">—</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+      <tr class="cat-row"><td colspan="4">Analytics & rapoarte</td></tr>
+      <tr><td>Dashboard progres clienți</td><td><span class="partial">Basic</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+      <tr><td>Rapoarte lunare automate</td><td><span class="dash">—</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+      <tr><td>Rapoarte personalizate</td><td><span class="dash">—</span></td><td><span class="dash">—</span></td><td><span class="check">✓</span></td></tr>
+      <tr><td>Export date CSV</td><td><span class="dash">—</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+      <tr class="cat-row"><td colspan="4">Securitate & conformitate</td></tr>
+      <tr><td>GDPR compliant</td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+      <tr><td>2FA obligatoriu</td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+      <tr><td>Audit log complet</td><td><span class="dash">—</span></td><td><span class="partial">30 zile</span></td><td><span class="check">✓ Nelimitat</span></td></tr>
+      <tr><td>SSO / SAML</td><td><span class="dash">—</span></td><td><span class="dash">—</span></td><td><span class="check">✓</span></td></tr>
+      <tr><td>API access</td><td><span class="dash">—</span></td><td><span class="dash">—</span></td><td><span class="check">✓</span></td></tr>
+      <tr><td>White-label</td><td><span class="dash">—</span></td><td><span class="dash">—</span></td><td><span class="check">✓</span></td></tr>
+      <tr class="cat-row"><td colspan="4">Suport</td></tr>
+      <tr><td>Email support</td><td>48h</td><td>12h</td><td>4h</td></tr>
+      <tr><td>Chat live</td><td><span class="dash">—</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+      <tr><td>Account manager dedicat</td><td><span class="dash">—</span></td><td><span class="dash">—</span></td><td><span class="check">✓</span></td></tr>
+      <tr><td>Onboarding asistat</td><td><span class="dash">—</span></td><td><span class="partial">Webinar</span></td><td><span class="check">✓ 4h 1:1</span></td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- FAQ -->
+<div class="faq-section">
+  <div class="section-header">
+    <div class="sec-eyebrow">Întrebări frecvente</div>
+    <h2 class="sec-title">Ai întrebări? Avem răspunsuri.</h2>
+  </div>
+  <div id="faqList">
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Ce se întâmplă după cele 14 zile de trial? <span class="faq-icon">+</span></button>
+      <div class="faq-a"><div class="faq-a-inner">La finalul trial-ului, poți alege un plan plătit sau contul trece în modul read-only — datele tale sunt păstrate timp de 30 de zile suplimentare. Nu ești debitat automat, niciodată.</div></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Pot schimba planul oricând? <span class="faq-icon">+</span></button>
+      <div class="faq-a"><div class="faq-a-inner">Da, upgrade sau downgrade oricând din setările contului. La upgrade, plătești diferența pro-rata pentru luna curentă. La downgrade, schimbarea intră în vigoare la finalul perioadei de facturare.</div></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Cum funcționează facturarea anuală? <span class="faq-icon">+</span></button>
+      <div class="faq-a"><div class="faq-a-inner">La facturarea anuală beneficiezi de 20% reducere față de prețul lunar. Plata se face integral la începutul anului. Poți anula oricând, cu rambursare pro-rata pentru lunile nefolosite.</div></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Datele clienților mei sunt în siguranță? <span class="faq-icon">+</span></button>
+      <div class="faq-a"><div class="faq-a-inner">Noura este 100% GDPR compliant. Datele sunt stocate în data center EU (Frankfurt), criptate AES-256 la repaus și TLS 1.3 în tranzit. Semnăm DPA (Data Processing Agreement) cu fiecare cabinet. Datele medicale ale clienților nu sunt niciodată vizibile bucătarilor.</div></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Planul Solo include și un cont pentru bucătar? <span class="faq-icon">+</span></button>
+      <div class="faq-a"><div class="faq-a-inner">Nu — Solo este dedicat nutriționistului care lucrează independent, fără bucătar. Dacă colaborezi cu bucătari, planul Pro (1 nutriționist + 2 bucătari) este cel mai potrivit.</div></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Pot importa clienții existenți din Excel sau alt tool? <span class="faq-icon">+</span></button>
+      <div class="faq-a"><div class="faq-a-inner">Da, oferim import CSV pentru profiluri de clienți (date demografice, restricții, obiective). Echipa noastră te asistă gratuit în migrare dacă ai mai mult de 20 de clienți — scrie-ne la hello@noura.app.</div></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Există o aplicație mobilă? <span class="faq-icon">+</span></button>
+      <div class="faq-a"><div class="faq-a-inner">În prezent Noura este o aplicație web responsivă, optimizată atât pentru desktop cât și pentru telefon. Aplicația nativă iOS pentru bucătari este planificată pentru Q1 2027 (versiunea 1.2 din roadmap).</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<section class="page-cta">
+  <div class="cta-inner">
+    <h2 class="cta-title">Începe gratuit astăzi.</h2>
+    <p class="cta-sub">14 zile pe planul Pro, fără card de credit. Anulezi oricând.</p>
+    <div class="cta-btns">
+      <a href="noura-onboarding.html" class="btn-primary">Pornește trial gratuit</a>
+      <a href="noura-how-it-works.html" class="btn-ghost">Cum funcționează →</a>
+    </div>
+  </div>
+</section>
+
+<script>
+// Billing toggle
+const prices = {
+  monthly: { solo: '€79',  pro: '€179', clinic: '€490' },
+  annual:  { solo: '€63',  pro: '€143', clinic: '€392' }
+};
+const notes = {
+  monthly: { solo: '', pro: '', clinic: '' },
+  annual:  {
+    solo:   'Facturat anual: €756/an (economisești €192)',
+    pro:    'Facturat anual: €1,716/an (economisești €432)',
+    clinic: 'Facturat anual: €4,704/an (economisești €1,176)'
+  }
+};
+
+function switchBilling(el) {
+  const isAnnual = el.checked;
+  const mode = isAnnual ? 'annual' : 'monthly';
+  document.getElementById('lblMonthly').classList.toggle('active', !isAnnual);
+  document.getElementById('lblAnnual').classList.toggle('active', isAnnual);
+  document.getElementById('saveBadge').style.opacity = isAnnual ? '1' : '0.4';
+  ['solo','pro','clinic'].forEach(plan => {
+    document.getElementById(`price-${plan}`).textContent = prices[mode][plan];
+    document.getElementById(`note-${plan}`).textContent = notes[mode][plan];
+  });
+}
+
+// FAQ toggle
+function toggleFaq(btn) {
+  const item = btn.closest('.faq-item');
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
+</script>
+</body>
+</html>
