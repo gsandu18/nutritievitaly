@@ -1,415 +1,624 @@
 <!DOCTYPE html>
-<html lang="ro" class="scroll-smooth">
+<html lang="ro">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>NutriChef Pro | Infrastructură Digitală pentru Nutriție Clinică și Meal Prep Sync</title>
-    
-    <!-- SEO Enterprise Meta Tags -->
-    <meta name="description" content="NutriChef Pro este o platformă SaaS securizată și integrată, destinată clinicilor medicale, nutriționiștilor clinicieni și operatorilor Meal Prep acreditați.">
-    <meta name="keywords" content="soft cabinet nutritie, aplicatie pwa dieta, platforma nutritionisti, meal prep romania, jurnal alimentar securizat, telemedicina criptata, soft dietetica">
-    <meta name="author" content="NutriChef Pro">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Noura. — Where precision meets flavor</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    <!-- Open Graph SEO / Social Media -->
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="NutriChef Pro | Securitate, Trasabilitate și Precizie în Nutriția Terapeutică">
-    <meta property="og:description" content="Sincronizare criptată end-to-end între diagnosticul nutriționistului și liniile logistice de producție alimentară.">
-    <meta property="og:image" content="https://images.unsplash.com/photo-1498837167922-41cfa6f5ce0f?q=80&w=1200">
+  :root {
+    --forest:  #0F2E28;
+    --forestd: #0a1f1b;
+    --sage:    #1D9E75;
+    --mint:    #5DCAA5;
+    --mintl:   #E1F5EE;
+    --saffron: #EF9F27;
+    --linen:   #FAFAF8;
+    --linend:  #F1EFE8;
+    --gray:    #888780;
+    --dark:    #2C2C2A;
+    --white:   #FFFFFF;
+  }
 
-    <!-- Fonts & Icons -->
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
-    
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'] },
-                    colors: {
-                        rubin: {
-                            50: '#f0fdf4',
-                            100: '#dcfce7',
-                            600: '#032F22', /* Verde Rubin Guvernamental / Clinic */
-                            700: '#02231A',
-                            950: '#01120D'
-                        },
-                        slate: {
-                            50: '#f8fafc',
-                            100: '#f1f5f9',
-                            200: '#e2e8f0',
-                            300: '#cbd5e1',
-                            700: '#334155',
-                            800: '#1e293b',
-                            900: '#0f172a'
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #ffffff; color: #0f172a; letter-spacing: -0.02em; -webkit-tap-highlight-color: transparent; }
-        .hide-scrollbar::-webkit-scrollbar { display: none; }
-        .institutional-nav { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(20px); border-bottom: 1px solid #e2e8f0; }
-        .corporate-card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
-        .corporate-card:hover { border-color: #0f172a; box-shadow: 0 12px 30px rgba(15,23,42,0.04); }
-        .expert-tab.active { border-color: #032F22; color: #032F22; font-weight: 700; }
-        .expert-tab.inactive { border-color: transparent; color: #94a3b8; }
-        
-        /* Câmpuri optimizate tehnic pentru mobil (text-base elimină complet auto-zoom forțat pe iPhone) */
-        .input-field { @apply w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-base sm:text-xs font-semibold outline-none transition-all text-black focus:bg-white focus:border-black min-h-[48px]; }
-        .input-field-select { @apply w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-base sm:text-xs font-bold outline-none transition-all text-black focus:bg-white focus:border-black min-h-[48px]; }
-        .input-label { @apply text-[10px] font-extrabold text-slate-400 uppercase tracking-widest mb-1 block pl-0.5; }
-    </style>
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    background: var(--linen);
+    color: var(--dark);
+    overflow-x: hidden;
+  }
+
+  /* ─── NAV ─────────────────────────────────────────────── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(250,250,248,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 0.5px solid rgba(15,46,40,0.12);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 3rem; height: 64px;
+  }
+  .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 600; color: var(--forest); letter-spacing: 0.02em; text-decoration: none; }
+  .nav-logo span { color: var(--sage); }
+  .nav-links { display: flex; align-items: center; gap: 2rem; }
+  .nav-links a { font-size: 13px; font-weight: 400; color: var(--gray); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--forest); }
+  .nav-cta { background: var(--forest); color: var(--linen) !important; padding: 8px 20px; border-radius: 6px; font-weight: 500 !important; font-size: 13px !important; transition: background 0.2s !important; }
+  .nav-cta:hover { background: var(--sage) !important; color: white !important; }
+
+  /* ─── HERO ────────────────────────────────────────────── */
+  .hero {
+    min-height: 100vh;
+    background: var(--forest);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 120px 3rem 80px;
+    gap: 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: 'N';
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(300px, 45vw, 600px);
+    font-weight: 600;
+    color: rgba(29,158,117,0.06);
+    position: absolute;
+    right: -80px; top: 50%;
+    transform: translateY(-50%);
+    line-height: 1;
+    pointer-events: none;
+    user-select: none;
+  }
+  .hero-content { position: relative; z-index: 1; }
+  .hero-eyebrow { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--mint); margin-bottom: 1.5rem; font-weight: 500; }
+  .hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(56px, 7vw, 88px); font-weight: 600; color: var(--mintl); line-height: 0.95; margin-bottom: 0.2em; letter-spacing: 0.01em; }
+  .hero-title .dot { color: var(--sage); }
+  .hero-subtitle { font-family: 'Cormorant Garamond', serif; font-size: clamp(20px, 2.5vw, 26px); font-style: italic; color: rgba(159,225,203,0.8); margin-bottom: 2.5rem; line-height: 1.4; }
+  .hero-desc { font-size: 15px; color: rgba(225,245,238,0.65); line-height: 1.8; margin-bottom: 2.5rem; max-width: 420px; font-weight: 300; }
+  .hero-actions { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+  .btn-primary { background: var(--sage); color: white; padding: 14px 28px; border-radius: 8px; font-size: 14px; font-weight: 500; text-decoration: none; transition: all 0.2s; border: none; cursor: pointer; font-family: 'DM Sans', sans-serif; }
+  .btn-primary:hover { background: var(--mint); transform: translateY(-1px); }
+  .btn-ghost { color: var(--mintl); padding: 14px 24px; border-radius: 8px; font-size: 14px; font-weight: 400; text-decoration: none; border: 0.5px solid rgba(93,202,165,0.3); transition: all 0.2s; }
+  .btn-ghost:hover { border-color: var(--mint); color: var(--mint); }
+
+  .hero-visual { position: relative; z-index: 1; }
+  .hero-card {
+    background: rgba(26,61,54,0.6);
+    border: 0.5px solid rgba(29,158,117,0.3);
+    border-radius: 16px;
+    padding: 1.5rem;
+    backdrop-filter: blur(8px);
+    animation: floatCard 6s ease-in-out infinite;
+  }
+  @keyframes floatCard { 0%,100% { transform: translateY(0px); } 50% { transform: translateY(-8px); } }
+  .card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.25rem; }
+  .card-title { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--mint); font-weight: 500; }
+  .card-badge { font-size: 10px; background: rgba(29,158,117,0.2); color: var(--mint); padding: 3px 10px; border-radius: 20px; font-weight: 500; }
+  .client-list { display: flex; flex-direction: column; gap: 10px; }
+  .client-row { display: flex; align-items: center; gap: 10px; padding: 10px; background: rgba(15,46,40,0.5); border-radius: 8px; border: 0.5px solid rgba(29,158,117,0.15); }
+  .cl-av { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-size: 14px; font-weight: 600; flex-shrink: 0; }
+  .cl-info { flex: 1; }
+  .cl-name { font-size: 13px; color: var(--mintl); font-weight: 400; }
+  .cl-plan { font-size: 11px; color: rgba(93,202,165,0.6); }
+  .progress-bar { width: 56px; }
+  .bar-bg { height: 3px; background: rgba(29,158,117,0.2); border-radius: 2px; }
+  .bar-fill { height: 3px; border-radius: 2px; background: var(--sage); }
+  .pct { font-size: 10px; color: var(--gray); text-align: right; margin-top: 2px; }
+  .collab-bubble {
+    background: rgba(26,61,54,0.8); border: 0.5px solid rgba(239,159,39,0.3);
+    border-radius: 10px; padding: 12px 14px; margin-top: 12px;
+    display: flex; gap: 10px; align-items: flex-start;
+  }
+  .av-saffron { width: 28px; height: 28px; border-radius: 50%; background: rgba(239,159,39,0.2); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; color: var(--saffron); flex-shrink: 0; }
+  .bubble-text { font-size: 12px; color: rgba(225,245,238,0.75); line-height: 1.5; }
+  .bubble-tag { font-size: 10px; color: var(--saffron); margin-top: 3px; }
+
+  /* ─── STATS ───────────────────────────────────────────── */
+  .stats-strip { background: var(--sage); padding: 2rem 3rem; display: grid; grid-template-columns: repeat(4,1fr); gap: 2rem; }
+  .stat-item { text-align: center; }
+  .stat-val { font-family: 'Cormorant Garamond', serif; font-size: 42px; font-weight: 600; color: white; line-height: 1; }
+  .stat-label { font-size: 12px; color: rgba(255,255,255,0.7); margin-top: 4px; font-weight: 300; }
+
+  /* ─── PROBLEM ─────────────────────────────────────────── */
+  .section { padding: 6rem 3rem; }
+  .section-label { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--sage); font-weight: 500; margin-bottom: 1rem; }
+  .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(36px, 5vw, 52px); font-weight: 600; color: var(--forest); line-height: 1.1; margin-bottom: 1.5rem; }
+  .section-body { font-size: 16px; color: var(--gray); line-height: 1.8; max-width: 540px; }
+
+  .problem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+  .pain-list { display: flex; flex-direction: column; gap: 20px; margin-top: 2.5rem; }
+  .pain-item { display: flex; gap: 16px; align-items: flex-start; }
+  .pain-num { font-family: 'Cormorant Garamond', serif; font-size: 48px; font-weight: 600; color: rgba(15,46,40,0.08); line-height: 1; flex-shrink: 0; width: 48px; }
+  .pain-text { padding-top: 8px; }
+  .pain-title { font-size: 15px; font-weight: 500; color: var(--forest); margin-bottom: 4px; }
+  .pain-desc { font-size: 13px; color: var(--gray); line-height: 1.6; }
+
+  .problem-visual {
+    background: var(--forest);
+    border-radius: 16px;
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .problem-visual::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(45deg, rgba(29,158,117,0.03) 0px, rgba(29,158,117,0.03) 1px, transparent 1px, transparent 16px);
+  }
+  .flow-item { position: relative; z-index: 1; background: rgba(26,61,54,0.6); border: 0.5px solid rgba(29,158,117,0.2); border-radius: 10px; padding: 14px 16px; margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between; }
+  .flow-item:last-child { margin-bottom: 0; }
+  .flow-label { font-size: 13px; color: var(--mintl); font-weight: 400; }
+  .flow-status { font-size: 11px; padding: 3px 10px; border-radius: 20px; font-weight: 500; }
+  .status-ok   { background: rgba(29,158,117,0.2); color: var(--mint); }
+  .status-warn { background: rgba(239,159,39,0.2); color: var(--saffron); }
+  .status-bad  { background: rgba(216,90,48,0.2); color: #F09579; }
+  .flow-arrow { text-align: center; color: rgba(93,202,165,0.3); font-size: 18px; margin: 4px 0; }
+
+  /* ─── SOLUTION / MODULES ──────────────────────────────── */
+  .solution { background: var(--white); }
+  .modules-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--linend); margin-top: 4rem; border-radius: 16px; overflow: hidden; }
+  .module-card { background: var(--white); padding: 2rem; transition: background 0.2s; }
+  .module-card:hover { background: var(--linen); }
+  .module-icon { width: 44px; height: 44px; border-radius: 10px; background: var(--mintl); display: flex; align-items: center; justify-content: center; margin-bottom: 1.25rem; }
+  .module-icon svg { width: 22px; height: 22px; }
+  .module-num { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mint); font-weight: 500; margin-bottom: 6px; }
+  .module-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 600; color: var(--forest); margin-bottom: 8px; }
+  .module-desc { font-size: 13px; color: var(--gray); line-height: 1.7; }
+  .module-highlight { grid-column: 1 / -1; background: var(--forest); }
+  .module-highlight:hover { background: #142823; }
+  .module-highlight .module-num { color: var(--mint); }
+  .module-highlight .module-title { color: var(--mintl); }
+  .module-highlight .module-desc { color: rgba(159,225,203,0.7); }
+  .module-highlight .module-icon { background: rgba(29,158,117,0.2); }
+  .highlight-inner { display: grid; grid-template-columns: auto 1fr; gap: 2rem; align-items: center; }
+
+  /* ─── WHO ─────────────────────────────────────────────── */
+  .who { background: var(--linen); }
+  .who-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 3rem; }
+  .who-card { border-radius: 16px; padding: 2.5rem; position: relative; overflow: hidden; }
+  .who-card.nutri { background: var(--forest); }
+  .who-card.chef  { background: var(--linend); border: 0.5px solid rgba(15,46,40,0.1); }
+  .who-avatar { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 600; margin-bottom: 1.5rem; }
+  .who-card.nutri .who-avatar { background: rgba(29,158,117,0.2); color: var(--mint); }
+  .who-card.chef  .who-avatar { background: rgba(239,159,39,0.15); color: var(--saffron); }
+  .who-role { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 500; margin-bottom: 8px; }
+  .who-card.nutri .who-role { color: var(--mint); }
+  .who-card.chef  .who-role { color: var(--saffron); }
+  .who-title { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 600; margin-bottom: 1rem; line-height: 1.15; }
+  .who-card.nutri .who-title { color: var(--mintl); }
+  .who-card.chef  .who-title { color: var(--forest); }
+  .who-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .who-list li { font-size: 13px; line-height: 1.6; padding-left: 16px; position: relative; }
+  .who-list li::before { content: ''; position: absolute; left: 0; top: 8px; width: 4px; height: 4px; border-radius: 50%; background: var(--sage); }
+  .who-card.nutri .who-list li { color: rgba(225,245,238,0.7); }
+  .who-card.chef  .who-list li { color: var(--gray); }
+
+  /* ─── PRICING ─────────────────────────────────────────── */
+  .pricing { background: var(--white); }
+  .pricing-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; margin-top: 3rem; }
+  .price-card { border-radius: 16px; padding: 2rem; border: 0.5px solid rgba(15,46,40,0.12); transition: transform 0.2s, box-shadow 0.2s; }
+  .price-card:hover { transform: translateY(-4px); }
+  .price-card.featured { background: var(--forest); border-color: var(--sage); }
+  .price-tier { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 500; margin-bottom: 12px; }
+  .price-card:not(.featured) .price-tier { color: var(--sage); }
+  .price-card.featured .price-tier { color: var(--mint); }
+  .price-name { font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 600; margin-bottom: 4px; }
+  .price-card:not(.featured) .price-name { color: var(--forest); }
+  .price-card.featured .price-name { color: var(--mintl); }
+  .price-amount { display: flex; align-items: baseline; gap: 4px; margin-bottom: 1.5rem; }
+  .price-val { font-family: 'Cormorant Garamond', serif; font-size: 48px; font-weight: 600; }
+  .price-card:not(.featured) .price-val { color: var(--forest); }
+  .price-card.featured .price-val { color: var(--mintl); }
+  .price-period { font-size: 13px; }
+  .price-card:not(.featured) .price-period { color: var(--gray); }
+  .price-card.featured .price-period { color: rgba(93,202,165,0.7); }
+  .price-features { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 2rem; }
+  .price-features li { font-size: 13px; padding-left: 18px; position: relative; line-height: 1.5; }
+  .price-features li::before { content: ''; position: absolute; left: 0; top: 7px; width: 5px; height: 5px; border-radius: 50%; }
+  .price-card:not(.featured) .price-features li { color: var(--gray); }
+  .price-card:not(.featured) .price-features li::before { background: var(--sage); }
+  .price-card.featured .price-features li { color: rgba(225,245,238,0.75); }
+  .price-card.featured .price-features li::before { background: var(--mint); }
+  .price-btn { width: 100%; padding: 12px; border-radius: 8px; font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.2s; text-align: center; display: block; text-decoration: none; font-family: 'DM Sans', sans-serif; border: none; }
+  .price-card:not(.featured) .price-btn { background: var(--mintl); color: var(--forest); }
+  .price-card:not(.featured) .price-btn:hover { background: var(--sage); color: white; }
+  .price-card.featured .price-btn { background: var(--sage); color: white; }
+  .price-card.featured .price-btn:hover { background: var(--mint); }
+  .featured-badge { display: inline-block; background: rgba(29,158,117,0.2); color: var(--mint); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 12px; border-radius: 20px; margin-bottom: 12px; font-weight: 500; }
+
+  /* ─── TESTIMONIALS ────────────────────────────────────── */
+  .testimonials { background: var(--linen); }
+  .testimonials-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.5rem; margin-top: 3rem; }
+  .testimonial-card { background: var(--white); border-radius: 16px; padding: 2rem; border: 0.5px solid rgba(15,46,40,0.08); }
+  .quote-mark { font-family: 'Cormorant Garamond', serif; font-size: 60px; font-weight: 600; color: var(--mintl); line-height: 0.8; margin-bottom: 12px; }
+  .quote-text { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-style: italic; color: var(--forest); line-height: 1.6; margin-bottom: 1.5rem; }
+  .quote-author { display: flex; align-items: center; gap: 10px; }
+  .qa-av { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-size: 15px; font-weight: 600; flex-shrink: 0; }
+  .qa-name { font-size: 13px; font-weight: 500; color: var(--forest); }
+  .qa-role { font-size: 11px; color: var(--gray); }
+
+  /* ─── CTA ─────────────────────────────────────────────── */
+  .cta-section {
+    background: var(--forest);
+    padding: 7rem 3rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-section::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at center, rgba(29,158,117,0.15) 0%, transparent 70%);
+  }
+  .cta-content { position: relative; z-index: 1; max-width: 640px; margin: 0 auto; }
+  .cta-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(40px, 5vw, 60px); font-weight: 600; color: var(--mintl); margin-bottom: 1rem; line-height: 1.1; }
+  .cta-sub { font-size: 16px; color: rgba(159,225,203,0.7); margin-bottom: 2.5rem; font-style: italic; font-family: 'Cormorant Garamond', serif; font-size: 22px; }
+  .cta-form { display: flex; gap: 10px; max-width: 420px; margin: 0 auto; }
+  .cta-input { flex: 1; padding: 14px 18px; background: rgba(26,61,54,0.6); border: 0.5px solid rgba(29,158,117,0.4); border-radius: 8px; color: var(--mintl); font-size: 14px; font-family: 'DM Sans', sans-serif; outline: none; transition: border-color 0.2s; }
+  .cta-input::placeholder { color: rgba(93,202,165,0.4); }
+  .cta-input:focus { border-color: var(--sage); }
+  .cta-note { font-size: 12px; color: rgba(93,202,165,0.4); margin-top: 12px; }
+
+  /* ─── FOOTER ──────────────────────────────────────────── */
+  footer { background: var(--forestd); padding: 3rem; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; align-items: start; }
+  .footer-brand .logo { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 600; color: var(--mintl); letter-spacing: 0.02em; }
+  .footer-brand .logo span { color: var(--sage); }
+  .footer-brand p { font-size: 13px; color: rgba(159,225,203,0.4); margin-top: 8px; font-style: italic; line-height: 1.6; }
+  .footer-col h4 { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mint); font-weight: 500; margin-bottom: 16px; }
+  .footer-col a { display: block; font-size: 13px; color: rgba(159,225,203,0.5); text-decoration: none; margin-bottom: 8px; transition: color 0.2s; }
+  .footer-col a:hover { color: var(--mint); }
+  .footer-bottom { background: var(--forestd); padding: 1rem 3rem; border-top: 0.5px solid rgba(29,158,117,0.1); display: flex; align-items: center; justify-content: space-between; }
+  .footer-bottom p { font-size: 12px; color: rgba(93,202,165,0.25); }
+
+  /* ─── ANIMATIONS ──────────────────────────────────────── */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+  .hero-content > * { opacity: 0; animation: fadeUp 0.7s ease forwards; }
+  .hero-eyebrow { animation-delay: 0.1s; }
+  .hero-title    { animation-delay: 0.25s; }
+  .hero-subtitle { animation-delay: 0.4s; }
+  .hero-desc     { animation-delay: 0.5s; }
+  .hero-actions  { animation-delay: 0.6s; }
+  .hero-visual   { opacity: 0; animation: fadeUp 0.7s 0.5s ease forwards; }
+
+  /* ─── RESPONSIVE ──────────────────────────────────────── */
+  @media (max-width: 900px) {
+    nav { padding: 0 1.5rem; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; padding: 100px 1.5rem 3rem; gap: 3rem; }
+    .problem-grid, .who-grid, .testimonials-grid { grid-template-columns: 1fr; }
+    .modules-grid { grid-template-columns: 1fr; }
+    .pricing-grid { grid-template-columns: 1fr; }
+    .stats-strip { grid-template-columns: repeat(2,1fr); gap: 1.5rem; padding: 2rem 1.5rem; }
+    .section { padding: 4rem 1.5rem; }
+    footer { grid-template-columns: 1fr 1fr; gap: 2rem; padding: 2rem 1.5rem; }
+    .footer-bottom { flex-direction: column; gap: 8px; text-align: center; padding: 1rem 1.5rem; }
+    .cta-form { flex-direction: column; }
+  }
+</style>
 </head>
-<body class="antialiased overflow-x-hidden">
+<body>
 
-    <!-- GLOBAL BACKDROP CLOSER -->
-    <div id="modal-overlay" onclick="closeAllModals()" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-40 hidden opacity-0 transition-opacity duration-300"></div>
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Noura<span>.</span></a>
+  <div class="nav-links">
+    <a href="#produs">Produs</a>
+    <a href="#pentru-cine">Pentru cine</a>
+    <a href="#preturi">Prețuri</a>
+    <a href="#" class="nav-cta">Solicită demo</a>
+  </div>
+</nav>
 
-    <!-- ================= GATEWAY SECURITY 1: PACIENT ================= -->
-    <div id="modal-gate-pacient" class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[calc(100%-2rem)] max-w-md bg-white rounded-2xl p-6 shadow-2xl z-50 border border-slate-200 hidden opacity-0 transition-all duration-300 transform scale-95 max-h-[90vh] overflow-y-auto hide-scrollbar">
-        <div class="flex justify-between items-center border-b pb-3 mb-5">
-            <h3 class="text-xs font-bold uppercase tracking-widest text-slate-900 flex items-center gap-1.5"><span class="material-symbols-rounded text-sm text-slate-600">lock</span> Portal Securizat Pacient</h3>
-            <button onclick="closeAllModals()" class="text-slate-400 hover:text-black p-1"><span class="material-symbols-rounded">close</span></button>
-        </div>
-        <div class="flex border-b border-slate-100 mb-4 text-xs font-bold uppercase tracking-wider gap-4">
-            <button onclick="toggleAuthForm('pacient', 'login')" id="btn-p-login" class="pb-2 border-b-2 border-black text-black">Conectare</button>
-            <button onclick="toggleAuthForm('pacient', 'register')" id="btn-p-reg" class="pb-2 border-b-2 border-transparent text-slate-400">Înregistrare Cont</button>
-        </div>
-        <form id="form-p-login" onsubmit="event.preventDefault(); alert('Acces autorizat Pacient!'); closeAllModals();" class="space-y-4 block">
-            <div><label class="input-label">E-mail cont</label><input type="email" required placeholder="nume@email.com" class="input-field"></div>
-            <div><label class="input-label">Parolă de acces</label><input type="password" required placeholder="••••••••" class="input-field"></div>
-            <button type="submit" class="w-full bg-slate-900 hover:bg-black text-white py-4 rounded-xl text-xs font-bold uppercase tracking-wider min-h-[48px] shadow-sm">Autentificare Pacient</button>
-        </form>
-        <form id="form-p-reg" onsubmit="event.preventDefault(); alert('Cont nou configurat!'); closeAllModals();" class="space-y-4 hidden">
-            <div><label class="input-label">Nume complet</label><input type="text" required placeholder="Nume Prenume" class="input-field"></div>
-            <div><label class="input-label">Adresă e-mail validă</label><input type="email" required placeholder="nume@email.com" class="input-field"></div>
-            <div class="grid grid-cols-2 gap-4">
-                <div><label class="input-label">Vârstă numerică</label><input type="number" required placeholder="Ani" class="input-field"></div>
-                <div><label class="input-label">Protocol vizat</label><select class="input-field-select"><option>Slăbire Metabolică</option><option>Restricție Terapeutică</option></select></div>
-            </div>
-            <div><label class="input-label">Configurare Parolă</label><input type="password" required placeholder="••••••••" class="input-field"></div>
-            <button type="submit" class="w-full bg-slate-900 text-white py-4 rounded-xl text-xs font-bold uppercase tracking-wider min-h-[48px]">Creează Contul</button>
-        </form>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-eyebrow">Nutrition & Culinary Platform</div>
+    <h1 class="hero-title">Noura<span class="dot">.</span></h1>
+    <p class="hero-subtitle">Where precision meets flavor.</p>
+    <p class="hero-desc">Prima platformă care unifică nutriționistul și bucătarul personal pe un singur flux de lucru colaborativ, în timp real.</p>
+    <div class="hero-actions">
+      <a href="#demo" class="btn-primary">Solicită acces beta</a>
+      <a href="#produs" class="btn-ghost">Cum funcționează →</a>
     </div>
-
-    <!-- ================= GATEWAY SECURITY 2: NUTRIȚIONIST ================= -->
-    <div id="modal-gate-nutri" class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[calc(100%-2rem)] max-w-md bg-white rounded-2xl p-6 shadow-2xl z-50 border border-slate-200 hidden opacity-0 transition-all duration-300 transform scale-95 max-h-[90vh] overflow-y-auto hide-scrollbar">
-        <div class="flex justify-between items-center border-b pb-3 mb-5">
-            <h3 class="text-xs font-bold uppercase tracking-widest text-slate-900 flex items-center gap-1.5"><span class="material-symbols-rounded text-sm text-rubin-600">shield_person</span> Autentificare Suită Clinică</h3>
-            <button onclick="closeAllModals()" class="text-slate-400 hover:text-black p-1"><span class="material-symbols-rounded">close</span></button>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-card">
+      <div class="card-header">
+        <span class="card-title">Clienți activi</span>
+        <span class="card-badge">Live</span>
+      </div>
+      <div class="client-list">
+        <div class="client-row">
+          <div class="cl-av" style="background:rgba(29,158,117,0.2); color:#5DCAA5;">AM</div>
+          <div class="cl-info"><div class="cl-name">Andrei Moldovan</div><div class="cl-plan">Deficit 300kcal · Săpt. 4/8</div></div>
+          <div class="progress-bar"><div class="bar-bg"><div class="bar-fill" style="width:72%"></div></div><div class="pct">72%</div></div>
         </div>
-        <div class="flex border-b border-slate-100 mb-4 text-xs font-bold uppercase tracking-wider gap-4">
-            <button onclick="toggleAuthForm('nutri', 'login')" id="btn-n-login" class="pb-2 border-b-2 border-black text-black">Conectare Pro</button>
-            <button onclick="toggleAuthForm('nutri', 'register')" id="btn-n-reg" class="pb-2 border-b-2 border-transparent text-slate-400">Înregistrare Soft</button>
+        <div class="client-row">
+          <div class="cl-av" style="background:rgba(239,159,39,0.15); color:#EF9F27;">IR</div>
+          <div class="cl-info"><div class="cl-name">Ioana Radu</div><div class="cl-plan">Masă musculară · Săpt. 2/12</div></div>
+          <div class="progress-bar"><div class="bar-bg"><div class="bar-fill" style="width:45%; background:#EF9F27;"></div></div><div class="pct">45%</div></div>
         </div>
-        <form id="form-n-login" onsubmit="event.preventDefault(); window.location.href='dashboard-nutritionist.html';" class="space-y-4 block">
-            <div><label class="input-label">E-mail profesional licență</label><input type="email" required placeholder="medic@nutrichef.ro" class="input-field"></div>
-            <div><label class="input-label">Parolă criptată master</label><input type="password" required placeholder="••••••••" class="input-field"></div>
-            <button type="submit" class="w-full bg-[#032F22] text-white py-4 rounded-xl text-xs font-bold uppercase tracking-wider min-h-[48px] shadow-sm">Acces Panou Control Clinic</button>
-        </form>
-        <form id="form-n-reg" onsubmit="event.preventDefault(); alert('Date trimise spre procesare administrativă!'); window.location.href='dashboard-nutritionist.html';" class="space-y-4 hidden">
-            <div><label class="input-label">Nume Specialist / Institut medical</label><input type="text" required placeholder="Dr. Nume Prenume" class="input-field"></div>
-            <div class="grid grid-cols-2 gap-4">
-                <div><label class="input-label">Număr Certificat Colegiu (ALP)</label><input type="text" required placeholder="Cod ALP" class="input-field uppercase font-mono"></div>
-                <div><label class="input-label">Competență / Titlu</label><input type="text" required placeholder="Ex: Diabet, Nutriție" class="input-field"></div>
-            </div>
-            <div><label class="input-label">Email Oficial</label><input type="email" required placeholder="cabinet@doctor.ro" class="input-field"></div>
-            <div><label class="input-label">Parolă Master</label><input type="password" required placeholder="••••••••" class="input-field"></div>
-            <button type="submit" class="w-full bg-[#032F22] text-white py-4 rounded-xl text-xs font-bold uppercase tracking-wider min-h-[48px]">Solicită Activare Suită</button>
-        </form>
+        <div class="client-row">
+          <div class="cl-av" style="background:rgba(93,202,165,0.15); color:#5DCAA5;">MP</div>
+          <div class="cl-info"><div class="cl-name">Mihai Popescu</div><div class="cl-plan">Diabet T2 · Săpt. 6/24</div></div>
+          <div class="progress-bar"><div class="bar-bg"><div class="bar-fill" style="width:88%"></div></div><div class="pct">88%</div></div>
+        </div>
+      </div>
+      <div class="collab-bubble">
+        <div class="av-saffron">RC</div>
+        <div>
+          <div class="bubble-text">Radu C. — Am redus sodiul cu 30% pentru Andrei. Verificați planul actualizat.</div>
+          <div class="bubble-tag">Bucătar · Acum 3 min</div>
+        </div>
+      </div>
     </div>
+  </div>
+</section>
 
-    <!-- ================= GATEWAY SECURITY 3: CHEF ================= -->
-    <div id="modal-gate-chef" class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[calc(100%-2rem)] max-w-md bg-white rounded-2xl p-6 shadow-2xl z-50 border border-slate-200 hidden opacity-0 transition-all duration-300 transform scale-95 max-h-[90vh] overflow-y-auto hide-scrollbar">
-        <div class="flex justify-between items-center border-b pb-3 mb-5">
-            <h3 class="text-xs font-bold uppercase tracking-widest text-slate-900 flex items-center gap-1.5"><span class="material-symbols-rounded text-sm text-slate-800">skillet</span> Conectare Operator Gastronomic</h3>
-            <button onclick="closeAllModals()" class="text-slate-400 hover:text-black p-1"><span class="material-symbols-rounded">close</span></button>
+<!-- STATS -->
+<div class="stats-strip">
+  <div class="stat-item"><div class="stat-val">$11B</div><div class="stat-label">Piața globală nutriție digitală</div></div>
+  <div class="stat-item"><div class="stat-val">-60%</div><div class="stat-label">Timp creat plan față de metoda actuală</div></div>
+  <div class="stat-item"><div class="stat-val">2.4M</div><div class="stat-label">Nutriționiști înregistrați în Europa</div></div>
+  <div class="stat-item"><div class="stat-val">NPS 67</div><div class="stat-label">Scor satisfacție beta-testeri</div></div>
+</div>
+
+<!-- PROBLEM -->
+<section class="section" id="produs">
+  <div class="problem-grid">
+    <div>
+      <div class="section-label">Problema</div>
+      <h2 class="section-title">Nutriționiștii și bucătarii lucrează în siloz.</h2>
+      <p class="section-body">PDF-uri, email-uri, WhatsApp. Fiecare instrument separat. Niciun context comun. Clientul suferă consecințele.</p>
+      <div class="pain-list">
+        <div class="pain-item">
+          <div class="pain-num">01</div>
+          <div class="pain-text"><div class="pain-title">Fragmentare completă</div><div class="pain-desc">Nutriționistul creează planul în Excel, îl trimite PDF. Bucătarul îl interpretează fără context clinic.</div></div>
         </div>
-        <div class="flex border-b border-slate-100 mb-4 text-xs font-bold uppercase tracking-wider gap-4">
-            <button onclick="toggleAuthForm('chef', 'login')" id="btn-c-login" class="pb-2 border-b-2 border-black text-black">Conectare Unitate</button>
-            <button onclick="toggleAuthForm('chef', 'register')" id="btn-c-reg" class="pb-2 border-b-2 border-transparent text-slate-400">Înregistrare Unitate</button>
+        <div class="pain-item">
+          <div class="pain-num">02</div>
+          <div class="pain-text"><div class="pain-title">Zero vizibilitate</div><div class="pain-desc">Nu există date în timp real. Nimeni nu știe dacă planul este respectat sau dacă clientul progresează.</div></div>
         </div>
-        <form id="form-c-login" onsubmit="event.preventDefault(); window.location.href='dashboard-chef.html';" class="space-y-4 block">
-            <div><label class="input-label">Email Înregistrat Afacere</label><input type="email" required placeholder="chef@nutrichef.ro" class="input-field"></div>
-            <div><label class="input-label">Parolă Terminal</label><input type="password" required placeholder="••••••••" class="input-field"></div>
-            <button type="submit" class="w-full bg-slate-900 text-white py-4 rounded-xl text-xs font-bold uppercase tracking-wider min-h-[48px]">Conectare Server Producție</button>
-        </form>
-        <form id="form-c-reg" onsubmit="event.preventDefault(); alert('Date transmise spre validare!'); window.location.href='dashboard-chef.html';" class="space-y-4 hidden">
-            <div><label class="input-label">Denumire Operator / Laborator</label><input type="text" required placeholder="Ex: Bucătarul Personal SRL" class="input-field"></div>
-            <div class="grid grid-cols-2 gap-4">
-                <div><label class="input-label">Aviz DSP Valid</label><input type="text" required placeholder="Număr Aviz" class="input-field font-mono uppercase"></div>
-                <div><label class="input-label">Arie Deservire Logistică</label><input type="text" required placeholder="Ex: Județul Cluj" class="input-field"></div>
-            </div>
-            <div><label class="input-label">Email Centrală Comenzi</label><input type="email" required placeholder="producție@brand.ro" class="input-field"></div>
-            <div><label class="input-label">Parolă</label><input type="password" required placeholder="••••••••" class="input-field"></div>
-            <button type="submit" class="w-full bg-slate-900 text-white py-4 rounded-xl text-xs font-bold uppercase tracking-wider min-h-[48px]">Creează Nod Producție</button>
-        </form>
+        <div class="pain-item">
+          <div class="pain-num">03</div>
+          <div class="pain-text"><div class="pain-title">Comunicare lentă</div><div class="pain-desc">Fiecare modificare de rețetă — un email. Fiecare întrebare — un mesaj. Totul în afara contextului.</div></div>
+        </div>
+      </div>
     </div>
+    <div class="problem-visual">
+      <div class="flow-item"><div class="flow-label">Nutriționist creează plan</div><div class="flow-status status-ok">OK</div></div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-item"><div class="flow-label">Export PDF → email</div><div class="flow-status status-warn">Lent</div></div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-item"><div class="flow-label">Bucătar interpretează planul</div><div class="flow-status status-warn">Ambiguu</div></div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-item"><div class="flow-label">Erori de execuție</div><div class="flow-status status-bad">Problemă</div></div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-item"><div class="flow-label">Clientul nu progresează</div><div class="flow-status status-bad">Critic</div></div>
+      <div style="margin-top: 20px; padding: 14px; background: rgba(29,158,117,0.1); border-radius: 8px; border: 0.5px solid rgba(29,158,117,0.2);">
+        <div style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mint); margin-bottom: 6px; font-weight: 500;">Cu Noura.</div>
+        <div style="font-size: 13px; color: rgba(225,245,238,0.7); line-height: 1.6;">Un singur spațiu. Nutriționist + Bucătar + Client. Context complet, în timp real.</div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- INSTITUTIONAL TOP NAVIGATION -->
-    <nav class="fixed top-0 left-0 right-0 z-30 institutional-nav">
-        <div class="max-w-7xl mx-auto px-4 sm:px-8 h-20 flex items-center justify-between">
-            <header class="flex items-center gap-2.5 cursor-pointer" onclick="window.scrollTo(0,0)">
-                <div class="w-7 h-7 bg-black text-white flex items-center justify-center font-black text-xs rounded">N</div>
-                <span class="text-xs font-black uppercase tracking-widest text-slate-900">NutriChef <span class="text-slate-400 font-normal">Enterprise</span></span>
-            </header>
-            
-            <div class="hidden lg:flex items-center gap-8 font-bold text-[10px] uppercase tracking-widest text-slate-500">
-                <a href="#ideea-brandului" class="hover:text-black transition-colors">Manifest Proiect</a>
-                <a href="#nutritionisti" class="hover:text-black transition-colors">Modul Clinic</a>
-                <a href="#bucatari" class="hover:text-black transition-colors">Modul Gastronomic</a>
-                <a href="#experti" class="hover:text-black transition-colors">Specialiști Verificați</a>
-                <a href="#pricing" class="hover:text-black transition-colors">Licențiere Soft</a>
-            </div>
-
-            <div class="flex items-center gap-2.5">
-                <button onclick="openModal('modal-gate-pacient')" class="text-[10px] font-bold uppercase tracking-wider text-slate-700 bg-slate-50 border border-slate-200 px-4 py-2.5 rounded-lg transition-all hover:border-black hover:bg-white">Acces Pacient</button>
-                <button onclick="openModal('modal-gate-nutri')" class="bg-black text-white px-4 py-2.5 rounded-lg text-[10px] font-bold uppercase tracking-widest shadow-sm">Portal Experți</button>
-            </div>
+<!-- MODULES -->
+<section class="section solution" style="padding-top: 5rem; padding-bottom: 5rem;">
+  <div style="text-align: center; max-width: 580px; margin: 0 auto;">
+    <div class="section-label" style="text-align: center;">Soluția</div>
+    <h2 class="section-title" style="text-align: center; margin: 0 auto 1rem;">Cinci module. Un singur flux.</h2>
+    <p class="section-body" style="margin: 0 auto; text-align: center;">Fiecare modul rezolvă o problemă reală. Împreună, elimină toate punctele de fricțiune din munca zilnică a unui profesionist în nutriție și gastronomie.</p>
+  </div>
+  <div class="modules-grid">
+    <div class="module-card">
+      <div class="module-icon"><svg fill="none" stroke="#1D9E75" stroke-width="1.5" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+      <div class="module-num">01</div>
+      <div class="module-title">Client Hub</div>
+      <div class="module-desc">Profilul complet al fiecărui client — obiective, alergii, restricții, istoric și progres, accesibil de ambii profesioniști.</div>
+    </div>
+    <div class="module-card">
+      <div class="module-icon"><svg fill="none" stroke="#1D9E75" stroke-width="1.5" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="2"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="13" y2="16"/></svg></div>
+      <div class="module-num">02</div>
+      <div class="module-title">Plan Nutrițional</div>
+      <div class="module-desc">Builder vizual drag-and-drop cu calcul automat de macronutrienți și export PDF profesional pentru clientul final.</div>
+    </div>
+    <div class="module-card">
+      <div class="module-icon"><svg fill="none" stroke="#1D9E75" stroke-width="1.5" viewBox="0 0 24 24"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg></div>
+      <div class="module-num">03</div>
+      <div class="module-title">Recipe Studio</div>
+      <div class="module-desc">Biblioteca de rețete conectată direct la planul nutrițional. Bucătarul vede valorile nutriționale live și compatibilitatea cu restricțiile clientului.</div>
+    </div>
+    <div class="module-card">
+      <div class="module-icon"><svg fill="none" stroke="#1D9E75" stroke-width="1.5" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 9.6a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 0h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 7.91a16 16 0 0 0 5.61 5.61l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 14.92z"/></svg></div>
+      <div class="module-num">04</div>
+      <div class="module-title">Analytics</div>
+      <div class="module-desc">Dashboard cu progresul clienților, aderența la plan și rapoarte lunare automate — date clare, nu presupuneri.</div>
+    </div>
+    <div class="module-highlight">
+      <div class="highlight-inner">
+        <div class="module-icon" style="flex-shrink: 0; width: 56px; height: 56px;"><svg fill="none" stroke="#5DCAA5" stroke-width="1.5" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+        <div>
+          <div class="module-num">05 — Diferențiatorul nostru</div>
+          <div class="module-title">Collaboration Layer</div>
+          <div class="module-desc">Canalul care face Noura unic: nutriționistul și bucătarul lucrează pe același caz, în același spațiu, în timp real. Comentarii pe rețete, aprobare modificări, notificări instant — tot ce e nevoie pentru o echipă care funcționează perfect.</div>
         </div>
-    </nav>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- CORPORATE HERO SECTION -->
-    <section class="relative pt-32 pb-16 sm:pt-48 sm:pb-24 border-b border-slate-200 bg-slate-50/60">
-        <div class="max-w-7xl mx-auto px-4 sm:px-8 text-center space-y-6">
-            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded bg-white border border-slate-200 text-slate-500 text-[10px] font-bold uppercase tracking-widest mx-auto shadow-sm">
-                <span class="w-1.5 h-1.5 rounded-full bg-[#032F22]"></span>
-                Infrastructură Centralizată de Sincronizare Medicală și Gastronomică
-            </div>
-            
-            <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 leading-[1.1] max-w-4xl mx-auto text-balance">
-                Traducem automat fișele de dietă din cabinetul medical în foi de producție pentru <span class="text-slate-400 font-normal italic font-serif">bucătari personali</span>.
-            </h1>
-            
-            <p class="text-xs sm:text-sm lg:text-base text-slate-400 font-medium max-w-2xl mx-auto leading-relaxed text-balance">
-                Sincronizare digitală cu nivel înalt de securitate între diagnosticul nutriționistului, unitățile logistice autorizate de Meal Prep și jurnalul de conformitate al pacientului.
-            </p>
-            
-            <div class="flex flex-col sm:flex-row items-center justify-center gap-3 max-w-md mx-auto sm:max-w-none pt-4">
-                <button onclick="openModal('modal-gate-pacient')" class="w-full sm:w-auto bg-black text-white px-6 py-3.5 rounded-xl text-[10px] font-bold uppercase tracking-widest min-h-[48px] shadow-sm">Înregistrare Pacient</button>
-                <button onclick="openModal('modal-gate-nutri')" class="w-full sm:w-auto bg-white border border-slate-200 text-black px-6 py-3.5 rounded-xl text-[10px] font-bold uppercase tracking-widest min-h-[48px] hover:border-black shadow-sm">Cabinet Clinic (Medici)</button>
-                <button onclick="openModal('modal-gate-chef')" class="w-full sm:w-auto bg-white border border-slate-200 text-black px-6 py-3.5 rounded-xl text-[10px] font-bold uppercase tracking-widest min-h-[48px] hover:border-black shadow-sm">Unitate Meal Prep / Chef</button>
-            </div>
-        </div>
-    </section>
+<!-- FOR WHOM -->
+<section class="section who" id="pentru-cine">
+  <div style="text-align: center; max-width: 560px; margin: 0 auto 0;">
+    <div class="section-label" style="text-align: center;">Pentru cine</div>
+    <h2 class="section-title" style="text-align: center; margin: 0 auto;">Construit pentru profesioniști.</h2>
+  </div>
+  <div class="who-grid">
+    <div class="who-card nutri">
+      <div class="who-avatar">N</div>
+      <div class="who-role">Nutriționist</div>
+      <h3 class="who-title">Gestionezi zeci de clienți. Vrei claritate, nu haos.</h3>
+      <ul class="who-list">
+        <li>Creezi planuri nutriționale în fracțiunea de timp obișnuit</li>
+        <li>Monitorizezi aderența la plan a fiecărui client în timp real</li>
+        <li>Colaborezi direct cu bucătarul fără email-uri pierdute</li>
+        <li>Generezi rapoarte profesionale cu un singur click</li>
+        <li>Toate datele clientului în același loc — mereu actualizate</li>
+      </ul>
+    </div>
+    <div class="who-card chef">
+      <div class="who-avatar" style="background: rgba(239,159,39,0.12); color: #EF9F27;">B</div>
+      <div class="who-role">Bucătar personal</div>
+      <h3 class="who-title" style="color: var(--forest);">Gătești cu precizie. Fără surprize, fără erori.</h3>
+      <ul class="who-list">
+        <li>Primești planul nutrițional cu context clinic complet</li>
+        <li>Știi instant dacă o rețetă este compatibilă cu restricțiile clientului</li>
+        <li>Propui substituții de ingrediente cu aprobare directă de la nutriționist</li>
+        <li>Lista de cumpărături generată automat din planul săptămânal</li>
+        <li>Mod cooking step-by-step pentru execuție perfectă</li>
+      </ul>
+    </div>
+  </div>
+</section>
 
-    <!-- MANIFEST EXPLICATIV / SEO INTERN -->
-    <section id="ideea-brandului" class="py-16 sm:py-24 bg-white border-b border-slate-200">
-        <div class="max-w-3xl mx-auto px-4 sm:px-6 space-y-4">
-            <span class="text-[9px] font-extrabold uppercase tracking-widest text-slate-400 font-mono block">Clinical Overview & Mission</span>
-            <h2 class="text-lg font-bold text-slate-900 uppercase tracking-wider">De unde vine ideea NutriChef Pro?</h2>
-            <article class="text-slate-500 text-xs sm:text-sm leading-relaxed space-y-4 font-medium text-justify">
-                <p>Arhitectura software-ului **NutriChef Pro** a apărut ca o soluție tehnologică riguroasă la cea mai mare problemă raportată în tratamentele metabolice moderne: *eșecul aderenței logistice a pacienților*. În cadrul cabinetelor clinice, medicii nutriționiști prescriau diete personalizate excelente, calculate precis la nivel de miligram. Cu toate acestea, statisticile indicau abandonul planului în primele 3 săptămâni, din cauza complexității cumpărăturilor, erorilor de cântărire a alimentelor și lipsei de timp pentru un gătit compatibil cu viața cotidiană alertă.</p>
-                <p>Inovația proiectului constă în externalizarea totală a efortului din sarcina pacientului. Prin **NutriChef Pro**, fișa completată de doctor în cabinet devine instant directivă digitală de batch cooking în bucătăria parteneră. Un **Chef Personal** sau un laborator de **Meal Prep** acreditat preia automat rețeta prescrisă, o prepară steril sub vid (Sous-Vide) și livrează caserolele direct la domiciliu. Astfel, aderența la regim devine un serviciu complet automatizat, garantând obținerea rezultatelor clinice fără abateri logistice.</p>
-            </article>
-        </div>
-    </section>
+<!-- PRICING -->
+<section class="section pricing" id="preturi">
+  <div style="text-align: center;">
+    <div class="section-label" style="text-align: center;">Prețuri</div>
+    <h2 class="section-title" style="text-align: center; margin: 0 auto 0.5rem;">Simplu. Transparent. Scalabil.</h2>
+    <p class="section-body" style="text-align: center; margin: 0 auto;">14 zile trial gratuit, fără card de credit.</p>
+  </div>
+  <div class="pricing-grid">
+    <div class="price-card">
+      <div class="price-tier">Solo</div>
+      <div class="price-name">Solo</div>
+      <div class="price-amount"><span class="price-val">€79</span><span class="price-period">/ lună</span></div>
+      <ul class="price-features">
+        <li>1 nutriționist</li>
+        <li>Până la 30 clienți activi</li>
+        <li>Plan nutrițional + recipe studio</li>
+        <li>Export PDF nelimitat</li>
+        <li>Support prin email</li>
+      </ul>
+      <a href="#demo" class="price-btn">Începe trial</a>
+    </div>
+    <div class="price-card featured">
+      <div class="featured-badge">Cel mai popular</div>
+      <div class="price-tier">Pro</div>
+      <div class="price-name">Pro</div>
+      <div class="price-amount"><span class="price-val">€179</span><span class="price-period">/ lună</span></div>
+      <ul class="price-features">
+        <li>1 nutriționist + 2 bucătari</li>
+        <li>Clienți nelimitați</li>
+        <li>Collaboration layer complet</li>
+        <li>Analytics dashboard avansat</li>
+        <li>Rapoarte lunare automate</li>
+        <li>Priority support</li>
+      </ul>
+      <a href="#demo" class="price-btn">Începe trial</a>
+    </div>
+    <div class="price-card">
+      <div class="price-tier">Clinic</div>
+      <div class="price-name">Clinic</div>
+      <div class="price-amount"><span class="price-val">€490</span><span class="price-period">/ lună</span></div>
+      <ul class="price-features">
+        <li>Echipă nelimitată</li>
+        <li>White-label opțional</li>
+        <li>API access</li>
+        <li>Rapoarte avansate personalizate</li>
+        <li>Account manager dedicat</li>
+        <li>Onboarding asistat</li>
+      </ul>
+      <a href="#demo" class="price-btn">Contactează-ne</a>
+    </div>
+  </div>
+</section>
 
-    <!-- PILONUL 1: CLINICI -->
-    <section id="nutritionisti" class="py-16 sm:py-24 bg-white border-b border-slate-100">
-        <div class="max-w-7xl mx-auto px-4 sm:px-8">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                <div class="space-y-4">
-                    <span class="text-[9px] font-black uppercase tracking-widest bg-slate-100 px-2.5 py-1 rounded text-slate-700">Modul Medical</span>
-                    <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 uppercase">Gestiune automatizată pentru cabinete de nutriție.</h2>
-                    <p class="text-slate-500 text-xs sm:text-sm leading-relaxed">Sistem avansat pentru calculul automat al caloriilor și macronutrienților dintr-o bază extinsă de peste 10.000 de alimente aprobate. Include dosar digital PWA, telemedicină video integrată peer-to-peer criptată (Jitsi) și plăți recurente integrate.</p>
-                    <button onclick="openModal('modal-gate-nutri')" class="px-5 py-3 bg-black text-white text-[10px] font-bold uppercase tracking-wider rounded-xl shadow-md min-h-[44px]">Activează cabinetul medical</button>
-                </div>
-                <img src="https://images.unsplash.com/photo-1664575602276-cd0709a6c682?q=80&w=2000&auto=format&fit=crop" alt="Clinical Nutrition Software Interface Workspace" class="rounded-xl border border-slate-200 w-full h-[280px] sm:h-[350px] object-cover">
-            </div>
-        </div>
-    </section>
+<!-- TESTIMONIALS -->
+<section class="section testimonials">
+  <div style="text-align: center; max-width: 480px; margin: 0 auto 0;">
+    <div class="section-label" style="text-align: center;">Beta feedback</div>
+    <h2 class="section-title" style="text-align: center; margin: 0 auto;">Ce spun beta-testerii noștri.</h2>
+  </div>
+  <div class="testimonials-grid">
+    <div class="testimonial-card">
+      <div class="quote-mark">"</div>
+      <p class="quote-text">Am redus la jumătate timpul de creare a planurilor nutriționale. Bucătarul meu știe exact ce poate și ce nu poate folosi. Nu mai există surprize neplacute.</p>
+      <div class="quote-author">
+        <div class="qa-av" style="background: #E1F5EE; color: #085041;">AM</div>
+        <div><div class="qa-name">Dr. Alina M.</div><div class="qa-role">Nutriționist clinician, București</div></div>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <div class="quote-mark">"</div>
+      <p class="quote-text">Pentru prima dată înțeleg de ce gătesc ce gătesc. Văd contextul complet al clientului și pot lua decizii de substituție cu încredere.</p>
+      <div class="quote-author">
+        <div class="qa-av" style="background: #FAEEDA; color: #633806;">RC</div>
+        <div><div class="qa-name">Radu C.</div><div class="qa-role">Chef personal, Cluj-Napoca</div></div>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <div class="quote-mark">"</div>
+      <p class="quote-text">Collaboration layer-ul schimbă totul. Nu mai dau email-uri pentru fiecare modificare mică. Totul e acolo, în context, instant.</p>
+      <div class="quote-author">
+        <div class="qa-av" style="background: #EEEDFE; color: #3C3489;">MI</div>
+        <div><div class="qa-name">Maria I.</div><div class="qa-role">Nutriționist sportiv, Timișoara</div></div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- PILONUL 2: OPERATORI CULINARI -->
-    <section id="bucatari" class="py-16 sm:py-24 bg-slate-50/50 border-b border-slate-200">
-        <div class="max-w-7xl mx-auto px-4 sm:px-8">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                <img src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?q=80&w=2070&auto=format&fit=crop" alt="Meal prep and chef kitchen hub production" class="rounded-xl border border-slate-200 w-full h-[280px] sm:h-[350px] object-cover order-2 lg:order-1">
-                <div class="space-y-4 order-1 lg:order-2">
-                    <span class="text-[9px] font-black uppercase tracking-widest bg-slate-100 px-2.5 py-1 rounded text-slate-700">Modul Operativ</span>
-                    <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 uppercase">Traducerea automată a directivelor în fișele de gătit.</h2>
-                    <p class="text-slate-500 text-xs sm:text-sm leading-relaxed">Unitățile logistice și bucătarii independenți primesc automat gramajele pacienților de la medici. Modulul include securizarea conturilor bancare IBAN și trimiterea fișelor de vizite lunare direct în aplicația pacientului.</p>
-                    <button onclick="openModal('modal-gate-chef')" class="px-5 py-3 bg-black text-white text-[10px] font-bold uppercase tracking-wider rounded-xl shadow-md min-h-[44px]">Configurare cont producție</button>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- CTA -->
+<section class="cta-section" id="demo">
+  <div class="cta-content">
+    <h2 class="cta-title">Gata să transformi modul în care lucrezi?</h2>
+    <p class="cta-sub">Alătură-te celor 50+ profesioniști din beta.</p>
+    <div class="cta-form">
+      <input type="email" class="cta-input" placeholder="adresa@ta.com">
+      <a href="#" class="btn-primary" style="white-space: nowrap;">Solicită acces</a>
+    </div>
+    <p class="cta-note">14 zile gratuit · Fără card de credit · Anulezi oricând</p>
+  </div>
+</section>
 
-    <!-- REȚEAUA EXPERȚI ACTIVI -->
-    <section id="experti" class="py-16 sm:py-24 bg-white border-b border-slate-200">
-        <div class="max-w-7xl mx-auto px-4 sm:px-8">
-            <div class="text-center max-w-xl mx-auto mb-10">
-                <span class="text-[9px] font-black uppercase tracking-widest text-slate-400 block mb-1">Acreditați Rețea</span>
-                <h2 class="text-sm font-bold text-slate-900 uppercase tracking-wider">Profesioniști verificați în ecosistem</h2>
-                
-                <div class="flex justify-center gap-6 mt-6 border-b border-slate-100 text-[10px] font-bold uppercase tracking-widest">
-                    <button onclick="switchExpertTab('nutri')" id="tab-btn-nutri" class="expert-tab border-b-2 pb-2 transition-all active">Nutriționiști Clinicieni</button>
-                    <button onclick="switchExpertTab('chefs')" id="tab-btn-chefs" class="expert-tab border-b-2 pb-2 transition-all inactive">Chefi Experți & Meal Prep</button>
-                </div>
-            </div>
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">
+    <div class="logo">Noura<span>.</span></div>
+    <p>Where precision meets flavor.<br>Platforma all-in-one pentru nutriționiști și bucătari personali profesioniști.</p>
+  </div>
+  <div class="footer-col">
+    <h4>Produs</h4>
+    <a href="#">Funcționalități</a>
+    <a href="#">Prețuri</a>
+    <a href="#">Roadmap</a>
+    <a href="#">Changelog</a>
+  </div>
+  <div class="footer-col">
+    <h4>Companie</h4>
+    <a href="#">Despre noi</a>
+    <a href="#">Blog</a>
+    <a href="#">Cariere</a>
+    <a href="#">Contact</a>
+  </div>
+  <div class="footer-col">
+    <h4>Legal</h4>
+    <a href="#">Termeni</a>
+    <a href="#">Confidențialitate</a>
+    <a href="#">GDPR</a>
+    <a href="#">Securitate</a>
+  </div>
+</footer>
+<div class="footer-bottom">
+  <p>© 2026 Noura. Toate drepturile rezervate.</p>
+  <p>Construit cu grijă pentru profesioniști.</p>
+</div>
 
-            <div id="pane-nutri" class="grid grid-cols-1 md:grid-cols-3 gap-6 block">
-                <div class="corporate-card p-5 flex flex-col justify-between">
-                    <div class="flex items-center gap-3 mb-3">
-                        <div class="w-10 h-10 rounded-xl overflow-hidden border shrink-0"><img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&w=2070&auto=format&fit=crop" class="w-full h-full object-cover" alt="Dr. Sarah Miller"></div>
-                        <div><h3 class="font-bold text-xs text-black">Dr. Sarah Miller</h3><p class="text-[9px] font-bold text-rubin-600 uppercase">Medic Dietetician</p></div>
-                    </div>
-                    <p class="text-xs text-slate-500 mb-4 font-medium">Nutriție clinică de înaltă rezoluție pentru patologii endocrine, metabolice și controlul obezității.</p>
-                    <button onclick="openModal('modal-gate-pacient')" class="w-full py-2.5 bg-slate-50 hover:bg-black hover:text-white border border-slate-200 text-[10px] font-bold uppercase tracking-wider rounded-lg transition-all min-h-[38px]">Solicită programare</button>
-                </div>
-            </div>
-
-            <div id="pane-chefs" class="grid grid-cols-1 md:grid-cols-3 gap-6 hidden">
-                <div class="corporate-card p-5 flex flex-col justify-between">
-                    <div class="flex items-center gap-3 mb-3">
-                        <div class="w-10 h-10 rounded-xl overflow-hidden border shrink-0"><img src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?q=80&w=1977&auto=format&fit=crop" class="w-full h-full object-cover" alt="Chef Alexandru Radu"></div>
-                        <div><h3 class="font-bold text-xs text-black">Chef Alexandru Radu</h3><p class="text-[9px] font-bold text-amber-600 uppercase">Dietary Chef</p></div>
-                    </div>
-                    <p class="text-xs text-slate-500 mb-4 font-medium">Specializat în tehnica Sous-Vide sterilă și managementul porțiilor zilnice de macro-nutrienți.</p>
-                    <button onclick="openModal('modal-gate-pacient')" class="w-full py-2.5 bg-black text-white text-[10px] font-bold uppercase tracking-wider rounded-lg transition-all min-h-[38px]">Contractează servicii</button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- LICENȚIERE PENTRU NUTRIȚIONIST -->
-    <section id="pricing" class="py-16 sm:py-24 bg-slate-50/50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-8">
-            <div class="text-center max-w-xl mx-auto mb-12">
-                <span class="text-[9px] font-black uppercase tracking-widest text-slate-400 block mb-1">Licențe Software</span>
-                <h2 class="text-sm font-bold text-slate-900 uppercase tracking-wider">Planuri Tarifare Nutriționiști</h2>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto items-stretch">
-                <!-- Pachetul 1: Trial Gratuit 30 Zile -->
-                <div class="corporate-card p-6 flex flex-col justify-between border-dashed bg-white">
-                    <div>
-                        <div class="flex justify-between items-center"><h3 class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Trial Gratuit</h3><span class="text-[9px] bg-slate-100 text-slate-600 font-bold px-2 py-0.5 rounded">Fără card</span></div>
-                        <p class="text-[11px] text-slate-400 mt-1 font-medium">Evaluează capabilitățile complete ale ecosistemului în mod direct în cabinetul tău.</p>
-                        <div class="my-4"><span class="text-2xl font-bold text-black">0 RON</span><span class="text-[11px] text-slate-400 font-bold"> / 30 zile</span></div>
-                        <ul class="space-y-2 text-xs text-slate-500 border-t border-slate-100 pt-3 mb-6 font-medium">
-                            <li class="flex items-center gap-2"><span class="material-symbols-rounded text-black text-sm">check</span> Maxim 5 pacienți în monitorizare activă</li>
-                            <li class="flex items-center gap-2"><span class="material-symbols-rounded text-black text-sm">check</span> Acces complet deblocat la baza de date alimente</li>
-                        </ul>
-                    </div>
-                    <button onclick="openModal('modal-gate-nutri')" class="w-full py-2.5 bg-slate-50 hover:bg-black hover:text-white border text-black text-[10px] font-bold uppercase tracking-wider rounded-xl transition-all">Activează Trial Gratuit</button>
-                </div>
-
-                <!-- Pachetul 2: Starter -->
-                <div class="corporate-card p-6 flex flex-col justify-between bg-white">
-                    <div>
-                        <h3 class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Starter Cabinet</h3>
-                        <p class="text-[11px] text-slate-400 mt-1 font-medium">Gestiune optimă pentru specialiști independenți și nutriționiști aflați la început de drum.</p>
-                        <div class="my-4"><span class="text-2xl font-bold text-black">145 RON</span><span class="text-[11px] text-slate-400 font-bold"> / lună</span></div>
-                        <ul class="space-y-2 text-xs text-slate-500 border-t border-slate-100 pt-3 mb-6 font-medium">
-                            <li class="flex items-center gap-2"><span class="material-symbols-rounded text-black text-sm">check</span> Până la 35 de pacienți monitorizați simultan</li>
-                            <li class="flex items-center gap-2"><span class="material-symbols-rounded text-black text-sm">check</span> Sesiuni video de telemedicină criptate active</li>
-                        </ul>
-                    </div>
-                    <button onclick="openModal('modal-gate-nutri')" class="w-full py-2.5 bg-black text-white text-[10px] font-bold uppercase tracking-wider rounded-xl transition-all shadow-sm">Alege Pachet Starter</button>
-                </div>
-
-                <!-- Pachetul 3: Pro Unlimited Node -->
-                <div class="corporate-card p-6 flex flex-col justify-between bg-black text-white relative border-2 border-rubin-600">
-                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-rubin-600 text-white text-[9px] font-black uppercase tracking-widest px-3 py-0.5 rounded-full">Enterprise Connected</div>
-                    <div>
-                        <h3 class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Pro Unlimited Node</h3>
-                        <p class="text-[11px] text-slate-500 mt-1 font-medium">Sincronizare digitală live automatizată cu unitățile logistice de Meal Prep.</p>
-                        <div class="my-4"><span class="text-2xl font-bold text-white">290 RON</span><span class="text-[11px] text-slate-400 font-bold"> / lună</span></div>
-                        <ul class="space-y-2 text-xs text-slate-400 border-t border-white/20 pt-3 mb-6 font-medium">
-                            <li class="flex items-center gap-2"><span class="material-symbols-rounded text-white text-sm">check</span> <strong>Pacienți Nelimitați</strong> în baza de date</li>
-                            <li class="flex items-center gap-2"><span class="material-symbols-rounded text-white text-sm">check</span> Sincronizare automată cu fișa de bucătărie</li>
-                        </ul>
-                    </div>
-                    <button onclick="openModal('modal-gate-nutri')" class="w-full py-2.5 bg-white text-black text-[10px] font-bold uppercase tracking-wider rounded-xl transition-all">Achiziționează Licența Pro</button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer class="bg-white border-t border-slate-200 py-8 text-center text-[9px] font-bold text-slate-400 uppercase tracking-widest px-4">
-        <p>© 2026 NutriChef Pro. Tehnologie Criptată Medical. Server Secure Core • Toate drepturile rezervate conform GDPR.</p>
-    </footer>
-
-    <!-- INTERACTIVE ENGINE -->
-    <script>
-        function openModal(modalId) {
-            closeAllModals();
-            const overlay = document.getElementById('modal-overlay');
-            const modal = document.getElementById(modalId);
-            
-            if(overlay && modal) {
-                overlay.classList.remove('hidden');
-                modal.classList.remove('hidden');
-                setTimeout(() => {
-                    overlay.classList.add('opacity-100');
-                    modal.classList.remove('scale-95', 'opacity-0');
-                    modal.classList.add('scale-100', 'opacity-100');
-                }, 20);
-            }
-        }
-
-        function closeAllModals() {
-            const overlay = document.getElementById('modal-overlay');
-            const modals = ['modal-gate-pacient', 'modal-gate-nutri', 'modal-gate-chef'];
-            
-            if(overlay) {
-                overlay.classList.remove('opacity-100');
-                setTimeout(() => overlay.classList.add('hidden'), 300);
-            }
-
-            modals.forEach(id => {
-                const modal = document.getElementById(id);
-                if(modal) {
-                    modal.classList.remove('scale-100', 'opacity-100');
-                    modal.classList.add('scale-95', 'opacity-0');
-                    setTimeout(() => modal.classList.add('hidden'), 300);
-                }
-            });
-        }
-
-        function toggleAuthForm(category, type) {
-            const loginForm = document.getElementById(`form-${category[0]}-login`);
-            const regForm = document.getElementById(`form-${category[0]}-reg`);
-            const loginBtn = document.getElementById(`btn-${category[0]}-login`);
-            const regBtn = document.getElementById(`btn-${category[0]}-reg`);
-
-            if(type === 'login') {
-                loginForm.classList.remove('hidden');
-                regForm.classList.add('hidden');
-                loginBtn.className = "pb-2 border-b-2 border-black text-black";
-                regBtn.className = "pb-2 border-b-2 border-transparent text-slate-400";
-            } else {
-                regForm.classList.remove('hidden');
-                loginForm.classList.add('hidden');
-                regBtn.className = "pb-2 border-b-2 border-black text-black";
-                loginBtn.className = "pb-2 border-b-2 border-transparent text-slate-400";
-            }
-        }
-
-        function switchExpertTab(tabId) {
-            const nutriPane = document.getElementById('pane-nutri');
-            const chefsPane = document.getElementById('pane-chefs');
-            const nutriBtn = document.getElementById('tab-btn-nutri');
-            const chefsBtn = document.getElementById('tab-btn-chefs');
-
-            if (tabId === 'nutri') {
-                nutriPane.classList.remove('hidden');
-                chefsPane.classList.add('hidden');
-                nutriBtn.className = "expert-tab border-b-2 pb-2 transition-all active";
-                chefsBtn.className = "expert-tab border-b-2 pb-2 transition-all inactive";
-            } else {
-                chefsPane.classList.remove('hidden');
-                nutriPane.classList.add('hidden');
-                chefsBtn.className = "expert-tab border-b-2 pb-2 transition-all active";
-                nutriBtn.className = "expert-tab border-b-2 pb-2 transition-all inactive";
-            }
-        }
-    </script>
 </body>
 </html>
