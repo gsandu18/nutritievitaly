@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Noura. — Prețuri</title>
+<title>Noura. — Blog & Resurse</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
-  --forest:  #0F2E28; --forestd: #0a1f1b; --forest2: #1a3d36;
-  --sage:    #1D9E75; --mint:    #5DCAA5; --mintl:   #E1F5EE;
-  --saffron: #EF9F27; --saffl:   #FAEEDA;
-  --linen:   #FAFAF8; --linend:  #F1EFE8;
-  --gray:    #888780; --dark:    #2C2C2A; --white:   #FFFFFF;
+  --forest: #0F2E28; --forestd: #0a1f1b; --forest2: #1a3d36;
+  --sage:   #1D9E75; --mint:    #5DCAA5; --mintl:   #E1F5EE;
+  --saffron:#EF9F27; --saffl:   #FAEEDA;
+  --linen:  #FAFAF8; --linend:  #F1EFE8;
+  --gray:   #888780; --dark:    #2C2C2A; --white:   #FFFFFF;
 }
 html { scroll-behavior: smooth; }
 body { font-family: 'DM Sans', sans-serif; font-weight: 300; background: var(--linen); color: var(--dark); overflow-x: hidden; }
@@ -22,156 +22,170 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba
 .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 600; color: var(--forest); text-decoration: none; }
 .nav-logo span { color: var(--sage); }
 .nav-links { display: flex; align-items: center; gap: 2rem; }
-.nav-links a { font-size: 13px; color: var(--gray); text-decoration: none; transition: color 0.2s; }
+.nav-links a { font-size: 13px; color: var(--gray); text-decoration: none; transition: color .2s; }
 .nav-links a:hover { color: var(--forest); }
 .nav-links a.active { color: var(--forest); font-weight: 500; }
-.nav-cta { background: var(--forest); color: var(--linen) !important; padding: 8px 20px; border-radius: 6px; font-weight: 500 !important; transition: background 0.2s !important; }
+.nav-cta { background: var(--forest); color: var(--linen) !important; padding: 8px 20px; border-radius: 6px; font-weight: 500 !important; transition: background .2s !important; }
 .nav-cta:hover { background: var(--sage) !important; }
 
 /* HERO */
-.page-hero { background: var(--forest); padding: 120px 3rem 72px; text-align: center; position: relative; overflow: hidden; }
-.page-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at center, rgba(29,158,117,0.13) 0%, transparent 65%); }
-.hero-inner { position: relative; z-index: 1; max-width: 600px; margin: 0 auto; }
-.hero-eyebrow { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--mint); font-weight: 500; margin-bottom: 1rem; }
-.hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(44px,6vw,68px); font-weight: 600; color: var(--mintl); line-height: 1.05; margin-bottom: 0.75rem; }
-.hero-sub { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-style: italic; color: rgba(159,225,203,0.7); margin-bottom: 2rem; line-height: 1.5; }
+.page-hero { background: var(--forest); padding: 120px 3rem 72px; position: relative; overflow: hidden; }
+.page-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 20% 50%, rgba(29,158,117,0.12) 0%, transparent 60%); }
+.hero-inner { max-width: 1120px; margin: 0 auto; position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: end; }
+.hero-eyebrow { font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--mint); font-weight: 500; margin-bottom: 1rem; }
+.hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(40px,5vw,64px); font-weight: 600; color: var(--mintl); line-height: 1.05; margin-bottom: 1rem; }
+.hero-sub { font-size: 15px; color: rgba(159,225,203,.65); line-height: 1.8; max-width: 420px; }
+.hero-search { margin-top: 2rem; display: flex; gap: 0; }
+.search-input { flex: 1; padding: 13px 18px; background: rgba(26,61,54,.7); border: 0.5px solid rgba(29,158,117,.3); border-right: none; border-radius: 8px 0 0 8px; font-size: 14px; font-family: 'DM Sans', sans-serif; color: var(--mintl); outline: none; transition: border-color .2s; }
+.search-input::placeholder { color: rgba(93,202,165,.35); }
+.search-input:focus { border-color: var(--sage); }
+.search-btn { background: var(--sage); color: white; border: none; padding: 13px 20px; border-radius: 0 8px 8px 0; font-size: 14px; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: background .2s; }
+.search-btn:hover { background: var(--mint); }
 
-/* Billing toggle */
-.billing-toggle { display: inline-flex; align-items: center; gap: 12px; background: rgba(26,61,54,0.6); border-radius: 10px; padding: 6px 16px; }
-.bt-label { font-size: 13px; color: rgba(159,225,203,0.6); transition: color 0.2s; }
-.bt-label.active { color: var(--mintl); font-weight: 500; }
-.toggle-switch { position: relative; width: 44px; height: 24px; cursor: pointer; }
-.toggle-switch input { opacity: 0; width: 0; height: 0; }
-.toggle-track { position: absolute; inset: 0; background: rgba(29,158,117,0.3); border-radius: 12px; transition: background 0.2s; }
-.toggle-thumb { position: absolute; top: 3px; left: 3px; width: 18px; height: 18px; background: var(--sage); border-radius: 50%; transition: transform 0.2s; }
-.toggle-switch input:checked + .toggle-track { background: var(--sage); }
-.toggle-switch input:checked + .toggle-track + .toggle-thumb { transform: translateX(20px); }
-.save-badge { background: rgba(239,159,39,0.2); color: var(--saffron); font-size: 10px; padding: 3px 10px; border-radius: 20px; font-weight: 600; letter-spacing: 0.06em; }
+/* Featured post */
+.featured-post { background: var(--white); border-radius: 14px; overflow: hidden; border: 0.5px solid rgba(15,46,40,.1); cursor: pointer; transition: transform .2s, box-shadow .2s; }
+.featured-post:hover { transform: translateY(-4px); box-shadow: 0 20px 60px rgba(15,46,40,.12); }
+.fp-img { height: 200px; background: linear-gradient(135deg, var(--forest2) 0%, var(--forest) 100%); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+.fp-img-bg { font-family: 'Cormorant Garamond', serif; font-size: 120px; font-weight: 600; color: rgba(29,158,117,.15); line-height: 1; position: absolute; }
+.fp-img-content { position: relative; z-index: 1; text-align: center; }
+.fp-img-emoji { font-size: 48px; display: block; margin-bottom: 8px; }
+.fp-img-label { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--mint); font-weight: 500; }
+.fp-body { padding: 1.5rem; }
+.fp-cat { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; font-weight: 600; color: var(--sage); margin-bottom: 8px; }
+.fp-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 600; color: var(--forest); line-height: 1.25; margin-bottom: 8px; }
+.fp-excerpt { font-size: 12px; color: var(--gray); line-height: 1.6; margin-bottom: 12px; }
+.fp-meta { display: flex; align-items: center; gap: 10px; }
+.fp-av { width: 28px; height: 28px; border-radius: 50%; background: var(--mintl); display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-size: 12px; font-weight: 600; color: var(--sage); }
+.fp-author { font-size: 11px; color: var(--dark); }
+.fp-date { font-size: 11px; color: var(--gray); margin-left: auto; }
 
-/* PLANS */
-.plans-section { padding: 5rem 3rem; max-width: 1120px; margin: 0 auto; }
-.plans-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; margin-bottom: 1rem; }
-.plan-card { border-radius: 16px; border: 0.5px solid rgba(15,46,40,0.12); background: var(--white); overflow: hidden; display: flex; flex-direction: column; transition: transform 0.2s, box-shadow 0.2s; }
-.plan-card:hover { transform: translateY(-4px); box-shadow: 0 20px 60px rgba(15,46,40,0.1); }
-.plan-card.featured { border-color: var(--sage); border-width: 1.5px; background: var(--forest); }
-.plan-top { padding: 2rem 2rem 1.5rem; }
-.plan-badge { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; padding: 3px 12px; border-radius: 20px; margin-bottom: 1rem; display: inline-block; }
-.plan-card:not(.featured) .plan-badge { background: var(--mintl); color: var(--sage); }
-.plan-card.featured .plan-badge { background: rgba(29,158,117,0.2); color: var(--mint); }
-.plan-name { font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 600; margin-bottom: 8px; }
-.plan-card:not(.featured) .plan-name { color: var(--forest); }
-.plan-card.featured .plan-name { color: var(--mintl); }
-.plan-desc { font-size: 13px; line-height: 1.6; margin-bottom: 1.5rem; }
-.plan-card:not(.featured) .plan-desc { color: var(--gray); }
-.plan-card.featured .plan-desc { color: rgba(159,225,203,0.65); }
-.plan-price { display: flex; align-items: baseline; gap: 4px; margin-bottom: 4px; }
-.price-amount { font-family: 'Cormorant Garamond', serif; font-size: 52px; font-weight: 600; line-height: 1; transition: all 0.3s; }
-.plan-card:not(.featured) .price-amount { color: var(--forest); }
-.plan-card.featured .price-amount { color: var(--mintl); }
-.price-period { font-size: 14px; }
-.plan-card:not(.featured) .price-period { color: var(--gray); }
-.plan-card.featured .price-period { color: rgba(93,202,165,0.6); }
-.price-annual-note { font-size: 11px; margin-bottom: 0; min-height: 16px; }
-.plan-card:not(.featured) .price-annual-note { color: var(--sage); }
-.plan-card.featured .price-annual-note { color: var(--mint); }
-.plan-divider { height: 0.5px; margin: 0 2rem; }
-.plan-card:not(.featured) .plan-divider { background: var(--linend); }
-.plan-card.featured .plan-divider { background: rgba(29,158,117,0.2); }
-.plan-features { padding: 1.5rem 2rem; flex: 1; }
-.feat-group-label { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 500; margin-bottom: 10px; margin-top: 16px; }
-.plan-card:not(.featured) .feat-group-label { color: var(--gray); }
-.plan-card.featured .feat-group-label { color: rgba(93,202,165,0.5); }
-.feat-group-label:first-child { margin-top: 0; }
-.feat-item { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 8px; font-size: 13px; line-height: 1.5; }
-.feat-check { width: 16px; height: 16px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; font-size: 9px; font-weight: 700; }
-.plan-card:not(.featured) .feat-check { background: var(--mintl); color: var(--sage); }
-.plan-card.featured .feat-check { background: rgba(29,158,117,0.25); color: var(--mint); }
-.feat-dash { width: 16px; height: 16px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: rgba(136,135,128,0.4); font-size: 14px; margin-top: 1px; }
-.feat-text { }
-.plan-card:not(.featured) .feat-text { color: var(--dark); }
-.plan-card.featured .feat-text { color: rgba(225,245,238,0.8); }
-.feat-text em { font-style: normal; font-weight: 500; }
-.plan-card:not(.featured) .feat-text em { color: var(--forest); }
-.plan-card.featured .feat-text em { color: var(--mintl); }
-.plan-bottom { padding: 1.5rem 2rem 2rem; }
-.plan-btn { width: 100%; padding: 14px; border-radius: 8px; font-size: 14px; font-weight: 500; cursor: pointer; border: none; font-family: 'DM Sans', sans-serif; transition: all 0.2s; text-align: center; display: block; text-decoration: none; }
-.plan-card:not(.featured) .plan-btn { background: var(--mintl); color: var(--forest); }
-.plan-card:not(.featured) .plan-btn:hover { background: var(--sage); color: white; }
-.plan-card.featured .plan-btn { background: var(--sage); color: white; }
-.plan-card.featured .plan-btn:hover { background: var(--mint); }
-.plan-trial-note { font-size: 11px; text-align: center; margin-top: 8px; }
-.plan-card:not(.featured) .plan-trial-note { color: var(--gray); }
-.plan-card.featured .plan-trial-note { color: rgba(93,202,165,0.4); }
+/* CATEGORY FILTER */
+.filter-bar { background: var(--white); border-bottom: 0.5px solid var(--linend); position: sticky; top: 64px; z-index: 80; }
+.filter-inner { max-width: 1120px; margin: 0 auto; padding: 0 3rem; display: flex; gap: 0; overflow-x: auto; }
+.filter-btn { padding: 16px 20px; font-size: 13px; color: var(--gray); cursor: pointer; border-bottom: 2px solid transparent; transition: all .2s; white-space: nowrap; background: none; border-top: none; border-left: none; border-right: none; font-family: 'DM Sans', sans-serif; }
+.filter-btn:hover { color: var(--forest); }
+.filter-btn.active { color: var(--sage); border-bottom-color: var(--sage); font-weight: 500; }
+.post-count { font-size: 10px; background: var(--linend); color: var(--gray); padding: 2px 7px; border-radius: 20px; margin-left: 5px; }
+.filter-btn.active .post-count { background: var(--mintl); color: var(--sage); }
 
-/* ENTERPRISE */
-.enterprise-banner { background: var(--linend); border-radius: 16px; padding: 2rem 2.5rem; display: flex; align-items: center; justify-content: space-between; gap: 2rem; border: 0.5px solid rgba(15,46,40,0.1); }
-.eb-left {}
-.eb-title { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 600; color: var(--forest); margin-bottom: 6px; }
-.eb-desc { font-size: 14px; color: var(--gray); line-height: 1.6; }
-.eb-features { display: flex; gap: 1.5rem; margin-top: 12px; flex-wrap: wrap; }
-.eb-feat { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--dark); }
-.eb-feat::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--sage); flex-shrink: 0; }
-.eb-cta { flex-shrink: 0; }
-.btn-outline { padding: 13px 28px; border: 1.5px solid var(--forest); color: var(--forest); border-radius: 8px; font-size: 14px; font-weight: 500; text-decoration: none; transition: all 0.2s; white-space: nowrap; display: block; text-align: center; font-family: 'DM Sans', sans-serif; }
-.btn-outline:hover { background: var(--forest); color: var(--linen); }
+/* MAIN GRID */
+.blog-main { max-width: 1120px; margin: 0 auto; padding: 4rem 3rem; display: grid; grid-template-columns: 1fr 340px; gap: 4rem; align-items: start; }
 
-/* COMPARISON TABLE */
-.comparison-section { padding: 4rem 3rem; max-width: 1120px; margin: 0 auto; }
-.section-header { text-align: center; margin-bottom: 3rem; }
-.sec-eyebrow { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--sage); font-weight: 500; margin-bottom: 8px; }
-.sec-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(32px,4vw,46px); font-weight: 600; color: var(--forest); line-height: 1.1; }
+.posts-grid { display: flex; flex-direction: column; gap: 0; }
 
-.comp-table { width: 100%; border-collapse: collapse; border-radius: 12px; overflow: hidden; }
-.comp-table th, .comp-table td { padding: 14px 20px; text-align: left; font-size: 13px; }
-.comp-table thead th { background: var(--forest); color: var(--mintl); font-size: 14px; font-weight: 500; }
-.comp-table thead th:first-child { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 600; }
-.comp-table thead th:not(:first-child) { text-align: center; }
-.comp-table thead th.col-featured { background: var(--sage); }
-.comp-table tbody tr:nth-child(even) td { background: var(--linen); }
-.comp-table tbody tr:nth-child(odd) td { background: var(--white); }
-.comp-table tbody td:not(:first-child) { text-align: center; }
-.comp-table tbody td:first-child { color: var(--dark); font-weight: 400; }
-.comp-table .cat-row td { background: var(--linend); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray); font-weight: 500; padding: 8px 20px; }
-.check { color: var(--sage); font-size: 16px; font-weight: 600; }
-.dash { color: rgba(136,135,128,0.35); font-size: 18px; }
-.partial { font-size: 11px; color: var(--saffron); font-weight: 500; }
+/* Post card */
+.post-card { display: grid; grid-template-columns: 180px 1fr; gap: 1.5rem; padding: 1.75rem 0; border-bottom: 0.5px solid var(--linend); cursor: pointer; transition: all .15s; }
+.post-card:first-child { padding-top: 0; }
+.post-card:last-child { border-bottom: none; }
+.post-card:hover .post-title { color: var(--sage); }
+.post-card:hover .post-thumb { transform: scale(1.03); }
+.post-thumb-wrap { border-radius: 10px; overflow: hidden; height: 120px; flex-shrink: 0; }
+.post-thumb { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 40px; transition: transform .3s; }
+.post-body { display: flex; flex-direction: column; }
+.post-tags { display: flex; gap: 6px; margin-bottom: 8px; flex-wrap: wrap; }
+.post-tag { font-size: 10px; padding: 2px 9px; border-radius: 20px; font-weight: 500; }
+.tag-nutri   { background: var(--mintl); color: #085041; }
+.tag-collab  { background: #EEEDFE; color: #3C3489; }
+.tag-culinar { background: var(--saffl); color: #633806; }
+.tag-business{ background: #F5EFE8; color: #5A3A1A; }
+.tag-gdpr    { background: #FAECE7; color: #712B13; }
+.post-title { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 600; color: var(--forest); line-height: 1.25; margin-bottom: 6px; transition: color .2s; }
+.post-excerpt { font-size: 13px; color: var(--gray); line-height: 1.65; flex: 1; margin-bottom: 10px; }
+.post-meta { display: flex; align-items: center; gap: 8px; }
+.pm-av { width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: 600; font-family: 'Cormorant Garamond', serif; flex-shrink: 0; }
+.pm-author { font-size: 11px; color: var(--dark); font-weight: 400; }
+.pm-dot { width: 2px; height: 2px; border-radius: 50%; background: var(--gray); }
+.pm-date { font-size: 11px; color: var(--gray); }
+.pm-read { font-size: 11px; color: var(--gray); margin-left: auto; }
 
-/* FAQ */
-.faq-section { padding: 4rem 3rem; max-width: 760px; margin: 0 auto; }
-.faq-item { border-bottom: 0.5px solid var(--linend); }
-.faq-q { width: 100%; text-align: left; padding: 18px 0; font-size: 15px; font-weight: 400; color: var(--forest); cursor: pointer; background: none; border: none; font-family: 'DM Sans', sans-serif; display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
-.faq-q:hover { color: var(--sage); }
-.faq-icon { font-size: 20px; color: var(--sage); flex-shrink: 0; transition: transform 0.2s; font-weight: 300; }
-.faq-item.open .faq-icon { transform: rotate(45deg); }
-.faq-a { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
-.faq-a-inner { padding: 0 0 16px; font-size: 14px; color: var(--gray); line-height: 1.8; }
-.faq-item.open .faq-a { max-height: 300px; }
+/* Load more */
+.load-more-wrap { text-align: center; padding-top: 2rem; }
+.btn-load { background: none; border: 1.5px solid rgba(15,46,40,.15); color: var(--forest); padding: 12px 28px; border-radius: 8px; font-size: 14px; font-weight: 400; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: all .2s; }
+.btn-load:hover { background: var(--forest); color: var(--linen); border-color: var(--forest); }
 
-/* LOGOS / SOCIAL PROOF */
-.proof-section { background: var(--white); padding: 3rem; text-align: center; border-top: 0.5px solid var(--linend); border-bottom: 0.5px solid var(--linend); }
-.proof-label { font-size: 12px; color: var(--gray); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1.5rem; }
-.proof-logos { display: flex; align-items: center; justify-content: center; gap: 3rem; flex-wrap: wrap; }
-.proof-logo { font-family: 'Cormorant Garamond', serif; font-size: 18px; color: rgba(15,46,40,0.25); font-weight: 600; letter-spacing: 0.04em; }
+/* SIDEBAR */
+.blog-sidebar { display: flex; flex-direction: column; gap: 1.5rem; }
+.sidebar-widget { background: var(--white); border-radius: 14px; padding: 1.5rem; border: 0.5px solid rgba(15,46,40,.08); }
+.sw-title { font-size: 12px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--forest); margin-bottom: 1.25rem; }
+
+/* Newsletter widget */
+.newsletter-widget { background: var(--forest); }
+.newsletter-widget .sw-title { color: var(--mint); }
+.nl-desc { font-size: 13px; color: rgba(159,225,203,.65); line-height: 1.6; margin-bottom: 1rem; }
+.nl-input { width: 100%; padding: 11px 14px; background: rgba(26,61,54,.7); border: 0.5px solid rgba(29,158,117,.3); border-radius: 8px; font-size: 13px; font-family: 'DM Sans', sans-serif; color: var(--mintl); outline: none; margin-bottom: 8px; transition: border-color .2s; }
+.nl-input::placeholder { color: rgba(93,202,165,.35); }
+.nl-input:focus { border-color: var(--sage); }
+.nl-btn { width: 100%; background: var(--sage); color: white; border: none; padding: 11px; border-radius: 8px; font-size: 13px; font-weight: 500; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: background .2s; }
+.nl-btn:hover { background: var(--mint); }
+.nl-note { font-size: 10px; color: rgba(93,202,165,.3); margin-top: 6px; }
+
+/* Popular posts */
+.popular-item { display: flex; gap: 10px; align-items: flex-start; padding: 10px 0; border-bottom: 0.5px solid var(--linend); cursor: pointer; }
+.popular-item:last-child { border-bottom: none; padding-bottom: 0; }
+.popular-item:first-child { padding-top: 0; }
+.pop-num { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 600; color: rgba(15,46,40,.1); line-height: 1; flex-shrink: 0; width: 28px; }
+.pop-title { font-size: 13px; color: var(--dark); line-height: 1.5; transition: color .2s; }
+.popular-item:hover .pop-title { color: var(--sage); }
+.pop-read { font-size: 11px; color: var(--gray); margin-top: 2px; }
+
+/* Tags cloud */
+.tags-cloud { display: flex; flex-wrap: wrap; gap: 6px; }
+.tag-cloud-item { font-size: 12px; padding: 5px 12px; border-radius: 20px; background: var(--linend); color: var(--dark); cursor: pointer; transition: all .15s; border: 0.5px solid transparent; }
+.tag-cloud-item:hover { background: var(--mintl); border-color: var(--mint); color: var(--forest); }
+
+/* Authors */
+.author-item { display: flex; gap: 10px; align-items: center; padding: 8px 0; border-bottom: 0.5px solid var(--linend); }
+.author-item:last-child { border-bottom: none; padding-bottom: 0; }
+.auth-av { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-size: 15px; font-weight: 600; flex-shrink: 0; }
+.auth-name { font-size: 13px; font-weight: 500; color: var(--forest); }
+.auth-role { font-size: 11px; color: var(--gray); }
+.auth-count { margin-left: auto; font-size: 11px; color: var(--gray); background: var(--linend); padding: 2px 8px; border-radius: 20px; }
+
+/* Resources section */
+.resources-section { background: var(--white); border-top: 0.5px solid var(--linend); padding: 4rem 3rem; }
+.resources-inner { max-width: 1120px; margin: 0 auto; }
+.res-title { font-family: 'Cormorant Garamond', serif; font-size: 36px; font-weight: 600; color: var(--forest); margin-bottom: 2rem; }
+.res-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+.res-card { border-radius: 12px; padding: 1.5rem; border: 0.5px solid rgba(15,46,40,.1); display: flex; flex-direction: column; gap: 10px; transition: transform .2s; cursor: pointer; }
+.res-card:hover { transform: translateY(-3px); }
+.res-icon { font-size: 28px; }
+.res-type { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; font-weight: 500; }
+.res-name { font-size: 15px; font-weight: 500; color: var(--forest); line-height: 1.4; }
+.res-desc { font-size: 12px; color: var(--gray); line-height: 1.5; flex: 1; }
+.res-cta { font-size: 12px; font-weight: 500; margin-top: auto; }
+.res-pdf   { background: #FEF3F0; border-color: rgba(216,90,48,.15); }
+.res-pdf .res-type, .res-pdf .res-cta { color: var(--red, #D85A30); }
+.res-xls   { background: #F0FEF8; border-color: rgba(29,158,117,.15); }
+.res-xls .res-type, .res-xls .res-cta { color: var(--sage); }
+.res-vid   { background: #F0F0FF; border-color: rgba(99,99,220,.15); }
+.res-vid .res-type, .res-vid .res-cta { color: #5B5BD6; }
+.res-tmpl  { background: var(--saffl); border-color: rgba(239,159,39,.2); }
+.res-tmpl .res-type, .res-tmpl .res-cta { color: #633806; }
+.res-guide { background: var(--mintl); border-color: rgba(29,158,117,.2); }
+.res-guide .res-type, .res-guide .res-cta { color: #085041; }
+.res-pod   { background: var(--linend); border-color: rgba(15,46,40,.1); }
+.res-pod .res-type, .res-pod .res-cta { color: var(--forest); }
 
 /* CTA */
-.page-cta { background: var(--forest); padding: 5rem 3rem; text-align: center; }
-.cta-inner { max-width: 540px; margin: 0 auto; }
-.cta-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(36px,5vw,52px); font-weight: 600; color: var(--mintl); margin-bottom: 1rem; line-height: 1.1; }
-.cta-sub { font-size: 15px; color: rgba(159,225,203,0.6); margin-bottom: 2.5rem; }
+.page-cta { background: var(--forest); padding: 4rem 3rem; text-align: center; }
+.cta-inner { max-width: 520px; margin: 0 auto; }
+.cta-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(32px,4vw,48px); font-weight: 600; color: var(--mintl); margin-bottom: .75rem; line-height: 1.1; }
+.cta-sub { font-size: 15px; color: rgba(159,225,203,.6); margin-bottom: 2rem; }
 .cta-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-.btn-primary { background: var(--sage); color: white; padding: 14px 32px; border-radius: 8px; font-size: 14px; font-weight: 500; text-decoration: none; transition: all 0.2s; }
+.btn-primary { background: var(--sage); color: white; padding: 13px 28px; border-radius: 8px; font-size: 14px; font-weight: 500; text-decoration: none; transition: all .2s; }
 .btn-primary:hover { background: var(--mint); transform: translateY(-1px); }
-.btn-ghost { color: var(--mintl); padding: 14px 24px; border-radius: 8px; font-size: 14px; font-weight: 400; text-decoration: none; border: 0.5px solid rgba(93,202,165,0.25); transition: all 0.2s; }
+.btn-ghost { color: var(--mintl); padding: 13px 22px; border-radius: 8px; font-size: 14px; text-decoration: none; border: 0.5px solid rgba(93,202,165,.25); transition: all .2s; }
 .btn-ghost:hover { border-color: var(--mint); color: var(--mint); }
 
 @media (max-width: 900px) {
   nav { padding: 0 1.5rem; }
-  .plans-grid { grid-template-columns: 1fr; }
-  .enterprise-banner { flex-direction: column; }
-  .plans-section, .comparison-section, .faq-section { padding: 3rem 1.5rem; }
-  .proof-section { padding: 2rem 1.5rem; }
-  .comp-table { font-size: 12px; }
-  .comp-table th, .comp-table td { padding: 10px 12px; }
+  .hero-inner { grid-template-columns: 1fr; }
+  .blog-main { grid-template-columns: 1fr; padding: 2rem 1.5rem; }
+  .blog-sidebar { display: none; }
+  .post-card { grid-template-columns: 120px 1fr; gap: 1rem; }
+  .resources-section { padding: 3rem 1.5rem; }
+  .res-grid { grid-template-columns: 1fr 1fr; }
+  .filter-inner { padding: 0 1.5rem; }
   .page-hero { padding: 100px 1.5rem 60px; }
 }
 </style>
@@ -181,264 +195,355 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba
 <nav>
   <a href="noura-landing.html" class="nav-logo">Noura<span>.</span></a>
   <div class="nav-links">
-    <a href="acasă.html">Acasă</a>
-    <a href="cum-functioneaza.html">Cum funcționează</a>
-    <a href="pret.html" class="active">Prețuri</a>
-    <a href="onboarding.html" class="nav-cta">Începe gratuit</a>
+    <a href="noura-landing.html">Acasă</a>
+    <a href="noura-how-it-works.html">Cum funcționează</a>
+    <a href="noura-pricing.html">Prețuri</a>
+    <a href="#" class="active">Blog</a>
+    <a href="noura-onboarding.html" class="nav-cta">Începe gratuit</a>
   </div>
 </nav>
 
 <!-- HERO -->
 <section class="page-hero">
   <div class="hero-inner">
-    <div class="hero-eyebrow">Prețuri transparente</div>
-    <h1 class="hero-title">Simplu. Onest. Scalabil.</h1>
-    <p class="hero-sub">14 zile trial gratuit pe orice plan, fără card de credit.</p>
-    <div class="billing-toggle">
-      <span class="bt-label active" id="lblMonthly">Lunar</span>
-      <label class="toggle-switch">
-        <input type="checkbox" id="billingToggle" onchange="switchBilling(this)">
-        <div class="toggle-track"></div>
-        <div class="toggle-thumb"></div>
-      </label>
-      <span class="bt-label" id="lblAnnual">Anual</span>
-      <span class="save-badge" id="saveBadge">Economisești 20%</span>
+    <div>
+      <div class="hero-eyebrow">Blog & Resurse</div>
+      <h1 class="hero-title">Cunoaștere pentru profesioniști.</h1>
+      <p class="hero-sub">Articole, ghiduri și resurse despre nutriție clinică, colaborare bucătar-nutriționist și construirea unui cabinet modern.</p>
+      <div class="hero-search">
+        <input class="search-input" type="text" placeholder="Caută articole, ghiduri, rețete...">
+        <button class="search-btn">Caută →</button>
+      </div>
+    </div>
+    <div>
+      <!-- Featured post in hero -->
+      <div class="featured-post" onclick="openPost('collaboration-layer')">
+        <div class="fp-img">
+          <div class="fp-img-bg">↔</div>
+          <div class="fp-img-content">
+            <span class="fp-img-emoji">🤝</span>
+            <div class="fp-img-label">Articol principal</div>
+          </div>
+        </div>
+        <div class="fp-body">
+          <div class="fp-cat">Colaborare profesională</div>
+          <div class="fp-title">De ce nutriționistul și bucătarul trebuie să lucreze ca o echipă, nu în siloz</div>
+          <div class="fp-excerpt">Studiu de caz: cum o clinică de nutriție din Cluj a redus erorile de plan cu 80% după ce a conectat nutriționistul direct cu bucătarul în același tool.</div>
+          <div class="fp-meta">
+            <div class="fp-av">AM</div>
+            <div class="fp-author">Dr. Alina Mureșan</div>
+            <div class="fp-date">28 mai 2026 · 8 min</div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- PLANS -->
-<div class="plans-section">
-  <div class="plans-grid">
-
-    <!-- SOLO -->
-    <div class="plan-card">
-      <div class="plan-top">
-        <div class="plan-badge">Solo</div>
-        <div class="plan-name">Solo</div>
-        <div class="plan-desc">Perfectă pentru nutriționistul care lucrează independent și vrea să înlocuiască Excel-ul și PDF-urile.</div>
-        <div class="plan-price">
-          <span class="price-amount" id="price-solo">€79</span>
-          <span class="price-period">/ lună</span>
-        </div>
-        <div class="price-annual-note" id="note-solo"></div>
-      </div>
-      <div class="plan-divider"></div>
-      <div class="plan-features">
-        <div class="feat-group-label">Clienți & planuri</div>
-        <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text"><em>1 nutriționist</em></div></div>
-        <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text">Până la <em>30 clienți activi</em></div></div>
-        <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text">Plan nutrițional builder complet</div></div>
-        <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text">Calcul automat macronutrienți</div></div>
-        <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text">Export PDF <em>nelimitat</em></div></div>
-        <div class="feat-group-label">Recipe Studio</div>
-        <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text">Bibliotecă rețete personală</div></div>
-        <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text">Verificare compatibilitate alergeni</div></div>
-        <div class="feat-item"><div class="feat-dash">—</div><div class="feat-text" style="color:var(--gray);">Collaboration layer</div></div>
-        <div class="feat-group-label">Suport</div>
-        <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text">Email support (48h)</div></div>
-        <div class="feat-item"><div class="feat-dash">—</div><div class="feat-text" style="color:var(--gray);">Chat live</div></div>
-      </div>
-      <div class="plan-bottom">
-        <a href="noura-onboarding.html" class="plan-btn">Începe trial 14 zile</a>
-        <div class="plan-trial-note">Fără card de credit</div>
-      </div>
-    </div>
-
-    <!-- PRO (featured) -->
-    <div class="plan-card featured">
-      <div class="plan-top">
-        <div class="plan-badge">⭐ Cel mai popular</div>
-        <div class="plan-name">Pro</div>
-        <div class="plan-desc">Pentru nutriționistul care colaborează cu unul sau mai mulți bucătari personali și vrea vizibilitate completă.</div>
-        <div class="plan-price">
-          <span class="price-amount" id="price-pro">€179</span>
-          <span class="price-period">/ lună</span>
-        </div>
-        <div class="price-annual-note" id="note-pro"></div>
-      </div>
-      <div class="plan-divider"></div>
-      <div class="plan-features">
-        <div class="feat-group-label">Clienți & planuri</div>
-        <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text"><em>1 nutriționist + 2 bucătari</em></div></div>
-        <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text">Clienți <em>nelimitați</em></div></div>
-        <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text">Plan nutrițional builder complet</div></div>
-        <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text">Calcul automat macronutrienți</div></div>
-        <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text">Template-uri reutilizabile</div></div>
-        <div class="feat-group-label">Collaboration</div>
-        <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text"><em>Collaboration layer complet</em></div></div>
-        <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text">Flux aprobare modificări</div></div>
-        <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text">Notificări real-time</div></div>
-        <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text"><em>Analytics dashboard avansat</em></div></div>
-        <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text">Rapoarte lunare automate</div></div>
-        <div class="feat-group-label">Suport</div>
-        <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text"><em>Priority support (12h)</em></div></div>
-        <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text">Chat live</div></div>
-      </div>
-      <div class="plan-bottom">
-        <a href="noura-onboarding.html" class="plan-btn">Începe trial 14 zile</a>
-        <div class="plan-trial-note">Fără card de credit · Cel mai ales plan</div>
-      </div>
-    </div>
-
-    <!-- CLINIC -->
-    <div class="plan-card">
-      <div class="plan-top">
-        <div class="plan-badge">Clinic</div>
-        <div class="plan-name">Clinic</div>
-        <div class="plan-desc">Pentru cabinete și clinici cu echipe mai mari, nevoi de branding propriu și integrări avansate.</div>
-        <div class="plan-price">
-          <span class="price-amount" id="price-clinic">€490</span>
-          <span class="price-period">/ lună</span>
-        </div>
-        <div class="price-annual-note" id="note-clinic"></div>
-      </div>
-      <div class="plan-divider"></div>
-      <div class="plan-features">
-        <div class="feat-group-label">Echipă & clienți</div>
-        <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text">Nutriționiști <em>nelimitați</em></div></div>
-        <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text">Bucătari <em>nelimitați</em></div></div>
-        <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text">Clienți <em>nelimitați</em></div></div>
-        <div class="feat-group-label">Funcționalități avansate</div>
-        <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text"><em>White-label</em> — logo & culori proprii</div></div>
-        <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text"><em>API access</em> pentru integrări</div></div>
-        <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text">Rapoarte personalizate avansate</div></div>
-        <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text">SSO (Single Sign-On)</div></div>
-        <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text">Audit log complet GDPR</div></div>
-        <div class="feat-group-label">Suport dedicat</div>
-        <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text"><em>Account manager dedicat</em></div></div>
-        <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text">Onboarding asistat (4h)</div></div>
-        <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text">SLA garantat 99.5% uptime</div></div>
-      </div>
-      <div class="plan-bottom">
-        <a href="mailto:hello@noura.app" class="plan-btn">Contactează echipa</a>
-        <div class="plan-trial-note">Demo personalizat disponibil</div>
-      </div>
-    </div>
-
-  </div>
-
-  <!-- ENTERPRISE BANNER -->
-  <div class="enterprise-banner">
-    <div class="eb-left">
-      <div class="eb-title">Ai o rețea de cabinete sau un spital?</div>
-      <div class="eb-desc">Oferim planuri Enterprise personalizate cu prețuri bazate pe volum, integrări HL7/FHIR și suport dedicat pentru conformitate medicală.</div>
-      <div class="eb-features">
-        <div class="eb-feat">Prețuri bazate pe volum</div>
-        <div class="eb-feat">Integrare EHR / HL7</div>
-        <div class="eb-feat">Contract SLA personalizat</div>
-        <div class="eb-feat">Training echipă inclus</div>
-      </div>
-    </div>
-    <div class="eb-cta">
-      <a href="mailto:enterprise@noura.app" class="btn-outline">Discutăm →</a>
-    </div>
+<!-- FILTER BAR -->
+<div class="filter-bar">
+  <div class="filter-inner">
+    <button class="filter-btn active" onclick="filterPosts('all', this)">Toate <span class="post-count">24</span></button>
+    <button class="filter-btn" onclick="filterPosts('nutritie', this)">Nutriție clinică <span class="post-count">9</span></button>
+    <button class="filter-btn" onclick="filterPosts('colaborare', this)">Colaborare <span class="post-count">6</span></button>
+    <button class="filter-btn" onclick="filterPosts('culinar', this)">Gastronomie <span class="post-count">5</span></button>
+    <button class="filter-btn" onclick="filterPosts('business', this)">Business cabinet <span class="post-count">3</span></button>
+    <button class="filter-btn" onclick="filterPosts('gdpr', this)">GDPR & legal <span class="post-count">1</span></button>
   </div>
 </div>
 
-<!-- SOCIAL PROOF -->
-<div class="proof-section">
-  <div class="proof-label">Folosit de profesioniști din</div>
-  <div class="proof-logos">
-    <div class="proof-logo">Cabinet NutriLife</div>
-    <div class="proof-logo">Wellness Clinic BCN</div>
-    <div class="proof-logo">SportNutri Pro</div>
-    <div class="proof-logo">Atelier Culinar Sănătos</div>
-    <div class="proof-logo">Med & Food Center</div>
+<!-- BLOG MAIN -->
+<div class="blog-main">
+  <div class="posts-grid" id="postsGrid">
+
+    <!-- Post 1 -->
+    <div class="post-card" data-cat="nutritie">
+      <div class="post-thumb-wrap" style="background: linear-gradient(135deg,#E1F5EE,#A8E6CF);">
+        <div class="post-thumb">🧬</div>
+      </div>
+      <div class="post-body">
+        <div class="post-tags"><span class="post-tag tag-nutri">Nutriție clinică</span></div>
+        <div class="post-title">Cum calculezi TDEE corect pentru clienții cu metabolism atipic</div>
+        <div class="post-excerpt">Formula Harris-Benedict nu funcționează pentru toată lumea. Explorăm 3 metode alternative și când să le aplici în practică.</div>
+        <div class="post-meta">
+          <div class="pm-av" style="background:var(--mintl);color:var(--sage);">AM</div>
+          <span class="pm-author">Dr. Alina M.</span>
+          <span class="pm-dot"></span>
+          <span class="pm-date">24 mai 2026</span>
+          <span class="pm-read">6 min citit</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Post 2 -->
+    <div class="post-card" data-cat="colaborare">
+      <div class="post-thumb-wrap" style="background: linear-gradient(135deg,#EEEDFE,#D4D3F8);">
+        <div class="post-thumb">💬</div>
+      </div>
+      <div class="post-body">
+        <div class="post-tags"><span class="post-tag tag-collab">Colaborare</span></div>
+        <div class="post-title">5 greșeli de comunicare între nutriționist și bucătar — și cum să le eviți</div>
+        <div class="post-excerpt">„Reducere sare" nu înseamnă același lucru pentru toți. Cum să construiești un limbaj comun cu bucătarul tău personal.</div>
+        <div class="post-meta">
+          <div class="pm-av" style="background:var(--saffl);color:#633806;">RC</div>
+          <span class="pm-author">Radu Constantin</span>
+          <span class="pm-dot"></span>
+          <span class="pm-date">20 mai 2026</span>
+          <span class="pm-read">5 min citit</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Post 3 -->
+    <div class="post-card" data-cat="culinar">
+      <div class="post-thumb-wrap" style="background: linear-gradient(135deg,#FAEEDA,#F5D99A);">
+        <div class="post-thumb">🍳</div>
+      </div>
+      <div class="post-body">
+        <div class="post-tags"><span class="post-tag tag-culinar">Gastronomie</span></div>
+        <div class="post-title">Mise en place nutrițional: cum planifici gătitul săptămânal al unui client</div>
+        <div class="post-excerpt">Ghidul complet al bucătarului personal — de la lista de cumpărături la timing-ul preparatelor, cu exemple reale din 3 profiluri de clienți.</div>
+        <div class="post-meta">
+          <div class="pm-av" style="background:var(--saffl);color:#633806;">MI</div>
+          <span class="pm-author">Maria Ionescu</span>
+          <span class="pm-dot"></span>
+          <span class="pm-date">17 mai 2026</span>
+          <span class="pm-read">9 min citit</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Post 4 -->
+    <div class="post-card" data-cat="nutritie">
+      <div class="post-thumb-wrap" style="background: linear-gradient(135deg,#F0FFF8,#B8EDD6);">
+        <div class="post-thumb">📊</div>
+      </div>
+      <div class="post-body">
+        <div class="post-tags"><span class="post-tag tag-nutri">Nutriție clinică</span><span class="post-tag tag-business">Business</span></div>
+        <div class="post-title">Aderența la plan: cum măsori succesul real al unui client, nu doar greutatea</div>
+        <div class="post-excerpt">Greutatea este un indicator lent și înșelător. Iată 7 metrici mai relevante pentru a evalua progresul nutrițional al unui client.</div>
+        <div class="post-meta">
+          <div class="pm-av" style="background:var(--mintl);color:var(--sage);">AM</div>
+          <span class="pm-author">Dr. Alina M.</span>
+          <span class="pm-dot"></span>
+          <span class="pm-date">14 mai 2026</span>
+          <span class="pm-read">7 min citit</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Post 5 -->
+    <div class="post-card" data-cat="business">
+      <div class="post-thumb-wrap" style="background: linear-gradient(135deg,#F5EFE8,#E8D5BC);">
+        <div class="post-thumb">📈</div>
+      </div>
+      <div class="post-body">
+        <div class="post-tags"><span class="post-tag tag-business">Business cabinet</span></div>
+        <div class="post-title">Cum să îți scalezi cabinetul de nutriție de la 10 la 50 de clienți fără să lucrezi dublu</div>
+        <div class="post-excerpt">Automatizare, sisteme și tooluri care fac diferența dintre un nutriționist epuizat și unul care crește cu cap. Un ghid practic din experiență reală.</div>
+        <div class="post-meta">
+          <div class="pm-av" style="background:#EEEDFE;color:#3C3489;">VP</div>
+          <span class="pm-author">Vlad Popescu</span>
+          <span class="pm-dot"></span>
+          <span class="pm-date">10 mai 2026</span>
+          <span class="pm-read">11 min citit</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Post 6 -->
+    <div class="post-card" data-cat="nutritie">
+      <div class="post-thumb-wrap" style="background: linear-gradient(135deg,#E8F5FF,#B8D9F0);">
+        <div class="post-thumb">🫀</div>
+      </div>
+      <div class="post-body">
+        <div class="post-tags"><span class="post-tag tag-nutri">Nutriție clinică</span></div>
+        <div class="post-title">Nutriție pentru hipertensiune: ce știm în 2026 și ce s-a schimbat față de protocoalele clasice</div>
+        <div class="post-excerpt">Protocoalele DASH sunt depășite? Ultimele meta-analize reevaluează rolul sodiului, potasiului și a grăsimilor saturate în managementul HTA.</div>
+        <div class="post-meta">
+          <div class="pm-av" style="background:var(--mintl);color:var(--sage);">AM</div>
+          <span class="pm-author">Dr. Alina M.</span>
+          <span class="pm-dot"></span>
+          <span class="pm-date">6 mai 2026</span>
+          <span class="pm-read">12 min citit</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Post 7 -->
+    <div class="post-card" data-cat="colaborare">
+      <div class="post-thumb-wrap" style="background: linear-gradient(135deg,#F0FFF4,#C6F0D8);">
+        <div class="post-thumb">🔄</div>
+      </div>
+      <div class="post-body">
+        <div class="post-tags"><span class="post-tag tag-collab">Colaborare</span><span class="post-tag tag-culinar">Gastronomie</span></div>
+        <div class="post-title">Substituții inteligente de ingrediente: ghidul bucătarului care respectă planul nutrițional</div>
+        <div class="post-excerpt">Când somonul nu e disponibil și trebuie să improvizezi fără să strici macronutrienții clientului. 40+ substituții validate nutrițional.</div>
+        <div class="post-meta">
+          <div class="pm-av" style="background:var(--saffl);color:#633806;">RC</div>
+          <span class="pm-author">Radu Constantin</span>
+          <span class="pm-dot"></span>
+          <span class="pm-date">2 mai 2026</span>
+          <span class="pm-read">8 min citit</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Post 8 -->
+    <div class="post-card" data-cat="gdpr">
+      <div class="post-thumb-wrap" style="background: linear-gradient(135deg,#FAECE7,#F5C4B0);">
+        <div class="post-thumb">🔒</div>
+      </div>
+      <div class="post-body">
+        <div class="post-tags"><span class="post-tag tag-gdpr">GDPR & legal</span></div>
+        <div class="post-title">GDPR pentru nutriționiști: tot ce trebuie să știi despre datele medicale ale clienților</div>
+        <div class="post-excerpt">Datele de sănătate sunt categoria specială în GDPR. Ce obligații ai ca nutriționist, cum stochezi datele corect și ce riscă un cabinet neconform.</div>
+        <div class="post-meta">
+          <div class="pm-av" style="background:#FAECE7;color:#712B13;">AC</div>
+          <span class="pm-author">Av. Ana Chirilă</span>
+          <span class="pm-dot"></span>
+          <span class="pm-date">28 apr. 2026</span>
+          <span class="pm-read">10 min citit</span>
+        </div>
+      </div>
+    </div>
+
   </div>
+
+  <div class="load-more-wrap">
+    <button class="btn-load" onclick="this.textContent='Se încarcă...'">Încarcă mai multe articole</button>
+  </div>
+
+  <!-- SIDEBAR -->
+  <aside class="blog-sidebar">
+
+    <!-- Newsletter -->
+    <div class="sidebar-widget newsletter-widget">
+      <div class="sw-title">📬 Newsletter săptămânal</div>
+      <div class="nl-desc">Articole, resurse și insight-uri despre nutriție profesională — direct în inbox, în fiecare joi.</div>
+      <input class="nl-input" type="email" placeholder="email@cabinet.ro">
+      <button class="nl-btn">Abonează-te gratuit</button>
+      <div class="nl-note">2.400+ profesioniști abonați · Dezabonare oricând</div>
+    </div>
+
+    <!-- Popular posts -->
+    <div class="sidebar-widget">
+      <div class="sw-title">🔥 Cele mai citite</div>
+      <div class="popular-item">
+        <div class="pop-num">1</div>
+        <div><div class="pop-title">Cum calculezi TDEE corect pentru clienții cu metabolism atipic</div><div class="pop-read">6 min · 4.2k citiri</div></div>
+      </div>
+      <div class="popular-item">
+        <div class="pop-num">2</div>
+        <div><div class="pop-title">GDPR pentru nutriționiști: datele medicale ale clienților</div><div class="pop-read">10 min · 3.8k citiri</div></div>
+      </div>
+      <div class="popular-item">
+        <div class="pop-num">3</div>
+        <div><div class="pop-title">Substituții inteligente de ingrediente: ghidul bucătarului</div><div class="pop-read">8 min · 3.1k citiri</div></div>
+      </div>
+      <div class="popular-item">
+        <div class="pop-num">4</div>
+        <div><div class="pop-title">Cum să îți scalezi cabinetul de la 10 la 50 de clienți</div><div class="pop-read">11 min · 2.7k citiri</div></div>
+      </div>
+    </div>
+
+    <!-- Authors -->
+    <div class="sidebar-widget">
+      <div class="sw-title">✍️ Autori</div>
+      <div class="author-item">
+        <div class="auth-av" style="background:var(--mintl);color:var(--sage);">AM</div>
+        <div><div class="auth-name">Dr. Alina Mureșan</div><div class="auth-role">Nutriționist clinician</div></div>
+        <span class="auth-count">9 articole</span>
+      </div>
+      <div class="author-item">
+        <div class="auth-av" style="background:var(--saffl);color:#633806;">RC</div>
+        <div><div class="auth-name">Radu Constantin</div><div class="auth-role">Chef personal</div></div>
+        <span class="auth-count">6 articole</span>
+      </div>
+      <div class="author-item">
+        <div class="auth-av" style="background:var(--saffl);color:#633806;">MI</div>
+        <div><div class="auth-name">Maria Ionescu</div><div class="auth-role">Chef & educator culinar</div></div>
+        <span class="auth-count">5 articole</span>
+      </div>
+      <div class="author-item">
+        <div class="auth-av" style="background:#EEEDFE;color:#3C3489;">VP</div>
+        <div><div class="auth-name">Vlad Popescu</div><div class="auth-role">Business development</div></div>
+        <span class="auth-count">3 articole</span>
+      </div>
+    </div>
+
+    <!-- Tags -->
+    <div class="sidebar-widget">
+      <div class="sw-title">🏷️ Tag-uri</div>
+      <div class="tags-cloud">
+        <div class="tag-cloud-item">TDEE</div>
+        <div class="tag-cloud-item">Macronutrienți</div>
+        <div class="tag-cloud-item">HTA</div>
+        <div class="tag-cloud-item">Diabet T2</div>
+        <div class="tag-cloud-item">Colaborare</div>
+        <div class="tag-cloud-item">GDPR</div>
+        <div class="tag-cloud-item">Mise en place</div>
+        <div class="tag-cloud-item">Substituții</div>
+        <div class="tag-cloud-item">Business</div>
+        <div class="tag-cloud-item">Plan nutrițional</div>
+        <div class="tag-cloud-item">Aderență</div>
+        <div class="tag-cloud-item">Vegan</div>
+        <div class="tag-cloud-item">Sportivi</div>
+        <div class="tag-cloud-item">Pediatric</div>
+      </div>
+    </div>
+
+  </aside>
+
 </div>
 
-<!-- COMPARISON TABLE -->
-<div class="comparison-section">
-  <div class="section-header">
-    <div class="sec-eyebrow">Comparație detaliată</div>
-    <h2 class="sec-title">Tot ce primești, plan cu plan.</h2>
-  </div>
-  <table class="comp-table">
-    <thead>
-      <tr>
-        <th>Funcționalitate</th>
-        <th>Solo</th>
-        <th class="col-featured">Pro</th>
-        <th>Clinic</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr class="cat-row"><td colspan="4">Clienți & utilizatori</td></tr>
-      <tr><td>Nutriționiști incluși</td><td>1</td><td>1</td><td>Nelimitați</td></tr>
-      <tr><td>Bucătari incluși</td><td>—</td><td>2</td><td>Nelimitați</td></tr>
-      <tr><td>Clienți activi</td><td>30</td><td>Nelimitați</td><td>Nelimitați</td></tr>
-      <tr class="cat-row"><td colspan="4">Plan nutrițional</td></tr>
-      <tr><td>Builder drag-and-drop</td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
-      <tr><td>Calcul macro automat</td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
-      <tr><td>Export PDF</td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
-      <tr><td>Template-uri reutilizabile</td><td><span class="partial">3 template-uri</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
-      <tr><td>PDF cu branding propriu</td><td><span class="dash">—</span></td><td><span class="partial">Logo cabinet</span></td><td><span class="check">✓</span></td></tr>
-      <tr class="cat-row"><td colspan="4">Recipe Studio</td></tr>
-      <tr><td>Bibliotecă rețete</td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
-      <tr><td>Verificare alergeni în timp real</td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
-      <tr><td>Mod cooking step-by-step</td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
-      <tr><td>Scalare automată porții</td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
-      <tr class="cat-row"><td colspan="4">Colaborare</td></tr>
-      <tr><td>Collaboration layer</td><td><span class="dash">—</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
-      <tr><td>Flux aprobare modificări</td><td><span class="dash">—</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
-      <tr><td>Notificări real-time</td><td><span class="dash">—</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
-      <tr><td>Shopping list automată</td><td><span class="dash">—</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
-      <tr class="cat-row"><td colspan="4">Analytics & rapoarte</td></tr>
-      <tr><td>Dashboard progres clienți</td><td><span class="partial">Basic</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
-      <tr><td>Rapoarte lunare automate</td><td><span class="dash">—</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
-      <tr><td>Rapoarte personalizate</td><td><span class="dash">—</span></td><td><span class="dash">—</span></td><td><span class="check">✓</span></td></tr>
-      <tr><td>Export date CSV</td><td><span class="dash">—</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
-      <tr class="cat-row"><td colspan="4">Securitate & conformitate</td></tr>
-      <tr><td>GDPR compliant</td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
-      <tr><td>2FA obligatoriu</td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
-      <tr><td>Audit log complet</td><td><span class="dash">—</span></td><td><span class="partial">30 zile</span></td><td><span class="check">✓ Nelimitat</span></td></tr>
-      <tr><td>SSO / SAML</td><td><span class="dash">—</span></td><td><span class="dash">—</span></td><td><span class="check">✓</span></td></tr>
-      <tr><td>API access</td><td><span class="dash">—</span></td><td><span class="dash">—</span></td><td><span class="check">✓</span></td></tr>
-      <tr><td>White-label</td><td><span class="dash">—</span></td><td><span class="dash">—</span></td><td><span class="check">✓</span></td></tr>
-      <tr class="cat-row"><td colspan="4">Suport</td></tr>
-      <tr><td>Email support</td><td>48h</td><td>12h</td><td>4h</td></tr>
-      <tr><td>Chat live</td><td><span class="dash">—</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
-      <tr><td>Account manager dedicat</td><td><span class="dash">—</span></td><td><span class="dash">—</span></td><td><span class="check">✓</span></td></tr>
-      <tr><td>Onboarding asistat</td><td><span class="dash">—</span></td><td><span class="partial">Webinar</span></td><td><span class="check">✓ 4h 1:1</span></td></tr>
-    </tbody>
-  </table>
-</div>
-
-<!-- FAQ -->
-<div class="faq-section">
-  <div class="section-header">
-    <div class="sec-eyebrow">Întrebări frecvente</div>
-    <h2 class="sec-title">Ai întrebări? Avem răspunsuri.</h2>
-  </div>
-  <div id="faqList">
-    <div class="faq-item">
-      <button class="faq-q" onclick="toggleFaq(this)">Ce se întâmplă după cele 14 zile de trial? <span class="faq-icon">+</span></button>
-      <div class="faq-a"><div class="faq-a-inner">La finalul trial-ului, poți alege un plan plătit sau contul trece în modul read-only — datele tale sunt păstrate timp de 30 de zile suplimentare. Nu ești debitat automat, niciodată.</div></div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-q" onclick="toggleFaq(this)">Pot schimba planul oricând? <span class="faq-icon">+</span></button>
-      <div class="faq-a"><div class="faq-a-inner">Da, upgrade sau downgrade oricând din setările contului. La upgrade, plătești diferența pro-rata pentru luna curentă. La downgrade, schimbarea intră în vigoare la finalul perioadei de facturare.</div></div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-q" onclick="toggleFaq(this)">Cum funcționează facturarea anuală? <span class="faq-icon">+</span></button>
-      <div class="faq-a"><div class="faq-a-inner">La facturarea anuală beneficiezi de 20% reducere față de prețul lunar. Plata se face integral la începutul anului. Poți anula oricând, cu rambursare pro-rata pentru lunile nefolosite.</div></div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-q" onclick="toggleFaq(this)">Datele clienților mei sunt în siguranță? <span class="faq-icon">+</span></button>
-      <div class="faq-a"><div class="faq-a-inner">Noura este 100% GDPR compliant. Datele sunt stocate în data center EU (Frankfurt), criptate AES-256 la repaus și TLS 1.3 în tranzit. Semnăm DPA (Data Processing Agreement) cu fiecare cabinet. Datele medicale ale clienților nu sunt niciodată vizibile bucătarilor.</div></div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-q" onclick="toggleFaq(this)">Planul Solo include și un cont pentru bucătar? <span class="faq-icon">+</span></button>
-      <div class="faq-a"><div class="faq-a-inner">Nu — Solo este dedicat nutriționistului care lucrează independent, fără bucătar. Dacă colaborezi cu bucătari, planul Pro (1 nutriționist + 2 bucătari) este cel mai potrivit.</div></div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-q" onclick="toggleFaq(this)">Pot importa clienții existenți din Excel sau alt tool? <span class="faq-icon">+</span></button>
-      <div class="faq-a"><div class="faq-a-inner">Da, oferim import CSV pentru profiluri de clienți (date demografice, restricții, obiective). Echipa noastră te asistă gratuit în migrare dacă ai mai mult de 20 de clienți — scrie-ne la hello@noura.app.</div></div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-q" onclick="toggleFaq(this)">Există o aplicație mobilă? <span class="faq-icon">+</span></button>
-      <div class="faq-a"><div class="faq-a-inner">În prezent Noura este o aplicație web responsivă, optimizată atât pentru desktop cât și pentru telefon. Aplicația nativă iOS pentru bucătari este planificată pentru Q1 2027 (versiunea 1.2 din roadmap).</div></div>
+<!-- RESOURCES -->
+<div class="resources-section">
+  <div class="resources-inner">
+    <div class="res-title">Resurse gratuite pentru profesioniști</div>
+    <div class="res-grid">
+      <div class="res-card res-pdf">
+        <div class="res-icon">📄</div>
+        <div class="res-type">PDF Ghid</div>
+        <div class="res-name">Ghidul complet GDPR pentru cabinete de nutriție</div>
+        <div class="res-desc">32 pagini cu tot ce trebuie să faci pentru a fi conform: DPA, consimțământ, stocare, dreptul la ștergere.</div>
+        <div class="res-cta">Descarcă gratuit →</div>
+      </div>
+      <div class="res-card res-xls">
+        <div class="res-icon">📊</div>
+        <div class="res-type">Excel Template</div>
+        <div class="res-name">Template plan nutrițional săptămânal cu calcul macro automat</div>
+        <div class="res-desc">Spreadsheet profesional cu formule pentru TDEE, macronutrienți și distribuție mese. Folosit de 1,200+ nutriționiști.</div>
+        <div class="res-cta">Descarcă gratuit →</div>
+      </div>
+      <div class="res-card res-vid">
+        <div class="res-icon">🎥</div>
+        <div class="res-type">Webinar înregistrat</div>
+        <div class="res-name">Colaborarea nutriționist-bucătar: workflow-uri care funcționează</div>
+        <div class="res-desc">55 minute cu Dr. Alina Mureșan și Chef Radu Constantin despre cum să construiești o echipă eficientă în jurul clientului.</div>
+        <div class="res-cta">Vizionează gratuit →</div>
+      </div>
+      <div class="res-card res-tmpl">
+        <div class="res-icon">📋</div>
+        <div class="res-type">Template Word</div>
+        <div class="res-name">Fișă client completă pentru nutriționiști — template editabil</div>
+        <div class="res-desc">Template profesional cu toate câmpurile esențiale: obiective, alergii, restricții, istoric, note sesiune. Disponibil în .docx și .pdf.</div>
+        <div class="res-cta">Descarcă gratuit →</div>
+      </div>
+      <div class="res-card res-guide">
+        <div class="res-icon">📚</div>
+        <div class="res-type">Ghid practic</div>
+        <div class="res-name">40+ substituții de ingrediente validate nutrițional pentru bucătari</div>
+        <div class="res-desc">Fiecare substituție vine cu impactul exact asupra macronutrienților. Un must-have pentru orice bucătar personal care lucrează cu plan nutrițional.</div>
+        <div class="res-cta">Descarcă gratuit →</div>
+      </div>
+      <div class="res-card res-pod">
+        <div class="res-icon">🎙️</div>
+        <div class="res-type">Podcast</div>
+        <div class="res-name">Noura Talks — episodul pilot: „Viitorul nutriției personalizate"</div>
+        <div class="res-desc">40 de minute cu cei mai buni nutriționiști și bucătari din România despre unde se îndreaptă industria și ce înseamnă cu adevărat personalizarea.</div>
+        <div class="res-cta">Ascultă gratuit →</div>
+      </div>
     </div>
   </div>
 </div>
@@ -446,49 +551,48 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba
 <!-- CTA -->
 <section class="page-cta">
   <div class="cta-inner">
-    <h2 class="cta-title">Începe gratuit astăzi.</h2>
-    <p class="cta-sub">14 zile pe planul Pro, fără card de credit. Anulezi oricând.</p>
+    <h2 class="cta-title">Pune cunoașterea în practică.</h2>
+    <p class="cta-sub">Noura — platforma care conectează teoria cu farfuria.</p>
     <div class="cta-btns">
-      <a href="noura-onboarding.html" class="btn-primary">Pornește trial gratuit</a>
-      <a href="noura-how-it-works.html" class="btn-ghost">Cum funcționează →</a>
+      <a href="noura-onboarding.html" class="btn-primary">Începe trial gratuit</a>
+      <a href="noura-pricing.html" class="btn-ghost">Vezi prețurile →</a>
     </div>
   </div>
 </section>
 
 <script>
-// Billing toggle
-const prices = {
-  monthly: { solo: '€79',  pro: '€179', clinic: '€490' },
-  annual:  { solo: '€63',  pro: '€143', clinic: '€392' }
-};
-const notes = {
-  monthly: { solo: '', pro: '', clinic: '' },
-  annual:  {
-    solo:   'Facturat anual: €756/an (economisești €192)',
-    pro:    'Facturat anual: €1,716/an (economisești €432)',
-    clinic: 'Facturat anual: €4,704/an (economisești €1,176)'
-  }
-};
-
-function switchBilling(el) {
-  const isAnnual = el.checked;
-  const mode = isAnnual ? 'annual' : 'monthly';
-  document.getElementById('lblMonthly').classList.toggle('active', !isAnnual);
-  document.getElementById('lblAnnual').classList.toggle('active', isAnnual);
-  document.getElementById('saveBadge').style.opacity = isAnnual ? '1' : '0.4';
-  ['solo','pro','clinic'].forEach(plan => {
-    document.getElementById(`price-${plan}`).textContent = prices[mode][plan];
-    document.getElementById(`note-${plan}`).textContent = notes[mode][plan];
+// Category filter
+function filterPosts(cat, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.post-card').forEach(card => {
+    if (cat === 'all' || card.dataset.cat === cat) {
+      card.style.display = 'grid';
+    } else {
+      card.style.display = 'none';
+    }
   });
 }
 
-// FAQ toggle
-function toggleFaq(btn) {
-  const item = btn.closest('.faq-item');
-  const isOpen = item.classList.contains('open');
-  document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
-  if (!isOpen) item.classList.add('open');
+function openPost(slug) {
+  // In a real app, navigate to article page
+  alert('Articol: ' + slug + '\n\nÎn implementarea completă, aceasta ar naviga la pagina articolului.');
 }
+
+// Hover effects on post cards
+document.querySelectorAll('.post-card').forEach(card => {
+  card.addEventListener('click', () => {
+    const title = card.querySelector('.post-title').textContent;
+    alert('Articol: ' + title + '\n\nÎn implementarea completă, aceasta ar deschide articolul complet.');
+  });
+});
+
+// Search
+document.querySelector('.search-input').addEventListener('keydown', e => {
+  if (e.key === 'Enter' && e.target.value.trim()) {
+    alert('Căutare: "' + e.target.value + '"\n\nÎn implementarea completă, aceasta ar filtra articolele.');
+  }
+});
 </script>
 </body>
 </html>
