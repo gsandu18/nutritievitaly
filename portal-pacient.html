@@ -1,575 +1,718 @@
 <!DOCTYPE html>
-<html lang="ro" class="light">
+<html lang="ro" class="h-full bg-[#FAFAF8]">
 <head>
     <meta charset="utf-8">
-    <!-- Viewport ajustat pentru a preveni zoom-ul automat pe mobil la inputuri -->
-    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
-    <title>Portal Client - NutriChef Pro</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Noura. | Portal Pacient Securizat</title>
+    
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Cormorant Garamond (Serif) & DM Sans (Sans-serif) -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Material Symbols (Icons) -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+    
+    <!-- Jitsi Meet API pentru Telemedicină -->
     <script src="https://meet.jit.si/external_api.js"></script>
 
+    <!-- Configurare Tailwind pentru Brandul Noura. -->
     <script>
         tailwind.config = {
-            darkMode: 'class',
             theme: {
                 extend: {
-                    fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'] },
+                    fontFamily: { 
+                        sans: ['"DM Sans"', 'sans-serif'],
+                        serif: ['"Cormorant Garamond"', 'serif']
+                    },
                     colors: {
-                        primary: { 50: '#f0fdfa', 100: '#ccfbf1', 500: '#14b8a6', 600: '#0d9488', 900: '#134e4a' },
-                        accent: { 500: '#f59e0b', 600: '#d97706' },
-                        macro: { carb: '#3b82f6', fat: '#eab308', protein: '#ef4444' },
-                        dark: { 800: '#1e293b', 900: '#0f172a', 950: '#020617' },
+                        forest: '#0F2E28',
+                        sage: '#1D9E75',
+                        mint: '#5DCAA5',
+                        saffron: '#EF9F27',
+                        linen: '#FAFAF8'
                     },
                     boxShadow: {
-                        'card': '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1)',
+                        'premium': '0 4px 20px -2px rgba(15, 46, 40, 0.05), 0 0 3px rgba(15, 46, 40, 0.02)',
                     }
                 }
             }
         }
     </script>
+
     <style>
-        /* Optimizări esențiale pentru comportamentul pe mobil */
-        body { font-family: 'Plus Jakarta Sans', sans-serif; height: 100dvh; -webkit-tap-highlight-color: transparent; }
+        /* Setări Globale & Scrollbar Ascuns pentru un aspect curat */
+        body { 
+            font-family: 'DM Sans', sans-serif; 
+            color: #0F2E28; 
+            -webkit-tap-highlight-color: transparent; 
+        }
         .hide-scrollbar::-webkit-scrollbar { display: none; }
         .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-        .glass-header { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(226, 232, 240, 0.8); }
-        .dark .glass-header { background: rgba(15, 23, 42, 0.85); border-bottom: 1px solid rgba(30, 41, 59, 0.8); }
+        
+        /* Header cu efect de sticlă mată (Glassmorphism) */
+        .glass-header { 
+            background: rgba(250, 250, 248, 0.85); 
+            backdrop-filter: blur(16px); 
+            border-bottom: 1px solid rgba(229, 229, 224, 0.8); 
+        }
+        
+        /* Elemente de Navigație */
+        .nav-item { 
+            @apply w-full flex items-center gap-3 px-5 py-3.5 rounded-xl text-sm font-medium transition-all duration-300 text-slate-400 hover:text-white hover:bg-white/5 text-left; 
+        }
+        .nav-item.active { 
+            @apply bg-sage text-white shadow-md font-bold; 
+        }
+        
+        /* Carduri Premium */
+        .dashboard-card { 
+            @apply bg-white border border-[#e5e5e0] rounded-[1.5rem] shadow-premium transition-all duration-300; 
+        }
+        
+        /* Formulare: Structură Verticală Anti-Suprapunere */
+        .form-group { @apply flex flex-col w-full mb-5; }
+        .form-group.mb-0 { margin-bottom: 0; }
+        
+        .input-field { 
+            @apply w-full bg-[#FAFAF8] border border-[#e5e5e0] rounded-xl px-4 text-base sm:text-sm font-medium focus:bg-white focus:border-forest outline-none transition-all text-forest h-12 block shadow-sm; 
+        }
+        .input-field-select { 
+            @apply w-full bg-[#FAFAF8] border border-[#e5e5e0] rounded-xl px-4 text-base sm:text-sm font-bold focus:bg-white focus:border-forest outline-none transition-all text-forest h-12 block appearance-none shadow-sm; 
+        }
+        .input-label { 
+            @apply text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-2 block pl-1 pointer-events-none; 
+        }
+        
+        /* Animații & Utilitare */
         .progress-bar { transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1); width: 0%; }
-        .task-cb:checked + div { text-decoration: line-through; opacity: 0.5; }
+        .task-cb:checked + div { text-decoration: line-through; opacity: 0.5; color: #1D9E75; }
     </style>
 </head>
-<body class="text-slate-800 dark:text-slate-200 flex overflow-hidden antialiased selection:bg-primary-500 selection:text-white bg-slate-50 dark:bg-dark-950 transition-colors duration-300">
+<body class="flex h-screen overflow-hidden antialiased bg-linen">
 
-    <!-- SIDEBAR (Desktop) -->
-    <aside class="w-64 bg-dark-900 flex flex-col justify-between hidden md:flex shrink-0 z-20 text-slate-300 border-r border-slate-800">
-        <div>
-            <div class="h-20 flex items-center px-8 border-b border-slate-800">
-                <div class="flex items-center gap-3 cursor-pointer" onclick="switchView('dashboard')">
-                    <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-primary-500 to-primary-600 text-white flex items-center justify-center shadow-lg"><span class="material-symbols-rounded text-[20px]">restaurant</span></div>
-                    <span class="font-bold text-lg tracking-tight text-white">NutriChef <span class="text-primary-500 font-light">Client</span></span>
-                </div>
-            </div>
-
-            <nav class="p-4 space-y-2 mt-4" id="sidebar-nav">
-                <button onclick="switchView('dashboard')" id="nav-dashboard" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold transition-all bg-primary-600/10 text-primary-500 relative"><span class="material-symbols-rounded text-[20px]">space_dashboard</span>Evoluția Mea</button>
-                <button onclick="switchView('diet')" id="nav-diet" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium hover:bg-slate-800 hover:text-white transition-all"><span class="material-symbols-rounded text-[20px]">restaurant_menu</span>Plan Alimentar</button>
-                <button onclick="switchView('messages')" id="nav-messages" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium hover:bg-slate-800 hover:text-white transition-all relative">
-                    <span class="material-symbols-rounded text-[20px]">chat_bubble</span>Mesaje
-                    <span class="absolute right-4 w-2 h-2 rounded-full bg-accent-500"></span>
-                </button>
-                <button onclick="switchView('financial')" id="nav-financial" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium hover:bg-slate-800 hover:text-white transition-all"><span class="material-symbols-rounded text-[20px]">credit_card</span>Plăți & Abonament</button>
-            </nav>
-        </div>
-
-        <div class="p-4 border-t border-slate-800">
-            <div onclick="switchView('profile')" id="nav-profile-btn" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-slate-800 cursor-pointer transition-colors border border-transparent hover:border-slate-700">
-                <div class="w-10 h-10 rounded-full bg-slate-800 border border-slate-700 text-white flex items-center justify-center font-bold text-sm bg-cover bg-center" id="sidebar-avatar">RI</div>
-                <div class="flex-1 min-w-0">
-                    <p class="text-sm font-semibold text-white truncate">Radu Ionescu</p>
-                    <p class="text-xs text-primary-500 truncate font-medium">Nutriționist: Sarah M.</p>
-                </div>
-                <span class="material-symbols-rounded text-slate-500 text-[18px]">manage_accounts</span>
-            </div>
-        </div>
-    </aside>
-
-    <!-- MENIU MOBIL (Slide-in) -->
+    <!-- ========================================== -->
+    <!-- MENIU MOBIL (SLIDE-IN)                     -->
+    <!-- ========================================== -->
     <div id="mobile-menu" class="fixed inset-0 z-50 pointer-events-none hidden">
-        <div id="mobile-menu-overlay" onclick="toggleMobileMenu()" class="absolute inset-0 bg-dark-900/60 backdrop-blur-sm opacity-0 transition-opacity duration-300 pointer-events-auto"></div>
-        <div id="mobile-menu-container" class="absolute top-0 left-0 bottom-0 w-[80%] max-w-sm bg-dark-900 text-slate-300 flex flex-col justify-between shadow-2xl transform -translate-x-full transition-transform duration-300 ease-out pointer-events-auto">
-            <div class="overflow-y-auto">
-                <div class="h-20 flex items-center justify-between px-6 border-b border-slate-800 shrink-0">
+        <div id="mobile-menu-overlay" onclick="toggleMobileMenu()" class="absolute inset-0 bg-forest/40 backdrop-blur-sm opacity-0 transition-opacity duration-300 pointer-events-auto"></div>
+        
+        <div id="mobile-menu-container" class="absolute top-0 left-0 bottom-0 w-[85%] max-w-sm bg-forest text-slate-300 flex flex-col justify-between shadow-2xl transform -translate-x-full transition-transform duration-300 ease-out pointer-events-auto border-r border-white/5">
+            
+            <div class="overflow-y-auto hide-scrollbar">
+                <!-- Header Meniu Mobil -->
+                <div class="h-20 flex items-center justify-between px-6 border-b border-white/5 shrink-0">
                     <div class="flex items-center gap-3">
-                        <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-primary-500 to-primary-600 text-white flex items-center justify-center"><span class="material-symbols-rounded text-[20px]">restaurant</span></div>
-                        <span class="font-bold text-lg tracking-tight text-white">NutriChef</span>
+                        <div class="w-8 h-8 rounded-lg bg-white text-forest flex items-center justify-center font-serif font-bold text-lg">N</div>
+                        <span class="font-bold text-xl tracking-tight text-white font-serif">Noura<span class="text-sage">.</span></span>
                     </div>
-                    <button onclick="toggleMobileMenu()" class="w-10 h-10 flex items-center justify-center rounded-xl text-slate-400 hover:bg-slate-800 active:bg-slate-800 transition-colors"><span class="material-symbols-rounded">close</span></button>
+                    <button onclick="toggleMobileMenu()" class="w-10 h-10 flex items-center justify-center rounded-xl text-slate-400 hover:text-white transition-colors bg-white/5">
+                        <span class="material-symbols-rounded">close</span>
+                    </button>
                 </div>
-                <nav class="p-4 space-y-2">
-                    <button onclick="switchView('dashboard'); toggleMobileMenu();" class="w-full flex items-center gap-4 px-4 py-3.5 rounded-xl text-sm font-medium hover:bg-slate-800 hover:text-white transition-colors"><span class="material-symbols-rounded text-[22px]">space_dashboard</span>Evoluția Mea</button>
-                    <button onclick="switchView('diet'); toggleMobileMenu();" class="w-full flex items-center gap-4 px-4 py-3.5 rounded-xl text-sm font-medium hover:bg-slate-800 hover:text-white transition-colors"><span class="material-symbols-rounded text-[22px]">restaurant_menu</span>Plan Alimentar</button>
-                    <button onclick="switchView('messages'); toggleMobileMenu();" class="w-full flex items-center gap-4 px-4 py-3.5 rounded-xl text-sm font-medium hover:bg-slate-800 hover:text-white transition-colors"><span class="material-symbols-rounded text-[22px]">chat_bubble</span>Mesaje</button>
-                    <button onclick="switchView('financial'); toggleMobileMenu();" class="w-full flex items-center gap-4 px-4 py-3.5 rounded-xl text-sm font-medium hover:bg-slate-800 hover:text-white transition-colors"><span class="material-symbols-rounded text-[22px]">credit_card</span>Plăți & Abonament</button>
-                    <button onclick="switchView('profile'); toggleMobileMenu();" class="w-full flex items-center gap-4 px-4 py-3.5 rounded-xl text-sm font-medium hover:bg-slate-800 hover:text-white transition-colors"><span class="material-symbols-rounded text-[22px]">person</span>Profil & Măsurători</button>
+                
+                <!-- Navigație Mobil -->
+                <nav class="p-5 space-y-2 mt-2">
+                    <button onclick="switchView('dashboard'); toggleMobileMenu();" class="nav-item active">
+                        <span class="material-symbols-rounded text-[22px]">space_dashboard</span> Evoluția Mea
+                    </button>
+                    <button onclick="switchView('diet'); toggleMobileMenu();" class="nav-item">
+                        <span class="material-symbols-rounded text-[22px]">restaurant_menu</span> Plan Alimentar
+                    </button>
+                    <button onclick="switchView('messages'); toggleMobileMenu();" class="nav-item relative">
+                        <span class="material-symbols-rounded text-[22px]">chat_bubble</span> Mesaje Doctor
+                        <span class="absolute right-4 w-2 h-2 rounded-full bg-saffron"></span>
+                    </button>
+                    <button onclick="switchView('financial'); toggleMobileMenu();" class="nav-item">
+                        <span class="material-symbols-rounded text-[22px]">credit_card</span> Abonament Clinic
+                    </button>
+                    <button onclick="switchView('profile'); toggleMobileMenu();" class="nav-item">
+                        <span class="material-symbols-rounded text-[22px]">person</span> Profil & Măsurători
+                    </button>
                 </nav>
             </div>
-            <div class="p-4 border-t border-slate-800 shrink-0">
-                <button onclick="logout()" class="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-sm font-bold bg-slate-800 text-white hover:bg-slate-700 transition-colors">
-                    <span class="material-symbols-rounded text-[18px]">logout</span> Deconectare
+            
+            <!-- Buton Ieșire Mobil -->
+            <div class="p-5 border-t border-white/5 shrink-0">
+                <button onclick="logout()" class="w-full flex items-center justify-center gap-2 px-4 py-4 rounded-xl text-sm font-bold bg-white/5 text-white hover:bg-red-500 hover:text-white transition-colors">
+                    <span class="material-symbols-rounded text-[18px]">logout</span> Deconectare Cont
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- CONȚINUT PRINCIPAL -->
-    <main class="flex-1 flex flex-col h-full relative overflow-hidden bg-slate-50 dark:bg-dark-950 transition-colors duration-300">
-        
-        <header class="h-16 md:h-20 glass-header flex justify-between items-center px-4 md:px-10 z-10 shrink-0">
-            <div class="flex items-center gap-3 md:gap-4">
-                <button onclick="toggleMobileMenu()" class="md:hidden text-slate-600 dark:text-slate-300 p-2 hover:bg-slate-100 dark:hover:bg-slate-800 active:bg-slate-200 rounded-xl transition-colors"><span class="material-symbols-rounded text-[26px]">menu</span></button>
-                <div>
-                    <h1 id="page-title" class="text-lg md:text-xl font-bold text-slate-900 dark:text-white tracking-tight transition-colors">Evoluția Mea</h1>
-                    <p id="page-subtitle" class="text-xs md:text-sm text-slate-500 dark:text-slate-400 hidden md:block">Rezumatul zilnic al macronutrienților tăi.</p>
+    <!-- ========================================== -->
+    <!-- SIDEBAR DESKTOP                            -->
+    <!-- ========================================== -->
+    <aside class="w-[280px] bg-forest flex flex-col justify-between hidden lg:flex shrink-0 z-20 text-slate-300 border-r border-white/5 shadow-2xl">
+        <div>
+            <!-- Logo Sidebar -->
+            <div class="h-24 flex items-center px-8 border-b border-white/5">
+                <div class="flex items-center gap-3 cursor-pointer" onclick="switchView('dashboard')">
+                    <div class="w-10 h-10 rounded-xl bg-white text-forest flex items-center justify-center font-serif font-bold text-2xl shadow-sm">N</div>
+                    <span class="font-bold text-2xl tracking-tight text-white font-serif mt-1">Noura<span class="text-sage">.</span> <span class="text-sm font-sans font-normal text-slate-400 tracking-widest uppercase ml-1">Client</span></span>
                 </div>
             </div>
-            <div class="flex items-center gap-4 md:gap-5">
-                <button onclick="toggleDarkMode()" class="text-slate-400 hover:text-slate-700 dark:hover:text-white transition-colors focus:outline-none flex items-center justify-center">
-                    <span id="theme-icon" class="material-symbols-rounded text-[24px]">dark_mode</span>
+            
+            <!-- Meniu Principal -->
+            <nav class="p-6 space-y-2 mt-2" id="sidebar-nav">
+                <button onclick="switchView('dashboard')" id="nav-dashboard" class="nav-item active">
+                    <span class="material-symbols-rounded text-[20px]">space_dashboard</span> Evoluția Mea
                 </button>
-                
-                <!-- Notificări Dropdown -->
+                <button onclick="switchView('diet')" id="nav-diet" class="nav-item">
+                    <span class="material-symbols-rounded text-[20px]">restaurant_menu</span> Plan Alimentar
+                </button>
+                <button onclick="switchView('messages')" id="nav-messages" class="nav-item relative">
+                    <span class="material-symbols-rounded text-[20px]">chat_bubble</span> Mesaje & Video
+                    <span class="absolute right-4 w-2 h-2 rounded-full bg-saffron shadow-sm"></span>
+                </button>
+                <button onclick="switchView('financial')" id="nav-financial" class="nav-item">
+                    <span class="material-symbols-rounded text-[20px]">credit_card</span> Abonament Clinic
+                </button>
+            </nav>
+        </div>
+        
+        <!-- Profil Minim în Sidebar -->
+        <div class="p-6 border-t border-white/5 bg-black/10">
+            <div onclick="switchView('profile')" id="nav-profile-btn" class="flex items-center gap-4 p-3 rounded-2xl hover:bg-white/5 cursor-pointer transition-all border border-transparent hover:border-white/10">
+                <div class="w-12 h-12 rounded-full bg-white/10 border-2 border-white/20 text-white flex items-center justify-center font-bold text-sm bg-cover bg-center overflow-hidden shrink-0 shadow-lg" id="sidebar-avatar">
+                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1000&auto=format&fit=crop" class="w-full h-full object-cover" alt="Avatar Pacient">
+                </div>
+                <div class="flex-1 min-w-0">
+                    <p class="text-sm font-bold text-white truncate">Radu Ionescu</p>
+                    <p class="text-[10px] text-mint truncate uppercase tracking-widest mt-1">Vezi Măsurătorile</p>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- ========================================== -->
+    <!-- ZONA CENTRALĂ (WORKSPACE)                  -->
+    <!-- ========================================== -->
+    <main class="flex-1 flex flex-col h-full relative overflow-hidden bg-linen">
+        
+        <!-- HEADER TOP -->
+        <header class="h-20 md:h-24 glass-header flex justify-between items-center px-6 md:px-10 z-10 shrink-0">
+            
+            <div class="flex items-center gap-4">
+                <button onclick="toggleMobileMenu()" class="lg:hidden text-forest p-2 hover:bg-slate-200 rounded-xl transition-colors bg-white border border-[#e5e5e0] shadow-sm">
+                    <span class="material-symbols-rounded text-[24px]">menu</span>
+                </button>
+                <div>
+                    <h1 id="page-title" class="text-xl md:text-3xl font-bold font-serif text-forest tracking-tight">Evoluția Mea</h1>
+                    <p id="page-subtitle" class="text-[10px] md:text-xs font-bold text-slate-400 uppercase tracking-widest hidden md:block mt-1">Rezumatul zilnic al dosarului tău medical.</p>
+                </div>
+            </div>
+            
+            <!-- Notificări & Ieșire -->
+            <div class="flex items-center gap-5">
                 <div class="relative">
-                    <button onclick="toggleNotificationsMenu()" class="relative text-slate-400 hover:text-slate-700 dark:hover:text-white transition-colors focus:outline-none">
-                        <span class="material-symbols-rounded text-[24px]">notifications</span>
-                        <span class="absolute top-0 right-0.5 w-2.5 h-2.5 md:w-2 md:h-2 bg-accent-500 rounded-full border border-white dark:border-dark-900"></span>
+                    <button onclick="toggleNotificationsMenu()" class="relative w-12 h-12 flex items-center justify-center bg-white border border-[#e5e5e0] rounded-xl text-slate-500 hover:text-forest hover:border-forest transition-colors shadow-sm focus:outline-none">
+                        <span class="material-symbols-rounded text-[22px]">notifications</span>
+                        <span class="absolute top-2 right-2.5 w-2.5 h-2.5 bg-saffron rounded-full border-2 border-white"></span>
                     </button>
-                    <!-- Meniul ascuns - Lățime adaptată pentru mobil -->
-                    <div id="notifications-dropdown" class="hidden absolute top-full right-[-10px] md:right-0 mt-4 w-[280px] md:w-80 bg-white dark:bg-dark-900 rounded-2xl shadow-2xl border border-slate-100 dark:border-slate-800 overflow-hidden z-50">
-                        <div class="p-4 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center bg-slate-50 dark:bg-dark-800">
-                            <h3 class="font-bold text-slate-900 dark:text-white text-sm">Notificări</h3>
-                            <span class="text-[10px] md:text-xs font-bold bg-accent-100 text-accent-700 px-2 py-0.5 rounded-full">1 Nouă</span>
+                    
+                    <!-- Dropdown Notificări -->
+                    <div id="notifications-dropdown" class="hidden absolute top-full right-0 mt-3 w-[300px] md:w-80 bg-white rounded-2xl shadow-premium border border-[#e5e5e0] overflow-hidden z-50">
+                        <div class="p-5 border-b border-slate-100 flex justify-between items-center bg-[#FAFAF8]">
+                            <h3 class="font-bold text-forest text-sm">Notificări Clinice</h3>
+                            <span class="text-[10px] font-bold bg-sage/10 text-sage px-2.5 py-1 rounded-full border border-sage/20">1 Nouă</span>
                         </div>
-                        <div class="divide-y divide-slate-100 dark:divide-slate-800 max-h-72 overflow-y-auto">
-                            <div class="p-4 hover:bg-slate-50 dark:hover:bg-dark-800 transition-colors cursor-pointer flex gap-3">
-                                <div class="w-8 h-8 rounded-full bg-primary-50 dark:bg-primary-900/30 text-primary-600 flex items-center justify-center shrink-0"><span class="material-symbols-rounded text-[16px]">task_alt</span></div>
+                        <div class="divide-y divide-slate-100 max-h-72 overflow-y-auto hide-scrollbar">
+                            <div class="p-5 hover:bg-slate-50 transition-colors cursor-pointer flex gap-4" onclick="switchView('dashboard'); toggleNotificationsMenu();">
+                                <div class="w-10 h-10 rounded-full bg-saffron/10 text-saffron flex items-center justify-center shrink-0 border border-saffron/20">
+                                    <span class="material-symbols-rounded text-[18px]">task_alt</span>
+                                </div>
                                 <div>
-                                    <p class="text-xs md:text-sm font-semibold text-slate-900 dark:text-white">Sarcină nouă de la Sarah M.</p>
-                                    <p class="text-[10px] md:text-xs text-slate-500 mt-0.5">Ai primit o sarcină nouă: "Trimite poza la cântar".</p>
+                                    <p class="text-xs font-bold text-forest">Sarcină nouă de la Medic</p>
+                                    <p class="text-[11px] text-slate-500 mt-1 leading-snug">Te rugăm să trimiți poza cu greutatea pe cântar.</p>
                                 </div>
                             </div>
                         </div>
-                        <div class="p-3 border-t border-slate-100 dark:border-slate-800 text-center">
-                            <button onclick="toggleNotificationsMenu()" class="text-xs font-bold text-primary-600 hover:text-primary-700 p-2">Închide</button>
+                        <div class="p-3 border-t border-slate-100 text-center bg-white">
+                            <button onclick="toggleNotificationsMenu()" class="text-[10px] font-bold uppercase tracking-widest text-sage hover:text-forest transition-colors p-2">Închide fereastra</button>
                         </div>
                     </div>
                 </div>
-
-                <div class="w-px h-6 bg-slate-200 dark:bg-slate-700 hidden md:block"></div>
-                <button onclick="logout()" class="hidden md:flex items-center gap-2 text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white transition-colors">
-                    Deconectare
+                
+                <button onclick="logout()" class="hidden md:flex items-center gap-2 px-5 py-3 bg-white border border-[#e5e5e0] hover:border-red-200 hover:bg-red-50 hover:text-red-600 rounded-xl text-xs font-bold uppercase tracking-widest text-slate-600 transition-all shadow-sm">
+                    <span class="material-symbols-rounded text-[18px]">logout</span> Ieșire
                 </button>
             </div>
         </header>
 
-        <!-- Conținutul cu Scroll -->
+        <!-- ========================================== -->
+        <!-- CONTAINER PRINCIPAL SCROLLABIL             -->
+        <!-- ========================================== -->
         <div id="main-scroll-container" class="flex-1 overflow-y-auto hide-scrollbar relative w-full flex flex-col min-h-0">
             
-            <!-- VIEW: DASHBOARD (Evoluția Mea) -->
-            <div id="view-dashboard" class="p-4 md:p-10 max-w-[1400px] mx-auto space-y-4 md:space-y-6 block w-full shrink-0 pb-20 md:pb-10">
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6">
-                    <div class="lg:col-span-2 space-y-4 md:space-y-6">
-                        <!-- Card Jurnal Astăzi -->
-                        <div class="bg-white dark:bg-dark-900 p-5 md:p-8 rounded-[1.5rem] md:rounded-3xl shadow-card border border-slate-200 dark:border-slate-800 transition-colors">
-                            <div class="flex justify-between items-center mb-6 md:mb-8">
-                                <div>
-                                    <h2 class="text-lg md:text-2xl font-bold text-slate-900 dark:text-white">Jurnal Astăzi</h2>
-                                    <p class="text-[11px] md:text-sm text-slate-500 mt-1">Obiectivul zilnic stabilit de nutriționist.</p>
-                                </div>
-                                <div class="w-10 h-10 md:w-14 md:h-14 rounded-full bg-primary-50 dark:bg-primary-900/30 flex items-center justify-center text-primary-600 dark:text-primary-400 shrink-0"><span class="material-symbols-rounded text-[20px] md:text-[28px]">monitoring</span></div>
-                            </div>
-
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
-                                <div class="flex flex-col items-center justify-center bg-slate-50 dark:bg-dark-800 p-5 md:p-6 rounded-2xl border border-slate-100 dark:border-slate-700 transition-colors">
-                                    <!-- Dimensiuni reduse pe mobil pentru cerc -->
-                                    <div class="relative w-32 h-32 md:w-48 md:h-48 flex items-center justify-center rounded-full border-[6px] md:border-8 border-slate-200 dark:border-slate-700">
-                                        <div class="absolute inset-0 rounded-full border-[6px] md:border-8 border-primary-500" style="clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);"></div>
-                                        <div class="text-center bg-white dark:bg-dark-900 w-24 h-24 md:w-40 md:h-40 rounded-full flex flex-col items-center justify-center shadow-sm z-10">
-                                            <span class="text-2xl md:text-4xl font-bold text-slate-900 dark:text-white">1450</span>
-                                            <span class="text-[9px] md:text-xs font-bold text-slate-400 uppercase tracking-widest mt-0.5 md:mt-1">/ 2000 Kcal</span>
-                                        </div>
-                                    </div>
-                                    <p class="text-[11px] md:text-sm font-bold text-primary-600 dark:text-primary-400 mt-4 bg-primary-50 dark:bg-primary-900/30 px-4 py-1.5 rounded-full">550 kcal rămase</p>
-                                </div>
-
-                                <div class="flex flex-col justify-center space-y-5 md:space-y-6">
-                                    <div>
-                                        <div class="flex justify-between text-[11px] md:text-sm mb-1.5 md:mb-2"><span class="font-bold text-slate-700 dark:text-slate-300 flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-macro-protein"></span> Proteine</span><span class="font-medium text-slate-500">85 / 120g</span></div>
-                                        <div class="w-full bg-slate-100 dark:bg-slate-800 rounded-full h-2 md:h-2.5 shadow-inner"><div class="bg-macro-protein h-2 md:h-2.5 rounded-full progress-bar" data-width="70%"></div></div>
-                                    </div>
-                                    <div>
-                                        <div class="flex justify-between text-[11px] md:text-sm mb-1.5 md:mb-2"><span class="font-bold text-slate-700 dark:text-slate-300 flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-macro-carb"></span> Carbohidrați</span><span class="font-medium text-slate-500">120 / 200g</span></div>
-                                        <div class="w-full bg-slate-100 dark:bg-slate-800 rounded-full h-2 md:h-2.5 shadow-inner"><div class="bg-macro-carb h-2 md:h-2.5 rounded-full progress-bar" data-width="60%"></div></div>
-                                    </div>
-                                    <div>
-                                        <div class="flex justify-between text-[11px] md:text-sm mb-1.5 md:mb-2"><span class="font-bold text-slate-700 dark:text-slate-300 flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-macro-fat"></span> Grăsimi</span><span class="font-medium text-slate-500">40 / 65g</span></div>
-                                        <div class="w-full bg-slate-100 dark:bg-slate-800 rounded-full h-2 md:h-2.5 shadow-inner"><div class="bg-macro-fat h-2 md:h-2.5 rounded-full progress-bar" data-width="61%"></div></div>
-                                    </div>
-                                </div>
-                            </div>
+            <!-- ---------------------------------------------------- -->
+            <!-- VIEW 1: DASHBOARD (EVOLUȚIA MEA)                     -->
+            <!-- ---------------------------------------------------- -->
+            <div id="view-dashboard" class="p-4 md:p-10 max-w-[1200px] mx-auto space-y-8 block w-full shrink-0 pb-24">
+                
+                <!-- Alertă Memento Consultație -->
+                <div class="bg-forest p-6 md:p-8 rounded-3xl shadow-premium border border-white/5 text-white relative overflow-hidden flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
+                    <div class="absolute top-0 right-0 w-40 h-40 bg-white/5 rounded-full -mr-10 -mt-10 blur-2xl"></div>
+                    <div class="relative z-10 flex items-center gap-5">
+                        <div class="w-14 h-14 bg-white/10 rounded-2xl flex items-center justify-center border border-white/20 shrink-0 shadow-inner">
+                            <span class="material-symbols-rounded text-mint text-[28px]">event</span>
                         </div>
-                        
-                        <!-- Sarcini de la Nutriționist -->
-                        <div class="bg-white dark:bg-dark-900 p-5 md:p-6 rounded-[1.5rem] md:rounded-3xl shadow-card border border-slate-200 dark:border-slate-800 transition-colors">
-                            <h3 class="font-bold text-slate-900 dark:text-white text-base md:text-lg mb-4 flex items-center gap-2"><span class="material-symbols-rounded text-primary-500">task_alt</span> Sarcini de la Nutriționist</h3>
-                            <div class="space-y-3">
-                                <label class="flex items-start gap-3 p-3 bg-slate-50 dark:bg-dark-800 rounded-xl cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors border border-slate-100 dark:border-slate-700">
-                                    <input type="checkbox" class="task-cb mt-0.5 md:mt-1 rounded text-primary-500 w-4 h-4 md:w-auto md:h-auto cursor-pointer" onclick="showNotification('Sarcină completată!', 'success')">
-                                    <div class="text-[13px] md:text-sm font-medium text-slate-700 dark:text-slate-300 transition-all leading-snug">Bea 2L de apă astăzi.</div>
-                                </label>
-                                <label class="flex items-start gap-3 p-3 bg-slate-50 dark:bg-dark-800 rounded-xl cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors border border-slate-100 dark:border-slate-700">
-                                    <input type="checkbox" class="task-cb mt-0.5 md:mt-1 rounded text-primary-500 w-4 h-4 md:w-auto md:h-auto cursor-pointer" onclick="showNotification('Sarcină completată!', 'success')">
-                                    <div class="text-[13px] md:text-sm font-medium text-slate-700 dark:text-slate-300 transition-all leading-snug">Trimite poza cu greutatea pe cântar.</div>
-                                </label>
-                            </div>
+                        <div>
+                            <p class="text-[10px] md:text-xs text-mint uppercase tracking-widest font-bold mb-1.5">Următoarea Consultație Live</p>
+                            <p class="font-serif font-bold text-2xl md:text-3xl">Astăzi, Ora 14:30</p>
                         </div>
                     </div>
-
-                    <!-- Modul Recompense -->
-                    <div class="bg-white dark:bg-dark-900 p-5 md:p-8 rounded-[1.5rem] md:rounded-3xl shadow-card border border-slate-200 dark:border-slate-800 flex flex-col transition-colors">
-                        <div class="flex justify-between items-center mb-5 md:mb-6">
-                            <div>
-                                <h3 class="font-bold text-slate-900 dark:text-white text-base md:text-lg">Recompense</h3>
-                                <p class="text-[11px] md:text-xs text-slate-500 mt-0.5">Obiective și realizări</p>
-                            </div>
-                            <div class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-accent-50 dark:bg-accent-900/30 text-accent-500 flex items-center justify-center shrink-0"><span class="material-symbols-rounded text-[20px] md:text-[24px]">military_tech</span></div>
-                        </div>
-                        
-                        <div class="flex-1 space-y-3 md:space-y-4 overflow-y-auto hide-scrollbar max-h-[400px] md:max-h-[500px]">
-                            <!-- Recompensă 1 -->
-                            <div class="bg-slate-50 dark:bg-dark-800 border border-slate-100 dark:border-slate-700 p-4 rounded-2xl transition-colors">
-                                <div class="flex items-center gap-2 md:gap-3 mb-2">
-                                    <span class="material-symbols-rounded text-accent-500 text-[18px] md:text-[20px]">local_fire_department</span>
-                                    <span class="text-[13px] md:text-sm font-bold text-slate-900 dark:text-white">Seria de Dietă</span>
-                                </div>
-                                <div class="flex items-end gap-1 mb-2 md:mb-3">
-                                    <span class="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white leading-none">14</span>
-                                    <span class="text-[11px] md:text-sm font-medium text-slate-500 mb-0.5 md:mb-1">zile la rând</span>
-                                </div>
-                                <div class="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-1.5 md:h-2"><div class="bg-accent-500 h-1.5 md:h-2 rounded-full progress-bar" data-width="70%"></div></div>
-                                <p class="text-[9px] md:text-[10px] font-bold text-slate-400 mt-2 text-right">Mai ai 6 zile până la bonus</p>
-                            </div>
-
-                            <!-- Recompensă 2 -->
-                            <div class="bg-slate-50 dark:bg-dark-800 border border-slate-100 dark:border-slate-700 p-4 rounded-2xl transition-colors">
-                                <div class="flex items-center gap-2 md:gap-3 mb-2">
-                                    <span class="material-symbols-rounded text-blue-500 text-[18px] md:text-[20px]">water_drop</span>
-                                    <span class="text-[13px] md:text-sm font-bold text-slate-900 dark:text-white">Hidratare Perfectă</span>
-                                </div>
-                                <div class="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-1.5 md:h-2 mt-3 md:mt-4"><div class="bg-blue-500 h-1.5 md:h-2 rounded-full progress-bar" data-width="30%"></div></div>
-                                <p class="text-[9px] md:text-[10px] font-bold text-slate-400 mt-2 text-right">3/10 zile completate</p>
-                            </div>
-
-                            <!-- Recompensă 3: Deblocată -->
-                            <div onclick="showNotification('Reducerea a fost deja aplicată.', 'success')" class="bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-100 dark:border-emerald-800 p-4 rounded-2xl relative overflow-hidden group cursor-pointer transition-colors hover:bg-emerald-100 dark:hover:bg-emerald-900/40">
-                                <div class="absolute right-0 top-0 w-12 h-12 md:w-16 md:h-16 bg-emerald-500/10 rounded-bl-full -mr-2 -mt-2"></div>
-                                <div class="flex justify-between items-center relative z-10">
-                                    <div>
-                                        <p class="text-[9px] md:text-xs font-bold text-emerald-700 dark:text-emerald-400 uppercase tracking-widest mb-0.5 md:mb-1">Deblocat!</p>
-                                        <p class="text-[13px] md:text-sm font-bold text-slate-900 dark:text-white">-10% la abonament</p>
-                                        <p class="text-[9px] md:text-[10px] text-slate-500 mt-0.5">Pentru primele 5kg slăbite.</p>
-                                    </div>
-                                    <span class="material-symbols-rounded text-emerald-600 dark:text-emerald-400 text-[20px] md:text-[24px]">redeem</span>
-                                </div>
-                            </div>
-                            
-                            <!-- Recompensă 4: Blocată -->
-                            <div class="bg-slate-50 dark:bg-dark-800 border border-slate-100 dark:border-slate-700 p-4 rounded-2xl transition-colors opacity-60 grayscale">
-                                <div class="flex justify-between items-center relative z-10">
-                                    <div>
-                                        <p class="text-[9px] md:text-xs font-bold text-slate-500 uppercase tracking-widest mb-0.5 md:mb-1 flex items-center gap-1"><span class="material-symbols-rounded text-[12px] md:text-[14px]">lock</span> Blocat</p>
-                                        <p class="text-[13px] md:text-sm font-bold text-slate-900 dark:text-white">Consultație Gratuită</p>
-                                        <p class="text-[9px] md:text-[10px] text-slate-500 mt-0.5">La atingerea a 10.000 pași/zi o lună.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <button onclick="switchView('messages')" class="relative z-10 w-full sm:w-auto px-8 py-4 bg-sage hover:bg-emerald-600 text-white rounded-xl text-xs font-bold uppercase tracking-widest shadow-lg transition-colors flex items-center justify-center gap-2">
+                        <span class="material-symbols-rounded text-[20px]">videocam</span> Intră în apel
+                    </button>
                 </div>
 
-                <!-- Call to action mobil -->
-                <div class="bg-gradient-to-br from-slate-900 to-slate-800 p-5 md:p-6 rounded-2xl shadow-card border border-slate-700 text-white relative overflow-hidden flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-                    <div class="absolute top-0 right-0 w-32 h-32 md:w-48 md:h-48 bg-white/5 rounded-full -mr-10 -mt-10 md:-mr-16 md:-mt-16 blur-xl md:blur-2xl"></div>
-                    <div class="relative z-10 flex items-center gap-3 md:gap-4 w-full sm:w-auto">
-                        <div class="w-10 h-10 md:w-12 md:h-12 bg-white/10 rounded-xl flex items-center justify-center border border-white/20 shrink-0"><span class="material-symbols-rounded text-primary-400 text-[20px] md:text-[24px]">event</span></div>
-                        <div>
-                            <p class="text-[9px] md:text-[10px] text-slate-400 uppercase tracking-widest font-bold mb-0.5 md:mb-1">Următoarea Consultație</p>
-                            <p class="font-bold text-sm md:text-lg">15 Mai, Ora 11:30</p>
+                <!-- Grid Principal (Grafice și Sarcini) -->
+                <div class="grid grid-cols-1 xl:grid-cols-3 gap-8">
+                    
+                    <!-- Grafic Calorii & Macro -->
+                    <div class="xl:col-span-2 space-y-6">
+                        <div class="dashboard-card p-6 md:p-10">
+                            <div class="flex justify-between items-center mb-8 border-b border-slate-100 pb-5">
+                                <div>
+                                    <h2 class="text-2xl md:text-3xl font-bold font-serif text-forest">Jurnal Nutrițional</h2>
+                                    <p class="text-[10px] md:text-xs font-bold text-slate-400 uppercase tracking-widest mt-1.5">Obiectivul clinic calculat de medic</p>
+                                </div>
+                                <div class="w-12 h-12 rounded-full bg-[#FAFAF8] border border-[#e5e5e0] flex items-center justify-center text-sage shrink-0 shadow-sm">
+                                    <span class="material-symbols-rounded text-[24px]">donut_large</span>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+                                <!-- Indicator Circular Calorii -->
+                                <div class="flex flex-col items-center justify-center bg-[#FAFAF8] p-8 rounded-3xl border border-[#e5e5e0] shadow-inner">
+                                    <div class="relative w-48 h-48 flex items-center justify-center rounded-full border-[10px] border-slate-200 shadow-sm bg-white">
+                                        <!-- Arc Progres Simulat -->
+                                        <div class="absolute inset-0 rounded-full border-[10px] border-sage" style="clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);"></div>
+                                        <div class="text-center z-10 flex flex-col items-center justify-center">
+                                            <span class="text-4xl font-serif font-bold text-forest">1450</span>
+                                            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">/ 2000 Kcal</span>
+                                        </div>
+                                    </div>
+                                    <p class="text-xs font-bold text-sage mt-6 bg-sage/10 px-5 py-2 rounded-full border border-sage/20 uppercase tracking-widest">550 kcal rămase</p>
+                                </div>
+
+                                <!-- Bare Liniare Progres Macronutrienți -->
+                                <div class="flex flex-col justify-center space-y-8">
+                                    <div>
+                                        <div class="flex justify-between text-[11px] font-bold uppercase tracking-widest mb-2.5">
+                                            <span class="text-forest flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-sage shadow-sm"></span> Proteine</span>
+                                            <span class="text-slate-500">85 / 120g</span>
+                                        </div>
+                                        <div class="w-full bg-slate-100 rounded-full h-3 overflow-hidden shadow-inner"><div class="bg-sage h-3 rounded-full progress-bar" data-width="70%"></div></div>
+                                    </div>
+                                    <div>
+                                        <div class="flex justify-between text-[11px] font-bold uppercase tracking-widest mb-2.5">
+                                            <span class="text-forest flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-saffron shadow-sm"></span> Carbohidrați</span>
+                                            <span class="text-slate-500">120 / 200g</span>
+                                        </div>
+                                        <div class="w-full bg-slate-100 rounded-full h-3 overflow-hidden shadow-inner"><div class="bg-saffron h-3 rounded-full progress-bar" data-width="60%"></div></div>
+                                    </div>
+                                    <div>
+                                        <div class="flex justify-between text-[11px] font-bold uppercase tracking-widest mb-2.5">
+                                            <span class="text-forest flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-forest shadow-sm"></span> Grăsimi</span>
+                                            <span class="text-slate-500">40 / 65g</span>
+                                        </div>
+                                        <div class="w-full bg-slate-100 rounded-full h-3 overflow-hidden shadow-inner"><div class="bg-forest h-3 rounded-full progress-bar" data-width="61%"></div></div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <button onclick="switchView('messages')" class="relative z-10 w-full sm:w-auto px-5 md:px-6 py-2.5 md:py-3 bg-primary-500 hover:bg-primary-600 text-white rounded-xl text-[13px] md:text-sm font-bold shadow-md transition-colors flex items-center justify-center gap-2">
-                        <span class="material-symbols-rounded text-[18px]">videocam</span> Intră în apel
-                    </button>
+
+                    <!-- Sidebar Dreapta: Sarcini & Recompense -->
+                    <div class="space-y-8">
+                        <!-- Sarcini -->
+                        <div class="dashboard-card p-6 md:p-8">
+                            <h3 class="font-bold text-forest text-xs uppercase tracking-widest border-b border-slate-100 pb-4 mb-5 flex items-center gap-2">
+                                <span class="material-symbols-rounded text-saffron">task_alt</span> Sarcini Zilnice
+                            </h3>
+                            <div class="space-y-4">
+                                <label class="flex items-start gap-4 p-4 bg-[#FAFAF8] rounded-xl cursor-pointer hover:bg-white transition-colors border border-[#e5e5e0] shadow-sm">
+                                    <input type="checkbox" class="task-cb mt-1 rounded text-sage w-5 h-5 cursor-pointer" onclick="showNotification('Sarcină bifată cu succes!', 'success')">
+                                    <div class="text-[13px] font-bold text-forest transition-all leading-snug pt-0.5">Bea 2.5L de apă astăzi.</div>
+                                </label>
+                                <label class="flex items-start gap-4 p-4 bg-[#FAFAF8] rounded-xl cursor-pointer hover:bg-white transition-colors border border-[#e5e5e0] shadow-sm">
+                                    <input type="checkbox" class="task-cb mt-1 rounded text-sage w-5 h-5 cursor-pointer" onclick="showNotification('Sarcină bifată cu succes!', 'success')">
+                                    <div class="text-[13px] font-bold text-forest transition-all leading-snug pt-0.5">Trimite poza cu cântarul în chat medicului.</div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Streak / Motivatie -->
+                        <div class="dashboard-card p-6 md:p-8 bg-forest text-white border-0">
+                            <h3 class="font-bold text-mint text-xs uppercase tracking-widest border-b border-white/10 pb-4 mb-5 flex items-center gap-2">
+                                <span class="material-symbols-rounded text-saffron">military_tech</span> Progres & Streak
+                            </h3>
+                            
+                            <div class="bg-white/5 border border-white/10 p-5 rounded-2xl shadow-inner">
+                                <div class="flex items-center gap-2 mb-3">
+                                    <span class="material-symbols-rounded text-saffron text-[24px]">local_fire_department</span>
+                                    <span class="text-[10px] font-bold text-white uppercase tracking-widest">Aderență Dietă</span>
+                                </div>
+                                <div class="flex items-end gap-2 mb-4">
+                                    <span class="text-4xl font-bold font-serif text-white leading-none">14</span>
+                                    <span class="text-[10px] font-bold text-mint uppercase tracking-widest mb-1.5">zile consecutive</span>
+                                </div>
+                                <div class="w-full bg-white/10 rounded-full h-2 overflow-hidden"><div class="bg-saffron h-2 rounded-full progress-bar" data-width="70%"></div></div>
+                                <p class="text-[9px] font-bold text-slate-400 uppercase tracking-widest mt-3 text-right">Mai ai 6 zile până la Recompensă</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <!-- VIEW: PLAN ALIMENTAR (Optimizat Mobile-First) -->
-            <div id="view-diet" class="hidden p-4 md:p-10 max-w-[1000px] mx-auto space-y-4 md:space-y-6 w-full shrink-0 pb-20 md:pb-10">
-                <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-3 md:gap-0 mb-2">
+            <!-- ---------------------------------------------------- -->
+            <!-- VIEW 2: PLAN ALIMENTAR (DIETĂ)                       -->
+            <!-- ---------------------------------------------------- -->
+            <div id="view-diet" class="hidden p-4 md:p-10 max-w-[900px] mx-auto space-y-8 w-full shrink-0 pb-24">
+                
+                <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-5 border-b border-[#e5e5e0] pb-5 mb-6">
                     <div>
-                        <h2 class="text-xl md:text-2xl font-bold text-slate-900 dark:text-white">Meniul de Astăzi</h2>
-                        <p class="text-[11px] md:text-sm text-slate-500 dark:text-slate-400 mt-0.5 md:mt-1">Planul tău nutrițional detaliat.</p>
+                        <h2 class="text-2xl md:text-3xl font-bold font-serif text-forest">Planul Alimentar: Astăzi</h2>
+                        <p class="text-[10px] md:text-xs font-bold uppercase tracking-widest text-slate-400 mt-1.5">Mesele calculate cu precizie pentru nevoile tale.</p>
                     </div>
-                    <button onclick="showNotification('Meniul a fost descărcat în format PDF.', 'success')" class="flex items-center justify-center gap-2 px-4 py-2.5 bg-white dark:bg-dark-800 border border-slate-200 dark:border-slate-700 rounded-xl text-[13px] md:text-sm font-bold text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-dark-700 transition-colors shadow-sm w-full sm:w-auto">
-                        <span class="material-symbols-rounded text-[18px]">download</span> Descarcă PDF
+                    <button onclick="showNotification('Planul alimentar a fost descărcat în format PDF.', 'success')" class="flex items-center justify-center gap-2 px-6 py-3.5 bg-white border border-[#e5e5e0] rounded-xl text-xs font-bold uppercase tracking-widest text-forest hover:border-forest transition-colors shadow-sm w-full sm:w-auto h-12">
+                        <span class="material-symbols-rounded text-[20px]">download</span> Descarcă PDF
                     </button>
                 </div>
                 
-                <div class="space-y-3 md:space-y-4">
-                    <!-- Mic Dejun -->
-                    <div class="bg-white dark:bg-dark-900 p-4 md:p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-800 transition-colors">
-                        <div class="flex items-center justify-between mb-3">
-                            <div class="flex items-center gap-3">
-                                <div class="w-10 h-10 md:w-12 md:h-12 bg-orange-50 dark:bg-orange-900/30 text-orange-500 rounded-xl flex items-center justify-center shrink-0">
-                                    <span class="material-symbols-rounded text-[22px] md:text-[24px]">breakfast_dining</span>
+                <div class="space-y-6">
+                    <!-- Masă: Mic Dejun -->
+                    <div class="dashboard-card p-6 md:p-8">
+                        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-slate-100 pb-4 mb-5">
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 bg-saffron/10 text-saffron rounded-2xl flex items-center justify-center shrink-0 border border-saffron/20 shadow-sm">
+                                    <span class="material-symbols-rounded text-[26px]">wb_twilight</span>
                                 </div>
-                                <h3 class="font-bold text-slate-900 dark:text-white text-base md:text-lg">Mic Dejun</h3>
+                                <h3 class="font-bold text-forest text-sm md:text-base uppercase tracking-widest">Mic Dejun</h3>
                             </div>
-                            <div class="text-right">
-                                <p class="font-bold text-primary-600 dark:text-primary-400 text-sm md:text-base">350 kcal</p>
-                            </div>
+                            <p class="font-bold font-serif text-xl text-forest bg-[#FAFAF8] px-4 py-1.5 rounded-lg border border-[#e5e5e0]">350 kcal</p>
                         </div>
-                        <p class="text-[13px] md:text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-4">Omletă din 2 ouă, 30g telemea light, 1 roșie mare, o mână de spanac și 1 felie de pâine integrală prăjită.</p>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="px-2.5 py-1 bg-slate-50 dark:bg-dark-800 text-[10px] md:text-xs font-bold text-slate-500 dark:text-slate-400 rounded-lg border border-slate-100 dark:border-slate-700">20g Prot</span>
-                            <span class="px-2.5 py-1 bg-slate-50 dark:bg-dark-800 text-[10px] md:text-xs font-bold text-slate-500 dark:text-slate-400 rounded-lg border border-slate-100 dark:border-slate-700">15g Carb</span>
-                            <span class="px-2.5 py-1 bg-slate-50 dark:bg-dark-800 text-[10px] md:text-xs font-bold text-slate-500 dark:text-slate-400 rounded-lg border border-slate-100 dark:border-slate-700">18g Grăs</span>
+                        <p class="text-sm text-slate-600 font-medium leading-relaxed mb-6">Puding de Chia cu lapte de migdale (200ml) și un mix de fructe de pădure proaspete (50g).</p>
+                        <div class="flex flex-wrap gap-3">
+                            <span class="px-3 py-1.5 bg-[#FAFAF8] border border-[#e5e5e0] text-sage text-[11px] font-bold rounded-lg uppercase tracking-wider shadow-sm">15g Proteine</span>
+                            <span class="px-3 py-1.5 bg-[#FAFAF8] border border-[#e5e5e0] text-saffron text-[11px] font-bold rounded-lg uppercase tracking-wider shadow-sm">25g Carbo</span>
+                            <span class="px-3 py-1.5 bg-[#FAFAF8] border border-[#e5e5e0] text-forest text-[11px] font-bold rounded-lg uppercase tracking-wider shadow-sm">18g Grăsimi</span>
                         </div>
                     </div>
 
-                    <!-- Prânz -->
-                    <div class="bg-white dark:bg-dark-900 p-4 md:p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-800 transition-colors">
-                        <div class="flex items-center justify-between mb-3">
-                            <div class="flex items-center gap-3">
-                                <div class="w-10 h-10 md:w-12 md:h-12 bg-blue-50 dark:bg-blue-900/30 text-blue-500 rounded-xl flex items-center justify-center shrink-0">
-                                    <span class="material-symbols-rounded text-[22px] md:text-[24px]">lunch_dining</span>
+                    <!-- Masă: Prânz -->
+                    <div class="dashboard-card p-6 md:p-8">
+                        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-slate-100 pb-4 mb-5">
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 bg-saffron/10 text-saffron rounded-2xl flex items-center justify-center shrink-0 border border-saffron/20 shadow-sm">
+                                    <span class="material-symbols-rounded text-[26px]">wb_sunny</span>
                                 </div>
-                                <h3 class="font-bold text-slate-900 dark:text-white text-base md:text-lg">Prânz</h3>
+                                <h3 class="font-bold text-forest text-sm md:text-base uppercase tracking-widest">Prânz</h3>
                             </div>
-                            <div class="text-right">
-                                <p class="font-bold text-primary-600 dark:text-primary-400 text-sm md:text-base">450 kcal</p>
-                            </div>
+                            <p class="font-bold font-serif text-xl text-forest bg-[#FAFAF8] px-4 py-1.5 rounded-lg border border-[#e5e5e0]">450 kcal</p>
                         </div>
-                        <p class="text-[13px] md:text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-4">150g piept de pui la grătar, 100g orez basmati fiert, 200g broccoli la abur cu o linguriță de ulei de măsline.</p>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="px-2.5 py-1 bg-slate-50 dark:bg-dark-800 text-[10px] md:text-xs font-bold text-slate-500 dark:text-slate-400 rounded-lg border border-slate-100 dark:border-slate-700">35g Prot</span>
-                            <span class="px-2.5 py-1 bg-slate-50 dark:bg-dark-800 text-[10px] md:text-xs font-bold text-slate-500 dark:text-slate-400 rounded-lg border border-slate-100 dark:border-slate-700">45g Carb</span>
-                            <span class="px-2.5 py-1 bg-slate-50 dark:bg-dark-800 text-[10px] md:text-xs font-bold text-slate-500 dark:text-slate-400 rounded-lg border border-slate-100 dark:border-slate-700">10g Grăs</span>
+                        <p class="text-sm text-slate-600 font-medium leading-relaxed mb-6">150g piept de pui la grătar, 100g orez basmati fiert, 200g broccoli la abur cu o linguriță de ulei de măsline.</p>
+                        <div class="flex flex-wrap gap-3">
+                            <span class="px-3 py-1.5 bg-[#FAFAF8] border border-[#e5e5e0] text-sage text-[11px] font-bold rounded-lg uppercase tracking-wider shadow-sm">35g Proteine</span>
+                            <span class="px-3 py-1.5 bg-[#FAFAF8] border border-[#e5e5e0] text-saffron text-[11px] font-bold rounded-lg uppercase tracking-wider shadow-sm">45g Carbo</span>
+                            <span class="px-3 py-1.5 bg-[#FAFAF8] border border-[#e5e5e0] text-forest text-[11px] font-bold rounded-lg uppercase tracking-wider shadow-sm">10g Grăsimi</span>
                         </div>
                     </div>
 
-                    <!-- Gustare (Folosind eco) -->
-                    <div class="bg-white dark:bg-dark-900 p-4 md:p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-800 transition-colors">
-                        <div class="flex items-center justify-between mb-3">
-                            <div class="flex items-center gap-3">
-                                <div class="w-10 h-10 md:w-12 md:h-12 bg-emerald-50 dark:bg-emerald-900/30 text-emerald-500 rounded-xl flex items-center justify-center shrink-0">
-                                    <span class="material-symbols-rounded text-[22px] md:text-[24px]">eco</span>
+                    <!-- Masă: Cină -->
+                    <div class="dashboard-card p-6 md:p-8">
+                        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-slate-100 pb-4 mb-5">
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 bg-sage/10 text-sage rounded-2xl flex items-center justify-center shrink-0 border border-sage/20 shadow-sm">
+                                    <span class="material-symbols-rounded text-[26px]">bedtime</span>
                                 </div>
-                                <h3 class="font-bold text-slate-900 dark:text-white text-base md:text-lg">Gustare</h3>
+                                <h3 class="font-bold text-forest text-sm md:text-base uppercase tracking-widest">Cină</h3>
                             </div>
-                            <div class="text-right">
-                                <p class="font-bold text-primary-600 dark:text-primary-400 text-sm md:text-base">200 kcal</p>
-                            </div>
+                            <p class="font-bold font-serif text-xl text-forest bg-[#FAFAF8] px-4 py-1.5 rounded-lg border border-[#e5e5e0]">400 kcal</p>
                         </div>
-                        <p class="text-[13px] md:text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-4">150g iaurt grecesc 2%, o mână de afine proaspete și 15g migdale crude.</p>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="px-2.5 py-1 bg-slate-50 dark:bg-dark-800 text-[10px] md:text-xs font-bold text-slate-500 dark:text-slate-400 rounded-lg border border-slate-100 dark:border-slate-700">12g Prot</span>
-                            <span class="px-2.5 py-1 bg-slate-50 dark:bg-dark-800 text-[10px] md:text-xs font-bold text-slate-500 dark:text-slate-400 rounded-lg border border-slate-100 dark:border-slate-700">15g Carb</span>
-                            <span class="px-2.5 py-1 bg-slate-50 dark:bg-dark-800 text-[10px] md:text-xs font-bold text-slate-500 dark:text-slate-400 rounded-lg border border-slate-100 dark:border-slate-700">10g Grăs</span>
-                        </div>
-                    </div>
-
-                    <!-- Cină -->
-                    <div class="bg-white dark:bg-dark-900 p-4 md:p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-800 transition-colors">
-                        <div class="flex items-center justify-between mb-3">
-                            <div class="flex items-center gap-3">
-                                <div class="w-10 h-10 md:w-12 md:h-12 bg-purple-50 dark:bg-purple-900/30 text-purple-500 rounded-xl flex items-center justify-center shrink-0">
-                                    <span class="material-symbols-rounded text-[22px] md:text-[24px]">set_meal</span>
-                                </div>
-                                <h3 class="font-bold text-slate-900 dark:text-white text-base md:text-lg">Cină</h3>
-                            </div>
-                            <div class="text-right">
-                                <p class="font-bold text-primary-600 dark:text-primary-400 text-sm md:text-base">400 kcal</p>
-                            </div>
-                        </div>
-                        <p class="text-[13px] md:text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-4">120g somon la cuptor cu lămâie, servit cu 150g sparanghel și o salată verde mare.</p>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="px-2.5 py-1 bg-slate-50 dark:bg-dark-800 text-[10px] md:text-xs font-bold text-slate-500 dark:text-slate-400 rounded-lg border border-slate-100 dark:border-slate-700">28g Prot</span>
-                            <span class="px-2.5 py-1 bg-slate-50 dark:bg-dark-800 text-[10px] md:text-xs font-bold text-slate-500 dark:text-slate-400 rounded-lg border border-slate-100 dark:border-slate-700">10g Carb</span>
-                            <span class="px-2.5 py-1 bg-slate-50 dark:bg-dark-800 text-[10px] md:text-xs font-bold text-slate-500 dark:text-slate-400 rounded-lg border border-slate-100 dark:border-slate-700">22g Grăs</span>
+                        <p class="text-sm text-slate-600 font-medium leading-relaxed mb-6">120g somon la cuptor cu lămâie, servit cu 150g sparanghel și o salată verde mare.</p>
+                        <div class="flex flex-wrap gap-3">
+                            <span class="px-3 py-1.5 bg-[#FAFAF8] border border-[#e5e5e0] text-sage text-[11px] font-bold rounded-lg uppercase tracking-wider shadow-sm">28g Proteine</span>
+                            <span class="px-3 py-1.5 bg-[#FAFAF8] border border-[#e5e5e0] text-saffron text-[11px] font-bold rounded-lg uppercase tracking-wider shadow-sm">10g Carbo</span>
+                            <span class="px-3 py-1.5 bg-[#FAFAF8] border border-[#e5e5e0] text-forest text-[11px] font-bold rounded-lg uppercase tracking-wider shadow-sm">22g Grăsimi</span>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- VIEW: MESAJE & VIDEO -->
-            <div id="view-messages" class="hidden flex-1 min-h-0 w-full flex-col">
-                <div class="flex flex-col flex-1 min-h-0 bg-white dark:bg-dark-900 md:max-w-[1200px] mx-auto md:shadow-sm md:border-x border-slate-200 dark:border-slate-800 w-full transition-colors">
+            <!-- ---------------------------------------------------- -->
+            <!-- VIEW 3: MESAJE & VIDEO TELEMEDICINĂ                  -->
+            <!-- ---------------------------------------------------- -->
+            <div id="view-messages" class="hidden flex-1 min-h-0 w-full flex-col h-[calc(100vh-100px)] pb-6 px-4 md:px-10">
+                <div class="flex flex-col flex-1 min-h-0 bg-white max-w-[1200px] mx-auto shadow-premium border border-[#e5e5e0] rounded-3xl w-full overflow-hidden">
                     
-                    <div class="h-[68px] md:h-[76px] px-4 md:px-6 border-b border-slate-200 dark:border-slate-800 flex justify-between items-center shrink-0 z-10 bg-white dark:bg-dark-900">
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-full bg-primary-50 dark:bg-primary-900/30 border border-primary-200 dark:border-primary-800 text-primary-700 dark:text-primary-400 flex items-center justify-center font-bold text-sm shrink-0">SM</div>
+                    <!-- Chat Header -->
+                    <div class="h-20 px-6 border-b border-[#e5e5e0] flex justify-between items-center shrink-0 bg-[#FAFAF8]">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-white border border-[#e5e5e0] text-forest flex items-center justify-center font-serif font-bold text-xl shrink-0 overflow-hidden shadow-sm">
+                                <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&w=2070" class="w-full h-full object-cover" alt="Dr. Sarah Miller">
+                            </div>
                             <div class="min-w-0">
-                                <h3 class="text-[13px] md:text-sm font-bold text-slate-900 dark:text-white truncate">Dr. Sarah Miller</h3>
-                                <p class="text-[10px] md:text-xs text-slate-500 font-medium truncate">Nutriționistul Tău</p>
+                                <h3 class="text-base font-bold text-forest truncate">Dr. Sarah Miller</h3>
+                                <p class="text-[10px] font-bold uppercase tracking-widest text-sage truncate mt-0.5">Nutriționistul Tău Curant</p>
                             </div>
                         </div>
-                        <button onclick="toggleVideoCall()" id="btn-video" class="flex items-center gap-1.5 px-3 py-2 md:px-4 md:py-2.5 bg-white dark:bg-dark-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-dark-700 rounded-xl text-xs md:text-sm font-bold shadow-sm transition-all shrink-0">
-                            <span class="material-symbols-rounded text-[18px] md:text-[20px]">videocam</span>
+                        <button onclick="toggleVideoCall()" id="btn-video" class="flex items-center gap-2 px-5 py-3 bg-forest hover:bg-black text-white rounded-xl text-xs font-bold uppercase tracking-widest shadow-md transition-all shrink-0">
+                            <span class="material-symbols-rounded text-[20px]">videocam</span>
                             <span class="hidden sm:inline">Consult Video</span>
                         </button>
                     </div>
                     
-                    <div id="video-container" class="hidden h-[30vh] md:h-[350px] shrink-0 bg-dark-900 relative border-b border-slate-200 dark:border-slate-800"><div id="jitsi-meet-frame" class="w-full h-full"></div></div>
+                    <!-- Container Jitsi Video -->
+                    <div id="video-container" class="hidden h-[40vh] md:h-[450px] shrink-0 bg-black relative border-b border-forest">
+                        <div id="jitsi-meet-frame" class="w-full h-full"></div>
+                        <div class="absolute inset-0 flex items-center justify-center pointer-events-none" id="video-placeholder">
+                            <span class="text-xs font-bold text-mint uppercase tracking-widest animate-pulse border border-mint p-4 rounded-xl">Conectare tunel securizat Noura...</span>
+                        </div>
+                    </div>
                     
-                    <div class="flex-1 min-h-0 overflow-y-auto p-4 md:p-6 space-y-4 bg-slate-50 dark:bg-dark-950 flex flex-col" id="chat-messages-box">
-                        <div class="flex justify-center"><span class="text-[9px] md:text-[10px] font-bold text-slate-400 uppercase tracking-wider bg-slate-100 dark:bg-dark-800 px-3 py-1 rounded-full">Astăzi, 10:42 AM</span></div>
+                    <!-- Chat Area -->
+                    <div class="flex-1 min-h-0 overflow-y-auto p-6 space-y-6 bg-white flex flex-col hide-scrollbar" id="chat-messages-box">
+                        <div class="flex justify-center"><span class="text-[9px] font-bold text-slate-400 uppercase tracking-widest bg-[#FAFAF8] border border-[#e5e5e0] px-4 py-1.5 rounded-full shadow-sm">Astăzi</span></div>
                         
-                        <div class="flex justify-end items-end gap-2 mt-2">
-                            <div class="max-w-[85%] md:max-w-[75%] bg-dark-900 dark:bg-primary-600 text-white p-3 md:p-4 rounded-xl md:rounded-2xl rounded-br-none shadow-sm">
-                                <p class="text-[13px] md:text-sm leading-relaxed">Bună ziua! Am urmat planul, dar am o întrebare legată de gustarea de după-amiază.</p>
-                                <p class="text-[9px] md:text-[10px] text-slate-400 font-medium mt-1 md:mt-2 text-right">10:42 AM</p>
+                        <!-- Mesaj Pacient -->
+                        <div class="flex justify-end items-end gap-3 mt-4">
+                            <div class="max-w-[85%] md:max-w-[60%] bg-[#FAFAF8] border border-[#e5e5e0] text-forest p-4 rounded-2xl rounded-br-none shadow-sm">
+                                <p class="text-sm font-medium leading-relaxed">Bună ziua! Am respectat planul, dar pot bea o cafea neagră după masă?</p>
+                                <p class="text-[9px] text-slate-400 font-bold uppercase mt-2 text-right tracking-widest">10:42 AM</p>
                             </div>
                         </div>
 
-                        <div class="flex justify-start items-end gap-2">
-                            <div class="w-7 h-7 md:w-8 md:h-8 rounded-full bg-primary-100 dark:bg-primary-900/50 text-primary-700 dark:text-primary-300 flex items-center justify-center text-[10px] md:text-xs font-bold shrink-0">SM</div>
-                            <div class="max-w-[85%] md:max-w-[75%] bg-white dark:bg-dark-900 border border-slate-200 dark:border-slate-800 p-3 md:p-4 rounded-xl md:rounded-2xl rounded-bl-none shadow-sm transition-colors">
-                                <p class="text-[13px] md:text-sm text-slate-700 dark:text-slate-300 leading-relaxed">Salutare Radu! Sigur, o poți înlocui cu un măr și o mână mică de migdale. Amintește-ți să bei apă!</p>
-                                <p class="text-[9px] md:text-[10px] text-slate-400 font-medium mt-1 md:mt-2">10:45 AM</p>
+                        <!-- Mesaj Medic -->
+                        <div class="flex justify-start items-end gap-3 mt-2">
+                            <div class="w-10 h-10 rounded-full bg-white border border-[#e5e5e0] text-forest flex items-center justify-center text-xs font-bold shrink-0 overflow-hidden shadow-sm">
+                                <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80" class="w-full h-full object-cover">
+                            </div>
+                            <div class="max-w-[85%] md:max-w-[60%] bg-forest text-white p-4 rounded-2xl rounded-bl-none shadow-md">
+                                <p class="text-sm font-medium leading-relaxed text-slate-100">Salutare Radu! Sigur, cafeaua neagră (fără zahăr sau lapte) este perfectă. Nu îți va afecta deloc protocolul metabolic. 😊</p>
+                                <p class="text-[9px] text-mint font-bold uppercase mt-2 tracking-widest">10:45 AM</p>
                             </div>
                         </div>
                     </div>
                     
-                    <div class="p-3 md:p-4 bg-white dark:bg-dark-900 border-t border-slate-200 dark:border-slate-800 shrink-0 transition-colors">
-                        <form onsubmit="sendMessage(event);" class="flex items-center gap-2">
-                            <button type="button" class="p-2 text-slate-400 hover:text-slate-600 dark:hover:text-white transition-colors shrink-0"><span class="material-symbols-rounded text-[22px]">attach_file</span></button>
-                            <input type="text" id="chat-input-field" placeholder="Scrie un mesaj..." autocomplete="off" class="flex-1 min-w-0 bg-slate-50 dark:bg-dark-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2.5 md:py-3 text-[13px] md:text-sm focus:border-primary-500 dark:text-white outline-none transition-all">
-                            <button type="submit" class="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-primary-600 hover:bg-primary-700 transition-colors text-white flex items-center justify-center shadow-md shrink-0"><span class="material-symbols-rounded text-[18px] md:text-[20px]">send</span></button>
+                    <!-- Chat Input -->
+                    <div class="p-4 md:p-6 bg-[#FAFAF8] border-t border-[#e5e5e0] shrink-0">
+                        <form onsubmit="sendMessage(event);" class="flex items-center gap-3">
+                            <input type="text" id="chat-input-field" placeholder="Scrie un mesaj securizat..." autocomplete="off" class="flex-1 min-w-0 bg-white border border-[#e5e5e0] rounded-xl px-5 py-4 text-sm font-medium focus:border-forest outline-none transition-all shadow-sm">
+                            <button type="submit" class="w-14 h-14 rounded-xl bg-sage hover:bg-forest transition-colors text-white flex items-center justify-center shadow-md shrink-0">
+                                <span class="material-symbols-rounded text-[24px]">send</span>
+                            </button>
                         </form>
                     </div>
                 </div>
             </div>
 
-            <!-- VIEW: FINANCIAR & ABONAMENT -->
-            <div id="view-financial" class="hidden p-4 md:p-10 max-w-[1200px] mx-auto space-y-4 md:space-y-6 w-full shrink-0 pb-20 md:pb-10">
-                <div>
-                    <h2 class="text-xl md:text-2xl font-bold text-slate-900 dark:text-white">Plăți & Abonament</h2>
-                    <p class="text-[11px] md:text-sm text-slate-500 mt-0.5 md:mt-1">Gestionează metodele de plată și urmărește facturile.</p>
+            <!-- ---------------------------------------------------- -->
+            <!-- VIEW 4: ABONAMENT CLINIC & FACTURI FINANCIARE        -->
+            <!-- ---------------------------------------------------- -->
+            <div id="view-financial" class="hidden p-4 md:p-10 max-w-[1000px] mx-auto space-y-8 w-full shrink-0 pb-24">
+                
+                <div class="border-b border-[#e5e5e0] pb-5 mb-8">
+                    <h2 class="text-2xl md:text-3xl font-bold font-serif text-forest">Plăți & Abonament</h2>
+                    <p class="text-[10px] md:text-xs font-bold uppercase tracking-widest text-slate-400 mt-1.5">Gestionează contractele clinice și metoda de plată.</p>
                 </div>
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-8 mt-4 md:mt-6">
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                     
-                    <!-- Abonamentul Tău -->
-                    <div class="bg-gradient-to-br from-primary-600 to-primary-800 p-5 md:p-6 rounded-[1.5rem] md:rounded-2xl shadow-card border border-primary-700 text-white relative overflow-hidden h-fit">
-                        <div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-10 -mt-10 blur-xl"></div>
-                        <h3 class="font-bold text-base md:text-lg mb-1 md:mb-2 flex items-center gap-2 relative z-10"><span class="material-symbols-rounded text-accent-400 text-[20px]">workspace_premium</span> Abonament Curent</h3>
-                        <p class="text-[11px] md:text-xs text-primary-100 relative z-10 mb-5 md:mb-6">Ai acces complet la planul nutrițional și chat.</p>
+                    <!-- Plan Curent -->
+                    <div class="bg-forest p-8 rounded-3xl shadow-premium border border-white/5 text-white relative overflow-hidden h-fit">
+                        <div class="absolute top-0 right-0 w-48 h-48 bg-white/5 rounded-full -mr-16 -mt-16 blur-2xl"></div>
+                        <h3 class="text-xs font-bold uppercase tracking-widest text-mint mb-8 flex items-center gap-2 relative z-10">
+                            <span class="material-symbols-rounded text-[22px]">workspace_premium</span> Plan Clinic Activ
+                        </h3>
                         
-                        <div class="bg-white/10 border border-white/20 p-4 rounded-xl relative z-10 flex justify-between items-center mb-4">
+                        <div class="bg-black/20 border border-white/10 p-6 rounded-2xl relative z-10 flex justify-between items-center mb-8 shadow-inner">
                             <div>
-                                <p class="text-[9px] md:text-[10px] text-primary-200 uppercase font-bold tracking-wider mb-0.5">Plan</p>
-                                <p class="font-bold text-base md:text-lg">Nutriție Premium</p>
+                                <p class="text-[9px] text-mint uppercase font-bold tracking-widest mb-1.5">Pachet Selectat</p>
+                                <p class="font-serif font-bold text-2xl md:text-3xl">Premium Control</p>
                             </div>
                             <div class="text-right">
-                                <p class="text-[9px] md:text-[10px] text-primary-200 uppercase font-bold tracking-wider mb-1">Status</p>
-                                <span class="px-2.5 py-1 bg-emerald-500/20 text-emerald-100 text-[10px] md:text-xs font-bold rounded-lg border border-emerald-500/30">Activ</span>
+                                <span class="px-4 py-1.5 bg-sage text-white text-[10px] uppercase font-bold tracking-widest rounded-xl shadow-sm">Activ</span>
                             </div>
                         </div>
                         
-                        <div class="flex justify-between items-center relative z-10 text-[11px] md:text-sm">
-                            <p class="text-primary-100">Următoarea facturare:</p>
-                            <p class="font-bold">15 Iunie 2026</p>
+                        <div class="flex justify-between items-center relative z-10 text-[11px] font-bold text-slate-300 uppercase tracking-widest border-t border-white/10 pt-5">
+                            <p>Următoarea facturare programată:</p>
+                            <p class="text-white text-sm">15 Iunie 2026</p>
                         </div>
                     </div>
 
-                    <!-- Carduri Salvate -->
-                    <div class="bg-white dark:bg-dark-900 rounded-[1.5rem] md:rounded-2xl shadow-card border border-slate-200 dark:border-slate-800 p-5 md:p-6 transition-colors h-fit">
-                        <div class="flex justify-between items-center mb-5 md:mb-6">
-                            <h3 class="font-bold text-slate-900 dark:text-white text-base md:text-lg">Metoda de Plată</h3>
-                            <button onclick="showNotification('Te redirecționăm pentru adăugarea cardului.', 'info')" class="text-[11px] md:text-sm font-semibold text-primary-600 hover:text-primary-700 dark:text-primary-400">+ Schimbă</button>
-                        </div>
-                        <div class="relative w-full h-40 md:h-48 rounded-xl md:rounded-2xl bg-gradient-to-tr from-slate-900 via-slate-800 to-slate-900 p-5 md:p-6 text-white shadow-xl overflow-hidden mb-2">
-                            <div class="absolute top-0 right-0 w-24 h-24 md:w-32 md:h-32 bg-white/5 rounded-full -mr-8 -mt-8 md:-mr-10 md:-mt-10 blur-xl md:blur-2xl"></div>
-                            <div class="flex justify-between items-start relative z-10">
-                                <span class="font-bold tracking-widest text-base md:text-lg opacity-90">VISA</span>
-                                <span class="material-symbols-rounded opacity-50">contactless</span>
+                    <!-- Metoda de Plată & Istoric -->
+                    <div class="space-y-8 h-fit">
+                        
+                        <!-- Card Stripe Salvat -->
+                        <div class="dashboard-card p-8">
+                            <div class="flex justify-between items-center mb-6 border-b border-slate-100 pb-4">
+                                <h3 class="text-xs font-bold text-forest uppercase tracking-widest">Metodă de Plată (Stripe)</h3>
+                                <button onclick="showNotification('Sistemul Stripe te redirecționează...', 'info')" class="text-[10px] font-bold uppercase text-sage hover:text-forest transition-colors bg-sage/10 px-3 py-1.5 rounded-lg">Modifică Card</button>
                             </div>
-                            <div class="mt-6 md:mt-8 relative z-10"><p class="font-mono text-lg md:text-xl tracking-widest opacity-90">•••• •••• •••• 1234</p></div>
-                            <div class="flex justify-between items-end mt-4 md:mt-6 text-[11px] md:text-sm opacity-80 relative z-10">
-                                <div><p class="text-[9px] md:text-[10px] opacity-70 mb-0.5">Titular</p><p class="font-medium tracking-wide">RADU IONESCU</p></div>
-                                <div><p class="text-[9px] md:text-[10px] opacity-70 mb-0.5">Expiră</p><p class="font-medium tracking-wide">08/27</p></div>
+                            
+                            <div class="relative w-full h-48 rounded-2xl bg-forest border border-white/10 p-6 text-white shadow-lg overflow-hidden">
+                                <div class="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -mr-10 -mt-10 blur-xl"></div>
+                                <div class="flex justify-between items-start relative z-10">
+                                    <span class="font-bold tracking-widest text-xl opacity-90 font-serif">VISA</span>
+                                    <span class="material-symbols-rounded opacity-50 text-[28px]">contactless</span>
+                                </div>
+                                <div class="mt-8 relative z-10"><p class="font-mono text-2xl tracking-widest text-mint shadow-sm">•••• •••• •••• 4291</p></div>
+                                <div class="flex justify-between items-end mt-6 text-[10px] uppercase tracking-widest font-bold opacity-80 relative z-10">
+                                    <div><p class="opacity-50 mb-1 text-[8px]">Titular Card</p><p class="text-white text-xs">RADU IONESCU</p></div>
+                                    <div><p class="opacity-50 mb-1 text-[8px]">Expiră la</p><p class="text-white text-xs font-mono">08/27</p></div>
+                                </div>
                             </div>
                         </div>
+
                     </div>
 
-                    <!-- Istoric Tranzacții -->
-                    <div class="lg:col-span-2 bg-white dark:bg-dark-900 rounded-[1.5rem] md:rounded-2xl shadow-card border border-slate-200 dark:border-slate-800 p-5 md:p-6 transition-colors">
-                        <div class="flex justify-between items-center mb-4 md:mb-6 border-b border-slate-100 dark:border-slate-800 pb-3">
-                            <h3 class="font-bold text-slate-900 dark:text-white text-base md:text-lg">Istoric Facturi</h3>
-                        </div>
-                        <div class="space-y-3">
-                            <div class="flex items-center justify-between p-3 hover:bg-slate-50 dark:hover:bg-dark-800 rounded-xl transition-colors cursor-pointer">
-                                <div class="flex items-center gap-3 md:gap-4">
-                                    <div class="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-emerald-50 dark:bg-emerald-900/30 flex items-center justify-center text-emerald-600 dark:text-emerald-400 shrink-0"><span class="material-symbols-rounded text-[20px]">receipt_long</span></div>
-                                    <div><p class="text-[13px] md:text-sm font-bold text-slate-900 dark:text-white">Abonament Premium</p><p class="text-[10px] md:text-xs text-slate-500">Plătit pe 1 Mai 2026</p></div>
+                    <!-- Tabel Istoric Facturi (Latime integrala) -->
+                    <div class="lg:col-span-2 dashboard-card p-8 mt-2">
+                        <h3 class="text-xs font-bold text-forest uppercase tracking-widest border-b border-slate-100 pb-4 mb-6">Istoric Facturi Fiscale</h3>
+                        <div class="space-y-4">
+                            
+                            <!-- Rand Factura -->
+                            <div class="flex items-center justify-between p-5 bg-[#FAFAF8] border border-[#e5e5e0] rounded-2xl transition-colors cursor-pointer hover:border-forest hover:shadow-md">
+                                <div class="flex items-center gap-5">
+                                    <div class="w-12 h-12 rounded-xl bg-white border border-[#e5e5e0] flex items-center justify-center text-sage shrink-0 shadow-sm">
+                                        <span class="material-symbols-rounded text-[24px]">receipt_long</span>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm font-bold text-forest">Abonament Premium Control</p>
+                                        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">Plătit pe 1 Mai 2026</p>
+                                    </div>
                                 </div>
-                                <div class="text-right shrink-0">
-                                    <p class="text-[13px] md:text-sm font-bold text-slate-900 dark:text-white">350 RON</p>
-                                    <button onclick="showNotification('Factura se descarcă.', 'info')" class="text-[9px] md:text-[10px] font-bold text-primary-600 uppercase mt-0.5 md:mt-1 hover:underline">Descarcă</button>
-                                </div>
-                            </div>
-                            <div class="w-full h-px bg-slate-100 dark:bg-slate-800"></div>
-                            <div class="flex items-center justify-between p-3 hover:bg-slate-50 dark:hover:bg-dark-800 rounded-xl transition-colors cursor-pointer">
-                                <div class="flex items-center gap-3 md:gap-4">
-                                    <div class="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-emerald-50 dark:bg-emerald-900/30 flex items-center justify-center text-emerald-600 dark:text-emerald-400 shrink-0"><span class="material-symbols-rounded text-[20px]">receipt_long</span></div>
-                                    <div><p class="text-[13px] md:text-sm font-bold text-slate-900 dark:text-white">Consultație Inițială</p><p class="text-[10px] md:text-xs text-slate-500">Plătit pe 15 Apr 2026</p></div>
-                                </div>
-                                <div class="text-right shrink-0">
-                                    <p class="text-[13px] md:text-sm font-bold text-slate-900 dark:text-white">150 RON</p>
-                                    <button onclick="showNotification('Factura se descarcă.', 'info')" class="text-[9px] md:text-[10px] font-bold text-primary-600 uppercase mt-0.5 md:mt-1 hover:underline">Descarcă</button>
+                                <div class="text-right shrink-0 flex flex-col items-end">
+                                    <p class="text-base font-bold text-forest font-serif">350 RON</p>
+                                    <button onclick="showNotification('Factura se descarcă in format PDF.', 'info')" class="text-[9px] font-bold text-sage uppercase tracking-widest mt-1.5 flex items-center gap-1 hover:text-forest">
+                                        <span class="material-symbols-rounded text-[14px]">download</span> Descarcă
+                                    </button>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- VIEW: PROFIL (Complet, optimizat mobil) -->
-            <div id="view-profile" class="hidden p-4 md:p-10 max-w-[1200px] mx-auto space-y-4 md:space-y-8 w-full shrink-0 pb-20 md:pb-10">
-                <h2 class="text-xl md:text-2xl font-bold text-slate-900 dark:text-white">Setări Cont & Profil</h2>
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-8">
+            <!-- ---------------------------------------------------- -->
+            <!-- VIEW 5: PROFIL & MĂSURĂTORI FIZICE (ANTI-SUPRAPUNERE)-->
+            <!-- ---------------------------------------------------- -->
+            <div id="view-profile" class="hidden p-4 md:p-10 max-w-[1000px] mx-auto space-y-8 w-full shrink-0 pb-24">
+                
+                <div class="border-b border-[#e5e5e0] pb-5 mb-8">
+                    <h2 class="text-2xl md:text-3xl font-bold font-serif text-forest">Setări Cont & Dosar Fizic</h2>
+                    <p class="text-[10px] md:text-xs font-bold uppercase tracking-widest text-slate-400 mt-1.5">Actualizează detaliile personale și trimite măsurătorile medicului.</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                     
-                    <!-- Date Personale & Poza de Profil -->
-                    <div class="bg-white dark:bg-dark-900 p-5 md:p-6 rounded-[1.5rem] md:rounded-2xl shadow-card border border-slate-200 dark:border-slate-800 space-y-4 md:space-y-5 transition-colors h-fit">
-                        <h3 class="font-bold text-slate-900 dark:text-white border-b border-slate-100 dark:border-slate-800 pb-3 text-base md:text-lg">Date Personale</h3>
+                    <!-- Pilon Stânga: Date Personale -->
+                    <div class="dashboard-card p-6 md:p-8 space-y-8">
+                        <h3 class="text-xs font-bold uppercase tracking-widest text-forest border-b border-slate-100 pb-4">Date de Identificare</h3>
                         
-                        <div class="flex flex-col items-center text-center gap-2 md:gap-4 mb-2">
+                        <!-- Upload Poză -->
+                        <div class="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-6 bg-[#FAFAF8] border border-[#e5e5e0] p-6 rounded-2xl">
                             <input type="file" id="client-profile-upload" accept="image/*" class="hidden" onchange="updateClientProfilePic(event)">
-                            <div class="relative group cursor-pointer" onclick="document.getElementById('client-profile-upload').click()">
-                                <div id="client-profile-avatar" class="w-20 h-20 md:w-24 md:h-24 rounded-full bg-slate-100 dark:bg-dark-800 border-4 border-white dark:border-dark-900 shadow-md flex items-center justify-center text-2xl md:text-3xl font-bold text-slate-700 dark:text-slate-300 bg-cover bg-center">RI</div>
-                                <button class="absolute bottom-0 right-0 w-7 h-7 md:w-8 md:h-8 bg-white dark:bg-dark-800 border border-slate-200 dark:border-slate-700 rounded-full flex items-center justify-center shadow-sm text-slate-600 dark:text-slate-300 hover:text-primary-600 transition-colors"><span class="material-symbols-rounded text-[14px] md:text-[16px]">edit</span></button>
+                            <div class="relative group cursor-pointer shrink-0" onclick="document.getElementById('client-profile-upload').click()">
+                                <div id="client-profile-avatar" class="w-24 h-24 rounded-2xl bg-white border border-[#e5e5e0] shadow-sm flex items-center justify-center bg-cover bg-center overflow-hidden">
+                                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1000&auto=format&fit=crop" class="w-full h-full object-cover">
+                                </div>
+                                <button type="button" class="absolute -bottom-3 -right-3 w-10 h-10 bg-sage border-4 border-white rounded-full flex items-center justify-center shadow-md text-white transition-transform hover:scale-110">
+                                    <span class="material-symbols-rounded text-[16px]">photo_camera</span>
+                                </button>
                             </div>
-                            <p class="text-[11px] md:text-xs text-slate-500">Apasă pentru poză nouă</p>
+                            <div class="space-y-2">
+                                <h4 class="text-xs font-bold text-forest uppercase tracking-wider">Fotografie Cont</h4>
+                                <p class="text-[11px] text-slate-500 font-medium leading-relaxed">O fotografie ajută medicul să țină o evidență vizuală mai bună a parcursului tău.</p>
+                            </div>
                         </div>
 
-                        <div><label class="block text-[10px] md:text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">Nume Complet</label><input type="text" value="Radu Ionescu" class="w-full p-3 bg-slate-50 dark:bg-dark-800 border border-slate-200 dark:border-slate-700 rounded-xl text-[13px] md:text-sm outline-none dark:text-white focus:border-primary-500 transition-colors"></div>
-                        <div><label class="block text-[10px] md:text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">Email</label><input type="email" value="radu@email.com" class="w-full p-3 bg-slate-50 dark:bg-dark-800 border border-slate-200 dark:border-slate-700 rounded-xl text-[13px] md:text-sm outline-none dark:text-white focus:border-primary-500 transition-colors"></div>
-                        <div><label class="block text-[10px] md:text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">Telefon</label><input type="text" value="0722 123 456" class="w-full p-3 bg-slate-50 dark:bg-dark-800 border border-slate-200 dark:border-slate-700 rounded-xl text-[13px] md:text-sm outline-none dark:text-white focus:border-primary-500 transition-colors"></div>
-                        <button onclick="showNotification('Datele personale salvate!', 'success')" class="w-full py-3 bg-dark-900 dark:bg-primary-600 hover:bg-slate-800 text-white rounded-xl text-[13px] md:text-sm font-bold transition-colors shadow-md mt-2">Salvează Modificările</button>
+                        <!-- Formular Date - Structură Strict Verticală -->
+                        <div class="space-y-5">
+                            <div class="form-group mb-0">
+                                <label class="input-label">Nume și Prenume</label>
+                                <input type="text" value="Radu Ionescu" class="input-field">
+                            </div>
+                            <div class="form-group mb-0">
+                                <label class="input-label">Adresă de Email</label>
+                                <input type="email" value="radu@email.com" class="input-field">
+                            </div>
+                            <div class="form-group mb-0">
+                                <label class="input-label">Număr Telefon Contact</label>
+                                <input type="tel" value="0722 123 456" class="input-field">
+                            </div>
+                        </div>
+                        
+                        <button onclick="showNotification('Datele personale au fost salvate pe server.', 'success')" class="w-full py-4 bg-forest hover:bg-black text-white rounded-xl text-xs font-bold uppercase tracking-widest transition-colors shadow-md h-14">
+                            Salvează Modificările
+                        </button>
                     </div>
 
-                    <div class="space-y-4 md:space-y-8">
-                        <!-- Masuratori Fizice -->
-                        <div class="bg-white dark:bg-dark-900 p-5 md:p-6 rounded-[1.5rem] md:rounded-2xl shadow-card border border-slate-200 dark:border-slate-800 transition-colors">
-                            <h3 class="font-bold text-slate-900 dark:text-white border-b border-slate-100 dark:border-slate-800 pb-3 mb-4 md:mb-5 text-base md:text-lg">Măsurători & Obiective</h3>
-                            <div class="grid grid-cols-2 gap-3 md:gap-4">
-                                <div><label class="block text-[10px] md:text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">Curentă</label><div class="relative"><input type="number" value="85" class="w-full p-3 bg-slate-50 dark:bg-dark-800 border border-slate-200 dark:border-slate-700 rounded-xl text-[13px] md:text-sm outline-none dark:text-white focus:border-primary-500 transition-colors font-bold"><span class="absolute right-3 top-3 text-[13px] text-slate-400">kg</span></div></div>
-                                <div><label class="block text-[10px] md:text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">Țintă</label><div class="relative"><input type="number" value="75" class="w-full p-3 bg-slate-50 dark:bg-dark-800 border border-slate-200 dark:border-slate-700 rounded-xl text-[13px] md:text-sm outline-none dark:text-white focus:border-primary-500 transition-colors font-bold text-primary-600 dark:text-primary-400"><span class="absolute right-3 top-3 text-[13px] text-slate-400">kg</span></div></div>
-                                <div class="col-span-2"><label class="block text-[10px] md:text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">Înălțime</label><div class="relative"><input type="number" value="180" class="w-full p-3 bg-slate-50 dark:bg-dark-800 border border-slate-200 dark:border-slate-700 rounded-xl text-[13px] md:text-sm outline-none dark:text-white focus:border-primary-500 transition-colors"><span class="absolute right-3 top-3 text-[13px] text-slate-400">cm</span></div></div>
+                    <!-- Pilon Dreapta: Măsurători & Securitate -->
+                    <div class="space-y-8">
+                        
+                        <!-- Măsurători Fiziologice -->
+                        <div class="dashboard-card p-6 md:p-8 space-y-6">
+                            <h3 class="text-xs font-bold uppercase tracking-widest text-forest border-b border-slate-100 pb-4">Raport Măsurători Fizice</h3>
+                            
+                            <div class="grid grid-cols-2 gap-5">
+                                <div class="form-group mb-0">
+                                    <label class="input-label">Greutate Curentă</label>
+                                    <div class="relative">
+                                        <input type="number" value="85" class="input-field font-bold text-center pr-10 text-lg">
+                                        <span class="absolute right-4 top-3.5 text-[10px] font-bold text-slate-400 uppercase">kg</span>
+                                    </div>
+                                </div>
+                                <div class="form-group mb-0">
+                                    <label class="input-label text-sage">Greutate Obiectiv</label>
+                                    <div class="relative">
+                                        <input type="number" value="75" class="input-field font-bold text-center pr-10 text-lg text-sage bg-sage/5 border-sage/30 focus:border-sage">
+                                        <span class="absolute right-4 top-3.5 text-[10px] font-bold text-sage uppercase">kg</span>
+                                    </div>
+                                </div>
+                                <div class="col-span-2 form-group mb-0 mt-2">
+                                    <label class="input-label">Înălțime</label>
+                                    <div class="relative">
+                                        <input type="number" value="180" class="input-field font-bold text-center pr-10 text-lg">
+                                        <span class="absolute right-4 top-3.5 text-[10px] font-bold text-slate-400 uppercase">cm</span>
+                                    </div>
+                                </div>
                             </div>
-                            <button onclick="showNotification('Măsurătorile trimise nutriționistului.', 'success')" class="w-full py-3 bg-slate-100 dark:bg-dark-800 hover:bg-slate-200 text-slate-900 dark:text-white rounded-xl text-[13px] md:text-sm font-bold transition-colors mt-4 md:mt-5 border border-slate-200 dark:border-slate-700">Actualizează Măsurătorile</button>
+                            
+                            <button onclick="showNotification('Măsurătorile au fost trimise medicului curant!', 'success')" class="w-full py-4 bg-[#FAFAF8] border border-[#e5e5e0] hover:border-forest text-forest rounded-xl text-xs font-bold uppercase tracking-widest transition-colors shadow-sm h-14">
+                                Trimite Actualizarea
+                            </button>
                         </div>
 
-                        <!-- Securitate -->
-                        <div class="bg-white dark:bg-dark-900 p-5 md:p-6 rounded-[1.5rem] md:rounded-2xl shadow-card border border-slate-200 dark:border-slate-800 transition-colors">
-                            <h3 class="font-bold text-slate-900 dark:text-white border-b border-slate-100 dark:border-slate-800 pb-3 mb-4 md:mb-5 flex items-center gap-2 text-base md:text-lg"><span class="material-symbols-rounded text-[18px] md:text-[20px] text-slate-400">lock</span> Securitate Cont</h3>
-                            <div class="space-y-3 md:space-y-4">
-                                <div><label class="block text-[10px] md:text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">Parola Curentă</label><input type="password" placeholder="••••••••" class="w-full p-3 bg-slate-50 dark:bg-dark-800 border border-slate-200 dark:border-slate-700 rounded-xl text-[13px] md:text-sm outline-none dark:text-white focus:border-primary-500 transition-colors"></div>
-                                <div><label class="block text-[10px] md:text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">Parola Nouă</label><input type="password" placeholder="Noua parolă" class="w-full p-3 bg-slate-50 dark:bg-dark-800 border border-slate-200 dark:border-slate-700 rounded-xl text-[13px] md:text-sm outline-none dark:text-white focus:border-primary-500 transition-colors"></div>
-                                <button onclick="showNotification('Parola schimbată cu succes.', 'success')" class="w-full py-3 bg-slate-100 dark:bg-dark-800 hover:bg-slate-200 text-slate-900 dark:text-white rounded-xl text-[13px] md:text-sm font-bold transition-colors mt-2 border border-slate-200 dark:border-slate-700">Schimbă Parola</button>
+                        <!-- Securitate Parolă -->
+                        <div class="dashboard-card p-6 md:p-8 space-y-6">
+                            <h3 class="text-xs font-bold uppercase tracking-widest text-forest border-b border-slate-100 pb-4 flex items-center gap-2">
+                                <span class="material-symbols-rounded text-[20px] text-sage">shield_lock</span> Securitate Parolă
+                            </h3>
+                            
+                            <div class="space-y-5">
+                                <div class="form-group mb-0">
+                                    <label class="input-label">Parola Curentă</label>
+                                    <input type="password" placeholder="••••••••" class="input-field text-center font-mono tracking-widest">
+                                </div>
+                                <div class="form-group mb-0">
+                                    <label class="input-label">Parola Nouă Securizată</label>
+                                    <input type="password" placeholder="Scrieți parola nouă" class="input-field text-center font-mono tracking-widest">
+                                </div>
                             </div>
+                            
+                            <button onclick="showNotification('Parola de acces a fost modificată.', 'success')" class="w-full py-4 bg-[#FAFAF8] border border-[#e5e5e0] hover:border-forest text-forest rounded-xl text-xs font-bold uppercase tracking-widest transition-colors shadow-sm h-14">
+                                Confirmă Securitatea
+                            </button>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -577,45 +720,41 @@
         </div>
     </main>
 
-    <!-- TOAST CONTAINER -->
-    <div id="toast-container" class="fixed bottom-[80px] md:bottom-5 right-4 md:right-5 z-[200] flex flex-col gap-3 pointer-events-none w-[calc(100%-32px)] md:w-auto"></div>
+    <!-- ========================================== -->
+    <!-- SISTEM DE NOTIFICĂRI TOAST NATIVE NURA.    -->
+    <!-- ========================================== -->
+    <div id="toast-container" class="fixed bottom-[80px] md:bottom-10 right-4 md:right-10 z-[200] flex flex-col gap-4 pointer-events-none w-[calc(100%-32px)] md:w-auto"></div>
 
+    <!-- ========================================== -->
+    <!-- LOGICA JAVASCRIPT A APLICAȚIEI             -->
+    <!-- ========================================== -->
     <script>
-        // Actualizare poză client
+        // Actualizare Live Poză de Profil în toate containerele
         function updateClientProfilePic(event) {
             const file = event.target.files[0];
             if (file) {
                 const imageUrl = URL.createObjectURL(file);
+                
                 const profileAvatar = document.getElementById('client-profile-avatar');
-                if(profileAvatar) {
-                    profileAvatar.style.backgroundImage = `url(${imageUrl})`;
-                    profileAvatar.innerText = '';
+                if(profileAvatar) { 
+                    profileAvatar.innerHTML = `<img src="${imageUrl}" class="w-full h-full object-cover">`; 
                 }
+                
                 const sidebarAvatar = document.getElementById('sidebar-avatar');
-                if(sidebarAvatar) {
-                    sidebarAvatar.style.backgroundImage = `url(${imageUrl})`;
-                    sidebarAvatar.innerText = '';
+                if(sidebarAvatar) { 
+                    sidebarAvatar.innerHTML = `<img src="${imageUrl}" class="w-full h-full object-cover">`; 
                 }
-                showNotification('Fotografia de profil a fost actualizată!', 'success');
+                
+                showNotification('Fotografia de profil a fost actualizată în sistemul securizat!', 'success');
             }
         }
 
-        // Meniu Notificari
+        // Toggle pentru Notificările din Header
         function toggleNotificationsMenu() { 
             document.getElementById('notifications-dropdown').classList.toggle('hidden'); 
         }
-        
-        document.addEventListener('click', function(event) {
-            const dropdown = document.getElementById('notifications-dropdown');
-            const bellBtn = event.target.closest('button[onclick="toggleNotificationsMenu()"]');
-            const isInsideDropdown = event.target.closest('#notifications-dropdown');
-            
-            if (!bellBtn && !isInsideDropdown && dropdown && !dropdown.classList.contains('hidden')) {
-                dropdown.classList.add('hidden');
-            }
-        });
 
-        // Bare Progres Animatie
+        // Animație fluidă pentru barele de progres
         function animateProgressBars() {
             setTimeout(() => {
                 const bars = document.querySelectorAll('.progress-bar');
@@ -626,46 +765,45 @@
             }, 100);
         }
 
-        window.addEventListener('DOMContentLoaded', () => {
-            animateProgressBars();
+        window.addEventListener('DOMContentLoaded', () => { 
+            animateProgressBars(); 
         });
 
-        // TOAST NOTIFICATIONS (adaptat pentru mobil lățime full)
+        // Sistem Elegant de Toasts pentru validări (Stil Noura.)
         function showNotification(message, type = 'success') {
             const container = document.getElementById('toast-container');
             const toast = document.createElement('div');
-            const bgColor = type === 'success' ? 'bg-emerald-50 dark:bg-emerald-900 border-emerald-200 dark:border-emerald-700 text-emerald-800 dark:text-emerald-200' : 'bg-blue-50 dark:bg-blue-900 border-blue-200 dark:border-blue-700 text-blue-800 dark:text-blue-200';
+            
+            // Culori adaptate paletei de brand
+            const bgColor = type === 'success' ? 'bg-sage text-white' : 'bg-forest text-white';
             const icon = type === 'success' ? 'check_circle' : 'info';
             
-            toast.className = `flex items-center gap-3 px-4 py-3.5 rounded-xl border shadow-lg transform transition-all duration-300 translate-y-10 opacity-0 pointer-events-auto w-full md:w-[350px] ${bgColor}`;
+            toast.className = `flex items-center gap-4 px-6 py-5 rounded-2xl shadow-premium transform transition-all duration-400 translate-y-12 opacity-0 pointer-events-auto w-full md:w-[380px] ${bgColor}`;
             toast.innerHTML = `
-                <span class="material-symbols-rounded shrink-0">${icon}</span>
-                <p class="text-[13px] md:text-sm font-semibold leading-snug flex-1">${message}</p>
-                <button onclick="this.parentElement.remove()" class="text-slate-400 hover:text-slate-600 dark:hover:text-white shrink-0 p-1"><span class="material-symbols-rounded text-[18px]">close</span></button>
+                <span class="material-symbols-rounded shrink-0 text-[24px]">${icon}</span>
+                <p class="text-xs font-bold uppercase tracking-widest leading-snug flex-1">${message}</p>
+                <button onclick="this.parentElement.remove()" class="text-white/60 hover:text-white shrink-0 p-1 transition-colors"><span class="material-symbols-rounded text-[20px]">close</span></button>
             `;
             
             container.appendChild(toast);
-            setTimeout(() => toast.classList.remove('translate-y-10', 'opacity-0'), 10);
-            setTimeout(() => { toast.classList.add('opacity-0', 'translate-x-10'); setTimeout(() => toast.remove(), 300); }, 4000);
+            
+            // Animatie Intrare
+            requestAnimationFrame(() => {
+                setTimeout(() => toast.classList.remove('translate-y-12', 'opacity-0'), 10);
+            });
+            
+            // Animatie Iesire si eliminare din DOM
+            setTimeout(() => { 
+                toast.classList.add('opacity-0', 'translate-x-12'); 
+                setTimeout(() => toast.remove(), 400); 
+            }, 4500);
         }
 
-        // DARK MODE
-        function toggleDarkMode() {
-            const htmlClasses = document.documentElement.classList;
-            const icon = document.getElementById('theme-icon');
-            if (htmlClasses.contains('dark')) {
-                htmlClasses.remove('dark'); htmlClasses.add('light');
-                icon.innerText = 'dark_mode';
-            } else {
-                htmlClasses.remove('light'); htmlClasses.add('dark');
-                icon.innerText = 'light_mode';
-            }
+        function logout() { 
+            if(confirm("Ești sigur că vrei să părăsești portalul securizat?")) { location.reload(); } 
         }
 
-        function logout() {
-            if(confirm("Ești sigur că vrei să te deconectezi?")) { location.reload(); }
-        }
-
+        // Toggle Meniu Mobil Slide
         function toggleMobileMenu() {
             const menu = document.getElementById('mobile-menu');
             const overlay = document.getElementById('mobile-menu-overlay');
@@ -684,62 +822,73 @@
             }
         }
 
+        // Sistem de Navigație Taburi (Views)
         function switchView(viewId) {
             const views = ['dashboard', 'diet', 'messages', 'financial', 'profile'];
             const container = document.getElementById('main-scroll-container');
             
+            // Resetare specifică pentru chat ca sa nu existe dublu-scroll
             if(viewId === 'messages') {
-                container.classList.remove('overflow-y-auto');
+                container.classList.remove('overflow-y-auto'); 
                 container.classList.add('overflow-hidden');
             } else {
-                container.classList.remove('overflow-hidden');
+                container.classList.remove('overflow-hidden'); 
                 container.classList.add('overflow-y-auto');
             }
             
+            // Ascunde toate
             views.forEach(v => {
                 const el = document.getElementById('view-' + v);
-                if(el) {
-                    el.classList.add('hidden');
+                if(el) { 
+                    el.classList.add('hidden'); 
                     el.classList.remove('block', 'flex', 'flex-1', 'min-h-0'); 
                 }
             });
             
+            // Afiseaza View curent
             const currentView = document.getElementById('view-' + viewId);
             if(currentView) {
                 currentView.classList.remove('hidden');
-                if(viewId === 'messages') {
-                    currentView.classList.add('flex', 'flex-1', 'min-h-0');
-                } else {
-                    currentView.classList.add('block');
+                if(viewId === 'messages') { 
+                    currentView.classList.add('flex', 'flex-1', 'min-h-0'); 
+                } else { 
+                    currentView.classList.add('block'); 
                 }
             }
 
-            // Update desktop sidebar classes
+            // Actualizare status butoane de meniu Sidebar Desktop
             views.forEach(n => {
                 const btn = document.getElementById('nav-' + n);
                 if(btn) {
-                    if(n === viewId) {
-                        btn.className = "w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold transition-all bg-primary-600/10 text-primary-500 relative";
-                    } else {
-                        btn.className = "w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium hover:bg-slate-800 hover:text-white transition-all relative";
+                    if(n === viewId) { 
+                        btn.className = "w-full flex items-center gap-3 px-5 py-3.5 rounded-xl text-sm font-bold transition-all duration-300 bg-sage text-white shadow-md text-left"; 
+                    } else { 
+                        btn.className = "w-full flex items-center gap-3 px-5 py-3.5 rounded-xl text-sm font-medium transition-all duration-300 text-slate-400 hover:text-white hover:bg-white/5 text-left"; 
                     }
                 }
             });
-            
-            const profileBtn = document.getElementById('nav-profile-btn');
-            if(viewId === 'profile') {
-                profileBtn.classList.add('bg-slate-800', 'border-slate-700');
-            } else {
-                profileBtn.classList.remove('bg-slate-800', 'border-slate-700');
-            }
 
-            const titles = { 'dashboard': 'Evoluția Mea', 'diet': 'Plan Alimentar', 'messages': 'Chat Nutriționist', 'financial': 'Plăți & Facturi', 'profile': 'Setări Cont & Profil' };
-            const subtitles = { 'dashboard': 'Rezumatul zilnic al macronutrienților tăi.', 'diet': 'Meniul stabilit pentru tine.', 'messages': 'Suport direct de la expert.', 'financial': 'Istoricul plăților și carduri salvate.', 'profile': 'Actualizează securitatea și datele fizice.' };
+            // Schimbare Dinamica a Titlurilor
+            const titles = { 
+                'dashboard': 'Evoluția Mea', 
+                'diet': 'Plan Alimentar', 
+                'messages': 'Chat Nutriționist', 
+                'financial': 'Abonament Clinic', 
+                'profile': 'Setări & Dosar Fizic' 
+            };
+            const subtitles = { 
+                'dashboard': 'Rezumatul zilnic al dosarului tău medical.', 
+                'diet': 'Aceste mese sunt pregătite cu precizie pentru tine.', 
+                'messages': 'Suport direct și confidențial de la expertul alocat.', 
+                'financial': 'Istoricul facturilor și contractul tău curent.', 
+                'profile': 'Actualizează securitatea și datele fiziologice curente.' 
+            };
             
             document.getElementById('page-title').innerText = titles[viewId] || 'Portal Client';
             const sub = document.getElementById('page-subtitle');
             if(sub) sub.innerText = subtitles[viewId] || '';
 
+            // Re-declanșare animații dacă se revine la dashboard
             if(viewId === 'dashboard') {
                 const bars = document.querySelectorAll('.progress-bar');
                 bars.forEach(bar => bar.style.width = '0%');
@@ -747,6 +896,7 @@
             }
         }
 
+        // Chat Text Input Simulator
         function sendMessage(event) {
             event.preventDefault();
             const input = document.getElementById('chat-input-field');
@@ -758,51 +908,68 @@
             const timestamp = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
 
             const msgRow = document.createElement('div');
-            msgRow.className = "flex justify-end items-end gap-2 mt-2 md:mt-4";
+            msgRow.className = "flex justify-end items-end gap-3 mt-4 animate-in fade-in";
             msgRow.innerHTML = `
-                <div class="max-w-[85%] md:max-w-[75%] bg-dark-900 dark:bg-primary-600 text-white p-3 md:p-4 rounded-xl md:rounded-2xl rounded-br-none shadow-sm">
-                    <p class="text-[13px] md:text-sm leading-relaxed">${input.value}</p>
-                    <p class="text-[9px] md:text-[10px] text-slate-400 font-medium mt-1 md:mt-2 text-right">${timestamp}</p>
+                <div class="max-w-[85%] md:max-w-[60%] bg-[#FAFAF8] border border-[#e5e5e0] text-forest p-4 rounded-2xl rounded-br-none shadow-sm">
+                    <p class="text-sm font-medium leading-relaxed">${input.value}</p>
+                    <p class="text-[9px] text-slate-400 font-bold uppercase mt-2 text-right tracking-widest">${timestamp}</p>
                 </div>
             `;
             
             box.appendChild(msgRow);
             input.value = '';
+            
+            // Auto scroll to bottom
             box.scrollTop = box.scrollHeight;
         }
 
+        // Simulator Telemedicină (Jitsi API Wrapper)
         let jitsiApi = null;
         let isVideoActive = false;
+        
         function toggleVideoCall() {
             const container = document.getElementById('video-container');
+            const placeholder = document.getElementById('video-placeholder');
             const btn = document.getElementById('btn-video');
             const btnText = btn.querySelector('span:nth-child(2)');
             const btnIcon = btn.querySelector('span:nth-child(1)');
             
             if (!isVideoActive) {
+                // Pornire Video
                 container.classList.remove('hidden');
                 btnIcon.innerText = 'call_end';
-                if(btnText) btnText.innerText = 'Închide';
-                btn.classList.replace('text-slate-700', 'text-red-600');
-                btn.classList.replace('dark:text-slate-300', 'dark:text-red-500');
+                if(btnText) btnText.innerText = 'Închide Apelul';
+                
+                // Schimbare styling buton pentru stare "Oprire"
+                btn.classList.replace('bg-forest', 'bg-red-500');
+                btn.classList.replace('hover:bg-black', 'hover:bg-red-600');
                 
                 const domain = "meet.jit.si";
                 const options = { 
-                    roomName: "NutriChef_Premium_Consultation_123", 
+                    roomName: "Noura_Premium_Consultation_Secure_Client", 
                     width: "100%", 
                     height: "100%", 
                     parentNode: document.getElementById('jitsi-meet-frame'),
-                    configOverwrite: { startWithAudioMuted: false, startWithVideoMuted: false }
+                    configOverwrite: { startWithAudioMuted: false, startWithVideoMuted: false },
+                    interfaceConfigOverwrite: { filmStripOnly: false }
                 };
+                
+                placeholder.classList.add('hidden'); // Ascunde placeholderul pulsant
                 jitsiApi = new JitsiMeetExternalAPI(domain, options);
                 isVideoActive = true;
-                showNotification("Conectare la apelul video...", "info");
+                
+                showNotification("Tunelul criptat video a fost stabilit.", "success");
             } else {
+                // Oprire Video
                 container.classList.add('hidden');
+                placeholder.classList.remove('hidden');
                 btnIcon.innerText = 'videocam';
                 if(btnText) btnText.innerText = 'Consult Video';
-                btn.classList.replace('text-red-600', 'text-slate-700');
-                btn.classList.replace('dark:text-red-500', 'dark:text-slate-300');
+                
+                // Revenire styling buton
+                btn.classList.replace('bg-red-500', 'bg-forest');
+                btn.classList.replace('hover:bg-red-600', 'hover:bg-black');
+                
                 if (jitsiApi) jitsiApi.dispose();
                 isVideoActive = false;
             }
