@@ -28,16 +28,19 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba
 .nav-cta { background: var(--forest); color: var(--linen) !important; padding: 8px 20px; border-radius: 6px; font-weight: 500 !important; transition: background 0.2s !important; }
 .nav-cta:hover { background: var(--sage) !important; }
 
+/* Buton meniu mobil */
+.mobile-toggle { display: none; background: none; border: none; font-size: 24px; color: var(--forest); cursor: pointer; }
+
 /* HERO */
 .page-hero { background: var(--forest); padding: 120px 3rem 72px; text-align: center; position: relative; overflow: hidden; }
 .page-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at center, rgba(29,158,117,0.13) 0%, transparent 65%); }
 .hero-inner { position: relative; z-index: 1; max-width: 600px; margin: 0 auto; }
 .hero-eyebrow { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--mint); font-weight: 500; margin-bottom: 1rem; }
-.hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(44px,6vw,68px); font-weight: 600; color: var(--mintl); line-height: 1.05; margin-bottom: 0.75rem; }
-.hero-sub { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-style: italic; color: rgba(159,225,203,0.7); margin-bottom: 2rem; line-height: 1.5; }
+.hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(38px, 6vw, 68px); font-weight: 600; color: var(--mintl); line-height: 1.05; margin-bottom: 0.75rem; }
+.hero-sub { font-family: 'Cormorant Garamond', serif; font-size: clamp(18px, 3vw, 20px); font-style: italic; color: rgba(159,225,203,0.7); margin-bottom: 2rem; line-height: 1.5; }
 
 /* Billing toggle */
-.billing-toggle { display: inline-flex; align-items: center; gap: 12px; background: rgba(26,61,54,0.6); border-radius: 10px; padding: 6px 16px; }
+.billing-toggle { display: inline-flex; align-items: center; flex-wrap: wrap; justify-content: center; gap: 12px; background: rgba(26,61,54,0.6); border-radius: 10px; padding: 6px 16px; }
 .bt-label { font-size: 13px; color: rgba(159,225,203,0.6); transition: color 0.2s; }
 .bt-label.active { color: var(--mintl); font-weight: 500; }
 .toggle-switch { position: relative; width: 44px; height: 24px; cursor: pointer; }
@@ -46,26 +49,26 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba
 .toggle-thumb { position: absolute; top: 3px; left: 3px; width: 18px; height: 18px; background: var(--sage); border-radius: 50%; transition: transform 0.2s; }
 .toggle-switch input:checked + .toggle-track { background: var(--sage); }
 .toggle-switch input:checked + .toggle-track + .toggle-thumb { transform: translateX(20px); }
-.save-badge { background: rgba(239,159,39,0.2); color: var(--saffron); font-size: 10px; padding: 3px 10px; border-radius: 20px; font-weight: 600; letter-spacing: 0.06em; }
+.save-badge { background: rgba(239,159,39,0.2); color: var(--saffron); font-size: 10px; padding: 3px 10px; border-radius: 20px; font-weight: 600; letter-spacing: 0.06em; white-space: nowrap; }
 
 /* PLANS */
-.plans-section { padding: 5rem 3rem; max-width: 1120px; margin: 0 auto; }
-.plans-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; margin-bottom: 1rem; }
+.plans-section { padding: 5rem 3rem; max-width: 1280px; margin: 0 auto; }
+.plans-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-bottom: 1rem; }
 .plan-card { border-radius: 16px; border: 0.5px solid rgba(15,46,40,0.12); background: var(--white); overflow: hidden; display: flex; flex-direction: column; transition: transform 0.2s, box-shadow 0.2s; }
 .plan-card:hover { transform: translateY(-4px); box-shadow: 0 20px 60px rgba(15,46,40,0.1); }
 .plan-card.featured { border-color: var(--sage); border-width: 1.5px; background: var(--forest); }
-.plan-top { padding: 2rem 2rem 1.5rem; }
+.plan-top { padding: 2rem 1.5rem 1.5rem; }
 .plan-badge { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; padding: 3px 12px; border-radius: 20px; margin-bottom: 1rem; display: inline-block; }
 .plan-card:not(.featured) .plan-badge { background: var(--mintl); color: var(--sage); }
 .plan-card.featured .plan-badge { background: rgba(29,158,117,0.2); color: var(--mint); }
-.plan-name { font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 600; margin-bottom: 8px; }
+.plan-name { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 600; margin-bottom: 8px; }
 .plan-card:not(.featured) .plan-name { color: var(--forest); }
 .plan-card.featured .plan-name { color: var(--mintl); }
-.plan-desc { font-size: 13px; line-height: 1.6; margin-bottom: 1.5rem; }
+.plan-desc { font-size: 13px; line-height: 1.6; margin-bottom: 1.5rem; min-height: 40px; }
 .plan-card:not(.featured) .plan-desc { color: var(--gray); }
 .plan-card.featured .plan-desc { color: rgba(159,225,203,0.65); }
 .plan-price { display: flex; align-items: baseline; gap: 4px; margin-bottom: 4px; }
-.price-amount { font-family: 'Cormorant Garamond', serif; font-size: 52px; font-weight: 600; line-height: 1; transition: all 0.3s; }
+.price-amount { font-family: 'Cormorant Garamond', serif; font-size: 46px; font-weight: 600; line-height: 1; transition: all 0.3s; }
 .plan-card:not(.featured) .price-amount { color: var(--forest); }
 .plan-card.featured .price-amount { color: var(--mintl); }
 .price-period { font-size: 14px; }
@@ -74,10 +77,10 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba
 .price-annual-note { font-size: 11px; margin-bottom: 0; min-height: 16px; }
 .plan-card:not(.featured) .price-annual-note { color: var(--sage); }
 .plan-card.featured .price-annual-note { color: var(--mint); }
-.plan-divider { height: 0.5px; margin: 0 2rem; }
+.plan-divider { height: 0.5px; margin: 0 1.5rem; }
 .plan-card:not(.featured) .plan-divider { background: var(--linend); }
 .plan-card.featured .plan-divider { background: rgba(29,158,117,0.2); }
-.plan-features { padding: 1.5rem 2rem; flex: 1; }
+.plan-features { padding: 1.5rem; flex: 1; }
 .feat-group-label { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 500; margin-bottom: 10px; margin-top: 16px; }
 .plan-card:not(.featured) .feat-group-label { color: var(--gray); }
 .plan-card.featured .feat-group-label { color: rgba(93,202,165,0.5); }
@@ -93,7 +96,7 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba
 .feat-text em { font-style: normal; font-weight: 500; }
 .plan-card:not(.featured) .feat-text em { color: var(--forest); }
 .plan-card.featured .feat-text em { color: var(--mintl); }
-.plan-bottom { padding: 1.5rem 2rem 2rem; }
+.plan-bottom { padding: 1.5rem 1.5rem 2rem; }
 .plan-btn { width: 100%; padding: 14px; border-radius: 8px; font-size: 14px; font-weight: 500; cursor: pointer; border: none; font-family: 'DM Sans', sans-serif; transition: all 0.2s; text-align: center; display: block; text-decoration: none; }
 .plan-card:not(.featured) .plan-btn { background: var(--mintl); color: var(--forest); }
 .plan-card:not(.featured) .plan-btn:hover { background: var(--sage); color: white; }
@@ -103,35 +106,63 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba
 .plan-card:not(.featured) .plan-trial-note { color: var(--gray); }
 .plan-card.featured .plan-trial-note { color: rgba(93,202,165,0.4); }
 
-/* ENTERPRISE */
-.enterprise-banner { background: var(--linend); border-radius: 16px; padding: 2rem 2.5rem; display: flex; align-items: center; justify-content: space-between; gap: 2rem; border: 0.5px solid rgba(15,46,40,0.1); }
-.eb-left {}
-.eb-title { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 600; color: var(--forest); margin-bottom: 6px; }
-.eb-desc { font-size: 14px; color: var(--gray); line-height: 1.6; }
-.eb-features { display: flex; gap: 1.5rem; margin-top: 12px; flex-wrap: wrap; }
-.eb-feat { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--dark); }
-.eb-feat::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--sage); flex-shrink: 0; }
-.eb-cta { flex-shrink: 0; }
-.btn-outline { padding: 13px 28px; border: 1.5px solid var(--forest); color: var(--forest); border-radius: 8px; font-size: 14px; font-weight: 500; text-decoration: none; transition: all 0.2s; white-space: nowrap; display: block; text-align: center; font-family: 'DM Sans', sans-serif; }
-.btn-outline:hover { background: var(--forest); color: var(--linen); }
-
 /* COMPARISON TABLE */
-.comparison-section { padding: 4rem 3rem; max-width: 1120px; margin: 0 auto; }
+.comparison-section { padding: 4rem 3rem; max-width: 1280px; margin: 0 auto; }
 .section-header { text-align: center; margin-bottom: 3rem; }
 .sec-eyebrow { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--sage); font-weight: 500; margin-bottom: 8px; }
-.sec-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(32px,4vw,46px); font-weight: 600; color: var(--forest); line-height: 1.1; }
+.sec-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(28px, 5vw, 46px); font-weight: 600; color: var(--forest); line-height: 1.1; }
 
-.comp-table { width: 100%; border-collapse: collapse; border-radius: 12px; overflow: hidden; }
+/* Responsive Table Wrapper */
+.table-responsive { 
+  width: 100%; 
+  overflow-x: auto; 
+  -webkit-overflow-scrolling: touch; 
+  border-radius: 12px; 
+  box-shadow: 0 10px 30px rgba(15,46,40,0.05); 
+  position: relative;
+}
+
+.comp-table { width: 100%; border-collapse: collapse; min-width: 800px; }
 .comp-table th, .comp-table td { padding: 14px 20px; text-align: left; font-size: 13px; }
-.comp-table thead th { background: var(--forest); color: var(--mintl); font-size: 14px; font-weight: 500; }
-.comp-table thead th:first-child { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 600; }
-.comp-table thead th:not(:first-child) { text-align: center; }
+
+/* Header */
+.comp-table thead th { background: var(--forest); color: var(--mintl); font-size: 14px; font-weight: 500; position: sticky; top: 0; z-index: 10; }
+.comp-table thead th:first-child { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 600; position: sticky; left: 0; background: var(--forest); z-index: 11; box-shadow: 2px 0 5px rgba(0,0,0,0.05); }
 .comp-table thead th.col-featured { background: var(--sage); }
-.comp-table tbody tr:nth-child(even) td { background: var(--linen); }
-.comp-table tbody tr:nth-child(odd) td { background: var(--white); }
+.comp-table thead th:not(:first-child) { text-align: center; }
+
+/* Alternating Row Backgrounds */
+.comp-table tbody tr:nth-child(odd) { background: var(--white); }
+.comp-table tbody tr:nth-child(even) { background: var(--linen); }
+
+/* Sticky Left Column */
+.comp-table tbody td:first-child { 
+  color: var(--dark); 
+  font-weight: 500; 
+  position: sticky; 
+  left: 0; 
+  z-index: 5; 
+  box-shadow: 2px 0 5px rgba(0,0,0,0.03); 
+}
+.comp-table tbody tr:nth-child(odd) td:first-child { background: var(--white); }
+.comp-table tbody tr:nth-child(even) td:first-child { background: var(--linen); }
+
+/* Category Row */
+.comp-table .cat-row td { 
+  font-size: 11px; 
+  letter-spacing: 0.1em; 
+  text-transform: uppercase; 
+  color: var(--gray); 
+  font-weight: 500; 
+  padding: 10px 20px; 
+  position: sticky; 
+  left: 0; 
+  background: var(--linend) !important; 
+  z-index: 6; 
+}
+
 .comp-table tbody td:not(:first-child) { text-align: center; }
-.comp-table tbody td:first-child { color: var(--dark); font-weight: 400; }
-.comp-table .cat-row td { background: var(--linend); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray); font-weight: 500; padding: 8px 20px; }
+
 .check { color: var(--sage); font-size: 16px; font-weight: 600; }
 .dash { color: rgba(136,135,128,0.35); font-size: 18px; }
 .partial { font-size: 11px; color: var(--saffron); font-weight: 500; }
@@ -156,23 +187,74 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba
 /* CTA */
 .page-cta { background: var(--forest); padding: 5rem 3rem; text-align: center; }
 .cta-inner { max-width: 540px; margin: 0 auto; }
-.cta-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(36px,5vw,52px); font-weight: 600; color: var(--mintl); margin-bottom: 1rem; line-height: 1.1; }
+.cta-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(32px,5vw,52px); font-weight: 600; color: var(--mintl); margin-bottom: 1rem; line-height: 1.1; }
 .cta-sub { font-size: 15px; color: rgba(159,225,203,0.6); margin-bottom: 2.5rem; }
 .cta-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-.btn-primary { background: var(--sage); color: white; padding: 14px 32px; border-radius: 8px; font-size: 14px; font-weight: 500; text-decoration: none; transition: all 0.2s; }
+.btn-primary { background: var(--sage); color: white; padding: 14px 32px; border-radius: 8px; font-size: 14px; font-weight: 500; text-decoration: none; transition: all 0.2s; text-align: center;}
 .btn-primary:hover { background: var(--mint); transform: translateY(-1px); }
-.btn-ghost { color: var(--mintl); padding: 14px 24px; border-radius: 8px; font-size: 14px; font-weight: 400; text-decoration: none; border: 0.5px solid rgba(93,202,165,0.25); transition: all 0.2s; }
+.btn-ghost { color: var(--mintl); padding: 14px 24px; border-radius: 8px; font-size: 14px; font-weight: 400; text-decoration: none; border: 0.5px solid rgba(93,202,165,0.25); transition: all 0.2s; text-align: center;}
 .btn-ghost:hover { border-color: var(--mint); color: var(--mint); }
 
-@media (max-width: 900px) {
+/* === MEDIA QUERIES === */
+@media (max-width: 1100px) {
+  /* 2 coloane pe tablete medii */
+  .plans-grid { grid-template-columns: repeat(2, 1fr); max-width: 700px; margin: 0 auto; }
+}
+
+@media (max-width: 768px) {
+  /* Navigation */
   nav { padding: 0 1.5rem; }
-  .plans-grid { grid-template-columns: 1fr; }
-  .enterprise-banner { flex-direction: column; }
-  .plans-section, .comparison-section, .faq-section { padding: 3rem 1.5rem; }
-  .proof-section { padding: 2rem 1.5rem; }
-  .comp-table { font-size: 12px; }
-  .comp-table th, .comp-table td { padding: 10px 12px; }
+  .mobile-toggle { display: block; }
+  
+  .nav-links { 
+    display: none; 
+    position: absolute; 
+    top: 64px; 
+    left: 0; 
+    right: 0; 
+    background: var(--white); 
+    flex-direction: column; 
+    align-items: flex-start;
+    padding: 2rem 1.5rem; 
+    gap: 1.5rem;
+    box-shadow: 0 10px 20px rgba(15,46,40,0.08); 
+    border-bottom: 1px solid var(--linend);
+  }
+  .nav-links.active { display: flex; }
+  .nav-links a { font-size: 16px; width: 100%; text-align: left; }
+  .nav-cta { width: 100%; text-align: center; }
+
+  /* Sections Padding */
   .page-hero { padding: 100px 1.5rem 60px; }
+  .plans-section, .comparison-section, .faq-section, .page-cta { padding: 3rem 1.5rem; }
+  .proof-section { padding: 2rem 1.5rem; }
+
+  /* 1 coloană pe telefoane */
+  .plans-grid { grid-template-columns: 1fr; max-width: 450px; }
+  
+  /* Social Proof */
+  .proof-logos { gap: 1.5rem; }
+  
+  /* Titles Table */
+  .sec-title { font-size: 28px; line-height: 1.2; }
+
+  /* Table Adjustments for Mobile */
+  .comp-table { min-width: 600px; }
+  .comp-table th, .comp-table td { padding: 12px 10px; font-size: 12px; }
+  
+  /* Control left column width to allow space for content */
+  .comp-table thead th:first-child { font-size: 15px; min-width: 120px; max-width: 120px; white-space: normal; }
+  .comp-table tbody td:first-child { min-width: 120px; max-width: 120px; font-size: 11px; white-space: normal; line-height: 1.4; }
+  .comp-table .cat-row td { padding: 8px 10px; font-size: 10px; }
+  .check { font-size: 14px; }
+  
+  /* Buttons */
+  .cta-btns { flex-direction: column; }
+  .btn-primary, .btn-ghost { width: 100%; }
+}
+
+@media (max-width: 480px) {
+  .plan-top, .plan-features, .plan-bottom { padding-left: 1.5rem; padding-right: 1.5rem; }
 }
 </style>
 </head>
@@ -180,6 +262,7 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba
 
 <nav>
   <a href="noura-landing.html" class="nav-logo">Noura<span>.</span></a>
+  <button class="mobile-toggle" aria-label="Deschide meniul">☰</button>
   <div class="nav-links">
     <a href="noura-landing.html">Acasă</a>
     <a href="noura-how-it-works.html">Cum funcționează</a>
@@ -216,7 +299,7 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba
       <div class="plan-top">
         <div class="plan-badge">Solo</div>
         <div class="plan-name">Solo</div>
-        <div class="plan-desc">Perfectă pentru nutriționistul care lucrează independent și vrea să înlocuiască Excel-ul și PDF-urile.</div>
+        <div class="plan-desc">Perfectă pentru nutriționistul independent. Înlocuiește Excel-ul și PDF-urile.</div>
         <div class="plan-price">
           <span class="price-amount" id="price-solo">€79</span>
           <span class="price-period">/ lună</span>
@@ -228,16 +311,15 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba
         <div class="feat-group-label">Clienți & planuri</div>
         <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text"><em>1 nutriționist</em></div></div>
         <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text">Până la <em>30 clienți activi</em></div></div>
-        <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text">Plan nutrițional builder complet</div></div>
+        <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text">Plan nutrițional complet</div></div>
         <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text">Calcul automat macronutrienți</div></div>
         <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text">Export PDF <em>nelimitat</em></div></div>
         <div class="feat-group-label">Recipe Studio</div>
         <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text">Bibliotecă rețete personală</div></div>
-        <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text">Verificare compatibilitate alergeni</div></div>
+        <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text">Verificare alergeni automată</div></div>
         <div class="feat-item"><div class="feat-dash">—</div><div class="feat-text" style="color:var(--gray);">Collaboration layer</div></div>
         <div class="feat-group-label">Suport</div>
         <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text">Email support (48h)</div></div>
-        <div class="feat-item"><div class="feat-dash">—</div><div class="feat-text" style="color:var(--gray);">Chat live</div></div>
       </div>
       <div class="plan-bottom">
         <a href="noura-onboarding.html" class="plan-btn">Începe trial 14 zile</a>
@@ -250,7 +332,7 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba
       <div class="plan-top">
         <div class="plan-badge">⭐ Cel mai popular</div>
         <div class="plan-name">Pro</div>
-        <div class="plan-desc">Pentru nutriționistul care colaborează cu unul sau mai mulți bucătari personali și vrea vizibilitate completă.</div>
+        <div class="plan-desc">Pentru nutriționistul care colaborează direct cu bucătari personali.</div>
         <div class="plan-price">
           <span class="price-amount" id="price-pro">€179</span>
           <span class="price-period">/ lună</span>
@@ -262,8 +344,6 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba
         <div class="feat-group-label">Clienți & planuri</div>
         <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text"><em>1 nutriționist + 2 bucătari</em></div></div>
         <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text">Clienți <em>nelimitați</em></div></div>
-        <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text">Plan nutrițional builder complet</div></div>
-        <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text">Calcul automat macronutrienți</div></div>
         <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text">Template-uri reutilizabile</div></div>
         <div class="feat-group-label">Collaboration</div>
         <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text"><em>Collaboration layer complet</em></div></div>
@@ -286,7 +366,7 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba
       <div class="plan-top">
         <div class="plan-badge">Clinic</div>
         <div class="plan-name">Clinic</div>
-        <div class="plan-desc">Pentru cabinete și clinici cu echipe mai mari, nevoi de branding propriu și integrări avansate.</div>
+        <div class="plan-desc">Pentru cabinete și clinici medii, cu nevoi de branding propriu.</div>
         <div class="plan-price">
           <span class="price-amount" id="price-clinic">€490</span>
           <span class="price-period">/ lună</span>
@@ -302,37 +382,49 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba
         <div class="feat-group-label">Funcționalități avansate</div>
         <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text"><em>White-label</em> — logo & culori proprii</div></div>
         <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text"><em>API access</em> pentru integrări</div></div>
-        <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text">Rapoarte personalizate avansate</div></div>
-        <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text">SSO (Single Sign-On)</div></div>
+        <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text">Rapoarte personalizate</div></div>
         <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text">Audit log complet GDPR</div></div>
         <div class="feat-group-label">Suport dedicat</div>
         <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text"><em>Account manager dedicat</em></div></div>
         <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text">Onboarding asistat (4h)</div></div>
-        <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text">SLA garantat 99.5% uptime</div></div>
       </div>
       <div class="plan-bottom">
-        <a href="mailto:hello@noura.app" class="plan-btn">Contactează echipa</a>
-        <div class="plan-trial-note">Demo personalizat disponibil</div>
+        <a href="noura-onboarding.html" class="plan-btn">Începe trial 14 zile</a>
+        <div class="plan-trial-note">Include onboarding asistat</div>
       </div>
     </div>
 
-  </div>
-
-  <!-- ENTERPRISE BANNER -->
-  <div class="enterprise-banner">
-    <div class="eb-left">
-      <div class="eb-title">Ai o rețea de cabinete sau un spital?</div>
-      <div class="eb-desc">Oferim planuri Enterprise personalizate cu prețuri bazate pe volum, integrări HL7/FHIR și suport dedicat pentru conformitate medicală.</div>
-      <div class="eb-features">
-        <div class="eb-feat">Prețuri bazate pe volum</div>
-        <div class="eb-feat">Integrare EHR / HL7</div>
-        <div class="eb-feat">Contract SLA personalizat</div>
-        <div class="eb-feat">Training echipă inclus</div>
+    <!-- ENTERPRISE (Nou) -->
+    <div class="plan-card">
+      <div class="plan-top">
+        <div class="plan-badge">Enterprise</div>
+        <div class="plan-name">Rețea</div>
+        <div class="plan-desc">Pentru spitale sau rețele cu nevoi de integrări medicale și securitate la scară.</div>
+        <div class="plan-price">
+          <span class="price-amount" style="font-size: 34px; padding-top: 5px; padding-bottom: 7px;">Personalizat</span>
+        </div>
+        <div class="price-annual-note">Facturare la cerere</div>
+      </div>
+      <div class="plan-divider"></div>
+      <div class="plan-features">
+        <div class="feat-group-label">Organizație</div>
+        <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text">Volum personalizat <em>la scară</em></div></div>
+        <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text">SSO (Single Sign-On)</div></div>
+        <div class="feat-group-label">Integrări & Medical</div>
+        <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text">Integrare EHR / <em>HL7 / FHIR</em></div></div>
+        <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text">Opțiune server dedicat</div></div>
+        <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text">Conformitate medicală absolută</div></div>
+        <div class="feat-group-label">Suport Enterprise</div>
+        <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text"><em>Contract SLA</em> personalizat</div></div>
+        <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text">Training pentru toată echipa</div></div>
+        <div class="feat-item"><div class="feat-check">✓</div><div class="feat-text">Suport tehnic 24/7</div></div>
+      </div>
+      <div class="plan-bottom">
+        <a href="mailto:enterprise@noura.app" class="plan-btn">Discutăm →</a>
+        <div class="plan-trial-note">Prețuri bazate pe volum</div>
       </div>
     </div>
-    <div class="eb-cta">
-      <a href="mailto:enterprise@noura.app" class="btn-outline">Discutăm →</a>
-    </div>
+
   </div>
 </div>
 
@@ -354,55 +446,64 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba
     <div class="sec-eyebrow">Comparație detaliată</div>
     <h2 class="sec-title">Tot ce primești, plan cu plan.</h2>
   </div>
-  <table class="comp-table">
-    <thead>
-      <tr>
-        <th>Funcționalitate</th>
-        <th>Solo</th>
-        <th class="col-featured">Pro</th>
-        <th>Clinic</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr class="cat-row"><td colspan="4">Clienți & utilizatori</td></tr>
-      <tr><td>Nutriționiști incluși</td><td>1</td><td>1</td><td>Nelimitați</td></tr>
-      <tr><td>Bucătari incluși</td><td>—</td><td>2</td><td>Nelimitați</td></tr>
-      <tr><td>Clienți activi</td><td>30</td><td>Nelimitați</td><td>Nelimitați</td></tr>
-      <tr class="cat-row"><td colspan="4">Plan nutrițional</td></tr>
-      <tr><td>Builder drag-and-drop</td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
-      <tr><td>Calcul macro automat</td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
-      <tr><td>Export PDF</td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
-      <tr><td>Template-uri reutilizabile</td><td><span class="partial">3 template-uri</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
-      <tr><td>PDF cu branding propriu</td><td><span class="dash">—</span></td><td><span class="partial">Logo cabinet</span></td><td><span class="check">✓</span></td></tr>
-      <tr class="cat-row"><td colspan="4">Recipe Studio</td></tr>
-      <tr><td>Bibliotecă rețete</td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
-      <tr><td>Verificare alergeni în timp real</td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
-      <tr><td>Mod cooking step-by-step</td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
-      <tr><td>Scalare automată porții</td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
-      <tr class="cat-row"><td colspan="4">Colaborare</td></tr>
-      <tr><td>Collaboration layer</td><td><span class="dash">—</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
-      <tr><td>Flux aprobare modificări</td><td><span class="dash">—</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
-      <tr><td>Notificări real-time</td><td><span class="dash">—</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
-      <tr><td>Shopping list automată</td><td><span class="dash">—</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
-      <tr class="cat-row"><td colspan="4">Analytics & rapoarte</td></tr>
-      <tr><td>Dashboard progres clienți</td><td><span class="partial">Basic</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
-      <tr><td>Rapoarte lunare automate</td><td><span class="dash">—</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
-      <tr><td>Rapoarte personalizate</td><td><span class="dash">—</span></td><td><span class="dash">—</span></td><td><span class="check">✓</span></td></tr>
-      <tr><td>Export date CSV</td><td><span class="dash">—</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
-      <tr class="cat-row"><td colspan="4">Securitate & conformitate</td></tr>
-      <tr><td>GDPR compliant</td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
-      <tr><td>2FA obligatoriu</td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
-      <tr><td>Audit log complet</td><td><span class="dash">—</span></td><td><span class="partial">30 zile</span></td><td><span class="check">✓ Nelimitat</span></td></tr>
-      <tr><td>SSO / SAML</td><td><span class="dash">—</span></td><td><span class="dash">—</span></td><td><span class="check">✓</span></td></tr>
-      <tr><td>API access</td><td><span class="dash">—</span></td><td><span class="dash">—</span></td><td><span class="check">✓</span></td></tr>
-      <tr><td>White-label</td><td><span class="dash">—</span></td><td><span class="dash">—</span></td><td><span class="check">✓</span></td></tr>
-      <tr class="cat-row"><td colspan="4">Suport</td></tr>
-      <tr><td>Email support</td><td>48h</td><td>12h</td><td>4h</td></tr>
-      <tr><td>Chat live</td><td><span class="dash">—</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
-      <tr><td>Account manager dedicat</td><td><span class="dash">—</span></td><td><span class="dash">—</span></td><td><span class="check">✓</span></td></tr>
-      <tr><td>Onboarding asistat</td><td><span class="dash">—</span></td><td><span class="partial">Webinar</span></td><td><span class="check">✓ 4h 1:1</span></td></tr>
-    </tbody>
-  </table>
+  
+  <div class="table-responsive">
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th>Funcționalitate</th>
+          <th>Solo</th>
+          <th class="col-featured">Pro</th>
+          <th>Clinic</th>
+          <th>Enterprise</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="cat-row"><td colspan="5">Clienți & utilizatori</td></tr>
+        <tr><td>Nutriționiști incluși</td><td>1</td><td>1</td><td>Nelimitați</td><td>Personalizat</td></tr>
+        <tr><td>Bucătari incluși</td><td>—</td><td>2</td><td>Nelimitați</td><td>Personalizat</td></tr>
+        <tr><td>Clienți activi</td><td>30</td><td>Nelimitați</td><td>Nelimitați</td><td>Nelimitați</td></tr>
+        
+        <tr class="cat-row"><td colspan="5">Plan nutrițional</td></tr>
+        <tr><td>Builder drag-and-drop</td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>Calcul macro automat</td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>Export PDF</td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>Template-uri reutilizabile</td><td><span class="partial">3 template-uri</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>PDF cu branding propriu</td><td><span class="dash">—</span></td><td><span class="partial">Logo cabinet</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+        
+        <tr class="cat-row"><td colspan="5">Recipe Studio</td></tr>
+        <tr><td>Bibliotecă rețete</td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>Verificare alergeni</td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>Mod cooking step-by-step</td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>Scalare automată porții</td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+        
+        <tr class="cat-row"><td colspan="5">Colaborare</td></tr>
+        <tr><td>Collaboration layer</td><td><span class="dash">—</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>Flux aprobare modificări</td><td><span class="dash">—</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>Notificări real-time</td><td><span class="dash">—</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+        
+        <tr class="cat-row"><td colspan="5">Analytics & rapoarte</td></tr>
+        <tr><td>Dashboard progres clienți</td><td><span class="partial">Basic</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>Rapoarte lunare automate</td><td><span class="dash">—</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>Rapoarte personalizate</td><td><span class="dash">—</span></td><td><span class="dash">—</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+        
+        <tr class="cat-row"><td colspan="5">Securitate, Integrări & Conformitate</td></tr>
+        <tr><td>GDPR compliant</td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>2FA obligatoriu</td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>Audit log complet</td><td><span class="dash">—</span></td><td><span class="partial">30 zile</span></td><td><span class="check">✓ Nelimitat</span></td><td><span class="check">✓ Nelimitat</span></td></tr>
+        <tr><td>API access</td><td><span class="dash">—</span></td><td><span class="dash">—</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>SSO / SAML</td><td><span class="dash">—</span></td><td><span class="dash">—</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>Integrare EHR / HL7</td><td><span class="dash">—</span></td><td><span class="dash">—</span></td><td><span class="dash">—</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>Server dedicat on-premise</td><td><span class="dash">—</span></td><td><span class="dash">—</span></td><td><span class="dash">—</span></td><td><span class="check">✓</span></td></tr>
+        
+        <tr class="cat-row"><td colspan="5">Suport</td></tr>
+        <tr><td>Timp de răspuns garantat</td><td>48h</td><td>12h</td><td>4h</td><td><span class="check">SLA dedicat</span></td></tr>
+        <tr><td>Chat live</td><td><span class="dash">—</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓ 24/7</span></td></tr>
+        <tr><td>Account manager dedicat</td><td><span class="dash">—</span></td><td><span class="dash">—</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>Onboarding asistat</td><td><span class="dash">—</span></td><td><span class="partial">Webinar</span></td><td><span class="check">✓ 4h 1:1</span></td><td><span class="check">✓ Inclus pentru echipă</span></td></tr>
+      </tbody>
+    </table>
+  </div>
 </div>
 
 <!-- FAQ -->
@@ -436,10 +537,6 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba
       <button class="faq-q" onclick="toggleFaq(this)">Pot importa clienții existenți din Excel sau alt tool? <span class="faq-icon">+</span></button>
       <div class="faq-a"><div class="faq-a-inner">Da, oferim import CSV pentru profiluri de clienți (date demografice, restricții, obiective). Echipa noastră te asistă gratuit în migrare dacă ai mai mult de 20 de clienți — scrie-ne la hello@noura.app.</div></div>
     </div>
-    <div class="faq-item">
-      <button class="faq-q" onclick="toggleFaq(this)">Există o aplicație mobilă? <span class="faq-icon">+</span></button>
-      <div class="faq-a"><div class="faq-a-inner">În prezent Noura este o aplicație web responsivă, optimizată atât pentru desktop cât și pentru telefon. Aplicația nativă iOS pentru bucătari este planificată pentru Q1 2027 (versiunea 1.2 din roadmap).</div></div>
-    </div>
   </div>
 </div>
 
@@ -456,6 +553,16 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba
 </section>
 
 <script>
+// Toggle Mobile Menu
+document.querySelector('.mobile-toggle').addEventListener('click', function() {
+  document.querySelector('.nav-links').classList.toggle('active');
+  if (this.textContent === '☰') {
+    this.textContent = '✕';
+  } else {
+    this.textContent = '☰';
+  }
+});
+
 // Billing toggle
 const prices = {
   monthly: { solo: '€79',  pro: '€179', clinic: '€490' },
@@ -492,4 +599,3 @@ function toggleFaq(btn) {
 </script>
 </body>
 </html>
-m
