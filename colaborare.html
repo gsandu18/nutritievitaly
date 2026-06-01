@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Noura. — Colaborare</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{--forest:#0F2E28;--forest2:#1a3d36;--sage:#1D9E75;--mint:#5DCAA5;--mintl:#E1F5EE;--saffron:#EF9F27;--saffl:#FAEEDA;--linen:#FAFAF8;--linend:#F1EFE8;--gray:#888780;--dark:#2C2C2A;--white:#FFFFFF;--red:#D85A30;--redl:#FAECE7;--purple:#AFA9EC;--purpll:#EEEDFE;}
+html,body{height:100%;font-family:'DM Sans',sans-serif;font-weight:300;background:var(--linen);color:var(--dark);overflow:hidden;}
+.app{display:grid;grid-template-columns:220px 1fr;height:100vh;overflow:hidden;}
+
+/* SIDEBAR */
+.sb{background:var(--forest);display:flex;flex-direction:column;}
+.sb-logo{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;color:#E1F5EE;padding:26px 22px 22px;letter-spacing:.02em;}
+.sb-logo span{color:var(--sage);}
+.sb-nav{padding:8px 0;flex:1;}
+.sb-s{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(93,202,165,.38);padding:14px 22px 5px;font-weight:500;}
+.sb-i{display:flex;align-items:center;gap:11px;padding:10px 22px;font-size:13px;color:rgba(159,225,203,.5);cursor:pointer;border-left:2.5px solid transparent;transition:all .15s;}
+.sb-i:hover{background:rgba(29,158,117,.1);color:rgba(225,245,238,.8);}
+.sb-i.active{background:rgba(29,158,117,.12);color:#E1F5EE;border-left-color:var(--sage);font-weight:500;}
+.sb-ico{width:15px;height:15px;border:1.5px solid currentColor;border-radius:3px;opacity:.6;flex-shrink:0;}
+.sb-i.active .sb-ico{opacity:1;}
+.sb-badge{margin-left:auto;background:rgba(239,159,39,.3);color:var(--saffron);font-size:10px;padding:2px 6px;border-radius:20px;font-weight:500;}
+.sb-user{padding:14px 18px;border-top:.5px solid rgba(29,158,117,.14);display:flex;align-items:center;gap:9px;flex-shrink:0;}
+.sb-av{width:32px;height:32px;border-radius:50%;background:rgba(29,158,117,.2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:500;color:var(--mint);flex-shrink:0;}
+.sb-uname{font-size:12px;color:rgba(225,245,238,.8);}
+.sb-urole{font-size:10px;color:rgba(93,202,165,.4);}
+
+/* MAIN */
+.main{display:grid;grid-template-columns:300px 1fr 280px;overflow:hidden;background:var(--linen);}
+
+/* Thread list */
+.thread-col{background:var(--white);border-right:.5px solid rgba(15,46,40,.09);display:flex;flex-direction:column;overflow:hidden;}
+.tc-top{padding:16px 14px 12px;border-bottom:.5px solid rgba(15,46,40,.08);flex-shrink:0;}
+.tc-title{font-size:14px;font-weight:500;color:var(--dark);margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;}
+.tc-badge{background:var(--saffl);color:#633806;font-size:10px;padding:2px 8px;border-radius:20px;font-weight:500;}
+.search-wrap{position:relative;}
+.si{width:100%;padding:8px 8px 8px 30px;font-size:12px;border:.5px solid rgba(15,46,40,.12);border-radius:8px;font-family:inherit;color:var(--dark);background:var(--linen);outline:none;}
+.si:focus{border-color:var(--sage);}
+.si-ico{position:absolute;left:9px;top:50%;transform:translateY(-50%);color:var(--gray);font-size:13px;pointer-events:none;}
+.filter-tabs{display:flex;border-bottom:.5px solid rgba(15,46,40,.08);flex-shrink:0;}
+.ft{flex:1;padding:9px 4px;font-size:11px;text-align:center;cursor:pointer;border-bottom:2px solid transparent;color:var(--gray);transition:all .15s;background:none;border-top:none;border-left:none;border-right:none;font-family:inherit;}
+.ft.active{color:var(--dark);border-bottom-color:var(--dark);font-weight:500;}
+
+.thread-list{flex:1;overflow-y:auto;}
+.ti{display:flex;align-items:flex-start;gap:10px;padding:12px 14px;border-bottom:.5px solid rgba(15,46,40,.05);cursor:pointer;transition:background .1s;}
+.ti:hover{background:var(--linen);}
+.ti.selected{background:var(--mintl);}
+.ti.unread .ti-name{font-weight:500;}
+.ti-av{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:500;flex-shrink:0;position:relative;}
+.ti-unread-dot{position:absolute;top:0;right:0;width:9px;height:9px;border-radius:50%;background:var(--saffron);border:2px solid var(--white);}
+.ti-body{flex:1;min-width:0;}
+.ti-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:2px;}
+.ti-name{font-size:12px;color:var(--dark);}
+.ti-time{font-size:10px;color:var(--gray);}
+.ti-preview{font-size:11px;color:var(--gray);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:3px;}
+.ti-chips{display:flex;gap:4px;flex-wrap:wrap;}
+.ti-chip{font-size:9px;padding:1px 6px;border-radius:20px;font-weight:500;}
+.chip-pend{background:var(--saffl);color:#633806;}
+.chip-ok{background:var(--mintl);color:#085041;}
+.chip-info{background:var(--purpll);color:#3C3489;}
+.chip-client{background:var(--linend);color:var(--gray);}
+
+/* Chat */
+.chat-col{display:flex;flex-direction:column;overflow:hidden;}
+.chat-header{background:var(--white);border-bottom:.5px solid rgba(15,46,40,.09);padding:0 18px;height:54px;display:flex;align-items:center;gap:12px;flex-shrink:0;}
+.ch-av{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:500;flex-shrink:0;}
+.ch-name{font-size:14px;font-weight:500;color:var(--dark);}
+.ch-sub{font-size:11px;color:var(--gray);}
+.ch-spacer{flex:1;}
+.ch-btn{padding:6px 14px;border-radius:8px;font-size:12px;font-weight:500;cursor:pointer;border:.5px solid rgba(15,46,40,.14);background:var(--white);color:var(--dark);font-family:inherit;transition:all .15s;}
+.ch-btn:hover{border-color:var(--sage);color:var(--sage);}
+.ch-btn.primary{background:var(--forest);color:#E1F5EE;border-color:var(--forest);}
+.ch-btn.primary:hover{background:var(--sage);}
+
+.chat-scroll{flex:1;overflow-y:auto;padding:16px 18px;display:flex;flex-direction:column;gap:12px;}
+.msg{display:flex;gap:9px;align-items:flex-start;}
+.msg.right{flex-direction:row-reverse;}
+.m-av{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:500;flex-shrink:0;margin-top:2px;}
+.m-bubble{max-width:72%;}
+.m-content{padding:10px 13px;border-radius:12px;font-size:12px;line-height:1.6;}
+.msg.left .m-content{background:var(--white);color:var(--dark);border-radius:4px 12px 12px 12px;border:.5px solid rgba(15,46,40,.08);}
+.msg.right .m-content{background:var(--forest);color:#E1F5EE;border-radius:12px 4px 12px 12px;}
+.m-time{font-size:9px;color:var(--gray);margin-top:3px;padding:0 2px;}
+.msg.right .m-time{text-align:right;}
+.m-pill{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:20px;font-size:10px;font-weight:500;margin-top:5px;}
+.mp-pend{background:var(--saffl);color:#633806;}
+.mp-ok{background:var(--mintl);color:#085041;}
+.mp-rej{background:var(--redl);color:#712B13;}
+
+/* Recipe card in chat */
+.recipe-card-msg{background:var(--linen);border:.5px solid rgba(15,46,40,.1);border-radius:10px;padding:10px 12px;margin-top:6px;}
+.rcm-title{font-size:12px;font-weight:500;color:var(--dark);margin-bottom:3px;}
+.rcm-meta{font-size:10px;color:var(--gray);}
+.rcm-macros{display:flex;gap:8px;margin-top:6px;}
+.rcmm{text-align:center;flex:1;background:var(--white);border-radius:6px;padding:5px;}
+.rcmm-val{font-size:12px;font-weight:500;color:var(--dark);}
+.rcmm-lbl{font-size:8px;color:var(--gray);}
+
+/* System message */
+.sys-msg{text-align:center;font-size:10px;color:var(--gray);padding:6px;position:relative;}
+.sys-msg::before,.sys-msg::after{content:'';position:absolute;top:50%;width:calc(50% - 70px);height:.5px;background:rgba(15,46,40,.1);}
+.sys-msg::before{left:0;}
+.sys-msg::after{right:0;}
+
+/* Input area */
+.chat-input{background:var(--white);border-top:.5px solid rgba(15,46,40,.09);padding:12px 18px;flex-shrink:0;}
+.ci-row{display:flex;gap:8px;align-items:flex-end;}
+.ci-ta{flex:1;padding:10px 12px;font-size:13px;border:.5px solid rgba(15,46,40,.14);border-radius:10px;font-family:inherit;color:var(--dark);background:var(--linen);resize:none;outline:none;height:40px;transition:all .2s;line-height:1.5;}
+.ci-ta:focus{border-color:var(--sage);height:72px;background:var(--white);}
+.ci-send{width:38px;height:40px;background:var(--forest);border:none;border-radius:10px;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;transition:background .15s;font-size:16px;color:#E1F5EE;}
+.ci-send:hover{background:var(--sage);}
+.ci-actions{display:flex;gap:6px;margin-top:6px;}
+.ci-action{padding:5px 12px;border-radius:20px;font-size:11px;border:.5px solid rgba(15,46,40,.14);background:var(--white);color:var(--gray);cursor:pointer;font-family:inherit;transition:all .15s;}
+.ci-action:hover{border-color:var(--saffron);color:#633806;background:var(--saffl);}
+
+/* Right info col */
+.info-col{background:var(--white);border-left:.5px solid rgba(15,46,40,.09);display:flex;flex-direction:column;overflow:hidden;}
+.ic-header{padding:14px 14px 10px;border-bottom:.5px solid rgba(15,46,40,.08);flex-shrink:0;}
+.ic-title{font-size:12px;font-weight:500;color:var(--dark);margin-bottom:2px;}
+.ic-sub{font-size:10px;color:var(--gray);}
+.ic-scroll{flex:1;overflow-y:auto;padding:12px;}
+
+.pending-section{margin-bottom:16px;}
+.ps-title{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--gray);font-weight:500;margin-bottom:8px;}
+.pending-item{background:var(--saffl);border-radius:10px;padding:10px 12px;margin-bottom:8px;border:.5px solid rgba(239,159,39,.2);}
+.pi-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;}
+.pi-title{font-size:11px;font-weight:500;color:#633806;}
+.pi-time{font-size:9px;color:rgba(99,56,6,.6);}
+.pi-body{font-size:11px;color:#633806;line-height:1.5;margin-bottom:8px;}
+.pi-actions{display:flex;gap:6px;}
+.pi-approve{flex:1;padding:6px;background:var(--sage);color:var(--white);border:none;border-radius:7px;font-size:11px;font-weight:500;cursor:pointer;font-family:inherit;transition:background .15s;}
+.pi-approve:hover{background:var(--mint);}
+.pi-reject{flex:1;padding:6px;background:var(--white);color:var(--red);border:.5px solid rgba(216,90,48,.3);border-radius:7px;font-size:11px;font-weight:500;cursor:pointer;font-family:inherit;transition:all .15s;}
+.pi-reject:hover{background:var(--redl);}
+
+.history-item{display:flex;gap:7px;padding:8px 0;border-bottom:.5px solid rgba(15,46,40,.06);}
+.history-item:last-child{border-bottom:none;}
+.hi-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:4px;}
+.hi-body{flex:1;}
+.hi-text{font-size:11px;color:var(--dark);line-height:1.5;}
+.hi-meta{font-size:9px;color:var(--gray);margin-top:2px;}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="sb">
+    <div class="sb-logo">Noura<span>.</span></div>
+    <div class="sb-nav">
+      <div class="sb-s">Principal</div>
+      <div class="sb-i"><div class="sb-ico"></div>Dashboard</div>
+      <div class="sb-i"><div class="sb-ico"></div>Clienți</div>
+      <div class="sb-i"><div class="sb-ico"></div>Planuri</div>
+      <div class="sb-i"><div class="sb-ico"></div>Rețete</div>
+      <div class="sb-s">Analiză</div>
+      <div class="sb-i"><div class="sb-ico"></div>Analytics</div>
+      <div class="sb-i"><div class="sb-ico"></div>Rapoarte</div>
+      <div class="sb-s">Echipă</div>
+      <div class="sb-i active"><div class="sb-ico"></div>Colaborare <span class="sb-badge">3</span></div>
+      <div class="sb-i"><div class="sb-ico"></div>Setări</div>
+    </div>
+    <div class="sb-user">
+      <div class="sb-av">AM</div>
+      <div><div class="sb-uname">Dr. Alina M.</div><div class="sb-urole">nutriționist</div></div>
+    </div>
+  </div>
+
+  <div class="main">
+    <!-- Thread list -->
+    <div class="thread-col">
+      <div class="tc-top">
+        <div class="tc-title">Colaborare <span class="tc-badge">3 pending</span></div>
+        <div class="search-wrap">
+          <span class="si-ico">⊡</span>
+          <input class="si" type="text" placeholder="Caută conversație...">
+        </div>
+      </div>
+      <div class="filter-tabs">
+        <button class="ft active">Toate</button>
+        <button class="ft">Pending</button>
+        <button class="ft">Andrei M.</button>
+        <button class="ft">Ioana R.</button>
+      </div>
+      <div class="thread-list">
+        <div class="ti selected unread" onclick="selectThread(this)">
+          <div class="ti-av" style="background:var(--saffl);color:#633806;">RC<div class="ti-unread-dot"></div></div>
+          <div class="ti-body">
+            <div class="ti-header"><div class="ti-name">Radu Constantin</div><div class="ti-time">12 min</div></div>
+            <div class="ti-preview">Sodiu redus cu 38% — sare roz înlocuită. Gata pentru joi.</div>
+            <div class="ti-chips"><div class="ti-chip chip-client">Andrei M.</div><div class="ti-chip chip-ok">✓ Aplicat</div></div>
+          </div>
+        </div>
+        <div class="ti unread" onclick="selectThread(this)">
+          <div class="ti-av" style="background:var(--saffl);color:#633806;">MC<div class="ti-unread-dot"></div></div>
+          <div class="ti-body">
+            <div class="ti-header"><div class="ti-name">Maria Constantin</div><div class="ti-time">1 oră</div></div>
+            <div class="ti-preview">Pot substitui somonul cu ton pentru Ioana?</div>
+            <div class="ti-chips"><div class="ti-chip chip-client">Ioana R.</div><div class="ti-chip chip-pend">⏳ Pending</div></div>
+          </div>
+        </div>
+        <div class="ti unread" onclick="selectThread(this)">
+          <div class="ti-av" style="background:var(--saffl);color:#633806;">RC<div class="ti-unread-dot"></div></div>
+          <div class="ti-body">
+            <div class="ti-header"><div class="ti-name">Radu Constantin</div><div class="ti-time">2 ore</div></div>
+            <div class="ti-preview">3 rețete noi compatibile cu planul Mihai P. adăugate.</div>
+            <div class="ti-chips"><div class="ti-chip chip-client">Mihai P.</div><div class="ti-chip chip-info">📋 3 rețete</div></div>
+          </div>
+        </div>
+        <div class="ti" onclick="selectThread(this)">
+          <div class="ti-av" style="background:var(--saffl);color:#633806;">RC</div>
+          <div class="ti-body">
+            <div class="ti-header"><div class="ti-name">Radu Constantin</div><div class="ti-time">Ieri</div></div>
+            <div class="ti-preview">Quinoa înlocuită cu orez brun pentru Andrei — mai ușor digestibil.</div>
+            <div class="ti-chips"><div class="ti-chip chip-client">Andrei M.</div><div class="ti-chip chip-ok">✓ Aprobat</div></div>
+          </div>
+        </div>
+        <div class="ti" onclick="selectThread(this)">
+          <div class="ti-av" style="background:var(--saffl);color:#633806;">MC</div>
+          <div class="ti-body">
+            <div class="ti-header"><div class="ti-name">Maria Constantin</div><div class="ti-time">Ieri</div></div>
+            <div class="ti-preview">Plan săptămâna 3 complet pregătit pentru Ioana. Toate mesele ok.</div>
+            <div class="ti-chips"><div class="ti-chip chip-client">Ioana R.</div><div class="ti-chip chip-ok">✓ Complet</div></div>
+          </div>
+        </div>
+        <div class="ti" onclick="selectThread(this)">
+          <div class="ti-av" style="background:var(--saffl);color:#633806;">RC</div>
+          <div class="ti-body">
+            <div class="ti-header"><div class="ti-name">Radu Constantin</div><div class="ti-time">26 mai</div></div>
+            <div class="ti-preview">Confirmat: somon atlantic disponibil tot luna. Stoc asigurat.</div>
+            <div class="ti-chips"><div class="ti-chip chip-client">Andrei M.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Chat -->
+    <div class="chat-col">
+      <div class="chat-header">
+        <div class="ch-av" style="background:var(--saffl);color:#633806;">RC</div>
+        <div>
+          <div class="ch-name">Radu Constantin</div>
+          <div class="ch-sub">Bucătar personal · Client: Andrei Moldovan</div>
+        </div>
+        <div class="ch-spacer"></div>
+        <button class="ch-btn">Profilul clientului</button>
+        <button class="ch-btn">Planul activ</button>
+        <button class="ch-btn primary">Aprobă tot</button>
+      </div>
+
+      <div class="chat-scroll">
+        <div class="sys-msg">27 mai 2026</div>
+
+        <div class="msg left">
+          <div class="m-av" style="background:var(--mintl);color:#085041;">AM</div>
+          <div class="m-bubble">
+            <div class="m-content">Radu, pentru săptămâna viitoare te rog să reduci sodiul la toate rețetele lui Andrei. Tensiunea sa a crescut ușor — max 2g sodiu/zi.</div>
+            <div class="m-time">Dr. Alina M. · 27 mai, 9:14</div>
+          </div>
+        </div>
+
+        <div class="msg right">
+          <div class="m-av" style="background:var(--saffl);color:#633806;">RC</div>
+          <div class="m-bubble">
+            <div class="m-content">Înțeles! Am identificat 3 rețete cu sodiu ridicat. Propun înlocuirea sării normale cu sare roz himalayană — reducere 50% sodiu. Modific și cantitatea de ulei de măsline.</div>
+            <div class="m-time">Radu C. · 27 mai, 9:28</div>
+            <div class="m-pill mp-pend">⏳ Propunere trimisă</div>
+          </div>
+        </div>
+
+        <div class="msg left">
+          <div class="m-av" style="background:var(--mintl);color:#085041;">AM</div>
+          <div class="m-bubble">
+            <div class="m-content">Aprobat — sare roz e o alegere excelentă. Mulțumesc pentru inițiativă!</div>
+            <div class="m-time">Dr. Alina M. · 27 mai, 9:32</div>
+            <div class="m-pill mp-ok">✓ Modificare aprobată</div>
+          </div>
+        </div>
+
+        <div class="sys-msg">28 mai 2026 · Azi</div>
+
+        <div class="msg right">
+          <div class="m-av" style="background:var(--saffl);color:#633806;">RC</div>
+          <div class="m-bubble">
+            <div class="m-content">Rețeta de somon cu quinoa a fost actualizată. Sodiu redus cu 38%. Iată varianta finală:</div>
+            <div class="recipe-card-msg">
+              <div class="rcm-title">Somon la abur cu quinoa — versiunea LOW-Na</div>
+              <div class="rcm-meta">487 kcal · 35 min · Sodiu: 420mg (↓38%)</div>
+              <div class="rcm-macros">
+                <div class="rcmm"><div class="rcmm-val">42g</div><div class="rcmm-lbl">prot</div></div>
+                <div class="rcmm"><div class="rcmm-val">38g</div><div class="rcmm-lbl">carb</div></div>
+                <div class="rcmm"><div class="rcmm-val">16g</div><div class="rcmm-lbl">fat</div></div>
+              </div>
+            </div>
+            <div class="m-time">Radu C. · Azi, 8:45</div>
+            <div class="m-pill mp-ok">✓ Modificare aplicată</div>
+          </div>
+        </div>
+
+        <div class="msg right">
+          <div class="m-av" style="background:var(--saffl);color:#633806;">RC</div>
+          <div class="m-bubble">
+            <div class="m-content">O întrebare suplimentară — somonul atlantic nu va fi disponibil la furnizor săptămâna viitoare. Pot înlocui cu cod alb? Valori similare, omega-3 puțin mai scăzut.</div>
+            <div class="m-time">Radu C. · Azi, 9:02</div>
+            <div class="m-pill mp-pend">⏳ Așteaptă aprobare</div>
+          </div>
+        </div>
+
+        <div class="msg left">
+          <div class="m-av" style="background:var(--mintl);color:#085041;">AM</div>
+          <div class="m-bubble">
+            <div class="m-content">Analizez valorile nutriționale comparative... codul alb este acceptabil din punct de vedere clinic. Aprob substituția pentru o săptămână.</div>
+            <div class="m-time">Dr. Alina M. · Azi, 9:14</div>
+            <div class="m-pill mp-ok">✓ Substituție aprobată</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="chat-input">
+        <div class="ci-row">
+          <textarea class="ci-ta" placeholder="Scrie un mesaj pentru Radu..."></textarea>
+          <button class="ci-send" onclick="sendMsg()">→</button>
+        </div>
+        <div class="ci-actions">
+          <button class="ci-action">⚡ Aprobare rapidă</button>
+          <button class="ci-action">📋 Atașează rețetă</button>
+          <button class="ci-action">⚠️ Notă urgentă</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Info / Pending -->
+    <div class="info-col">
+      <div class="ic-header">
+        <div class="ic-title">Aprobări în așteptare</div>
+        <div class="ic-sub">3 propuneri necesită decizia ta</div>
+      </div>
+      <div class="ic-scroll">
+        <div class="pending-section">
+          <div class="ps-title">Urgent</div>
+          <div class="pending-item">
+            <div class="pi-header">
+              <div class="pi-title">Substituție ingredient</div>
+              <div class="pi-time">Azi · 9:02</div>
+            </div>
+            <div class="pi-body"><strong>Radu C.</strong> propune: Somon Atlantic → Cod alb. Client: Andrei M. Diferență: omega-3 -15%, proteine identice.</div>
+            <div class="pi-actions">
+              <button class="pi-approve" onclick="approve(this)">✓ Aprobă</button>
+              <button class="pi-reject" onclick="reject(this)">✕ Refuză</button>
+            </div>
+          </div>
+          <div class="pending-item">
+            <div class="pi-header">
+              <div class="pi-title">Substituție ingredient</div>
+              <div class="pi-time">Azi · 10:30</div>
+            </div>
+            <div class="pi-body"><strong>Maria C.</strong> propune: Somon → Ton. Client: Ioana R. Macronutrienți: +2g prot, -4g grăsimi față de original.</div>
+            <div class="pi-actions">
+              <button class="pi-approve" onclick="approve(this)">✓ Aprobă</button>
+              <button class="pi-reject" onclick="reject(this)">✕ Refuză</button>
+            </div>
+          </div>
+          <div class="pending-item">
+            <div class="pi-header">
+              <div class="pi-title">Modificare porție</div>
+              <div class="pi-time">Ieri · 18:20</div>
+            </div>
+            <div class="pi-body"><strong>Radu C.</strong> propune reducerea porției de quinoa cu 20g pentru Mihai P. Motiv: toleranță digestivă.</div>
+            <div class="pi-actions">
+              <button class="pi-approve" onclick="approve(this)">✓ Aprobă</button>
+              <button class="pi-reject" onclick="reject(this)">✕ Refuză</button>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="ps-title">Istoric recent</div>
+          <div class="history-item">
+            <div class="hi-dot" style="background:var(--sage);"></div>
+            <div class="hi-body"><div class="hi-text">Sare normală → Sare roz himalayană. Aprobat.</div><div class="hi-meta">Radu C. · Azi 9:32 · Andrei M.</div></div>
+          </div>
+          <div class="history-item">
+            <div class="hi-dot" style="background:var(--sage);"></div>
+            <div class="hi-body"><div class="hi-text">Plan săpt. 3 marcat complet de Maria C.</div><div class="hi-meta">Maria C. · Ieri · Ioana R.</div></div>
+          </div>
+          <div class="history-item">
+            <div class="hi-dot" style="background:var(--sage);"></div>
+            <div class="hi-body"><div class="hi-text">Quinoa → Orez brun. Aprobat pentru o săptămână.</div><div class="hi-meta">Radu C. · 27 mai · Andrei M.</div></div>
+          </div>
+          <div class="history-item">
+            <div class="hi-dot" style="background:var(--red);"></div>
+            <div class="hi-body"><div class="hi-text">Propunere creveți refuzată — alergen pentru Andrei M.</div><div class="hi-meta">Radu C. · 25 mai · Andrei M.</div></div>
+          </div>
+          <div class="history-item">
+            <div class="hi-dot" style="background:var(--sage);"></div>
+            <div class="hi-body"><div class="hi-text">3 rețete noi low-carb adăugate de Radu C.</div><div class="hi-meta">Radu C. · 24 mai · Mihai P.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function selectThread(el) {
+  document.querySelectorAll('.ti').forEach(t => t.classList.remove('selected'));
+  el.classList.add('selected');
+  el.classList.remove('unread');
+  el.querySelector('.ti-unread-dot') && el.querySelector('.ti-unread-dot').remove();
+}
+function sendMsg() {
+  const ta = document.querySelector('.ci-ta');
+  if (!ta.value.trim()) return;
+  const scroll = document.querySelector('.chat-scroll');
+  const d = document.createElement('div');
+  d.className = 'msg left';
+  d.innerHTML = `<div class="m-av" style="background:var(--mintl);color:#085041;">AM</div><div class="m-bubble"><div class="m-content">${ta.value}</div><div class="m-time">Dr. Alina M. · Acum</div></div>`;
+  scroll.appendChild(d);
+  scroll.scrollTop = scroll.scrollHeight;
+  ta.value = '';
+}
+function approve(btn) {
+  const item = btn.closest('.pending-item');
+  item.style.background = 'var(--mintl)';
+  item.style.borderColor = 'rgba(29,158,117,.2)';
+  item.querySelector('.pi-actions').innerHTML = '<div style="font-size:11px;font-weight:500;color:#085041;">✓ Aprobat</div>';
+}
+function reject(btn) {
+  const item = btn.closest('.pending-item');
+  item.style.opacity = '.5';
+  item.querySelector('.pi-actions').innerHTML = '<div style="font-size:11px;font-weight:500;color:var(--red);">✕ Refuzat</div>';
+}
+</script>
+</body>
+</html>
