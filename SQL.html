@@ -1,0 +1,910 @@
+-- ═══════════════════════════════════════════════════════════════════
+--  NOURA — Schema PostgreSQL completă pentru Supabase
+--  Versiunea 1.0 | 2026
+--  Rulează în Supabase SQL Editor
+-- ═══════════════════════════════════════════════════════════════════
+
+-- Extensions
+create extension if not exists "uuid-ossp";
+create extension if not exists "pg_trgm"; -- pentru search full-text
+
+-- ─── ENUM TYPES ────────────────────────────────────────────────────
+create type user_role as enum ('nutritionist', 'chef', 'admin');
+create type plan_status as enum ('draft', 'active', 'completed', 'archived');
+create type meal_type as enum ('breakfast', 'lunch', 'dinner', 'snack');
+create type recipe_difficulty as enum ('easy', 'medium', 'advanced');
+create type recipe_status as enum ('draft', 'published', 'archived');
+create type message_type as enum ('text', 'recipe_ref', 'plan_ref', 'substitution_proposal');
+create type substitution_status as enum ('pending', 'approved', 'rejected');
+create type report_status as enum ('draft', 'ready', 'sent');
+create type notification_type as enum ('message', 'substitution_pending', 'plan_updated', 'report_ready', 'alert');
+create type activity_level as enum ('sedentary', 'light', 'moderate', 'active', 'very_active');
+create type client_goal as enum ('deficit', 'surplus', 'maintenance', 'medical', 'performance');
+
+-- ═══════════════════════════════════════════════════════════════════
+--  TABELA 1: profiles
+--  Extinde auth.users cu date de profil
+-- ═══════════════════════════════════════════════════════════════════
+create table public.profiles (
+  id              uuid references auth.users(id) on delete cascade primary key,
+  role            user_role not null default 'nutritionist',
+  first_name      text not null,
+  last_name       text not null,
+  email           text not null,
+  phone           text,
+  cabinet_name    text,                  -- numele cabinetului (pentru nutritionisti)
+  avatar_url      text,
+  bio             text,
+  specializations text[] default '{}',   -- tags: ['diabet', 'sport', 'vegan']
+  created_at      timestamptz default now(),
+  updated_at      timestamptz default now()
+);
+
+-- Trigger: auto-update updated_at
+create or replace function update_updated_at()
+returns trigger as $$
+begin
+  new.updated_at = now();
+  return new;
+end;
+$$ language plpgsql;
+
+create trigger profiles_updated_at
+  before update on public.profiles
+  for each row execute function update_updated_at();
+
+-- Trigger: auto-create profile la signup
+create or replace function public.handle_new_user()
+returns trigger as $$
+begin
+  insert into public.profiles (id, email, first_name, last_name, role)
+  values (
+    new.id,
+    new.email,
+    coalesce(new.raw_user_meta_data->>'first_name', ''),
+    coalesce(new.raw_user_meta_data->>'last_name', ''),
+    coalesce((new.raw_user_meta_data->>'role')::user_role, 'nutritionist')
+  );
+  return new;
+end;
+$$ language plpgsql security definer;
+
+create trigger on_auth_user_created
+  after insert on auth.users
+  for each row execute function public.handle_new_user();
+
+-- ═══════════════════════════════════════════════════════════════════
+--  TABELA 2: nutritionist_chef_links
+--  Relația many-to-many dintre nutriționiști și bucătari
+-- ═══════════════════════════════════════════════════════════════════
+create table public.nutritionist_chef_links (
+  id              uuid default uuid_generate_v4() primary key,
+  nutritionist_id uuid references public.profiles(id) on delete cascade not null,
+  chef_id         uuid references public.profiles(id) on delete cascade not null,
+  invited_at      timestamptz default now(),
+  accepted_at     timestamptz,
+  is_active       boolean default true,
+  unique(nutritionist_id, chef_id)
+);
+
+-- ═══════════════════════════════════════════════════════════════════
+--  TABELA 3: clients
+--  Clienții nutriționiștilor
+-- ═══════════════════════════════════════════════════════════════════
+create table public.clients (
+  id                    uuid default uuid_generate_v4() primary key,
+  nutritionist_id       uuid references public.profiles(id) on delete cascade not null,
+  assigned_chef_id      uuid references public.profiles(id) on delete set null,
+  first_name            text not null,
+  last_name             text not null,
+  email                 text,
+  phone                 text,
+  date_of_birth         date,
+  gender                text,                    -- 'male', 'female', 'other'
+  height_cm             numeric(5,1),
+  weight_kg             numeric(5,2),
+  target_weight_kg      numeric(5,2),
+  activity_level        activity_level default 'moderate',
+  primary_goal          client_goal default 'maintenance',
+  -- Restricții alimentare (vizibile bucătarului)
+  food_allergies        text[] default '{}',     -- ['crustacee', 'alune']
+  food_intolerances     text[] default '{}',     -- ['gluten', 'lactoza']
+  dietary_restrictions  text[] default '{}',     -- ['vegan', 'halal']
+  culinary_preferences  text,                    -- text liber, transmis bucătarului
+  -- Date medicale (NUMAI pentru nutritionist - RLS)
+  medical_conditions    text[] default '{}',     -- ['diabet_t2', 'hta']
+  current_medications   text,                    -- text liber, PRIVAT
+  notes_private         text,                    -- note interne nutritionist
+  -- Macronutrienți target / zi
+  target_calories       integer,
+  target_protein_g      numeric(6,1),
+  target_carbs_g        numeric(6,1),
+  target_fat_g          numeric(6,1),
+  target_fiber_g        numeric(6,1),
+  target_sodium_mg      integer,
+  -- Meta
+  is_active             boolean default true,
+  created_at            timestamptz default now(),
+  updated_at            timestamptz default now()
+);
+
+create trigger clients_updated_at
+  before update on public.clients
+  for each row execute function update_updated_at();
+
+create index idx_clients_nutritionist on public.clients(nutritionist_id);
+create index idx_clients_chef on public.clients(assigned_chef_id);
+
+-- ═══════════════════════════════════════════════════════════════════
+--  TABELA 4: client_weight_logs
+--  Istoricul greutății clientului
+-- ═══════════════════════════════════════════════════════════════════
+create table public.client_weight_logs (
+  id          uuid default uuid_generate_v4() primary key,
+  client_id   uuid references public.clients(id) on delete cascade not null,
+  weight_kg   numeric(5,2) not null,
+  logged_at   date default current_date,
+  notes       text,
+  created_at  timestamptz default now()
+);
+
+create index idx_weight_logs_client on public.client_weight_logs(client_id, logged_at desc);
+
+-- ═══════════════════════════════════════════════════════════════════
+--  TABELA 5: food_items
+--  Baza de date cu alimente și valori nutriționale
+-- ═══════════════════════════════════════════════════════════════════
+create table public.food_items (
+  id                uuid default uuid_generate_v4() primary key,
+  name              text not null,
+  name_en           text,                        -- pentru Open Food Facts
+  barcode           text unique,
+  brand             text,
+  category          text,                        -- 'carne', 'lactate', 'legume' etc.
+  -- Valori nutriționale per 100g/ml
+  calories_per_100g numeric(7,2) not null default 0,
+  protein_per_100g  numeric(6,2) default 0,
+  carbs_per_100g    numeric(6,2) default 0,
+  fat_per_100g      numeric(6,2) default 0,
+  fiber_per_100g    numeric(6,2) default 0,
+  sodium_per_100g   numeric(7,2) default 0,
+  sugar_per_100g    numeric(6,2) default 0,
+  -- Alergeni conținuți
+  contains_allergens text[] default '{}',
+  -- Sursa datelor
+  source            text default 'manual',       -- 'manual', 'open_food_facts', 'usda'
+  off_id            text,                        -- Open Food Facts ID
+  is_verified       boolean default false,
+  created_by        uuid references public.profiles(id),
+  created_at        timestamptz default now(),
+  updated_at        timestamptz default now()
+);
+
+create trigger food_items_updated_at
+  before update on public.food_items
+  for each row execute function update_updated_at();
+
+create index idx_food_items_name on public.food_items using gin(name gin_trgm_ops);
+create index idx_food_items_category on public.food_items(category);
+
+-- ═══════════════════════════════════════════════════════════════════
+--  TABELA 6: nutrition_plans
+--  Planurile nutriționale săptămânale
+-- ═══════════════════════════════════════════════════════════════════
+create table public.nutrition_plans (
+  id              uuid default uuid_generate_v4() primary key,
+  client_id       uuid references public.clients(id) on delete cascade not null,
+  nutritionist_id uuid references public.profiles(id) on delete cascade not null,
+  title           text not null,
+  status          plan_status default 'draft',
+  week_number     integer,
+  total_weeks     integer,
+  start_date      date,
+  end_date        date,
+  -- Targets pentru acest plan specific
+  daily_calories  integer,
+  daily_protein_g numeric(6,1),
+  daily_carbs_g   numeric(6,1),
+  daily_fat_g     numeric(6,1),
+  daily_fiber_g   numeric(6,1),
+  daily_sodium_mg integer,
+  -- Note pentru bucătar (vizibile)
+  chef_notes      text,
+  -- Note interne (NUMAI nutritionist)
+  internal_notes  text,
+  -- PDF generat
+  pdf_url         text,
+  pdf_generated_at timestamptz,
+  created_at      timestamptz default now(),
+  updated_at      timestamptz default now()
+);
+
+create trigger plans_updated_at
+  before update on public.nutrition_plans
+  for each row execute function update_updated_at();
+
+create index idx_plans_client on public.nutrition_plans(client_id);
+create index idx_plans_nutritionist on public.nutrition_plans(nutritionist_id);
+
+-- ═══════════════════════════════════════════════════════════════════
+--  TABELA 7: plan_meals
+--  Mesele dintr-un plan (o înregistrare per slot zi+masă)
+-- ═══════════════════════════════════════════════════════════════════
+create table public.plan_meals (
+  id          uuid default uuid_generate_v4() primary key,
+  plan_id     uuid references public.nutrition_plans(id) on delete cascade not null,
+  day_of_week integer not null check (day_of_week between 0 and 6), -- 0=Lun, 6=Dum
+  meal_type   meal_type not null,
+  meal_date   date,
+  notes       text,
+  -- Totale calculate (denormalizat pentru performanță)
+  total_calories numeric(7,2) default 0,
+  total_protein  numeric(6,2) default 0,
+  total_carbs    numeric(6,2) default 0,
+  total_fat      numeric(6,2) default 0,
+  total_fiber    numeric(6,2) default 0,
+  total_sodium   numeric(7,2) default 0,
+  created_at  timestamptz default now(),
+  unique(plan_id, day_of_week, meal_type)
+);
+
+create index idx_plan_meals_plan on public.plan_meals(plan_id);
+
+-- ═══════════════════════════════════════════════════════════════════
+--  TABELA 8: plan_meal_items
+--  Alimentele/rețetele dintr-o masă
+-- ═══════════════════════════════════════════════════════════════════
+create table public.plan_meal_items (
+  id              uuid default uuid_generate_v4() primary key,
+  meal_id         uuid references public.plan_meals(id) on delete cascade not null,
+  -- Poate fi aliment simplu SAU rețetă
+  food_item_id    uuid references public.food_items(id) on delete set null,
+  recipe_id       uuid,                          -- FK la recipes (adăugat mai jos)
+  -- Cantitate
+  quantity_g      numeric(8,2) not null default 100,
+  quantity_unit   text default 'g',             -- 'g', 'ml', 'buc', 'portie'
+  servings        numeric(4,2) default 1,
+  -- Valori nutriționale calculate pentru această cantitate
+  calories        numeric(7,2) default 0,
+  protein_g       numeric(6,2) default 0,
+  carbs_g         numeric(6,2) default 0,
+  fat_g           numeric(6,2) default 0,
+  fiber_g         numeric(6,2) default 0,
+  sodium_mg       numeric(7,2) default 0,
+  sort_order      integer default 0,
+  created_at      timestamptz default now()
+);
+
+create index idx_meal_items_meal on public.plan_meal_items(meal_id);
+
+-- ═══════════════════════════════════════════════════════════════════
+--  TABELA 9: plan_templates
+--  Template-uri de planuri reutilizabile
+-- ═══════════════════════════════════════════════════════════════════
+create table public.plan_templates (
+  id              uuid default uuid_generate_v4() primary key,
+  nutritionist_id uuid references public.profiles(id) on delete cascade not null,
+  title           text not null,
+  description     text,
+  tags            text[] default '{}',           -- ['diabet', 'sportivi', 'vegan']
+  template_data   jsonb not null default '{}',   -- snapshot al planului
+  is_public       boolean default false,
+  use_count       integer default 0,
+  created_at      timestamptz default now(),
+  updated_at      timestamptz default now()
+);
+
+-- ═══════════════════════════════════════════════════════════════════
+--  TABELA 10: recipes
+--  Biblioteca de rețete
+-- ═══════════════════════════════════════════════════════════════════
+create table public.recipes (
+  id                  uuid default uuid_generate_v4() primary key,
+  created_by          uuid references public.profiles(id) on delete cascade not null,
+  title               text not null,
+  description         text,
+  meal_type           meal_type,
+  difficulty          recipe_difficulty default 'easy',
+  status              recipe_status default 'draft',
+  prep_time_min       integer default 0,
+  cook_time_min       integer default 0,
+  total_time_min      integer generated always as (prep_time_min + cook_time_min) stored,
+  base_servings       integer default 1,
+  tags                text[] default '{}',       -- ['low-carb', 'fara-gluten', 'vegan']
+  equipment_needed    text[] default '{}',
+  -- Valori nutriționale per porție (calculate din ingrediente)
+  calories_per_serving  numeric(7,2) default 0,
+  protein_per_serving   numeric(6,2) default 0,
+  carbs_per_serving     numeric(6,2) default 0,
+  fat_per_serving       numeric(6,2) default 0,
+  fiber_per_serving     numeric(6,2) default 0,
+  sodium_per_serving    numeric(7,2) default 0,
+  -- Alergeni (calculați automat din ingrediente)
+  contains_allergens    text[] default '{}',
+  -- Imagini
+  cover_image_url       text,
+  image_urls            text[] default '{}',
+  -- Meta
+  is_public             boolean default false,
+  use_count             integer default 0,
+  created_at            timestamptz default now(),
+  updated_at            timestamptz default now()
+);
+
+create trigger recipes_updated_at
+  before update on public.recipes
+  for each row execute function update_updated_at();
+
+create index idx_recipes_created_by on public.recipes(created_by);
+create index idx_recipes_meal_type on public.recipes(meal_type);
+create index idx_recipes_tags on public.recipes using gin(tags);
+create index idx_recipes_title on public.recipes using gin(title gin_trgm_ops);
+
+-- Adaugă FK la plan_meal_items după ce recipes există
+alter table public.plan_meal_items
+  add constraint plan_meal_items_recipe_fk
+  foreign key (recipe_id) references public.recipes(id) on delete set null;
+
+-- ═══════════════════════════════════════════════════════════════════
+--  TABELA 11: recipe_ingredients
+--  Ingredientele unei rețete
+-- ═══════════════════════════════════════════════════════════════════
+create table public.recipe_ingredients (
+  id            uuid default uuid_generate_v4() primary key,
+  recipe_id     uuid references public.recipes(id) on delete cascade not null,
+  food_item_id  uuid references public.food_items(id) on delete set null,
+  name          text not null,                  -- fallback dacă food_item_id e null
+  quantity_g    numeric(8,2) not null,
+  quantity_unit text default 'g',
+  notes         text,                           -- ex: "ras fin", "tocat marunt"
+  is_optional   boolean default false,
+  sort_order    integer default 0,
+  -- Valori nutriționale calculate pentru această cantitate
+  calories      numeric(7,2) default 0,
+  protein_g     numeric(6,2) default 0,
+  carbs_g       numeric(6,2) default 0,
+  fat_g         numeric(6,2) default 0,
+  sodium_mg     numeric(7,2) default 0
+);
+
+create index idx_recipe_ingredients_recipe on public.recipe_ingredients(recipe_id);
+
+-- ═══════════════════════════════════════════════════════════════════
+--  TABELA 12: recipe_steps
+--  Pașii de preparare ai unei rețete
+-- ═══════════════════════════════════════════════════════════════════
+create table public.recipe_steps (
+  id          uuid default uuid_generate_v4() primary key,
+  recipe_id   uuid references public.recipes(id) on delete cascade not null,
+  step_number integer not null,
+  title       text not null,
+  description text not null,
+  timer_sec   integer,                          -- timer în secunde (opțional)
+  image_url   text,
+  created_at  timestamptz default now()
+);
+
+create index idx_recipe_steps_recipe on public.recipe_steps(recipe_id, step_number);
+
+-- ═══════════════════════════════════════════════════════════════════
+--  TABELA 13: messages
+--  Mesajele în Collaboration Layer
+-- ═══════════════════════════════════════════════════════════════════
+create table public.messages (
+  id              uuid default uuid_generate_v4() primary key,
+  client_id       uuid references public.clients(id) on delete cascade not null,
+  sender_id       uuid references public.profiles(id) on delete cascade not null,
+  message_type    message_type default 'text',
+  content         text not null,
+  -- Referințe opționale la context
+  recipe_id       uuid references public.recipes(id) on delete set null,
+  plan_id         uuid references public.nutrition_plans(id) on delete set null,
+  meal_id         uuid references public.plan_meals(id) on delete set null,
+  -- Status
+  is_read         boolean default false,
+  read_at         timestamptz,
+  -- Meta
+  created_at      timestamptz default now()
+);
+
+create index idx_messages_client on public.messages(client_id, created_at desc);
+create index idx_messages_sender on public.messages(sender_id);
+
+-- ═══════════════════════════════════════════════════════════════════
+--  TABELA 14: substitution_proposals
+--  Propunerile bucătarilor pentru substituție ingrediente
+-- ═══════════════════════════════════════════════════════════════════
+create table public.substitution_proposals (
+  id                    uuid default uuid_generate_v4() primary key,
+  client_id             uuid references public.clients(id) on delete cascade not null,
+  recipe_id             uuid references public.recipes(id) on delete cascade not null,
+  proposed_by           uuid references public.profiles(id) on delete cascade not null,
+  reviewed_by           uuid references public.profiles(id) on delete set null,
+  -- Ingredientul original
+  original_ingredient   text not null,
+  original_food_item_id uuid references public.food_items(id) on delete set null,
+  -- Înlocuitorul propus
+  substitute_ingredient text not null,
+  substitute_food_item_id uuid references public.food_items(id) on delete set null,
+  -- Motivul și diferența nutrițională
+  reason                text,
+  nutritional_diff      jsonb,                 -- {calories: -10, protein: +2, ...}
+  -- Status
+  status                substitution_status default 'pending',
+  review_comment        text,
+  reviewed_at           timestamptz,
+  -- Link la mesaj
+  message_id            uuid references public.messages(id) on delete set null,
+  created_at            timestamptz default now()
+);
+
+create index idx_substitutions_client on public.substitution_proposals(client_id);
+create index idx_substitutions_status on public.substitution_proposals(status);
+
+-- ═══════════════════════════════════════════════════════════════════
+--  TABELA 15: reports
+--  Rapoartele lunare generate
+-- ═══════════════════════════════════════════════════════════════════
+create table public.reports (
+  id              uuid default uuid_generate_v4() primary key,
+  client_id       uuid references public.clients(id) on delete cascade not null,
+  nutritionist_id uuid references public.profiles(id) on delete cascade not null,
+  period_month    integer not null check (period_month between 1 and 12),
+  period_year     integer not null,
+  status          report_status default 'draft',
+  -- Date calculate pentru raport
+  avg_daily_calories  numeric(7,2),
+  avg_daily_protein   numeric(6,2),
+  avg_daily_carbs     numeric(6,2),
+  avg_daily_fat       numeric(6,2),
+  adherence_pct       numeric(5,2),           -- % zile cu plan respectat
+  weight_start_kg     numeric(5,2),
+  weight_end_kg       numeric(5,2),
+  -- Conținut editabil de nutriționist
+  nutritionist_notes  text,
+  -- PDF generat
+  pdf_url             text,
+  pdf_generated_at    timestamptz,
+  sent_at             timestamptz,
+  created_at          timestamptz default now(),
+  updated_at          timestamptz default now(),
+  unique(client_id, period_month, period_year)
+);
+
+create trigger reports_updated_at
+  before update on public.reports
+  for each row execute function update_updated_at();
+
+-- ═══════════════════════════════════════════════════════════════════
+--  TABELA 16: notifications
+--  Notificările în aplicație
+-- ═══════════════════════════════════════════════════════════════════
+create table public.notifications (
+  id              uuid default uuid_generate_v4() primary key,
+  user_id         uuid references public.profiles(id) on delete cascade not null,
+  type            notification_type not null,
+  title           text not null,
+  body            text,
+  -- Referințe la context
+  client_id       uuid references public.clients(id) on delete cascade,
+  message_id      uuid references public.messages(id) on delete cascade,
+  substitution_id uuid references public.substitution_proposals(id) on delete cascade,
+  report_id       uuid references public.reports(id) on delete cascade,
+  -- Status
+  is_read         boolean default false,
+  read_at         timestamptz,
+  created_at      timestamptz default now()
+);
+
+create index idx_notifications_user on public.notifications(user_id, is_read, created_at desc);
+
+-- ═══════════════════════════════════════════════════════════════════
+--  TABELA 17: audit_log
+--  Log GDPR complet al acțiunilor sensibile
+-- ═══════════════════════════════════════════════════════════════════
+create table public.audit_log (
+  id          uuid default uuid_generate_v4() primary key,
+  user_id     uuid references public.profiles(id) on delete set null,
+  action      text not null,                   -- 'client.create', 'plan.export', etc.
+  table_name  text,
+  record_id   uuid,
+  old_data    jsonb,
+  new_data    jsonb,
+  ip_address  inet,
+  user_agent  text,
+  created_at  timestamptz default now()
+);
+
+create index idx_audit_user on public.audit_log(user_id, created_at desc);
+create index idx_audit_record on public.audit_log(table_name, record_id);
+
+-- ═══════════════════════════════════════════════════════════════════
+--  TABELA 18: plan_adherence_logs
+--  Tracking aderență la plan (marcaj manual sau auto)
+-- ═══════════════════════════════════════════════════════════════════
+create table public.plan_adherence_logs (
+  id          uuid default uuid_generate_v4() primary key,
+  plan_id     uuid references public.nutrition_plans(id) on delete cascade not null,
+  meal_id     uuid references public.plan_meals(id) on delete cascade not null,
+  cooked_at   timestamptz,                     -- când a gătit bucătarul
+  cooked_by   uuid references public.profiles(id) on delete set null,
+  is_adhered  boolean default false,
+  notes       text,
+  created_at  timestamptz default now()
+);
+
+create index idx_adherence_plan on public.plan_adherence_logs(plan_id);
+
+-- ═══════════════════════════════════════════════════════════════════
+--  ROW LEVEL SECURITY (RLS)
+-- ═══════════════════════════════════════════════════════════════════
+
+-- Enable RLS pe toate tabelele
+alter table public.profiles enable row level security;
+alter table public.nutritionist_chef_links enable row level security;
+alter table public.clients enable row level security;
+alter table public.client_weight_logs enable row level security;
+alter table public.food_items enable row level security;
+alter table public.nutrition_plans enable row level security;
+alter table public.plan_meals enable row level security;
+alter table public.plan_meal_items enable row level security;
+alter table public.plan_templates enable row level security;
+alter table public.recipes enable row level security;
+alter table public.recipe_ingredients enable row level security;
+alter table public.recipe_steps enable row level security;
+alter table public.messages enable row level security;
+alter table public.substitution_proposals enable row level security;
+alter table public.reports enable row level security;
+alter table public.notifications enable row level security;
+alter table public.audit_log enable row level security;
+alter table public.plan_adherence_logs enable row level security;
+
+-- Helper functions pentru RLS
+create or replace function auth_uid() returns uuid as $$
+  select auth.uid();
+$$ language sql security definer;
+
+create or replace function get_user_role() returns user_role as $$
+  select role from public.profiles where id = auth.uid();
+$$ language sql security definer;
+
+-- ── PROFILES policies ──────────────────────────────────────────────
+create policy "Users can view own profile"
+  on public.profiles for select
+  using (id = auth_uid());
+
+create policy "Users can update own profile"
+  on public.profiles for update
+  using (id = auth_uid());
+
+create policy "Nutritionists can view linked chefs"
+  on public.profiles for select
+  using (
+    id in (
+      select chef_id from public.nutritionist_chef_links
+      where nutritionist_id = auth_uid() and is_active = true
+    )
+  );
+
+create policy "Chefs can view linked nutritionists"
+  on public.profiles for select
+  using (
+    id in (
+      select nutritionist_id from public.nutritionist_chef_links
+      where chef_id = auth_uid() and is_active = true
+    )
+  );
+
+-- ── CLIENTS policies ───────────────────────────────────────────────
+create policy "Nutritionists can CRUD own clients"
+  on public.clients for all
+  using (nutritionist_id = auth_uid());
+
+create policy "Chefs can view assigned clients (no medical data)"
+  on public.clients for select
+  using (
+    assigned_chef_id = auth_uid()
+  );
+-- IMPORTANT: bucătarul NU vede medical_conditions și current_medications
+-- Acestea sunt filtrate la nivel de aplicație, nu de RLS
+
+-- ── NUTRITION PLANS policies ───────────────────────────────────────
+create policy "Nutritionists can CRUD own plans"
+  on public.nutrition_plans for all
+  using (nutritionist_id = auth_uid());
+
+create policy "Chefs can view plans for assigned clients"
+  on public.nutrition_plans for select
+  using (
+    client_id in (
+      select id from public.clients
+      where assigned_chef_id = auth_uid()
+    )
+  );
+
+-- ── PLAN MEALS policies ────────────────────────────────────────────
+create policy "Nutritionists can CRUD plan meals"
+  on public.plan_meals for all
+  using (
+    plan_id in (
+      select id from public.nutrition_plans
+      where nutritionist_id = auth_uid()
+    )
+  );
+
+create policy "Chefs can view plan meals"
+  on public.plan_meals for select
+  using (
+    plan_id in (
+      select p.id from public.nutrition_plans p
+      join public.clients c on c.id = p.client_id
+      where c.assigned_chef_id = auth_uid()
+    )
+  );
+
+-- ── RECIPES policies ───────────────────────────────────────────────
+create policy "Users can CRUD own recipes"
+  on public.recipes for all
+  using (created_by = auth_uid());
+
+create policy "Users can view public recipes"
+  on public.recipes for select
+  using (is_public = true);
+
+create policy "Chefs can view recipes in their context"
+  on public.recipes for select
+  using (
+    created_by in (
+      select nutritionist_id from public.nutritionist_chef_links
+      where chef_id = auth_uid() and is_active = true
+    )
+  );
+
+-- ── RECIPE INGREDIENTS & STEPS policies ───────────────────────────
+create policy "Recipe owner can CRUD ingredients"
+  on public.recipe_ingredients for all
+  using (
+    recipe_id in (select id from public.recipes where created_by = auth_uid())
+  );
+
+create policy "Linked users can view ingredients"
+  on public.recipe_ingredients for select
+  using (
+    recipe_id in (
+      select id from public.recipes
+      where is_public = true or created_by = auth_uid()
+    )
+  );
+
+create policy "Recipe owner can CRUD steps"
+  on public.recipe_steps for all
+  using (
+    recipe_id in (select id from public.recipes where created_by = auth_uid())
+  );
+
+create policy "Linked users can view steps"
+  on public.recipe_steps for select
+  using (
+    recipe_id in (
+      select id from public.recipes
+      where is_public = true or created_by = auth_uid()
+    )
+  );
+
+-- ── MESSAGES policies ──────────────────────────────────────────────
+create policy "Users can view messages for their clients"
+  on public.messages for select
+  using (
+    client_id in (
+      select id from public.clients
+      where nutritionist_id = auth_uid() or assigned_chef_id = auth_uid()
+    )
+  );
+
+create policy "Users can send messages"
+  on public.messages for insert
+  with check (
+    sender_id = auth_uid() and
+    client_id in (
+      select id from public.clients
+      where nutritionist_id = auth_uid() or assigned_chef_id = auth_uid()
+    )
+  );
+
+-- ── SUBSTITUTIONS policies ─────────────────────────────────────────
+create policy "Users can view substitutions for their clients"
+  on public.substitution_proposals for select
+  using (
+    client_id in (
+      select id from public.clients
+      where nutritionist_id = auth_uid() or assigned_chef_id = auth_uid()
+    )
+  );
+
+create policy "Chefs can propose substitutions"
+  on public.substitution_proposals for insert
+  with check (
+    proposed_by = auth_uid() and
+    client_id in (
+      select id from public.clients where assigned_chef_id = auth_uid()
+    )
+  );
+
+create policy "Nutritionists can review substitutions"
+  on public.substitution_proposals for update
+  using (
+    client_id in (
+      select id from public.clients where nutritionist_id = auth_uid()
+    )
+  );
+
+-- ── NOTIFICATIONS policies ─────────────────────────────────────────
+create policy "Users can view own notifications"
+  on public.notifications for select
+  using (user_id = auth_uid());
+
+create policy "Users can mark own notifications as read"
+  on public.notifications for update
+  using (user_id = auth_uid());
+
+-- ── REPORTS policies ───────────────────────────────────────────────
+create policy "Nutritionists can CRUD own reports"
+  on public.reports for all
+  using (nutritionist_id = auth_uid());
+
+-- ── FOOD ITEMS policies ────────────────────────────────────────────
+create policy "All authenticated users can view food items"
+  on public.food_items for select
+  to authenticated
+  using (true);
+
+create policy "Users can add custom food items"
+  on public.food_items for insert
+  with check (created_by = auth_uid());
+
+create policy "Users can update own food items"
+  on public.food_items for update
+  using (created_by = auth_uid());
+
+-- ── AUDIT LOG policies ─────────────────────────────────────────────
+create policy "Users can view own audit log"
+  on public.audit_log for select
+  using (user_id = auth_uid());
+
+-- ═══════════════════════════════════════════════════════════════════
+--  FUNCȚII UTILITARE
+-- ═══════════════════════════════════════════════════════════════════
+
+-- Calculează macronutrienții totali pentru o masă
+create or replace function calculate_meal_totals(p_meal_id uuid)
+returns void as $$
+begin
+  update public.plan_meals pm
+  set
+    total_calories = coalesce((
+      select sum(calories) from public.plan_meal_items
+      where meal_id = p_meal_id
+    ), 0),
+    total_protein = coalesce((
+      select sum(protein_g) from public.plan_meal_items
+      where meal_id = p_meal_id
+    ), 0),
+    total_carbs = coalesce((
+      select sum(carbs_g) from public.plan_meal_items
+      where meal_id = p_meal_id
+    ), 0),
+    total_fat = coalesce((
+      select sum(fat_g) from public.plan_meal_items
+      where meal_id = p_meal_id
+    ), 0),
+    total_fiber = coalesce((
+      select sum(fiber_g) from public.plan_meal_items
+      where meal_id = p_meal_id
+    ), 0),
+    total_sodium = coalesce((
+      select sum(sodium_mg) from public.plan_meal_items
+      where meal_id = p_meal_id
+    ), 0)
+  where pm.id = p_meal_id;
+end;
+$$ language plpgsql security definer;
+
+-- Calculează macronutrienții totali pentru o rețetă
+create or replace function calculate_recipe_totals(p_recipe_id uuid)
+returns void as $$
+begin
+  update public.recipes r
+  set
+    calories_per_serving = coalesce((
+      select sum(calories) / r.base_servings
+      from public.recipe_ingredients
+      where recipe_id = p_recipe_id
+    ), 0),
+    protein_per_serving = coalesce((
+      select sum(protein_g) / r.base_servings
+      from public.recipe_ingredients
+      where recipe_id = p_recipe_id
+    ), 0),
+    carbs_per_serving = coalesce((
+      select sum(carbs_g) / r.base_servings
+      from public.recipe_ingredients
+      where recipe_id = p_recipe_id
+    ), 0),
+    fat_per_serving = coalesce((
+      select sum(fat_g) / r.base_servings
+      from public.recipe_ingredients
+      where recipe_id = p_recipe_id
+    ), 0),
+    fiber_per_serving = coalesce((
+      select sum(fiber_g) / r.base_servings
+      from public.recipe_ingredients
+      where recipe_id = p_recipe_id
+    ), 0),
+    sodium_per_serving = coalesce((
+      select sum(sodium_mg) / r.base_servings
+      from public.recipe_ingredients
+      where recipe_id = p_recipe_id
+    ), 0),
+    contains_allergens = coalesce((
+      select array_agg(distinct allergen)
+      from public.recipe_ingredients ri
+      join public.food_items fi on fi.id = ri.food_item_id
+      cross join unnest(fi.contains_allergens) as allergen
+      where ri.recipe_id = p_recipe_id
+    ), '{}')
+  where r.id = p_recipe_id;
+end;
+$$ language plpgsql security definer;
+
+-- Calculează aderența la plan pentru un client (%)
+create or replace function calculate_adherence(p_plan_id uuid)
+returns numeric as $$
+  select
+    round(
+      count(pal.id)::numeric / nullif(count(pm.id), 0) * 100,
+      1
+    )
+  from public.plan_meals pm
+  left join public.plan_adherence_logs pal
+    on pal.meal_id = pm.id and pal.is_adhered = true
+  where pm.plan_id = p_plan_id;
+$$ language sql security definer;
+
+-- ═══════════════════════════════════════════════════════════════════
+--  REALTIME — Enable pentru tabelele de colaborare
+-- ═══════════════════════════════════════════════════════════════════
+
+-- În Supabase Dashboard > Database > Replication
+-- Sau prin SQL:
+alter publication supabase_realtime add table public.messages;
+alter publication supabase_realtime add table public.notifications;
+alter publication supabase_realtime add table public.substitution_proposals;
+alter publication supabase_realtime add table public.plan_adherence_logs;
+
+-- ═══════════════════════════════════════════════════════════════════
+--  SEED DATA — Date demo pentru development
+-- ═══════════════════════════════════════════════════════════════════
+
+-- Alimente de bază (câteva exemple)
+insert into public.food_items (name, category, calories_per_100g, protein_per_100g, carbs_per_100g, fat_per_100g, fiber_per_100g, sodium_per_100g, source, is_verified)
+values
+  ('File somon Atlantic', 'peste',      208, 20.0, 0.0,  13.0, 0.0, 59.0,  'manual', true),
+  ('Piept de pui gătit',  'carne',      165, 31.0, 0.0,  3.6,  0.0, 74.0,  'manual', true),
+  ('Quinoa albă gătită',  'cereale',    120, 4.4,  21.0, 1.9,  2.8, 7.0,   'manual', true),
+  ('Broccoli crud',       'legume',     34,  2.8,  6.6,  0.4,  2.6, 33.0,  'manual', true),
+  ('Avocado',             'fructe',     160, 2.0,  8.5,  14.7, 6.7, 7.0,   'manual', true),
+  ('Ou de gaina (mare)',  'oua',        78,  6.3,  0.6,  5.3,  0.0, 62.0,  'manual', true),
+  ('Iaurt grecesc 0%',    'lactate',    59,  10.2, 3.6,  0.4,  0.0, 36.0,  'manual', true),
+  ('Orez brun gătit',     'cereale',    112, 2.3,  23.5, 0.9,  1.8, 5.0,   'manual', true),
+  ('Linte roșie gătită',  'leguminoase',116, 9.0,  19.8, 0.4,  7.9, 4.0,   'manual', true),
+  ('Cartof dulce copt',   'legume',     90,  2.0,  20.7, 0.1,  3.3, 36.0,  'manual', true),
+  ('Brânză cottage 2%',   'lactate',    84,  11.1, 3.4,  2.3,  0.0, 321.0, 'manual', true),
+  ('Cod alb gătit',       'peste',      105, 22.8, 0.0,  1.2,  0.0, 67.0,  'manual', true);
+
+-- ═══════════════════════════════════════════════════════════════════
+--  DONE
+-- ═══════════════════════════════════════════════════════════════════
+-- Schema completă: 18 tabele, RLS pe toate, funcții utilitare,
+-- Realtime activat pentru collaboration layer.
+-- Urmează: Auth setup + React app cu hooks Supabase
+-- ═══════════════════════════════════════════════════════════════════
