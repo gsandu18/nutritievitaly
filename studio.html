@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Noura. — Recipe Studio</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --forest: #0F2E28; --forest2: #1a3d36; --forestd: #0a1f1b;
+  --sage:   #1D9E75; --mint:    #5DCAA5; --mintl:   #E1F5EE;
+  --saffron:#EF9F27; --saffl:   #FAEEDA;
+  --linen:  #FAFAF8; --linend:  #F1EFE8;
+  --gray:   #888780; --dark:    #2C2C2A; --white:   #FFFFFF;
+  --red:    #D85A30; --redl:    #FAECE7;
+  --purple: #AFA9EC; --purpll:  #EEEDFE;
+}
+html, body { height: 100%; }
+body { font-family: 'DM Sans', sans-serif; font-weight: 300; background: var(--linen); color: var(--dark); overflow: hidden; display: flex; flex-direction: column; }
+
+/* ─── APP SHELL ────────────────────────────────── */
+.app { display: grid; grid-template-columns: 200px 1fr; flex: 1; overflow: hidden; }
+
+/* SIDEBAR */
+.sidebar { background: var(--forestd); display: flex; flex-direction: column; overflow: hidden; }
+.sb-logo { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 600; color: var(--mintl); letter-spacing: .03em; padding: 18px 16px 16px; border-bottom: 0.5px solid rgba(29,158,117,.15); flex-shrink: 0; }
+.sb-logo span { color: var(--sage); }
+.sb-nav { padding: 10px 0; flex: 1; overflow-y: auto; }
+.sb-s { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: rgba(93,202,165,.35); padding: 8px 14px 3px; }
+.sb-i { display: flex; align-items: center; gap: 8px; padding: 8px 14px; font-size: 12px; color: rgba(159,225,203,.5); cursor: pointer; border-left: 2px solid transparent; transition: all .15s; }
+.sb-i:hover { background: rgba(29,158,117,.1); color: rgba(225,245,238,.8); }
+.sb-i.active { background: rgba(29,158,117,.15); color: var(--mintl); border-left-color: var(--sage); font-weight: 500; }
+.sb-i i { font-size: 15px; flex-shrink: 0; }
+.sb-badge { margin-left: auto; background: rgba(239,159,39,.25); color: var(--saffron); font-size: 9px; padding: 1px 5px; border-radius: 20px; font-weight: 500; }
+.sb-user { padding: 10px 14px; border-top: 0.5px solid rgba(29,158,117,.12); display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+.sb-av { width: 28px; height: 28px; border-radius: 50%; background: rgba(239,159,39,.2); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 500; color: var(--saffron); flex-shrink: 0; }
+.sb-uname { font-size: 11px; color: rgba(225,245,238,.7); }
+.sb-urole { font-size: 10px; color: rgba(93,202,165,.4); }
+
+/* ─── MAIN ─────────────────────────────────────── */
+.main { display: grid; grid-template-columns: 260px 1fr 280px; overflow: hidden; background: var(--linen); }
+
+/* RECIPE LIST */
+.list-col { background: var(--white); border-right: 0.5px solid rgba(15,46,40,.1); display: flex; flex-direction: column; overflow: hidden; }
+.lc-top { padding: 16px 14px 10px; border-bottom: 0.5px solid rgba(15,46,40,.08); flex-shrink: 0; }
+.lc-title { font-size: 13px; font-weight: 500; color: var(--forest); margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; }
+.lc-count { font-size: 11px; color: var(--gray); font-weight: 300; }
+.search-wrap { position: relative; margin-bottom: 8px; }
+.search-wrap i { position: absolute; left: 8px; top: 50%; transform: translateY(-50%); font-size: 14px; color: var(--gray); pointer-events: none; }
+.search-in { width: 100%; padding: 7px 8px 7px 28px; font-size: 12px; border: 0.5px solid rgba(15,46,40,.12); border-radius: 8px; font-family: inherit; color: var(--dark); background: var(--linen); outline: none; transition: border-color .2s; }
+.search-in:focus { border-color: var(--sage); background: var(--white); }
+.filter-pills { display: flex; gap: 4px; flex-wrap: wrap; }
+.fp { font-size: 10px; padding: 3px 10px; border-radius: 20px; border: 0.5px solid rgba(15,46,40,.12); color: var(--gray); cursor: pointer; transition: all .15s; background: var(--white); }
+.fp.on { background: var(--forest); color: var(--linen); border-color: var(--forest); }
+.fp:hover:not(.on) { border-color: var(--sage); color: var(--sage); }
+
+.recipe-list { flex: 1; overflow-y: auto; }
+.ri { padding: 10px 14px; border-bottom: 0.5px solid rgba(15,46,40,.06); cursor: pointer; transition: background .1s; display: flex; gap: 10px; align-items: flex-start; }
+.ri:hover { background: var(--linen); }
+.ri.active { background: var(--mintl); }
+.ri-thumb { width: 44px; height: 44px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
+.ri-body { flex: 1; min-width: 0; }
+.ri-name { font-size: 12px; font-weight: 500; color: var(--forest); line-height: 1.3; margin-bottom: 3px; }
+.ri-meta { font-size: 10px; color: var(--gray); }
+.ri-kcal { font-size: 10px; font-weight: 500; color: var(--sage); }
+.ri-compat { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; margin-top: 4px; }
+.c-ok   { background: var(--sage); }
+.c-warn { background: var(--saffron); }
+.c-err  { background: var(--red); }
+
+/* RECIPE DETAIL */
+.detail-col { display: flex; flex-direction: column; overflow: hidden; }
+.dc-topbar { background: var(--white); border-bottom: 0.5px solid rgba(15,46,40,.1); padding: 0 16px; height: 52px; display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+.dc-title { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 600; color: var(--forest); flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.icon-btn { width: 30px; height: 30px; border-radius: 6px; border: 0.5px solid rgba(15,46,40,.12); background: var(--white); display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--gray); transition: all .15s; }
+.icon-btn:hover { background: var(--linen); border-color: var(--sage); color: var(--sage); }
+.icon-btn i { font-size: 15px; }
+.mode-btn { padding: 6px 14px; border-radius: 6px; font-size: 12px; font-weight: 500; cursor: pointer; border: none; font-family: inherit; transition: all .15s; }
+.mode-btn.secondary { background: var(--linen); color: var(--forest); border: 0.5px solid rgba(15,46,40,.12); }
+.mode-btn.secondary:hover { border-color: var(--sage); }
+.mode-btn.primary { background: var(--forest); color: var(--mintl); }
+.mode-btn.primary:hover { background: var(--sage); }
+
+.dc-scroll { flex: 1; overflow-y: auto; }
+
+/* Hero banner */
+.recipe-banner { background: var(--forest); padding: 1.5rem; display: flex; align-items: center; gap: 1.25rem; position: relative; overflow: hidden; }
+.rb-bg { position: absolute; right: -20px; top: 50%; transform: translateY(-50%); font-size: 120px; opacity: .06; line-height: 1; pointer-events: none; }
+.rb-emoji { font-size: 52px; flex-shrink: 0; position: relative; z-index: 1; }
+.rb-info { position: relative; z-index: 1; }
+.rb-tag { font-size: 10px; background: rgba(29,158,117,.25); color: var(--mint); padding: 2px 9px; border-radius: 20px; font-weight: 500; display: inline-block; margin-bottom: 6px; }
+.rb-name { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 600; color: var(--mintl); line-height: 1.15; margin-bottom: 4px; }
+.rb-sub { font-family: 'Cormorant Garamond', serif; font-size: 14px; font-style: italic; color: rgba(159,225,203,.65); }
+.rb-stats { display: flex; gap: 16px; margin-top: 10px; }
+.rbs { text-align: center; }
+.rbs-val { font-size: 18px; font-weight: 500; color: var(--mintl); }
+.rbs-lbl { font-size: 9px; color: rgba(93,202,165,.6); text-transform: uppercase; letter-spacing: .07em; }
+
+.dc-body { padding: 16px; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+/* panels */
+.panel { background: var(--white); border: 0.5px solid rgba(15,46,40,.08); border-radius: 12px; padding: 14px; }
+.panel.full { grid-column: 1 / -1; }
+.p-title { font-size: 11px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--gray); margin-bottom: 10px; }
+
+/* Ingredients */
+.ing-row { display: flex; align-items: center; gap: 8px; padding: 6px 0; border-bottom: 0.5px solid rgba(15,46,40,.05); }
+.ing-row:last-child { border-bottom: none; }
+.ing-flag { width: 16px; height: 16px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: 700; flex-shrink: 0; }
+.if-ok   { background: var(--mintl); color: #085041; }
+.if-warn { background: var(--saffl); color: #633806; }
+.if-err  { background: var(--redl); color: #791F1F; }
+.ing-name { font-size: 12px; color: var(--dark); flex: 1; }
+.ing-amount { font-size: 11px; color: var(--gray); font-weight: 500; }
+.ing-qty-input { width: 48px; padding: 3px 6px; font-size: 11px; border: 0.5px solid rgba(15,46,40,.12); border-radius: 5px; text-align: center; font-family: inherit; color: var(--dark); background: var(--linen); cursor: pointer; }
+
+/* Steps */
+.step-item { display: flex; gap: 10px; margin-bottom: 10px; }
+.step-item:last-child { margin-bottom: 0; }
+.step-num { width: 22px; height: 22px; border-radius: 50%; background: var(--forest); color: var(--mintl); font-size: 10px; font-weight: 500; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+.step-body { flex: 1; }
+.step-text { font-size: 12px; color: var(--dark); line-height: 1.65; }
+.step-timer { display: inline-flex; align-items: center; gap: 4px; font-size: 10px; color: var(--sage); margin-top: 3px; cursor: pointer; background: var(--mintl); padding: 2px 8px; border-radius: 20px; font-weight: 500; transition: background .15s; }
+.step-timer:hover { background: var(--sage); color: var(--white); }
+.step-timer i { font-size: 12px; }
+
+/* Macro breakdown */
+.macro-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 6px; }
+.macro-box { background: var(--linen); border-radius: 8px; padding: 8px; }
+.mb-val { font-size: 20px; font-weight: 500; color: var(--forest); }
+.mb-lbl { font-size: 9px; color: var(--gray); text-transform: uppercase; letter-spacing: .07em; }
+.mb-bar { height: 3px; border-radius: 2px; margin-top: 5px; background: rgba(15,46,40,.08); overflow: hidden; }
+.mb-fill { height: 100%; border-radius: 2px; }
+
+/* Compat badge */
+.compat-banner { display: flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 8px; font-size: 11px; margin-bottom: 10px; }
+.cb-ok   { background: var(--mintl); color: #085041; border: 0.5px solid rgba(29,158,117,.2); }
+.cb-warn { background: var(--saffl); color: #633806; border: 0.5px solid rgba(239,159,39,.2); }
+.cb-err  { background: var(--redl); color: #791F1F; border: 0.5px solid rgba(216,90,48,.2); }
+.compat-banner i { font-size: 15px; flex-shrink: 0; }
+
+/* COOKING MODE overlay */
+.cooking-overlay { position: fixed; inset: 0; background: var(--forest); z-index: 1000; display: none; flex-direction: column; align-items: center; justify-content: center; padding: 2rem; }
+.cooking-overlay.show { display: flex; }
+.co-logo { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 600; color: var(--mintl); margin-bottom: 2rem; }
+.co-logo span { color: var(--sage); }
+.co-step-num { font-size: 11px; letter-spacing: .15em; text-transform: uppercase; color: var(--mint); margin-bottom: .75rem; }
+.co-step-title { font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 600; color: var(--mintl); margin-bottom: 1rem; line-height: 1.2; text-align: center; max-width: 540px; }
+.co-step-text { font-size: 16px; color: rgba(159,225,203,.75); line-height: 1.8; text-align: center; max-width: 500px; margin-bottom: 2rem; }
+.co-timer { font-size: 56px; font-weight: 500; color: var(--mintl); font-variant-numeric: tabular-nums; margin-bottom: 2rem; }
+.co-nav { display: flex; gap: 12px; }
+.co-btn { padding: 13px 28px; border-radius: 8px; font-size: 14px; font-weight: 500; cursor: pointer; border: none; font-family: inherit; transition: all .2s; }
+.co-btn.prev { background: rgba(29,158,117,.15); color: var(--mint); }
+.co-btn.prev:hover { background: rgba(29,158,117,.25); }
+.co-btn.next { background: var(--sage); color: var(--white); }
+.co-btn.next:hover { background: var(--mint); }
+.co-btn.close { background: none; color: rgba(159,225,203,.4); border: 0.5px solid rgba(93,202,165,.2); }
+.co-btn.close:hover { color: var(--mint); border-color: var(--mint); }
+.co-progress { display: flex; gap: 6px; margin-bottom: 2rem; }
+.co-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(29,158,117,.25); transition: background .2s; }
+.co-dot.done { background: var(--sage); }
+.co-dot.current { background: var(--mintl); }
+
+/* RIGHT COL — Collab */
+.right-col { background: var(--white); border-left: 0.5px solid rgba(15,46,40,.1); display: flex; flex-direction: column; overflow: hidden; }
+.rc-header { padding: 14px; border-bottom: 0.5px solid rgba(15,46,40,.08); flex-shrink: 0; }
+.rc-title { font-size: 12px; font-weight: 500; color: var(--forest); margin-bottom: 2px; }
+.rc-sub { font-size: 10px; color: var(--gray); }
+.client-chip { display: inline-flex; align-items: center; gap: 5px; background: var(--mintl); border-radius: 20px; padding: 3px 10px 3px 5px; margin-top: 6px; }
+.cc-av { width: 18px; height: 18px; border-radius: 50%; background: var(--sage); display: flex; align-items: center; justify-content: center; font-size: 8px; font-weight: 500; color: var(--white); }
+.cc-name { font-size: 10px; font-weight: 500; color: #085041; }
+.collab-scroll { flex: 1; overflow-y: auto; padding: 10px 12px; display: flex; flex-direction: column; gap: 8px; }
+.msg { display: flex; gap: 7px; }
+.msg.right { flex-direction: row-reverse; }
+.m-av { width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: 500; flex-shrink: 0; }
+.m-bubble { max-width: 80%; }
+.m-content { padding: 8px 11px; border-radius: 12px; font-size: 11px; line-height: 1.55; }
+.msg.left  .m-content { background: var(--linen); color: var(--dark); border-radius: 4px 12px 12px 12px; }
+.msg.right .m-content { background: var(--forest); color: var(--mintl); border-radius: 12px 4px 12px 12px; }
+.m-time { font-size: 9px; color: var(--gray); margin-top: 2px; padding: 0 2px; }
+.msg.right .m-time { text-align: right; }
+.m-pill { display: inline-flex; align-items: center; gap: 4px; padding: 3px 8px; border-radius: 20px; font-size: 9px; font-weight: 500; margin-top: 4px; }
+.mp-pend { background: var(--saffl); color: #633806; }
+.mp-ok   { background: var(--mintl); color: #085041; }
+
+.rc-input-area { padding: 10px 12px; border-top: 0.5px solid rgba(15,46,40,.08); flex-shrink: 0; }
+.rc-input-row { display: flex; gap: 6px; }
+.rc-textarea { flex: 1; padding: 8px 10px; font-size: 12px; border: 0.5px solid rgba(15,46,40,.12); border-radius: 8px; font-family: inherit; color: var(--dark); background: var(--linen); outline: none; resize: none; height: 36px; transition: border-color .2s; line-height: 1.5; }
+.rc-textarea:focus { border-color: var(--sage); background: var(--white); height: 60px; }
+.rc-send { width: 34px; height: 36px; background: var(--forest); border: none; border-radius: 8px; display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0; transition: background .15s; }
+.rc-send:hover { background: var(--sage); }
+.rc-send i { font-size: 15px; color: var(--mintl); }
+.subst-btn { width: 100%; margin-top: 6px; padding: 7px; background: var(--linen); border: 0.5px solid rgba(15,46,40,.12); border-radius: 8px; font-size: 11px; font-weight: 500; color: var(--forest); cursor: pointer; font-family: inherit; transition: all .15s; display: flex; align-items: center; justify-content: center; gap: 5px; }
+.subst-btn:hover { border-color: var(--saffron); color: #633806; background: var(--saffl); }
+.subst-btn i { font-size: 14px; }
+
+@media (max-width: 1000px) { .app { grid-template-columns: 1fr; } .sidebar { display: none; } .main { grid-template-columns: 1fr; } .list-col,.right-col { display: none; } }
+</style>
+</head>
+<body>
+
+<!-- COOKING MODE OVERLAY -->
+<div class="cooking-overlay" id="cookingOverlay">
+  <div class="co-logo">Noura<span>.</span></div>
+  <div class="co-step-num" id="coStepNum">Pasul 1 din 4</div>
+  <div class="co-progress" id="coDots"></div>
+  <div class="co-step-title" id="coStepTitle">Pregătire quinoa</div>
+  <div class="co-step-text" id="coStepText">Clătești quinoa sub jet de apă rece timp de 1-2 minute pentru a îndepărta saponina. O pui la fiert în apă cu raport 1:2 la foc mediu.</div>
+  <div class="co-timer" id="coTimer">15:00</div>
+  <div class="co-nav">
+    <button class="co-btn close" onclick="closeCooking()">✕ Ieși</button>
+    <button class="co-btn prev" id="coPrev" onclick="cookStep(-1)">← Înapoi</button>
+    <button class="co-btn next" id="coNext" onclick="cookStep(1)">Următor →</button>
+  </div>
+</div>
+
+<div class="app">
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <div class="sb-logo">Noura<span>.</span></div>
+    <div class="sb-nav">
+      <div class="sb-s">Bucătar</div>
+      <div class="sb-i"><i class="ti ti-layout-dashboard"></i> Azi</div>
+      <div class="sb-i active"><i class="ti ti-tools-kitchen-2"></i> Recipe Studio</div>
+      <div class="sb-i"><i class="ti ti-users"></i> Clienții mei</div>
+      <div class="sb-i"><i class="ti ti-shopping-cart"></i> Lista cumpărături</div>
+      <div class="sb-s">Colaborare</div>
+      <div class="sb-i"><i class="ti ti-messages"></i> Mesaje <span class="sb-badge">3</span></div>
+      <div class="sb-i"><i class="ti ti-bell"></i> Notificări <span class="sb-badge">2</span></div>
+      <div class="sb-i"><i class="ti ti-settings"></i> Setări</div>
+    </div>
+    <div class="sb-user">
+      <div class="sb-av">RC</div>
+      <div><div class="sb-uname">Radu Constantin</div><div class="sb-urole">Bucătar personal</div></div>
+    </div>
+  </div>
+
+  <div class="main">
+    <!-- RECIPE LIST -->
+    <div class="list-col">
+      <div class="lc-top">
+        <div class="lc-title">Recipe Studio <span class="lc-count">142 rețete</span></div>
+        <div class="search-wrap">
+          <i class="ti ti-search"></i>
+          <input class="search-in" type="text" placeholder="Caută rețetă sau ingredient...">
+        </div>
+        <div class="filter-pills">
+          <div class="fp on">Toate</div>
+          <div class="fp">Prânz</div>
+          <div class="fp">Mic dejun</div>
+          <div class="fp">Cină</div>
+          <div class="fp">✓ Compatibile</div>
+        </div>
+      </div>
+      <div class="recipe-list">
+        <div class="ri active" onclick="selectRecipe(0)">
+          <div class="ri-thumb" style="background:#E1F5EE;">🐟</div>
+          <div class="ri-body">
+            <div class="ri-name">Somon la abur cu quinoa și legume</div>
+            <div class="ri-meta">35 min · 1 porție · Prânz</div>
+            <div class="ri-kcal">487 kcal · 42g prot</div>
+          </div>
+          <div class="ri-compat c-ok"></div>
+        </div>
+        <div class="ri" onclick="selectRecipe(1)">
+          <div class="ri-thumb" style="background:#FAEEDA;">🥑</div>
+          <div class="ri-body">
+            <div class="ri-name">Avocado toast cu ouă poșate</div>
+            <div class="ri-meta">15 min · 1 porție · Mic dejun</div>
+            <div class="ri-kcal">350 kcal · 14g prot</div>
+          </div>
+          <div class="ri-compat c-ok"></div>
+        </div>
+        <div class="ri" onclick="selectRecipe(2)">
+          <div class="ri-thumb" style="background:#EEEDFE;">🥦</div>
+          <div class="ri-body">
+            <div class="ri-name">Bowl quinoa cu legume coapte</div>
+            <div class="ri-meta">40 min · 1 porție · Prânz</div>
+            <div class="ri-kcal">410 kcal · 22g prot</div>
+          </div>
+          <div class="ri-compat c-ok"></div>
+        </div>
+        <div class="ri" onclick="selectRecipe(3)">
+          <div class="ri-thumb" style="background:#FAECE7;">🍤</div>
+          <div class="ri-body">
+            <div class="ri-name">Creveți cu paste integrale</div>
+            <div class="ri-meta">25 min · 1 porție · Cină</div>
+            <div class="ri-kcal">480 kcal · 38g prot</div>
+          </div>
+          <div class="ri-compat c-err"></div>
+        </div>
+        <div class="ri" onclick="selectRecipe(4)">
+          <div class="ri-thumb" style="background:#EAF3DE;">🍗</div>
+          <div class="ri-body">
+            <div class="ri-name">Piept de pui cu orez brun</div>
+            <div class="ri-meta">30 min · 1 porție · Cină</div>
+            <div class="ri-kcal">420 kcal · 45g prot</div>
+          </div>
+          <div class="ri-compat c-ok"></div>
+        </div>
+        <div class="ri" onclick="selectRecipe(5)">
+          <div class="ri-thumb" style="background:#F0F0FF;">🍳</div>
+          <div class="ri-body">
+            <div class="ri-name">Omletă cu spanac și brânză feta</div>
+            <div class="ri-meta">12 min · 1 porție · Mic dejun</div>
+            <div class="ri-kcal">310 kcal · 22g prot</div>
+          </div>
+          <div class="ri-compat c-warn"></div>
+        </div>
+        <div class="ri" onclick="selectRecipe(6)">
+          <div class="ri-thumb" style="background:#FFF0E8;">🥣</div>
+          <div class="ri-body">
+            <div class="ri-name">Supă cremă linte roșie</div>
+            <div class="ri-meta">25 min · 2 porții · Cină</div>
+            <div class="ri-kcal">280 kcal · 16g prot</div>
+          </div>
+          <div class="ri-compat c-ok"></div>
+        </div>
+        <div class="ri" onclick="selectRecipe(7)">
+          <div class="ri-thumb" style="background:#E8F5FF;">🐟</div>
+          <div class="ri-body">
+            <div class="ri-name">Cod la abur cu legume mediteraneene</div>
+            <div class="ri-meta">30 min · 1 porție · Cină</div>
+            <div class="ri-kcal">320 kcal · 36g prot</div>
+          </div>
+          <div class="ri-compat c-ok"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DETAIL -->
+    <div class="detail-col">
+      <div class="dc-topbar">
+        <div class="dc-title" id="detailTitle">Somon la abur cu quinoa și legume de sezon</div>
+        <div class="icon-btn" title="Editează rețeta"><i class="ti ti-pencil"></i></div>
+        <div class="icon-btn" title="Duplică rețeta"><i class="ti ti-copy"></i></div>
+        <div class="icon-btn" title="Adaugă la plan"><i class="ti ti-calendar-plus"></i></div>
+        <button class="mode-btn secondary" onclick="togglePortions()"><i class="ti ti-scale" style="font-size:13px;"></i> <span id="portionLabel">1 porție</span></button>
+        <button class="mode-btn primary" onclick="startCooking()"><i class="ti ti-chef-hat" style="font-size:13px;"></i> Mod cooking</button>
+      </div>
+
+      <div class="dc-scroll">
+        <!-- Banner -->
+        <div class="recipe-banner">
+          <div class="rb-bg" id="bannerEmoji">🐟</div>
+          <div class="rb-emoji" id="bannerEmojiMain">🐟</div>
+          <div class="rb-info">
+            <div class="rb-tag" id="bannerTag">✓ Compatibil cu Andrei M.</div>
+            <div class="rb-name" id="bannerName">Somon la abur cu quinoa și legume de sezon</div>
+            <div class="rb-sub" id="bannerSub">Bogat în omega-3 · Sodiu redus · Fără crustacee</div>
+            <div class="rb-stats">
+              <div class="rbs"><div class="rbs-val" id="s-kcal">487</div><div class="rbs-lbl">kcal</div></div>
+              <div class="rbs"><div class="rbs-val" id="s-prot">42g</div><div class="rbs-lbl">prot.</div></div>
+              <div class="rbs"><div class="rbs-val" id="s-carb">38g</div><div class="rbs-lbl">glucide</div></div>
+              <div class="rbs"><div class="rbs-val" id="s-fat">16g</div><div class="rbs-lbl">grăsimi</div></div>
+              <div class="rbs"><div class="rbs-val" id="s-time">35</div><div class="rbs-lbl">minute</div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="dc-body">
+          <!-- Compat -->
+          <div class="panel full">
+            <div class="compat-banner cb-ok" id="compatBanner">
+              <i class="ti ti-shield-check"></i>
+              <span id="compatText"><strong>100% compatibil</strong> cu profilul lui Andrei Moldovan — fără alergeni, sodiu redus respectat, lactoză ok.</span>
+            </div>
+          </div>
+
+          <!-- Ingrediente -->
+          <div class="panel">
+            <div class="p-title">Ingrediente <span style="font-size:9px;font-weight:300;text-transform:none;letter-spacing:0;color:var(--gray);">(editează cantitățile)</span></div>
+            <div id="ingredientsList"></div>
+          </div>
+
+          <!-- Macronutrienți -->
+          <div class="panel">
+            <div class="p-title">Valori nutriționale / porție</div>
+            <div class="macro-grid">
+              <div class="macro-box"><div class="mb-val" id="m-kcal">487 kcal</div><div class="mb-lbl">Calorii</div><div class="mb-bar"><div class="mb-fill" style="width:82%;background:#1D9E75;"></div></div></div>
+              <div class="macro-box"><div class="mb-val" id="m-prot">42g</div><div class="mb-lbl">Proteine</div><div class="mb-bar"><div class="mb-fill" style="width:78%;background:#1D9E75;"></div></div></div>
+              <div class="macro-box"><div class="mb-val" id="m-carb">38g</div><div class="mb-lbl">Carbohidrați</div><div class="mb-bar"><div class="mb-fill" style="width:58%;background:#EF9F27;"></div></div></div>
+              <div class="macro-box"><div class="mb-val" id="m-fat">16g</div><div class="mb-lbl">Grăsimi</div><div class="mb-bar"><div class="mb-fill" style="width:45%;background:#5DCAA5;"></div></div></div>
+              <div class="macro-box"><div class="mb-val" id="m-sodium">420mg</div><div class="mb-lbl">Sodiu</div><div class="mb-bar"><div class="mb-fill" style="width:35%;background:#AFA9EC;"></div></div></div>
+              <div class="macro-box"><div class="mb-val" id="m-fiber">4g</div><div class="mb-lbl">Fibre</div><div class="mb-bar"><div class="mb-fill" style="width:52%;background:#AFA9EC;"></div></div></div>
+            </div>
+          </div>
+
+          <!-- Pași -->
+          <div class="panel full">
+            <div class="p-title">Mod de preparare</div>
+            <div id="stepsList"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT — COLLAB -->
+    <div class="right-col">
+      <div class="rc-header">
+        <div class="rc-title">Colaborare cu nutriționistul</div>
+        <div class="rc-sub">Conversație legată de această rețetă</div>
+        <div class="client-chip"><div class="cc-av">AM</div><div class="cc-name">Client: Andrei Moldovan</div></div>
+      </div>
+
+      <div class="collab-scroll" id="collabScroll">
+        <div class="msg left">
+          <div class="m-av" style="background:#E1F5EE;color:#085041;">Dr</div>
+          <div class="m-bubble">
+            <div class="m-content">Radu, te rog reduce sodiul la această rețetă — Andrei are tensiunea ușor ridicată.</div>
+            <div class="m-time">Dr. Alina M. · Ieri, 9:14</div>
+          </div>
+        </div>
+        <div class="msg right">
+          <div class="m-av" style="background:#FAEEDA;color:#633806;">RC</div>
+          <div class="m-bubble">
+            <div class="m-content">Înțeles! Am înlocuit sarea normală cu sare roz himalayană — jumătate din sodiu. Am ajustat și cantitatea de ulei.</div>
+            <div class="m-time">Ieri, 9:28</div>
+            <div class="m-pill mp-ok">✓ Modificare aplicată</div>
+          </div>
+        </div>
+        <div class="msg left">
+          <div class="m-av" style="background:#E1F5EE;color:#085041;">Dr</div>
+          <div class="m-bubble">
+            <div class="m-content">Perfect, mulțumesc! Sodiu redus cu 38% — exact ce era nevoie. Continuă cu planul.</div>
+            <div class="m-time">Ieri, 9:32</div>
+          </div>
+        </div>
+        <div class="msg right">
+          <div class="m-av" style="background:#FAEEDA;color:#633806;">RC</div>
+          <div class="m-bubble">
+            <div class="m-content">O întrebare — pot înlocui somonul cu cod pentru săptămâna viitoare? Somonul atlantic nu e disponibil local.</div>
+            <div class="m-time">Azi, 8:45</div>
+            <div class="m-pill mp-pend">⏳ Așteaptă aprobare</div>
+          </div>
+        </div>
+        <div class="msg left">
+          <div class="m-av" style="background:#E1F5EE;color:#085041;">Dr</div>
+          <div class="m-bubble">
+            <div class="m-content">Analizez valorile nutriționale... </div>
+            <div class="m-time">Azi, 9:02</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="rc-input-area">
+        <div class="rc-input-row">
+          <textarea class="rc-textarea" placeholder="Scrie un mesaj..."></textarea>
+          <button class="rc-send" onclick="sendMsg()"><i class="ti ti-send"></i></button>
+        </div>
+        <button class="subst-btn" onclick="proposeSubstitution()">
+          <i class="ti ti-replace"></i> Propune substituție ingredient
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── DATA ──────────────────────────────────────────────────────────────────
+const recipes = [
+  {
+    emoji:'🐟', name:'Somon la abur cu quinoa și legume de sezon',
+    sub:'Bogat în omega-3 · Sodiu redus · Fără crustacee',
+    tag:'✓ Compatibil cu Andrei M.', tagClass:'cb-ok', tagIcon:'ti-shield-check',
+    kcal:487, prot:42, carb:38, fat:16, sodium:420, fiber:4, time:35,
+    compat: { cls:'c-ok', text:'<strong>100% compatibil</strong> cu profilul lui Andrei Moldovan — fără alergeni, sodiu redus respectat, lactoză ok.' },
+    ingredients: [
+      {flag:'ok',  name:'File somon Atlantic',        base:180, unit:'g',  kcalPer:2.08, pPer:.2,  cPer:0,   fPer:.13},
+      {flag:'ok',  name:'Quinoa albă (uscată)',        base:70,  unit:'g',  kcalPer:1.20, pPer:.04, cPer:.21, fPer:.02},
+      {flag:'ok',  name:'Broccoli',                   base:120, unit:'g',  kcalPer:.35,  pPer:.03, cPer:.05, fPer:.004},
+      {flag:'ok',  name:'Morcovi baby',               base:80,  unit:'g',  kcalPer:.41,  pPer:.01, cPer:.10, fPer:.002},
+      {flag:'warn',name:'Ulei de măsline extra virgin',base:10,  unit:'ml', kcalPer:8.84, pPer:0,   cPer:0,   fPer:1.0},
+      {flag:'ok',  name:'Zeamă de lămâie',            base:15,  unit:'ml', kcalPer:.22,  pPer:.003,cPer:.07, fPer:0},
+      {flag:'ok',  name:'Sare roz himalayană',        base:2,   unit:'g',  kcalPer:0,    pPer:0,   cPer:0,   fPer:0},
+    ],
+    steps: [
+      {title:'Pregătire quinoa',       text:'Clătești quinoa sub jet de apă rece 1-2 minute. O pui la fiert în apă cu raport 1:2 la foc mediu-mare.', timer:900},
+      {title:'Condimentezi somonul',   text:'Tamponezi fileul de somon cu un șervețel. Îl condimentezi cu sare roz și zeamă de lămâie pe ambele fețe.', timer:null},
+      {title:'Aburi somonul și legumele', text:'Pregătești aburitorul. Pui somonul în coș și gătești 12 minute. Broccoli și morcovii intră în ultimele 8 minute.', timer:720},
+      {title:'Asamblare și servire',   text:'Quinoa la bază, somonul deasupra, legumele lateral. Finisezi cu un fir de ulei de măsline și extra lămâie. Servești imediat.', timer:null},
+    ]
+  },
+  {
+    emoji:'🥑', name:'Avocado toast cu ouă poșate',
+    sub:'High protein · Mic dejun energizant', tag:'✓ Compatibil', tagClass:'cb-ok', tagIcon:'ti-shield-check',
+    kcal:350, prot:14, carb:32, fat:18, sodium:380, fiber:7, time:15,
+    compat: { cls:'c-ok', text:'<strong>100% compatibil</strong> cu profilul lui Andrei Moldovan.' },
+    ingredients: [
+      {flag:'ok', name:'Pâine integrală',  base:80, unit:'g', kcalPer:2.5, pPer:.1, cPer:.45, fPer:.03},
+      {flag:'ok', name:'Avocado copt',     base:100,unit:'g', kcalPer:1.6, pPer:.02,cPer:.09, fPer:.15},
+      {flag:'ok', name:'Ouă (2 buc)',      base:100,unit:'g', kcalPer:1.55,pPer:.13,cPer:.011,fPer:.11},
+      {flag:'ok', name:'Suc de lămâie',   base:10, unit:'ml',kcalPer:.22, pPer:.003,cPer:.07,fPer:0},
+      {flag:'ok', name:'Sare & piper',    base:2,  unit:'g', kcalPer:0,   pPer:0,   cPer:0,  fPer:0},
+    ],
+    steps: [
+      {title:'Fierbi apa',            text:'Într-o cratiță adâncă aduci apa la fierbere cu puțin oțet alb.', timer:180},
+      {title:'Pregătești avocado',    text:'Zdrobești avocado cu o furculiță, adaugi zeamă de lămâie, sare și piper. Prăjești pâinea.', timer:null},
+      {title:'Poșezi ouăle',          text:'Creezi un vârtej în apă, spargi oul în centru. Gătești 3 minute pentru albuș ferm, gălbenuș moale.', timer:180},
+      {title:'Asamblare',             text:'Pâine prăjită → pastă avocado → ou poșat. Garnisești cu fulgi de ardei iute opțional.', timer:null},
+    ]
+  },
+];
+
+let currentRecipe = 0;
+let portions = 1;
+let cookStep_idx = 0;
+let cookTimer = null;
+let cookSeconds = 0;
+
+// ── RENDER ────────────────────────────────────────────────────────────────
+function renderRecipe(idx) {
+  const r = recipes[idx] || recipes[0];
+  document.getElementById('detailTitle').textContent = r.name;
+  document.getElementById('bannerEmoji').textContent = r.emoji;
+  document.getElementById('bannerEmojiMain').textContent = r.emoji;
+  document.getElementById('bannerTag').textContent = r.tag;
+  document.getElementById('bannerTag').className = 'rb-tag';
+  document.getElementById('bannerName').textContent = r.name;
+  document.getElementById('bannerSub').textContent = r.sub;
+
+  const p = portions;
+  document.getElementById('s-kcal').textContent = Math.round(r.kcal * p);
+  document.getElementById('s-prot').textContent = Math.round(r.prot * p) + 'g';
+  document.getElementById('s-carb').textContent = Math.round(r.carb * p) + 'g';
+  document.getElementById('s-fat').textContent  = Math.round(r.fat  * p) + 'g';
+  document.getElementById('s-time').textContent = r.time;
+
+  document.getElementById('m-kcal').textContent   = Math.round(r.kcal   * p) + ' kcal';
+  document.getElementById('m-prot').textContent   = Math.round(r.prot   * p) + 'g';
+  document.getElementById('m-carb').textContent   = Math.round(r.carb   * p) + 'g';
+  document.getElementById('m-fat').textContent    = Math.round(r.fat    * p) + 'g';
+  document.getElementById('m-sodium').textContent = Math.round(r.sodium * p) + 'mg';
+  document.getElementById('m-fiber').textContent  = Math.round(r.fiber  * p) + 'g';
+
+  const compatBanner = document.getElementById('compatBanner');
+  compatBanner.className = 'compat-banner ' + r.compat.cls;
+  compatBanner.innerHTML = `<i class="ti ${r.compat.cls === 'cb-ok' ? 'ti-shield-check' : r.compat.cls === 'cb-warn' ? 'ti-alert-triangle' : 'ti-shield-x'}"></i><span>${r.compat.text}</span>`;
+
+  // Ingredients
+  document.getElementById('ingredientsList').innerHTML = r.ingredients.map((ing, i) => `
+    <div class="ing-row">
+      <div class="ing-flag ${ing.flag === 'ok' ? 'if-ok' : ing.flag === 'warn' ? 'if-warn' : 'if-err'}">${ing.flag === 'ok' ? '✓' : ing.flag === 'warn' ? '!' : '✕'}</div>
+      <div class="ing-name">${ing.name}</div>
+      <input class="ing-qty-input" type="number" value="${Math.round(ing.base * p)}" min="0" data-idx="${i}" onchange="updateQty(this)">
+      <div class="ing-amount">${ing.unit}</div>
+    </div>
+  `).join('');
+
+  // Steps
+  document.getElementById('stepsList').innerHTML = r.steps.map((s, i) => `
+    <div class="step-item">
+      <div class="step-num">${i + 1}</div>
+      <div class="step-body">
+        <div class="step-text"><strong>${s.title}.</strong> ${s.text}</div>
+        ${s.timer ? `<div class="step-timer" onclick="startTimer(${s.timer})"><i class="ti ti-clock"></i> ${Math.floor(s.timer/60)} min timer</div>` : ''}
+      </div>
+    </div>
+  `).join('');
+}
+
+function selectRecipe(idx) {
+  currentRecipe = idx;
+  portions = 1;
+  document.getElementById('portionLabel').textContent = '1 porție';
+  document.querySelectorAll('.ri').forEach((el, i) => el.classList.toggle('active', i === idx));
+  renderRecipe(idx);
+}
+
+function togglePortions() {
+  portions = portions === 1 ? 2 : portions === 2 ? 4 : 1;
+  document.getElementById('portionLabel').textContent = portions + (portions === 1 ? ' porție' : ' porții');
+  renderRecipe(currentRecipe);
+}
+
+function updateQty(input) {
+  // In real app: recalculate macros live
+  const r = recipes[currentRecipe];
+  const ing = r.ingredients[parseInt(input.dataset.idx)];
+  const ratio = parseInt(input.value) / (ing.base * portions);
+  // Visual feedback only in this demo
+}
+
+function startTimer(seconds) {
+  alert(`Timer pornit: ${Math.floor(seconds/60)} minute ${seconds%60 > 0 ? seconds%60 + ' secunde' : ''}\n\nÎn aplicația completă, timerul ar rula în fundal cu alertă sonoră.`);
+}
+
+// ── COOKING MODE ──────────────────────────────────────────────────────────
+const cookSteps = [
+  {title:'Pregătire quinoa',          text:'Clătești quinoa sub jet de apă rece 1-2 minute. O pui la fiert în apă cu raport 1:2 la foc mediu.', sec:900},
+  {title:'Condimentezi somonul',      text:'Tamponezi fileul cu un șervețel. Condimentezi cu sare roz himalayană și zeamă de lămâie pe ambele fețe.', sec:0},
+  {title:'Aburi somonul & legumele',  text:'Pregătești aburitorul. Somonul — 12 minute. Broccoli și morcovii intră în ultimele 8 minute.', sec:720},
+  {title:'Asamblare și servire',      text:'Quinoa la bază, somonul deasupra, legumele lateral. Finisezi cu ulei de măsline și zeamă de lămâie. Servești imediat.', sec:0},
+];
+
+function startCooking() {
+  cookStep_idx = 0;
+  document.getElementById('cookingOverlay').classList.add('show');
+  renderCookStep();
+}
+
+function closeCooking() {
+  document.getElementById('cookingOverlay').classList.remove('show');
+  clearInterval(cookTimer);
+}
+
+function renderCookStep() {
+  const step = cookSteps[cookStep_idx];
+  document.getElementById('coStepNum').textContent = `Pasul ${cookStep_idx + 1} din ${cookSteps.length}`;
+  document.getElementById('coStepTitle').textContent = step.title;
+  document.getElementById('coStepText').textContent = step.text;
+  document.getElementById('coPrev').disabled = cookStep_idx === 0;
+  document.getElementById('coNext').textContent = cookStep_idx === cookSteps.length - 1 ? '✓ Gata!' : 'Următor →';
+
+  // Dots
+  document.getElementById('coDots').innerHTML = cookSteps.map((_, i) =>
+    `<div class="co-dot ${i < cookStep_idx ? 'done' : i === cookStep_idx ? 'current' : ''}"></div>`
+  ).join('');
+
+  // Timer
+  clearInterval(cookTimer);
+  if (step.sec > 0) {
+    cookSeconds = step.sec;
+    updateTimerDisplay();
+    cookTimer = setInterval(() => {
+      cookSeconds--;
+      updateTimerDisplay();
+      if (cookSeconds <= 0) clearInterval(cookTimer);
+    }, 1000);
+  } else {
+    document.getElementById('coTimer').textContent = '—';
+  }
+}
+
+function updateTimerDisplay() {
+  const m = Math.floor(cookSeconds / 60).toString().padStart(2,'0');
+  const s = (cookSeconds % 60).toString().padStart(2,'0');
+  document.getElementById('coTimer').textContent = `${m}:${s}`;
+}
+
+function cookStep(dir) {
+  const next = cookStep_idx + dir;
+  if (next < 0) return;
+  if (next >= cookSteps.length) { closeCooking(); return; }
+  cookStep_idx = next;
+  renderCookStep();
+}
+
+// ── COLLAB ────────────────────────────────────────────────────────────────
+function sendMsg() {
+  const ta = document.querySelector('.rc-textarea');
+  const msg = ta.value.trim();
+  if (!msg) return;
+  const scroll = document.getElementById('collabScroll');
+  const div = document.createElement('div');
+  div.className = 'msg right';
+  div.innerHTML = `
+    <div class="m-av" style="background:#FAEEDA;color:#633806;">RC</div>
+    <div class="m-bubble">
+      <div class="m-content">${msg}</div>
+      <div class="m-time">Acum</div>
+    </div>`;
+  scroll.appendChild(div);
+  scroll.scrollTop = scroll.scrollHeight;
+  ta.value = '';
+}
+
+function proposeSubstitution() {
+  const ingredient = prompt('Ce ingredient vrei să substitui?', 'Somon Atlantic');
+  if (!ingredient) return;
+  const alternative = prompt('Cu ce îl înlocuiești?', 'Cod alb');
+  if (!alternative) return;
+  const scroll = document.getElementById('collabScroll');
+  const div = document.createElement('div');
+  div.className = 'msg right';
+  div.innerHTML = `
+    <div class="m-av" style="background:#FAEEDA;color:#633806;">RC</div>
+    <div class="m-bubble">
+      <div class="m-content">Propun substituție: <strong>${ingredient}</strong> → <strong>${alternative}</strong>. Disponibilitate locală limitată această săptămână.</div>
+      <div class="m-time">Acum</div>
+      <div class="m-pill mp-pend">⏳ Așteaptă aprobarea Dr. Alina M.</div>
+    </div>`;
+  scroll.appendChild(div);
+  scroll.scrollTop = scroll.scrollHeight;
+}
+
+// Init
+renderRecipe(0);
+</script>
+</body>
+</html>
