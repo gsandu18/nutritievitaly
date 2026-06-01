@@ -25,13 +25,19 @@
 }
 html, body { height: 100%; font-family: 'DM Sans', sans-serif; font-weight: 300; background: var(--linen); color: var(--dark); overflow: hidden; }
 
-.app { display: grid; grid-template-columns: 220px 1fr 320px; height: 100vh; overflow: hidden; }
+/* ─── APP LAYOUT ─── */
+.app { display: grid; grid-template-columns: 220px 1fr 320px; height: 100vh; overflow: hidden; position: relative; }
+
+/* ─── MASCĂ MENIU (MOBIL) ─── */
+.overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 40; }
 
 /* ─── SIDEBAR ─────────────────────────────────────── */
-.sidebar { background: var(--forest); display: flex; flex-direction: column; }
-.sb-logo { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 600; color: #E1F5EE; letter-spacing: .02em; padding: 28px 24px 24px; }
+.sidebar { background: var(--forest); display: flex; flex-direction: column; z-index: 50; transition: transform 0.3s ease; }
+.sb-logo { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 600; color: #E1F5EE; letter-spacing: .02em; padding: 28px 24px 24px; display: flex; align-items: center; justify-content: space-between;}
 .sb-logo span { color: var(--sage); }
-.sb-nav { padding: 8px 0; flex: 1; }
+.close-menu { display: none; color: #E1F5EE; font-size: 24px; cursor: pointer; background: none; border: none; }
+
+.sb-nav { padding: 8px 0; flex: 1; overflow-y: auto;}
 .sb-sec { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: rgba(93,202,165,.4); padding: 16px 24px 6px; font-weight: 500; }
 .sb-i { display: flex; align-items: center; gap: 12px; padding: 11px 24px; font-size: 14px; color: rgba(159,225,203,.5); cursor: pointer; border-left: 2.5px solid transparent; transition: all .15s; }
 .sb-i:hover { background: rgba(29,158,117,.1); color: rgba(225,245,238,.8); }
@@ -41,7 +47,7 @@ html, body { height: 100%; font-family: 'DM Sans', sans-serif; font-weight: 300;
 .sb-badge { margin-left: auto; background: rgba(239,159,39,.3); color: var(--saffron); font-size: 11px; padding: 2px 7px; border-radius: 20px; font-weight: 500; }
 .sb-user { padding: 16px 20px; border-top: 0.5px solid rgba(29,158,117,.15); display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
 .sb-av { width: 34px; height: 34px; border-radius: 50%; background: rgba(29,158,117,.2); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 500; color: var(--mint); flex-shrink: 0; }
-.sb-uname { font-size: 13px; color: rgba(225,245,238,.8); }
+.sb-uname { font-size: 13px; color: rgba(225,245,238,.8); line-height: 1.2;}
 .sb-urole { font-size: 11px; color: rgba(93,202,165,.45); }
 
 /* ─── MAIN / PLAN ─────────────────────────────────── */
@@ -49,20 +55,21 @@ html, body { height: 100%; font-family: 'DM Sans', sans-serif; font-weight: 300;
 
 /* Topbar */
 .topbar { padding: 16px 20px; border-bottom: 1px solid rgba(15,46,40,.08); display: flex; align-items: center; gap: 14px; flex-shrink: 0; }
+.menu-toggle { display: none; background: none; border: none; font-size: 24px; color: var(--dark); cursor: pointer; padding-right: 10px;}
 .client-chip { display: flex; align-items: center; gap: 8px; background: var(--linen); border: 1px solid rgba(15,46,40,.12); border-radius: 12px; padding: 8px 14px 8px 8px; cursor: pointer; transition: border-color .15s; }
 .client-chip:hover { border-color: var(--sage); }
 .cc-av { width: 30px; height: 30px; border-radius: 50%; background: #E1F5EE; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 500; color: #085041; flex-shrink: 0; }
 .cc-name { font-size: 14px; font-weight: 500; color: var(--dark); line-height: 1.2; }
 .cc-arrow { color: var(--gray); font-size: 12px; margin-left: 2px; }
 .plan-ico { width: 20px; height: 20px; border: 1.5px solid rgba(15,46,40,.25); border-radius: 4px; cursor: pointer; }
-.week-label { font-size: 15px; font-weight: 500; color: var(--dark); }
+.week-label { font-size: 15px; font-weight: 500; color: var(--dark); white-space: nowrap; margin-left: auto;}
 
 /* Macro strip */
 .macro-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border-bottom: 1px solid rgba(15,46,40,.08); flex-shrink: 0; }
 .mc { padding: 14px 18px; border-right: 1px solid rgba(15,46,40,.06); }
 .mc:last-child { border-right: none; }
 .mc-lbl { font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: var(--gray); font-weight: 500; margin-bottom: 4px; }
-.mc-val { font-size: 26px; font-weight: 500; color: var(--dark); line-height: 1; margin-bottom: 2px; }
+.mc-val { font-size: 24px; font-weight: 500; color: var(--dark); line-height: 1; margin-bottom: 2px; }
 .mc-target { font-size: 11px; color: var(--gray); margin-bottom: 6px; }
 .mc-target s { color: rgba(136,135,128,.5); }
 .mc-bar-bg { height: 4px; background: rgba(15,46,40,.07); border-radius: 2px; overflow: hidden; }
@@ -70,10 +77,10 @@ html, body { height: 100%; font-family: 'DM Sans', sans-serif; font-weight: 300;
 
 /* Grid */
 .plan-scroll { flex: 1; overflow: auto; }
-.week-grid { min-width: 500px; }
+.week-grid { min-width: 600px; padding-bottom: 20px;}
 
 /* Header row */
-.grid-header { display: grid; grid-template-columns: 52px repeat(7, 1fr); background: var(--forest); }
+.grid-header { display: grid; grid-template-columns: 52px repeat(7, 1fr); background: var(--forest); position: sticky; top: 0; z-index: 10;}
 .gh-corner { padding: 10px 6px; display: flex; align-items: center; justify-content: center; }
 .gh-lbl { font-size: 9px; letter-spacing: .1em; text-transform: uppercase; color: rgba(93,202,165,.4); font-weight: 500; }
 .gh-day { padding: 10px 4px; text-align: center; border-left: 0.5px solid rgba(255,255,255,.06); }
@@ -86,105 +93,196 @@ html, body { height: 100%; font-family: 'DM Sans', sans-serif; font-weight: 300;
 .meal-row { display: grid; grid-template-columns: 52px repeat(7, 1fr); border-bottom: 1px solid rgba(15,46,40,.07); }
 .meal-label-cell { display: flex; align-items: center; justify-content: center; background: var(--linen); border-right: 1px solid rgba(15,46,40,.07); padding: 6px 4px; }
 .meal-label-text { font-size: 9px; letter-spacing: .12em; text-transform: uppercase; color: var(--gray); font-weight: 500; writing-mode: vertical-rl; text-orientation: mixed; transform: rotate(180deg); }
-.cell { border-left: 0.5px solid rgba(15,46,40,.06); padding: 6px 6px; min-height: 72px; cursor: pointer; transition: background .1s; vertical-align: top; }
+.cell { border-left: 0.5px solid rgba(15,46,40,.06); padding: 8px 6px; min-height: 80px; cursor: pointer; transition: background .1s; vertical-align: top; }
 .cell:hover { background: var(--linen); }
 .cell.today-col { background: rgba(29,158,117,.04); }
 .cell.selected { background: #E8F7F2; outline: 2px solid var(--sage); outline-offset: -2px; }
 .meal-item { }
-.mi-name { font-size: 11px; color: var(--dark); line-height: 1.35; font-weight: 400; margin-bottom: 2px; }
-.mi-kcal { font-size: 11px; color: var(--sage); font-weight: 500; }
-.cell-empty { display: flex; align-items: center; justify-content: center; height: 60px; }
-.add-plus { width: 20px; height: 20px; border: 1.5px dashed rgba(15,46,40,.18); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; color: rgba(15,46,40,.18); transition: all .15s; }
+.mi-name { font-size: 11px; color: var(--dark); line-height: 1.35; font-weight: 500; margin-bottom: 3px; word-break: break-word;}
+.mi-kcal { font-size: 11px; color: var(--sage); font-weight: 600; }
+.cell-empty { display: flex; align-items: center; justify-content: center; height: 100%; min-height: 60px;}
+.add-plus { width: 22px; height: 22px; border: 1.5px dashed rgba(15,46,40,.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; color: rgba(15,46,40,.3); transition: all .15s; }
 .cell:hover .add-plus { border-color: var(--sage); color: var(--sage); }
 
 /* Totals row */
 .totals-row { display: grid; grid-template-columns: 52px repeat(7, 1fr); border-bottom: 1px solid rgba(15,46,40,.07); background: var(--linen); }
 .tot-label-cell { display: flex; align-items: center; justify-content: center; background: var(--linend); border-right: 1px solid rgba(15,46,40,.07); padding: 6px 4px; }
 .tot-label-text { font-size: 8px; letter-spacing: .1em; text-transform: uppercase; color: var(--gray); font-weight: 500; writing-mode: vertical-rl; transform: rotate(180deg); }
-.tot-cell { border-left: 0.5px solid rgba(15,46,40,.06); padding: 8px 6px; text-align: center; }
-.tot-val { font-size: 13px; font-weight: 500; color: var(--dark); }
+.tot-cell { border-left: 0.5px solid rgba(15,46,40,.06); padding: 10px 6px; text-align: center; }
+.tot-val { font-size: 13px; font-weight: 600; color: var(--dark); }
 .tot-dash { font-size: 14px; color: rgba(15,46,40,.2); }
-.tot-bar-bg { height: 3px; background: rgba(15,46,40,.1); border-radius: 2px; overflow: hidden; margin-top: 4px; }
+.tot-bar-bg { height: 3px; background: rgba(15,46,40,.1); border-radius: 2px; overflow: hidden; margin-top: 6px; }
 .tot-bar-fill { height: 100%; border-radius: 2px; }
 
 /* Scrollbar */
-.plan-scroll::-webkit-scrollbar { height: 4px; }
+.plan-scroll::-webkit-scrollbar { height: 6px; width: 6px;}
 .plan-scroll::-webkit-scrollbar-track { background: transparent; }
-.plan-scroll::-webkit-scrollbar-thumb { background: rgba(15,46,40,.12); border-radius: 2px; }
+.plan-scroll::-webkit-scrollbar-thumb { background: rgba(15,46,40,.15); border-radius: 4px; }
 
 /* ─── RIGHT PANEL ─────────────────────────────────── */
-.right-col { display: flex; flex-direction: column; overflow: hidden; background: var(--white); }
+.right-col { display: flex; flex-direction: column; overflow: hidden; background: var(--white); z-index: 20;}
 
 /* Tab row */
-.tab-row { display: grid; grid-template-columns: 1fr 1fr 1fr; border-bottom: 1px solid rgba(15,46,40,.1); flex-shrink: 0; }
-.tab-btn { padding: 16px 8px; font-size: 15px; font-weight: 400; text-align: center; cursor: pointer; border-bottom: 2.5px solid transparent; color: var(--gray); transition: all .15s; background: none; border-top: none; border-left: none; border-right: none; font-family: inherit; }
-.tab-btn.active { color: var(--dark); border-bottom-color: var(--dark); font-weight: 500; }
+.tab-row { display: grid; grid-template-columns: 1fr 1fr 1fr; border-bottom: 1px solid rgba(15,46,40,.1); flex-shrink: 0; background: var(--white);}
+.tab-btn { padding: 16px 8px; font-size: 14px; font-weight: 500; text-align: center; cursor: pointer; border-bottom: 2px solid transparent; color: var(--gray); transition: all .15s; background: none; border-top: none; border-left: none; border-right: none; font-family: inherit; }
+.tab-btn.active { color: var(--dark); border-bottom-color: var(--dark); }
 .tab-btn:hover:not(.active) { color: var(--dark); }
 
-.right-scroll { flex: 1; overflow-y: auto; padding: 16px; }
+.right-scroll { flex: 1; overflow-y: auto; padding: 20px; }
 
 /* Selected label */
-.selected-lbl { font-size: 13px; color: var(--gray); margin-bottom: 14px; }
+.selected-lbl { font-size: 13px; color: var(--gray); margin-bottom: 16px; }
 .selected-lbl strong { color: var(--dark); }
 
 /* Search */
-.food-search { position: relative; margin-bottom: 12px; }
-.food-search-ico { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--gray); font-size: 14px; pointer-events: none; }
-.food-in { width: 100%; padding: 12px 12px 12px 36px; font-size: 14px; border: 1px solid rgba(15,46,40,.15); border-radius: 10px; font-family: inherit; color: var(--dark); background: var(--white); outline: none; transition: border-color .2s; }
+.food-search { position: relative; margin-bottom: 16px; }
+.food-search-ico { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--gray); font-size: 14px; pointer-events: none; }
+.food-in { width: 100%; padding: 12px 14px 12px 40px; font-size: 14px; border: 1px solid rgba(15,46,40,.15); border-radius: 8px; font-family: inherit; color: var(--dark); background: var(--white); outline: none; transition: border-color .2s; }
 .food-in:focus { border-color: var(--sage); }
 .food-in::placeholder { color: rgba(136,135,128,.5); }
 
 /* Compat alert */
-.compat-alert { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: 10px; background: var(--mintl); font-size: 13px; color: #085041; margin-bottom: 16px; }
-.ca-ico { width: 16px; height: 16px; border: 1.5px solid #085041; border-radius: 3px; flex-shrink: 0; }
+.compat-alert { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: 8px; background: var(--mintl); font-size: 13px; color: #085041; margin-bottom: 20px; line-height: 1.4;}
+.ca-ico { width: 18px; height: 18px; border: 1.5px solid #085041; border-radius: 4px; flex-shrink: 0; }
 
 /* Food list */
-.food-item { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 0.5px solid rgba(15,46,40,.07); cursor: pointer; transition: background .1s; }
-.food-item:last-child { border-bottom: none; }
-.food-item:hover { background: var(--linen); margin: 0 -4px; padding-left: 4px; padding-right: 4px; border-radius: 8px; }
-.fi-emoji { width: 36px; height: 36px; border-radius: 50%; background: var(--linen); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; border: 0.5px solid rgba(15,46,40,.06); }
+.food-list-container { display: flex; flex-direction: column; gap: 4px; }
+.food-item { display: flex; align-items: center; gap: 12px; padding: 10px 8px; border-radius: 8px; cursor: pointer; transition: background .1s; border: 1px solid transparent;}
+.food-item:hover { background: var(--linen); border-color: rgba(15,46,40,.05);}
+.fi-emoji { width: 38px; height: 38px; border-radius: 50%; background: var(--white); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; border: 1px solid rgba(15,46,40,.08); box-shadow: 0 2px 5px rgba(0,0,0,.02);}
 .fi-info { flex: 1; min-width: 0; }
-.fi-name { font-size: 13px; font-weight: 500; color: var(--dark); margin-bottom: 1px; }
-.fi-meta { font-size: 11px; color: var(--gray); }
-.fi-add { width: 22px; height: 22px; border: 1.5px solid rgba(15,46,40,.2); border-radius: 4px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all .15s; }
+.fi-name { font-size: 13px; font-weight: 500; color: var(--dark); margin-bottom: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+.fi-meta { font-size: 11px; color: var(--gray); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+.fi-add { width: 24px; height: 24px; border: 1.5px solid rgba(15,46,40,.2); border-radius: 6px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all .15s; position: relative;}
 .fi-add:hover { background: var(--sage); border-color: var(--sage); }
-.fi-add::after { content: ''; display: block; width: 1px; height: 1px; }
+.fi-add::before, .fi-add::after { content: ''; position: absolute; background: currentColor; }
+.fi-add::before { width: 10px; height: 1.5px; }
+.fi-add::after { width: 1.5px; height: 10px; }
+.fi-add:hover::before, .fi-add:hover::after { background: var(--white); }
 
 /* Detaliu tab */
-.detail-card { background: var(--linen); border-radius: 10px; padding: 14px; margin-bottom: 12px; }
-.dc-name { font-size: 14px; font-weight: 500; color: var(--dark); margin-bottom: 10px; }
-.dc-macros { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
-.dcm { text-align: center; background: var(--white); border-radius: 8px; padding: 8px; border: 0.5px solid rgba(15,46,40,.08); }
-.dcm-val { font-size: 16px; font-weight: 500; color: var(--dark); }
-.dcm-lbl { font-size: 10px; color: var(--gray); }
+.detail-card { background: var(--linen); border-radius: 12px; padding: 16px; margin-bottom: 16px; border: 1px solid rgba(15,46,40,.05);}
+.dc-name { font-size: 15px; font-weight: 500; color: var(--dark); margin-bottom: 16px; line-height: 1.3;}
+.dc-macros { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+.dcm { text-align: center; background: var(--white); border-radius: 8px; padding: 12px 8px; border: 1px solid rgba(15,46,40,.08); box-shadow: 0 1px 3px rgba(0,0,0,.02);}
+.dcm-val { font-size: 18px; font-weight: 500; color: var(--dark); margin-bottom: 2px;}
+.dcm-lbl { font-size: 11px; color: var(--gray); text-transform: lowercase;}
 
 /* Note tab */
-.note-textarea { width: 100%; height: 80px; padding: 10px 12px; font-size: 13px; border: 1px solid rgba(15,46,40,.14); border-radius: 10px; font-family: inherit; color: var(--dark); background: var(--linen); resize: none; outline: none; line-height: 1.6; }
-.note-textarea:focus { border-color: var(--sage); }
-.send-btn { width: 100%; margin-top: 8px; background: var(--forest); color: var(--linen); border: none; border-radius: 10px; padding: 11px; font-size: 13px; font-weight: 500; cursor: pointer; font-family: inherit; transition: background .15s; }
+.note-title {font-size:13px;font-weight:500;color:var(--dark);margin-bottom:10px;}
+.note-textarea { width: 100%; height: 100px; padding: 12px; font-size: 14px; border: 1px solid rgba(15,46,40,.15); border-radius: 8px; font-family: inherit; color: var(--dark); background: var(--white); resize: none; outline: none; line-height: 1.5; margin-bottom: 12px;}
+.note-textarea:focus { border-color: var(--sage); box-shadow: 0 0 0 3px rgba(29,158,117,.12);}
+.send-btn { width: 100%; background: var(--forest); color: var(--white); border: none; border-radius: 8px; padding: 14px; font-size: 14px; font-weight: 500; cursor: pointer; font-family: inherit; transition: background .15s; }
 .send-btn:hover { background: var(--sage); }
-.note-history-title { font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--gray); font-weight: 500; margin: 14px 0 8px; }
-.note-hist-item { font-size: 12px; color: var(--dark); padding: 8px 10px; background: var(--linen); border-radius: 8px; margin-bottom: 6px; line-height: 1.55; border-left: 2px solid var(--sage); }
-.nhi-meta { font-size: 10px; color: var(--gray); margin-top: 3px; }
+.note-history-title { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--gray); font-weight: 600; margin: 24px 0 12px; border-bottom: 1px solid rgba(15,46,40,.08); padding-bottom: 8px;}
+.note-hist-item { font-size: 13px; color: var(--dark); padding: 12px 14px; background: var(--linen); border-radius: 8px; margin-bottom: 10px; line-height: 1.5; border-left: 3px solid var(--sage); }
+.nhi-meta { font-size: 11px; color: var(--gray); margin-top: 6px; }
+
+/* ─── RESPONSIVE (MEDIA QUERIES) ─── */
+
+/* Tablete mici / Desktop redus */
+@media (max-width: 1024px) {
+  .app { grid-template-columns: 80px 1fr 280px; }
+  .sb-logo { padding: 20px 10px; justify-content: center;}
+  .sb-logo span { display: none; }
+  .sb-nav { padding: 10px 0;}
+  .sb-sec { display: none; }
+  .sb-i { padding: 14px; justify-content: center; border-left: none; border-bottom: 2px solid transparent;}
+  .sb-i.active { border-bottom-color: var(--sage); border-left-color: transparent;}
+  .sb-i text { display: none; } /* Ascunde textul meniului */
+  .sb-ico { margin: 0; transform: scale(1.2);}
+  .sb-badge { display: none; }
+  .sb-user { padding: 16px 0; justify-content: center; }
+  .sb-uname, .sb-urole { display: none; }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  body { overflow: auto; } /* Permite scroll pe body pe mobil */
+  .app { 
+    display: flex; 
+    flex-direction: column; 
+    height: auto; 
+    min-height: 100vh;
+    overflow: visible;
+  }
+  
+  /* Sidebar devine meniu off-canvas */
+  .sidebar { 
+    position: fixed; top: 0; left: -260px; width: 260px; height: 100vh;
+    padding: 0; box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+  }
+  .sidebar.open { transform: translateX(260px); }
+  .sb-logo { padding: 20px; justify-content: space-between;}
+  .sb-logo span { display: inline; }
+  .close-menu { display: block; }
+  .sb-sec { display: block; }
+  .sb-i { padding: 12px 20px; justify-content: flex-start; border-left: 3px solid transparent; border-bottom: none;}
+  .sb-i.active { border-left-color: var(--sage); border-bottom-color: transparent;}
+  .sb-i text { display: inline; } /* Arată textul */
+  .sb-ico { margin-right: 12px; transform: scale(1);}
+  .sb-badge { display: inline-block; }
+  .sb-user { padding: 16px 20px; justify-content: flex-start; }
+  .sb-uname, .sb-urole { display: block; }
+
+  /* Main & Topbar */
+  .main { flex: none; border-right: none; height: auto;}
+  .topbar { padding: 12px 16px; position: sticky; top: 0; background: var(--white); z-index: 20;}
+  .menu-toggle { display: block; }
+  .client-chip { padding: 6px 12px 6px 6px; }
+  .cc-name { font-size: 13px; }
+  .week-label { font-size: 13px; }
+
+  /* Macro Strip scrollable */
+  .macro-strip { 
+    display: flex; 
+    overflow-x: auto; 
+    scroll-snap-type: x mandatory; 
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 4px;
+  }
+  .macro-strip::-webkit-scrollbar { display: none; }
+  .mc { min-width: 120px; scroll-snap-align: start; padding: 12px 16px; border-right: 1px solid rgba(15,46,40,.06); border-bottom: 1px solid rgba(15,46,40,.06);}
+
+  /* Grid wrapper */
+  .plan-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .week-grid { min-width: 700px; /* Asigură lățimea pt scroll orizontal */ }
+
+  /* Panoul Dreapta jos */
+  .right-col { border-top: 1px solid rgba(15,46,40,.1); height: auto; flex: none; }
+  .right-scroll { padding: 16px; }
+  .tab-btn { padding: 14px 8px; }
+}
+
+@media (max-width: 480px) {
+  .cc-name { display: none; } /* Ascunde numele pe ecrane f mici */
+  .cc-arrow { margin-left: 4px; }
+}
 </style>
 </head>
 <body>
+
+<div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+
 <div class="app">
 
   <!-- SIDEBAR -->
-  <div class="sidebar">
-    <div class="sb-logo">Noura<span>.</span></div>
+  <div class="sidebar" id="sidebar">
+    <div class="sb-logo">
+      <div>Noura<span>.</span></div>
+      <button class="close-menu" onclick="toggleMenu()">×</button>
+    </div>
     <div class="sb-nav">
       <div class="sb-sec">Principal</div>
-      <div class="sb-i"><div class="sb-ico"></div> Dashboard</div>
-      <div class="sb-i"><div class="sb-ico"></div> Clienți</div>
-      <div class="sb-i active"><div class="sb-ico"></div> Planuri</div>
-      <div class="sb-i"><div class="sb-ico"></div> Rețete</div>
+      <div class="sb-i"><div class="sb-ico"></div> <text>Dashboard</text></div>
+      <div class="sb-i"><div class="sb-ico"></div> <text>Clienți</text></div>
+      <div class="sb-i active"><div class="sb-ico"></div> <text>Planuri</text></div>
+      <div class="sb-i"><div class="sb-ico"></div> <text>Rețete</text></div>
       <div class="sb-sec">Analiză</div>
-      <div class="sb-i"><div class="sb-ico"></div> Analytics</div>
-      <div class="sb-i"><div class="sb-ico"></div> Rapoarte</div>
+      <div class="sb-i"><div class="sb-ico"></div> <text>Analytics</text></div>
+      <div class="sb-i"><div class="sb-ico"></div> <text>Rapoarte</text></div>
       <div class="sb-sec">Echipă</div>
-      <div class="sb-i"><div class="sb-ico"></div> Colaborare <span class="sb-badge">3</span></div>
+      <div class="sb-i"><div class="sb-ico"></div> <text>Colaborare</text> <span class="sb-badge">3</span></div>
     </div>
     <div class="sb-user">
       <div class="sb-av">AM</div>
@@ -199,19 +297,20 @@ html, body { height: 100%; font-family: 'DM Sans', sans-serif; font-weight: 300;
   <div class="main">
     <!-- Topbar -->
     <div class="topbar">
+      <button class="menu-toggle" onclick="toggleMenu()">☰</button>
       <div class="client-chip">
         <div class="cc-av">AM</div>
         <div class="cc-name">Andrei<br>Moldovan</div>
         <span class="cc-arrow">▾</span>
       </div>
-      <div class="plan-ico"></div>
+      <div class="plan-ico" style="margin-left:auto;"></div>
       <div class="week-label">Săpt. 4 · 26 mai–1 iun</div>
     </div>
 
     <!-- Macro strip -->
     <div class="macro-strip">
       <div class="mc">
-        <div class="mc-lbl">Calorii<br>/ Zi</div>
+        <div class="mc-lbl">Calorii / Zi</div>
         <div class="mc-val">1,682</div>
         <div class="mc-target">Target: 1700 kcal</div>
         <div class="mc-bar-bg"><div class="mc-bar-fill" style="width:99%;background:var(--sage);"></div></div>
@@ -229,7 +328,7 @@ html, body { height: 100%; font-family: 'DM Sans', sans-serif; font-weight: 300;
         <div class="mc-bar-bg"><div class="mc-bar-fill" style="width:97%;background:var(--saffron);"></div></div>
       </div>
       <div class="mc">
-        <div class="mc-lbl">GR...</div>
+        <div class="mc-lbl">Grăsimi</div>
         <div class="mc-val">64g</div>
         <div class="mc-target">Tare: 65g</div>
         <div class="mc-bar-bg"><div class="mc-bar-fill" style="width:98%;background:var(--mint);"></div></div>
@@ -254,133 +353,128 @@ html, body { height: 100%; font-family: 'DM Sans', sans-serif; font-weight: 300;
         <!-- MIC DEJUN -->
         <div class="meal-row">
           <div class="meal-label-cell"><div class="meal-label-text">Mic Dejun</div></div>
-          <div class="cell" onclick="selectCell('Mic Dejun','Luni')">
+          <div class="cell" onclick="selectCell('Mic Dejun','Luni', this)">
             <div class="meal-item"><div class="mi-name">Omletă cu spanac</div><div class="mi-kcal">310 kcal</div></div>
           </div>
-          <div class="cell" onclick="selectCell('Mic Dejun','Marți')">
+          <div class="cell" onclick="selectCell('Mic Dejun','Marți', this)">
             <div class="meal-item"><div class="mi-name">Smoothie verde</div><div class="mi-kcal">280 kcal</div></div>
           </div>
-          <div class="cell today-col" onclick="selectCell('Mic Dejun','Miercuri')">
+          <div class="cell today-col" onclick="selectCell('Mic Dejun','Miercuri', this)">
             <div class="meal-item"><div class="mi-name">Avocado toast</div><div class="mi-kcal">350 kcal</div></div>
           </div>
-          <div class="cell" onclick="selectCell('Mic Dejun','Joi')">
-            <div class="cell-empty"><div class="add-plus">+</div></div>
+          <div class="cell" onclick="selectCell('Mic Dejun','Joi', this)">
+            <div class="cell-empty"><div class="add-plus"></div></div>
           </div>
-          <div class="cell" onclick="selectCell('Mic Dejun','Vineri')">
+          <div class="cell" onclick="selectCell('Mic Dejun','Vineri', this)">
             <div class="meal-item"><div class="mi-name">Granola & iaurt</div><div class="mi-kcal">320 kcal</div></div>
           </div>
-          <div class="cell" onclick="selectCell('Mic Dejun','Sâmbătă')">
-            <div class="cell-empty"><div class="add-plus">+</div></div>
+          <div class="cell" onclick="selectCell('Mic Dejun','Sâmbătă', this)">
+            <div class="cell-empty"><div class="add-plus"></div></div>
           </div>
-          <div class="cell" onclick="selectCell('Mic Dejun','Duminică')">
-            <div class="cell-empty"><div class="add-plus">+</div></div>
+          <div class="cell" onclick="selectCell('Mic Dejun','Duminică', this)">
+            <div class="cell-empty"><div class="add-plus"></div></div>
           </div>
         </div>
 
         <!-- PRÂNZ -->
         <div class="meal-row">
           <div class="meal-label-cell"><div class="meal-label-text">Prânz</div></div>
-          <div class="cell selected" onclick="selectCell('Prânz','Luni')">
+          <div class="cell selected" onclick="selectCell('Prânz','Luni', this)">
             <div class="meal-item"><div class="mi-name">Somon cu quinoa</div><div class="mi-kcal">487 kcal</div></div>
           </div>
-          <div class="cell" onclick="selectCell('Prânz','Marți')">
+          <div class="cell" onclick="selectCell('Prânz','Marți', this)">
             <div class="meal-item"><div class="mi-name">Piept pui & orez</div><div class="mi-kcal">420 kcal</div></div>
           </div>
-          <div class="cell today-col" onclick="selectCell('Prânz','Miercuri')">
+          <div class="cell today-col" onclick="selectCell('Prânz','Miercuri', this)">
             <div class="meal-item"><div class="mi-name">Bowl quinoa legume</div><div class="mi-kcal">410 kcal</div></div>
           </div>
-          <div class="cell" onclick="selectCell('Prânz','Joi')">
+          <div class="cell" onclick="selectCell('Prânz','Joi', this)">
             <div class="meal-item"><div class="mi-name">Paste integrale ton</div><div class="mi-kcal">450 kcal</div></div>
           </div>
-          <div class="cell" onclick="selectCell('Prânz','Vineri')">
+          <div class="cell" onclick="selectCell('Prânz','Vineri', this)">
             <div class="meal-item"><div class="mi-name">Salată niçoise</div><div class="mi-kcal">390 kcal</div></div>
           </div>
-          <div class="cell" onclick="selectCell('Prânz','Sâmbătă')">
-            <div class="cell-empty"><div class="add-plus">+</div></div>
+          <div class="cell" onclick="selectCell('Prânz','Sâmbătă', this)">
+            <div class="cell-empty"><div class="add-plus"></div></div>
           </div>
-          <div class="cell" onclick="selectCell('Prânz','Duminică')">
-            <div class="cell-empty"><div class="add-plus">+</div></div>
+          <div class="cell" onclick="selectCell('Prânz','Duminică', this)">
+            <div class="cell-empty"><div class="add-plus"></div></div>
           </div>
         </div>
 
         <!-- CINĂ -->
         <div class="meal-row">
           <div class="meal-label-cell"><div class="meal-label-text">Cină</div></div>
-          <div class="cell" onclick="selectCell('Cină','Luni')">
+          <div class="cell" onclick="selectCell('Cină','Luni', this)">
             <div class="meal-item"><div class="mi-name">Supă cremă linte</div><div class="mi-kcal">280 kcal</div></div>
           </div>
-          <div class="cell" onclick="selectCell('Cină','Marți')">
+          <div class="cell" onclick="selectCell('Cină','Marți', this)">
             <div class="meal-item"><div class="mi-name">Tofu stir-fry</div><div class="mi-kcal">350 kcal</div></div>
           </div>
-          <div class="cell today-col" onclick="selectCell('Cină','Miercuri')">
+          <div class="cell today-col" onclick="selectCell('Cină','Miercuri', this)">
             <div class="meal-item"><div class="mi-name">Cod la abur</div><div class="mi-kcal">320 kcal</div></div>
           </div>
-          <div class="cell" onclick="selectCell('Cină','Joi')">
+          <div class="cell" onclick="selectCell('Cină','Joi', this)">
             <div class="meal-item"><div class="mi-name">Piept curcan</div><div class="mi-kcal">380 kcal</div></div>
           </div>
-          <div class="cell" onclick="selectCell('Cină','Vineri')">
+          <div class="cell" onclick="selectCell('Cină','Vineri', this)">
             <div class="meal-item"><div class="mi-name">Legume coapte & hummus</div><div class="mi-kcal">300 kcal</div></div>
           </div>
-          <div class="cell" onclick="selectCell('Cină','Sâmbătă')">
-            <div class="cell-empty"><div class="add-plus">+</div></div>
+          <div class="cell" onclick="selectCell('Cină','Sâmbătă', this)">
+            <div class="cell-empty"><div class="add-plus"></div></div>
           </div>
-          <div class="cell" onclick="selectCell('Cină','Duminică')">
-            <div class="cell-empty"><div class="add-plus">+</div></div>
+          <div class="cell" onclick="selectCell('Cină','Duminică', this)">
+            <div class="cell-empty"><div class="add-plus"></div></div>
           </div>
         </div>
 
         <!-- GUSTARE -->
         <div class="meal-row">
           <div class="meal-label-cell"><div class="meal-label-text">Gustare</div></div>
-          <div class="cell" onclick="selectCell('Gustare','Luni')">
+          <div class="cell" onclick="selectCell('Gustare','Luni', this)">
             <div class="meal-item"><div class="mi-name">Iaurt & fructe</div><div class="mi-kcal">150 kcal</div></div>
           </div>
-          <div class="cell" onclick="selectCell('Gustare','Marți')">
+          <div class="cell" onclick="selectCell('Gustare','Marți', this)">
             <div class="meal-item"><div class="mi-name">Nuci mix 30g</div><div class="mi-kcal">180 kcal</div></div>
           </div>
-          <div class="cell today-col" onclick="selectCell('Gustare','Miercuri')">
+          <div class="cell today-col" onclick="selectCell('Gustare','Miercuri', this)">
             <div class="meal-item"><div class="mi-name">Măr & unt arahide</div><div class="mi-kcal">200 kcal</div></div>
           </div>
-          <div class="cell" onclick="selectCell('Gustare','Joi')">
+          <div class="cell" onclick="selectCell('Gustare','Joi', this)">
             <div class="meal-item"><div class="mi-name">Baton proteic</div><div class="mi-kcal">190 kcal</div></div>
           </div>
-          <div class="cell" onclick="selectCell('Gustare','Vineri')">
+          <div class="cell" onclick="selectCell('Gustare','Vineri', this)">
             <div class="meal-item"><div class="mi-name">Smoothie afine</div><div class="mi-kcal">160 kcal</div></div>
           </div>
-          <div class="cell" onclick="selectCell('Gustare','Sâmbătă')">
-            <div class="cell-empty"><div class="add-plus">+</div></div>
+          <div class="cell" onclick="selectCell('Gustare','Sâmbătă', this)">
+            <div class="cell-empty"><div class="add-plus"></div></div>
           </div>
-          <div class="cell" onclick="selectCell('Gustare','Duminică')">
-            <div class="cell-empty"><div class="add-plus">+</div></div>
+          <div class="cell" onclick="selectCell('Gustare','Duminică', this)">
+            <div class="cell-empty"><div class="add-plus"></div></div>
           </div>
         </div>
 
         <!-- TOTALS -->
         <div class="totals-row">
           <div class="tot-label-cell"><div class="tot-label-text">Total Kcal</div></div>
-          <!-- Luni: 310+487+280+150=1227 -->
           <div class="tot-cell">
             <div class="tot-val">1227</div>
             <div class="tot-bar-bg"><div class="tot-bar-fill" style="width:72%;background:var(--purple);"></div></div>
           </div>
-          <!-- Marți: 280+420+350+180=1230 -->
           <div class="tot-cell">
             <div class="tot-val">1230</div>
             <div class="tot-bar-bg"><div class="tot-bar-fill" style="width:72%;background:var(--purple);"></div></div>
           </div>
-          <!-- Miercuri: 350+410+320+200=1280 -->
           <div class="tot-cell">
             <div class="tot-val">1280</div>
             <div class="tot-bar-bg"><div class="tot-bar-fill" style="width:75%;background:var(--sage);"></div></div>
           </div>
-          <!-- Joi: 0+450+380+190=1340 -->
           <div class="tot-cell">
             <div class="tot-val">1340</div>
             <div class="tot-bar-bg"><div class="tot-bar-fill" style="width:79%;background:var(--purple);"></div></div>
           </div>
-          <!-- Vineri: 320+390+300+160=1170 -->
           <div class="tot-cell">
-            <div class="tot-val">1140</div>
+            <div class="tot-val">1170</div>
             <div class="tot-bar-bg"><div class="tot-bar-fill" style="width:67%;background:var(--purple);"></div></div>
           </div>
           <div class="tot-cell"><div class="tot-dash">—</div></div>
@@ -391,7 +485,7 @@ html, body { height: 100%; font-family: 'DM Sans', sans-serif; font-weight: 300;
   </div>
 
   <!-- RIGHT PANEL -->
-  <div class="right-col">
+  <div class="right-col" id="rightPanel">
     <div class="tab-row">
       <button class="tab-btn active" id="tabAdauga" onclick="switchTab('adauga')">Adaugă</button>
       <button class="tab-btn" id="tabDetaliu" onclick="switchTab('detaliu')">Detaliu</button>
@@ -403,7 +497,7 @@ html, body { height: 100%; font-family: 'DM Sans', sans-serif; font-weight: 300;
       <div class="selected-lbl">Selectat: <strong id="selectedLabel">Prânz · Luni</strong></div>
 
       <div class="food-search">
-        <span class="food-search-ico">⊡</span>
+        <span class="food-search-ico">🔍</span>
         <input class="food-in" type="text" placeholder="Caută aliment sau rețetă..." oninput="filterFoods(this.value)" id="foodSearchInput">
       </div>
 
@@ -412,13 +506,13 @@ html, body { height: 100%; font-family: 'DM Sans', sans-serif; font-weight: 300;
         Fără alergeni detectați pentru Andrei M.
       </div>
 
-      <div id="foodListEl"></div>
+      <div class="food-list-container" id="foodListEl"></div>
     </div>
 
     <!-- DETALIU TAB -->
     <div class="right-scroll" id="panelDetaliu" style="display:none;">
       <div class="detail-card">
-        <div class="dc-name" id="detailMealName">Somon cu quinoa — Luni, Prânz</div>
+        <div class="dc-name" id="detailMealName">Somon cu quinoa<br><span style="font-size: 13px; color: var(--gray); font-weight: 400; margin-top: 4px; display: block;">Luni, Prânz</span></div>
         <div class="dc-macros">
           <div class="dcm"><div class="dcm-val">487</div><div class="dcm-lbl">kcal</div></div>
           <div class="dcm"><div class="dcm-val">42g</div><div class="dcm-lbl">proteine</div></div>
@@ -426,18 +520,18 @@ html, body { height: 100%; font-family: 'DM Sans', sans-serif; font-weight: 300;
           <div class="dcm"><div class="dcm-val">16g</div><div class="dcm-lbl">grăsimi</div></div>
         </div>
       </div>
-      <p style="font-size:12px;color:var(--gray);line-height:1.6;">Dă click pe orice masă din plan pentru a vedea detaliile nutriționale complete.</p>
+      <p style="font-size:13px;color:var(--gray);line-height:1.5;">Selectează orice celulă din plan pentru a vedea detaliile nutriționale complete.</p>
     </div>
 
     <!-- NOTE TAB -->
     <div class="right-scroll" id="panelNote" style="display:none;">
-      <div style="font-size:13px;font-weight:500;color:var(--dark);margin-bottom:8px;">Notă pentru bucătar</div>
+      <div class="note-title">Notă pentru bucătar</div>
       <textarea class="note-textarea" placeholder="Instrucțiuni speciale, substituții permise...">Andrei are tensiunea ușor ridicată această săptămână. Te rog limitează sodiul la max 2g/zi.</textarea>
-      <button class="send-btn">Trimite bucătarului →</button>
-      <div class="note-history-title">Istoric</div>
+      <button class="send-btn">Trimite mesaj →</button>
+      <div class="note-history-title">Istoric comunicare</div>
       <div class="note-hist-item">
         Reducere sodiu aprobată de Radu C. — sare roz înlocuită.
-        <div class="nhi-meta">Ieri · 9:35</div>
+        <div class="nhi-meta">Ieri · 09:35</div>
       </div>
       <div class="note-hist-item">
         Substituție propusă somon → cod. Aprobat.
@@ -448,26 +542,34 @@ html, body { height: 100%; font-family: 'DM Sans', sans-serif; font-weight: 300;
 </div>
 
 <script>
+// Logică meniu mobil
+function toggleMenu() {
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('overlay').style.display = 
+    document.getElementById('sidebar').classList.contains('open') ? 'block' : 'none';
+}
+
+// Bază de date alimente
 const foods = [
   { emoji:'🐟', name:'File somon Atlantic',    meta:'208 kcal · 20g prot · per 100g' },
   { emoji:'🥦', name:'Broccoli la abur',        meta:'35 kcal · 3g prot · per 100g' },
   { emoji:'🌾', name:'Quinoa albă gătită',      meta:'120 kcal · 4g prot · per 100g' },
   { emoji:'🥚', name:'Ou fiert (1 buc)',        meta:'78 kcal · 6g prot · per 50g' },
   { emoji:'🍗', name:'Piept de pui gătit',      meta:'165 kcal · 31g prot · per 100g' },
-  { emoji:'🥑', name:'Avocado',                 meta:'160 kcal · 2g prot · per 100g' },
+  { emoji:'🥑', name:'Avocado crud',            meta:'160 kcal · 2g prot · per 100g' },
   { emoji:'🍠', name:'Cartof dulce copt',       meta:'90 kcal · 2g prot · per 100g' },
   { emoji:'🧀', name:'Brânză cottage',          meta:'98 kcal · 11g prot · per 100g' },
 ];
 
 function renderFoods(list) {
   document.getElementById('foodListEl').innerHTML = list.map(f => `
-    <div class="food-item">
+    <div class="food-item" onclick="addFood('${f.name}')">
       <div class="fi-emoji">${f.emoji}</div>
       <div class="fi-info">
         <div class="fi-name">${f.name}</div>
         <div class="fi-meta">${f.meta}</div>
       </div>
-      <div class="fi-add" onclick="addFood('${f.name}', '${f.meta}')"></div>
+      <div class="fi-add"></div>
     </div>
   `).join('');
 }
@@ -477,27 +579,46 @@ function filterFoods(q) {
   renderFoods(foods.filter(f => f.name.toLowerCase().includes(q.toLowerCase())));
 }
 
-function addFood(name, meta) {
+function addFood(name) {
   const lbl = document.getElementById('selectedLabel').textContent;
-  alert(`"${name}" adăugat la ${lbl}`);
+  alert(`"${name}" a fost adăugat la ${lbl}`);
 }
 
-function selectCell(meal, day) {
+function selectCell(meal, day, element) {
+  // Elimină clasa 'selected' de pe toate celulele
   document.querySelectorAll('.cell').forEach(c => c.classList.remove('selected'));
-  event.currentTarget.classList.add('selected');
+  // Adaugă clasa pe celula apăsată
+  element.classList.add('selected');
+  
+  // Actualizează eticheta în tabul Adaugă
   const lbl = `${meal} · ${day}`;
   document.getElementById('selectedLabel').textContent = lbl;
-  document.getElementById('detailMealName').textContent = `${event.currentTarget.querySelector('.mi-name')?.textContent || '—'} — ${day}, ${meal}`;
+  
+  // Actualizează detaliile în tabul Detaliu
+  const mealName = element.querySelector('.mi-name')?.textContent || 'Celulă goală';
+  document.getElementById('detailMealName').innerHTML = `${mealName}<br><span style="font-size: 13px; color: var(--gray); font-weight: 400; margin-top: 4px; display: block;">${day}, ${meal}</span>`;
+
+  // Pe mobil, dacă utilizatorul selectează o celulă, facem scroll automat la panoul de jos
+  if(window.innerWidth <= 768) {
+    document.getElementById('rightPanel').scrollIntoView({ behavior: 'smooth' });
+  }
 }
 
 function switchTab(tab) {
+  // Ascunde toate panourile și resetează butoanele
   ['adauga','detaliu','note'].forEach(t => {
-    document.getElementById('panel' + t.charAt(0).toUpperCase() + t.slice(1)).style.display = t === tab ? 'block' : 'none';
-    document.getElementById('tab' + t.charAt(0).toUpperCase() + t.slice(1)).classList.toggle('active', t === tab);
+    document.getElementById('panel' + t.charAt(0).toUpperCase() + t.slice(1)).style.display = 'none';
+    document.getElementById('tab' + t.charAt(0).toUpperCase() + t.slice(1)).classList.remove('active');
   });
+  
+  // Afișează panoul cerut și activează butonul
+  document.getElementById('panel' + tab.charAt(0).toUpperCase() + tab.slice(1)).style.display = 'block';
+  document.getElementById('tab' + tab.charAt(0).toUpperCase() + tab.slice(1)).classList.add('active');
 }
 
+// Inițializare
 renderFoods(foods);
 </script>
 </body>
 </html>
+k
