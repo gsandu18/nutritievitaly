@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Noura. — Analytics</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{--forest:#0F2E28;--forest2:#1a3d36;--sage:#1D9E75;--mint:#5DCAA5;--mintl:#E1F5EE;--saffron:#EF9F27;--saffl:#FAEEDA;--linen:#FAFAF8;--linend:#F1EFE8;--gray:#888780;--dark:#2C2C2A;--white:#FFFFFF;--red:#D85A30;--redl:#FAECE7;--purple:#AFA9EC;}
+html,body{height:100%;font-family:'DM Sans',sans-serif;font-weight:300;background:var(--linen);color:var(--dark);overflow:hidden;}
+.app{display:grid;grid-template-columns:220px 1fr;height:100vh;overflow:hidden;}
+
+/* SIDEBAR */
+.sb{background:var(--forest);display:flex;flex-direction:column;}
+.sb-logo{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;color:#E1F5EE;padding:26px 22px 22px;letter-spacing:.02em;}
+.sb-logo span{color:var(--sage);}
+.sb-nav{padding:8px 0;flex:1;}
+.sb-s{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(93,202,165,.38);padding:14px 22px 5px;font-weight:500;}
+.sb-i{display:flex;align-items:center;gap:11px;padding:10px 22px;font-size:13px;color:rgba(159,225,203,.5);cursor:pointer;border-left:2.5px solid transparent;transition:all .15s;}
+.sb-i:hover{background:rgba(29,158,117,.1);color:rgba(225,245,238,.8);}
+.sb-i.active{background:rgba(29,158,117,.12);color:#E1F5EE;border-left-color:var(--sage);font-weight:500;}
+.sb-ico{width:15px;height:15px;border:1.5px solid currentColor;border-radius:3px;opacity:.6;flex-shrink:0;}
+.sb-i.active .sb-ico{opacity:1;}
+.sb-badge{margin-left:auto;background:rgba(239,159,39,.3);color:var(--saffron);font-size:10px;padding:2px 6px;border-radius:20px;font-weight:500;}
+.sb-user{padding:14px 18px;border-top:.5px solid rgba(29,158,117,.14);display:flex;align-items:center;gap:9px;flex-shrink:0;}
+.sb-av{width:32px;height:32px;border-radius:50%;background:rgba(29,158,117,.2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:500;color:var(--mint);flex-shrink:0;}
+.sb-uname{font-size:12px;color:rgba(225,245,238,.8);}
+.sb-urole{font-size:10px;color:rgba(93,202,165,.4);}
+
+/* MAIN */
+.main{display:flex;flex-direction:column;overflow:hidden;background:var(--linen);}
+.topbar{background:var(--white);border-bottom:.5px solid rgba(15,46,40,.09);padding:0 22px;height:54px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
+.topbar-left{display:flex;align-items:center;gap:10px;}
+.page-title{font-size:16px;font-weight:500;color:var(--dark);}
+.period-select{display:flex;gap:3px;background:var(--linen);border-radius:8px;padding:3px;}
+.ps-btn{padding:5px 12px;border-radius:6px;font-size:12px;color:var(--gray);cursor:pointer;transition:all .15s;background:none;border:none;font-family:inherit;}
+.ps-btn.active{background:var(--white);color:var(--dark);font-weight:500;box-shadow:0 1px 4px rgba(0,0,0,.08);}
+.topbar-right{display:flex;align-items:center;gap:8px;}
+.ico-btn{width:32px;height:32px;border-radius:7px;border:.5px solid rgba(15,46,40,.12);background:var(--white);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--gray);transition:all .15s;font-size:16px;}
+.ico-btn:hover{background:var(--linen);border-color:var(--sage);color:var(--sage);}
+
+.scroll{flex:1;overflow-y:auto;padding:18px 22px;display:flex;flex-direction:column;gap:14px;}
+
+/* KPI row */
+.kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
+.kpi{background:var(--white);border:.5px solid rgba(15,46,40,.08);border-radius:12px;padding:14px 16px;}
+.kpi-label{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--gray);margin-bottom:6px;font-weight:500;}
+.kpi-val{font-size:28px;font-weight:500;color:var(--dark);line-height:1;margin-bottom:4px;}
+.kpi-delta{font-size:11px;display:flex;align-items:center;gap:4px;}
+.delta-up{color:var(--sage);}
+.delta-down{color:var(--red);}
+.delta-warn{color:var(--saffron);}
+.kpi-bar{height:3px;background:rgba(15,46,40,.07);border-radius:2px;margin-top:8px;overflow:hidden;}
+.kpi-bar-fill{height:100%;border-radius:2px;}
+
+/* Grid 2 */
+.grid2{display:grid;grid-template-columns:2fr 1fr;gap:14px;}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;}
+.panel{background:var(--white);border:.5px solid rgba(15,46,40,.08);border-radius:12px;padding:16px 18px;}
+.panel-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+.panel-title{font-size:13px;font-weight:500;color:var(--dark);}
+.panel-action{font-size:11px;color:var(--sage);cursor:pointer;}
+.panel-action:hover{text-decoration:underline;}
+
+/* Chart — bar */
+.bar-chart{display:flex;align-items:flex-end;gap:5px;height:100px;padding-bottom:18px;position:relative;}
+.bar-chart-labels{display:flex;gap:5px;margin-top:4px;}
+.bc-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:0;}
+.bc-bar{width:100%;border-radius:3px 3px 0 0;transition:height .4s;position:relative;cursor:pointer;}
+.bc-bar:hover{filter:brightness(1.1);}
+.bc-lbl{font-size:9px;color:var(--gray);margin-top:4px;text-align:center;}
+.bc-val{font-size:9px;color:var(--dark);font-weight:500;text-align:center;margin-bottom:2px;}
+
+/* Chart — line dots */
+.line-chart{position:relative;height:80px;overflow:hidden;}
+.lc-svg{position:absolute;inset:0;width:100%;height:100%;}
+
+/* Client progress rows */
+.cp-row{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:.5px solid rgba(15,46,40,.06);}
+.cp-row:last-child{border-bottom:none;padding-bottom:0;}
+.cp-av{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:500;flex-shrink:0;}
+.cp-info{flex:1;min-width:0;}
+.cp-name{font-size:12px;font-weight:500;color:var(--dark);margin-bottom:1px;}
+.cp-plan{font-size:10px;color:var(--gray);}
+.cp-bar-w{width:80px;}
+.cp-bar-bg{height:4px;background:rgba(15,46,40,.07);border-radius:2px;overflow:hidden;}
+.cp-bar-fill{height:100%;border-radius:2px;}
+.cp-pct{font-size:10px;font-weight:500;color:var(--dark);text-align:right;margin-top:1px;}
+.cp-badge{font-size:9px;padding:2px 7px;border-radius:20px;font-weight:500;flex-shrink:0;}
+.b-ok{background:var(--mintl);color:#085041;}
+.b-warn{background:var(--saffl);color:#633806;}
+.b-exp{background:var(--redl);color:#712B13;}
+
+/* Macro breakdown */
+.macro-item{display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+.macro-item:last-child{margin-bottom:0;}
+.mi-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+.mi-lbl{font-size:12px;color:var(--dark);flex:1;}
+.mi-val{font-size:12px;font-weight:500;color:var(--dark);width:34px;text-align:right;}
+.mi-pct{font-size:10px;color:var(--gray);width:28px;text-align:right;}
+
+/* Alert items */
+.alert-item{display:flex;align-items:flex-start;gap:9px;padding:9px 11px;border-radius:9px;margin-bottom:8px;font-size:12px;}
+.alert-item:last-child{margin-bottom:0;}
+.ai-warn{background:var(--saffl);color:#633806;}
+.ai-ok{background:var(--mintl);color:#085041;}
+.ai-err{background:var(--redl);color:#712B13;}
+.alert-item i{font-size:14px;flex-shrink:0;margin-top:1px;}
+
+/* Sparkline mini */
+.sparkline{display:inline-flex;align-items:flex-end;gap:2px;height:24px;}
+.sp-bar{width:4px;border-radius:1px 1px 0 0;}
+
+/* Donut placeholder */
+.donut-wrap{display:flex;justify-content:center;margin:8px 0;}
+.donut{width:80px;height:80px;border-radius:50%;position:relative;}
+.donut-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+.dc-val{font-size:18px;font-weight:500;color:var(--dark);}
+.dc-lbl{font-size:9px;color:var(--gray);}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="sb">
+    <div class="sb-logo">Noura<span>.</span></div>
+    <div class="sb-nav">
+      <div class="sb-s">Principal</div>
+      <div class="sb-i"><div class="sb-ico"></div>Dashboard</div>
+      <div class="sb-i"><div class="sb-ico"></div>Clienți</div>
+      <div class="sb-i"><div class="sb-ico"></div>Planuri</div>
+      <div class="sb-i"><div class="sb-ico"></div>Rețete</div>
+      <div class="sb-s">Analiză</div>
+      <div class="sb-i active"><div class="sb-ico"></div>Analytics</div>
+      <div class="sb-i"><div class="sb-ico"></div>Rapoarte</div>
+      <div class="sb-s">Echipă</div>
+      <div class="sb-i"><div class="sb-ico"></div>Colaborare <span class="sb-badge">3</span></div>
+      <div class="sb-i"><div class="sb-ico"></div>Setări</div>
+    </div>
+    <div class="sb-user">
+      <div class="sb-av">AM</div>
+      <div><div class="sb-uname">Dr. Alina M.</div><div class="sb-urole">nutriționist</div></div>
+    </div>
+  </div>
+
+  <div class="main">
+    <div class="topbar">
+      <div class="topbar-left">
+        <div class="page-title">Analytics</div>
+        <div class="period-select">
+          <button class="ps-btn">7 zile</button>
+          <button class="ps-btn active">30 zile</button>
+          <button class="ps-btn">90 zile</button>
+          <button class="ps-btn">12 luni</button>
+        </div>
+      </div>
+      <div class="topbar-right">
+        <div class="ico-btn" title="Export">↓</div>
+        <div class="ico-btn" title="Setări">⚙</div>
+      </div>
+    </div>
+
+    <div class="scroll">
+      <!-- KPI row -->
+      <div class="kpi-row">
+        <div class="kpi">
+          <div class="kpi-label">Clienți activi</div>
+          <div class="kpi-val">23</div>
+          <div class="kpi-delta delta-up">▲ +2 față de luna trecută</div>
+          <div class="kpi-bar"><div class="kpi-bar-fill" style="width:76%;background:var(--sage);"></div></div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label">Aderență medie</div>
+          <div class="kpi-val">76%</div>
+          <div class="kpi-delta delta-down">▼ -4% față de țintă</div>
+          <div class="kpi-bar"><div class="kpi-bar-fill" style="width:76%;background:var(--saffron);"></div></div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label">NPS clienți</div>
+          <div class="kpi-val">67</div>
+          <div class="kpi-delta delta-up">▲ +5 față de Q1</div>
+          <div class="kpi-bar"><div class="kpi-bar-fill" style="width:67%;background:var(--sage);"></div></div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label">Timp plan / client</div>
+          <div class="kpi-val">34 min</div>
+          <div class="kpi-delta delta-up">▲ -56 min vs anterior</div>
+          <div class="kpi-bar"><div class="kpi-bar-fill" style="width:38%;background:var(--mint);"></div></div>
+        </div>
+      </div>
+
+      <!-- Row 2 -->
+      <div class="grid2">
+        <div class="panel">
+          <div class="panel-header">
+            <div class="panel-title">Aderență la plan — ultimele 8 săptămâni</div>
+            <div class="panel-action">Detalii →</div>
+          </div>
+          <div style="display:flex;align-items:flex-end;gap:6px;height:110px;padding-bottom:20px;">
+            <div style="flex:1;display:flex;flex-direction:column;align-items:center;">
+              <div style="font-size:9px;color:var(--dark);font-weight:500;margin-bottom:3px;">55%</div>
+              <div style="width:100%;background:var(--mintl);border-radius:3px 3px 0 0;height:55px;cursor:pointer;" title="S1 - 55%"></div>
+              <div style="font-size:9px;color:var(--gray);margin-top:3px;">S1</div>
+            </div>
+            <div style="flex:1;display:flex;flex-direction:column;align-items:center;">
+              <div style="font-size:9px;color:var(--dark);font-weight:500;margin-bottom:3px;">62%</div>
+              <div style="width:100%;background:var(--mintl);border-radius:3px 3px 0 0;height:62px;"></div>
+              <div style="font-size:9px;color:var(--gray);margin-top:3px;">S2</div>
+            </div>
+            <div style="flex:1;display:flex;flex-direction:column;align-items:center;">
+              <div style="font-size:9px;color:var(--dark);font-weight:500;margin-bottom:3px;">70%</div>
+              <div style="width:100%;background:var(--mint);border-radius:3px 3px 0 0;height:70px;"></div>
+              <div style="font-size:9px;color:var(--gray);margin-top:3px;">S3</div>
+            </div>
+            <div style="flex:1;display:flex;flex-direction:column;align-items:center;">
+              <div style="font-size:9px;color:var(--dark);font-weight:500;margin-bottom:3px;">65%</div>
+              <div style="width:100%;background:var(--mintl);border-radius:3px 3px 0 0;height:65px;"></div>
+              <div style="font-size:9px;color:var(--gray);margin-top:3px;">S4</div>
+            </div>
+            <div style="flex:1;display:flex;flex-direction:column;align-items:center;">
+              <div style="font-size:9px;color:var(--dark);font-weight:500;margin-bottom:3px;">80%</div>
+              <div style="width:100%;background:var(--mint);border-radius:3px 3px 0 0;height:80px;"></div>
+              <div style="font-size:9px;color:var(--gray);margin-top:3px;">S5</div>
+            </div>
+            <div style="flex:1;display:flex;flex-direction:column;align-items:center;">
+              <div style="font-size:9px;color:var(--dark);font-weight:500;margin-bottom:3px;">74%</div>
+              <div style="width:100%;background:var(--mintl);border-radius:3px 3px 0 0;height:74px;"></div>
+              <div style="font-size:9px;color:var(--gray);margin-top:3px;">S6</div>
+            </div>
+            <div style="flex:1;display:flex;flex-direction:column;align-items:center;">
+              <div style="font-size:9px;color:var(--dark);font-weight:500;margin-bottom:3px;">82%</div>
+              <div style="width:100%;background:var(--sage);border-radius:3px 3px 0 0;height:82px;"></div>
+              <div style="font-size:9px;color:var(--gray);margin-top:3px;">S7</div>
+            </div>
+            <div style="flex:1;display:flex;flex-direction:column;align-items:center;">
+              <div style="font-size:9px;color:var(--dark);font-weight:500;margin-bottom:3px;">76%</div>
+              <div style="width:100%;background:var(--sage);border-radius:3px 3px 0 0;height:76px;border:2px solid var(--forest);"></div>
+              <div style="font-size:9px;color:var(--forest);margin-top:3px;font-weight:500;">S8 ←</div>
+            </div>
+          </div>
+          <!-- Alerte -->
+          <div class="alert-item ai-warn"><span>⚠️</span><span><strong>Ioana Radu</strong> — aderență 45% · Planul necesită revizuire urgentă</span></div>
+          <div class="alert-item ai-ok"><span>✓</span><span><strong>Mihai Popescu</strong> — aderență 88% · Progres excelent, menție planul</span></div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-header">
+            <div class="panel-title">Distribuție macronutrienți</div>
+          </div>
+          <!-- Donut SVG -->
+          <div style="display:flex;justify-content:center;margin-bottom:12px;">
+            <svg width="110" height="110" viewBox="0 0 110 110">
+              <circle cx="55" cy="55" r="40" fill="none" stroke="#F1EFE8" stroke-width="18"/>
+              <!-- Proteine 38% -->
+              <circle cx="55" cy="55" r="40" fill="none" stroke="#1D9E75" stroke-width="18"
+                stroke-dasharray="95.5 156.2" stroke-dashoffset="0" transform="rotate(-90 55 55)"/>
+              <!-- Glucide 42% -->
+              <circle cx="55" cy="55" r="40" fill="none" stroke="#EF9F27" stroke-width="18"
+                stroke-dasharray="105.5 146.2" stroke-dashoffset="-95.5" transform="rotate(-90 55 55)"/>
+              <!-- Grăsimi 20% -->
+              <circle cx="55" cy="55" r="40" fill="none" stroke="#5DCAA5" stroke-width="18"
+                stroke-dasharray="50.2 201.5" stroke-dashoffset="-201" transform="rotate(-90 55 55)"/>
+              <text x="55" y="51" text-anchor="middle" font-family="DM Sans" font-size="14" font-weight="500" fill="#2C2C2A">76%</text>
+              <text x="55" y="63" text-anchor="middle" font-family="DM Sans" font-size="9" fill="#888780">aderență</text>
+            </svg>
+          </div>
+          <div class="macro-item">
+            <div class="mi-dot" style="background:var(--sage);"></div>
+            <div class="mi-lbl">Proteine</div>
+            <div class="mi-val">142g</div>
+            <div class="mi-pct">38%</div>
+          </div>
+          <div class="macro-item">
+            <div class="mi-dot" style="background:var(--saffron);"></div>
+            <div class="mi-lbl">Carbohidrați</div>
+            <div class="mi-val">198g</div>
+            <div class="mi-pct">42%</div>
+          </div>
+          <div class="macro-item">
+            <div class="mi-dot" style="background:var(--mint);"></div>
+            <div class="mi-lbl">Grăsimi</div>
+            <div class="mi-val">68g</div>
+            <div class="mi-pct">20%</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Row 3 -->
+      <div class="grid3">
+        <div class="panel">
+          <div class="panel-header">
+            <div class="panel-title">Progres clienți</div>
+            <div class="panel-action">Toți →</div>
+          </div>
+          <div class="cp-row">
+            <div class="cp-av" style="background:#E1F5EE;color:#085041;">AM</div>
+            <div class="cp-info"><div class="cp-name">Andrei M.</div><div class="cp-plan">Deficit 300kcal</div></div>
+            <div class="cp-bar-w"><div class="cp-bar-bg"><div class="cp-bar-fill" style="width:72%;background:var(--sage);"></div></div><div class="cp-pct">72%</div></div>
+            <div class="cp-badge b-ok">Ok</div>
+          </div>
+          <div class="cp-row">
+            <div class="cp-av" style="background:#FAEEDA;color:#633806;">IR</div>
+            <div class="cp-info"><div class="cp-name">Ioana R.</div><div class="cp-plan">Masă musculară</div></div>
+            <div class="cp-bar-w"><div class="cp-bar-bg"><div class="cp-bar-fill" style="width:45%;background:var(--saffron);"></div></div><div class="cp-pct">45%</div></div>
+            <div class="cp-badge b-warn">Atenție</div>
+          </div>
+          <div class="cp-row">
+            <div class="cp-av" style="background:#EEEDFE;color:#3C3489;">MP</div>
+            <div class="cp-info"><div class="cp-name">Mihai P.</div><div class="cp-plan">Diabet T2</div></div>
+            <div class="cp-bar-w"><div class="cp-bar-bg"><div class="cp-bar-fill" style="width:88%;background:var(--sage);"></div></div><div class="cp-pct">88%</div></div>
+            <div class="cp-badge b-ok">Excelent</div>
+          </div>
+          <div class="cp-row">
+            <div class="cp-av" style="background:#FAECE7;color:#712B13;">EV</div>
+            <div class="cp-info"><div class="cp-name">Elena V.</div><div class="cp-plan">Menținere</div></div>
+            <div class="cp-bar-w"><div class="cp-bar-bg"><div class="cp-bar-fill" style="width:20%;background:var(--purple);"></div></div><div class="cp-pct">20%</div></div>
+            <div class="cp-badge" style="background:#EEEDFE;color:#3C3489;font-size:9px;padding:2px 7px;border-radius:20px;font-weight:500;">Nou</div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-header"><div class="panel-title">Rețete cele mai gătite</div></div>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <div style="display:flex;align-items:center;gap:8px;">
+              <div style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:rgba(15,46,40,.1);width:20px;">1</div>
+              <div style="flex:1;font-size:12px;color:var(--dark);">Somon cu quinoa</div>
+              <div style="display:flex;align-items:flex-end;gap:2px;height:20px;">
+                <div style="width:4px;height:12px;background:var(--mintl);border-radius:1px 1px 0 0;"></div>
+                <div style="width:4px;height:16px;background:var(--mintl);border-radius:1px 1px 0 0;"></div>
+                <div style="width:4px;height:20px;background:var(--sage);border-radius:1px 1px 0 0;"></div>
+              </div>
+              <div style="font-size:11px;font-weight:500;color:var(--sage);width:24px;text-align:right;">14×</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;">
+              <div style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:rgba(15,46,40,.1);width:20px;">2</div>
+              <div style="flex:1;font-size:12px;color:var(--dark);">Piept pui & orez</div>
+              <div style="display:flex;align-items:flex-end;gap:2px;height:20px;">
+                <div style="width:4px;height:10px;background:var(--mintl);border-radius:1px 1px 0 0;"></div>
+                <div style="width:4px;height:14px;background:var(--mintl);border-radius:1px 1px 0 0;"></div>
+                <div style="width:4px;height:18px;background:var(--mint);border-radius:1px 1px 0 0;"></div>
+              </div>
+              <div style="font-size:11px;font-weight:500;color:var(--sage);width:24px;text-align:right;">11×</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;">
+              <div style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:rgba(15,46,40,.1);width:20px;">3</div>
+              <div style="flex:1;font-size:12px;color:var(--dark);">Bowl quinoa legume</div>
+              <div style="display:flex;align-items:flex-end;gap:2px;height:20px;">
+                <div style="width:4px;height:8px;background:var(--mintl);border-radius:1px 1px 0 0;"></div>
+                <div style="width:4px;height:12px;background:var(--mintl);border-radius:1px 1px 0 0;"></div>
+                <div style="width:4px;height:15px;background:var(--mint);border-radius:1px 1px 0 0;"></div>
+              </div>
+              <div style="font-size:11px;font-weight:500;color:var(--sage);width:24px;text-align:right;">9×</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;">
+              <div style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:rgba(15,46,40,.1);width:20px;">4</div>
+              <div style="flex:1;font-size:12px;color:var(--dark);">Supă cremă linte</div>
+              <div style="display:flex;align-items:flex-end;gap:2px;height:20px;">
+                <div style="width:4px;height:6px;background:var(--mintl);border-radius:1px 1px 0 0;"></div>
+                <div style="width:4px;height:9px;background:var(--mintl);border-radius:1px 1px 0 0;"></div>
+                <div style="width:4px;height:12px;background:var(--mintl);border-radius:1px 1px 0 0;"></div>
+              </div>
+              <div style="font-size:11px;font-weight:500;color:var(--sage);width:24px;text-align:right;">7×</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-header"><div class="panel-title">Metrici cabinet</div></div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+            <div style="background:var(--linen);border-radius:8px;padding:10px;text-align:center;">
+              <div style="font-size:20px;font-weight:500;color:var(--dark);">€2.4K</div>
+              <div style="font-size:9px;color:var(--gray);text-transform:uppercase;letter-spacing:.07em;margin-top:2px;">Venit lunar</div>
+              <div style="font-size:10px;color:var(--sage);margin-top:3px;">▲ +18%</div>
+            </div>
+            <div style="background:var(--linen);border-radius:8px;padding:10px;text-align:center;">
+              <div style="font-size:20px;font-weight:500;color:var(--dark);">94%</div>
+              <div style="font-size:9px;color:var(--gray);text-transform:uppercase;letter-spacing:.07em;margin-top:2px;">Retenție</div>
+              <div style="font-size:10px;color:var(--sage);margin-top:3px;">▲ +2%</div>
+            </div>
+            <div style="background:var(--linen);border-radius:8px;padding:10px;text-align:center;">
+              <div style="font-size:20px;font-weight:500;color:var(--dark);">142</div>
+              <div style="font-size:9px;color:var(--gray);text-transform:uppercase;letter-spacing:.07em;margin-top:2px;">Rețete</div>
+              <div style="font-size:10px;color:var(--sage);margin-top:3px;">▲ +14</div>
+            </div>
+            <div style="background:var(--linen);border-radius:8px;padding:10px;text-align:center;">
+              <div style="font-size:20px;font-weight:500;color:var(--dark);">3</div>
+              <div style="font-size:9px;color:var(--gray);text-transform:uppercase;letter-spacing:.07em;margin-top:2px;">Bucătari</div>
+              <div style="font-size:10px;color:var(--gray);margin-top:3px;">stabil</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
