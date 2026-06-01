@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Noura. — Rapoarte</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{--forest:#0F2E28;--forest2:#1a3d36;--sage:#1D9E75;--mint:#5DCAA5;--mintl:#E1F5EE;--saffron:#EF9F27;--saffl:#FAEEDA;--linen:#FAFAF8;--linend:#F1EFE8;--gray:#888780;--dark:#2C2C2A;--white:#FFFFFF;--red:#D85A30;--redl:#FAECE7;--purple:#AFA9EC;--purpll:#EEEDFE;}
+html,body{height:100%;font-family:'DM Sans',sans-serif;font-weight:300;background:var(--linen);color:var(--dark);overflow:hidden;}
+.app{display:grid;grid-template-columns:220px 1fr;height:100vh;overflow:hidden;}
+
+/* SIDEBAR */
+.sb{background:var(--forest);display:flex;flex-direction:column;}
+.sb-logo{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;color:#E1F5EE;padding:26px 22px 22px;letter-spacing:.02em;}
+.sb-logo span{color:var(--sage);}
+.sb-nav{padding:8px 0;flex:1;}
+.sb-s{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(93,202,165,.38);padding:14px 22px 5px;font-weight:500;}
+.sb-i{display:flex;align-items:center;gap:11px;padding:10px 22px;font-size:13px;color:rgba(159,225,203,.5);cursor:pointer;border-left:2.5px solid transparent;transition:all .15s;}
+.sb-i:hover{background:rgba(29,158,117,.1);color:rgba(225,245,238,.8);}
+.sb-i.active{background:rgba(29,158,117,.12);color:#E1F5EE;border-left-color:var(--sage);font-weight:500;}
+.sb-ico{width:15px;height:15px;border:1.5px solid currentColor;border-radius:3px;opacity:.6;flex-shrink:0;}
+.sb-i.active .sb-ico{opacity:1;}
+.sb-badge{margin-left:auto;background:rgba(239,159,39,.3);color:var(--saffron);font-size:10px;padding:2px 6px;border-radius:20px;font-weight:500;}
+.sb-user{padding:14px 18px;border-top:.5px solid rgba(29,158,117,.14);display:flex;align-items:center;gap:9px;flex-shrink:0;}
+.sb-av{width:32px;height:32px;border-radius:50%;background:rgba(29,158,117,.2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:500;color:var(--mint);flex-shrink:0;}
+.sb-uname{font-size:12px;color:rgba(225,245,238,.8);}
+.sb-urole{font-size:10px;color:rgba(93,202,165,.4);}
+
+/* MAIN */
+.main{display:grid;grid-template-columns:320px 1fr;overflow:hidden;}
+
+/* LEFT — list */
+.list-col{background:var(--white);border-right:.5px solid rgba(15,46,40,.09);display:flex;flex-direction:column;overflow:hidden;}
+.lc-top{padding:16px 14px 12px;border-bottom:.5px solid rgba(15,46,40,.08);flex-shrink:0;}
+.lc-title{font-size:14px;font-weight:500;color:var(--dark);margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;}
+.gen-all-btn{padding:6px 12px;background:var(--forest);color:#E1F5EE;border:none;border-radius:8px;font-size:11px;font-weight:500;cursor:pointer;font-family:inherit;transition:background .15s;}
+.gen-all-btn:hover{background:var(--sage);}
+.month-select{display:flex;gap:4px;background:var(--linen);border-radius:8px;padding:3px;margin-bottom:8px;}
+.ms-btn{flex:1;padding:5px 8px;border-radius:6px;font-size:11px;color:var(--gray);cursor:pointer;transition:all .15s;background:none;border:none;font-family:inherit;text-align:center;}
+.ms-btn.active{background:var(--white);color:var(--dark);font-weight:500;box-shadow:0 1px 3px rgba(0,0,0,.08);}
+.search-wrap{position:relative;}
+.si{width:100%;padding:8px 8px 8px 28px;font-size:12px;border:.5px solid rgba(15,46,40,.12);border-radius:8px;font-family:inherit;color:var(--dark);background:var(--linen);outline:none;}
+.si:focus{border-color:var(--sage);}
+.si-ico{position:absolute;left:8px;top:50%;transform:translateY(-50%);color:var(--gray);font-size:12px;pointer-events:none;}
+
+.report-list{flex:1;overflow-y:auto;}
+.ri{display:flex;align-items:center;gap:10px;padding:11px 14px;border-bottom:.5px solid rgba(15,46,40,.05);cursor:pointer;transition:background .1s;}
+.ri:hover{background:var(--linen);}
+.ri.selected{background:var(--mintl);}
+.ri-av{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:500;flex-shrink:0;}
+.ri-body{flex:1;min-width:0;}
+.ri-name{font-size:13px;font-weight:500;color:var(--dark);}
+.ri-sub{font-size:10px;color:var(--gray);margin-top:1px;}
+.ri-right{display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex-shrink:0;}
+.ri-status{font-size:9px;padding:2px 7px;border-radius:20px;font-weight:500;}
+.rs-ready{background:var(--mintl);color:#085041;}
+.rs-draft{background:var(--saffl);color:#633806;}
+.rs-sent{background:var(--purpll);color:#3C3489;}
+.rs-new{background:var(--linend);color:var(--gray);}
+
+/* RIGHT — preview */
+.preview-col{display:flex;flex-direction:column;overflow:hidden;background:var(--linen);}
+.pc-topbar{background:var(--white);border-bottom:.5px solid rgba(15,46,40,.09);padding:0 20px;height:54px;display:flex;align-items:center;gap:10px;flex-shrink:0;}
+.pc-title{font-size:15px;font-weight:500;color:var(--dark);flex:1;}
+.tb-btn{display:flex;align-items:center;gap:5px;padding:7px 14px;border-radius:8px;font-size:12px;font-weight:400;cursor:pointer;border:.5px solid rgba(15,46,40,.14);background:var(--white);color:var(--dark);font-family:inherit;transition:all .15s;}
+.tb-btn:hover{border-color:var(--sage);color:var(--sage);}
+.tb-btn.primary{background:var(--forest);color:#E1F5EE;border-color:var(--forest);}
+.tb-btn.primary:hover{background:var(--sage);}
+
+.pdf-scroll{flex:1;overflow-y:auto;padding:20px;display:flex;justify-content:center;}
+
+/* PDF Preview */
+.pdf-page{background:var(--white);width:100%;max-width:680px;border-radius:12px;box-shadow:0 4px 24px rgba(15,46,40,.1);overflow:hidden;}
+.pdf-header{background:var(--forest);padding:28px 32px;position:relative;overflow:hidden;}
+.pdf-header::before{content:'N';font-family:'Cormorant Garamond',serif;font-size:200px;font-weight:600;color:rgba(29,158,117,.07);position:absolute;right:-20px;top:50%;transform:translateY(-50%);line-height:1;pointer-events:none;}
+.pdf-logo{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;color:#E1F5EE;letter-spacing:.02em;margin-bottom:4px;}
+.pdf-logo span{color:var(--sage);}
+.pdf-report-title{font-family:'Cormorant Garamond',serif;font-size:16px;font-style:italic;color:rgba(159,225,203,.7);}
+.pdf-meta-row{display:flex;gap:32px;margin-top:16px;}
+.pdf-meta-item{display:flex;flex-direction:column;gap:2px;}
+.pdf-meta-lbl{font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(93,202,165,.5);}
+.pdf-meta-val{font-size:13px;font-weight:500;color:#E1F5EE;}
+
+.pdf-body{padding:24px 32px;}
+.pdf-section{margin-bottom:20px;}
+.pdf-sec-title{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--gray);font-weight:500;margin-bottom:10px;padding-bottom:6px;border-bottom:.5px solid rgba(15,46,40,.08);}
+
+.pdf-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px;}
+.ps-box{background:var(--linen);border-radius:10px;padding:12px;text-align:center;}
+.ps-val{font-size:22px;font-weight:500;color:var(--dark);}
+.ps-lbl{font-size:9px;color:var(--gray);text-transform:uppercase;letter-spacing:.07em;margin-top:3px;}
+.ps-delta{font-size:10px;margin-top:2px;}
+
+.pdf-bar-row{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
+.pb-lbl{font-size:12px;color:var(--dark);width:90px;flex-shrink:0;}
+.pb-bg{flex:1;height:5px;background:rgba(15,46,40,.07);border-radius:3px;overflow:hidden;}
+.pb-fill{height:100%;border-radius:3px;}
+.pb-val{font-size:11px;font-weight:500;color:var(--dark);width:36px;text-align:right;}
+
+.pdf-weekly{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:8px;}
+.pw-item{background:var(--linen);border-radius:8px;padding:8px;text-align:center;}
+.pw-val{font-size:16px;font-weight:500;color:var(--dark);}
+.pw-lbl{font-size:9px;color:var(--gray);}
+.pw-bar{height:3px;background:rgba(15,46,40,.08);border-radius:2px;margin-top:5px;overflow:hidden;}
+.pw-fill{height:100%;border-radius:2px;}
+
+.pdf-note-box{background:var(--linen);border-radius:10px;padding:14px;border-left:3px solid var(--sage);font-size:12px;color:var(--dark);line-height:1.7;}
+.pdf-note-area{width:100%;min-height:60px;font-size:12px;border:none;background:transparent;font-family:inherit;color:var(--dark);resize:none;outline:none;line-height:1.7;}
+
+.pdf-footer{background:var(--linend);padding:14px 32px;display:flex;justify-content:space-between;align-items:center;}
+.pdf-footer-logo{font-family:'Cormorant Garamond',serif;font-size:16px;color:var(--forest);font-weight:600;letter-spacing:.02em;}
+.pdf-footer-logo span{color:var(--sage);}
+.pdf-footer-text{font-size:10px;color:var(--gray);}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="sb">
+    <div class="sb-logo">Noura<span>.</span></div>
+    <div class="sb-nav">
+      <div class="sb-s">Principal</div>
+      <div class="sb-i"><div class="sb-ico"></div>Dashboard</div>
+      <div class="sb-i"><div class="sb-ico"></div>Clienți</div>
+      <div class="sb-i"><div class="sb-ico"></div>Planuri</div>
+      <div class="sb-i"><div class="sb-ico"></div>Rețete</div>
+      <div class="sb-s">Analiză</div>
+      <div class="sb-i"><div class="sb-ico"></div>Analytics</div>
+      <div class="sb-i active"><div class="sb-ico"></div>Rapoarte</div>
+      <div class="sb-s">Echipă</div>
+      <div class="sb-i"><div class="sb-ico"></div>Colaborare <span class="sb-badge">3</span></div>
+      <div class="sb-i"><div class="sb-ico"></div>Setări</div>
+    </div>
+    <div class="sb-user">
+      <div class="sb-av">AM</div>
+      <div><div class="sb-uname">Dr. Alina M.</div><div class="sb-urole">nutriționist</div></div>
+    </div>
+  </div>
+
+  <div class="main">
+    <div class="list-col">
+      <div class="lc-top">
+        <div class="lc-title">Rapoarte lunare <button class="gen-all-btn">Generează toate</button></div>
+        <div class="month-select">
+          <button class="ms-btn">Mar</button>
+          <button class="ms-btn">Apr</button>
+          <button class="ms-btn active">Mai</button>
+          <button class="ms-btn">Iun</button>
+        </div>
+        <div class="search-wrap">
+          <span class="si-ico">⊡</span>
+          <input class="si" type="text" placeholder="Caută client...">
+        </div>
+      </div>
+      <div class="report-list">
+        <div class="ri selected" onclick="selectReport(this,'Andrei Moldovan','AM','#E1F5EE','#085041')">
+          <div class="ri-av" style="background:#E1F5EE;color:#085041;">AM</div>
+          <div class="ri-body">
+            <div class="ri-name">Andrei Moldovan</div>
+            <div class="ri-sub">Mai 2026 · Deficit 300kcal · Săpt. 4/8</div>
+          </div>
+          <div class="ri-right">
+            <div class="ri-status rs-ready">✓ Gata</div>
+            <div style="font-size:9px;color:var(--gray);">PDF generat</div>
+          </div>
+        </div>
+        <div class="ri" onclick="selectReport(this,'Ioana Radu','IR','#FAEEDA','#633806')">
+          <div class="ri-av" style="background:#FAEEDA;color:#633806;">IR</div>
+          <div class="ri-body">
+            <div class="ri-name">Ioana Radu</div>
+            <div class="ri-sub">Mai 2026 · Masă musculară · Săpt. 2/12</div>
+          </div>
+          <div class="ri-right">
+            <div class="ri-status rs-draft">Draft</div>
+            <div style="font-size:9px;color:var(--gray);">Necesită revizuire</div>
+          </div>
+        </div>
+        <div class="ri" onclick="selectReport(this,'Mihai Popescu','MP','#EEEDFE','#3C3489')">
+          <div class="ri-av" style="background:#EEEDFE;color:#3C3489;">MP</div>
+          <div class="ri-body">
+            <div class="ri-name">Mihai Popescu</div>
+            <div class="ri-sub">Mai 2026 · Diabet T2 · Săpt. 6/24</div>
+          </div>
+          <div class="ri-right">
+            <div class="ri-status rs-sent">Trimis</div>
+            <div style="font-size:9px;color:var(--gray);">28 mai 2026</div>
+          </div>
+        </div>
+        <div class="ri" onclick="selectReport(this,'Elena Vasile','EV','#FAECE7','#712B13')">
+          <div class="ri-av" style="background:#FAECE7;color:#712B13;">EV</div>
+          <div class="ri-body">
+            <div class="ri-name">Elena Vasile</div>
+            <div class="ri-sub">Mai 2026 · Menținere · Săpt. 1/4</div>
+          </div>
+          <div class="ri-right">
+            <div class="ri-status rs-new">Nou</div>
+            <div style="font-size:9px;color:var(--gray);">Insuficient date</div>
+          </div>
+        </div>
+        <div class="ri" onclick="selectReport(this,'Cosmin Barbu','CB','#EAF3DE','#27500A')">
+          <div class="ri-av" style="background:#EAF3DE;color:#27500A;">CB</div>
+          <div class="ri-body">
+            <div class="ri-name">Cosmin Barbu</div>
+            <div class="ri-sub">Mai 2026 · Slăbire · Plan expirat</div>
+          </div>
+          <div class="ri-right">
+            <div class="ri-status rs-ready">✓ Gata</div>
+            <div style="font-size:9px;color:var(--gray);">PDF generat</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="preview-col">
+      <div class="pc-topbar">
+        <div class="pc-title" id="previewTitle">Raport lunar — Andrei Moldovan · Mai 2026</div>
+        <button class="tb-btn">✏️ Editează</button>
+        <button class="tb-btn">📤 Trimite pe email</button>
+        <button class="tb-btn primary">⬇ Descarcă PDF</button>
+      </div>
+
+      <div class="pdf-scroll">
+        <div class="pdf-page" id="pdfPage">
+          <div class="pdf-header">
+            <div class="pdf-logo">Noura<span>.</span></div>
+            <div class="pdf-report-title">Raport de progres nutrițional lunar</div>
+            <div class="pdf-meta-row">
+              <div class="pdf-meta-item"><div class="pdf-meta-lbl">Client</div><div class="pdf-meta-val" id="pdfClient">Andrei Moldovan</div></div>
+              <div class="pdf-meta-item"><div class="pdf-meta-lbl">Perioadă</div><div class="pdf-meta-val">Mai 2026</div></div>
+              <div class="pdf-meta-item"><div class="pdf-meta-lbl">Nutriționist</div><div class="pdf-meta-val">Dr. Alina Mureșan</div></div>
+              <div class="pdf-meta-item"><div class="pdf-meta-lbl">Plan activ</div><div class="pdf-meta-val" id="pdfPlan">Deficit 300kcal · S4/8</div></div>
+            </div>
+          </div>
+
+          <div class="pdf-body">
+            <!-- Stats -->
+            <div class="pdf-section">
+              <div class="pdf-sec-title">Sumar progres</div>
+              <div class="pdf-stats">
+                <div class="ps-box">
+                  <div class="ps-val" id="pdfWeight">82kg</div>
+                  <div class="ps-lbl">Greutate actuală</div>
+                  <div class="ps-delta" style="color:var(--sage);">▼ -1.2kg față de luna trecută</div>
+                </div>
+                <div class="ps-box">
+                  <div class="ps-val" id="pdfAdh">76%</div>
+                  <div class="ps-lbl">Aderență la plan</div>
+                  <div class="ps-delta" style="color:var(--saffron);">▼ -4% față de obiectiv</div>
+                </div>
+                <div class="ps-box">
+                  <div class="ps-val">18</div>
+                  <div class="ps-lbl">Rețete preparate</div>
+                  <div class="ps-delta" style="color:var(--sage);">▲ +6 față de luna trecută</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Macronutrients -->
+            <div class="pdf-section">
+              <div class="pdf-sec-title">Macronutrienți medii / zi (actual vs. target)</div>
+              <div class="pdf-bar-row">
+                <div class="pb-lbl">Calorii</div>
+                <div class="pb-bg"><div class="pb-fill" style="width:99%;background:var(--sage);"></div></div>
+                <div class="pb-val">1682 kcal</div>
+              </div>
+              <div class="pdf-bar-row">
+                <div class="pb-lbl">Proteine</div>
+                <div class="pb-bg"><div class="pb-fill" style="width:92%;background:var(--sage);"></div></div>
+                <div class="pb-val">138g / 150g</div>
+              </div>
+              <div class="pdf-bar-row">
+                <div class="pb-lbl">Carbohidrați</div>
+                <div class="pb-bg"><div class="pb-fill" style="width:97%;background:var(--saffron);"></div></div>
+                <div class="pb-val">195g / 200g</div>
+              </div>
+              <div class="pdf-bar-row">
+                <div class="pb-lbl">Grăsimi</div>
+                <div class="pb-bg"><div class="pb-fill" style="width:98%;background:var(--mint);"></div></div>
+                <div class="pb-val">64g / 65g</div>
+              </div>
+              <div class="pdf-bar-row">
+                <div class="pb-lbl">Fibre</div>
+                <div class="pb-bg"><div class="pb-fill" style="width:86%;background:var(--purple);"></div></div>
+                <div class="pb-val">24g / 28g</div>
+              </div>
+            </div>
+
+            <!-- Weekly adherence -->
+            <div class="pdf-section">
+              <div class="pdf-sec-title">Aderență săptămânală</div>
+              <div class="pdf-weekly">
+                <div class="pw-item"><div class="pw-val">68%</div><div class="pw-lbl">Săpt. 1</div><div class="pw-bar"><div class="pw-fill" style="width:68%;background:var(--mintl);"></div></div></div>
+                <div class="pw-item"><div class="pw-val">74%</div><div class="pw-lbl">Săpt. 2</div><div class="pw-bar"><div class="pw-fill" style="width:74%;background:var(--mint);"></div></div></div>
+                <div class="pw-item"><div class="pw-val">80%</div><div class="pw-lbl">Săpt. 3</div><div class="pw-bar"><div class="pw-fill" style="width:80%;background:var(--sage);"></div></div></div>
+                <div class="pw-item"><div class="pw-val">76%</div><div class="pw-lbl">Săpt. 4</div><div class="pw-bar"><div class="pw-fill" style="width:76%;background:var(--sage);"></div></div></div>
+              </div>
+            </div>
+
+            <!-- Note -->
+            <div class="pdf-section">
+              <div class="pdf-sec-title">Observații nutriționist</div>
+              <div class="pdf-note-box">
+                <textarea class="pdf-note-area" id="pdfNote">Andrei a înregistrat un progres bun în luna mai — pierdere în greutate de 1.2kg, în linie cu obiectivul de deficit caloric moderat. Aderența la plan a fost de 76%, ușor sub ținta de 80%.
+
+Principala provocare a lunii a fost controlul sodiului în contextul tensiunii ușor ridicate. Bucătarul a adaptat rețetele cu sare roz himalayană, reducând aportul cu 38%.
+
+Recomandări pentru luna iunie: creșterea aderenței la masa de prânz (cea mai frecventă abatere), menținerea planului actual fără modificări majore.</textarea>
+              </div>
+            </div>
+
+            <!-- Recipes -->
+            <div class="pdf-section">
+              <div class="pdf-sec-title">Top rețete preparate această lună</div>
+              <div style="display:flex;flex-direction:column;gap:6px;">
+                <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--linen);border-radius:8px;">
+                  <div style="width:20px;text-align:center;font-size:12px;">🐟</div>
+                  <div style="flex:1;font-size:12px;color:var(--dark);">Somon la abur cu quinoa</div>
+                  <div style="font-size:11px;font-weight:500;color:var(--sage);">6×</div>
+                </div>
+                <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--linen);border-radius:8px;">
+                  <div style="width:20px;text-align:center;font-size:12px;">🍗</div>
+                  <div style="flex:1;font-size:12px;color:var(--dark);">Piept de pui cu orez brun</div>
+                  <div style="font-size:11px;font-weight:500;color:var(--sage);">5×</div>
+                </div>
+                <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--linen);border-radius:8px;">
+                  <div style="width:20px;text-align:center;font-size:12px;">🥣</div>
+                  <div style="flex:1;font-size:12px;color:var(--dark);">Supă cremă de linte roșie</div>
+                  <div style="font-size:11px;font-weight:500;color:var(--sage);">4×</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="pdf-footer">
+            <div class="pdf-footer-logo">Noura<span>.</span></div>
+            <div class="pdf-footer-text">Cabinet Dr. Alina Mureșan · Generat automat de Noura · Mai 2026 · Confidențial</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function selectReport(el, name, initials, avBg, avColor) {
+  document.querySelectorAll('.ri').forEach(r => r.classList.remove('selected'));
+  el.classList.add('selected');
+  document.getElementById('previewTitle').textContent = `Raport lunar — ${name} · Mai 2026`;
+  document.getElementById('pdfClient').textContent = name;
+}
+</script>
+</body>
+</html>
