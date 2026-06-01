@@ -28,12 +28,15 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba
 .nav-cta { background: var(--forest); color: var(--linen) !important; padding: 8px 20px; border-radius: 6px; font-weight: 500 !important; transition: background .2s !important; }
 .nav-cta:hover { background: var(--sage) !important; }
 
+/* Buton meniu mobil */
+.mobile-toggle { display: none; background: none; border: none; font-size: 24px; color: var(--forest); cursor: pointer; }
+
 /* HERO */
 .page-hero { background: var(--forest); padding: 120px 3rem 72px; position: relative; overflow: hidden; }
 .page-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 20% 50%, rgba(29,158,117,0.12) 0%, transparent 60%); }
 .hero-inner { max-width: 1120px; margin: 0 auto; position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: end; }
 .hero-eyebrow { font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--mint); font-weight: 500; margin-bottom: 1rem; }
-.hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(40px,5vw,64px); font-weight: 600; color: var(--mintl); line-height: 1.05; margin-bottom: 1rem; }
+.hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(36px, 5vw, 64px); font-weight: 600; color: var(--mintl); line-height: 1.05; margin-bottom: 1rem; }
 .hero-sub { font-size: 15px; color: rgba(159,225,203,.65); line-height: 1.8; max-width: 420px; }
 .hero-search { margin-top: 2rem; display: flex; gap: 0; }
 .search-input { flex: 1; padding: 13px 18px; background: rgba(26,61,54,.7); border: 0.5px solid rgba(29,158,117,.3); border-right: none; border-radius: 8px 0 0 8px; font-size: 14px; font-family: 'DM Sans', sans-serif; color: var(--mintl); outline: none; transition: border-color .2s; }
@@ -62,6 +65,10 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba
 /* CATEGORY FILTER */
 .filter-bar { background: var(--white); border-bottom: 0.5px solid var(--linend); position: sticky; top: 64px; z-index: 80; }
 .filter-inner { max-width: 1120px; margin: 0 auto; padding: 0 3rem; display: flex; gap: 0; overflow-x: auto; }
+/* Ascunde scrollbar pentru meniu curat pe mobil */
+.filter-inner::-webkit-scrollbar { display: none; }
+.filter-inner { -ms-overflow-style: none; scrollbar-width: none; }
+
 .filter-btn { padding: 16px 20px; font-size: 13px; color: var(--gray); cursor: pointer; border-bottom: 2px solid transparent; transition: all .2s; white-space: nowrap; background: none; border-top: none; border-left: none; border-right: none; font-family: 'DM Sans', sans-serif; }
 .filter-btn:hover { color: var(--forest); }
 .filter-btn.active { color: var(--sage); border-bottom-color: var(--sage); font-weight: 500; }
@@ -70,7 +77,6 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba
 
 /* MAIN GRID */
 .blog-main { max-width: 1120px; margin: 0 auto; padding: 4rem 3rem; display: grid; grid-template-columns: 1fr 340px; gap: 4rem; align-items: start; }
-
 .posts-grid { display: flex; flex-direction: column; gap: 0; }
 
 /* Post card */
@@ -91,7 +97,7 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba
 .tag-gdpr    { background: #FAECE7; color: #712B13; }
 .post-title { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 600; color: var(--forest); line-height: 1.25; margin-bottom: 6px; transition: color .2s; }
 .post-excerpt { font-size: 13px; color: var(--gray); line-height: 1.65; flex: 1; margin-bottom: 10px; }
-.post-meta { display: flex; align-items: center; gap: 8px; }
+.post-meta { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
 .pm-av { width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: 600; font-family: 'Cormorant Garamond', serif; flex-shrink: 0; }
 .pm-author { font-size: 11px; color: var(--dark); font-weight: 400; }
 .pm-dot { width: 2px; height: 2px; border-radius: 50%; background: var(--gray); }
@@ -144,7 +150,7 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba
 /* Resources section */
 .resources-section { background: var(--white); border-top: 0.5px solid var(--linend); padding: 4rem 3rem; }
 .resources-inner { max-width: 1120px; margin: 0 auto; }
-.res-title { font-family: 'Cormorant Garamond', serif; font-size: 36px; font-weight: 600; color: var(--forest); margin-bottom: 2rem; }
+.res-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(28px, 4vw, 36px); font-weight: 600; color: var(--forest); margin-bottom: 2rem; }
 .res-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
 .res-card { border-radius: 12px; padding: 1.5rem; border: 0.5px solid rgba(15,46,40,.1); display: flex; flex-direction: column; gap: 10px; transition: transform .2s; cursor: pointer; }
 .res-card:hover { transform: translateY(-3px); }
@@ -169,7 +175,7 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba
 /* CTA */
 .page-cta { background: var(--forest); padding: 4rem 3rem; text-align: center; }
 .cta-inner { max-width: 520px; margin: 0 auto; }
-.cta-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(32px,4vw,48px); font-weight: 600; color: var(--mintl); margin-bottom: .75rem; line-height: 1.1; }
+.cta-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(28px, 4vw, 48px); font-weight: 600; color: var(--mintl); margin-bottom: .75rem; line-height: 1.1; }
 .cta-sub { font-size: 15px; color: rgba(159,225,203,.6); margin-bottom: 2rem; }
 .cta-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
 .btn-primary { background: var(--sage); color: white; padding: 13px 28px; border-radius: 8px; font-size: 14px; font-weight: 500; text-decoration: none; transition: all .2s; }
@@ -177,16 +183,66 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba
 .btn-ghost { color: var(--mintl); padding: 13px 22px; border-radius: 8px; font-size: 14px; text-decoration: none; border: 0.5px solid rgba(93,202,165,.25); transition: all .2s; }
 .btn-ghost:hover { border-color: var(--mint); color: var(--mint); }
 
-@media (max-width: 900px) {
-  nav { padding: 0 1.5rem; }
-  .hero-inner { grid-template-columns: 1fr; }
-  .blog-main { grid-template-columns: 1fr; padding: 2rem 1.5rem; }
+/* === RESPONSIVITATE MEDIA QUERIES === */
+
+/* Tablete și ecrane medii */
+@media (max-width: 992px) {
+  .hero-inner { grid-template-columns: 1fr; gap: 3rem; }
+  .blog-main { grid-template-columns: 1fr; padding: 3rem 2rem; }
   .blog-sidebar { display: none; }
-  .post-card { grid-template-columns: 120px 1fr; gap: 1rem; }
-  .resources-section { padding: 3rem 1.5rem; }
-  .res-grid { grid-template-columns: 1fr 1fr; }
+  .res-grid { grid-template-columns: repeat(2, 1fr); }
+  .page-hero { padding: 100px 2rem 60px; }
+  nav, .filter-inner, .resources-section, .page-cta { padding-left: 2rem; padding-right: 2rem; }
+}
+
+/* Telefoane și ecrane mici */
+@media (max-width: 768px) {
+  nav { padding: 0 1.5rem; }
+  .mobile-toggle { display: block; }
+  
+  /* Meniu Hamburger ascuns/arătat din JS */
+  .nav-links { 
+    display: none; 
+    position: absolute; 
+    top: 64px; 
+    left: 0; 
+    right: 0; 
+    background: var(--white); 
+    flex-direction: column; 
+    align-items: flex-start; /* ALINIERE LA STÂNGA */
+    padding: 2rem 1.5rem; 
+    gap: 1.5rem;
+    box-shadow: 0 10px 20px rgba(15,46,40,0.08); 
+    border-bottom: 1px solid var(--linend);
+  }
+  .nav-links.active { display: flex; }
+  .nav-links a { font-size: 16px; width: 100%; text-align: left; }
+  .nav-cta { width: 100%; text-align: center; } /* Butonul CTA îl păstrăm centrat pe toată lățimea, opțional îl poți pune la stânga și pe el */
+
+  .page-hero { padding: 90px 1.5rem 50px; }
   .filter-inner { padding: 0 1.5rem; }
-  .page-hero { padding: 100px 1.5rem 60px; }
+  .blog-main { padding: 2rem 1.5rem; }
+  .resources-section { padding: 3rem 1.5rem; }
+  .page-cta { padding: 3rem 1.5rem; }
+}
+
+/* Telefoane foarte mici (mobil vertical) */
+@media (max-width: 600px) {
+  /* Search Hero Wrap */
+  .hero-search { flex-direction: column; gap: 10px; }
+  .search-input { border-radius: 8px; border-right: 0.5px solid rgba(29,158,117,.3); }
+  .search-btn { border-radius: 8px; }
+
+  /* Stack Post Cards */
+  .post-card { grid-template-columns: 1fr; gap: 1rem; padding: 1.5rem 0; }
+  .post-thumb-wrap { height: 180px; }
+  
+  /* Stack Resources Grid */
+  .res-grid { grid-template-columns: 1fr; }
+  
+  /* Stack CTA buttons */
+  .cta-btns { flex-direction: column; }
+  .btn-primary, .btn-ghost { width: 100%; }
 }
 </style>
 </head>
@@ -194,6 +250,7 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba
 
 <nav>
   <a href="noura-landing.html" class="nav-logo">Noura<span>.</span></a>
+  <button class="mobile-toggle" aria-label="Deschide meniul">☰</button>
   <div class="nav-links">
     <a href="noura-landing.html">Acasă</a>
     <a href="noura-how-it-works.html">Cum funcționează</a>
@@ -561,13 +618,29 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba
 </section>
 
 <script>
+// Toggle Mobile Menu
+document.querySelector('.mobile-toggle').addEventListener('click', function() {
+  document.querySelector('.nav-links').classList.toggle('active');
+  // Schimbă iconița (☰ la X)
+  if (this.textContent === '☰') {
+    this.textContent = '✕';
+  } else {
+    this.textContent = '☰';
+  }
+});
+
 // Category filter
 function filterPosts(cat, btn) {
   document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
   document.querySelectorAll('.post-card').forEach(card => {
     if (cat === 'all' || card.dataset.cat === cat) {
-      card.style.display = 'grid';
+      card.style.display = 'grid'; 
+      
+      if (window.innerWidth <= 600) {
+        card.style.display = 'flex';
+        card.style.flexDirection = 'column';
+      }
     } else {
       card.style.display = 'none';
     }
@@ -575,7 +648,6 @@ function filterPosts(cat, btn) {
 }
 
 function openPost(slug) {
-  // In a real app, navigate to article page
   alert('Articol: ' + slug + '\n\nÎn implementarea completă, aceasta ar naviga la pagina articolului.');
 }
 
@@ -593,6 +665,21 @@ document.querySelector('.search-input').addEventListener('keydown', e => {
     alert('Căutare: "' + e.target.value + '"\n\nÎn implementarea completă, aceasta ar filtra articolele.');
   }
 });
+
+// Fix resize bug pentru display:grid la carduri
+window.addEventListener('resize', () => {
+  const activeBtn = document.querySelector('.filter-btn.active');
+  if(activeBtn) {
+    const cat = activeBtn.textContent.split(' ')[0].toLowerCase() === 'toate' ? 'all' : activeBtn.textContent.split(' ')[0].toLowerCase();
+    document.querySelectorAll('.post-card').forEach(card => {
+      card.style.display = ''; 
+      if(cat !== 'all' && card.dataset.cat !== cat) {
+        card.style.display = 'none';
+      }
+    });
+  }
+});
 </script>
 </body>
 </html>
+ik
