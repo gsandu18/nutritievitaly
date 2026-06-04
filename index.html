@@ -239,6 +239,15 @@ html,body{height:100%;font-family:'DM Sans',system-ui,sans-serif;font-weight:300
   window.getAuth=function(){return window._fbAuth;};
   window.getDb=function(){return window._fbDb;};
   window.routeByRole=function(role){
+    // Save role for sidebar routing
+    try{localStorage.setItem("noura_role",role);}catch(e){}
+    if(typeof setRole==="function") setRole(role);
+    // Force sidebar rebuild on next navigation
+    var wrap=document.getElementById("app-shell-wrap");
+    if(wrap) wrap.setAttribute("data-role","");
+    var ssw=document.getElementById("self-sidebar-wrap");
+    if(ssw) ssw.remove();
+    // Navigate to role home
     if(role==="nutritionist") window.navigate&&navigate("dashboard");
     else if(role==="chef") window.navigate&&navigate("recipe-studio");
     else if(role==="patient") window.navigate&&navigate("dashboard-pacient");
@@ -619,4 +628,4 @@ document.addEventListener("DOMContentLoaded",function(){
 </script>
 
 </body>
-</html>
+</html>uh
