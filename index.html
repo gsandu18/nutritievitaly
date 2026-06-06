@@ -79,10 +79,10 @@ function Login({onLogin,initialMode,onBack}:any){
   );
 }
 
-function Sidebar({role,name,onLogout,pg,setPg}:any){
+function Sidebar({role,name,onLogout,pg,setPg,open}:any){
   var sections:any={nutritionist:[{t:'Principal',i:['Dashboard','Clienți','Planuri','Plan Builder','Rețete']},{t:'Analiză',i:['Analytics','Rapoarte']},{t:'Echipă',i:['Colaborare','Setări']},{t:'Informații',i:['Cum funcționează','Prețuri','Blog']}],chef:[{t:'Bucătar',i:['Recipe Studio','Rețete']},{t:'Colaborare',i:['Mesaje','Setări']},{t:'Informații',i:['Cum funcționează','Prețuri','Blog']}],patient:[{t:'Planul meu',i:['Dashboard','Plan alimentar','Rețetele mele','Progres']},{t:'Comunicare',i:['Mesaje']},{t:'Cont',i:['Setări']},{t:'Informații',i:['Cum funcționează','Prețuri','Blog']}]};
   var u={n:name,s:ROLE_LABEL[role]||'Utilizator'};
-  return React.createElement('aside',{style:{width:220,background:'#0F2E28',display:'flex',flexDirection:'column',flexShrink:0}},
+  return React.createElement('aside',{className:'nshell-sidebar'+(open?' open':''),style:{width:220,background:'#0F2E28',display:'flex',flexDirection:'column',flexShrink:0}},
     React.createElement('div',{style:{padding:'20px 20px 12px',fontFamily:'Georgia',fontSize:20,fontWeight:600,color:'#E1F5EE'}},'Noura.'),
     React.createElement('nav',{style:{flex:1,padding:'4px 10px',overflowY:'auto'}},
       ...(sections[role]||sections.nutritionist).map((s:any)=>React.createElement('div',{key:s.t,style:{marginBottom:12}},
@@ -645,7 +645,7 @@ var PR_HTML=`
 </div>
 <div class="comparison-section">
   <div class="section-header"><div class="sec-eyebrow">Comparație detaliată</div><h2 class="sec-title">Tot ce primești, plan cu plan.</h2></div>
-  <table class="comp-table">
+  <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;"><table class="comp-table" style="min-width:560px;">
     <thead><tr><th>Funcționalitate</th><th>Solo</th><th class="col-featured">Pro</th><th>Clinic</th></tr></thead>
     <tbody>
       <tr class="cat-row"><td colspan="4">Clienți & utilizatori</td></tr>
@@ -686,7 +686,7 @@ var PR_HTML=`
       <tr><td>Account manager dedicat</td><td><span class="dash">—</span></td><td><span class="dash">—</span></td><td><span class="check">✓</span></td></tr>
       <tr><td>Onboarding asistat</td><td><span class="dash">—</span></td><td><span class="partial">Webinar</span></td><td><span class="check">✓ 4h 1:1</span></td></tr>
     </tbody>
-  </table>
+  </table></div>
 </div>
 <div class="faq-section">
   <div class="section-header"><div class="sec-eyebrow">Întrebări frecvente</div><h2 class="sec-title">Ai întrebări? Avem răspunsuri.</h2></div>
@@ -1856,20 +1856,31 @@ function Landing({onStart}:any){
   );
 }
 
+var SHELL_CSS="\n.nshell-burger{display:none;}\n.nshell-backdrop{display:none;}\n@media (max-width:900px){\n  .nshell-sidebar{position:fixed;top:0;left:0;height:100%;z-index:60;transform:translateX(-100%);transition:transform .25s ease;box-shadow:0 12px 40px rgba(10,31,27,.35);}\n  .nshell-sidebar.open{transform:translateX(0);}\n  .nshell-backdrop.open{display:block;position:fixed;inset:0;background:rgba(10,31,27,.45);z-index:55;}\n  .nshell-burger{display:inline-flex;align-items:center;justify-content:center;}\n}\n@media (max-width:640px){\n  .nshell-main [style*=\"grid-template-columns\"]{grid-template-columns:1fr!important;}\n}\n";
+
 export default function App(){
   var[acc,setAcc]=React.useState<any>(function(){return store.get('session',null)});
   var[pg,setPg]=React.useState(function(){var s=store.get('session',null);return s&&s.role==='chef'?'Recipe Studio':'Dashboard'});
   var[auth,setAuth]=React.useState<any>(null);
+  var[navOpen,setNavOpen]=React.useState(false);
   function logout(){setAcc(null);store.set('session',null);setAuth(null)}
   function doLogin(a:any){store.set('session',a);setAcc(a);setPg(a.role==='chef'?'Recipe Studio':'Dashboard')}
   if(!acc){
     if(!auth)return React.createElement(Landing,{onStart:(m:string)=>setAuth(m)});
     return React.createElement(Login,{initialMode:auth,onBack:()=>setAuth(null),onLogin:doLogin});
   }
-  return React.createElement('div',{style:{display:'flex',height:'100vh',overflow:'hidden',fontFamily:"'DM Sans',system-ui,sans-serif"}},
-    React.createElement(Sidebar,{role:acc.role,name:acc.name,onLogout:logout,pg,setPg}),
-    React.createElement('div',{style:{flex:1,display:'flex',flexDirection:'column',overflow:'hidden',background:'#FAFAF8'}},
-      React.createElement('div',{style:{background:'rgba(255,255,255,.8)',backdropFilter:'blur(12px)',borderBottom:'.5px solid rgba(15,46,40,.05)',padding:'12px 20px',display:'flex',justifyContent:'space-between',alignItems:'center',flexShrink:0}},React.createElement('div',{style:{fontSize:16,fontWeight:500}},pg),React.createElement('div',{style:{fontSize:12,color:'#888'}},'Bună, '+firstName(acc.name))),
+  return React.createElement('div',{className:'napp',style:{display:'flex',height:'100vh',overflow:'hidden',fontFamily:"'DM Sans',system-ui,sans-serif"}},
+    React.createElement('style',{},SHELL_CSS),
+    React.createElement(Sidebar,{role:acc.role,name:acc.name,onLogout:logout,pg,setPg:function(p:string){setPg(p);setNavOpen(false)},open:navOpen}),
+    navOpen&&React.createElement('div',{className:'nshell-backdrop open',onClick:()=>setNavOpen(false)}),
+    React.createElement('div',{className:'nshell-main',style:{flex:1,display:'flex',flexDirection:'column',overflow:'hidden',background:'#FAFAF8',minWidth:0}},
+      React.createElement('div',{style:{background:'rgba(255,255,255,.8)',backdropFilter:'blur(12px)',borderBottom:'.5px solid rgba(15,46,40,.05)',padding:'12px 20px',display:'flex',justifyContent:'space-between',alignItems:'center',flexShrink:0,gap:12}},
+        React.createElement('div',{style:{display:'flex',alignItems:'center',gap:10,minWidth:0}},
+          React.createElement('button',{className:'nshell-burger','aria-label':'Meniu',onClick:()=>setNavOpen(true),style:{background:'transparent',border:'none',cursor:'pointer',fontSize:20,color:'#0F2E28',padding:0,lineHeight:1}},'☰'),
+          React.createElement('div',{style:{fontSize:16,fontWeight:500,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}},pg)
+        ),
+        React.createElement('div',{style:{fontSize:12,color:'#888',flexShrink:0}},'Bună, '+firstName(acc.name))
+      ),
       React.createElement('div',{style:{flex:1,overflowY:'auto'}},React.createElement(PageContent,{page:pg,role:acc.role,acc:acc,onLogout:logout,onNav:setPg}))
     )
   );
