@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard Curs — Noura.</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --forest: #0F2E28; --forestd: #0a1f1b; --sage: #1D9E75;
+    --mint: #5DCAA5; --mintl: #E1F5EE; --saffron: #EF9F27;
+    --linen: #FAFAF8; --linend: #F1EFE8; --gray: #888780;
+    --dark: #2C2C2A; --white: #FFFFFF;
+    --sidebar-w: 240px;
+  }
+  body { font-family: 'DM Sans', sans-serif; font-weight: 300; background: var(--linend); color: var(--dark); min-height: 100vh; display: flex; }
+
+  /* ─── SIDEBAR ─── */
+  .sidebar {
+    width: var(--sidebar-w); background: var(--forest); display: flex; flex-direction: column;
+    position: fixed; top: 0; left: 0; height: 100vh; z-index: 100; transition: transform 0.3s;
+  }
+  .sb-logo { padding: 20px 18px 16px; border-bottom: 0.5px solid rgba(29,158,117,0.15); display: flex; align-items: center; justify-content: space-between; }
+  .sb-logo a { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 600; color: var(--mintl); text-decoration: none; }
+  .sb-logo span { color: var(--sage); }
+  .sb-close { display: none; background: none; border: none; color: var(--mintl); font-size: 20px; cursor: pointer; }
+
+  .sb-nav { padding: 12px 0; flex: 1; overflow-y: auto; }
+  .sb-section { font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(93,202,165,0.35); padding: 12px 18px 5px; font-weight: 600; }
+  .sb-item { display: flex; align-items: center; gap: 10px; padding: 10px 18px; font-size: 13px; color: rgba(159,225,203,0.55); cursor: pointer; transition: all 0.15s; border-left: 3px solid transparent; text-decoration: none; }
+  .sb-item:hover { background: rgba(29,158,117,0.1); color: rgba(225,245,238,0.85); }
+  .sb-item.active { background: rgba(29,158,117,0.15); color: var(--mintl); border-left-color: var(--sage); font-weight: 500; }
+  .sb-item .icon { font-size: 16px; flex-shrink: 0; width: 20px; text-align: center; }
+  .sb-badge { margin-left: auto; background: rgba(239,159,39,0.25); color: var(--saffron); font-size: 10px; padding: 2px 7px; border-radius: 20px; font-weight: 600; }
+
+  .sb-progress { padding: 14px 18px; border-top: 0.5px solid rgba(29,158,117,0.12); }
+  .sp-label { font-size: 11px; color: rgba(93,202,165,0.5); margin-bottom: 6px; display: flex; justify-content: space-between; }
+  .sp-label strong { color: var(--mint); }
+  .sp-bar { height: 4px; background: rgba(29,158,117,0.15); border-radius: 2px; overflow: hidden; }
+  .sp-fill { height: 100%; background: var(--sage); border-radius: 2px; width: 33%; transition: width 0.5s; }
+
+  .sb-user { padding: 14px 18px; border-top: 0.5px solid rgba(29,158,117,0.12); display: flex; align-items: center; gap: 10px; }
+  .sb-av { width: 34px; height: 34px; border-radius: 50%; background: rgba(29,158,117,0.2); display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-size: 14px; font-weight: 600; color: var(--mint); flex-shrink: 0; }
+  .sb-uname { font-size: 13px; color: rgba(225,245,238,0.85); font-weight: 400; }
+  .sb-urole { font-size: 10px; color: rgba(93,202,165,0.4); margin-top: 1px; }
+  .sb-logout { margin-left: auto; font-size: 13px; color: rgba(93,202,165,0.35); text-decoration: none; cursor: pointer; transition: color 0.2s; }
+  .sb-logout:hover { color: var(--mint); }
+
+  /* ─── MAIN CONTENT ─── */
+  .content { margin-left: var(--sidebar-w); flex: 1; min-height: 100vh; display: flex; flex-direction: column; }
+
+  .topbar { background: var(--white); border-bottom: 0.5px solid rgba(15,46,40,0.08); padding: 0 2rem; height: 60px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 50; }
+  .topbar-left { display: flex; align-items: center; gap: 12px; }
+  .menu-toggle { display: none; background: none; border: none; font-size: 22px; color: var(--dark); cursor: pointer; }
+  .topbar-title { font-size: 15px; font-weight: 500; color: var(--dark); }
+  .topbar-right { display: flex; align-items: center; gap: 12px; }
+  .notif-btn { width: 36px; height: 36px; border-radius: 50%; background: var(--linen); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 15px; position: relative; }
+  .notif-dot { width: 8px; height: 8px; background: var(--saffron); border-radius: 50%; position: absolute; top: 6px; right: 6px; border: 2px solid white; }
+  .avatar-btn { width: 36px; height: 36px; border-radius: 50%; background: var(--mintl); display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-size: 15px; font-weight: 600; color: var(--forest); cursor: pointer; border: none; }
+
+  .page { padding: 2rem; flex: 1; }
+
+  /* ─── HERO WELCOME ─── */
+  .welcome { background: var(--forest); border-radius: 16px; padding: 2rem; display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; position: relative; overflow: hidden; }
+  .welcome::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(45deg, rgba(29,158,117,0.04) 0px, rgba(29,158,117,0.04) 1px, transparent 1px, transparent 16px); }
+  .welcome-text { position: relative; z-index: 1; }
+  .welcome-hey { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--mint); margin-bottom: 6px; font-weight: 500; }
+  .welcome-title { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 600; color: var(--mintl); line-height: 1.1; margin-bottom: 8px; }
+  .welcome-desc { font-size: 13px; color: rgba(225,245,238,0.6); }
+  .welcome-cta { position: relative; z-index: 1; }
+  .continue-btn { background: var(--sage); color: white; border: none; border-radius: 10px; padding: 12px 22px; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.2s; white-space: nowrap; text-decoration: none; display: inline-block; }
+  .continue-btn:hover { background: var(--mint); transform: translateY(-1px); }
+
+  /* ─── STATS ROW ─── */
+  .stats-row { display: grid; grid-template-columns: repeat(4,1fr); gap: 1rem; margin-bottom: 1.5rem; }
+  .stat-card { background: var(--white); border-radius: 12px; padding: 1.25rem; border: 0.5px solid rgba(15,46,40,0.07); }
+  .sc-label { font-size: 11px; color: var(--gray); margin-bottom: 6px; letter-spacing: 0.05em; text-transform: uppercase; }
+  .sc-val { font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 600; color: var(--forest); line-height: 1; }
+  .sc-sub { font-size: 11px; color: var(--sage); margin-top: 4px; }
+
+  /* ─── 2-COL LAYOUT ─── */
+  .two-col { display: grid; grid-template-columns: 1fr 360px; gap: 1.5rem; }
+
+  /* ─── MODULES LIST ─── */
+  .card { background: var(--white); border-radius: 14px; padding: 1.5rem; border: 0.5px solid rgba(15,46,40,0.07); }
+  .card-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.25rem; }
+  .card-title { font-size: 14px; font-weight: 500; color: var(--dark); }
+  .card-link { font-size: 12px; color: var(--sage); text-decoration: none; }
+  .card-link:hover { text-decoration: underline; }
+
+  .module-row { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 0.5px solid rgba(15,46,40,0.06); cursor: pointer; transition: background 0.15s; border-radius: 8px; padding: 10px 8px; }
+  .module-row:last-child { border-bottom: none; }
+  .module-row:hover { background: var(--linen); }
+  .mr-num { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-size: 16px; font-weight: 600; flex-shrink: 0; }
+  .mr-num.done { background: rgba(29,158,117,0.12); color: var(--sage); }
+  .mr-num.active { background: var(--forest); color: var(--mint); }
+  .mr-num.locked { background: var(--linend); color: var(--gray); }
+  .mr-info { flex: 1; }
+  .mr-title { font-size: 13px; font-weight: 400; color: var(--dark); }
+  .mr-meta { font-size: 11px; color: var(--gray); margin-top: 2px; }
+  .mr-status { font-size: 10px; padding: 3px 10px; border-radius: 20px; font-weight: 500; flex-shrink: 0; }
+  .ms-done   { background: rgba(29,158,117,0.1); color: var(--sage); }
+  .ms-active { background: rgba(15,46,40,0.08); color: var(--forest); }
+  .ms-locked { background: var(--linend); color: var(--gray); }
+  .mr-prog { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; width: 60px; flex-shrink: 0; }
+  .prog-bar { width: 100%; height: 3px; background: var(--linend); border-radius: 2px; overflow: hidden; }
+  .prog-fill { height: 100%; border-radius: 2px; background: var(--sage); }
+  .prog-pct { font-size: 10px; color: var(--gray); }
+
+  /* ─── RIGHT COLUMN ─── */
+  .streak-card { background: var(--forest); border-radius: 14px; padding: 1.25rem; margin-bottom: 1.25rem; }
+  .streak-label { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mint); margin-bottom: 6px; }
+  .streak-val { font-family: 'Cormorant Garamond', serif; font-size: 40px; font-weight: 600; color: var(--mintl); line-height: 1; }
+  .streak-days { display: flex; gap: 6px; margin-top: 12px; }
+  .day-dot { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 500; }
+  .day-done  { background: rgba(29,158,117,0.3); color: var(--mint); }
+  .day-today { background: var(--sage); color: white; }
+  .day-empty { background: rgba(29,158,117,0.1); color: rgba(93,202,165,0.3); }
+
+  .next-lesson { background: var(--white); border-radius: 14px; padding: 1.25rem; margin-bottom: 1.25rem; border: 0.5px solid rgba(15,46,40,0.07); }
+  .nl-eyebrow { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--sage); font-weight: 500; margin-bottom: 8px; }
+  .nl-title { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 600; color: var(--forest); margin-bottom: 4px; }
+  .nl-sub { font-size: 12px; color: var(--gray); margin-bottom: 1rem; }
+  .nl-btn { display: block; background: var(--forest); color: white; text-align: center; padding: 10px; border-radius: 8px; font-size: 13px; font-weight: 500; text-decoration: none; transition: all 0.2s; }
+  .nl-btn:hover { background: var(--sage); }
+
+  .cert-card { background: linear-gradient(135deg, rgba(239,159,39,0.08), rgba(29,158,117,0.05)); border: 1px solid rgba(239,159,39,0.2); border-radius: 14px; padding: 1.25rem; }
+  .cert-icon { font-size: 28px; margin-bottom: 8px; }
+  .cert-title { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 600; color: var(--forest); margin-bottom: 4px; }
+  .cert-desc { font-size: 12px; color: var(--gray); line-height: 1.6; }
+  .cert-prog { margin-top: 12px; }
+  .cp-label { display: flex; justify-content: space-between; font-size: 11px; color: var(--gray); margin-bottom: 5px; }
+  .cp-bar { height: 5px; background: var(--linend); border-radius: 3px; overflow: hidden; }
+  .cp-fill { height: 100%; background: var(--saffron); border-radius: 3px; width: 33%; }
+
+  /* ─── OVERLAY ─── */
+  .overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 90; }
+  .overlay.show { display: block; }
+
+  @media (max-width: 1024px) {
+    .two-col { grid-template-columns: 1fr; }
+    .stats-row { grid-template-columns: repeat(2,1fr); }
+  }
+  @media (max-width: 768px) {
+    .sidebar { transform: translateX(-100%); }
+    .sidebar.open { transform: translateX(0); }
+    .sb-close { display: block; }
+    .content { margin-left: 0; }
+    .menu-toggle { display: block; }
+    .page { padding: 1rem; }
+    .welcome { flex-direction: column; gap: 1rem; align-items: flex-start; }
+    .stats-row { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+
+<!-- ─── SIDEBAR ─── -->
+<aside class="sidebar" id="sidebar">
+  <div class="sb-logo">
+    <a href="curs-bucatar.html">Noura<span>.</span></a>
+    <button class="sb-close" onclick="closeSidebar()">✕</button>
+  </div>
+
+  <nav class="sb-nav">
+    <div class="sb-section">Principal</div>
+    <a href="dashboard-cursant.html" class="sb-item active">
+      <span class="icon">🏠</span> Dashboard
+    </a>
+    <a href="lectie-curs.html" class="sb-item">
+      <span class="icon">▶️</span> Continuă lecția
+    </a>
+
+    <div class="sb-section">Curriculum</div>
+    <a href="lectie-curs.html" class="sb-item">
+      <span class="icon">📚</span> Toate modulele
+    </a>
+    <a href="materiale-curs.html" class="sb-item">
+      <span class="icon">📄</span> Materiale didactice
+      <span class="sb-badge">12</span>
+    </a>
+
+    <div class="sb-section">Comunitate</div>
+    <a href="chat.html" class="sb-item">
+      <span class="icon">💬</span> Forum discuții
+      <span class="sb-badge">3</span>
+    </a>
+    <a href="#" class="sb-item">
+      <span class="icon">📅</span> Sesiuni live
+    </a>
+
+    <div class="sb-section">Cont</div>
+    <a href="profil.html" class="sb-item">
+      <span class="icon">👤</span> Profilul meu
+    </a>
+    <a href="#" class="sb-item">
+      <span class="icon">🏆</span> Certificat
+    </a>
+    <a href="setari.html" class="sb-item">
+      <span class="icon">⚙️</span> Setări
+    </a>
+  </nav>
+
+  <div class="sb-progress">
+    <div class="sp-label">Progres curs <strong id="progPct">33%</strong></div>
+    <div class="sp-bar"><div class="sp-fill" id="progBar"></div></div>
+  </div>
+
+  <div class="sb-user">
+    <div class="sb-av">IP</div>
+    <div>
+      <div class="sb-uname">Ion Popescu</div>
+      <div class="sb-urole">Plan Complet</div>
+    </div>
+    <a href="login-curs.html" class="sb-logout" title="Deconectare">⏏</a>
+  </div>
+</aside>
+
+<!-- ─── MAIN ─── -->
+<div class="content">
+  <div class="topbar">
+    <div class="topbar-left">
+      <button class="menu-toggle" onclick="openSidebar()">☰</button>
+      <span class="topbar-title">Dashboard</span>
+    </div>
+    <div class="topbar-right">
+      <button class="notif-btn">🔔<div class="notif-dot"></div></button>
+      <div class="avatar-btn">IP</div>
+    </div>
+  </div>
+
+  <div class="page">
+
+    <!-- Welcome -->
+    <div class="welcome">
+      <div class="welcome-text">
+        <div class="welcome-hey">Bun venit înapoi</div>
+        <div class="welcome-title">Ion, continuă de unde<br>ai rămas!</div>
+        <div class="welcome-desc">Modul 02 · Lecția 3: Tehnici de tăiere profesionistă</div>
+      </div>
+      <div class="welcome-cta">
+        <a href="lectie-curs.html" class="continue-btn">▶ Continuă lecția</a>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="sc-label">Module finalizate</div>
+        <div class="sc-val">4</div>
+        <div class="sc-sub">din 12 module</div>
+      </div>
+      <div class="stat-card">
+        <div class="sc-label">Ore parcurse</div>
+        <div class="sc-val">13h</div>
+        <div class="sc-sub">din 40+ ore total</div>
+      </div>
+      <div class="stat-card">
+        <div class="sc-label">Materiale descărcate</div>
+        <div class="sc-val">8</div>
+        <div class="sc-sub">din 24 disponibile</div>
+      </div>
+      <div class="stat-card">
+        <div class="sc-label">Zile de studiu</div>
+        <div class="sc-val">14</div>
+        <div class="sc-sub">Serie activă: 4 zile</div>
+      </div>
+    </div>
+
+    <div class="two-col">
+
+      <!-- Modules -->
+      <div class="card">
+        <div class="card-head">
+          <span class="card-title">Modulele cursului</span>
+          <a href="lectie-curs.html" class="card-link">Vezi tot →</a>
+        </div>
+
+        <div class="module-row" onclick="location.href='lectie-curs.html'">
+          <div class="mr-num done">01</div>
+          <div class="mr-info">
+            <div class="mr-title">Fundamente nutriționale</div>
+            <div class="mr-meta">3 lecții · 2h 30min</div>
+          </div>
+          <span class="mr-status ms-done">Finalizat</span>
+          <div class="mr-prog">
+            <div class="prog-bar"><div class="prog-fill" style="width:100%"></div></div>
+            <span class="prog-pct">100%</span>
+          </div>
+        </div>
+
+        <div class="module-row" onclick="location.href='lectie-curs.html'">
+          <div class="mr-num active">02</div>
+          <div class="mr-info">
+            <div class="mr-title">Tehnici culinare esențiale</div>
+            <div class="mr-meta">5 lecții · 4h 15min · Lecția 3 activă</div>
+          </div>
+          <span class="mr-status ms-active">În progres</span>
+          <div class="mr-prog">
+            <div class="prog-bar"><div class="prog-fill" style="width:60%"></div></div>
+            <span class="prog-pct">60%</span>
+          </div>
+        </div>
+
+        <div class="module-row" onclick="location.href='lectie-curs.html'">
+          <div class="mr-num done">03</div>
+          <div class="mr-info">
+            <div class="mr-title">Planificare meniuri personalizate</div>
+            <div class="mr-meta">4 lecții · 3h 00min</div>
+          </div>
+          <span class="mr-status ms-done">Finalizat</span>
+          <div class="mr-prog">
+            <div class="prog-bar"><div class="prog-fill" style="width:100%"></div></div>
+            <span class="prog-pct">100%</span>
+          </div>
+        </div>
+
+        <div class="module-row">
+          <div class="mr-num locked">04</div>
+          <div class="mr-info">
+            <div class="mr-title">Bucătărie internațională</div>
+            <div class="mr-meta">6 lecții · 5h 45min</div>
+          </div>
+          <span class="mr-status ms-locked">Blocat</span>
+          <div class="mr-prog">
+            <div class="prog-bar"><div class="prog-fill" style="width:0%"></div></div>
+            <span class="prog-pct">0%</span>
+          </div>
+        </div>
+
+        <div class="module-row">
+          <div class="mr-num locked">05</div>
+          <div class="mr-info">
+            <div class="mr-title">Patiserie & Deserturi</div>
+            <div class="mr-meta">4 lecții · 3h 30min</div>
+          </div>
+          <span class="mr-status ms-locked">Blocat</span>
+          <div class="mr-prog">
+            <div class="prog-bar"><div class="prog-fill" style="width:0%"></div></div>
+            <span class="prog-pct">0%</span>
+          </div>
+        </div>
+
+        <div class="module-row">
+          <div class="mr-num locked">06</div>
+          <div class="mr-info">
+            <div class="mr-title">Aprovizionare & Furnizori</div>
+            <div class="mr-meta">3 lecții · 2h 00min</div>
+          </div>
+          <span class="mr-status ms-locked">Blocat</span>
+          <div class="mr-prog">
+            <div class="prog-bar"><div class="prog-fill" style="width:0%"></div></div>
+            <span class="prog-pct">0%</span>
+          </div>
+        </div>
+
+        <div class="module-row">
+          <div class="mr-num locked">07</div>
+          <div class="mr-info">
+            <div class="mr-title">Business & Marketing personal</div>
+            <div class="mr-meta">5 lecții · 4h 00min</div>
+          </div>
+          <span class="mr-status ms-locked">Blocat</span>
+          <div class="mr-prog">
+            <div class="prog-bar"><div class="prog-fill" style="width:0%"></div></div>
+            <span class="prog-pct">0%</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right column -->
+      <div>
+        <!-- Streak -->
+        <div class="streak-card">
+          <div class="streak-label">Seria ta de studiu</div>
+          <div class="streak-val">4 <span style="font-size:18px;color:rgba(93,202,165,0.6)">zile</span></div>
+          <div class="streak-days">
+            <div class="day-dot day-done" title="Luni">L</div>
+            <div class="day-dot day-done" title="Marți">Ma</div>
+            <div class="day-dot day-done" title="Miercuri">Mi</div>
+            <div class="day-dot day-today" title="Joi">J</div>
+            <div class="day-dot day-empty" title="Vineri">V</div>
+            <div class="day-dot day-empty" title="Sâmbătă">S</div>
+            <div class="day-dot day-empty" title="Duminică">D</div>
+          </div>
+        </div>
+
+        <!-- Next lesson -->
+        <div class="next-lesson">
+          <div class="nl-eyebrow">Continuă de unde ai rămas</div>
+          <div class="nl-title">Tehnici de tăiere profesionistă</div>
+          <div class="nl-sub">Modul 02 · Lecția 3 din 5 · 38 min</div>
+          <a href="lectie-curs.html" class="nl-btn">▶ Continuă lecția</a>
+        </div>
+
+        <!-- Certificate progress -->
+        <div class="cert-card">
+          <div class="cert-icon">🏆</div>
+          <div class="cert-title">Certificatul Noura</div>
+          <div class="cert-desc">Finalizează toate modulele pentru a primi certificatul tău de bucătar personal.</div>
+          <div class="cert-prog">
+            <div class="cp-label"><span>Progres general</span><span>33%</span></div>
+            <div class="cp-bar"><div class="cp-fill"></div></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  function openSidebar() {
+    document.getElementById('sidebar').classList.add('open');
+    document.getElementById('overlay').classList.add('show');
+  }
+  function closeSidebar() {
+    document.getElementById('sidebar').classList.remove('open');
+    document.getElementById('overlay').classList.remove('show');
+  }
+</script>
+</body>
+</html>

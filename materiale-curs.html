@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Materiale Didactice — Noura.</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --forest: #0F2E28; --forestd: #0a1f1b; --sage: #1D9E75;
+    --mint: #5DCAA5; --mintl: #E1F5EE; --saffron: #EF9F27;
+    --linen: #FAFAF8; --linend: #F1EFE8; --gray: #888780;
+    --dark: #2C2C2A; --white: #FFFFFF;
+    --sidebar-w: 240px;
+  }
+  body { font-family: 'DM Sans', sans-serif; font-weight: 300; background: var(--linend); color: var(--dark); min-height: 100vh; display: flex; }
+
+  /* ─── SIDEBAR (same as dashboard) ─── */
+  .sidebar { width: var(--sidebar-w); background: var(--forest); display: flex; flex-direction: column; position: fixed; top: 0; left: 0; height: 100vh; z-index: 100; transition: transform 0.3s; }
+  .sb-logo { padding: 20px 18px 16px; border-bottom: 0.5px solid rgba(29,158,117,0.15); display: flex; align-items: center; justify-content: space-between; }
+  .sb-logo a { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 600; color: var(--mintl); text-decoration: none; }
+  .sb-logo span { color: var(--sage); }
+  .sb-close { display: none; background: none; border: none; color: var(--mintl); font-size: 20px; cursor: pointer; }
+  .sb-nav { padding: 12px 0; flex: 1; overflow-y: auto; }
+  .sb-section { font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(93,202,165,0.35); padding: 12px 18px 5px; font-weight: 600; }
+  .sb-item { display: flex; align-items: center; gap: 10px; padding: 10px 18px; font-size: 13px; color: rgba(159,225,203,0.55); cursor: pointer; transition: all 0.15s; border-left: 3px solid transparent; text-decoration: none; }
+  .sb-item:hover { background: rgba(29,158,117,0.1); color: rgba(225,245,238,0.85); }
+  .sb-item.active { background: rgba(29,158,117,0.15); color: var(--mintl); border-left-color: var(--sage); font-weight: 500; }
+  .sb-item .icon { font-size: 16px; flex-shrink: 0; width: 20px; text-align: center; }
+  .sb-badge { margin-left: auto; background: rgba(239,159,39,0.25); color: var(--saffron); font-size: 10px; padding: 2px 7px; border-radius: 20px; font-weight: 600; }
+  .sb-progress { padding: 14px 18px; border-top: 0.5px solid rgba(29,158,117,0.12); }
+  .sp-label { font-size: 11px; color: rgba(93,202,165,0.5); margin-bottom: 6px; display: flex; justify-content: space-between; }
+  .sp-label strong { color: var(--mint); }
+  .sp-bar { height: 4px; background: rgba(29,158,117,0.15); border-radius: 2px; overflow: hidden; }
+  .sp-fill { height: 100%; background: var(--sage); border-radius: 2px; width: 33%; }
+  .sb-user { padding: 14px 18px; border-top: 0.5px solid rgba(29,158,117,0.12); display: flex; align-items: center; gap: 10px; }
+  .sb-av { width: 34px; height: 34px; border-radius: 50%; background: rgba(29,158,117,0.2); display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-size: 14px; font-weight: 600; color: var(--mint); flex-shrink: 0; }
+  .sb-uname { font-size: 13px; color: rgba(225,245,238,0.85); font-weight: 400; }
+  .sb-urole { font-size: 10px; color: rgba(93,202,165,0.4); margin-top: 1px; }
+  .sb-logout { margin-left: auto; font-size: 13px; color: rgba(93,202,165,0.35); text-decoration: none; cursor: pointer; transition: color 0.2s; }
+  .sb-logout:hover { color: var(--mint); }
+
+  /* ─── CONTENT ─── */
+  .content { margin-left: var(--sidebar-w); flex: 1; min-height: 100vh; display: flex; flex-direction: column; }
+  .topbar { background: var(--white); border-bottom: 0.5px solid rgba(15,46,40,0.08); padding: 0 2rem; height: 60px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 50; }
+  .topbar-left { display: flex; align-items: center; gap: 12px; }
+  .menu-toggle { display: none; background: none; border: none; font-size: 22px; color: var(--dark); cursor: pointer; }
+  .topbar-title { font-size: 15px; font-weight: 500; color: var(--dark); }
+  .topbar-right { display: flex; align-items: center; gap: 10px; }
+
+  /* Search */
+  .search-wrap { position: relative; }
+  .search-input { height: 36px; padding: 0 14px 0 36px; border-radius: 8px; border: 1px solid rgba(15,46,40,0.12); background: var(--linen); font-family: 'DM Sans', sans-serif; font-size: 13px; color: var(--dark); outline: none; width: 220px; transition: all 0.2s; }
+  .search-input:focus { border-color: var(--sage); background: white; box-shadow: 0 0 0 3px rgba(29,158,117,0.08); }
+  .search-icon { position: absolute; left: 11px; top: 50%; transform: translateY(-50%); font-size: 14px; pointer-events: none; }
+
+  .page { padding: 2rem; flex: 1; }
+
+  /* Page header */
+  .page-header { margin-bottom: 2rem; }
+  .page-eyebrow { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--sage); font-weight: 500; margin-bottom: 6px; }
+  .page-title { font-family: 'Cormorant Garamond', serif; font-size: 36px; font-weight: 600; color: var(--forest); }
+  .page-sub { font-size: 14px; color: var(--gray); margin-top: 4px; }
+
+  /* Stats row */
+  .mat-stats { display: flex; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; }
+  .ms-item { background: var(--white); border-radius: 10px; padding: 1rem 1.25rem; border: 0.5px solid rgba(15,46,40,0.07); min-width: 120px; }
+  .ms-val { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 600; color: var(--forest); }
+  .ms-label { font-size: 11px; color: var(--gray); margin-top: 2px; }
+
+  /* Filter tabs */
+  .filter-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 2rem; align-items: center; }
+  .filter-btn { background: var(--white); border: 1px solid rgba(15,46,40,0.12); border-radius: 20px; padding: 7px 16px; font-family: 'DM Sans', sans-serif; font-size: 12px; color: var(--gray); cursor: pointer; transition: all 0.2s; white-space: nowrap; }
+  .filter-btn:hover { border-color: var(--sage); color: var(--sage); }
+  .filter-btn.active { background: var(--forest); border-color: var(--forest); color: white; }
+  .filter-count { display: inline-block; background: rgba(29,158,117,0.1); color: var(--sage); font-size: 10px; padding: 1px 6px; border-radius: 10px; margin-left: 4px; }
+  .filter-btn.active .filter-count { background: rgba(255,255,255,0.15); color: white; }
+
+  /* Sort select */
+  .sort-sel { height: 36px; padding: 0 10px; border-radius: 8px; border: 1px solid rgba(15,46,40,0.12); background: var(--white); font-family: 'DM Sans', sans-serif; font-size: 12px; color: var(--gray); outline: none; cursor: pointer; margin-left: auto; }
+
+  /* Materials grid */
+  .mat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; }
+  .mat-card { background: var(--white); border-radius: 14px; border: 0.5px solid rgba(15,46,40,0.07); overflow: hidden; transition: transform 0.2s, box-shadow 0.2s; display: flex; flex-direction: column; }
+  .mat-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.06); }
+
+  .mat-thumb { height: 120px; display: flex; align-items: center; justify-content: center; font-size: 40px; position: relative; }
+  .mat-thumb.pdf   { background: rgba(239,159,39,0.08); }
+  .mat-thumb.video { background: rgba(15,46,40,0.06); }
+  .mat-thumb.sheet { background: rgba(29,158,117,0.07); }
+  .mat-thumb.template { background: rgba(93,202,165,0.07); }
+  .mat-module-badge { position: absolute; top: 10px; left: 10px; font-size: 10px; background: rgba(15,46,40,0.75); color: var(--mintl); padding: 3px 10px; border-radius: 20px; font-weight: 500; backdrop-filter: blur(4px); }
+  .mat-new-badge { position: absolute; top: 10px; right: 10px; font-size: 10px; background: rgba(239,159,39,0.9); color: white; padding: 3px 10px; border-radius: 20px; font-weight: 600; }
+
+  .mat-body { padding: 1rem; flex: 1; display: flex; flex-direction: column; }
+  .mat-type { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 500; margin-bottom: 5px; }
+  .mat-type.pdf      { color: var(--saffron); }
+  .mat-type.video    { color: var(--forest); }
+  .mat-type.sheet    { color: var(--sage); }
+  .mat-type.template { color: var(--mint); }
+  .mat-title { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 600; color: var(--forest); line-height: 1.2; margin-bottom: 6px; }
+  .mat-desc { font-size: 12px; color: var(--gray); line-height: 1.6; flex: 1; margin-bottom: 12px; }
+  .mat-meta { display: flex; align-items: center; justify-content: space-between; }
+  .mat-size { font-size: 11px; color: var(--gray); }
+  .mat-downloaded { font-size: 11px; color: var(--sage); }
+
+  .mat-footer { padding: 0 1rem 1rem; }
+  .dl-btn { width: 100%; padding: 9px; background: var(--forest); color: white; border: none; border-radius: 8px; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.2s; }
+  .dl-btn:hover { background: var(--sage); }
+  .dl-btn.downloaded { background: rgba(29,158,117,0.1); color: var(--sage); border: 1px solid rgba(29,158,117,0.2); }
+  .dl-btn.downloaded:hover { background: rgba(29,158,117,0.15); }
+  .dl-btn.locked { background: var(--linend); color: var(--gray); cursor: not-allowed; }
+
+  /* Section heading */
+  .section-head { margin: 2rem 0 1rem; }
+  .sh-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 600; color: var(--forest); }
+  .sh-sub { font-size: 12px; color: var(--gray); }
+
+  /* Overlay */
+  .overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 90; }
+  .overlay.show { display: block; }
+
+  @media (max-width: 768px) {
+    .sidebar { transform: translateX(-100%); }
+    .sidebar.open { transform: translateX(0); }
+    .sb-close { display: block; }
+    .content { margin-left: 0; }
+    .menu-toggle { display: block; }
+    .page { padding: 1rem; }
+    .mat-grid { grid-template-columns: 1fr; }
+    .sort-sel { margin-left: 0; }
+  }
+</style>
+</head>
+<body>
+
+<div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+
+<!-- ─── SIDEBAR ─── -->
+<aside class="sidebar" id="sidebar">
+  <div class="sb-logo">
+    <a href="curs-bucatar.html">Noura<span>.</span></a>
+    <button class="sb-close" onclick="closeSidebar()">✕</button>
+  </div>
+  <nav class="sb-nav">
+    <div class="sb-section">Principal</div>
+    <a href="dashboard-cursant.html" class="sb-item"><span class="icon">🏠</span> Dashboard</a>
+    <a href="lectie-curs.html" class="sb-item"><span class="icon">▶️</span> Continuă lecția</a>
+    <div class="sb-section">Curriculum</div>
+    <a href="lectie-curs.html" class="sb-item"><span class="icon">📚</span> Toate modulele</a>
+    <a href="materiale-curs.html" class="sb-item active">
+      <span class="icon">📄</span> Materiale didactice
+      <span class="sb-badge">12</span>
+    </a>
+    <div class="sb-section">Comunitate</div>
+    <a href="chat.html" class="sb-item"><span class="icon">💬</span> Forum discuții <span class="sb-badge">3</span></a>
+    <a href="#" class="sb-item"><span class="icon">📅</span> Sesiuni live</a>
+    <div class="sb-section">Cont</div>
+    <a href="profil.html" class="sb-item"><span class="icon">👤</span> Profilul meu</a>
+    <a href="#" class="sb-item"><span class="icon">🏆</span> Certificat</a>
+    <a href="setari.html" class="sb-item"><span class="icon">⚙️</span> Setări</a>
+  </nav>
+  <div class="sb-progress">
+    <div class="sp-label">Progres curs <strong>33%</strong></div>
+    <div class="sp-bar"><div class="sp-fill"></div></div>
+  </div>
+  <div class="sb-user">
+    <div class="sb-av">IP</div>
+    <div>
+      <div class="sb-uname">Ion Popescu</div>
+      <div class="sb-urole">Plan Complet</div>
+    </div>
+    <a href="login-curs.html" class="sb-logout" title="Deconectare">⏏</a>
+  </div>
+</aside>
+
+<!-- ─── MAIN ─── -->
+<div class="content">
+  <div class="topbar">
+    <div class="topbar-left">
+      <button class="menu-toggle" onclick="openSidebar()">☰</button>
+      <span class="topbar-title">Materiale Didactice</span>
+    </div>
+    <div class="topbar-right">
+      <div class="search-wrap">
+        <span class="search-icon">🔍</span>
+        <input class="search-input" type="text" placeholder="Caută materiale..." oninput="filterSearch(this.value)" />
+      </div>
+    </div>
+  </div>
+
+  <div class="page">
+
+    <div class="page-header">
+      <div class="page-eyebrow">Resurse curs</div>
+      <h1 class="page-title">Materiale Didactice</h1>
+      <p class="page-sub">Descarcă și studiază resursele asociate fiecărui modul.</p>
+    </div>
+
+    <!-- Stats -->
+    <div class="mat-stats">
+      <div class="ms-item">
+        <div class="ms-val">24</div>
+        <div class="ms-label">Materiale total</div>
+      </div>
+      <div class="ms-item">
+        <div class="ms-val">8</div>
+        <div class="ms-label">Descărcate</div>
+      </div>
+      <div class="ms-item">
+        <div class="ms-val">16</div>
+        <div class="ms-label">Disponibile</div>
+      </div>
+      <div class="ms-item">
+        <div class="ms-val">3</div>
+        <div class="ms-label">Nou adăugate</div>
+      </div>
+    </div>
+
+    <!-- Filters -->
+    <div class="filter-row" id="filterRow">
+      <button class="filter-btn active" onclick="filterCat('toate', this)">Toate <span class="filter-count">24</span></button>
+      <button class="filter-btn" onclick="filterCat('pdf', this)">Ghiduri PDF <span class="filter-count">10</span></button>
+      <button class="filter-btn" onclick="filterCat('sheet', this)">Fișe exerciții <span class="filter-count">7</span></button>
+      <button class="filter-btn" onclick="filterCat('template', this)">Template-uri <span class="filter-count">4</span></button>
+      <button class="filter-btn" onclick="filterCat('video', this)">Resurse video <span class="filter-count">3</span></button>
+      <select class="sort-sel" onchange="sortMaterials(this.value)">
+        <option value="module">Sortare: după modul</option>
+        <option value="recent">Sortare: recente</option>
+        <option value="name">Sortare: A–Z</option>
+      </select>
+    </div>
+
+    <!-- Section: Modul 01 -->
+    <div class="section-head">
+      <div class="sh-title">Modul 01 — Fundamente nutriționale</div>
+      <div class="sh-sub">3 materiale disponibile</div>
+    </div>
+    <div class="mat-grid" id="matGrid">
+
+      <div class="mat-card" data-cat="pdf" data-module="01">
+        <div class="mat-thumb pdf">
+          📄
+          <span class="mat-module-badge">Modul 01</span>
+        </div>
+        <div class="mat-body">
+          <div class="mat-type pdf">Ghid PDF</div>
+          <div class="mat-title">Ghid macronutrienți și calorii</div>
+          <div class="mat-desc">Tabel complet cu valorile nutriționale ale principalelor grupe de alimente.</div>
+          <div class="mat-meta">
+            <span class="mat-size">📄 3.2 MB · 18 pag.</span>
+            <span class="mat-downloaded">✓ Descărcat</span>
+          </div>
+        </div>
+        <div class="mat-footer">
+          <button class="dl-btn downloaded" onclick="downloadMat(this)">✓ Descărcat · Re-descarcă</button>
+        </div>
+      </div>
+
+      <div class="mat-card" data-cat="sheet" data-module="01">
+        <div class="mat-thumb sheet">
+          📋
+          <span class="mat-module-badge">Modul 01</span>
+        </div>
+        <div class="mat-body">
+          <div class="mat-type sheet">Fișă exerciții</div>
+          <div class="mat-title">Calcularea nevoilor calorice ale clientului</div>
+          <div class="mat-desc">Fișă de lucru cu formule și exemple pentru calculul BMR și TDEE.</div>
+          <div class="mat-meta">
+            <span class="mat-size">📄 0.9 MB · 4 pag.</span>
+            <span class="mat-downloaded">✓ Descărcat</span>
+          </div>
+        </div>
+        <div class="mat-footer">
+          <button class="dl-btn downloaded" onclick="downloadMat(this)">✓ Descărcat · Re-descarcă</button>
+        </div>
+      </div>
+
+      <div class="mat-card" data-cat="template" data-module="01">
+        <div class="mat-thumb template">
+          📊
+          <span class="mat-module-badge">Modul 01</span>
+          <span class="mat-new-badge">Nou</span>
+        </div>
+        <div class="mat-body">
+          <div class="mat-type template">Template</div>
+          <div class="mat-title">Fișă de evaluare nutrițională client</div>
+          <div class="mat-desc">Template editabil pentru prima consultație cu un client nou. Include secțiuni de alergii, preferințe și obiective.</div>
+          <div class="mat-meta">
+            <span class="mat-size">📄 1.1 MB · 6 pag.</span>
+            <span class="mat-downloaded" style="color:var(--gray);">Nedescărcat</span>
+          </div>
+        </div>
+        <div class="mat-footer">
+          <button class="dl-btn" onclick="downloadMat(this)">↓ Descarcă</button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Section: Modul 02 -->
+    <div class="section-head">
+      <div class="sh-title">Modul 02 — Tehnici culinare esențiale</div>
+      <div class="sh-sub">5 materiale · 3 descărcate</div>
+    </div>
+    <div class="mat-grid">
+
+      <div class="mat-card" data-cat="pdf" data-module="02">
+        <div class="mat-thumb pdf">
+          📄
+          <span class="mat-module-badge">Modul 02</span>
+        </div>
+        <div class="mat-body">
+          <div class="mat-type pdf">Ghid PDF</div>
+          <div class="mat-title">Ghid vizual tehnici de tăiere</div>
+          <div class="mat-desc">Ilustrații pas-cu-pas pentru Julienne, Brunoise, Chiffonade și alte 8 tehnici esențiale.</div>
+          <div class="mat-meta">
+            <span class="mat-size">📄 2.4 MB · 12 pag.</span>
+            <span class="mat-downloaded">✓ Descărcat</span>
+          </div>
+        </div>
+        <div class="mat-footer">
+          <button class="dl-btn downloaded" onclick="downloadMat(this)">✓ Descărcat · Re-descarcă</button>
+        </div>
+      </div>
+
+      <div class="mat-card" data-cat="sheet" data-module="02">
+        <div class="mat-thumb sheet">
+          📋
+          <span class="mat-module-badge">Modul 02</span>
+        </div>
+        <div class="mat-body">
+          <div class="mat-type sheet">Fișă exerciții</div>
+          <div class="mat-title">Fișă practică — Julienne & Brunoise</div>
+          <div class="mat-desc">Exerciții progresive de tăiere cu autoevaluare și criterii de calitate profesionale.</div>
+          <div class="mat-meta">
+            <span class="mat-size">📄 0.8 MB · 4 pag.</span>
+            <span class="mat-downloaded">✓ Descărcat</span>
+          </div>
+        </div>
+        <div class="mat-footer">
+          <button class="dl-btn downloaded" onclick="downloadMat(this)">✓ Descărcat · Re-descarcă</button>
+        </div>
+      </div>
+
+      <div class="mat-card" data-cat="pdf" data-module="02">
+        <div class="mat-thumb pdf">
+          📄
+          <span class="mat-module-badge">Modul 02</span>
+          <span class="mat-new-badge">Nou</span>
+        </div>
+        <div class="mat-body">
+          <div class="mat-type pdf">Ghid PDF</div>
+          <div class="mat-title">Ghid sous-vide pentru bucătari privați</div>
+          <div class="mat-desc">Temperaturi, timpi de gătire și sfaturi de siguranță pentru gătitul sous-vide la domiciliul clientului.</div>
+          <div class="mat-meta">
+            <span class="mat-size">📄 4.1 MB · 22 pag.</span>
+            <span class="mat-downloaded" style="color:var(--gray);">Nedescărcat</span>
+          </div>
+        </div>
+        <div class="mat-footer">
+          <button class="dl-btn" onclick="downloadMat(this)">↓ Descarcă</button>
+        </div>
+      </div>
+
+      <div class="mat-card" data-cat="template" data-module="02">
+        <div class="mat-thumb template">
+          📊
+          <span class="mat-module-badge">Modul 02</span>
+        </div>
+        <div class="mat-body">
+          <div class="mat-type template">Template</div>
+          <div class="mat-title">Tabel dimensiuni tăieri profesionale</div>
+          <div class="mat-desc">Referință rapidă format A5 cu toate dimensiunile standard de tăiere.</div>
+          <div class="mat-meta">
+            <span class="mat-size">📄 0.3 MB · 1 pag.</span>
+            <span class="mat-downloaded" style="color:var(--gray);">Nedescărcat</span>
+          </div>
+        </div>
+        <div class="mat-footer">
+          <button class="dl-btn" onclick="downloadMat(this)">↓ Descarcă</button>
+        </div>
+      </div>
+
+      <div class="mat-card" data-cat="video" data-module="02">
+        <div class="mat-thumb video">
+          🎬
+          <span class="mat-module-badge">Modul 02</span>
+        </div>
+        <div class="mat-body">
+          <div class="mat-type video">Resursă video</div>
+          <div class="mat-title">Demonstrație prezentare pe farfurie</div>
+          <div class="mat-desc">Video bonus cu Chef Andrei demonstrând plating pentru 5 tipuri de feluri principale.</div>
+          <div class="mat-meta">
+            <span class="mat-size">🎬 320 MB · 18 min</span>
+            <span class="mat-downloaded" style="color:var(--gray);">Nedescărcat</span>
+          </div>
+        </div>
+        <div class="mat-footer">
+          <button class="dl-btn" onclick="downloadMat(this)">↓ Descarcă</button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Section: Modul 03 -->
+    <div class="section-head">
+      <div class="sh-title">Modul 03 — Planificare meniuri personalizate</div>
+      <div class="sh-sub">4 materiale disponibile</div>
+    </div>
+    <div class="mat-grid">
+
+      <div class="mat-card" data-cat="template" data-module="03">
+        <div class="mat-thumb template">
+          📊
+          <span class="mat-module-badge">Modul 03</span>
+        </div>
+        <div class="mat-body">
+          <div class="mat-type template">Template</div>
+          <div class="mat-title">Template plan alimentar săptămânal</div>
+          <div class="mat-desc">Fișier Excel/Sheets cu calcul automat de calorii și macronutrienți pentru planuri de 7 zile.</div>
+          <div class="mat-meta">
+            <span class="mat-size">📊 0.5 MB · Excel</span>
+            <span class="mat-downloaded">✓ Descărcat</span>
+          </div>
+        </div>
+        <div class="mat-footer">
+          <button class="dl-btn downloaded" onclick="downloadMat(this)">✓ Descărcat · Re-descarcă</button>
+        </div>
+      </div>
+
+      <div class="mat-card" data-cat="pdf" data-module="03">
+        <div class="mat-thumb pdf">
+          📄
+          <span class="mat-module-badge">Modul 03</span>
+        </div>
+        <div class="mat-body">
+          <div class="mat-type pdf">Ghid PDF</div>
+          <div class="mat-title">Ghid: Meniuri pentru diete speciale</div>
+          <div class="mat-desc">Cum adaptezi planurile alimentare pentru diete keto, vegan, fără gluten și diabetici.</div>
+          <div class="mat-meta">
+            <span class="mat-size">📄 5.2 MB · 28 pag.</span>
+            <span class="mat-downloaded" style="color:var(--gray);">Nedescărcat</span>
+          </div>
+        </div>
+        <div class="mat-footer">
+          <button class="dl-btn" onclick="downloadMat(this)">↓ Descarcă</button>
+        </div>
+      </div>
+
+      <div class="mat-card" data-cat="sheet" data-module="03">
+        <div class="mat-thumb sheet">
+          📋
+          <span class="mat-module-badge">Modul 03</span>
+        </div>
+        <div class="mat-body">
+          <div class="mat-type sheet">Fișă exerciții</div>
+          <div class="mat-title">Calculul costului per porție</div>
+          <div class="mat-desc">Fișă de lucru cu formula și exemple practice pentru calculul costului real al fiecărei mese.</div>
+          <div class="mat-meta">
+            <span class="mat-size">📄 1.0 MB · 5 pag.</span>
+            <span class="mat-downloaded" style="color:var(--gray);">Nedescărcat</span>
+          </div>
+        </div>
+        <div class="mat-footer">
+          <button class="dl-btn" onclick="downloadMat(this)">↓ Descarcă</button>
+        </div>
+      </div>
+
+      <!-- Locked material (module not completed) -->
+      <div class="mat-card" data-cat="template" data-module="04" style="opacity:0.6;">
+        <div class="mat-thumb pdf" style="background:var(--linend);">
+          🔒
+          <span class="mat-module-badge" style="background:rgba(136,135,128,0.7);">Modul 04</span>
+        </div>
+        <div class="mat-body">
+          <div class="mat-type pdf" style="color:var(--gray);">Ghid PDF</div>
+          <div class="mat-title" style="color:var(--gray);">Bucătăria mediteraneană — rețete și tehnici</div>
+          <div class="mat-desc">Disponibil după finalizarea Modulului 04.</div>
+          <div class="mat-meta">
+            <span class="mat-size">📄 6.8 MB · 34 pag.</span>
+          </div>
+        </div>
+        <div class="mat-footer">
+          <button class="dl-btn locked">🔒 Deblocare după Modul 04</button>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<script>
+  function openSidebar() {
+    document.getElementById('sidebar').classList.add('open');
+    document.getElementById('overlay').classList.add('show');
+  }
+  function closeSidebar() {
+    document.getElementById('sidebar').classList.remove('open');
+    document.getElementById('overlay').classList.remove('show');
+  }
+
+  function filterCat(cat, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.mat-card').forEach(card => {
+      card.style.display = (cat === 'toate' || card.dataset.cat === cat) ? '' : 'none';
+    });
+  }
+
+  function filterSearch(val) {
+    const q = val.toLowerCase();
+    document.querySelectorAll('.mat-card').forEach(card => {
+      const text = card.querySelector('.mat-title').textContent.toLowerCase();
+      card.style.display = text.includes(q) ? '' : 'none';
+    });
+  }
+
+  function downloadMat(btn) {
+    if (btn.classList.contains('locked')) return;
+    btn.textContent = '⏬ Se descarcă...';
+    setTimeout(() => {
+      btn.textContent = '✓ Descărcat · Re-descarcă';
+      btn.classList.add('downloaded');
+    }, 1200);
+  }
+
+  function sortMaterials(val) {
+    // In production this would re-order the DOM
+  }
+</script>
+</body>
+</html>
