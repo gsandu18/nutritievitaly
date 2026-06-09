@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Curs Bucătar Personal — Noura.</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --forest:  #0F2E28;
+    --forestd: #0a1f1b;
+    --sage:    #1D9E75;
+    --mint:    #5DCAA5;
+    --mintl:   #E1F5EE;
+    --saffron: #EF9F27;
+    --linen:   #FAFAF8;
+    --linend:  #F1EFE8;
+    --gray:    #888780;
+    --dark:    #2C2C2A;
+    --white:   #FFFFFF;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    background: var(--linen);
+    color: var(--dark);
+    overflow-x: hidden;
+  }
+
+  /* ─── NAV ─────────────────────────────────────────────── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(250,250,248,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 0.5px solid rgba(15,46,40,0.12);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 3rem; height: 64px;
+  }
+  .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 600; color: var(--forest); letter-spacing: 0.02em; text-decoration: none; }
+  .nav-logo span { color: var(--sage); }
+  .nav-links { display: flex; align-items: center; gap: 2rem; }
+  .nav-links a { font-size: 13px; font-weight: 400; color: var(--gray); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--forest); }
+  .nav-cta { background: var(--forest); color: var(--linen) !important; padding: 8px 20px; border-radius: 6px; font-weight: 500 !important; font-size: 13px !important; transition: background 0.2s !important; }
+  .nav-cta:hover { background: var(--sage) !important; color: white !important; }
+  .menu-btn { display: none; background: none; border: none; font-size: 24px; color: var(--forest); cursor: pointer; }
+
+  /* ─── HERO ────────────────────────────────────────────── */
+  .hero {
+    min-height: 100vh;
+    background: var(--forest);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 120px 3rem 80px;
+    gap: 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: 'C';
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(300px, 45vw, 600px);
+    font-weight: 600;
+    color: rgba(29,158,117,0.05);
+    position: absolute;
+    right: -60px; top: 50%;
+    transform: translateY(-50%);
+    line-height: 1;
+    pointer-events: none;
+    user-select: none;
+  }
+  .hero-content { position: relative; z-index: 1; }
+  .hero-eyebrow { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--mint); margin-bottom: 1.5rem; font-weight: 500; }
+  .hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(48px, 6.5vw, 80px); font-weight: 600; color: var(--mintl); line-height: 0.95; margin-bottom: 0.2em; letter-spacing: 0.01em; }
+  .hero-title .dot { color: var(--sage); }
+  .hero-subtitle { font-family: 'Cormorant Garamond', serif; font-size: clamp(18px, 2.2vw, 24px); font-style: italic; color: rgba(159,225,203,0.8); margin-bottom: 2.5rem; line-height: 1.4; }
+  .hero-desc { font-size: 15px; color: rgba(225,245,238,0.65); line-height: 1.8; margin-bottom: 2.5rem; max-width: 420px; font-weight: 300; }
+  .hero-actions { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+  .btn-primary { background: var(--sage); color: white; padding: 14px 28px; border-radius: 8px; font-size: 14px; font-weight: 500; text-decoration: none; transition: all 0.2s; border: none; cursor: pointer; font-family: 'DM Sans', sans-serif; display: inline-block; }
+  .btn-primary:hover { background: var(--mint); transform: translateY(-1px); }
+  .btn-ghost { color: var(--mintl); padding: 14px 24px; border-radius: 8px; font-size: 14px; font-weight: 400; text-decoration: none; border: 0.5px solid rgba(93,202,165,0.3); transition: all 0.2s; display: inline-block; }
+  .btn-ghost:hover { border-color: var(--mint); color: var(--mint); }
+
+  /* Hero visual — floating course card */
+  .hero-visual { position: relative; z-index: 1; }
+  .hero-card {
+    background: rgba(26,61,54,0.6);
+    border: 0.5px solid rgba(29,158,117,0.3);
+    border-radius: 16px;
+    padding: 1.75rem;
+    backdrop-filter: blur(8px);
+    animation: floatCard 6s ease-in-out infinite;
+  }
+  @keyframes floatCard { 0%,100% { transform: translateY(0px); } 50% { transform: translateY(-8px); } }
+  .card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; }
+  .card-title { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--mint); font-weight: 500; }
+  .card-badge { font-size: 10px; background: rgba(239,159,39,0.2); color: var(--saffron); padding: 3px 10px; border-radius: 20px; font-weight: 500; }
+
+  .module-preview { display: flex; flex-direction: column; gap: 8px; }
+  .mp-row { display: flex; align-items: center; gap: 10px; padding: 10px 12px; background: rgba(15,46,40,0.5); border-radius: 8px; border: 0.5px solid rgba(29,158,117,0.15); }
+  .mp-num { font-family: 'Cormorant Garamond', serif; font-size: 16px; font-weight: 600; color: var(--sage); width: 22px; flex-shrink: 0; }
+  .mp-info { flex: 1; }
+  .mp-name { font-size: 12px; color: var(--mintl); font-weight: 400; }
+  .mp-dur  { font-size: 10px; color: rgba(93,202,165,0.6); margin-top: 2px; }
+  .mp-status { font-size: 10px; padding: 2px 8px; border-radius: 20px; font-weight: 500; }
+  .mp-active { background: rgba(29,158,117,0.2); color: var(--mint); }
+  .mp-lock   { background: rgba(136,135,128,0.2); color: var(--gray); }
+
+  .progress-summary {
+    background: rgba(15,46,40,0.5); border: 0.5px solid rgba(239,159,39,0.2);
+    border-radius: 10px; padding: 12px 14px; margin-top: 12px;
+    display: flex; gap: 12px; align-items: center;
+  }
+  .ps-icon { width: 32px; height: 32px; border-radius: 50%; background: rgba(239,159,39,0.15); display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
+  .ps-text { font-size: 12px; color: rgba(225,245,238,0.75); line-height: 1.5; }
+  .ps-label { font-size: 10px; color: var(--saffron); margin-top: 2px; }
+
+  /* ─── STATS STRIP ─────────────────────────────────────── */
+  .stats-strip { background: var(--sage); padding: 2rem 3rem; display: grid; grid-template-columns: repeat(4,1fr); gap: 2rem; }
+  .stat-item { text-align: center; }
+  .stat-val { font-family: 'Cormorant Garamond', serif; font-size: 42px; font-weight: 600; color: white; line-height: 1; }
+  .stat-label { font-size: 12px; color: rgba(255,255,255,0.7); margin-top: 4px; font-weight: 300; }
+
+  /* ─── SECTIONS ────────────────────────────────────────── */
+  .section { padding: 6rem 3rem; }
+  .section-label { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--sage); font-weight: 500; margin-bottom: 1rem; }
+  .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(36px, 5vw, 52px); font-weight: 600; color: var(--forest); line-height: 1.1; margin-bottom: 1.5rem; }
+  .section-body  { font-size: 16px; color: var(--gray); line-height: 1.8; max-width: 540px; }
+
+  /* ─── CURRICULUM ──────────────────────────────────────── */
+  .curriculum { background: var(--white); }
+  .curriculum-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--linend); margin-top: 4rem; border-radius: 16px; overflow: hidden; }
+  .module-card { background: var(--white); padding: 2rem; transition: background 0.2s; }
+  .module-card:hover { background: var(--linen); }
+  .module-icon { width: 44px; height: 44px; border-radius: 10px; background: var(--mintl); display: flex; align-items: center; justify-content: center; margin-bottom: 1.25rem; font-size: 20px; }
+  .module-num { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mint); font-weight: 500; margin-bottom: 6px; }
+  .module-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 600; color: var(--forest); margin-bottom: 8px; }
+  .module-desc { font-size: 13px; color: var(--gray); line-height: 1.7; }
+  .module-highlight { grid-column: 1 / -1; background: var(--forest); }
+  .module-highlight:hover { background: #142823; }
+  .module-highlight .module-num { color: var(--mint); }
+  .module-highlight .module-title { color: var(--mintl); font-size: 26px; }
+  .module-highlight .module-desc { color: rgba(159,225,203,0.7); }
+  .module-highlight .module-icon { background: rgba(29,158,117,0.2); }
+  .highlight-inner { display: grid; grid-template-columns: auto 1fr; gap: 2rem; align-items: center; }
+  .module-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+  .tag { font-size: 10px; padding: 3px 10px; border-radius: 20px; background: rgba(29,158,117,0.12); color: var(--sage); font-weight: 500; }
+  .module-highlight .tag { background: rgba(29,158,117,0.2); color: var(--mint); }
+
+  /* ─── FOR WHOM ────────────────────────────────────────── */
+  .for-whom { background: var(--linen); }
+  .whom-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 3rem; }
+  .whom-card { border-radius: 16px; padding: 2.5rem; position: relative; overflow: hidden; }
+  .whom-card.primary  { background: var(--forest); }
+  .whom-card.secondary { background: var(--linend); border: 0.5px solid rgba(15,46,40,0.1); }
+  .whom-avatar { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; margin-bottom: 1.5rem; }
+  .whom-card.primary  .whom-avatar { background: rgba(29,158,117,0.2); }
+  .whom-card.secondary .whom-avatar { background: rgba(239,159,39,0.15); }
+  .whom-role { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 500; margin-bottom: 8px; }
+  .whom-card.primary  .whom-role { color: var(--mint); }
+  .whom-card.secondary .whom-role { color: var(--saffron); }
+  .whom-title { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 600; margin-bottom: 1rem; line-height: 1.15; }
+  .whom-card.primary  .whom-title { color: var(--mintl); }
+  .whom-card.secondary .whom-title { color: var(--forest); }
+  .whom-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .whom-list li { font-size: 13px; line-height: 1.6; padding-left: 18px; position: relative; }
+  .whom-list li::before { content: ''; position: absolute; left: 0; top: 8px; width: 5px; height: 5px; border-radius: 50%; background: var(--sage); }
+  .whom-card.primary  .whom-list li { color: rgba(225,245,238,0.75); }
+  .whom-card.secondary .whom-list li { color: var(--gray); }
+
+  /* ─── TESTIMONIALS ────────────────────────────────────── */
+  .testimonials { background: var(--white); }
+  .testi-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; margin-top: 3rem; }
+  .testi-card { background: var(--linen); border-radius: 16px; padding: 2rem; border: 0.5px solid rgba(15,46,40,0.08); position: relative; }
+  .testi-quote { font-family: 'Cormorant Garamond', serif; font-size: 56px; color: rgba(29,158,117,0.15); line-height: 0.8; margin-bottom: 0.5rem; }
+  .testi-text { font-size: 14px; color: var(--dark); line-height: 1.8; margin-bottom: 1.5rem; font-style: italic; }
+  .testi-author { display: flex; align-items: center; gap: 10px; }
+  .testi-av { width: 36px; height: 36px; border-radius: 50%; background: var(--mintl); display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-size: 15px; font-weight: 600; color: var(--forest); flex-shrink: 0; }
+  .testi-name { font-size: 13px; font-weight: 500; color: var(--forest); }
+  .testi-role { font-size: 11px; color: var(--gray); }
+  .star-row { color: var(--saffron); font-size: 13px; margin-bottom: 0.75rem; letter-spacing: 2px; }
+
+  /* ─── PRICING ─────────────────────────────────────────── */
+  .pricing { background: var(--linend); }
+  .pricing-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; margin-top: 3rem; }
+  .price-card { border-radius: 16px; padding: 2rem; border: 0.5px solid rgba(15,46,40,0.12); background: var(--white); transition: transform 0.2s, box-shadow 0.2s; }
+  .price-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.06); }
+  .price-card.featured { background: var(--forest); border-color: var(--sage); }
+  .price-tier { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 500; margin-bottom: 12px; }
+  .price-card:not(.featured) .price-tier { color: var(--sage); }
+  .price-card.featured .price-tier { color: var(--mint); }
+  .featured-badge { display: inline-block; background: rgba(29,158,117,0.2); color: var(--mint); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 12px; border-radius: 20px; margin-bottom: 12px; font-weight: 500; }
+  .price-name { font-family: 'Cormorant Garamond', serif; font-size: 30px; font-weight: 600; margin-bottom: 4px; }
+  .price-card:not(.featured) .price-name { color: var(--forest); }
+  .price-card.featured .price-name { color: var(--mintl); }
+  .price-amount { display: flex; align-items: baseline; gap: 4px; margin-bottom: 1.5rem; }
+  .price-val { font-family: 'Cormorant Garamond', serif; font-size: 48px; font-weight: 600; }
+  .price-card:not(.featured) .price-val { color: var(--forest); }
+  .price-card.featured .price-val { color: var(--mintl); }
+  .price-currency { font-size: 20px; font-weight: 500; align-self: flex-start; margin-top: 10px; }
+  .price-card:not(.featured) .price-currency { color: var(--sage); }
+  .price-card.featured .price-currency { color: var(--mint); }
+  .price-period { font-size: 13px; }
+  .price-card:not(.featured) .price-period { color: var(--gray); }
+  .price-card.featured .price-period { color: rgba(93,202,165,0.7); }
+  .price-features { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 2rem; }
+  .price-features li { font-size: 13px; padding-left: 18px; position: relative; line-height: 1.5; }
+  .price-features li::before { content: ''; position: absolute; left: 0; top: 7px; width: 5px; height: 5px; border-radius: 50%; }
+  .price-card:not(.featured) .price-features li { color: var(--gray); }
+  .price-card:not(.featured) .price-features li::before { background: var(--sage); }
+  .price-card.featured .price-features li { color: rgba(225,245,238,0.75); }
+  .price-card.featured .price-features li::before { background: var(--mint); }
+  .price-btn { width: 100%; padding: 12px; border-radius: 8px; font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.2s; text-align: center; display: block; text-decoration: none; font-family: 'DM Sans', sans-serif; border: none; }
+  .price-card:not(.featured) .price-btn { background: var(--mintl); color: var(--forest); }
+  .price-card:not(.featured) .price-btn:hover { background: var(--sage); color: white; }
+  .price-card.featured .price-btn { background: var(--sage); color: white; }
+  .price-card.featured .price-btn:hover { background: var(--mint); }
+
+  /* ─── FAQ ─────────────────────────────────────────────── */
+  .faq { background: var(--white); }
+  .faq-list { max-width: 720px; margin: 3rem auto 0; display: flex; flex-direction: column; gap: 1px; background: var(--linend); border-radius: 16px; overflow: hidden; }
+  .faq-item { background: var(--white); }
+  .faq-question { padding: 1.25rem 1.5rem; display: flex; justify-content: space-between; align-items: center; cursor: pointer; font-size: 15px; font-weight: 400; color: var(--forest); transition: background 0.2s; user-select: none; }
+  .faq-question:hover { background: var(--linen); }
+  .faq-icon { width: 22px; height: 22px; border-radius: 50%; background: var(--mintl); display: flex; align-items: center; justify-content: center; color: var(--sage); font-size: 16px; font-weight: 300; flex-shrink: 0; transition: transform 0.3s; }
+  .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.35s ease, padding 0.35s ease; }
+  .faq-answer p { padding: 0 1.5rem 1.25rem; font-size: 14px; color: var(--gray); line-height: 1.8; }
+  .faq-item.open .faq-answer { max-height: 300px; }
+  .faq-item.open .faq-icon { transform: rotate(45deg); }
+
+  /* ─── CTA BANNER ──────────────────────────────────────── */
+  .cta-banner {
+    background: var(--forest);
+    padding: 6rem 3rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-banner::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(45deg, rgba(29,158,117,0.03) 0px, rgba(29,158,117,0.03) 1px, transparent 1px, transparent 20px);
+  }
+  .cta-banner > * { position: relative; z-index: 1; }
+  .cta-banner .section-label { color: var(--mint); }
+  .cta-banner .section-title { color: var(--mintl); max-width: 600px; margin: 0 auto 1.5rem; }
+  .cta-banner .section-body { color: rgba(225,245,238,0.65); margin: 0 auto 2.5rem; text-align: center; }
+  .cta-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+  /* ─── FOOTER ──────────────────────────────────────────── */
+  footer {
+    background: var(--forestd);
+    padding: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+  .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 600; color: var(--mintl); text-decoration: none; }
+  .footer-logo span { color: var(--sage); }
+  .footer-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+  .footer-links a { font-size: 13px; color: rgba(225,245,238,0.5); text-decoration: none; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--mint); }
+  .footer-copy { font-size: 12px; color: rgba(225,245,238,0.35); }
+
+  /* ─── RESPONSIVE ──────────────────────────────────────── */
+  @media (max-width: 900px) {
+    nav { padding: 0 1.5rem; }
+    .nav-links { display: none; }
+    .menu-btn { display: block; }
+    .hero { grid-template-columns: 1fr; padding: 100px 1.5rem 60px; gap: 2.5rem; }
+    .hero::before { display: none; }
+    .stats-strip { grid-template-columns: repeat(2,1fr); padding: 2rem 1.5rem; }
+    .section { padding: 4rem 1.5rem; }
+    .curriculum-grid { grid-template-columns: 1fr; }
+    .module-highlight { grid-column: auto; }
+    .highlight-inner { grid-template-columns: 1fr; gap: 1rem; }
+    .whom-grid { grid-template-columns: 1fr; }
+    .testi-grid { grid-template-columns: 1fr; }
+    .pricing-grid { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 1.25rem; padding: 2rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ─── NAV ─────────────────────────────────────────────── -->
+<nav>
+  <a href="index.html" class="nav-logo">Noura<span>.</span></a>
+  <div class="nav-links">
+    <a href="#curriculum">Curriculum</a>
+    <a href="#for-whom">Pentru cine</a>
+    <a href="#testimonials">Testimoniale</a>
+    <a href="#pricing">Prețuri</a>
+    <a href="#faq">FAQ</a>
+    <a href="inregistrare-pacient.html" class="nav-cta">Înscrie-te acum</a>
+  </div>
+  <button class="menu-btn" onclick="this.nextElementSibling?.classList.toggle('open')">☰</button>
+</nav>
+
+<!-- ─── HERO ────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="hero-content">
+    <p class="hero-eyebrow">Curs profesionist · Bucătar Personal</p>
+    <h1 class="hero-title">Arta<br>Bucătăriei<br>Private<span class="dot">.</span></h1>
+    <p class="hero-subtitle">De la tehnici de bază la meniuri rafinate pentru clienți exigenți</p>
+    <p class="hero-desc">
+      Un program complet dedicat celor care vor să devină bucătari personali sau să-și perfecționeze abilitățile.
+      Învață nutriție aplicată, planificare de meniuri, tehnici culinare avansate și managementul relației cu clienții.
+    </p>
+    <div class="hero-actions">
+      <a href="#pricing" class="btn-primary">Începe cursul</a>
+      <a href="#curriculum" class="btn-ghost">Vezi programa →</a>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="hero-card">
+      <div class="card-header">
+        <span class="card-title">Programa cursului</span>
+        <span class="card-badge">12 module</span>
+      </div>
+      <div class="module-preview">
+        <div class="mp-row">
+          <span class="mp-num">01</span>
+          <div class="mp-info">
+            <div class="mp-name">Fundamente nutriționale</div>
+            <div class="mp-dur">3 lecții · 2h 30min</div>
+          </div>
+          <span class="mp-status mp-active">Disponibil</span>
+        </div>
+        <div class="mp-row">
+          <span class="mp-num">02</span>
+          <div class="mp-info">
+            <div class="mp-name">Tehnici culinare esențiale</div>
+            <div class="mp-dur">5 lecții · 4h 15min</div>
+          </div>
+          <span class="mp-status mp-active">Disponibil</span>
+        </div>
+        <div class="mp-row">
+          <span class="mp-num">03</span>
+          <div class="mp-info">
+            <div class="mp-name">Planificare meniuri personalizate</div>
+            <div class="mp-dur">4 lecții · 3h 00min</div>
+          </div>
+          <span class="mp-status mp-lock">Blocat</span>
+        </div>
+        <div class="mp-row">
+          <span class="mp-num">04</span>
+          <div class="mp-info">
+            <div class="mp-name">Bucătărie internațională</div>
+            <div class="mp-dur">6 lecții · 5h 45min</div>
+          </div>
+          <span class="mp-status mp-lock">Blocat</span>
+        </div>
+      </div>
+      <div class="progress-summary">
+        <div class="ps-icon">🎓</div>
+        <div>
+          <div class="ps-text">Certificare inclusă la absolvire</div>
+          <div class="ps-label">Recunoscută de platforma Noura</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── STATS ────────────────────────────────────────────── -->
+<div class="stats-strip">
+  <div class="stat-item">
+    <div class="stat-val">12</div>
+    <div class="stat-label">Module complete</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-val">40+</div>
+    <div class="stat-label">Ore de conținut video</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-val">350+</div>
+    <div class="stat-label">Absolvenți activi</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-val">4.9</div>
+    <div class="stat-label">Rating mediu curs</div>
+  </div>
+</div>
+
+<!-- ─── CURRICULUM ───────────────────────────────────────── -->
+<section class="section curriculum" id="curriculum">
+  <p class="section-label">Programa</p>
+  <h2 class="section-title">12 module, de la zero<br>la profesionist</h2>
+  <p class="section-body">
+    Fiecare modul combină teorie aplicată cu exerciții practice. Progresezi în ritmul tău,
+    cu acces pe viață la materiale și actualizări.
+  </p>
+
+  <div class="curriculum-grid">
+    <!-- Full-width highlight -->
+    <div class="module-card module-highlight">
+      <div class="highlight-inner">
+        <div class="module-icon" style="font-size:28px; width:56px; height:56px;">🍽️</div>
+        <div>
+          <div class="module-num">Modul de bază</div>
+          <div class="module-title">Fundamentele bucătăriei private</div>
+          <div class="module-desc">
+            Înțelegi rolul bucătarului personal, etica profesională, regulile de igienă și siguranță alimentară,
+            și cum să construiești o relație solidă cu clientul tău. Modulul de bază este gratuit pentru toți cursanții înregistrați.
+          </div>
+          <div class="module-tags">
+            <span class="tag">Igienă alimentară</span>
+            <span class="tag">Etica profesiei</span>
+            <span class="tag">Relaţia cu clientul</span>
+            <span class="tag">Gratuit</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="module-card">
+      <div class="module-icon">🥗</div>
+      <div class="module-num">Modul 01</div>
+      <div class="module-title">Nutriție aplicată</div>
+      <div class="module-desc">Macronutrienți, micronutrienți, diete speciale (fără gluten, vegan, keto) și cum să adaptezi meniurile la nevoile fiecărui client.</div>
+      <div class="module-tags">
+        <span class="tag">Macronutrienți</span>
+        <span class="tag">Diete speciale</span>
+      </div>
+    </div>
+
+    <div class="module-card">
+      <div class="module-icon">🔪</div>
+      <div class="module-num">Modul 02</div>
+      <div class="module-title">Tehnici culinare</div>
+      <div class="module-desc">Taiere profesionistă, tehnici de gătit (sous-vide, confit, bain-marie), prezentare estetică pe farfurie și manipularea temperaturilor.</div>
+      <div class="module-tags">
+        <span class="tag">Sous-vide</span>
+        <span class="tag">Prezentare</span>
+      </div>
+    </div>
+
+    <div class="module-card">
+      <div class="module-icon">📋</div>
+      <div class="module-num">Modul 03</div>
+      <div class="module-title">Planificare meniuri</div>
+      <div class="module-desc">Cum construiești planuri alimentare săptămânale, calculezi costul per porție, listele de cumpărături și organizezi sesiunile de meal-prep.</div>
+      <div class="module-tags">
+        <span class="tag">Meal-prep</span>
+        <span class="tag">Cost per porție</span>
+      </div>
+    </div>
+
+    <div class="module-card">
+      <div class="module-icon">🌍</div>
+      <div class="module-num">Modul 04</div>
+      <div class="module-title">Bucătărie internațională</div>
+      <div class="module-desc">Explorezi bucătăriile mediteraneană, asiatică, middle-eastern și americană. Identifici ingrediente cheie și tehnici specifice fiecărei culturi.</div>
+      <div class="module-tags">
+        <span class="tag">Mediteraneean</span>
+        <span class="tag">Asian</span>
+        <span class="tag">Middle-Eastern</span>
+      </div>
+    </div>
+
+    <div class="module-card">
+      <div class="module-icon">🎂</div>
+      <div class="module-num">Modul 05</div>
+      <div class="module-title">Patiserie & Deserturi</div>
+      <div class="module-desc">Bazele patiseriei fine, deserturi fără zahăr rafinat, prezentarea tort-urilor și a deserturilor cu fructe proaspete.</div>
+      <div class="module-tags">
+        <span class="tag">Patiserie</span>
+        <span class="tag">Fără zahăr</span>
+      </div>
+    </div>
+
+    <div class="module-card">
+      <div class="module-icon">🛒</div>
+      <div class="module-num">Modul 06</div>
+      <div class="module-title">Aprovizionare & Furnizori</div>
+      <div class="module-desc">Cum selectezi ingrediente premium, lucrezi cu producători locali, gestionezi bugetul de aprovizionare și eviți risipa alimentară.</div>
+      <div class="module-tags">
+        <span class="tag">Producători locali</span>
+        <span class="tag">Zero-waste</span>
+      </div>
+    </div>
+
+    <div class="module-card">
+      <div class="module-icon">📱</div>
+      <div class="module-num">Modul 07</div>
+      <div class="module-title">Business & Marketing</div>
+      <div class="module-desc">Stabilirea tarifelor, contracte cu clienții, portofoliu fotografic, prezența pe social media și cum să atragi primii clienți premium.</div>
+      <div class="module-tags">
+        <span class="tag">Tarife</span>
+        <span class="tag">Contracte</span>
+        <span class="tag">Social media</span>
+      </div>
+    </div>
+
+    <div class="module-card">
+      <div class="module-icon">🏆</div>
+      <div class="module-num">Modul 08</div>
+      <div class="module-title">Proiect final & Certificare</div>
+      <div class="module-desc">Pregătești un meniu complet pentru un client fictiv: analiză nutrițională, plan săptămânal, rețete detaliate și prezentare vizuală. Primești certificatul Noura.</div>
+      <div class="module-tags">
+        <span class="tag">Certificat</span>
+        <span class="tag">Proiect real</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOR WHOM ──────────────────────────────────────────── -->
+<section class="section for-whom" id="for-whom">
+  <p class="section-label">Cui se adresează</p>
+  <h2 class="section-title">Cursul este creat<br>pentru tine dacă...</h2>
+
+  <div class="whom-grid">
+    <div class="whom-card primary">
+      <div class="whom-avatar">👨‍🍳</div>
+      <div class="whom-role">Bucătar în devenire</div>
+      <h3 class="whom-title">Vrei să devii<br>bucătar personal</h3>
+      <ul class="whom-list">
+        <li>Ești pasionat de gătit și vrei să transformi pasiunea în carieră</li>
+        <li>Nu ai experiență profesională dar ești motivat să înveți</li>
+        <li>Vrei să lucrezi cu clienți privați, nu în restaurante aglomerate</li>
+        <li>Cauți flexibilitate și independență financiară</li>
+        <li>Dorești o certificare recunoscută în domeniu</li>
+      </ul>
+    </div>
+    <div class="whom-card secondary">
+      <div class="whom-avatar">⭐</div>
+      <div class="whom-role">Bucătar cu experiență</div>
+      <h3 class="whom-title">Vrei să-ți<br>perfecționezi meseria</h3>
+      <ul class="whom-list">
+        <li>Ai experiență în restaurante și vrei să treci la servicii private</li>
+        <li>Vrei să înveți nutriție aplicată pentru a oferi meniuri mai sănătoase</li>
+        <li>Dorești să crești tarifele și să atragi clienți premium</li>
+        <li>Vrei să-ți construiești o marcă personală puternică</li>
+        <li>Cauți un network de profesioniști din același domeniu</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ─── TESTIMONIALS ──────────────────────────────────────── -->
+<section class="section testimonials" id="testimonials">
+  <p class="section-label">Ce spun absolvenții</p>
+  <h2 class="section-title">Povești de succes<br>reale</h2>
+
+  <div class="testi-grid">
+    <div class="testi-card">
+      <div class="star-row">★★★★★</div>
+      <div class="testi-quote">"</div>
+      <p class="testi-text">Cursul mi-a schimbat complet perspectiva. În 6 luni de la certificare am 3 clienți stabili și am renunțat la jobul de zi. Modulul de business a fost o revelație.</p>
+      <div class="testi-author">
+        <div class="testi-av">AM</div>
+        <div>
+          <div class="testi-name">Alexandru M.</div>
+          <div class="testi-role">Bucătar personal · Cluj-Napoca</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="star-row">★★★★★</div>
+      <div class="testi-quote">"</div>
+      <p class="testi-text">Aveam 10 ani în restaurante dar habar nu aveam de nutriție sau cum să comunic cu un client privat. Modulele practice sunt exacte ce îmi trebuia.</p>
+      <div class="testi-author">
+        <div class="testi-av">IP</div>
+        <div>
+          <div class="testi-name">Ioana P.</div>
+          <div class="testi-role">Bucătăreasă personală · București</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="star-row">★★★★★</div>
+      <div class="testi-quote">"</div>
+      <p class="testi-text">Calitatea conținutului e la alt nivel față de ce am mai văzut online. Instructorii sunt profesioniști adevărați, nu teoreticieni. Recomand fără rezerve.</p>
+      <div class="testi-author">
+        <div class="testi-av">MD</div>
+        <div>
+          <div class="testi-name">Mihai D.</div>
+          <div class="testi-role">Chef privat · Constanța</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PRICING ───────────────────────────────────────────── -->
+<section class="section pricing" id="pricing">
+  <p class="section-label">Prețuri</p>
+  <h2 class="section-title">Investește în cariera ta</h2>
+  <p class="section-body">Toate planurile includ acces pe viață la conținut și certificat la absolvire. Fără abonament lunar.</p>
+
+  <div class="pricing-grid">
+    <!-- Starter -->
+    <div class="price-card">
+      <div class="price-tier">Starter</div>
+      <div class="price-name">Esențial</div>
+      <div class="price-amount">
+        <span class="price-currency">RON</span>
+        <span class="price-val">790</span>
+        <span class="price-period">&nbsp;/ acces complet</span>
+      </div>
+      <ul class="price-features">
+        <li>8 module video (40+ ore)</li>
+        <li>Rețete și materiale descărcabile</li>
+        <li>Acces pe viață la conținut</li>
+        <li>Certificat digital de absolvire</li>
+        <li>Forum comunitate cursanți</li>
+      </ul>
+      <a href="inregistrare-pacient.html" class="price-btn">Cumpără acum</a>
+    </div>
+
+    <!-- Professional (featured) -->
+    <div class="price-card featured">
+      <div class="featured-badge">Recomandat</div>
+      <div class="price-tier">Profesional</div>
+      <div class="price-name">Complet</div>
+      <div class="price-amount">
+        <span class="price-currency" style="color:var(--mint);">RON</span>
+        <span class="price-val">1.490</span>
+        <span class="price-period">&nbsp;/ acces complet</span>
+      </div>
+      <ul class="price-features">
+        <li>Tot din planul Esențial</li>
+        <li>4 sesiuni live cu instructorii (Zoom)</li>
+        <li>Feedback personalizat pe proiectul final</li>
+        <li>Certificat fizic trimis prin poștă</li>
+        <li>Acces la rețelele de clienți Noura</li>
+        <li>Mentorship 30 de zile post-absolvire</li>
+      </ul>
+      <a href="inregistrare-pacient.html" class="price-btn">Alege planul Pro</a>
+    </div>
+
+    <!-- Enterprise -->
+    <div class="price-card">
+      <div class="price-tier">Echipă</div>
+      <div class="price-name">Business</div>
+      <div class="price-amount">
+        <span class="price-currency">RON</span>
+        <span class="price-val">3.900</span>
+        <span class="price-period">&nbsp;/ echipă de 5</span>
+      </div>
+      <ul class="price-features">
+        <li>Tot din planul Profesional · ×5 locuri</li>
+        <li>Dashboard de urmărire progres echipă</li>
+        <li>Sesiuni private de grup (2 ore/lună)</li>
+        <li>Factură fiscală pentru firmă</li>
+        <li>Manager de cont dedicat</li>
+      </ul>
+      <a href="bookconsultanta.html" class="price-btn">Contactează-ne</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FAQ ───────────────────────────────────────────────── -->
+<section class="section faq" id="faq">
+  <p class="section-label">Întrebări frecvente</p>
+  <h2 class="section-title" style="text-align:center;">Ai întrebări?<br>Avem răspunsuri.</h2>
+
+  <div class="faq-list">
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        Trebuie să am experiență culinară pentru a mă înscrie?
+        <div class="faq-icon">+</div>
+      </div>
+      <div class="faq-answer">
+        <p>Nu. Cursul este structurat pentru a fi accesibil atât începătorilor, cât și bucătarilor cu experiență. Modulele de bază acoperă toate fundamentele necesare.</p>
+      </div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        Cât durează cursul?
+        <div class="faq-icon">+</div>
+      </div>
+      <div class="faq-answer">
+        <p>La un ritm de 5-6 ore pe săptămână, poți finaliza cursul în 8-10 săptămâni. Ai acces pe viață la conținut, deci poți avansa în ritmul tău propriu.</p>
+      </div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        Este certificatul recunoscut?
+        <div class="faq-icon">+</div>
+      </div>
+      <div class="faq-answer">
+        <p>Certificatul Noura este recunoscut de toți partenerii și clienții înregistrați pe platformă. Este un atestat profesional al calității cursului, nu o diplomă de stat.</p>
+      </div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        Pot obține o rambursare dacă nu sunt mulțumit?
+        <div class="faq-icon">+</div>
+      </div>
+      <div class="faq-answer">
+        <p>Da. Oferim o garanție de 14 zile de la achiziție. Dacă nu ești satisfăcut, îți rambursăm integral suma plătită, fără întrebări.</p>
+      </div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        Există sesiuni live sau totul este pre-înregistrat?
+        <div class="faq-icon">+</div>
+      </div>
+      <div class="faq-answer">
+        <p>Planul Esențial include exclusiv conținut video pre-înregistrat. Planul Profesional adaugă 4 sesiuni live lunare cu instructorii și posibilitatea de Q&A direct.</p>
+      </div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        Platforma funcționează pe mobil?
+        <div class="faq-icon">+</div>
+      </div>
+      <div class="faq-answer">
+        <p>Da, platforma Noura este complet responsivă și disponibilă ca aplicație progresivă (PWA). Poți urmări lecțiile pe orice dispozitiv, inclusiv offline după descărcare.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CTA BANNER ────────────────────────────────────────── -->
+<section class="cta-banner">
+  <p class="section-label">Începe astăzi</p>
+  <h2 class="section-title">Transformă pasiunea pentru gătit<br>în carieră</h2>
+  <p class="section-body">
+    Alătură-te celor 350+ absolvenți care și-au construit o carieră de succes ca bucătari personali.
+    Primii pași sunt mai ușori decât crezi.
+  </p>
+  <div class="cta-actions">
+    <a href="inregistrare-pacient.html" class="btn-primary">Înscrie-te acum</a>
+    <a href="bookconsultanta.html" class="btn-ghost">Discută cu un consilier</a>
+  </div>
+</section>
+
+<!-- ─── FOOTER ────────────────────────────────────────────── -->
+<footer>
+  <a href="index.html" class="footer-logo">Noura<span>.</span></a>
+  <div class="footer-links">
+    <a href="index.html">Acasă</a>
+    <a href="#curriculum">Curriculum</a>
+    <a href="#pricing">Prețuri</a>
+    <a href="blog.html">Blog</a>
+    <a href="bookconsultanta.html">Contact</a>
+  </div>
+  <span class="footer-copy">© 2026 Noura. Toate drepturile rezervate.</span>
+</footer>
+
+<script>
+  function toggleFaq(el) {
+    const item = el.parentElement;
+    item.classList.toggle('open');
+  }
+</script>
+</body>
+</html>
