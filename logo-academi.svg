@@ -1,0 +1,143 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="500" height="500">
+  <defs>
+    <style>
+      .green  { fill: #3DB53D; }
+      .green2 { fill: #2E9E2E; }
+      .white  { fill: #FFFFFF; }
+      .black  { fill: #000000; }
+      .gold   { fill: #E8C520; }
+    </style>
+  </defs>
+
+  <!-- ── BACKGROUND ── -->
+  <rect width="500" height="500" fill="#000"/>
+
+  <!-- ═══════════════════════════════════════════
+       CHEF CHARACTER  (centrat în stânga-sus)
+  ════════════════════════════════════════════ -->
+
+  <!-- ── CORP (halat bucătar) ── -->
+  <ellipse cx="215" cy="200" rx="62" ry="72" class="green" stroke="#000" stroke-width="3"/>
+  <!-- umeri -->
+  <ellipse cx="160" cy="165" rx="28" ry="22" class="green" stroke="#000" stroke-width="2"/>
+  <ellipse cx="270" cy="165" rx="28" ry="22" class="green" stroke="#000" stroke-width="2"/>
+  <!-- halat alb central -->
+  <rect x="197" y="145" width="36" height="80" fill="#fff" rx="4" opacity="0.9"/>
+  <!-- nasturi -->
+  <circle cx="215" cy="160" r="4" fill="#000"/>
+  <circle cx="215" cy="178" r="4" fill="#000"/>
+  <circle cx="215" cy="196" r="4" fill="#000"/>
+
+  <!-- ── CAP ── -->
+  <circle cx="215" cy="100" r="42" class="green" stroke="#000" stroke-width="3"/>
+  <!-- față / trăsături -->
+  <!-- ochi stâng -->
+  <ellipse cx="200" cy="96" rx="6" ry="7" fill="#fff"/>
+  <circle cx="202" cy="97" r="3.5" fill="#000"/>
+  <!-- ochi drept -->
+  <ellipse cx="230" cy="96" rx="6" ry="7" fill="#fff"/>
+  <circle cx="232" cy="97" r="3.5" fill="#000"/>
+  <!-- sprâncene -->
+  <path d="M193 86 Q200 82 207 86" stroke="#000" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <path d="M223 86 Q230 82 237 86" stroke="#000" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <!-- zâmbet -->
+  <path d="M200 112 Q215 122 230 112" stroke="#000" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <!-- mustăcioară -->
+  <path d="M205 107 Q215 111 225 107" stroke="#000" stroke-width="2" fill="none"/>
+
+  <!-- ══════════════════════════════════════════
+       PĂLĂRIE DE UNIVERSITATE  (mortarboard)
+  ═══════════════════════════════════════════ -->
+  <!-- baza rotundă a căciulii -->
+  <ellipse cx="215" cy="62" rx="36" ry="14" class="green2" stroke="#000" stroke-width="2.5"/>
+  <!-- platoul pătrat (ușor rotit) -->
+  <g transform="rotate(-8, 215, 48)">
+    <rect x="173" y="38" width="84" height="12" class="green2" stroke="#000" stroke-width="2.5" rx="1"/>
+    <!-- bordura de sus a platoului -->
+    <rect x="173" y="38" width="84" height="4" fill="#2E9E2E" opacity="0.6" rx="1"/>
+  </g>
+  <!-- ciucure (tassel) - atârnă din colțul drept -->
+  <line x1="257" y1="40" x2="268" y2="70" stroke="#E8C520" stroke-width="3"/>
+  <circle cx="268" cy="73" r="3" class="gold"/>
+  <!-- franjuri ciucure -->
+  <line x1="265" y1="72" x2="261" y2="88" stroke="#E8C520" stroke-width="2"/>
+  <line x1="268" y1="73" x2="268" y2="90" stroke="#E8C520" stroke-width="2"/>
+  <line x1="271" y1="72" x2="275" y2="88" stroke="#E8C520" stroke-width="2"/>
+
+  <!-- ── BRAȚUL STÂNG (ridicat, semn OK) ── -->
+  <path d="M158 155 Q125 130 118 100 Q114 80 128 72" stroke="#3DB53D" stroke-width="20" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- mâna OK -->
+  <circle cx="134" cy="66" r="18" class="green" stroke="#000" stroke-width="2"/>
+  <!-- degetele semn OK -->
+  <circle cx="134" cy="66" r="9" fill="#000"/>
+  <circle cx="134" cy="66" r="6" class="green"/>
+  <path d="M144 56 Q152 44 148 35" stroke="#3DB53D" stroke-width="9" fill="none" stroke-linecap="round"/>
+  <path d="M147 60 Q158 52 156 42" stroke="#3DB53D" stroke-width="9" fill="none" stroke-linecap="round"/>
+
+  <!-- ── BRAȚUL DREPT (ține tava) ── -->
+  <path d="M272 155 Q310 160 345 168" stroke="#3DB53D" stroke-width="20" fill="none" stroke-linecap="round"/>
+  <!-- mâna + tava -->
+  <ellipse cx="348" cy="170" rx="8" ry="10" class="green" stroke="#000" stroke-width="1.5"/>
+  <!-- tava -->
+  <ellipse cx="348" cy="160" rx="40" ry="10" fill="#ddd" stroke="#000" stroke-width="2"/>
+  <ellipse cx="348" cy="156" rx="40" ry="10" fill="#fff" stroke="#000" stroke-width="1.5"/>
+  <!-- clopot pe tavă -->
+  <ellipse cx="348" cy="152" rx="18" ry="7" fill="#ccc" stroke="#000" stroke-width="1.5"/>
+  <path d="M330 152 Q348 138 366 152" fill="#ddd" stroke="#000" stroke-width="1.5"/>
+  <circle cx="348" cy="137" r="4" fill="#aaa" stroke="#000" stroke-width="1"/>
+
+  <!-- ── PICIOARE ── -->
+  <path d="M188 265 Q178 295 172 320" stroke="#3DB53D" stroke-width="22" fill="none" stroke-linecap="round"/>
+  <path d="M242 265 Q258 295 268 318" stroke="#3DB53D" stroke-width="22" fill="none" stroke-linecap="round"/>
+  <!-- pantofi -->
+  <ellipse cx="168" cy="323" rx="28" ry="11" fill="#1a1a1a" stroke="#3DB53D" stroke-width="2"/>
+  <ellipse cx="273" cy="321" rx="28" ry="11" fill="#1a1a1a" stroke="#3DB53D" stroke-width="2"/>
+
+
+  <!-- ═══════════════════════════════════════
+       TEXT  BUCĂTARUL
+  ════════════════════════════════════════ -->
+  <text x="250" y="372"
+        font-family="'Arial Black', 'Impact', 'Franklin Gothic Heavy', sans-serif"
+        font-size="66"
+        font-weight="900"
+        fill="#3DB53D"
+        stroke="#000"
+        stroke-width="4"
+        stroke-linejoin="round"
+        paint-order="stroke"
+        text-anchor="middle"
+        letter-spacing="1">BUCĂTARUL</text>
+
+  <!-- ═══════════════════════════════════════
+       TEXT  ACADEMI  (galben-verde, italic)
+  ════════════════════════════════════════ -->
+  <text x="250" y="404"
+        font-family="'Arial Black', 'Impact', sans-serif"
+        font-size="26"
+        font-weight="700"
+        font-style="italic"
+        fill="#E8C520"
+        stroke="#000"
+        stroke-width="2"
+        paint-order="stroke"
+        text-anchor="middle"
+        letter-spacing="6">ACADEMI</text>
+
+  <!-- ═══════════════════════════════════════
+       BAR PERSONAL ®
+  ════════════════════════════════════════ -->
+  <rect x="110" y="416" width="280" height="44" fill="#fff" rx="3"/>
+  <text x="240" y="448"
+        font-family="'Arial Black', 'Impact', sans-serif"
+        font-size="28"
+        font-weight="900"
+        fill="#000"
+        text-anchor="middle"
+        letter-spacing="5">PERSONAL</text>
+  <text x="393" y="428"
+        font-family="Arial, sans-serif"
+        font-size="14"
+        fill="#000">®</text>
+
+</svg>
